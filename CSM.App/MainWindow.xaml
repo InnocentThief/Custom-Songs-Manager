@@ -3,10 +3,54 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CSM.App"
+        xmlns:local="clr-namespace:CSM.App" 
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
         mc:Ignorable="d"
         Title="Custom Songs Manager" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+
+    <Window.Resources>
+        <telerik:StringToGlyphConverter x:Key="StringToGlyphConverter" />
+
+
+        <Style x:Key="BaseNavigationViewItemStyle" TargetType="telerik:RadNavigationViewItem">
+            <Setter Property="DisplayMemberPath" Value="Title" />
+            <Setter Property="Icon" Value="{Binding IconGlyph}" />
+            <Setter Property="IconTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <telerik:RadGlyph Glyph="{Binding Converter={StaticResource StringToGlyphConverter}}" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <telerik:RadNavigationView ItemsSource="{Binding Workspaces}"
+                               SelectedItem="{Binding SelectedWorkspace}"
+                               DisplayMode="Compact"
+                               AutoChangeDisplayMode="False"
+                               DisplayMemberPath="Title" 
+                               SelectedIndex="0"
+                               ItemContainerStyle="{StaticResource BaseNavigationViewItemStyle}">
+
+        <!-- Content -->
+        <!--<telerik:RadNavigationView.Content>
+            <telerik:RadTransitionControl Content="{Binding SelectedItem}" ContentTemplateSelector="{StaticResource NavigationViewContentTemplateSelector}" Foreground="Black" Duration="0:0:0.4">
+                <telerik:RadTransitionControl.Transition>
+                    <telerik:FadeTransition />
+                </telerik:RadTransitionControl.Transition>
+            </telerik:RadTransitionControl>
+        </telerik:RadNavigationView.Content>-->
+
+        <!-- Footer -->
+        <telerik:RadNavigationView.PaneFooter>
+            <telerik:RadNavigationViewItem Content="Settings" 
+                                               Command="{Binding SettingsCommand}"
+                                               IconTemplate="{x:Null}">
+                <telerik:RadNavigationViewItem.Icon>
+                    <telerik:RadGlyph Glyph="&#xe13a;" FontSize="20" />
+                </telerik:RadNavigationViewItem.Icon>
+            </telerik:RadNavigationViewItem>
+        </telerik:RadNavigationView.PaneFooter>
+    </telerik:RadNavigationView>
 </Window>

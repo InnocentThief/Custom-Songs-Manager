@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSM.UiLogic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Telerik.Windows.Controls;
 
 namespace CSM.App
 {
@@ -23,6 +25,13 @@ namespace CSM.App
         public MainWindow()
         {
             InitializeComponent();
+
+            DataContext = new MainWindowViewModel();
+        }
+
+        private void SetStyle()
+        {
+            StyleManager.ApplicationTheme = new Office2019Theme();
         }
     }
 }
