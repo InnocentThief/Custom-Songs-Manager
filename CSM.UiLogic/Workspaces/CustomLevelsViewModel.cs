@@ -6,16 +6,18 @@ using System.Threading.Tasks;
 
 namespace CSM.UiLogic.Workspaces
 {
-    internal class CustomLevelsViewModel : BaseWorkspaceViewModel
+    public class CustomLevelsViewModel : BaseWorkspaceViewModel
     {
+        public override WorkspaceType WorkspaceType => WorkspaceType.CustomLevels;
+
         public override async Task LoadDataAsync()
         {
-            throw new NotImplementedException();
+          await Task.CompletedTask;
         }
 
         public override void UnloadData()
         {
-            throw new NotImplementedException();
+       
         }
     }
 }

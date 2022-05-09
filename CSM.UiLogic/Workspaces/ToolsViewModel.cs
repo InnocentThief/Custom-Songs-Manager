@@ -8,14 +8,16 @@ namespace CSM.UiLogic.Workspaces
 {
     internal class ToolsViewModel : BaseWorkspaceViewModel
     {
-        public override Task LoadDataAsync()
+        public override WorkspaceType WorkspaceType => WorkspaceType.Tools;
+
+        public override async Task LoadDataAsync()
         {
-            throw new NotImplementedException();
+            await Task.CompletedTask;
         }
 
         public override void UnloadData()
         {
-            throw new NotImplementedException();
+
         }
     }
 }

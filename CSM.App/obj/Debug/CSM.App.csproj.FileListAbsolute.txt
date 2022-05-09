@@ -52,3 +52,13 @@ C:\Sources\Custom Songs Manager\CSM.App\bin\Debug\System.Threading.Tasks.Extensi
 C:\Sources\Custom Songs Manager\CSM.App\bin\Debug\System.Buffers.xml
 C:\Sources\Custom Songs Manager\CSM.App\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Sources\Custom Songs Manager\CSM.App\bin\Debug\System.Numerics.Vectors.xml
+C:\Sources\Custom Songs Manager\CSM.App\obj\Debug\Workspaces\CustomLevels\CustomLevelsView.g.cs
+C:\Sources\Custom Songs Manager\CSM.App\obj\Debug\Workspaces\Playlists\PlaylistsView.g.cs
+C:\Sources\Custom Songs Manager\CSM.App\obj\Debug\Workspaces\Tools\ToolsView.g.cs
+C:\Sources\Custom Songs Manager\CSM.App\obj\Debug\Workspaces\TwitchIntegration\TwitchIntegrationView.g.cs
+C:\Sources\Custom Songs Manager\CSM.App\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Sources\Custom Songs Manager\CSM.App\obj\Debug\Workspaces\CustomLevels\CustomLevelsView.baml
+C:\Sources\Custom Songs Manager\CSM.App\obj\Debug\Workspaces\Playlists\PlaylistsView.baml
+C:\Sources\Custom Songs Manager\CSM.App\obj\Debug\Workspaces\Tools\ToolsView.baml
+C:\Sources\Custom Songs Manager\CSM.App\obj\Debug\Workspaces\TwitchIntegration\TwitchIntegrationView.baml
+C:\Sources\Custom Songs Manager\CSM.App\obj\Debug\App.baml

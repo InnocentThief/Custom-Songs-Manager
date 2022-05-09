@@ -4,12 +4,34 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CSM.App" 
-        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" xmlns:workspaces="clr-namespace:CSM.App.Workspaces" xmlns:customlevels="clr-namespace:CSM.App.Workspaces.CustomLevels" xmlns:playlists="clr-namespace:CSM.App.Workspaces.Playlists" xmlns:twitchintegration="clr-namespace:CSM.App.Workspaces.TwitchIntegration" xmlns:tools="clr-namespace:CSM.App.Workspaces.Tools"
         mc:Ignorable="d"
         Title="Custom Songs Manager" Height="450" Width="800">
 
     <Window.Resources>
         <telerik:StringToGlyphConverter x:Key="StringToGlyphConverter" />
+
+        <DataTemplate x:Key="CustomLevelsDataTemplate">
+            <customlevels:CustomLevelsView />
+        </DataTemplate>
+
+        <DataTemplate x:Key="PlaylistsDataTemplate">
+            <playlists:PlaylistsView />
+        </DataTemplate>
+
+        <DataTemplate x:Key="TwitchIntegrationDataTemplate">
+            <twitchintegration:TwitchIntegrationView />
+        </DataTemplate>
+
+        <DataTemplate x:Key="ToolsDataTemplate">
+            <tools:ToolsView />
+        </DataTemplate>
+
+        <workspaces:WorkspaceContentTemplateSelector x:Key="WorkspaceContentTemplateSelector"
+                                                     CustomLevels="{StaticResource CustomLevelsDataTemplate}"
+                                                     Playlists="{StaticResource PlaylistsDataTemplate}"
+                                                     TwitchIntegration="{StaticResource TwitchIntegrationDataTemplate}"
+                                                     Tools="{StaticResource ToolsDataTemplate}" />
 
 
         <Style x:Key="BaseNavigationViewItemStyle" TargetType="telerik:RadNavigationViewItem">
@@ -31,16 +53,18 @@
                                AutoChangeDisplayMode="False"
                                DisplayMemberPath="Title" 
                                SelectedIndex="0"
-                               ItemContainerStyle="{StaticResource BaseNavigationViewItemStyle}">
+                               ItemContainerStyle="{StaticResource BaseNavigationViewItemStyle}" 
+                               SelectionChanged="RadNavigationView_SelectionChanged"
+                               >
 
         <!-- Content -->
-        <!--<telerik:RadNavigationView.Content>
-            <telerik:RadTransitionControl Content="{Binding SelectedItem}" ContentTemplateSelector="{StaticResource NavigationViewContentTemplateSelector}" Foreground="Black" Duration="0:0:0.4">
+        <telerik:RadNavigationView.Content>
+            <telerik:RadTransitionControl Content="{Binding SelectedWorkspace}" ContentTemplateSelector="{StaticResource WorkspaceContentTemplateSelector}" Duration="0:0:0.4">
                 <telerik:RadTransitionControl.Transition>
                     <telerik:FadeTransition />
                 </telerik:RadTransitionControl.Transition>
             </telerik:RadTransitionControl>
-        </telerik:RadNavigationView.Content>-->
+        </telerik:RadNavigationView.Content>
 
         <!-- Footer -->
         <telerik:RadNavigationView.PaneFooter>

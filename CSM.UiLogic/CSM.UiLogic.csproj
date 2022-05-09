@@ -75,6 +75,7 @@
     <Compile Include="SettingsViewModel.cs" />
     <Compile Include="Workspaces\ToolsViewModel.cs" />
     <Compile Include="Workspaces\TwitchIntegrationViewModel.cs" />
+    <Compile Include="Workspaces\WorkspaceType.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CSM.DataAccess\CSM.DataAccess.csproj">

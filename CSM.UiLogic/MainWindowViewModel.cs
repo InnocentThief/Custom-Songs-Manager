@@ -49,5 +49,13 @@ namespace CSM.UiLogic
                 OnPropertyChanged();
             }
         }
+
+        public async Task LoadWorkspaceAsync()
+        {
+            if (selectedWorkspace != null)
+            {
+                await selectedWorkspace.LoadDataAsync();
+            }
+        }
     }
 }

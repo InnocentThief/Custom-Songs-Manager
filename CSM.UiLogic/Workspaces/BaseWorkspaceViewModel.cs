@@ -13,6 +13,8 @@ namespace CSM.UiLogic.Workspaces
 
         public string IconGlyph { get; set; }
 
+        public abstract WorkspaceType WorkspaceType { get; }
+
         public abstract Task LoadDataAsync();
 
         public abstract void UnloadData();

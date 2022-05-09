@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:CSM.App"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary Source="/Telerik.Windows.Controls;component/Themes/FontResources.xaml"/>
     </Application.Resources>
 </Application>
