@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -53,6 +52,14 @@
       <Project>{093e1723-517f-4539-ae61-642ef773acb0}</Project>
       <Name>CSM.Services</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\" />
+    <Folder Include="CustomLevels\" />
+    <Folder Include="Playlists\" />
+    <Folder Include="Settings\" />
+    <Folder Include="Tools\" />
+    <Folder Include="TwitchIntegration\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

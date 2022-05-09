@@ -1,0 +1,11 @@
+C:\Sources\Custom Songs Manager\CSM.UiLogic\bin\Debug\CSM.UiLogic.dll
+C:\Sources\Custom Songs Manager\CSM.UiLogic\bin\Debug\CSM.UiLogic.pdb
+C:\Sources\Custom Songs Manager\CSM.UiLogic\bin\Debug\CSM.DataAccess.dll
+C:\Sources\Custom Songs Manager\CSM.UiLogic\bin\Debug\CSM.Services.dll
+C:\Sources\Custom Songs Manager\CSM.UiLogic\bin\Debug\CSM.DataAccess.pdb
+C:\Sources\Custom Songs Manager\CSM.UiLogic\bin\Debug\CSM.Services.pdb
+C:\Sources\Custom Songs Manager\CSM.UiLogic\obj\Debug\CSM.UiLogic.csproj.AssemblyReference.cache
+C:\Sources\Custom Songs Manager\CSM.UiLogic\obj\Debug\CSM.UiLogic.csproj.CoreCompileInputs.cache
+C:\Sources\Custom Songs Manager\CSM.UiLogic\obj\Debug\CSM.UiLogic.csproj.CopyComplete
+C:\Sources\Custom Songs Manager\CSM.UiLogic\obj\Debug\CSM.UiLogic.dll
+C:\Sources\Custom Songs Manager\CSM.UiLogic\obj\Debug\CSM.UiLogic.pdb
