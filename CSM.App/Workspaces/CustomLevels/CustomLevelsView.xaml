@@ -11,6 +11,8 @@
         <telerik:StringToGlyphConverter x:Key="StringToGlyphConverter" />
     </UserControl.Resources>
     
+    
+    
     <Grid Margin="8">
         
         <Grid.ColumnDefinitions>
@@ -29,7 +31,7 @@
         </Border>
 
         <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="1,0,1,1">
-
+            <telerik:RadBusyIndicator Content="Loading..." IsIndeterminate="False" ProgressValue="{Binding LoadProgress}" IsBusy="{Binding IsLoading}" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Border>
 
         <GridSplitter Grid.Column="1" Grid.Row="1" ResizeDirection="Columns"

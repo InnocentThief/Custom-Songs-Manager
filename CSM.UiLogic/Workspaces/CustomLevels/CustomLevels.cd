@@ -6,6 +6,10 @@
       <HashCode>ABAAAQEEAAAAAAAggAAAAAAAgQAAIAMACAAAAAAAAAQ=</HashCode>
       <FileName>Workspaces\CustomLevelsViewModel.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CustomLevelDetail" />
+      <Property Name="SelectedCustomLevel" />
+    </ShowAsAssociation>
     <ShowAsCollectionAssociation>
       <Field Name="itemsObservable" />
     </ShowAsCollectionAssociation>
@@ -20,8 +24,22 @@
   <Class Name="CSM.UiLogic.Workspaces.CustomLevels.CustomLevelViewModel">
     <Position X="7.5" Y="2.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAACAAAAAACAEBAAQAIAALAIAAAAAAAAAoAAA=</HashCode>
       <FileName>Workspaces\CustomLevels\CustomLevelViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="customLevel" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CSM.DataAccess.Entities.Offline.CustomLevel">
+    <Position X="11" Y="2.5" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="CSM.UiLogic.Workspaces.CustomLevels.CustomLevelDetailViewModel">
+    <Position X="7.5" Y="6.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Workspaces\CustomLevels\CustomLevelDetailViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

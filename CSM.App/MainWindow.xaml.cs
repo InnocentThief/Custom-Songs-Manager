@@ -60,7 +60,7 @@ namespace CSM.App
 
         }
 
-        private async void RadNavigationView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void RadNavigationView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // Unload removed workspace
             if (e.RemovedItems.Count > 0)
@@ -71,7 +71,7 @@ namespace CSM.App
 
             // Load added workspace
             var viewModel = DataContext as MainWindowViewModel;
-            await viewModel.LoadWorkspaceAsync();
+            viewModel.LoadWorkspace();
         }
     }
 }

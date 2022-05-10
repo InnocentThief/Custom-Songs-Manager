@@ -15,7 +15,7 @@ namespace CSM.UiLogic.Workspaces
 
         public abstract WorkspaceType WorkspaceType { get; }
 
-        public abstract Task LoadDataAsync();
+        public abstract void LoadData();
 
         public abstract void UnloadData();
     }

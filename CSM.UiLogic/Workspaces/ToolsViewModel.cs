@@ -10,9 +10,9 @@ namespace CSM.UiLogic.Workspaces
     {
         public override WorkspaceType WorkspaceType => WorkspaceType.Tools;
 
-        public override async Task LoadDataAsync()
+        public override void LoadData()
         {
-            await Task.CompletedTask;
+            
         }
 
         public override void UnloadData()

@@ -50,11 +50,11 @@ namespace CSM.UiLogic
             }
         }
 
-        public async Task LoadWorkspaceAsync()
+        public void LoadWorkspace()
         {
             if (selectedWorkspace != null)
             {
-                await selectedWorkspace.LoadDataAsync();
+                selectedWorkspace.LoadData();
             }
         }
     }
