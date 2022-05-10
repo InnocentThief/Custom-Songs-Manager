@@ -1,9 +1,0 @@
-C:\Sources\Custom Songs Manager\CSM.Services\bin\Debug\CSM.Services.dll
-C:\Sources\Custom Songs Manager\CSM.Services\bin\Debug\CSM.Services.pdb
-C:\Sources\Custom Songs Manager\CSM.Services\bin\Debug\CSM.DataAccess.dll
-C:\Sources\Custom Songs Manager\CSM.Services\bin\Debug\CSM.DataAccess.pdb
-C:\Sources\Custom Songs Manager\CSM.Services\obj\Debug\CSM.Services.csproj.AssemblyReference.cache
-C:\Sources\Custom Songs Manager\CSM.Services\obj\Debug\CSM.Services.csproj.CoreCompileInputs.cache
-C:\Sources\Custom Songs Manager\CSM.Services\obj\Debug\CSM.Services.csproj.CopyComplete
-C:\Sources\Custom Songs Manager\CSM.Services\obj\Debug\CSM.Services.dll
-C:\Sources\Custom Songs Manager\CSM.Services\obj\Debug\CSM.Services.pdb

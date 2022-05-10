@@ -1,6 +1,0 @@
-C:\Sources\Custom Songs Manager\CSM.DataAccess\bin\Debug\CSM.DataAccess.dll
-C:\Sources\Custom Songs Manager\CSM.DataAccess\bin\Debug\CSM.DataAccess.pdb
-C:\Sources\Custom Songs Manager\CSM.DataAccess\obj\Debug\CSM.DataAccess.csproj.AssemblyReference.cache
-C:\Sources\Custom Songs Manager\CSM.DataAccess\obj\Debug\CSM.DataAccess.csproj.CoreCompileInputs.cache
-C:\Sources\Custom Songs Manager\CSM.DataAccess\obj\Debug\CSM.DataAccess.dll
-C:\Sources\Custom Songs Manager\CSM.DataAccess\obj\Debug\CSM.DataAccess.pdb
