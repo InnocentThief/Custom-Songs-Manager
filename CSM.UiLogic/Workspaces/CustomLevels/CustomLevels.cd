@@ -3,15 +3,25 @@
   <Class Name="CSM.UiLogic.Workspaces.CustomLevelsViewModel">
     <Position X="3.75" Y="2.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAgAAAAAIAAAAAAAAAAAA=</HashCode>
+      <HashCode>ABAAAQEEAAAAAAAggAAAAAAAgQAAIAMACAAAAAAAAAQ=</HashCode>
       <FileName>Workspaces\CustomLevelsViewModel.cs</FileName>
     </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="itemsObservable" />
+    </ShowAsCollectionAssociation>
   </Class>
   <Class Name="CSM.UiLogic.Workspaces.BaseWorkspaceViewModel" Collapsed="true">
     <Position X="3.75" Y="1.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAgQAAAAIAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAQAAAAAAAEAAAAAAAAAAgQAAAAIAAAAAAAAAAAA=</HashCode>
       <FileName>Workspaces\BaseWorkspaceViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSM.UiLogic.Workspaces.CustomLevels.CustomLevelViewModel">
+    <Position X="7.5" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Workspaces\CustomLevels\CustomLevelViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
