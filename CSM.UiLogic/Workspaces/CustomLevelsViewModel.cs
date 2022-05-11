@@ -61,7 +61,8 @@ namespace CSM.UiLogic.Workspaces
         {
             get
             {
-                if (CustomLevels.Count == 1) return $"1 custom level loaded.";
+                if (CustomLevels.Count == 0) return "No custom levels loaded";
+                if (CustomLevels.Count == 1) return "1 custom level loaded";
                 return $"{CustomLevels.Count} custom levels loaded";
             }
         }
@@ -77,7 +78,7 @@ namespace CSM.UiLogic.Workspaces
                 if (value == customLevelDetail) return;
                 customLevelDetail = value;
                 OnPropertyChanged();
-                            }
+            }
         }
 
         /// <summary>
@@ -219,6 +220,7 @@ namespace CSM.UiLogic.Workspaces
             var customLevels = (List<CustomLevel>)e.Result;
             itemsObservable.AddRange(customLevels.Select(cl => new CustomLevelViewModel(cl)));
             IsLoading = false;
+            OnPropertyChanged(nameof(CustomLevelCount));
         }
 
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -228,7 +230,13 @@ namespace CSM.UiLogic.Workspaces
 
         private void DeleteCustomLevel()
         {
-
+            var directoryPath = Path.GetDirectoryName(SelectedCustomLevel.Path);
+            if (Directory.Exists(directoryPath))
+            {
+                Directory.Delete(directoryPath, true);
+                CustomLevels.Remove(SelectedCustomLevel);
+                OnPropertyChanged(nameof(CustomLevelCount));
+            }
         }
 
         public bool CanDeleteCustomLevel()
