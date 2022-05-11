@@ -16,18 +16,13 @@ using System.Windows.Shapes;
 namespace CSM.App.Workspaces.CustomLevels
 {
     /// <summary>
-    /// Interaction logic for CustomLevelDetail.xaml
+    /// Interaction logic for CustomLevelDifficultyView.xaml
     /// </summary>
-    public partial class CustomLevelDetailView : UserControl
+    public partial class CustomLevelDifficultyView : UserControl
     {
-        public CustomLevelDetailView()
+        public CustomLevelDifficultyView()
         {
             InitializeComponent();
-        }
-
-        private void RadPropertyGrid_AutoGeneratingPropertyDefinition(object sender, Telerik.Windows.Controls.Data.PropertyGrid.AutoGeneratingPropertyDefinitionEventArgs e)
-        {
-            if (e.PropertyDefinition.DisplayName == "Difficulties") e.Cancel = true;
         }
     }
 }

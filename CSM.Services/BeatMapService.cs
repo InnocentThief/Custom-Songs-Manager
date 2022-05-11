@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using CSM.DataAccess.Entities.Online;
+using System.Threading.Tasks;
 
 namespace CSM.Services
 {
@@ -11,10 +12,10 @@ namespace CSM.Services
             client = new GenericServiceClient("https://api.beatsaver.com/maps/id");
         }
 
-        //public async Task<BeatMap> GetBeatMapDataAsync(string key)
-        //{
-        //    var beatmap = await client.GetAsync<BeatMap>($"/{key}");
-        //    return beatmap;
-        //}
+        public async Task<BeatMap> GetBeatMapDataAsync(string key)
+        {
+            var beatmap = await client.GetAsync<BeatMap>($"/{key}");
+            return beatmap;
+        }
     }
 }

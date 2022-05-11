@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Threading.Tasks;
 using System.Windows.Data;
 
 namespace CSM.UiLogic.Workspaces
@@ -29,6 +30,7 @@ namespace CSM.UiLogic.Workspaces
         private BackgroundWorker bgWorker;
         private bool isLoading;
         private int loadProgress;
+        private string customLevelPath;
 
         #endregion
 
@@ -119,6 +121,21 @@ namespace CSM.UiLogic.Workspaces
         }
 
         /// <summary>
+        /// Gets or sets the custom level path.
+        /// </summary>
+        [Obsolete("Has to be removed when settings page is introduced")]
+        public string CustomLevelPath
+        {
+            get => customLevelPath;
+            set
+            {
+                if (value == customLevelPath) return;
+                customLevelPath = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
         /// Gets the workspace type.
         /// </summary>
         public override WorkspaceType WorkspaceType => WorkspaceType.CustomLevels;
@@ -130,6 +147,7 @@ namespace CSM.UiLogic.Workspaces
         /// </summary>
         public CustomLevelsViewModel()
         {
+            CustomLevelPath = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Beat Saber\\Beat Saber_Data\\CustomLevels";
             beatMapService = new BeatMapService();
             itemsObservable = new ObservableCollection<CustomLevelViewModel>();
             itemsCollection = DefaultSort();
@@ -162,6 +180,12 @@ namespace CSM.UiLogic.Workspaces
 
         }
 
+        public async Task GetBeatSaverBeatMapDataAsync(string key)
+        {
+            var beatmap = await beatMapService.GetBeatMapDataAsync(key);
+            CustomLevelDetail = beatmap == null ? null : new CustomLevelDetailViewModel(beatmap);
+        }
+
         #region Helper methods
 
         private ListCollectionView DefaultSort()
@@ -184,7 +208,9 @@ namespace CSM.UiLogic.Workspaces
             var i = 0;
             var levels = new List<CustomLevel>();
 
-            IEnumerable<string> folderEntries = Directory.EnumerateDirectories("C:\\Users\\dk\\OneDrive\\Madeleine Shared\\BeatSaber\\CustomLevels");
+            if (!Directory.Exists(CustomLevelPath)) return;
+
+            IEnumerable<string> folderEntries = Directory.EnumerateDirectories(CustomLevelPath);
             foreach (string folderEntry in folderEntries)
             {
                 var info = Path.Combine(folderEntry, "Info.dat");
@@ -218,7 +244,10 @@ namespace CSM.UiLogic.Workspaces
         {
             bgWorker.Dispose();
             var customLevels = (List<CustomLevel>)e.Result;
-            itemsObservable.AddRange(customLevels.Select(cl => new CustomLevelViewModel(cl)));
+            if (customLevels != null)
+            {
+                itemsObservable.AddRange(customLevels.Select(cl => new CustomLevelViewModel(cl)));
+            }
             IsLoading = false;
             OnPropertyChanged(nameof(CustomLevelCount));
         }

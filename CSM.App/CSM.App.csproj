@@ -169,8 +169,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converter\DifficultyToColorConverter.cs" />
     <Compile Include="Workspaces\CustomLevels\CustomLevelDetail.xaml.cs">
       <DependentUpon>CustomLevelDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Workspaces\CustomLevels\CustomLevelDifficultyView.xaml.cs">
+      <DependentUpon>CustomLevelDifficultyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Workspaces\CustomLevels\CustomLevelListView.xaml.cs">
       <DependentUpon>CustomLevelListView.xaml</DependentUpon>
@@ -201,6 +205,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Workspaces\CustomLevels\CustomLevelDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Workspaces\CustomLevels\CustomLevelDifficultyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

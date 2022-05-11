@@ -75,6 +75,12 @@
     <Compile Include="Entities\Offline\BeatMapDifficultySet.cs" />
     <Compile Include="Entities\Offline\CustomLevel.cs" />
     <Compile Include="Entities\Offline\CustomLevelCustomData.cs" />
+    <Compile Include="Entities\Online\BeatMap.cs" />
+    <Compile Include="Entities\Online\Difficulty.cs" />
+    <Compile Include="Entities\Online\Metadata.cs" />
+    <Compile Include="Entities\Online\Stats.cs" />
+    <Compile Include="Entities\Online\Uploader.cs" />
+    <Compile Include="Entities\Online\Version.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

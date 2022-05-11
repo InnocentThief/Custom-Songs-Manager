@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSM.UiLogic.Workspaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,15 @@ namespace CSM.App.Workspaces.CustomLevels
         public CustomLevelListView()
         {
             InitializeComponent();
+        }
+
+        private async void RadGridView_SelectionChanged(object sender, Telerik.Windows.Controls.SelectionChangeEventArgs e)
+        {
+            var viewModel = DataContext as CustomLevelsViewModel;
+            if (viewModel?.SelectedCustomLevel != null)
+            {
+                await viewModel.GetBeatSaverBeatMapDataAsync(viewModel.SelectedCustomLevel.BsrKey);
+            }
         }
     }
 }

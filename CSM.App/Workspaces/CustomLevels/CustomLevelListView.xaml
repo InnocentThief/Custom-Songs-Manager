@@ -3,7 +3,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:local="clr-namespace:CSM.App" 
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
              mc:Ignorable="d" 
@@ -28,12 +27,13 @@
             <TextBlock Text="Custom Levels" Foreground="White" VerticalAlignment="Center" Margin="8,0" FontWeight="DemiBold" />
             <!-- Commands -->
             <telerik:RadToolBar Grid.Column="1" OverflowButtonVisibility="Collapsed" GripVisibility="Collapsed" Background="Transparent" BorderThickness="0" >
-                <telerik:RadButton Command="{Binding DeleteCustomLevelCommand}" ToolTip="Deletes the selected custom level">
-                    <telerik:RadGlyph Glyph="&#xe10c;" />
-                </telerik:RadButton>
-                <telerik:RadToolBarSeparator />
+                <TextBox Text="{Binding CustomLevelPath}" Width="300" />
                 <telerik:RadButton Command="{Binding RefreshCommand}" ToolTip="Refresh the custom level list">
                     <telerik:RadGlyph Glyph="&#xe103;" />
+                </telerik:RadButton>
+                <telerik:RadToolBarSeparator />
+                <telerik:RadButton Command="{Binding DeleteCustomLevelCommand}" ToolTip="Deletes the selected custom level">
+                    <telerik:RadGlyph Glyph="&#xe10c;" />
                 </telerik:RadButton>
             </telerik:RadToolBar>
         </Grid>
@@ -45,7 +45,7 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <!-- ListView -->
-                <telerik:RadGridView ItemsSource="{Binding CustomLevels}" SelectedItem="{Binding SelectedCustomLevel}" AutoGenerateColumns="False" RowIndicatorVisibility="Collapsed" FrozenColumnsSplitterVisibility="Collapsed" BorderThickness="0" AlternationCount="2">
+                <telerik:RadGridView ItemsSource="{Binding CustomLevels}" SelectedItem="{Binding SelectedCustomLevel}" AutoGenerateColumns="False" RowIndicatorVisibility="Collapsed" FrozenColumnsSplitterVisibility="Collapsed" BorderThickness="0" AlternationCount="2" SelectionChanged="RadGridView_SelectionChanged"  >
                     <telerik:RadGridView.Columns>
                         <telerik:GridViewDataColumn Header="BSR" DataMemberBinding="{Binding BsrKey}" />
                         <telerik:GridViewDataColumn Header="Title" DataMemberBinding="{Binding SongName}" />
@@ -86,7 +86,7 @@
                                 </DataTemplate>
                             </telerik:GridViewDataColumn.CellTemplate>
                         </telerik:GridViewDataColumn>
-                        <telerik:GridViewDataColumn Header="Last Modified" DataMemberBinding="{Binding ChangeDate, StringFormat='g', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
+                        <telerik:GridViewDataColumn Header="Download date" DataMemberBinding="{Binding ChangeDate, StringFormat='g', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
                     </telerik:RadGridView.Columns>
                 </telerik:RadGridView>
                 <!-- Entry counter -->

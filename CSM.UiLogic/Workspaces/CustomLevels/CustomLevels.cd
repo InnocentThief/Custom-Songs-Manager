@@ -3,12 +3,12 @@
   <Class Name="CSM.UiLogic.Workspaces.CustomLevelsViewModel">
     <Position X="3.75" Y="2.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>ABAAAQEEAAAAAAAggAAAAAAAgQAAIAMACAAAAAAAAAQ=</HashCode>
+      <HashCode>BBAAAwEECgBQAAgggACAIAAAgQAAIAMACAEAAAAAAAI=</HashCode>
       <FileName>Workspaces\CustomLevelsViewModel.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="CustomLevelDetail" />
       <Property Name="SelectedCustomLevel" />
+      <Property Name="CustomLevelDetail" />
     </ShowAsAssociation>
     <ShowAsCollectionAssociation>
       <Field Name="itemsObservable" />
@@ -17,14 +17,14 @@
   <Class Name="CSM.UiLogic.Workspaces.BaseWorkspaceViewModel" Collapsed="true">
     <Position X="3.75" Y="1.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAQAAAAAAAEAAAAAAAAAAgQAAAAIAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAQAAAAAQAEAAAAAAAAAAAQAAAAIAAAAAAAAAAAA=</HashCode>
       <FileName>Workspaces\BaseWorkspaceViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CSM.UiLogic.Workspaces.CustomLevels.CustomLevelViewModel">
     <Position X="7.5" Y="2.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAACAAAAAACAEBAAQAIAALAIAAAAAAAAAoAAA=</HashCode>
+      <HashCode>AAAAAAAAACAAAAIABAEBAAAAIAAJAIAEAAAAgAAoAAA=</HashCode>
       <FileName>Workspaces\CustomLevels\CustomLevelViewModel.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -36,10 +36,17 @@
     <TypeIdentifier />
   </Class>
   <Class Name="CSM.UiLogic.Workspaces.CustomLevels.CustomLevelDetailViewModel">
-    <Position X="7.5" Y="6.75" Width="2.25" />
+    <Position X="7.5" Y="8.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAACEAAAQIAiAAgACAAAAACAAAEAAEAAAAAAgAAAAQA=</HashCode>
       <FileName>Workspaces\CustomLevels\CustomLevelDetailViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSM.UiLogic.Workspaces.CustomLevels.CustomLevelDifficultyViewModel">
+    <Position X="11.75" Y="8.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AEAAEAAFgAIAAQAACCAAAAAAAAIAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Workspaces\CustomLevels\CustomLevelDifficultyViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
