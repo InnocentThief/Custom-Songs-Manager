@@ -24,7 +24,9 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
+            <!-- Title -->
             <TextBlock Text="Custom Levels" Foreground="White" VerticalAlignment="Center" Margin="8,0" FontWeight="DemiBold" />
+            <!-- Commands -->
             <telerik:RadToolBar Grid.Column="1" OverflowButtonVisibility="Collapsed" GripVisibility="Collapsed" Background="Transparent" BorderThickness="0" >
                 <telerik:RadButton Command="{Binding DeleteCustomLevelCommand}" ToolTip="Deletes the selected custom level">
                     <telerik:RadGlyph Glyph="&#xe10c;" />
@@ -43,11 +45,11 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <!-- ListView -->
-                <telerik:RadGridView ItemsSource="{Binding CustomLevels}" SelectedItem="{Binding SelectedCustomLevel}" AutoGenerateColumns="False" RowIndicatorVisibility="Collapsed" FrozenColumnsSplitterVisibility="Collapsed" BorderThickness="0">
+                <telerik:RadGridView ItemsSource="{Binding CustomLevels}" SelectedItem="{Binding SelectedCustomLevel}" AutoGenerateColumns="False" RowIndicatorVisibility="Collapsed" FrozenColumnsSplitterVisibility="Collapsed" BorderThickness="0" AlternationCount="2">
                     <telerik:RadGridView.Columns>
                         <telerik:GridViewDataColumn Header="BSR" DataMemberBinding="{Binding BsrKey}" />
-                        <telerik:GridViewDataColumn Header="Artist" DataMemberBinding="{Binding SongAuthorName}" />
                         <telerik:GridViewDataColumn Header="Title" DataMemberBinding="{Binding SongName}" />
+                        <telerik:GridViewDataColumn Header="Artist" DataMemberBinding="{Binding SongAuthorName}" />
                         <telerik:GridViewDataColumn Header="Mapper" DataMemberBinding="{Binding LevelAuthorName}" />
                         <telerik:GridViewDataColumn Header="E" DataMemberBinding="{Binding Easy}">
                             <telerik:GridViewDataColumn.CellTemplate>

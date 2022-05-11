@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:CSM.App.Workspaces.CustomLevels"
+             xmlns:local="clr-namespace:CSM.App.Workspaces.CustomLevels" xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -13,11 +13,49 @@
         </Grid.RowDefinitions>
         <!-- Header -->
         <Border Background="#FF018574" >
-            <TextBlock Text="Song Detail" Foreground="White" VerticalAlignment="Center" Margin="8,0" FontWeight="DemiBold" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <!-- Title -->
+                <TextBlock Text="Song Detail" Foreground="White" VerticalAlignment="Center" Margin="8,0" FontWeight="DemiBold" />
+                <!-- Commands -->
+                <telerik:RadToolBar Grid.Column="1" OverflowButtonVisibility="Collapsed" GripVisibility="Collapsed" Background="Transparent" BorderThickness="0" >
+                    <telerik:RadButton Command="{Binding CopyBsrKeyCommand}" ToolTip="Copy the bsr key. Can be used to request the map in Twitch.">
+                        <StackPanel Orientation="Horizontal">
+                            <telerik:RadGlyph Glyph="&#xe111;" />
+                            <TextBlock Text="!BSR" Margin="3,0,0,0" />
+                        </StackPanel>
+                    </telerik:RadButton>
+                </telerik:RadToolBar>
+            </Grid>
         </Border>
         <!-- Content -->
         <Border Grid.Row="1" BorderBrush="DimGray" BorderThickness="1,0,1,1">
-            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <!-- Detail map information -->
+                <telerik:RadPropertyGrid SortAndGroupButtonsVisibility="Collapsed" SearchBoxVisibility="Collapsed" DescriptionPanelVisibility="Collapsed" BorderThickness="0">
+
+                </telerik:RadPropertyGrid>
+
+                <!-- Difficulty information -->
+                <telerik:RadGridView Grid.Row="1" FrozenColumnsSplitterVisibility="Collapsed" IsFilteringAllowed="False" AutoGenerateColumns="False" CanUserSortColumns="False" RowIndicatorVisibility="Collapsed" ShowGroupPanel="false" BorderThickness="0">
+                    <telerik:RadGridView.Columns>
+                        <telerik:GridViewDataColumn>
+                            <telerik:GridViewColumn.CellTemplate>
+                                <DataTemplate>
+
+                                </DataTemplate>
+                            </telerik:GridViewColumn.CellTemplate>
+                        </telerik:GridViewDataColumn>
+                    </telerik:RadGridView.Columns>
+                </telerik:RadGridView>
+            </Grid>
         </Border>
     </Grid>
 </UserControl>
