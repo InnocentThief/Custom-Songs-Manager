@@ -57,6 +57,9 @@ namespace CSM.DataAccess.Entities.Offline
         [JsonIgnore]
         public DateTime ChangeDate { get; set; }
 
+        [JsonIgnore]
+        public string Path { get; set; }
+
         [JsonPropertyName("_customData")]
         public CustomLevelCustomData CustomData { get; set; }
 

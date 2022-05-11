@@ -50,6 +50,7 @@ namespace CSM.UiLogic.Workspaces
                 if (value == selectedCustomLevel) return;
                 selectedCustomLevel = value;
                 OnPropertyChanged();
+                DeleteCustomLevelCommand.NotifyCanExecuteChanged();
             }
         }
 
@@ -76,7 +77,7 @@ namespace CSM.UiLogic.Workspaces
                 if (value == customLevelDetail) return;
                 customLevelDetail = value;
                 OnPropertyChanged();
-            }
+                            }
         }
 
         /// <summary>
@@ -84,6 +85,14 @@ namespace CSM.UiLogic.Workspaces
         /// </summary>
         public RelayCommand RefreshCommand { get; }
 
+        /// <summary>
+        /// Command used to delete the selected custom level.
+        /// </summary>
+        public RelayCommand DeleteCustomLevelCommand { get; }
+
+        /// <summary>
+        /// Gets or sets whether the data is loading.
+        /// </summary>
         public bool IsLoading
         {
             get => isLoading;
@@ -95,6 +104,9 @@ namespace CSM.UiLogic.Workspaces
             }
         }
 
+        /// <summary>
+        /// Gets or sets the load progress.
+        /// </summary>
         public int LoadProgress
         {
             get => loadProgress;
@@ -121,6 +133,7 @@ namespace CSM.UiLogic.Workspaces
             itemsObservable = new ObservableCollection<CustomLevelViewModel>();
             itemsCollection = DefaultSort();
             RefreshCommand = new RelayCommand(Refresh);
+            DeleteCustomLevelCommand = new RelayCommand(DeleteCustomLevel, CanDeleteCustomLevel);
         }
 
         /// <summary>
@@ -138,6 +151,29 @@ namespace CSM.UiLogic.Workspaces
             bgWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
             bgWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
             bgWorker.RunWorkerAsync();
+        }
+
+        /// <summary>
+        /// Unloads the data.
+        /// </summary>
+        public override void UnloadData()
+        {
+
+        }
+
+        #region Helper methods
+
+        private ListCollectionView DefaultSort()
+        {
+            var collection = new ListCollectionView(itemsObservable);
+            collection.SortDescriptions.Add(new SortDescription("ChangeDate", ListSortDirection.Descending));
+            return collection;
+        }
+
+        private void Refresh()
+        {
+            itemsObservable.Clear();
+            LoadData();
         }
 
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -162,6 +198,7 @@ namespace CSM.UiLogic.Workspaces
                         {
                             customLevel.BsrKey = directory.Name.Substring(0, directory.Name.IndexOf(" "));
                             customLevel.ChangeDate = File.GetLastWriteTime(info);
+                            customLevel.Path = info;
                         }
                         catch (Exception)
                         {
@@ -189,33 +226,15 @@ namespace CSM.UiLogic.Workspaces
             LoadProgress = e.ProgressPercentage;
         }
 
-        /// <summary>
-        /// Unloads the data.
-        /// </summary>
-        public override void UnloadData()
+        private void DeleteCustomLevel()
         {
 
         }
 
-        #region Helper methods
-
-        private ListCollectionView DefaultSort()
+        public bool CanDeleteCustomLevel()
         {
-            var collection = new ListCollectionView(itemsObservable);
-            collection.SortDescriptions.Add(new SortDescription("ChangeDate", ListSortDirection.Descending));
-            return collection;
+            return SelectedCustomLevel != null;
         }
-
-        private void Refresh()
-        {
-            itemsObservable.Clear();
-            LoadData();
-        }
-
-        //private void CustomLevelsLoader_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        //{
-        //    LoadProgress = e.ProgressPercentage;
-        //}
 
         #endregion
     }

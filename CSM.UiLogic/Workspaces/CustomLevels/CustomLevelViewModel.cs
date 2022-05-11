@@ -32,6 +32,8 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
 
         public DateTime ChangeDate => customLevel.ChangeDate;
 
+        public string Path => customLevel.Path;
+
         #endregion
 
         public CustomLevelViewModel(CustomLevel customLevel)
