@@ -13,6 +13,8 @@
     
     
     
+    
+    
     <Grid Margin="8">
         
         <Grid.ColumnDefinitions>
@@ -20,32 +22,31 @@
             <ColumnDefinition Width="6" />
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="32" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
 
+        <local:CustomLevelListView />
 
-        <Border Background="#FF018574" >
+        <!--<Border Background="#FF018574" >
             <TextBlock Text="Custom Levels" Foreground="White" VerticalAlignment="Center" Margin="8,0" />
         </Border>
 
         <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="1,0,1,1">
             <telerik:RadBusyIndicator Content="Loading..." IsIndeterminate="False" ProgressValue="{Binding LoadProgress}" IsBusy="{Binding IsLoading}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        </Border>
+        </Border>-->
 
         <GridSplitter Grid.Column="1" Grid.Row="1" ResizeDirection="Columns"
               ResizeBehavior="PreviousAndNext"
                       Background="Transparent"
               HorizontalAlignment="Stretch" />
 
-        <Border Grid.Column="2" Background="#FF018574" >
+        <local:CustomLevelDetailView Grid.Column="2" />
+
+        <!--<Border Grid.Column="2" Background="#FF018574" >
             <TextBlock Text="Song Detail" Foreground="White" VerticalAlignment="Center" Margin="8,0" />
         </Border>
 
         <Border Grid.Column="2" Grid.Row="1" BorderBrush="Gray" BorderThickness="1,0,1,1">
 
-        </Border>
+        </Border>-->
 
         <!--<telerik:RadToolBar OverflowButtonVisibility="Collapsed" GripVisibility="Collapsed">
             <telerik:RadButton>

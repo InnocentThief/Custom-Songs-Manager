@@ -18,9 +18,9 @@ namespace CSM.App.Workspaces.CustomLevels
     /// <summary>
     /// Interaction logic for CustomLevelList.xaml
     /// </summary>
-    public partial class CustomLevelList : UserControl
+    public partial class CustomLevelListView : UserControl
     {
-        public CustomLevelList()
+        public CustomLevelListView()
         {
             InitializeComponent();
         }

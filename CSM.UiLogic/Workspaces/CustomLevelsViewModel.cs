@@ -1,5 +1,5 @@
 ﻿using CSM.DataAccess.Entities.Offline;
-using CSM.Framework.IoHandlers;
+using CSM.Framework.Extensions;
 using CSM.Services;
 using CSM.UiLogic.Workspaces.CustomLevels;
 using Microsoft.Toolkit.Mvvm.Input;
@@ -9,9 +9,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows.Data;
 
 namespace CSM.UiLogic.Workspaces
@@ -29,7 +27,6 @@ namespace CSM.UiLogic.Workspaces
         private CustomLevelDetailViewModel customLevelDetail;
         private BeatMapService beatMapService;
         private BackgroundWorker bgWorker;
-        //private CustomLevelsLoader customLevelsLoader;
         private bool isLoading;
         private int loadProgress;
 
@@ -43,18 +40,6 @@ namespace CSM.UiLogic.Workspaces
         public ListCollectionView CustomLevels => itemsCollection;
 
         /// <summary>
-        /// Gets the custom level count.
-        /// </summary>
-        public string CustomLevelCount
-        {
-            get
-            {
-                if (CustomLevels.Count == 1) return $"1 custom level loaded.";
-                return $"{CustomLevels.Count} custom levels loaded";
-            }
-        }
-
-        /// <summary>
         /// Gets or sets the currently selected custom level.
         /// </summary>
         public CustomLevelViewModel SelectedCustomLevel
@@ -65,6 +50,18 @@ namespace CSM.UiLogic.Workspaces
                 if (value == selectedCustomLevel) return;
                 selectedCustomLevel = value;
                 OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Gets the custom level count.
+        /// </summary>
+        public string CustomLevelCount
+        {
+            get
+            {
+                if (CustomLevels.Count == 1) return $"1 custom level loaded.";
+                return $"{CustomLevels.Count} custom levels loaded";
             }
         }
 
@@ -120,8 +117,6 @@ namespace CSM.UiLogic.Workspaces
         /// </summary>
         public CustomLevelsViewModel()
         {
-            //customLevelsLoader = new CustomLevelsLoader();
-            //customLevelsLoader.ProgressChanged += CustomLevelsLoader_ProgressChanged;
             beatMapService = new BeatMapService();
             itemsObservable = new ObservableCollection<CustomLevelViewModel>();
             itemsCollection = DefaultSort();
@@ -143,9 +138,6 @@ namespace CSM.UiLogic.Workspaces
             bgWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
             bgWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
             bgWorker.RunWorkerAsync();
-
-            //IsLoading = true;
-            //var customLevels = customLevelsLoader.LoadCustomLevels("C:\\Users\\InnocentThief\\OneDrive\\Madeleine Shared\\BeatSaber\\CustomLevels");
         }
 
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -155,7 +147,7 @@ namespace CSM.UiLogic.Workspaces
             var i = 0;
             var levels = new List<CustomLevel>();
 
-            IEnumerable<string> folderEntries = Directory.EnumerateDirectories("C:\\Users\\InnocentThief\\OneDrive\\Madeleine Shared\\BeatSaber\\CustomLevels");
+            IEnumerable<string> folderEntries = Directory.EnumerateDirectories("C:\\Users\\dk\\OneDrive\\Madeleine Shared\\BeatSaber\\CustomLevels");
             foreach (string folderEntry in folderEntries)
             {
                 var info = Path.Combine(folderEntry, "Info.dat");
@@ -169,6 +161,7 @@ namespace CSM.UiLogic.Workspaces
                         try
                         {
                             customLevel.BsrKey = directory.Name.Substring(0, directory.Name.IndexOf(" "));
+                            customLevel.ChangeDate = File.GetLastWriteTime(info);
                         }
                         catch (Exception)
                         {
@@ -185,9 +178,10 @@ namespace CSM.UiLogic.Workspaces
 
         private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            IsLoading = false;
-            var customLevels = (List<CustomLevel>)e.Result;
             bgWorker.Dispose();
+            var customLevels = (List<CustomLevel>)e.Result;
+            itemsObservable.AddRange(customLevels.Select(cl => new CustomLevelViewModel(cl)));
+            IsLoading = false;
         }
 
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)

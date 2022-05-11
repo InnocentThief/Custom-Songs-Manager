@@ -172,8 +172,8 @@
     <Compile Include="Workspaces\CustomLevels\CustomLevelDetail.xaml.cs">
       <DependentUpon>CustomLevelDetail.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Workspaces\CustomLevels\CustomLevelList.xaml.cs">
-      <DependentUpon>CustomLevelList.xaml</DependentUpon>
+    <Compile Include="Workspaces\CustomLevels\CustomLevelListView.xaml.cs">
+      <DependentUpon>CustomLevelListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Workspaces\CustomLevels\CustomLevelsView.xaml.cs">
       <DependentUpon>CustomLevelsView.xaml</DependentUpon>
@@ -204,7 +204,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Workspaces\CustomLevels\CustomLevelList.xaml">
+    <Page Include="Workspaces\CustomLevels\CustomLevelListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

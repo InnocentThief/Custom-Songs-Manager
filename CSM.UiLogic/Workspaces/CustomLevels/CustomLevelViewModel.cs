@@ -12,13 +12,13 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
 
         public string BsrKey => customLevel.BsrKey;
 
-        public string Name => customLevel.SongName;
+        public string SongName => customLevel.SongName;
 
         public string SongSubName => customLevel.SongSubName;
 
-        public string Mapper => customLevel.LevelAuthorName;
+        public string LevelAuthorName => customLevel.LevelAuthorName;
 
-        public string Compser => customLevel.SongAuthorName;
+        public string SongAuthorName => customLevel.SongAuthorName;
 
         public bool Easy => customLevel.DifficultiySets.SelectMany(ds => ds.Difficulties).Any(d => d.DifficultyRank == 1);
 
