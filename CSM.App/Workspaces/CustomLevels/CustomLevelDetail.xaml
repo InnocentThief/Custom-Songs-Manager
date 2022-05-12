@@ -6,8 +6,10 @@
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:local="clr-namespace:CSM.App.Workspaces.CustomLevels"
              xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
+             xmlns:p="clr-namespace:CSM.App.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    
     <Grid DataContext="{Binding CustomLevelDetail}">
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
@@ -21,10 +23,10 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <!-- Title -->
-                <TextBlock Text="Song Detail" Foreground="White" VerticalAlignment="Center" Margin="8,0" FontWeight="DemiBold" />
+                <TextBlock Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_Title}" Foreground="White" VerticalAlignment="Center" Margin="8,0" FontWeight="DemiBold" />
                 <!-- Commands -->
                 <telerik:RadToolBar Grid.Column="1" OverflowButtonVisibility="Collapsed" GripVisibility="Collapsed" Background="Transparent" BorderThickness="0" >
-                    <telerik:RadButton Command="{Binding CopyBsrKeyCommand}" ToolTip="Copy the bsr key. Can be used to request the map in Twitch.">
+                    <telerik:RadButton Command="{Binding CopyBsrKeyCommand}" ToolTip="{x:Static p:Resources.Workspace_CustomLevels_Detail_Command_CopyBsrKey_Tooltip}">
                         <StackPanel Orientation="Horizontal">
                             <telerik:RadGlyph Glyph="&#xe111;" />
                             <TextBlock Text="!bsr" Margin="3,0,0,0" />
@@ -64,16 +66,16 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <!-- SongName -->
-                            <TextBlock Text="Title" FontWeight="DemiBold" Margin="0,1" />
+                            <TextBlock Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_SongName}" FontWeight="DemiBold" Margin="0,1" />
                             <TextBlock Grid.Column="1" Text="{Binding SongName}" TextWrapping="Wrap" Margin="0,1" />
                             <!-- SongSubName -->
-                            <TextBlock Grid.Row="1" Text="Subtitle" FontWeight="DemiBold" Margin="0,1" />
+                            <TextBlock Grid.Row="1" Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_SongSubName}" FontWeight="DemiBold" Margin="0,1" />
                             <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding SongSubName}" TextWrapping="Wrap" Margin="0,1" />
                             <!-- SongAuthorName -->
-                            <TextBlock Grid.Row="2" Text="Artist" FontWeight="DemiBold" Margin="0,1" />
+                            <TextBlock Grid.Row="2" Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_Artist}" FontWeight="DemiBold" Margin="0,1" />
                             <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding SongAuthorName}" TextWrapping="Wrap" Margin="0,1" />
                             <!-- LevelAuthorName -->
-                            <TextBlock Grid.Row="3" Text="Mapper" FontWeight="DemiBold" Margin="0,1" />
+                            <TextBlock Grid.Row="3" Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_Mapper}" FontWeight="DemiBold" Margin="0,1" />
                             <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding LevelAuthorName}" TextWrapping="Wrap" Margin="0,1" />
                         </Grid>
                         <!-- Level informations -->
@@ -95,44 +97,43 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <!-- BSR (Id) -->
-                            <TextBlock Text="BSR (ID)" FontWeight="DemiBold" Margin="0,1" />
+                            <TextBlock Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_BSR}" FontWeight="DemiBold" Margin="0,1" />
                             <TextBlock Grid.Column="1" Text="{Binding Id}" Margin="0,1" />
                             <!-- Uploaded -->
-                            <TextBlock Grid.Row="1" Text="Uploaded" FontWeight="DemiBold" Margin="0,1" />
+                            <TextBlock Grid.Row="1" Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_Uploaded}" FontWeight="DemiBold" Margin="0,1" />
                             <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Uploaded, StringFormat='g', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" Margin="0,1" />
                             <!-- Notes per minute -->
-                            <TextBlock Grid.Row="2" Text="Beats per minute" FontWeight="DemiBold" Margin="0,1" />
+                            <TextBlock Grid.Row="2" Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_BeatsPerMinute}" FontWeight="DemiBold" Margin="0,1" />
                             <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Bpm}" Margin="0,1" />
                             <!-- Duration -->
-                            <TextBlock Grid.Row="3" Text="Duration" FontWeight="DemiBold" Margin="0,1" />
+                            <TextBlock Grid.Row="3" Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_Duration}" FontWeight="DemiBold" Margin="0,1" />
                             <StackPanel Grid.Row="3" Grid.Column="1" Margin="0,1" Orientation="Horizontal">
                                 <TextBlock Text="{Binding Duration}" />
-                                <TextBlock Text="Seconds" Margin="3,0" />
+                                <TextBlock Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_Seconds}" Margin="3,0" />
                             </StackPanel>
                             <!-- Upvotes -->
-                            <TextBlock Grid.Row="4" Text="Upvotes" FontWeight="DemiBold" Margin="0,1" />
+                            <TextBlock Grid.Row="4" Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_Upvotes}" FontWeight="DemiBold" Margin="0,1" />
                             <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Upvotes}" Margin="0,1" />
                             <!-- Downvotes -->
-                            <TextBlock Grid.Row="5" Text="Downvotes" FontWeight="DemiBold" Margin="0,1" />
+                            <TextBlock Grid.Row="5" Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_Downvotes}" FontWeight="DemiBold" Margin="0,1" />
                             <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding Downvotes}" Margin="0,1" />
                             <!-- Score -->
-                            <TextBlock Grid.Row="6" Text="Score" FontWeight="DemiBold" Margin="0,1" />
+                            <TextBlock Grid.Row="6" Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_Score}" FontWeight="DemiBold" Margin="0,1" />
                             <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding Score}" Margin="0,1" />
                             <!-- Ranked -->
-                            <TextBlock Grid.Row="7" Text="Ranked" FontWeight="DemiBold" Margin="0,1" />
+                            <TextBlock Grid.Row="7" Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_Ranked}" FontWeight="DemiBold" Margin="0,1" />
                             <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding Ranked}" Margin="0,1" />
                             <!-- Qualified -->
-                            <TextBlock Grid.Row="8" Text="Qualified" FontWeight="DemiBold" Margin="0,1" />
+                            <TextBlock Grid.Row="8" Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_Qualified}" FontWeight="DemiBold" Margin="0,1" />
                             <TextBlock Grid.Row="8" Grid.Column="1" Text="{Binding Qualified}" Margin="0,1" />
                             <!-- Tags -->
-                            <TextBlock Grid.Row="9" Text="Tags" FontWeight="DemiBold" Margin="0,1" />
+                            <TextBlock Grid.Row="9" Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_Tags}" FontWeight="DemiBold" Margin="0,1" />
                             <TextBlock Grid.Row="9" Grid.Column="1" Text="{Binding Tags}" TextWrapping="Wrap" Margin="0,1" />
                         </Grid>
                     </Grid>
 
-
                     <!-- Difficulty information -->
-                    <TextBlock Grid.Row="1" Text="Difficulties" FontWeight="bold" Margin="0,20,0,0" />
+                    <TextBlock Grid.Row="1" Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_Difficulties}" FontWeight="bold" Margin="0,20,0,0" />
                     <ItemsControl Grid.Row="2" ItemsSource="{Binding Characteristics}" BorderThickness="0">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>

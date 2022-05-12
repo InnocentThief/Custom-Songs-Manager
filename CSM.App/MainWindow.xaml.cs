@@ -2,8 +2,10 @@
 using CSM.UiLogic.Workspaces;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,6 +29,7 @@ namespace CSM.App
         {
             SetStyle();
             InitializeComponent();
+            //Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("de-CH");
             DataContext = new MainWindowViewModel();
         }
 

@@ -1,6 +1,7 @@
 ﻿using CSM.DataAccess.Entities.Offline;
 using CSM.Framework.Extensions;
 using CSM.Services;
+using CSM.UiLogic.Properties;
 using CSM.UiLogic.Workspaces.CustomLevels;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
@@ -63,9 +64,9 @@ namespace CSM.UiLogic.Workspaces
         {
             get
             {
-                if (CustomLevels.Count == 0) return "No custom levels loaded";
-                if (CustomLevels.Count == 1) return "1 custom level loaded";
-                return $"{CustomLevels.Count} custom levels loaded";
+                if (CustomLevels.Count == 0) return Resources.CustomLevels_NoCustomLevelsLoaded;
+                if (CustomLevels.Count == 1) return Resources.CustomLevels_OneCustomLevelLoaded;
+                return string.Format(Resources.CustomLevels_MultipleCustomLevelsLoaded, CustomLevels.Count);
             }
         }
 

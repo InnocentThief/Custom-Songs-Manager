@@ -117,103 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Workspace_CustomLevels_ColumnHeader_Artist" xml:space="preserve">
-    <value>Artist</value>
-    <comment>Header text for Artist column</comment>
+  <data name="CustomLevels_MultipleCustomLevelsLoaded" xml:space="preserve">
+    <value>{0} custom levels loaded</value>
+    <comment>Used to show that multiple custom levels have been loaded on the custom levels workspace</comment>
   </data>
-  <data name="Workspace_CustomLevels_ColumnHeader_BSR" xml:space="preserve">
-    <value>BSR</value>
-    <comment>Header text for BSR column</comment>
+  <data name="CustomLevels_NoCustomLevelsLoaded" xml:space="preserve">
+    <value>No custom levels loaded</value>
+    <comment>Used to show that no custom level has been loaded on the custom levels workspace</comment>
   </data>
-  <data name="Workspace_CustomLevels_ColumnHeader_ChangeDate" xml:space="preserve">
-    <value>Download Date</value>
-    <comment>Header text for Download Date column</comment>
+  <data name="CustomLevels_OneCustomLevelLoaded" xml:space="preserve">
+    <value>1 custom level loaded</value>
+    <comment>Used to show that one custom level has been loaded on the custom levels workspace</comment>
   </data>
-  <data name="Workspace_CustomLevels_ColumnHeader_E" xml:space="preserve">
-    <value>E</value>
-    <comment>Header text for Easy column</comment>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
   </data>
-  <data name="Workspace_CustomLevels_ColumnHeader_Ex" xml:space="preserve">
-    <value>Ex</value>
-    <comment>Header text for Expert column</comment>
-  </data>
-  <data name="Workspace_CustomLevels_ColumnHeader_ExPlus" xml:space="preserve">
-    <value>Ex+</value>
-    <comment>Header text for Export+ column</comment>
-  </data>
-  <data name="Workspace_CustomLevels_ColumnHeader_H" xml:space="preserve">
-    <value>H</value>
-    <comment>Header text for Hard column</comment>
-  </data>
-  <data name="Workspace_CustomLevels_ColumnHeader_Mapper" xml:space="preserve">
-    <value>Mapper</value>
-    <comment>Header text for Mapper column</comment>
-  </data>
-  <data name="Workspace_CustomLevels_ColumnHeader_N" xml:space="preserve">
-    <value>N</value>
-    <comment>Header text for Normal column</comment>
-  </data>
-  <data name="Workspace_CustomLevels_CulumnHeader_Title" xml:space="preserve">
-    <value>Title</value>
-    <comment>Header text for Title column</comment>
-  </data>
-  <data name="Workspace_CustomLevels_Detail_Artist" xml:space="preserve">
-    <value>Artist</value>
-  </data>
-  <data name="Workspace_CustomLevels_Detail_BeatsPerMinute" xml:space="preserve">
-    <value>Beats per minute</value>
-  </data>
-  <data name="Workspace_CustomLevels_Detail_BSR" xml:space="preserve">
-    <value>BSR (ID)</value>
-  </data>
-  <data name="Workspace_CustomLevels_Detail_Command_CopyBsrKey_Tooltip" xml:space="preserve">
-    <value>Copy the bsr key. Can be used to request the map in Twitch.</value>
-  </data>
-  <data name="Workspace_CustomLevels_Detail_Difficulties" xml:space="preserve">
-    <value>Difficulties</value>
-  </data>
-  <data name="Workspace_CustomLevels_Detail_Downvotes" xml:space="preserve">
-    <value>Downvotes</value>
-  </data>
-  <data name="Workspace_CustomLevels_Detail_Duration" xml:space="preserve">
-    <value>Duration</value>
-  </data>
-  <data name="Workspace_CustomLevels_Detail_Mapper" xml:space="preserve">
-    <value>Mapper</value>
-  </data>
-  <data name="Workspace_CustomLevels_Detail_Qualified" xml:space="preserve">
-    <value>Qualified</value>
-  </data>
-  <data name="Workspace_CustomLevels_Detail_Ranked" xml:space="preserve">
-    <value>Ranked</value>
-  </data>
-  <data name="Workspace_CustomLevels_Detail_Score" xml:space="preserve">
-    <value>Score</value>
-  </data>
-  <data name="Workspace_CustomLevels_Detail_Seconds" xml:space="preserve">
-    <value>Seconds</value>
-  </data>
-  <data name="Workspace_CustomLevels_Detail_SongName" xml:space="preserve">
-    <value>Title</value>
-  </data>
-  <data name="Workspace_CustomLevels_Detail_SongSubName" xml:space="preserve">
-    <value>Subtitle</value>
-  </data>
-  <data name="Workspace_CustomLevels_Detail_Tags" xml:space="preserve">
-    <value>Tags</value>
-  </data>
-  <data name="Workspace_CustomLevels_Detail_Title" xml:space="preserve">
-    <value>Song Detail</value>
-    <comment>Title for the detail area on the custom levels workspace</comment>
-  </data>
-  <data name="Workspace_CustomLevels_Detail_Uploaded" xml:space="preserve">
-    <value>Uploaded</value>
-  </data>
-  <data name="Workspace_CustomLevels_Detail_Upvotes" xml:space="preserve">
-    <value>Upvotes</value>
-  </data>
-  <data name="Workspace_CustomLevels_Title" xml:space="preserve">
-    <value>Custom Levels</value>
-    <comment>Title for the list area on the custom levels workspace</comment>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
   </data>
 </root>

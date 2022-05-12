@@ -1,8 +1,5 @@
 ﻿using CSM.DataAccess.Entities.Online;
-using CSM.Framework.Extensions;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace CSM.UiLogic.Workspaces.CustomLevels
 {
@@ -12,28 +9,20 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
 
         #region Public Properties
 
-        [Display(Name = "Note Jump Speed", Order = 0)]
         public decimal NoteJumpMovementSpeed => difficulty.NoteJumpMovementSpeed;
 
-        [Display(Name = "Note Jump Offset", Order = 1)]
         public decimal NoteJumpStartBeatOffset => difficulty.NoteJumpStartBeatOffset;
 
-        [Display(Name = "Notes Pers Second", Order = 2)]
         public decimal NotesPerSecond => difficulty.Nps;
 
-        [Display(Name = "Characteristic", Order = 2)]
         public string Characteristic => difficulty.Characteristic;
 
-        [Display(Name = "Difficulty", Order = 3)]
         public string Difficulty => difficulty.Diff;
 
-        [Display(Name = "Chroma", Order = 4)]
         public bool Chroma => difficulty.Chroma;
 
-        [Display(Name = "Noodle", Order = 5)]
         public bool Noodle => difficulty.Noodle;
 
-        [Display(Name = "MappingExtensions", Order = 5)]
         public bool MappingExtension => difficulty.MappingExtension;
 
         public string Stars

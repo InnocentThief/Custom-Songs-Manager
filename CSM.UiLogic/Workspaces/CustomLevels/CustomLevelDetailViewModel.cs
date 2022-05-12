@@ -1,11 +1,9 @@
 ﻿using CSM.DataAccess.Entities.Online;
+using CSM.UiLogic.Properties;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace CSM.UiLogic.Workspaces.CustomLevels
@@ -38,9 +36,9 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
 
         public string Score => $"{Math.Round(beatMap.Stats.Score * 100, 0)}%";
 
-        public string Ranked => beatMap.Ranked ? "Yes" : "No";
+        public string Ranked => beatMap.Ranked ? Resources.Yes : Resources.No;
 
-        public string Qualified => beatMap.Qualified ? "Yes" : "No";
+        public string Qualified => beatMap.Qualified ? Resources.Yes : Resources.No;
 
         public string CoverUrl => beatMap.Versions.First().CoverUrl;
 

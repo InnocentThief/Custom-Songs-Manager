@@ -161,7 +161,7 @@
     <value>Artist</value>
   </data>
   <data name="Workspace_CustomLevels_Detail_BeatsPerMinute" xml:space="preserve">
-    <value>Beats per minute</value>
+    <value>Beats pro Minute</value>
   </data>
   <data name="Workspace_CustomLevels_Detail_BSR" xml:space="preserve">
     <value>BSR (ID)</value>
@@ -176,7 +176,7 @@
     <value>Downvotes</value>
   </data>
   <data name="Workspace_CustomLevels_Detail_Duration" xml:space="preserve">
-    <value>Duration</value>
+    <value>Dauer</value>
   </data>
   <data name="Workspace_CustomLevels_Detail_Mapper" xml:space="preserve">
     <value>Mapper</value>
@@ -191,13 +191,13 @@
     <value>Score</value>
   </data>
   <data name="Workspace_CustomLevels_Detail_Seconds" xml:space="preserve">
-    <value>Seconds</value>
+    <value>Sekunden</value>
   </data>
   <data name="Workspace_CustomLevels_Detail_SongName" xml:space="preserve">
-    <value>Title</value>
+    <value>Titel</value>
   </data>
   <data name="Workspace_CustomLevels_Detail_SongSubName" xml:space="preserve">
-    <value>Subtitle</value>
+    <value>Subtitel</value>
   </data>
   <data name="Workspace_CustomLevels_Detail_Tags" xml:space="preserve">
     <value>Tags</value>
@@ -207,7 +207,7 @@
     <comment>Title for the detail area on the custom levels workspace</comment>
   </data>
   <data name="Workspace_CustomLevels_Detail_Uploaded" xml:space="preserve">
-    <value>Uploaded</value>
+    <value>Hochgeladen</value>
   </data>
   <data name="Workspace_CustomLevels_Detail_Upvotes" xml:space="preserve">
     <value>Upvotes</value>

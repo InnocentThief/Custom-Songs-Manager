@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
+             xmlns:p="clr-namespace:CSM.App.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1200">
 
@@ -24,7 +25,7 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <!-- Title -->
-            <TextBlock Text="Custom Levels" Foreground="White" VerticalAlignment="Center" Margin="8,0" FontWeight="DemiBold" />
+            <TextBlock Text="{x:Static p:Resources.Workspace_CustomLevels_Title}" Foreground="White" VerticalAlignment="Center" Margin="8,0" FontWeight="DemiBold" />
             <!-- Commands -->
             <telerik:RadToolBar Grid.Column="1" OverflowButtonVisibility="Collapsed" GripVisibility="Collapsed" Background="Transparent" BorderThickness="0" >
                 <TextBox Text="{Binding CustomLevelPath}" Width="300" />
@@ -47,46 +48,46 @@
                 <!-- ListView -->
                 <telerik:RadGridView ItemsSource="{Binding CustomLevels}" SelectedItem="{Binding SelectedCustomLevel}" AutoGenerateColumns="False" RowIndicatorVisibility="Collapsed" FrozenColumnsSplitterVisibility="Collapsed" BorderThickness="0" AlternationCount="2" SelectionChanged="RadGridView_SelectionChanged"  >
                     <telerik:RadGridView.Columns>
-                        <telerik:GridViewDataColumn Header="BSR" DataMemberBinding="{Binding BsrKey}" />
-                        <telerik:GridViewDataColumn Header="Title" DataMemberBinding="{Binding SongName}" />
-                        <telerik:GridViewDataColumn Header="Artist" DataMemberBinding="{Binding SongAuthorName}" />
-                        <telerik:GridViewDataColumn Header="Mapper" DataMemberBinding="{Binding LevelAuthorName}" />
-                        <telerik:GridViewDataColumn Header="E" DataMemberBinding="{Binding Easy}">
+                        <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_BSR}" DataMemberBinding="{Binding BsrKey}" />
+                        <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_CulumnHeader_Title}" DataMemberBinding="{Binding SongName}" />
+                        <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_Artist}" DataMemberBinding="{Binding SongAuthorName}" />
+                        <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_Mapper}" DataMemberBinding="{Binding LevelAuthorName}" />
+                        <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_E}" DataMemberBinding="{Binding Easy}">
                             <telerik:GridViewDataColumn.CellTemplate>
                                 <DataTemplate>
                                     <telerik:RadGlyph Glyph="&#xe118;" Foreground="#FF018574" Visibility="{Binding Easy, Converter={StaticResource BoolToVisConverter}}" />
                                 </DataTemplate>
                             </telerik:GridViewDataColumn.CellTemplate>
                         </telerik:GridViewDataColumn>
-                        <telerik:GridViewDataColumn Header="N" DataMemberBinding="{Binding Normal}">
+                        <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_N}" DataMemberBinding="{Binding Normal}">
                             <telerik:GridViewDataColumn.CellTemplate>
                                 <DataTemplate>
                                     <telerik:RadGlyph Glyph="&#xe118;" Foreground="#FF018574" Visibility="{Binding Normal, Converter={StaticResource BoolToVisConverter}}" />
                                 </DataTemplate>
                             </telerik:GridViewDataColumn.CellTemplate>
                         </telerik:GridViewDataColumn>
-                        <telerik:GridViewDataColumn Header="H" DataMemberBinding="{Binding Hard}">
+                        <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_H}" DataMemberBinding="{Binding Hard}">
                             <telerik:GridViewDataColumn.CellTemplate>
                                 <DataTemplate>
                                     <telerik:RadGlyph Glyph="&#xe118;" Foreground="#FF018574" Visibility="{Binding Hard, Converter={StaticResource BoolToVisConverter}}" />
                                 </DataTemplate>
                             </telerik:GridViewDataColumn.CellTemplate>
                         </telerik:GridViewDataColumn>
-                        <telerik:GridViewDataColumn Header="Ex" DataMemberBinding="{Binding Expert}">
+                        <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_Ex}" DataMemberBinding="{Binding Expert}">
                             <telerik:GridViewDataColumn.CellTemplate>
                                 <DataTemplate>
                                     <telerik:RadGlyph Glyph="&#xe118;" Foreground="#FF018574" Visibility="{Binding Expert, Converter={StaticResource BoolToVisConverter}}" />
                                 </DataTemplate>
                             </telerik:GridViewDataColumn.CellTemplate>
                         </telerik:GridViewDataColumn>
-                        <telerik:GridViewDataColumn Header="Ex+" DataMemberBinding="{Binding ExpertPlus}">
+                        <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_ExPlus}" DataMemberBinding="{Binding ExpertPlus}">
                             <telerik:GridViewDataColumn.CellTemplate>
                                 <DataTemplate>
                                     <telerik:RadGlyph Glyph="&#xe118;" Foreground="#FF018574" Visibility="{Binding ExpertPlus, Converter={StaticResource BoolToVisConverter}}" />
                                 </DataTemplate>
                             </telerik:GridViewDataColumn.CellTemplate>
                         </telerik:GridViewDataColumn>
-                        <telerik:GridViewDataColumn Header="Download date" DataMemberBinding="{Binding ChangeDate, StringFormat='g', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
+                        <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_ChangeDate}" DataMemberBinding="{Binding ChangeDate, StringFormat='g', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
                     </telerik:RadGridView.Columns>
                 </telerik:RadGridView>
                 <!-- Entry counter -->
