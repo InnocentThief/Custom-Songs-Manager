@@ -1,14 +1,20 @@
 ﻿<Window x:Class="CSM.App.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CSM.App" 
-        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" xmlns:workspaces="clr-namespace:CSM.App.Workspaces" xmlns:customlevels="clr-namespace:CSM.App.Workspaces.CustomLevels" xmlns:playlists="clr-namespace:CSM.App.Workspaces.Playlists" xmlns:twitchintegration="clr-namespace:CSM.App.Workspaces.TwitchIntegration" xmlns:tools="clr-namespace:CSM.App.Workspaces.Tools"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        xmlns:workspaces="clr-namespace:CSM.App.Workspaces"
+        xmlns:customlevels="clr-namespace:CSM.App.Workspaces.CustomLevels"
+        xmlns:playlists="clr-namespace:CSM.App.Workspaces.Playlists"
+        xmlns:settings="clr-namespace:CSM.App.Workspaces.Settings"
+        xmlns:tools="clr-namespace:CSM.App.Workspaces.Tools"
+        xmlns:twitchintegration="clr-namespace:CSM.App.Workspaces.TwitchIntegration"
         mc:Ignorable="d"
         Title="Custom Songs Manager" Height="450" Width="800">
 
     <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
         <telerik:StringToGlyphConverter x:Key="StringToGlyphConverter" />
 
         <DataTemplate x:Key="CustomLevelsDataTemplate">
@@ -17,6 +23,10 @@
 
         <DataTemplate x:Key="PlaylistsDataTemplate">
             <playlists:PlaylistsView />
+        </DataTemplate>
+
+        <DataTemplate x:Key="SettingsDataTemplate">
+            <settings:SettingsView />
         </DataTemplate>
 
         <DataTemplate x:Key="TwitchIntegrationDataTemplate">
@@ -55,15 +65,18 @@
                                SelectedIndex="0"
                                ItemContainerStyle="{StaticResource BaseNavigationViewItemStyle}" 
                                SelectionChanged="RadNavigationView_SelectionChanged"
-                               >
+                               PaneHeader="Custom Songs Mananger">
 
         <!-- Content -->
         <telerik:RadNavigationView.Content>
-            <telerik:RadTransitionControl Content="{Binding SelectedWorkspace}" ContentTemplateSelector="{StaticResource WorkspaceContentTemplateSelector}" Duration="0:0:0.4">
-                <telerik:RadTransitionControl.Transition>
-                    <telerik:FadeTransition />
-                </telerik:RadTransitionControl.Transition>
-            </telerik:RadTransitionControl>
+            <Grid>
+                <telerik:RadTransitionControl Content="{Binding SelectedWorkspace}" ContentTemplateSelector="{StaticResource WorkspaceContentTemplateSelector}" Duration="0:0:0.4">
+                    <telerik:RadTransitionControl.Transition>
+                        <telerik:FadeTransition />
+                    </telerik:RadTransitionControl.Transition>
+                </telerik:RadTransitionControl>
+                <settings:SettingsView Margin="100" DataContext="{Binding Settings}" Visibility="{Binding Visible, Converter={StaticResource BoolToVisConverter}}" />
+            </Grid>
         </telerik:RadNavigationView.Content>
 
         <!-- Footer -->

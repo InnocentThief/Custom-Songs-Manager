@@ -100,7 +100,7 @@
     <Compile Include="Workspaces\CustomLevels\CustomLevelDifficultyViewModel.cs" />
     <Compile Include="Workspaces\CustomLevels\CustomLevelViewModel.cs" />
     <Compile Include="Workspaces\PlaylistsViewModel.cs" />
-    <Compile Include="SettingsViewModel.cs" />
+    <Compile Include="Workspaces\SettingsViewModel.cs" />
     <Compile Include="Workspaces\ToolsViewModel.cs" />
     <Compile Include="Workspaces\TwitchIntegrationViewModel.cs" />
     <Compile Include="Workspaces\WorkspaceType.cs" />
@@ -123,6 +123,7 @@
     <Folder Include="Settings\" />
     <Folder Include="Workspaces\Common\" />
     <Folder Include="Workspaces\Playlists\" />
+    <Folder Include="Workspaces\Settings\" />
     <Folder Include="Workspaces\Tools\" />
     <Folder Include="Workspaces\TwitchIntegration\" />
   </ItemGroup>

@@ -1,5 +1,6 @@
 ﻿using CSM.UiLogic.Workspaces;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,8 +12,15 @@ namespace CSM.UiLogic
 {
     public class MainWindowViewModel : ObservableObject
     {
+        #region Private fields
+
         private ObservableCollection<BaseWorkspaceViewModel> workspaces;
         private BaseWorkspaceViewModel selectedWorkspace;
+
+
+        #endregion
+
+        #region Public Properties
 
         public ObservableCollection<BaseWorkspaceViewModel> Workspaces
         {
@@ -50,12 +58,29 @@ namespace CSM.UiLogic
             }
         }
 
+        public RelayCommand SettingsCommand { get; }
+
+        public SettingsViewModel Settings { get; }
+
+        #endregion
+
+        public MainWindowViewModel()
+        {
+            Settings = new SettingsViewModel();
+            SettingsCommand = new RelayCommand(ShowSettings);
+        }
+
         public void LoadWorkspace()
         {
             if (selectedWorkspace != null)
             {
                 selectedWorkspace.LoadData();
             }
+        }
+
+        public void ShowSettings()
+        {
+            Settings.Visible = true;
         }
     }
 }
