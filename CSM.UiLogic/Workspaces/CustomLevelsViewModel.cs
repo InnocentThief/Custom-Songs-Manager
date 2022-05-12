@@ -1,4 +1,5 @@
 ﻿using CSM.DataAccess.Entities.Offline;
+using CSM.Framework.Configuration;
 using CSM.Framework.Extensions;
 using CSM.Services;
 using CSM.UiLogic.Properties;

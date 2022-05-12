@@ -262,6 +262,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CSM.Framework\CSM.Framework.csproj">
+      <Project>{E4212929-E64D-4154-B381-958DE99A2932}</Project>
+      <Name>CSM.Framework</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CSM.UiLogic\CSM.UiLogic.csproj">
       <Project>{f64504cd-e4c2-4cb7-8960-48620bb22d33}</Project>
       <Name>CSM.UiLogic</Name>
