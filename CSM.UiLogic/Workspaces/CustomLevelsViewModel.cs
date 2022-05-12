@@ -177,7 +177,8 @@ namespace CSM.UiLogic.Workspaces
         /// </summary>
         public override void UnloadData()
         {
-
+            itemsObservable.Clear();
+            CustomLevelDetail = null;
         }
 
         public async Task GetBeatSaverBeatMapDataAsync(string key)
@@ -225,7 +226,7 @@ namespace CSM.UiLogic.Workspaces
                         {
                             customLevel.BsrKey = directory.Name.Substring(0, directory.Name.IndexOf(" "));
                             customLevel.ChangeDate = File.GetLastWriteTime(info);
-                            customLevel.Path = info;
+                            customLevel.Path = folderEntry;
                         }
                         catch (Exception)
                         {
@@ -259,10 +260,9 @@ namespace CSM.UiLogic.Workspaces
 
         private void DeleteCustomLevel()
         {
-            var directoryPath = Path.GetDirectoryName(SelectedCustomLevel.Path);
-            if (Directory.Exists(directoryPath))
+            if (Directory.Exists(SelectedCustomLevel.Path))
             {
-                Directory.Delete(directoryPath, true);
+                Directory.Delete(SelectedCustomLevel.Path, true);
                 CustomLevels.Remove(SelectedCustomLevel);
                 OnPropertyChanged(nameof(CustomLevelCount));
             }

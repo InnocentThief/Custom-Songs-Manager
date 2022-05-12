@@ -35,91 +35,126 @@
         </Border>
         <!-- Content -->
         <Border Grid.Row="1" BorderBrush="DimGray" BorderThickness="1,0,1,1">
-            <Grid Margin="6">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <!-- Detail map information -->
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                <Grid Margin="6">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <!-- BSR (Id) -->
-                    <TextBlock Text="BSR (ID)" FontWeight="DemiBold" Margin="0,1" />
-                    <TextBlock Grid.Column="1" Text="{Binding Id}" Margin="0,1" />
-                    <!-- SongName -->
-                    <TextBlock Grid.Row="1" Text="Title" FontWeight="DemiBold" Margin="0,1" />
-                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding SongName}" TextWrapping="Wrap" Margin="0,1" />
-                    <!-- Uploaded -->
-                    <TextBlock Grid.Row="2" Text="Uploaded" FontWeight="DemiBold" Margin="0,1" />
-                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Uploaded, StringFormat='g', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" Margin="0,1" />
-                    <!-- Notes per minute -->
-                    <TextBlock Grid.Row="3" Text="Beats per minute" FontWeight="DemiBold" Margin="0,1" />
-                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Bpm}" Margin="0,1" />
-                    <!-- Duration -->
-                    <TextBlock Grid.Row="4" Text="Duration" FontWeight="DemiBold" Margin="0,1" />
-                    <StackPanel Grid.Row="4" Grid.Column="1" Margin="0,1" Orientation="Horizontal">
-                        <TextBlock Text="{Binding Duration}" />
-                        <TextBlock Text="Seconds" Margin="3,0" />
-                    </StackPanel>
-                    <!-- Upvotes -->
-                    <TextBlock Grid.Row="5" Text="Upvotes" FontWeight="DemiBold" Margin="0,1" />
-                    <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding Upvotes}" Margin="0,1" />
-                    <!-- Downvotes -->
-                    <TextBlock Grid.Row="6" Text="Downvotes" FontWeight="DemiBold" Margin="0,1" />
-                    <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding Downvotes}" Margin="0,1" />
-                    <!-- Score -->
-                    <TextBlock Grid.Row="7" Text="Score" FontWeight="DemiBold" Margin="0,1" />
-                    <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding Score}" Margin="0,1" />
-                    <!-- Ranked -->
-                    <TextBlock Grid.Row="8" Text="Ranked" FontWeight="DemiBold" Margin="0,1" />
-                    <TextBlock Grid.Row="8" Grid.Column="1" Text="{Binding Ranked}" Margin="0,1" />
-                    <!-- Qualified -->
-                    <TextBlock Grid.Row="9" Text="Qualified" FontWeight="DemiBold" Margin="0,1" />
-                    <TextBlock Grid.Row="9" Grid.Column="1" Text="{Binding Qualified}" Margin="0,1" />
-                    <!-- Tags -->
-                    <TextBlock Grid.Row="10" Text="Tags" FontWeight="DemiBold" Margin="0,1" />
-                    <TextBlock Grid.Row="10" Grid.Column="1" Text="{Binding Tags}" TextWrapping="Wrap" Margin="0,1" />
+                    <!-- Detail map information -->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <!-- Cover image -->
+                        <Image Source="{Binding CoverUrl}" />
+                        <!-- Title / Artist / Mapper -->
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <!-- SongName -->
+                            <TextBlock Text="Title" FontWeight="DemiBold" Margin="0,1" />
+                            <TextBlock Grid.Column="1" Text="{Binding SongName}" TextWrapping="Wrap" Margin="0,1" />
+                            <!-- SongSubName -->
+                            <TextBlock Grid.Row="1" Text="Subtitle" FontWeight="DemiBold" Margin="0,1" />
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding SongSubName}" TextWrapping="Wrap" Margin="0,1" />
+                            <!-- SongAuthorName -->
+                            <TextBlock Grid.Row="2" Text="Artist" FontWeight="DemiBold" Margin="0,1" />
+                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding SongAuthorName}" TextWrapping="Wrap" Margin="0,1" />
+                            <!-- LevelAuthorName -->
+                            <TextBlock Grid.Row="3" Text="Mapper" FontWeight="DemiBold" Margin="0,1" />
+                            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding LevelAuthorName}" TextWrapping="Wrap" Margin="0,1" />
+                        </Grid>
+                        <!-- Level informations -->
+                        <Grid Grid.Row="2" Margin="0,20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <!-- BSR (Id) -->
+                            <TextBlock Text="BSR (ID)" FontWeight="DemiBold" Margin="0,1" />
+                            <TextBlock Grid.Column="1" Text="{Binding Id}" Margin="0,1" />
+                            <!-- Uploaded -->
+                            <TextBlock Grid.Row="1" Text="Uploaded" FontWeight="DemiBold" Margin="0,1" />
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Uploaded, StringFormat='g', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" Margin="0,1" />
+                            <!-- Notes per minute -->
+                            <TextBlock Grid.Row="2" Text="Beats per minute" FontWeight="DemiBold" Margin="0,1" />
+                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Bpm}" Margin="0,1" />
+                            <!-- Duration -->
+                            <TextBlock Grid.Row="3" Text="Duration" FontWeight="DemiBold" Margin="0,1" />
+                            <StackPanel Grid.Row="3" Grid.Column="1" Margin="0,1" Orientation="Horizontal">
+                                <TextBlock Text="{Binding Duration}" />
+                                <TextBlock Text="Seconds" Margin="3,0" />
+                            </StackPanel>
+                            <!-- Upvotes -->
+                            <TextBlock Grid.Row="4" Text="Upvotes" FontWeight="DemiBold" Margin="0,1" />
+                            <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Upvotes}" Margin="0,1" />
+                            <!-- Downvotes -->
+                            <TextBlock Grid.Row="5" Text="Downvotes" FontWeight="DemiBold" Margin="0,1" />
+                            <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding Downvotes}" Margin="0,1" />
+                            <!-- Score -->
+                            <TextBlock Grid.Row="6" Text="Score" FontWeight="DemiBold" Margin="0,1" />
+                            <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding Score}" Margin="0,1" />
+                            <!-- Ranked -->
+                            <TextBlock Grid.Row="7" Text="Ranked" FontWeight="DemiBold" Margin="0,1" />
+                            <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding Ranked}" Margin="0,1" />
+                            <!-- Qualified -->
+                            <TextBlock Grid.Row="8" Text="Qualified" FontWeight="DemiBold" Margin="0,1" />
+                            <TextBlock Grid.Row="8" Grid.Column="1" Text="{Binding Qualified}" Margin="0,1" />
+                            <!-- Tags -->
+                            <TextBlock Grid.Row="9" Text="Tags" FontWeight="DemiBold" Margin="0,1" />
+                            <TextBlock Grid.Row="9" Grid.Column="1" Text="{Binding Tags}" TextWrapping="Wrap" Margin="0,1" />
+                        </Grid>
+                    </Grid>
+
+
+                    <!-- Difficulty information -->
+                    <TextBlock Grid.Row="1" Text="Difficulties" FontWeight="bold" Margin="0,20,0,0" />
+                    <ItemsControl Grid.Row="2" ItemsSource="{Binding Characteristics}" BorderThickness="0">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Text="{Binding Name}" FontWeight="DemiBold" Margin="0,3,0,6" />
+                                    <ItemsControl Grid.Row="1" ItemsSource="{Binding Difficulties}" BorderThickness="0">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <local:CustomLevelDifficultyView />
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </Grid>
-                <!-- Difficulty information -->
-                <TextBlock Grid.Row="1" Text="Difficulties" FontWeight="bold" Margin="0,20,0,0" />
-                <ItemsControl Grid.Row="2" ItemsSource="{Binding Characteristics}" BorderThickness="0">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <TextBlock Text="{Binding Name}" FontWeight="DemiBold" Margin="0,3,0,6" />
-                                <ItemsControl Grid.Row="1" ItemsSource="{Binding Difficulties}" BorderThickness="0">
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <local:CustomLevelDifficultyView />
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </Grid>
+            </ScrollViewer>
         </Border>
     </Grid>
 </UserControl>

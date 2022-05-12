@@ -10,5 +10,8 @@ namespace CSM.DataAccess.Entities.Online
 
         [JsonPropertyName("diffs")]
         public List<Difficulty> Difficulties { get; set; }
+
+        [JsonPropertyName("coverURL")]
+        public string CoverUrl { get; set; }
     }
 }

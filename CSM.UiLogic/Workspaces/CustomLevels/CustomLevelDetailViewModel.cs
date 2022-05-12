@@ -18,7 +18,13 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
 
         public string Id => beatMap.Id;
 
-        public string SongName => beatMap.Name;
+        public string SongName => beatMap.Metadata.SongName;
+
+        public string SongSubName => beatMap.Metadata.SongSubName;
+
+        public string SongAuthorName => beatMap.Metadata.SongAuthorName;
+
+        public string LevelAuthorName => beatMap.Metadata.LevelAuthorName;
 
         public DateTime Uploaded => beatMap.Uploaded;
 
@@ -35,6 +41,8 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
         public string Ranked => beatMap.Ranked ? "Yes" : "No";
 
         public string Qualified => beatMap.Qualified ? "Yes" : "No";
+
+        public string CoverUrl => beatMap.Versions.First().CoverUrl;
 
         public string Tags
         {
