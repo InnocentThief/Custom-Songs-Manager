@@ -153,6 +153,12 @@
     <value>N</value>
     <comment>Header text for Normal column</comment>
   </data>
+  <data name="Workspace_CustomLevels_Command_Delete" xml:space="preserve">
+    <value>Deletes the selected custom level</value>
+  </data>
+  <data name="Workspace_CustomLevels_Command_Refresh" xml:space="preserve">
+    <value>Refresh the custom level list</value>
+  </data>
   <data name="Workspace_CustomLevels_CulumnHeader_Title" xml:space="preserve">
     <value>Title</value>
     <comment>Header text for Title column</comment>
@@ -215,5 +221,8 @@
   <data name="Workspace_CustomLevels_Title" xml:space="preserve">
     <value>Custom Levels</value>
     <comment>Title for the list area on the custom levels workspace</comment>
+  </data>
+  <data name="Workspace_Playlists_Title" xml:space="preserve">
+    <value>Playlists</value>
   </data>
 </root>

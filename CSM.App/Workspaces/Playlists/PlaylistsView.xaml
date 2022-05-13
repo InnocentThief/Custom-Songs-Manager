@@ -3,10 +3,92 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:CSM.App.Workspaces.Playlists"
+             xmlns:p="clr-namespace:CSM.App.Properties"
+             xmlns:local="clr-namespace:CSM.App.Workspaces.Playlists" xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:customLevel="clr-namespace:CSM.App.Workspaces.CustomLevels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Margin="6">
-        <TextBlock Text="Playlists" />
-    </Grid>
+
+    <telerik:RadBusyIndicator IsIndeterminate="False" ProgressValue="{Binding LoadProgress}" IsBusy="{Binding IsLoading}">
+        <Grid Margin="8" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="6" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="6" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="6" />
+                <ColumnDefinition Width="200" />
+            </Grid.ColumnDefinitions>
+            <!-- Tree with available playlists -->
+            <local:PlaylistTreeView />
+            <!-- Vertical splitter -->
+            <GridSplitter Grid.Column="1" Grid.Row="1" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" HorizontalAlignment="Stretch" />
+            <!-- Playlist -->
+            <local:PlaylistView Grid.Column="2" />
+            <!-- Available Custom Levels -->
+            <local:AvailableCustomLevelsView Grid.Column="4" />
+            <customLevel:CustomLevelDetailView Grid.Column="6" />
+
+            <!-- Right side ;-) --><!--
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                --><!-- Header --><!--
+                <Grid Background="#FF018574">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    --><!-- Title --><!--
+                    <TextBlock Text="Playlist" Foreground="White" VerticalAlignment="Center" Margin="8,0" FontWeight="DemiBold" />
+                    --><!-- Commands --><!--
+                    <telerik:RadToolBar Grid.Column="1" OverflowButtonVisibility="Collapsed" GripVisibility="Collapsed" Background="Transparent" BorderThickness="0" >
+                        <TextBlock Text="{Binding PlaylistPath}" TextTrimming="CharacterEllipsis" Width="150" ToolTip="{Binding PlaylistPath}"/>
+                        <telerik:RadButton Command="{Binding RefreshCommand}" ToolTip="Refresh the playlists">
+                            <telerik:RadGlyph Glyph="&#xe103;" />
+                        </telerik:RadButton>
+                        <telerik:RadToolBarSeparator />
+                        <telerik:RadButton Command="{Binding DeletePlaylistCommand}" ToolTip="Deletes the selected playlist / folder">
+                            <telerik:RadGlyph Glyph="&#xe10c;" />
+                        </telerik:RadButton>
+                    </telerik:RadToolBar>
+                </Grid>
+                --><!-- Content --><!--
+                <Border Grid.Row="1" BorderBrush="DimGray" BorderThickness="1,0,1,1">
+                    <Grid Margin="6">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border Background="Green" />
+                            <Border Grid.Column="1" Background="Azure" Margin="6,0,0,0" />
+                        </Grid>
+                        <Grid Grid.Row="1" Margin="0,6,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="6" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="6" />
+                                <ColumnDefinition Width="200" />
+                            </Grid.ColumnDefinitions>
+                            <Border Background="Blue" />
+                            <Border Grid.Column="2" Background="red" />
+                            <Border Grid.Column="4" Background="Violet" />
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>-->
+        </Grid>
+    </telerik:RadBusyIndicator>
+
+
+
 </UserControl>

@@ -38,7 +38,7 @@ namespace CSM.App
             if (e.RemovedItems.Count > 0)
             {
                 var workspaceViewModel = e.RemovedItems[0] as BaseWorkspaceViewModel;
-                workspaceViewModel.UnloadData();
+                if (workspaceViewModel != null) workspaceViewModel.UnloadData();
             }
 
             // Load added workspace

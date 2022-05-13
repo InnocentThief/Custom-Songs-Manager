@@ -188,8 +188,18 @@
     <Compile Include="Workspaces\CustomLevels\CustomLevelsView.xaml.cs">
       <DependentUpon>CustomLevelsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Workspaces\Playlists\AvailableCustomLevelsView.xaml.cs">
+      <DependentUpon>AvailableCustomLevelsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Workspaces\Playlists\PlaylistDataTemplateSelector.cs" />
     <Compile Include="Workspaces\Playlists\PlaylistsView.xaml.cs">
       <DependentUpon>PlaylistsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Workspaces\Playlists\PlaylistTreeView.xaml.cs">
+      <DependentUpon>PlaylistTreeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Workspaces\Playlists\PlaylistView.xaml.cs">
+      <DependentUpon>PlaylistView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Workspaces\Settings\BeatSaberSettingsView.xaml.cs">
       <DependentUpon>BeatSaberSettingsView.xaml</DependentUpon>
@@ -243,7 +253,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Workspaces\Playlists\AvailableCustomLevelsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Workspaces\Playlists\PlaylistsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Workspaces\Playlists\PlaylistTreeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Workspaces\Playlists\PlaylistView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

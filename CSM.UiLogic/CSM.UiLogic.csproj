@@ -100,6 +100,9 @@
     <Compile Include="Workspaces\CustomLevels\CustomLevelDifficultyViewModel.cs" />
     <Compile Include="Workspaces\CustomLevels\CustomLevelViewModel.cs" />
     <Compile Include="Workspaces\PlaylistsViewModel.cs" />
+    <Compile Include="Workspaces\Playlists\BasePlaylistViewModel.cs" />
+    <Compile Include="Workspaces\Playlists\PlaylistFolderViewModel.cs" />
+    <Compile Include="Workspaces\Playlists\PlaylistViewModel.cs" />
     <Compile Include="Workspaces\SettingsViewModel.cs" />
     <Compile Include="Workspaces\Settings\BeatSaberSettingsViewModel.cs" />
     <Compile Include="Workspaces\Settings\WorkspaceSettingsViewModel.cs" />
@@ -123,7 +126,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Workspaces\Common\" />
-    <Folder Include="Workspaces\Playlists\" />
     <Folder Include="Workspaces\Tools\" />
     <Folder Include="Workspaces\TwitchIntegration\" />
   </ItemGroup>
@@ -131,6 +133,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Workspaces\CustomLevels\CustomLevels.cd" />
+    <None Include="Workspaces\Playlists\Playlists.cd" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.de.resx">

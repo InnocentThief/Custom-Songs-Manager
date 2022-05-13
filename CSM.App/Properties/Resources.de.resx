@@ -126,7 +126,7 @@
     <comment>Header text for BSR column</comment>
   </data>
   <data name="Workspace_CustomLevels_ColumnHeader_ChangeDate" xml:space="preserve">
-    <value>Download Date</value>
+    <value>Download Datum</value>
     <comment>Header text for Download Date column</comment>
   </data>
   <data name="Workspace_CustomLevels_ColumnHeader_E" xml:space="preserve">
@@ -153,6 +153,12 @@
     <value>N</value>
     <comment>Header text for Normal column</comment>
   </data>
+  <data name="Workspace_CustomLevels_Command_Delete" xml:space="preserve">
+    <value>Löscht die selektierte Map</value>
+  </data>
+  <data name="Workspace_CustomLevels_Command_Refresh" xml:space="preserve">
+    <value>Aktualisiert die Liste</value>
+  </data>
   <data name="Workspace_CustomLevels_CulumnHeader_Title" xml:space="preserve">
     <value>Title</value>
     <comment>Header text for Title column</comment>
@@ -167,7 +173,7 @@
     <value>BSR (ID)</value>
   </data>
   <data name="Workspace_CustomLevels_Detail_Command_CopyBsrKey_Tooltip" xml:space="preserve">
-    <value>Copy the bsr key. Can be used to request the map in Twitch.</value>
+    <value>Kopiert den BSR Code. Dieser kann für einen Request bei Twitch verwendet werden.</value>
   </data>
   <data name="Workspace_CustomLevels_Detail_Difficulties" xml:space="preserve">
     <value>Difficulties</value>
@@ -215,5 +221,8 @@
   <data name="Workspace_CustomLevels_Title" xml:space="preserve">
     <value>Custom Levels</value>
     <comment>Title for the list area on the custom levels workspace</comment>
+  </data>
+  <data name="Workspace_Playlists_Title" xml:space="preserve">
+    <value>Playlisten</value>
   </data>
 </root>

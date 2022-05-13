@@ -142,6 +142,24 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Deletes the selected custom level.
+        /// </summary>
+        public static string Workspace_CustomLevels_Command_Delete {
+            get {
+                return ResourceManager.GetString("Workspace_CustomLevels_Command_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh the custom level list.
+        /// </summary>
+        public static string Workspace_CustomLevels_Command_Refresh {
+            get {
+                return ResourceManager.GetString("Workspace_CustomLevels_Command_Refresh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Title.
         /// </summary>
         public static string Workspace_CustomLevels_CulumnHeader_Title {
@@ -318,6 +336,15 @@ namespace CSM.App.Properties {
         public static string Workspace_CustomLevels_Title {
             get {
                 return ResourceManager.GetString("Workspace_CustomLevels_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Playlists.
+        /// </summary>
+        public static string Workspace_Playlists_Title {
+            get {
+                return ResourceManager.GetString("Workspace_Playlists_Title", resourceCulture);
             }
         }
     }

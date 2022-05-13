@@ -11,5 +11,7 @@ namespace CSM.Framework.Configuration
         public bool CustomLevelsPathChanged { get; set; }
 
         public bool CustomLevelDetailPositionChanged { get; set; }
+
+        public bool PlaylistsPathChanged { get; set; }
     }
 }

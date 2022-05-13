@@ -87,8 +87,14 @@ namespace CSM.UiLogic.Workspaces
             }
         }
 
+        /// <summary>
+        /// Gets whether the Song Detail area on the bottom is visible.
+        /// </summary>
         public bool ShowBottomDetail => UserConfigManager.Instance.Config.CustomLevelsSongDetailPosition == SongDetailPosition.Bottom;
 
+        /// <summary>
+        /// Gets whether the Song Detail area on the right is visible.
+        /// </summary>
         public bool ShowRightDetail => UserConfigManager.Instance.Config.CustomLevelsSongDetailPosition == SongDetailPosition.Right;
 
         /// <summary>
@@ -161,18 +167,6 @@ namespace CSM.UiLogic.Workspaces
             RefreshCommand = new RelayCommand(Refresh);
             DeleteCustomLevelCommand = new RelayCommand(DeleteCustomLevel, CanDeleteCustomLevel);
             UserConfigManager.UserConfigChanged += UserConfigManager_UserConfigChanged;
-        }
-
-
-
-        /// <summary>
-        /// Loads the data in asynchronous fashion.
-        /// </summary>
-        /// <returns></returns>
-        public override void LoadData()
-        {
-            base.LoadData();
-            CustomLevelPath = UserConfigManager.Instance.Config.CustomLevelPaths.First().Path;
 
             bgWorker = new BackgroundWorker
             {
@@ -182,6 +176,16 @@ namespace CSM.UiLogic.Workspaces
             bgWorker.DoWork += BackgroundWorker_DoWork;
             bgWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
             bgWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
+        }
+
+        /// <summary>
+        /// Loads the data in asynchronous fashion.
+        /// </summary>
+        /// <returns></returns>
+        public override void LoadData()
+        {
+            base.LoadData();
+            CustomLevelPath = UserConfigManager.Instance.Config.CustomLevelPaths.First().Path;
             bgWorker.RunWorkerAsync();
         }
 
@@ -271,7 +275,6 @@ namespace CSM.UiLogic.Workspaces
 
         private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            bgWorker.Dispose();
             var customLevels = (List<CustomLevel>)e.Result;
             if (customLevels != null)
             {
