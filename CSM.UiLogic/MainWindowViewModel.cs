@@ -1,4 +1,5 @@
-﻿using CSM.UiLogic.Workspaces;
+﻿using CSM.Framework.Configuration;
+using CSM.UiLogic.Workspaces;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
@@ -35,6 +36,7 @@ namespace CSM.UiLogic
                         new TwitchIntegrationViewModel() { Title = "Twitch", IconGlyph = "&#xe800;" },
                         new ToolsViewModel() { Title = "Tools", IconGlyph = "&#xe13c;" }
                     };
+                    SelectedWorkspace = workspaces.Single(w=>w.WorkspaceType == UserConfigManager.Instance.Config.DefaultWorkspace);
                 }
                 return workspaces;
             }

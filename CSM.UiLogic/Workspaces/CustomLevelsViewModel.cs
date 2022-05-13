@@ -1,4 +1,5 @@
 ﻿using CSM.DataAccess.Entities.Offline;
+using CSM.Framework;
 using CSM.Framework.Configuration;
 using CSM.Framework.Extensions;
 using CSM.Services;
@@ -125,13 +126,12 @@ namespace CSM.UiLogic.Workspaces
         /// <summary>
         /// Gets or sets the custom level path.
         /// </summary>
-        [Obsolete("Has to be removed when settings page is introduced")]
         public string CustomLevelPath
         {
             get => customLevelPath;
             set
             {
-                if (value == customLevelPath) return;
+                if (customLevelPath == value) return;
                 customLevelPath = value;
                 OnPropertyChanged();
             }
@@ -149,13 +149,16 @@ namespace CSM.UiLogic.Workspaces
         /// </summary>
         public CustomLevelsViewModel()
         {
-            CustomLevelPath = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Beat Saber\\Beat Saber_Data\\CustomLevels";
+            CustomLevelPath = UserConfigManager.Instance.Config.CustomLevelPaths.First().Path;
             beatMapService = new BeatMapService();
             itemsObservable = new ObservableCollection<CustomLevelViewModel>();
             itemsCollection = DefaultSort();
             RefreshCommand = new RelayCommand(Refresh);
             DeleteCustomLevelCommand = new RelayCommand(DeleteCustomLevel, CanDeleteCustomLevel);
+            UserConfigManager.UserConfigChanged += UserConfigManager_UserConfigChanged;
         }
+
+
 
         /// <summary>
         /// Loads the data in asynchronous fashion.
@@ -163,6 +166,9 @@ namespace CSM.UiLogic.Workspaces
         /// <returns></returns>
         public override void LoadData()
         {
+            base.LoadData();
+            CustomLevelPath = UserConfigManager.Instance.Config.CustomLevelPaths.First().Path;
+
             bgWorker = new BackgroundWorker
             {
                 WorkerReportsProgress = true,
@@ -179,6 +185,7 @@ namespace CSM.UiLogic.Workspaces
         /// </summary>
         public override void UnloadData()
         {
+            base.UnloadData();
             itemsObservable.Clear();
             CustomLevelDetail = null;
         }
@@ -190,6 +197,15 @@ namespace CSM.UiLogic.Workspaces
         }
 
         #region Helper methods
+
+        private void UserConfigManager_UserConfigChanged(object sender, UserConfigChangedEventArgs e)
+        {
+            if (e.CustomLevelsPathChanged)
+            {
+                CustomLevelPath = UserConfigManager.Instance.Config.CustomLevelPaths.First().Path;
+                if (IsActive) Refresh();
+            }
+        }
 
         private ListCollectionView DefaultSort()
         {

@@ -28,7 +28,7 @@
             <TextBlock Text="{x:Static p:Resources.Workspace_CustomLevels_Title}" Foreground="White" VerticalAlignment="Center" Margin="8,0" FontWeight="DemiBold" />
             <!-- Commands -->
             <telerik:RadToolBar Grid.Column="1" OverflowButtonVisibility="Collapsed" GripVisibility="Collapsed" Background="Transparent" BorderThickness="0" >
-                <TextBox Text="{Binding CustomLevelPath}" Width="300" />
+                <TextBlock Text="{Binding CustomLevelPath}" TextTrimming="CharacterEllipsis" Width="300" ToolTip="{Binding CustomLevelPath}"/>
                 <telerik:RadButton Command="{Binding RefreshCommand}" ToolTip="Refresh the custom level list">
                     <telerik:RadGlyph Glyph="&#xe103;" />
                 </telerik:RadButton>

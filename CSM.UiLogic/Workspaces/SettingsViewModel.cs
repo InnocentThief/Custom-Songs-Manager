@@ -1,16 +1,16 @@
-﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+﻿using CSM.UiLogic.Workspaces.Settings;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CSM.UiLogic.Workspaces
 {
     public class SettingsViewModel : ObservableObject
     {
         private bool visible;
+
+        public BeatSaberSettingsViewModel BeatSaberSettings { get; }
+
+        public WorkspaceSettingsViewModel WorkspaceSettings { get; }
 
         public bool Visible
         {
@@ -28,6 +28,8 @@ namespace CSM.UiLogic.Workspaces
         public SettingsViewModel()
         {
             CloseCommand = new RelayCommand(Close);
+            BeatSaberSettings = new BeatSaberSettingsViewModel();
+            WorkspaceSettings = new WorkspaceSettingsViewModel();
         }
 
         private void Close()

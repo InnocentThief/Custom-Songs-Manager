@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
@@ -22,6 +23,8 @@ namespace CSM.Framework.Configuration
 
         #endregion
 
+        public static event EventHandler<UserConfigChangedEventArgs> UserConfigChanged;
+
         private UserConfigManager()
         {
             LoadOrCreateUserConfig();
@@ -36,11 +39,16 @@ namespace CSM.Framework.Configuration
             }
         }
 
+        public void Changed(UserConfigChangedEventArgs userConfigChangedEventArgs)
+        {
+            UserConfigChanged?.Invoke(this, userConfigChangedEventArgs);
+        }
+
         #region Helper methods
 
         private void LoadOrCreateUserConfig()
         {
-            tempDirectory = Path.Combine(Path.GetTempPath(), "Custom Songs Manager");
+            tempDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Custom Songs Manager");
             if (!Directory.Exists(tempDirectory)) Directory.CreateDirectory(tempDirectory);
 
             userConfigPath = Path.Combine(tempDirectory, "UserConfig.json");

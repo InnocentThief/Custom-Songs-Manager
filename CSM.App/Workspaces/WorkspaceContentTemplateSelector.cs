@@ -1,4 +1,5 @@
-﻿using CSM.UiLogic.Workspaces;
+﻿using CSM.Framework;
+using CSM.UiLogic.Workspaces;
 using System.Windows;
 using System.Windows.Controls;
 

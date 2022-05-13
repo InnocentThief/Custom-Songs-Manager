@@ -101,9 +101,11 @@
     <Compile Include="Workspaces\CustomLevels\CustomLevelViewModel.cs" />
     <Compile Include="Workspaces\PlaylistsViewModel.cs" />
     <Compile Include="Workspaces\SettingsViewModel.cs" />
+    <Compile Include="Workspaces\Settings\BeatSaberSettingsViewModel.cs" />
+    <Compile Include="Workspaces\Settings\WorkspaceSettingsViewModel.cs" />
+    <Compile Include="Workspaces\Settings\WorkspaceViewModel.cs" />
     <Compile Include="Workspaces\ToolsViewModel.cs" />
     <Compile Include="Workspaces\TwitchIntegrationViewModel.cs" />
-    <Compile Include="Workspaces\WorkspaceType.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CSM.DataAccess\CSM.DataAccess.csproj">
@@ -120,10 +122,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Settings\" />
     <Folder Include="Workspaces\Common\" />
     <Folder Include="Workspaces\Playlists\" />
-    <Folder Include="Workspaces\Settings\" />
     <Folder Include="Workspaces\Tools\" />
     <Folder Include="Workspaces\TwitchIntegration\" />
   </ItemGroup>

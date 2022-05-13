@@ -191,6 +191,9 @@
     <Compile Include="Workspaces\Settings\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Workspaces\Settings\WorkspaceSettingsView.xaml.cs">
+      <DependentUpon>WorkspaceSettingsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Workspaces\Tools\ToolsView.xaml.cs">
       <DependentUpon>ToolsView.xaml</DependentUpon>
     </Compile>
@@ -235,6 +238,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Workspaces\Settings\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Workspaces\Settings\WorkspaceSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -286,7 +293,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Settings\" />
     <Folder Include="Workspaces\Common\" />
   </ItemGroup>
   <ItemGroup>

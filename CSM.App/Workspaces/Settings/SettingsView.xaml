@@ -35,7 +35,8 @@
                     <ColumnDefinition Width="10" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <settings:BeatSaberSettingsView />
+                <settings:BeatSaberSettingsView DataContext="{Binding BeatSaberSettings}" />
+                <settings:WorkspaceSettingsView Grid.Column="2" DataContext="{Binding WorkspaceSettings}" />
             </Grid>
         </Border>
     </Grid>

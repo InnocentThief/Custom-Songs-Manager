@@ -1,9 +1,9 @@
 ﻿<UserControl x:Class="CSM.App.Workspaces.Settings.BeatSaberSettingsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:CSM.App.Workspaces.Settings" xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -24,16 +24,38 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <!-- Beat Saber Install Path -->
                 <TextBlock Text="Beat Saber Install Path" VerticalAlignment="Center" />
-                <Grid Grid.Column="1">
+                <Grid Grid.Column="1" Margin="0,2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBox Text="{Binding BeatSaberInstallPath}" />
-                    <telerik:RadButton Grid.Column="1" Content="..." Width="30" Margin="6,0,0,0" />
+                    <telerik:RadButton Grid.Column="1" Content="..." Command="{Binding SelectDirectoryCommand}" CommandParameter="BeatSaberInstallPath" Width="30" Margin="6,0,0,0" />
+                </Grid>
+                <!-- Custom Levels Path -->
+                <TextBlock Grid.Row="1" Text="Custom Levels Path" VerticalAlignment="Center" />
+                <Grid Grid.Row="1" Grid.Column="1" Margin="0,2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox Text="{Binding CustomLevelsPath}" />
+                    <telerik:RadButton Grid.Column="1" Content="..." Command="{Binding SelectDirectoryCommand}" CommandParameter="CustomLevelsPath" Width="30" Margin="6,0,0,0" />
+                </Grid>
+                <!-- Playlists Path -->
+                <TextBlock Grid.Row="2" Text="Playlists Path" VerticalAlignment="Center" />
+                <Grid Grid.Row="2" Grid.Column="1" Margin="0,2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox Text="{Binding PlaylistsPath}" />
+                    <telerik:RadButton Grid.Column="1" Content="..." Command="{Binding SelectDirectoryCommand}" CommandParameter="PlaylistsPath" Width="30" Margin="6,0,0,0" />
                 </Grid>
             </Grid>
         </Border>

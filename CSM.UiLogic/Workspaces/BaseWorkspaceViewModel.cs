@@ -1,13 +1,9 @@
-﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CSM.Framework;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 
 namespace CSM.UiLogic.Workspaces
 {
-    public abstract class BaseWorkspaceViewModel: ObservableObject
+    public abstract class BaseWorkspaceViewModel : ObservableObject
     {
         public string Title { get; set; }
 
@@ -15,8 +11,17 @@ namespace CSM.UiLogic.Workspaces
 
         public abstract WorkspaceType WorkspaceType { get; }
 
-        public abstract void LoadData();
+        public bool IsActive { get; set; }
 
-        public abstract void UnloadData();
+        public virtual void LoadData()
+        {
+            IsActive = true;
+        }
+
+        public virtual void UnloadData()
+        {
+            IsActive = false;
+        }
+
     }
 }
