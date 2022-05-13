@@ -25,7 +25,7 @@
             <!-- Vertical splitter -->
             <GridSplitter Grid.Column="1" Grid.Row="1" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" HorizontalAlignment="Stretch" />
             <!-- Playlist -->
-            <local:PlaylistView Grid.Column="2" />
+            <local:PlaylistView Grid.Column="2" DataContext="{Binding SelectedPlaylist}" />
             <!-- Available Custom Levels -->
             <local:AvailableCustomLevelsView Grid.Column="4" />
             <customLevel:CustomLevelDetailView Grid.Column="6" />

@@ -167,15 +167,6 @@ namespace CSM.UiLogic.Workspaces
             RefreshCommand = new RelayCommand(Refresh);
             DeleteCustomLevelCommand = new RelayCommand(DeleteCustomLevel, CanDeleteCustomLevel);
             UserConfigManager.UserConfigChanged += UserConfigManager_UserConfigChanged;
-
-            bgWorker = new BackgroundWorker
-            {
-                WorkerReportsProgress = true,
-                WorkerSupportsCancellation = true
-            };
-            bgWorker.DoWork += BackgroundWorker_DoWork;
-            bgWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
-            bgWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
         }
 
         /// <summary>
@@ -186,6 +177,15 @@ namespace CSM.UiLogic.Workspaces
         {
             base.LoadData();
             CustomLevelPath = UserConfigManager.Instance.Config.CustomLevelPaths.First().Path;
+
+            bgWorker = new BackgroundWorker
+            {
+                WorkerReportsProgress = true,
+                WorkerSupportsCancellation = true
+            };
+            bgWorker.DoWork += BackgroundWorker_DoWork;
+            bgWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
+            bgWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
             bgWorker.RunWorkerAsync();
         }
 
@@ -195,6 +195,7 @@ namespace CSM.UiLogic.Workspaces
         public override void UnloadData()
         {
             base.UnloadData();
+            if (bgWorker != null && bgWorker.IsBusy) bgWorker.CancelAsync();
             itemsObservable.Clear();
             CustomLevelDetail = null;
         }
@@ -282,6 +283,12 @@ namespace CSM.UiLogic.Workspaces
             }
             IsLoading = false;
             OnPropertyChanged(nameof(CustomLevelCount));
+
+            bgWorker.DoWork -= BackgroundWorker_DoWork;
+            bgWorker.ProgressChanged -= BackgroundWorker_ProgressChanged;
+            bgWorker.RunWorkerCompleted -= BackgroundWorker_RunWorkerCompleted;
+            bgWorker.Dispose();
+            bgWorker = null;
         }
 
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)

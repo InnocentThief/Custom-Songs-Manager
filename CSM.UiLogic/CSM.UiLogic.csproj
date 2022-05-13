@@ -103,6 +103,7 @@
     <Compile Include="Workspaces\Playlists\BasePlaylistViewModel.cs" />
     <Compile Include="Workspaces\Playlists\PlaylistFolderViewModel.cs" />
     <Compile Include="Workspaces\Playlists\PlaylistViewModel.cs" />
+    <Compile Include="Workspaces\Playlists\PlaylistSongViewModel.cs" />
     <Compile Include="Workspaces\SettingsViewModel.cs" />
     <Compile Include="Workspaces\Settings\BeatSaberSettingsViewModel.cs" />
     <Compile Include="Workspaces\Settings\WorkspaceSettingsViewModel.cs" />

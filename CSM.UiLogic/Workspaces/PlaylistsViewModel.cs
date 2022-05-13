@@ -116,6 +116,12 @@ namespace CSM.UiLogic.Workspaces
             RefreshCommand = new RelayCommand(Refresh);
             DeleteCustomLevelCommand = new RelayCommand(DeletePlaylist, CanDeletePlaylist);
             UserConfigManager.UserConfigChanged += UserConfigManager_UserConfigChanged;
+        }
+
+        public override void LoadData()
+        {
+            base.LoadData();
+            PlaylistPath = UserConfigManager.Instance.Config.PlaylistPaths.First().Path;
 
             bgWorker = new BackgroundWorker
             {
@@ -124,29 +130,30 @@ namespace CSM.UiLogic.Workspaces
             };
             bgWorker.DoWork += BackgroundWorker_DoWork;
             bgWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
-            bgWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerComplete;
-        }
-
-        public override void LoadData()
-        {
-            base.LoadData();
-            PlaylistPath = UserConfigManager.Instance.Config.PlaylistPaths.First().Path;
+            bgWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
             bgWorker.RunWorkerAsync();
         }
 
         public override void UnloadData()
         {
             base.UnloadData();
+            if (bgWorker != null && bgWorker.IsBusy) bgWorker.CancelAsync();
             Playlists.Clear();
             PlaylistPath = null;
         }
 
         #region Helper methods
 
-        private void BackgroundWorker_RunWorkerComplete(object sender, RunWorkerCompletedEventArgs e)
+        private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             Playlists.AddRange((List<BasePlaylistViewModel>)e.Result);
             IsLoading = false;
+
+            bgWorker.DoWork -= BackgroundWorker_DoWork;
+            bgWorker.ProgressChanged -= BackgroundWorker_ProgressChanged;
+            bgWorker.RunWorkerCompleted -= BackgroundWorker_RunWorkerCompleted;
+            bgWorker.Dispose();
+            bgWorker = null;
         }
 
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)

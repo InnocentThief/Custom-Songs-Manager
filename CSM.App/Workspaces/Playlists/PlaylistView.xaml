@@ -27,7 +27,7 @@
         <Border Grid.Row="1" BorderBrush="DimGray" BorderThickness="1,0,1,1">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="62" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <!-- Header (Image and playlist informations -->
@@ -37,9 +37,9 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <!-- Cover Image -->
-                    <Border Background="Green" Height="50" Width="50" />
+                    <Image Source="{Binding CoverImage}" Height="50" Width="50" />
                     <Grid Grid.Column="1" Margin="6,0">
-                        <Grid.ColumnDefinitions>
+                    <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="80" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
@@ -50,15 +50,39 @@
                         </Grid.RowDefinitions>
                         <!-- Playlist name -->
                         <TextBlock Text="Name" FontWeight="DemiBold" />
-                        <TextBlock Grid.Column="1" Text="Ich bin die Playliste mit dem Namen der Playliste" />
+                        <TextBlock Grid.Column="1" Text="{Binding PlaylistTitle}" TextTrimming="CharacterEllipsis" ToolTip="{Binding PlaylistTitle}" />
+                        <!--<TextBox Grid.Column="1" Text="{Binding PlaylistTitle, UpdateSourceTrigger=PropertyChanged}" Margin="0,2" />-->
                         <!-- Author -->
                         <TextBlock Grid.Row="1" Text="Author" FontWeight="DemiBold" />
-                        <TextBlock Grid.Column="1" Grid.Row="1" Text="Ich bin der Author der Playliste" />
+                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding PlaylistAuthor}" TextTrimming="CharacterEllipsis" ToolTip="{Binding PlaylistAuthor}" />
+                        <!--<TextBox Grid.Column="1" Grid.Row="1" Text="{Binding PlaylistAuthor, UpdateSourceTrigger=PropertyChanged}" Margin="0,2" />-->
                         <!-- Description -->
                         <TextBlock Grid.Row="2" Text="Description" FontWeight="DemiBold" />
-                        <TextBlock Grid.Column="1" Grid.Row="2" Text="Ich bin die Description der Playliste" />
+                        <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding PlaylistDescription}" TextTrimming="CharacterEllipsis" ToolTip="{Binding PlaylistDescription}" />
+                        <!--<TextBox Grid.Column="1" Grid.Row="2" Text="{Binding PlaylistDescription, UpdateSourceTrigger=PropertyChanged}" Margin="0,2" />-->
                     </Grid>
                 </Grid>
+                <!-- Content -->
+                <telerik:RadGridView Grid.Row="1" ItemsSource="{Binding Songs}" AutoGenerateColumns="False" IsFilteringAllowed="True" RowIndicatorVisibility="Collapsed" FrozenColumnsSplitterVisibility="Collapsed" BorderThickness="0" AlternationCount="2" ShowGroupPanel="False" >
+                    <telerik:RadGridView.Columns>
+                        <telerik:GridViewDataColumn Header="Songs" Width="*" DataMemberBinding="{Binding SongName}" >
+                            <telerik:GridViewDataColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding SongName}" VerticalAlignment="Center" />
+                                        <telerik:RadButton Grid.Column="1" Background="Transparent" BorderThickness="0" Margin="0,0,10,0">
+                                            <telerik:RadGlyph Glyph="&#xe10c;" Foreground="Red" />
+                                        </telerik:RadButton>
+                                    </Grid>
+                                </DataTemplate>
+                            </telerik:GridViewDataColumn.CellTemplate>
+                        </telerik:GridViewDataColumn>
+                    </telerik:RadGridView.Columns>
+                </telerik:RadGridView>
             </Grid>
         </Border>
     </Grid>
