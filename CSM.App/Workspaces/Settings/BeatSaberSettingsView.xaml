@@ -34,7 +34,7 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <TextBox Text="{Binding BeatSaberInstallPath}" />
+                    <TextBox Text="{Binding BeatSaberInstallPath, UpdateSourceTrigger=PropertyChanged}" />
                     <telerik:RadButton Grid.Column="1" Content="..." Command="{Binding SelectDirectoryCommand}" CommandParameter="BeatSaberInstallPath" Width="30" Margin="6,0,0,0" />
                 </Grid>
                 <!-- Custom Levels Path -->
@@ -44,7 +44,7 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <TextBox Text="{Binding CustomLevelsPath}" />
+                    <TextBox Text="{Binding CustomLevelsPath, UpdateSourceTrigger=PropertyChanged}" />
                     <telerik:RadButton Grid.Column="1" Content="..." Command="{Binding SelectDirectoryCommand}" CommandParameter="CustomLevelsPath" Width="30" Margin="6,0,0,0" />
                 </Grid>
                 <!-- Playlists Path -->
@@ -54,7 +54,7 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <TextBox Text="{Binding PlaylistsPath}" />
+                    <TextBox Text="{Binding PlaylistsPath, UpdateSourceTrigger=PropertyChanged}" />
                     <telerik:RadButton Grid.Column="1" Content="..." Command="{Binding SelectDirectoryCommand}" CommandParameter="PlaylistsPath" Width="30" Margin="6,0,0,0" />
                 </Grid>
             </Grid>

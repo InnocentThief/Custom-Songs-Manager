@@ -14,6 +14,7 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 
 namespace CSM.UiLogic.Workspaces
@@ -289,9 +290,12 @@ namespace CSM.UiLogic.Workspaces
         {
             if (Directory.Exists(SelectedCustomLevel.Path))
             {
-                Directory.Delete(SelectedCustomLevel.Path, true);
-                CustomLevels.Remove(SelectedCustomLevel);
-                OnPropertyChanged(nameof(CustomLevelCount));
+                if (MessageBox.Show("Do you want to delete the selected custom level?", "Delete custom level", MessageBoxButton.YesNo) == MessageBoxResult.OK)
+                {
+                    Directory.Delete(SelectedCustomLevel.Path, true);
+                    CustomLevels.Remove(SelectedCustomLevel);
+                    OnPropertyChanged(nameof(CustomLevelCount));
+                }
             }
         }
 

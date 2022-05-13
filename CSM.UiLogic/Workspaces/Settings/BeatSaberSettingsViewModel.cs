@@ -89,47 +89,55 @@ namespace CSM.UiLogic.Workspaces.Settings
 
         private void SelectDirectory(object type)
         {
-            var inputPath = string.Empty;
-
-            switch (type)
+            try
             {
-                case "BeatSaberInstallPath":
-                    inputPath = BeatSaberInstallPath;
-                    break;
-                case "CustomLevelsPath":
-                    inputPath = CustomLevelsPath;
-                    break;
-                case "PlaylistsPath":
-                    inputPath = PlaylistsPath;
-                    break;
-                default:
-                    inputPath = BeatSaberInstallPath;
-                    break;
-            }
+                var inputPath = string.Empty;
 
-            var dlg = new FolderPicker();
-            dlg.InputPath = inputPath;
-            if (dlg.ShowDialog() == true)
-            {
-                if (ValidatePath(dlg.ResultPath))
+                switch (type)
                 {
-                    switch (type)
+                    case "BeatSaberInstallPath":
+                        inputPath = BeatSaberInstallPath;
+                        break;
+                    case "CustomLevelsPath":
+                        inputPath = CustomLevelsPath;
+                        break;
+                    case "PlaylistsPath":
+                        inputPath = PlaylistsPath;
+                        break;
+                    default:
+                        inputPath = BeatSaberInstallPath;
+                        break;
+                }
+
+                var dlg = new FolderPicker();
+                if (!Directory.Exists(inputPath)) inputPath = "c:\\";
+                dlg.InputPath = inputPath;
+                if (dlg.ShowDialog() == true)
+                {
+                    if (ValidatePath(dlg.ResultPath))
                     {
-                        case "BeatSaberInstallPath":
-                            BeatSaberInstallPath = dlg.ResultPath;
-                            break;
-                        case "CustomLevelsPath":
-                            CustomLevelsPath = dlg.ResultPath;
-                            break;
-                        case "PlaylistsPath":
-                            PlaylistsPath = dlg.ResultPath;
-                            break;
-                        default:
-                            break;
+                        switch (type)
+                        {
+                            case "BeatSaberInstallPath":
+                                BeatSaberInstallPath = dlg.ResultPath;
+                                break;
+                            case "CustomLevelsPath":
+                                CustomLevelsPath = dlg.ResultPath;
+                                break;
+                            case "PlaylistsPath":
+                                PlaylistsPath = dlg.ResultPath;
+                                break;
+                            default:
+                                break;
+                        }
                     }
                 }
             }
-
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Unable to open file dialog");
+                throw;
+            }
         }
 
         #endregion
