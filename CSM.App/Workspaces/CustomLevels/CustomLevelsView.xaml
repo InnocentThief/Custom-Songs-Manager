@@ -9,25 +9,44 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
         <telerik:StringToGlyphConverter x:Key="StringToGlyphConverter" />
     </UserControl.Resources>
 
     <telerik:RadBusyIndicator IsIndeterminate="False" ProgressValue="{Binding LoadProgress}" IsBusy="{Binding IsLoading}">
-        <Grid Margin="8">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="5*" />
-                <ColumnDefinition Width="6" />
-                <ColumnDefinition Width="1*" />
-            </Grid.ColumnDefinitions>
-            <!-- List with custom levels -->
-            <local:CustomLevelListView />
-            <!-- Vertical splitter -->
-            <GridSplitter Grid.Column="1" Grid.Row="1" ResizeDirection="Columns"
-              ResizeBehavior="PreviousAndNext"
-                      Background="Transparent"
-              HorizontalAlignment="Stretch" />
-            <!-- Detail area -->
-            <local:CustomLevelDetailView Grid.Column="2" />
+        <Grid>
+            <!-- Detail Right -->
+            <Grid Margin="8" Visibility="{Binding ShowRightDetail, Converter={StaticResource BoolToVisConverter}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="6" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <!-- List with custom levels -->
+                <local:CustomLevelListView />
+
+                <!-- Vertical splitter -->
+                <GridSplitter Grid.Column="1" Grid.Row="1" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" HorizontalAlignment="Stretch" />
+                <!-- Detail area (Vertical) -->
+                <local:CustomLevelDetailView Grid.Column="2" />
+            </Grid>
+
+            <!-- Detail Bottom -->
+            <Grid Margin="8" Visibility="{Binding ShowBottomDetail, Converter={StaticResource BoolToVisConverter}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*" />
+                    <RowDefinition Height="6" />
+                    <RowDefinition Height="300" />
+                </Grid.RowDefinitions>
+                <!-- List with custom levels -->
+                <local:CustomLevelListView />
+
+                <!-- Horizontal splitter -->
+                <GridSplitter Grid.Row="1" ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" VerticalAlignment="Stretch" />
+                <!-- Detail area (Horizontal) -->
+                <local:CustomLevelDetailBottomView Grid.Row="2" />
+            </Grid>
         </Grid>
+
     </telerik:RadBusyIndicator>
 </UserControl>

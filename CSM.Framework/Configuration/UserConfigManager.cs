@@ -87,7 +87,8 @@ namespace CSM.Framework.Configuration
                         Name = Properties.Resources.DefaultPlaylistsPath
                     }
                 },
-                DefaultWorkspace = WorkspaceType.CustomLevels
+                DefaultWorkspace = WorkspaceType.CustomLevels,
+                CustomLevelsSongDetailPosition = SongDetailPosition.Right
             };
         }
 

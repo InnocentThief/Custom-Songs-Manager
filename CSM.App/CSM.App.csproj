@@ -173,6 +173,12 @@
     <Compile Include="Workspaces\CustomLevels\CustomLevelDetail.xaml.cs">
       <DependentUpon>CustomLevelDetail.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Workspaces\CustomLevels\CustomLevelDetailBottomView.xaml.cs">
+      <DependentUpon>CustomLevelDetailBottomView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Workspaces\CustomLevels\CustomLevelDifficultyBottomView.xaml.cs">
+      <DependentUpon>CustomLevelDifficultyBottomView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Workspaces\CustomLevels\CustomLevelDifficultyView.xaml.cs">
       <DependentUpon>CustomLevelDifficultyView.xaml</DependentUpon>
     </Compile>
@@ -214,6 +220,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Workspaces\CustomLevels\CustomLevelDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Workspaces\CustomLevels\CustomLevelDetailBottomView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Workspaces\CustomLevels\CustomLevelDifficultyBottomView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -86,6 +86,10 @@ namespace CSM.UiLogic.Workspaces
             }
         }
 
+        public bool ShowBottomDetail => UserConfigManager.Instance.Config.CustomLevelsSongDetailPosition == SongDetailPosition.Bottom;
+
+        public bool ShowRightDetail => UserConfigManager.Instance.Config.CustomLevelsSongDetailPosition == SongDetailPosition.Right;
+
         /// <summary>
         /// Command used to refresh the workspace data.
         /// </summary>
@@ -204,6 +208,11 @@ namespace CSM.UiLogic.Workspaces
             {
                 CustomLevelPath = UserConfigManager.Instance.Config.CustomLevelPaths.First().Path;
                 if (IsActive) Refresh();
+            }
+            if (e.CustomLevelDetailPositionChanged)
+            {
+                OnPropertyChanged(nameof(ShowBottomDetail));
+                OnPropertyChanged(nameof(ShowRightDetail));
             }
         }
 

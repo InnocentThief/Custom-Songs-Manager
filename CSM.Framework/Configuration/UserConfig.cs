@@ -15,5 +15,7 @@ namespace CSM.Framework.Configuration
         public List<PlaylistPath> PlaylistPaths { get; set; }
 
         public WorkspaceType DefaultWorkspace { get; set; }
+
+        public SongDetailPosition CustomLevelsSongDetailPosition { get; set; }
     }
 }

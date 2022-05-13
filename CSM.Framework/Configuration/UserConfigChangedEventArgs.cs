@@ -9,5 +9,7 @@ namespace CSM.Framework.Configuration
     public class UserConfigChangedEventArgs
     {
         public bool CustomLevelsPathChanged { get; set; }
+
+        public bool CustomLevelDetailPositionChanged { get; set; }
     }
 }

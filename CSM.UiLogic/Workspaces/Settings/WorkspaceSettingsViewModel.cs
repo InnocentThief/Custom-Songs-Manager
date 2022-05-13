@@ -11,6 +11,8 @@ namespace CSM.UiLogic.Workspaces.Settings
     public class WorkspaceSettingsViewModel : ObservableObject
     {
         private WorkspaceViewModel workspaceViewModel;
+        private bool songDetailPositionRight;
+        private bool songDetailPositionBottom;
 
         public List<WorkspaceViewModel> Workspaces { get; }
 
@@ -27,6 +29,42 @@ namespace CSM.UiLogic.Workspaces.Settings
             }
         }
 
+        public bool SongDetailPositionRight
+        {
+            get => songDetailPositionRight;
+            set
+            {
+                if (songDetailPositionRight == value) return;
+                songDetailPositionRight = value;
+                if (value)
+                {
+                    UserConfigManager.Instance.Config.CustomLevelsSongDetailPosition = SongDetailPosition.Right;
+                    UserConfigManager.Instance.SaveUserConfig();
+                    UserConfigManager.Instance.Changed(new UserConfigChangedEventArgs { CustomLevelDetailPositionChanged = true });
+                    SongDetailPositionBottom = false;
+                }
+                OnPropertyChanged();
+            }
+        }
+
+        public bool SongDetailPositionBottom
+        {
+            get => songDetailPositionBottom;
+            set
+            {
+                if (songDetailPositionBottom == value) return;
+                songDetailPositionBottom = value;
+                if (value)
+                {
+                    UserConfigManager.Instance.Config.CustomLevelsSongDetailPosition = SongDetailPosition.Bottom;
+                    UserConfigManager.Instance.SaveUserConfig();
+                    UserConfigManager.Instance.Changed(new UserConfigChangedEventArgs { CustomLevelDetailPositionChanged = true });
+                    SongDetailPositionRight = false;
+                }
+                OnPropertyChanged();
+            }
+        }
+
         public WorkspaceSettingsViewModel()
         {
             Workspaces = new List<WorkspaceViewModel>();
@@ -35,6 +73,8 @@ namespace CSM.UiLogic.Workspaces.Settings
                 Workspaces.Add(new WorkspaceViewModel(workspaceType.ToString().ToWorkspaceType(), (WorkspaceType)workspaceType));
             }
             SelectedWorkspace = Workspaces.SingleOrDefault(w => w.Type == UserConfigManager.Instance.Config.DefaultWorkspace);
+            songDetailPositionRight = UserConfigManager.Instance.Config.CustomLevelsSongDetailPosition == SongDetailPosition.Right;
+            songDetailPositionBottom = UserConfigManager.Instance.Config.CustomLevelsSongDetailPosition == SongDetailPosition.Bottom;
         }
     }
 }
