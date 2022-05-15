@@ -1,4 +1,6 @@
 ﻿using CSM.DataAccess.Entities.Offline;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CSM.UiLogic.Workspaces.Playlists
 {
@@ -22,6 +24,18 @@ namespace CSM.UiLogic.Workspaces.Playlists
             }
         }
 
+        public List<PlaylistSongDifficultyViewModel> Difficulties { get; }
+
+        public string Difficulty
+        {
+            get
+            {
+                if (playlistSong.Difficulties == null) return string.Empty;
+                var characteristics = playlistSong.Difficulties.GroupBy(d => d.Characteristic);
+                return string.Join(" / ", characteristics.Select(c => $"{c.Key} ({string.Join(", ", c.Select(d => d.Name))})"));
+            }
+        }
+
         /// <summary>
         /// Initializes a new <see cref="PlaylistSongViewModel"/>.
         /// </summary>
@@ -29,6 +43,11 @@ namespace CSM.UiLogic.Workspaces.Playlists
         public PlaylistSongViewModel(PlaylistSong playlistSong)
         {
             this.playlistSong = playlistSong;
+            Difficulties = new List<PlaylistSongDifficultyViewModel>();
+            if (playlistSong.Difficulties != null)
+            {
+                Difficulties.AddRange(playlistSong.Difficulties.Select(d => new PlaylistSongDifficultyViewModel(d)));
+            }
         }
     }
 }

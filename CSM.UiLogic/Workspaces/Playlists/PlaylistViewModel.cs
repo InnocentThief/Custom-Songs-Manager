@@ -13,11 +13,23 @@ namespace CSM.UiLogic.Workspaces.Playlists
     public class PlaylistViewModel : BasePlaylistViewModel
     {
         private Playlist playlist;
+        private PlaylistSongViewModel playlistSong;
 
         /// <summary>
         /// Contains all songs of a playlist.
         /// </summary>
         public ObservableCollection<PlaylistSongViewModel> Songs { get; }
+
+        public PlaylistSongViewModel SelectedPlaylistSong
+        {
+            get => playlistSong;
+            set
+            {
+                if (playlistSong == value) return;
+                playlistSong = value;
+                OnPropertyChanged();
+            }
+        }
 
         public string PlaylistTitle
         {

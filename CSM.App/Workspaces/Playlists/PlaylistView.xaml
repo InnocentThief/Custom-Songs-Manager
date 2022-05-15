@@ -6,9 +6,14 @@
                           xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:p="clr-namespace:CSM.App.Properties"
-             xmlns:local="clr-namespace:CSM.App.Workspaces.Playlists"
+             xmlns:local="clr-namespace:CSM.App.Workspaces.Playlists" xmlns:converter="clr-namespace:CSM.App.Converter"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <converter:DifficultyToColorConverter x:Key="DiffToColorConverter" />
+    </UserControl.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
@@ -40,7 +45,7 @@
                     <!-- Cover Image -->
                     <Image Source="{Binding CoverImage}" Height="50" Width="50" />
                     <Grid Grid.Column="1" Margin="6,0">
-                    <Grid.ColumnDefinitions>
+                        <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="80" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
@@ -66,7 +71,54 @@
                 <!-- Content -->
                 <telerik:RadGridView Grid.Row="1" ItemsSource="{Binding Songs}" AutoGenerateColumns="False" IsFilteringAllowed="True" RowIndicatorVisibility="Collapsed" FrozenColumnsSplitterVisibility="Collapsed" BorderThickness="0" AlternationCount="2" ShowGroupPanel="False" >
                     <telerik:RadGridView.Columns>
-                        <telerik:GridViewDataColumn Header="Songs" Width="*" DataMemberBinding="{Binding SongName}" >
+                        <telerik:GridViewDataColumn Header="Title" DataMemberBinding="{Binding SongName}" Width="*" />
+                        <!--<telerik:GridViewDataColumn Header="Difficulty" DataMemberBinding="{Binding Difficulty}" />-->
+                        <telerik:GridViewDataColumn Header="Difficulty" DataMemberBinding="{Binding Difficulties}">
+                            <telerik:GridViewDataColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ListBox ItemsSource="{Binding Difficulties}" Background="Transparent" BorderThickness="0">
+                                        <ListBox.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                                            </ItemsPanelTemplate>
+                                        </ListBox.ItemsPanel>
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border Background="{Binding Name, Converter={StaticResource DiffToColorConverter}}" CornerRadius="8">
+                                                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path515" Fill="White" Margin="6,3">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="M 3.1447489 11.323843 C 2.7196558 10.932006 2.3718527 10.466178 2.3718527 10.288671 c 0 -0.177509 0.2689558 -0.6204445 0.5976797 -0.9843023 C 3.4725992 8.7475339 4.3853281 7.0468719 4.2317665 6.9524834 4.2056448 6.936428 3.5240357 6.6294294 2.7170762 6.2702628 1.9101168 5.9110957 1.0751079 5.5062208 0.86150086 5.3705406 0.37139248 5.0592296 0.36305427 4.5380322 0.84280335 4.2020016 1.046128 4.0595873 1.7646239 3.1068662 2.4394612 2.084843 3.1142985 1.0628198 3.7539622 0.20071254 3.860936 0.16904876 4.40145 0.00905913 4.1490238 0.77908215 3.1384709 2.3729178 2.5269572 3.3373923 2.0268314 4.1779303 2.0270806 4.240781 2.027322 4.3036323 3.0545122 4.8423939 4.3097082 5.4380317 5.5649043 6.0336688 6.4968037 6.4259284 6.3805953 6.30972 6.0607589 5.9898842 6.118853 4.8834221 6.471378 4.5806555 7.1284455 4.0163332 8.0216764 4.0901505 8.5231611 4.750217 8.9711296 5.3398437 8.6320607 6.4512072 7.9521374 6.6218577 7.7310723 6.6773435 7.5502009 6.7770523 7.5502009 6.8434382 c 0 0.066385 0.9515214 0.5188632 2.1144929 1.005506 l 2.1144932 0.8848046 0.04199 -2.3619584 c 0.04753 -2.6734193 0.118065 -3.1387114 0.475849 -3.1387114 0.405268 0 0.452369 0.5930112 0.308473 3.8837624 C 12.442892 10.835429 12.586263 10.703132 9.9740971 9.5449599 8.5461572 8.9118456 8.1422642 8.7971599 7.8643504 8.9458945 7.6753066 9.0470672 7.5496386 9.1588491 7.5850882 9.1942987 c 0.035451 0.035451 0.8706092 0.401228 1.855912 0.8128413 1.8221608 0.761214 2.2193658 1.069853 2.0258518 1.574143 -0.176849 0.460862 -0.834088 0.334802 -3.4774611 -0.666985 -3.0909237 -1.1714002 -4.5449488 -1.2782748 -3.4545734 -0.25392 0.4650997 0.436939 0.5417849 0.846052 0.2190754 1.168762 -0.365933 0.365933 -0.8179646 0.223988 -1.609144 -0.505297 z" FillRule="NonZero"/>
+                                                        </Path.Data>
+                                                    </Path>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+
+                                    <!--<StackPanel Orientation="Horizontal">
+                                        <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path515" Fill="White">
+                                            <Path.Data>
+                                                <PathGeometry Figures="m 4.5601241 17.278423 c -0.651593 -0.600617 -1.184714 -1.314649 -1.184714 -1.586737 0 -0.272089 0.412262 -0.951032 0.916138 -1.508762 0.771113 -0.85353 2.170166 -3.460346 1.934783 -3.605027 -0.04004 -0.02461 -1.084827 -0.495185 -2.321754 -1.0457243 -1.236927 -0.55054 -2.516849 -1.171142 -2.844271 -1.379116 -0.75125003 -0.477185 -0.76403103 -1.276089 -0.02866 -1.791165 0.311661 -0.218296 1.412989 -1.67865 2.447396 -3.245232 1.034407 -1.566582 2.014899 -2.88804099 2.178871 -2.93657599 0.828513 -0.245236 0.441588 0.93507399 -1.107412 3.37814399 -0.937343 1.47837 -1.703948 2.766767 -1.703566 2.863106 3.7e-4 0.09634 1.574872 0.922167 3.498867 1.835175 1.923995 0.913007 3.352433 1.514272 3.174306 1.336145 -0.490253 -0.490252 -0.401205 -2.186264 0.139154 -2.650352 1.0071689 -0.865007 2.3763349 -0.751858 3.1450229 0.259908 0.686657 0.903794 0.166924 2.607319 -0.875279 2.8688963 -0.338854 0.08505 -0.616098 0.237886 -0.616098 0.339644 0 0.101757 1.458515 0.795326 3.241146 1.541264 l 3.241146 1.35625 0.06436 -3.6204673 c 0.07285 -4.097882 0.180972 -4.811093 0.729392 -4.811093 0.621205 0 0.693402 0.908982 0.472835 5.9531253 -0.249244 5.699942 -0.02948 5.497154 -4.033472 3.721879 -2.188781 -0.970453 -2.807878 -1.146246 -3.233871 -0.918262 -0.289771 0.15508 -0.482398 0.326422 -0.42806 0.38076 0.05434 0.05434 1.334491 0.615012 2.844787 1.245943 2.793052 1.166807 3.401898 1.639897 3.105275 2.412884 -0.271079 0.706421 -1.27851 0.513193 -5.330337 -1.022371 -4.7378429 -1.79555 -6.9666079 -1.95937 -5.2952539 -0.389214 0.712916 0.66975 0.830461 1.296849 0.335804 1.791506 -0.560911 0.560911 -1.253796 0.343335 -2.466535 -0.774531 z" FillRule="NonZero"/>
+                                            </Path.Data>
+                                        </Path>
+                                        <TextBlock Text="{Binding Difficulty}" Margin="6,0,0,0" />
+                                    </StackPanel>-->
+                                
+                                </DataTemplate>
+                            </telerik:GridViewDataColumn.CellTemplate>
+                        </telerik:GridViewDataColumn>
+                        
+                        <telerik:GridViewColumn>
+                            <telerik:GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <telerik:RadButton Grid.Column="1" Background="Transparent" BorderThickness="0" Margin="0,0,10,0">
+                                        <telerik:RadGlyph Glyph="&#xe10c;" Foreground="Red" />
+                                    </telerik:RadButton>
+                                </DataTemplate>
+                            </telerik:GridViewColumn.CellTemplate>
+                        </telerik:GridViewColumn>
+
+                        <!--<telerik:GridViewDataColumn Header="Songs" Width="*" DataMemberBinding="{Binding SongName}" >
                             <telerik:GridViewDataColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid>
@@ -81,7 +133,8 @@
                                     </Grid>
                                 </DataTemplate>
                             </telerik:GridViewDataColumn.CellTemplate>
-                        </telerik:GridViewDataColumn>
+                        </telerik:GridViewDataColumn>-->
+
                     </telerik:RadGridView.Columns>
                 </telerik:RadGridView>
             </Grid>

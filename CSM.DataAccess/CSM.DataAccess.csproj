@@ -80,6 +80,7 @@
     <Compile Include="Entities\Offline\CustomLevelCustomData.cs" />
     <Compile Include="Entities\Offline\Playlist.cs" />
     <Compile Include="Entities\Offline\PlaylistSong.cs" />
+    <Compile Include="Entities\Offline\PlaylistSongDifficulty.cs" />
     <Compile Include="Entities\Online\BeatMap.cs" />
     <Compile Include="Entities\Online\Difficulty.cs" />
     <Compile Include="Entities\Online\Metadata.cs" />

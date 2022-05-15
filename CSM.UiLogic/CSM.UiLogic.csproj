@@ -105,6 +105,7 @@
     <Compile Include="Workspaces\PlaylistsViewModel.cs" />
     <Compile Include="Workspaces\Playlists\BasePlaylistViewModel.cs" />
     <Compile Include="Workspaces\Playlists\PlaylistFolderViewModel.cs" />
+    <Compile Include="Workspaces\Playlists\PlaylistSongDifficultyViewModel.cs" />
     <Compile Include="Workspaces\Playlists\PlaylistViewModel.cs" />
     <Compile Include="Workspaces\Playlists\PlaylistSongViewModel.cs" />
     <Compile Include="Workspaces\SettingsViewModel.cs" />

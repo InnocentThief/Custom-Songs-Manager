@@ -13,15 +13,15 @@ namespace CSM.App.Converter
             switch (difficulty)
             {
                 case "Easy":
-                    return new SolidColorBrush(Colors.Green);
+                    return new SolidColorBrush(Color.FromArgb(255, 0, 128, 85));
                 case "Normal":
-                    return new SolidColorBrush(Colors.CornflowerBlue);
+                    return new SolidColorBrush(Color.FromArgb(255, 18, 104, 161));
                 case "Hard":
-                    return new SolidColorBrush(Colors.Orange);
+                    return new SolidColorBrush(Color.FromArgb(255, 189, 85, 0));
                 case "Expert":
-                    return new SolidColorBrush(Colors.Red);
+                    return new SolidColorBrush(Color.FromArgb(255, 181, 42, 28));
                 case "ExpertPlus":
-                    return new SolidColorBrush(Colors.MediumPurple);
+                    return new SolidColorBrush(Color.FromArgb(255, 69, 64, 136));
                 default:
                     return new SolidColorBrush(Colors.White);
             }
