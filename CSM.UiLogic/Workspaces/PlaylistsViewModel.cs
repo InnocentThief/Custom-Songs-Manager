@@ -2,6 +2,7 @@
 using CSM.Framework;
 using CSM.Framework.Configuration.UserConfiguration;
 using CSM.Framework.Extensions;
+using CSM.Framework.Logging;
 using CSM.UiLogic.Workspaces.Playlists;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
@@ -149,11 +150,14 @@ namespace CSM.UiLogic.Workspaces
             Playlists.AddRange((List<BasePlaylistViewModel>)e.Result);
             IsLoading = false;
 
-            bgWorker.DoWork -= BackgroundWorker_DoWork;
-            bgWorker.ProgressChanged -= BackgroundWorker_ProgressChanged;
-            bgWorker.RunWorkerCompleted -= BackgroundWorker_RunWorkerCompleted;
-            bgWorker.Dispose();
-            bgWorker = null;
+            if (bgWorker != null)
+            {
+                bgWorker.DoWork -= BackgroundWorker_DoWork;
+                bgWorker.ProgressChanged -= BackgroundWorker_ProgressChanged;
+                bgWorker.RunWorkerCompleted -= BackgroundWorker_RunWorkerCompleted;
+                bgWorker.Dispose();
+                bgWorker = null;
+            }
         }
 
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -163,45 +167,55 @@ namespace CSM.UiLogic.Workspaces
 
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            IsLoading = true;
-
-            var i = 0;
-            var playlists = new List<BasePlaylistViewModel>();
-
-            if (!Directory.Exists(PlaylistPath)) return;
-
-            playlistCount = Directory.GetDirectories(PlaylistPath).Count();
-            playlistCount += Directory.GetFiles(PlaylistPath).Count();
-
-            IEnumerable<string> folderEntries = Directory.EnumerateDirectories(PlaylistPath);
-            foreach (string folderEntry in folderEntries)
+            try
             {
-                var directory = new DirectoryInfo(folderEntry);
-                if (directory.Name == "CoverImages") continue;
-                var playListFolder = new PlaylistFolderViewModel(folderEntry);
-                GetDirectoriesRecursive(playListFolder);
-                playlists.Add(playListFolder);
-                i++;
-                bgWorker.ReportProgress(i);
-            }
+                IsLoading = true;
 
-            IEnumerable<string> files = Directory.EnumerateFiles(PlaylistPath);
-            foreach (string file in files)
-            {
-                if (Path.GetExtension(file) == ".json" || Path.GetExtension(file) == ".bplist")
+                var i = 0;
+                var playlists = new List<BasePlaylistViewModel>();
+
+                if (!Directory.Exists(PlaylistPath)) return;
+
+                playlistCount = Directory.GetDirectories(PlaylistPath).Count();
+                playlistCount += Directory.GetFiles(PlaylistPath).Count();
+
+                IEnumerable<string> folderEntries = Directory.EnumerateDirectories(PlaylistPath);
+                foreach (string folderEntry in folderEntries)
                 {
-                    var infoContent = File.ReadAllText(file);
-                    Playlist playlist = JsonSerializer.Deserialize<Playlist>(infoContent);
-                    if (playlist != null)
+                    if (bgWorker.CancellationPending) return;
+                    var directory = new DirectoryInfo(folderEntry);
+                    if (directory.Name == "CoverImages") continue;
+                    var playListFolder = new PlaylistFolderViewModel(folderEntry);
+                    GetDirectoriesRecursive(playListFolder);
+                    playlists.Add(playListFolder);
+                    i++;
+                    bgWorker.ReportProgress(i);
+                }
+
+                IEnumerable<string> files = Directory.EnumerateFiles(PlaylistPath);
+                foreach (string file in files)
+                {
+                    if (bgWorker.CancellationPending) return;
+                    if (Path.GetExtension(file) == ".json" || Path.GetExtension(file) == ".bplist")
                     {
-                        playlists.Add(new PlaylistViewModel(playlist));
-                        i++;
-                        bgWorker.ReportProgress(i);
+                        var infoContent = File.ReadAllText(file);
+                        Playlist playlist = JsonSerializer.Deserialize<Playlist>(infoContent);
+                        if (playlist != null)
+                        {
+                            playlists.Add(new PlaylistViewModel(playlist));
+                            i++;
+                            bgWorker.ReportProgress(i);
+                        }
                     }
                 }
+
+                e.Result = playlists;
+            }
+            catch (Exception ex)
+            {
+                LoggerProvider.Logger.Error<CustomLevelsViewModel>($"Unable to load playlists: {ex.Message}");
             }
 
-            e.Result = playlists;
         }
 
         private void GetDirectoriesRecursive(PlaylistFolderViewModel folder)

@@ -2,6 +2,7 @@
 using CSM.Framework;
 using CSM.Framework.Configuration.UserConfiguration;
 using CSM.Framework.Extensions;
+using CSM.Framework.Logging;
 using CSM.Services;
 using CSM.UiLogic.Properties;
 using CSM.UiLogic.Workspaces.CustomLevels;
@@ -237,41 +238,49 @@ namespace CSM.UiLogic.Workspaces
 
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            IsLoading = true;
-
-            var i = 0;
-            var levels = new List<CustomLevel>();
-
-            if (!Directory.Exists(CustomLevelPath)) return;
-
-            IEnumerable<string> folderEntries = Directory.EnumerateDirectories(CustomLevelPath);
-            foreach (string folderEntry in folderEntries)
+            try
             {
-                var info = Path.Combine(folderEntry, "Info.dat");
-                if (File.Exists(info))
+                IsLoading = true;
+
+                var i = 0;
+                var levels = new List<CustomLevel>();
+
+                if (!Directory.Exists(CustomLevelPath)) return;
+
+                IEnumerable<string> folderEntries = Directory.EnumerateDirectories(CustomLevelPath);
+                foreach (string folderEntry in folderEntries)
                 {
-                    var infoContent = File.ReadAllText(info);
-                    CustomLevel customLevel = JsonSerializer.Deserialize<CustomLevel>(infoContent);
-                    if (customLevel != null)
+                    if (bgWorker.CancellationPending) return;
+                    var info = Path.Combine(folderEntry, "Info.dat");
+                    if (File.Exists(info))
                     {
-                        var directory = new DirectoryInfo(folderEntry);
-                        try
+                        var infoContent = File.ReadAllText(info);
+                        CustomLevel customLevel = JsonSerializer.Deserialize<CustomLevel>(infoContent);
+                        if (customLevel != null)
                         {
-                            customLevel.BsrKey = directory.Name.Substring(0, directory.Name.IndexOf(" "));
-                            customLevel.ChangeDate = File.GetLastWriteTime(info);
-                            customLevel.Path = folderEntry;
+                            var directory = new DirectoryInfo(folderEntry);
+                            try
+                            {
+                                customLevel.BsrKey = directory.Name.Substring(0, directory.Name.IndexOf(" "));
+                                customLevel.ChangeDate = File.GetLastWriteTime(info);
+                                customLevel.Path = folderEntry;
+                            }
+                            catch (Exception)
+                            {
+                                LoggerProvider.Logger.Info<CustomLevelsViewModel>($"Unable to get key for {directory.FullName}. Wrong directory name.");
+                            }
+                            levels.Add(customLevel);
                         }
-                        catch (Exception)
-                        {
-                            //MessageBox.Show($"Unable to get key for {directory.FullName}. Wrong directory name.");
-                        }
-                        levels.Add(customLevel);
                     }
+                    i++;
+                    bgWorker.ReportProgress(i);
                 }
-                i++;
-                bgWorker.ReportProgress(i);
+                e.Result = levels;
             }
-            e.Result = levels;
+            catch (Exception ex)
+            {
+                LoggerProvider.Logger.Error<CustomLevelsViewModel>($"Unable to load custom levels: {ex.Message}");
+            }
         }
 
         private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -284,11 +293,14 @@ namespace CSM.UiLogic.Workspaces
             IsLoading = false;
             OnPropertyChanged(nameof(CustomLevelCount));
 
-            bgWorker.DoWork -= BackgroundWorker_DoWork;
-            bgWorker.ProgressChanged -= BackgroundWorker_ProgressChanged;
-            bgWorker.RunWorkerCompleted -= BackgroundWorker_RunWorkerCompleted;
-            bgWorker.Dispose();
-            bgWorker = null;
+            if (bgWorker != null)
+            {
+                bgWorker.DoWork -= BackgroundWorker_DoWork;
+                bgWorker.ProgressChanged -= BackgroundWorker_ProgressChanged;
+                bgWorker.RunWorkerCompleted -= BackgroundWorker_RunWorkerCompleted;
+                bgWorker.Dispose();
+                bgWorker = null;
+            }
         }
 
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)

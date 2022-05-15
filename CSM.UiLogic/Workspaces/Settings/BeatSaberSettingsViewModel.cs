@@ -1,4 +1,5 @@
 ﻿using CSM.Framework.Configuration.UserConfiguration;
+using CSM.Framework.Logging;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
@@ -133,7 +134,7 @@ namespace CSM.UiLogic.Workspaces.Settings
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString(), "Unable to open file dialog");
-                throw;
+                LoggerProvider.Logger.Error<BeatSaberSettingsViewModel>($"Unable to open file dialog: {ex.Message}");
             }
         }
 

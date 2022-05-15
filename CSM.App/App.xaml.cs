@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSM.Framework.Logging;
+using System;
 using System.Windows;
 using System.Windows.Media;
 using Telerik.Windows.Controls;
@@ -21,21 +22,18 @@ namespace CSM.App
         public App()
         {
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-
-            
-
+            Logger.Create();
         }
 
         protected sealed override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
             SetStyle();
-
         }
 
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            //log?.Fatal<App>($"Exception was unhandled in current app domain: {e.ExceptionObject}");
+            LoggerProvider.Logger.Fatal<App>($"Exception was unhandled in current app domain: {e.ExceptionObject}");
         }
 
         private void SetStyle()
