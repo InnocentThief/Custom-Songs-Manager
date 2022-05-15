@@ -2,6 +2,9 @@
 
 namespace CSM.DataAccess.Entities.Online
 {
+    /// <summary>
+    /// Represents the BeatMap metadata (as used in BeatSaver).
+    /// </summary>
     public class Metadata
     {
         [JsonPropertyName("bpm")]

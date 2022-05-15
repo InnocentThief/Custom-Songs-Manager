@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace CSM.UiLogic.Workspaces.CustomLevels
 {
+    /// <summary>
+    /// Represents one custom level.
+    /// </summary>
     public class CustomLevelViewModel
     {
         private readonly CustomLevel customLevel;
@@ -36,6 +39,10 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
 
         #endregion
 
+        /// <summary>
+        /// Initializes a new <see cref="CustomLevelViewModel"/>.
+        /// </summary>
+        /// <param name="customLevel">The <see cref="CustomLevel"/>.</param>
         public CustomLevelViewModel(CustomLevel customLevel)
         {
             this.customLevel = customLevel;

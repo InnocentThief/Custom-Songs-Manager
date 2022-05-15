@@ -174,6 +174,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="..\VersionInfo.cs">
+      <Link>VersionInfo.cs</Link>
+    </Compile>
     <Compile Include="Converter\DifficultyToColorConverter.cs" />
     <Compile Include="Workspaces\CustomLevels\CustomLevelDetail.xaml.cs">
       <DependentUpon>CustomLevelDetail.xaml</DependentUpon>

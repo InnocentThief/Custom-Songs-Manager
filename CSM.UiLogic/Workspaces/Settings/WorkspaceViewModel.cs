@@ -2,6 +2,9 @@
 
 namespace CSM.UiLogic.Workspaces.Settings
 {
+    /// <summary>
+    /// Represents one workspace (used to select the default workspace).
+    /// </summary>
     public class WorkspaceViewModel
     {
         public string Name { get; }

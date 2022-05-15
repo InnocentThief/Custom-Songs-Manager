@@ -15,6 +15,9 @@ using System.Text.Json;
 
 namespace CSM.UiLogic.Workspaces
 {
+    /// <summary>
+    /// ViewModel for the Playlists workspace.
+    /// </summary>
     internal class PlaylistsViewModel : BaseWorkspaceViewModel
     {
         #region Private fields

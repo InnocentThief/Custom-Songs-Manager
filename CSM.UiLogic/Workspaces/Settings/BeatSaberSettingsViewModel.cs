@@ -9,6 +9,9 @@ using System.Windows;
 
 namespace CSM.UiLogic.Workspaces.Settings
 {
+    /// <summary>
+    /// Contains the settings related to Beat Saber.
+    /// </summary>
     public class BeatSaberSettingsViewModel : ObservableObject
     {
         #region Private fields
@@ -74,6 +77,9 @@ namespace CSM.UiLogic.Workspaces.Settings
 
         #endregion
 
+        /// <summary>
+        /// Initializes a new <see cref="BeatSaberSettingsViewModel"/>.
+        /// </summary>
         public BeatSaberSettingsViewModel()
         {
             beatSaberInstallPath = UserConfigManager.Instance.Config.BeatSaberInstallPath;
@@ -138,8 +144,6 @@ namespace CSM.UiLogic.Workspaces.Settings
             }
         }
 
-        #endregion
-
         private bool ValidatePath(string path)
         {
             var ret = Directory.Exists(path);
@@ -149,5 +153,7 @@ namespace CSM.UiLogic.Workspaces.Settings
             }
             return ret;
         }
+
+        #endregion
     }
 }

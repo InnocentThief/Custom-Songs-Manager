@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace CSM.DataAccess.Entities.Offline
 {
+    /// <summary>
+    /// Represents a custom level. The one on the disc in the Custom Level directory.
+    /// </summary>
     public class CustomLevel
     {
         [JsonIgnore]

@@ -4,6 +4,9 @@ using System.Text.Json.Serialization;
 
 namespace CSM.DataAccess.Entities.Online
 {
+    /// <summary>
+    /// Represents a BeatMap (as used in BeatSaver).
+    /// </summary>
     public class BeatMap
     {
         [JsonPropertyName("id")]

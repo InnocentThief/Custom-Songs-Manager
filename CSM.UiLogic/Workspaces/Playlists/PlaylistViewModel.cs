@@ -1,16 +1,22 @@
 ﻿using CSM.DataAccess.Entities.Offline;
+using CSM.Framework.Converter;
 using CSM.Framework.Extensions;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Media;
-using CSM.Framework.Converter;
 
 namespace CSM.UiLogic.Workspaces.Playlists
 {
+    /// <summary>
+    /// Represents one playlist.
+    /// </summary>
     public class PlaylistViewModel : BasePlaylistViewModel
     {
         private Playlist playlist;
 
+        /// <summary>
+        /// Contains all songs of a playlist.
+        /// </summary>
         public ObservableCollection<PlaylistSongViewModel> Songs { get; }
 
         public string PlaylistTitle
@@ -55,6 +61,10 @@ namespace CSM.UiLogic.Workspaces.Playlists
             }
         }
 
+        /// <summary>
+        /// Initializes a new <see cref="PlaylistViewModel"/>.
+        /// </summary>
+        /// <param name="playlist">The <see cref="Playlist"/>.</param>
         public PlaylistViewModel(Playlist playlist) : base(playlist.PlaylistTitle)
         {
             this.playlist = playlist;

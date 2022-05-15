@@ -79,6 +79,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\VersionInfo.cs">
+      <Link>VersionInfo.cs</Link>
+    </Compile>
     <Compile Include="Configuration\UserConfiguration\CustomLevelPath.cs" />
     <Compile Include="Configuration\UserConfiguration\IUserConfigManager.cs" />
     <Compile Include="Configuration\UserConfiguration\PlaylistPath.cs" />

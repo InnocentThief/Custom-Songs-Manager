@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace CSM.DataAccess.Entities.Offline
 {
+    /// <summary>
+    /// Represents a Playlist. The one on the disc in the playlist directory.
+    /// </summary>
     public class Playlist
     {
         [JsonPropertyName("playlistTitle")]

@@ -2,6 +2,9 @@
 
 namespace CSM.DataAccess.Entities.Online
 {
+    /// <summary>
+    /// Represents a BeatMap difficulty (as used in BeatSaver).
+    /// </summary>
     public class Difficulty
     {
         [JsonPropertyName("njs")]

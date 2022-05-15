@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CSM.DataAccess.Entities.Online.BeatMap">
+    <Position X="1.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AFACAAAAQKAgCAAACCAAAAQAAAAAAEEAAAAAAQAEAAA=</HashCode>
+      <FileName>Entities\Online\BeatMap.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Stats" />
+      <Property Name="Metadata" />
+      <Property Name="Uploader" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Versions" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CSM.DataAccess.Entities.Online.Stats">
+    <Position X="4.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAACAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Online\Stats.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSM.DataAccess.Entities.Online.Metadata">
+    <Position X="4.75" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAABAEAAAAAAAAAAAAEAAAAgAAAAQA=</HashCode>
+      <FileName>Entities\Online\Metadata.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSM.DataAccess.Entities.Online.Uploader">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Online\Uploader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSM.DataAccess.Entities.Online.Version">
+    <Position X="4.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Entities\Online\Version.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Difficulties" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CSM.DataAccess.Entities.Online.Difficulty">
+    <Position X="7.25" Y="5.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AEQAAAAEgAAAAAAACCAAAAAAAAIAAAAAAAAAAAgAEAA=</HashCode>
+      <FileName>Entities\Online\Difficulty.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace CSM.UiLogic.Workspaces.CustomLevels
 {
+    /// <summary>
+    /// Represents one difficulty.
+    /// </summary>
     public class CustomLevelDifficultyViewModel
     {
         private Difficulty difficulty;
@@ -25,6 +28,10 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
 
         public bool MappingExtension => difficulty.MappingExtension;
 
+        /// <summary>
+        /// Gets the start rating of a difficulty.
+        /// </summary>
+        /// <remarks>The difficulty string if not ranked; otherwise the ranking.</remarks>
         public string Stars
         {
             get
@@ -33,10 +40,19 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
             }
         }
 
+        /// <summary>
+        /// Gets a string that contains the characteristc combined with the difficulty.
+        /// </summary>
         public string CharacteristicDifficultyCombination => $"{Characteristic} / {Difficulty}";
 
+        /// <summary>
+        /// Gets a string that contains the song speed information (NPS, NJS, NJO).
+        /// </summary>
         public string NoteInformation => $"NPS: {NotesPerSecond} / NJS: {NoteJumpMovementSpeed} / NJO: {NoteJumpStartBeatOffset}";
 
+        /// <summary>
+        /// Gets a string that contains the extension information (Chroma/Noodle/Mapping Extension).
+        /// </summary>
         public string ExtensionInformation
         {
             get
@@ -53,6 +69,10 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
 
         #endregion
 
+        /// <summary>
+        /// Initializes a new <see cref="CustomLevelDifficultyViewModel"/>.
+        /// </summary>
+        /// <param name="difficulty">The <see cref="Difficulty"/>.</param>
         public CustomLevelDifficultyViewModel(Difficulty difficulty)
         {
             this.difficulty = difficulty;

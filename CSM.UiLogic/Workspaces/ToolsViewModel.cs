@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace CSM.UiLogic.Workspaces
 {
+    /// <summary>
+    /// ViewModel for the Tools workspace.
+    /// </summary>
     internal class ToolsViewModel : BaseWorkspaceViewModel
     {
         public override WorkspaceType WorkspaceType => WorkspaceType.Tools;

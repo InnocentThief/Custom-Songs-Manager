@@ -8,11 +8,20 @@ using System.Linq;
 
 namespace CSM.UiLogic.Workspaces.Settings
 {
+    /// <summary>
+    /// Contains the settings related to workspaces.
+    /// </summary>
     public class WorkspaceSettingsViewModel : ObservableObject
     {
+        #region Private fields
+
         private WorkspaceViewModel workspaceViewModel;
         private bool songDetailPositionRight;
         private bool songDetailPositionBottom;
+
+        #endregion
+
+        #region Public Properties
 
         public List<WorkspaceViewModel> Workspaces { get; }
 
@@ -65,6 +74,11 @@ namespace CSM.UiLogic.Workspaces.Settings
             }
         }
 
+        #endregion
+
+        /// <summary>
+        /// Initializes a new <see cref="WorkspaceSettingsViewModel"/>.
+        /// </summary>
         public WorkspaceSettingsViewModel()
         {
             Workspaces = new List<WorkspaceViewModel>();

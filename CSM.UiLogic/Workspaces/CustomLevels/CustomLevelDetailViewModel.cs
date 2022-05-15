@@ -8,6 +8,9 @@ using System.Windows;
 
 namespace CSM.UiLogic.Workspaces.CustomLevels
 {
+    /// <summary>
+    /// Represents the custom level detail.
+    /// </summary>
     public class CustomLevelDetailViewModel
     {
         private BeatMap beatMap;
@@ -54,12 +57,22 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
 
         public string Description => beatMap.Description;
 
+        /// <summary>
+        /// Contains the <see cref="CustomLevelDifficultyViewModel"/> grouped by characteristc.
+        /// </summary>
         public List<CustomLevelCharactersisticViewModel> Characteristics { get; }
 
+        /// <summary>
+        /// Gets the command used to copy the bsr key.
+        /// </summary>
         public RelayCommand CopyBsrKeyCommand { get; }
 
         #endregion
 
+        /// <summary>
+        /// Initializes a new <see cref="CustomLevelDetailViewModel"/>
+        /// </summary>
+        /// <param name="beatMap">The <see cref="BeatMap"/>.</param>
         public CustomLevelDetailViewModel(BeatMap beatMap)
         {
             this.beatMap = beatMap;

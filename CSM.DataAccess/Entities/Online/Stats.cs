@@ -2,6 +2,9 @@
 
 namespace CSM.DataAccess.Entities.Online
 {
+    /// <summary>
+    /// Represents the BeatMap stats (as used in BeatSaver).
+    /// </summary>
     public class Stats
     {
         [JsonPropertyName("upvotes")]

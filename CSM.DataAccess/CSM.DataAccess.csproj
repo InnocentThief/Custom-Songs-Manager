@@ -71,6 +71,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\VersionInfo.cs">
+      <Link>VersionInfo.cs</Link>
+    </Compile>
     <Compile Include="Entities\Offline\BeatMapDifficulty.cs" />
     <Compile Include="Entities\Offline\BeatMapDifficultySet.cs" />
     <Compile Include="Entities\Offline\CustomLevel.cs" />
@@ -85,12 +88,11 @@
     <Compile Include="Entities\Online\Version.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Contexts\" />
-    <Folder Include="Repositories\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Entities\Offline\Offline.cd" />
+    <None Include="Entities\Online\Online.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

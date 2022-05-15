@@ -2,6 +2,9 @@
 
 namespace CSM.DataAccess.Entities.Offline
 {
+    /// <summary>
+    /// Represents a beat map difficulty.
+    /// </summary>
     public class BeatMapDifficulty
     {
         [JsonPropertyName("_difficulty")]

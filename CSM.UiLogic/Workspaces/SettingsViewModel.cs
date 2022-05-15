@@ -4,12 +4,23 @@ using Microsoft.Toolkit.Mvvm.Input;
 
 namespace CSM.UiLogic.Workspaces
 {
+    /// <summary>
+    /// ViewModel for the settings workspace.
+    /// </summary>
     public class SettingsViewModel : ObservableObject
     {
         private bool visible;
 
+        #region Public Properties
+
+        /// <summary>
+        /// Gets the Beat Saber settings.
+        /// </summary>
         public BeatSaberSettingsViewModel BeatSaberSettings { get; }
 
+        /// <summary>
+        /// Gets the workspace settings.
+        /// </summary>
         public WorkspaceSettingsViewModel WorkspaceSettings { get; }
 
         public bool Visible
@@ -23,8 +34,16 @@ namespace CSM.UiLogic.Workspaces
             }
         }
 
+        /// <summary>
+        /// Command used to close the settings workspace.
+        /// </summary>
         public RelayCommand CloseCommand { get; }
 
+        #endregion
+
+        /// <summary>
+        /// Initializes a new <see cref="SettingsViewModel"/>.
+        /// </summary>
         public SettingsViewModel()
         {
             CloseCommand = new RelayCommand(Close);

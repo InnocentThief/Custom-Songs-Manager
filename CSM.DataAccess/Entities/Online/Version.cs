@@ -3,6 +3,9 @@ using System.Text.Json.Serialization;
 
 namespace CSM.DataAccess.Entities.Online
 {
+    /// <summary>
+    /// Represents a BeatMap characteristic (as used in BeatSaver).
+    /// </summary>
     public class Version
     {
         [JsonPropertyName("hash")]
