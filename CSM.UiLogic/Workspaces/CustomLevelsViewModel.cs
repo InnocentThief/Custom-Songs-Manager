@@ -273,7 +273,7 @@ namespace CSM.UiLogic.Workspaces
                             }
                             catch (Exception)
                             {
-                                LoggerProvider.Logger.Info<CustomLevelsViewModel>($"Unable to get key for {directory.FullName}. Wrong directory name.");
+                                LoggerProvider.Logger.Info<CustomLevelsViewModel>($"Unable to get key for {directory.FullName}. Wrong directory name?");
                             }
                             levels.Add(customLevel);
                         }
@@ -285,7 +285,7 @@ namespace CSM.UiLogic.Workspaces
             }
             catch (Exception ex)
             {
-                LoggerProvider.Logger.Error<CustomLevelsViewModel>($"Unable to load custom levels: {ex.Message}");
+                LoggerProvider.Logger.Error<CustomLevelsViewModel>($"Unable to load custom levels: {ex}");
             }
         }
 
