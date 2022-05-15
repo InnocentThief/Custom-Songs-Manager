@@ -1,5 +1,5 @@
 ﻿using CSM.Framework;
-using CSM.Framework.Configuration;
+using CSM.Framework.Configuration.UserConfiguration;
 using CSM.Framework.Extensions;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;

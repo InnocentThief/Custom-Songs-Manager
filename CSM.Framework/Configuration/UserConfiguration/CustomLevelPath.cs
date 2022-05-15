@@ -1,6 +1,6 @@
-﻿namespace CSM.Framework.Configuration
+﻿namespace CSM.Framework.Configuration.UserConfiguration
 {
-    public class PlaylistPath
+    public class CustomLevelPath
     {
         public string Name { get; set; }
 

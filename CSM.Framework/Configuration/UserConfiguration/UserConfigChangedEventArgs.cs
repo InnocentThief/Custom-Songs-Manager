@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CSM.Framework.Configuration
+namespace CSM.Framework.Configuration.UserConfiguration
 {
     public class UserConfigChangedEventArgs
     {

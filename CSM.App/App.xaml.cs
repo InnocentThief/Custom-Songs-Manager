@@ -1,5 +1,4 @@
-﻿using CSM.Framework.Logging;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Media;
 using Telerik.Windows.Controls;
@@ -13,8 +12,6 @@ namespace CSM.App
     {
         #region Private fields
 
-        private ILogger log;
-        //private UnityContainer container;
 
         #endregion
 
@@ -38,7 +35,7 @@ namespace CSM.App
 
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            log?.Fatal<App>($"Exception was unhandled in current app domain: {e.ExceptionObject}");
+            //log?.Fatal<App>($"Exception was unhandled in current app domain: {e.ExceptionObject}");
         }
 
         private void SetStyle()

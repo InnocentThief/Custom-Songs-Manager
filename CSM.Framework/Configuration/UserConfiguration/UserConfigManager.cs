@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
-namespace CSM.Framework.Configuration
+namespace CSM.Framework.Configuration.UserConfiguration
 {
     public class UserConfigManager : IUserConfigManager
     {

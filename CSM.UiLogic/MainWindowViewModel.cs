@@ -1,4 +1,4 @@
-﻿using CSM.Framework.Configuration;
+﻿using CSM.Framework.Configuration.UserConfiguration;
 using CSM.UiLogic.Workspaces;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;

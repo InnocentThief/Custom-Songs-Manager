@@ -1,4 +1,4 @@
-﻿namespace CSM.Framework.Configuration
+﻿namespace CSM.Framework.Configuration.UserConfiguration
 {
     public interface IUserConfigManager
     {
