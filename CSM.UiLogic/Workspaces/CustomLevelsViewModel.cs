@@ -85,7 +85,13 @@ namespace CSM.UiLogic.Workspaces
                 if (value == customLevelDetail) return;
                 customLevelDetail = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(HasCustomLevelDetail));
             }
+        }
+
+        public bool HasCustomLevelDetail
+        {
+            get => customLevelDetail != null;
         }
 
         /// <summary>
