@@ -13,6 +13,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="150" />
         </Grid.RowDefinitions>
         <!-- Header -->
         <Grid Background="#FF018574">
@@ -85,5 +86,7 @@
                 </telerik:RadGridView>
             </Grid>
         </Border>
+        <!-- Song detail -->
+        <local:CustomLevelDetail Grid.Row="2" Margin="0,6,0,0" />
     </Grid>
 </UserControl>

@@ -10,6 +10,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="150" />
         </Grid.RowDefinitions>
         <!-- Header -->
         <Grid Background="#FF018574">
@@ -24,5 +25,6 @@
         <Border Grid.Row="1" BorderBrush="DimGray" BorderThickness="1,0,1,1">
             
         </Border>
+        <local:CustomLevelDetail Grid.Row="2" Margin="0,6,0,0" />
     </Grid>
 </UserControl>

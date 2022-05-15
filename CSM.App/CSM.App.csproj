@@ -199,6 +199,9 @@
     <Compile Include="Workspaces\Playlists\AvailableCustomLevelsView.xaml.cs">
       <DependentUpon>AvailableCustomLevelsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Workspaces\Playlists\CustomLevelDetail.xaml.cs">
+      <DependentUpon>CustomLevelDetail.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Workspaces\Playlists\PlaylistDataTemplateSelector.cs" />
     <Compile Include="Workspaces\Playlists\PlaylistsView.xaml.cs">
       <DependentUpon>PlaylistsView.xaml</DependentUpon>
@@ -262,6 +265,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Workspaces\Playlists\AvailableCustomLevelsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Workspaces\Playlists\CustomLevelDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
