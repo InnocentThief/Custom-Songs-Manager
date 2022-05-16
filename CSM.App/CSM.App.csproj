@@ -178,6 +178,7 @@
       <Link>VersionInfo.cs</Link>
     </Compile>
     <Compile Include="Converter\DifficultyToColorConverter.cs" />
+    <Compile Include="Workspaces\Common\CharacteristicDataTemplateSelector.cs" />
     <Compile Include="Workspaces\CustomLevels\CustomLevelDetailView.xaml.cs">
       <DependentUpon>CustomLevelDetailView.xaml</DependentUpon>
     </Compile>
@@ -240,6 +241,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Workspaces\Common\Characteristics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Workspaces\CustomLevels\CustomLevelDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -350,9 +355,7 @@
       <Name>CSM.UiLogic</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Workspaces\Common\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Update="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

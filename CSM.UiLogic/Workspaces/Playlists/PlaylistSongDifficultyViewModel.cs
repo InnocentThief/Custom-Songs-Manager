@@ -23,6 +23,8 @@ namespace CSM.UiLogic.Workspaces.Playlists
         /// </summary>
         public string Name => playlistSongDifficulty.Name;
 
+        public string Difficulty => $"{Characteristic} {Name}";
+
         /// <summary>
         /// Initializes a new <see cref="PlaylistSongDifficultyViewModel"/>.
         /// </summary>
