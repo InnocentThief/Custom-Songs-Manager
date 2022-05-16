@@ -65,11 +65,18 @@
                 <telerik:RadGridView Grid.Row="1" ItemsSource="{Binding Songs}" AutoGenerateColumns="False" IsFilteringAllowed="True" RowIndicatorVisibility="Collapsed" FrozenColumnsSplitterVisibility="Collapsed" BorderThickness="0" AlternationCount="2" ShowGroupPanel="False" >
                     <telerik:RadGridView.Columns>
                         <telerik:GridViewDataColumn Header="Title" DataMemberBinding="{Binding SongName}" Width="*" />
-                        <!--<telerik:GridViewDataColumn Header="Difficulty" DataMemberBinding="{Binding Difficulty}" />-->
+                        <telerik:GridViewDataColumn Header="Mapper" DataMemberBinding="{Binding LevelAuthorName}" Width="*" />
                         <telerik:GridViewDataColumn Header="Difficulty" DataMemberBinding="{Binding Difficulties}">
                             <telerik:GridViewDataColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
+                                        <!--<Popup IsOpen="{Binding ElementName=radToggle, Path=IsChecked}" Height="150" Placement="Right" PlacementTarget="{Binding ElementName=radToggle}">
+                                            <Border BorderBrush="DarkRed" BorderThickness="3" Height="150">
+                                                <TextBlock Text="Hallo ich bin das Popup" Margin="8" />
+                                            </Border>
+
+
+                                        </Popup>-->
                                         <telerik:RadButton Margin="0,0,6,0" Background="Transparent" BorderThickness="0">
                                             <telerik:RadGlyph Glyph="&#xe10b;" />
                                         </telerik:RadButton>

@@ -27,6 +27,14 @@ namespace CSM.UiLogic.Workspaces.Playlists
             }
         }
 
+        public string LevelAuthorName
+        {
+            get
+            {
+                return playlistSong.LevelAuthorName;
+            }
+        }
+
         /// <summary>
         /// Gets a list of difficulties this playlist song contains.
         /// </summary>
