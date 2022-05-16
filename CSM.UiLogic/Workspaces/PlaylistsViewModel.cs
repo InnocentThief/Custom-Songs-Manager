@@ -222,7 +222,7 @@ namespace CSM.UiLogic.Workspaces
             }
             catch (Exception ex)
             {
-                LoggerProvider.Logger.Error<CustomLevelsViewModel>($"Unable to load playlists: {ex}");
+                LoggerProvider.Logger.Error<CustomLevelsViewModel>( $"Unable to load playlists: {ex}");
             }
 
         }

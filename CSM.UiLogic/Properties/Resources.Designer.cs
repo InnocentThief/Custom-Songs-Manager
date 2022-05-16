@@ -61,6 +61,24 @@ namespace CSM.UiLogic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete custom level.
+        /// </summary>
+        public static string CustomLevels_Delete_Caption {
+            get {
+                return ResourceManager.GetString("CustomLevels_Delete_Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to delete the selected custom level?.
+        /// </summary>
+        public static string CustomLevels_Delete_Content {
+            get {
+                return ResourceManager.GetString("CustomLevels_Delete_Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} custom levels loaded.
         /// </summary>
         public static string CustomLevels_MultipleCustomLevelsLoaded {
@@ -93,6 +111,78 @@ namespace CSM.UiLogic.Properties {
         public static string No {
             get {
                 return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NA (Try to use Tools to fix this issue).
+        /// </summary>
+        public static string Playlists_SongName_NA {
+            get {
+                return ResourceManager.GetString("Playlists_SongName_NA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to open file dialog.
+        /// </summary>
+        public static string Settings_BeatSaber_FileDialog {
+            get {
+                return ResourceManager.GetString("Settings_BeatSaber_FileDialog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wrong path.
+        /// </summary>
+        public static string Settings_BeatSaber_ValidatePath_Caption {
+            get {
+                return ResourceManager.GetString("Settings_BeatSaber_ValidatePath_Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Path does not exist. Please enter a new path.
+        /// </summary>
+        public static string Settings_BeatSaber_ValidatePath_Content {
+            get {
+                return ResourceManager.GetString("Settings_BeatSaber_ValidatePath_Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom Levels.
+        /// </summary>
+        public static string Workspace_CustomLevels {
+            get {
+                return ResourceManager.GetString("Workspace_CustomLevels", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Playlists.
+        /// </summary>
+        public static string Workspace_Playlists {
+            get {
+                return ResourceManager.GetString("Workspace_Playlists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tools.
+        /// </summary>
+        public static string Workspace_Tools {
+            get {
+                return ResourceManager.GetString("Workspace_Tools", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Twitch.
+        /// </summary>
+        public static string Workspace_Twitch {
+            get {
+                return ResourceManager.GetString("Workspace_Twitch", resourceCulture);
             }
         }
         

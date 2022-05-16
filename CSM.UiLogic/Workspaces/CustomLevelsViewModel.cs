@@ -280,7 +280,7 @@ namespace CSM.UiLogic.Workspaces
                             }
                             catch (Exception)
                             {
-                                LoggerProvider.Logger.Info<CustomLevelsViewModel>($"Unable to get key for {directory.FullName}. Wrong directory name?");
+                                LoggerProvider.Logger.Info<CustomLevelsViewModel>($"Unable to get key for {directory.FullName}. Wrong directory name");
                             }
                             levels.Add(customLevel);
                         }
@@ -325,7 +325,7 @@ namespace CSM.UiLogic.Workspaces
         {
             if (Directory.Exists(SelectedCustomLevel.Path))
             {
-                if (MessageBox.Show("Do you want to delete the selected custom level?", "Delete custom level", MessageBoxButton.YesNo) == MessageBoxResult.OK)
+                if (MessageBox.Show(Resources.CustomLevels_Delete_Content, Resources.CustomLevels_Delete_Caption, MessageBoxButton.YesNo) == MessageBoxResult.OK)
                 {
                     Directory.Delete(SelectedCustomLevel.Path, true);
                     CustomLevels.Remove(SelectedCustomLevel);

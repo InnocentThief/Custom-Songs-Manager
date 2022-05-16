@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CSM.Framework.Configuration.UserConfiguration.UserConfigManager">
+    <Position X="0.75" Y="2.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAgAQAAAAFIQAAAAEAABAAAAAQAAAAEAEAAA=</HashCode>
+      <FileName>Configuration\UserConfiguration\UserConfigManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Config" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CSM.Framework.Configuration.UserConfiguration.UserConfig">
+    <Position X="4" Y="2.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEIAAAAgAAAAAAAAAAAAAAAAAAAAgCAAAAAAAAA=</HashCode>
+      <FileName>Configuration\UserConfiguration\UserConfig.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="PlaylistPaths" />
+      <Property Name="CustomLevelPaths" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CSM.Framework.Configuration.UserConfiguration.PlaylistPath">
+    <Position X="8.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAIAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Configuration\UserConfiguration\PlaylistPath.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSM.Framework.Configuration.UserConfiguration.CustomLevelPath">
+    <Position X="8.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAIAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Configuration\UserConfiguration\CustomLevelPath.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -77,5 +77,41 @@ namespace CSM.Framework.Properties {
                 return ResourceManager.GetString("DefaultPlaylistsPath", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom Levels.
+        /// </summary>
+        public static string Extension_CustomLevels {
+            get {
+                return ResourceManager.GetString("Extension_CustomLevels", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Playlists.
+        /// </summary>
+        public static string Extension_Playlists {
+            get {
+                return ResourceManager.GetString("Extension_Playlists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tools.
+        /// </summary>
+        public static string Extension_Tools {
+            get {
+                return ResourceManager.GetString("Extension_Tools", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Twitch.
+        /// </summary>
+        public static string Extension_Twitch {
+            get {
+                return ResourceManager.GetString("Extension_Twitch", resourceCulture);
+            }
+        }
     }
 }

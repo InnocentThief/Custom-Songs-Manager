@@ -4,6 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        xmlns:p="clr-namespace:CSM.App.Properties"
         xmlns:workspaces="clr-namespace:CSM.App.Workspaces"
         xmlns:customlevels="clr-namespace:CSM.App.Workspaces.CustomLevels"
         xmlns:playlists="clr-namespace:CSM.App.Workspaces.Playlists"
@@ -81,7 +82,7 @@
 
         <!-- Footer -->
         <telerik:RadNavigationView.PaneFooter>
-            <telerik:RadNavigationViewItem Content="Settings" 
+            <telerik:RadNavigationViewItem Content="{x:Static p:Resources.MainWindow_Settings}" 
                                                Command="{Binding SettingsCommand}"
                                                IconTemplate="{x:Null}">
                 <telerik:RadNavigationViewItem.Icon>

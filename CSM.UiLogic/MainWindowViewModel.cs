@@ -1,13 +1,10 @@
 ﻿using CSM.Framework.Configuration.UserConfiguration;
+using CSM.UiLogic.Properties;
 using CSM.UiLogic.Workspaces;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CSM.UiLogic
 {
@@ -23,6 +20,9 @@ namespace CSM.UiLogic
 
         #region Public Properties
 
+        /// <summary>
+        /// Gets a list of available workspaces.
+        /// </summary>
         public ObservableCollection<BaseWorkspaceViewModel> Workspaces
         {
             get
@@ -31,17 +31,20 @@ namespace CSM.UiLogic
                 {
                     workspaces = new ObservableCollection<BaseWorkspaceViewModel>()
                     {
-                        new CustomLevelsViewModel() { Title = "Custom Levels", IconGlyph = "&#xe023;" },
-                        new PlaylistsViewModel() { Title = "Playlists", IconGlyph = "&#xe029;" },
-                        new TwitchIntegrationViewModel() { Title = "Twitch", IconGlyph = "&#xe800;" },
-                        new ToolsViewModel() { Title = "Tools", IconGlyph = "&#xe13c;" }
+                        new CustomLevelsViewModel() { Title = Resources.Workspace_CustomLevels, IconGlyph = "&#xe023;" },
+                        new PlaylistsViewModel() { Title = Resources.Workspace_Playlists, IconGlyph = "&#xe029;" },
+                        new TwitchIntegrationViewModel() { Title = Resources.Workspace_Twitch, IconGlyph = "&#xe800;" },
+                        new ToolsViewModel() { Title = Resources.Workspace_Tools, IconGlyph = "&#xe13c;" }
                     };
-                    SelectedWorkspace = workspaces.Single(w=>w.WorkspaceType == UserConfigManager.Instance.Config.DefaultWorkspace);
+                    SelectedWorkspace = workspaces.Single(w => w.WorkspaceType == UserConfigManager.Instance.Config.DefaultWorkspace);
                 }
                 return workspaces;
             }
         }
 
+        /// <summary>
+        /// Gets or sets the selected workspace.
+        /// </summary>
         public BaseWorkspaceViewModel SelectedWorkspace
         {
             get
@@ -60,18 +63,30 @@ namespace CSM.UiLogic
             }
         }
 
+        /// <summary>
+        /// Command used to show the settings panel.
+        /// </summary>
         public RelayCommand SettingsCommand { get; }
 
+        /// <summary>
+        /// Gets the viewmodel for the settings panel.
+        /// </summary>
         public SettingsViewModel Settings { get; }
 
         #endregion
 
+        /// <summary>
+        /// Initializes a new <see cref="MainWindowViewModel"/>.
+        /// </summary>
         public MainWindowViewModel()
         {
             Settings = new SettingsViewModel();
             SettingsCommand = new RelayCommand(ShowSettings);
         }
 
+        /// <summary>
+        /// Loads the data of the selected workspace.
+        /// </summary>
         public void LoadWorkspace()
         {
             if (selectedWorkspace != null)
@@ -80,6 +95,9 @@ namespace CSM.UiLogic
             }
         }
 
+        /// <summary>
+        /// Shows the settings panel.
+        /// </summary>
         public void ShowSettings()
         {
             Settings.Visible = true;

@@ -61,6 +61,177 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No custom level selected.
+        /// </summary>
+        public static string CustomLevels_Detail_NoData {
+            get {
+                return ResourceManager.GetString("CustomLevels_Detail_NoData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string MainWindow_Settings {
+            get {
+                return ResourceManager.GetString("MainWindow_Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Playlist.
+        /// </summary>
+        public static string Playlist_Title {
+            get {
+                return ResourceManager.GetString("Playlist_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Author.
+        /// </summary>
+        public static string Playlists_Author {
+            get {
+                return ResourceManager.GetString("Playlists_Author", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Available Custom Levels.
+        /// </summary>
+        public static string Playlists_AvailableCustomLevels_Title {
+            get {
+                return ResourceManager.GetString("Playlists_AvailableCustomLevels_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deletes the selected playlist / folder.
+        /// </summary>
+        public static string Playlists_Delete {
+            get {
+                return ResourceManager.GetString("Playlists_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string Playlists_Description {
+            get {
+                return ResourceManager.GetString("Playlists_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string Playlists_Name {
+            get {
+                return ResourceManager.GetString("Playlists_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh the playlists.
+        /// </summary>
+        public static string Playlists_Refresh {
+            get {
+                return ResourceManager.GetString("Playlists_Refresh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom Levels Path.
+        /// </summary>
+        public static string Settings_BeatSaber_CustomLevelsPath {
+            get {
+                return ResourceManager.GetString("Settings_BeatSaber_CustomLevelsPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Beat Saber Install Path.
+        /// </summary>
+        public static string Settings_BeatSaber_InstallPath {
+            get {
+                return ResourceManager.GetString("Settings_BeatSaber_InstallPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Playlists Path.
+        /// </summary>
+        public static string Settings_BeatSaber_PlaylistsPath {
+            get {
+                return ResourceManager.GetString("Settings_BeatSaber_PlaylistsPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Beat Saber.
+        /// </summary>
+        public static string Settings_BeatSaber_Title {
+            get {
+                return ResourceManager.GetString("Settings_BeatSaber_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Closes Settings.
+        /// </summary>
+        public static string Settings_Close {
+            get {
+                return ResourceManager.GetString("Settings_Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string Settings_Title {
+            get {
+                return ResourceManager.GetString("Settings_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom Levels.
+        /// </summary>
+        public static string Settings_Workspace_CustomLevels {
+            get {
+                return ResourceManager.GetString("Settings_Workspace_CustomLevels", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Song Detail Position.
+        /// </summary>
+        public static string Settings_Workspace_SongDetailPosition {
+            get {
+                return ResourceManager.GetString("Settings_Workspace_SongDetailPosition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default Workspace.
+        /// </summary>
+        public static string Settings_Workspaces_Default {
+            get {
+                return ResourceManager.GetString("Settings_Workspaces_Default", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Workspaces.
+        /// </summary>
+        public static string Settings_Workspaces_Title {
+            get {
+                return ResourceManager.GetString("Settings_Workspaces_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Artist.
         /// </summary>
         public static string Workspace_CustomLevels_ColumnHeader_Artist {

@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CustomLevels_Delete_Caption" xml:space="preserve">
+    <value>Delete custom level</value>
+  </data>
+  <data name="CustomLevels_Delete_Content" xml:space="preserve">
+    <value>Do you want to delete the selected custom level?</value>
+  </data>
   <data name="CustomLevels_MultipleCustomLevelsLoaded" xml:space="preserve">
     <value>{0} custom levels loaded</value>
     <comment>Used to show that multiple custom levels have been loaded on the custom levels workspace</comment>
@@ -130,9 +136,33 @@
     <comment>Used to show that one custom level has been loaded on the custom levels workspace</comment>
   </data>
   <data name="No" xml:space="preserve">
-    <value>No</value>
+    <value>Nein</value>
+  </data>
+  <data name="Playlists_SongName_NA" xml:space="preserve">
+    <value>NA (Try to use Tools to fix this issue)</value>
+  </data>
+  <data name="Settings_BeatSaber_FileDialog" xml:space="preserve">
+    <value>Unable to open file dialog</value>
+  </data>
+  <data name="Settings_BeatSaber_ValidatePath_Caption" xml:space="preserve">
+    <value>Wrong path</value>
+  </data>
+  <data name="Settings_BeatSaber_ValidatePath_Content" xml:space="preserve">
+    <value>Path does not exist. Please enter a new path</value>
+  </data>
+  <data name="Workspace_CustomLevels" xml:space="preserve">
+    <value>Custom Levels</value>
+  </data>
+  <data name="Workspace_Playlists" xml:space="preserve">
+    <value>Playlisten</value>
+  </data>
+  <data name="Workspace_Tools" xml:space="preserve">
+    <value>Tools</value>
+  </data>
+  <data name="Workspace_Twitch" xml:space="preserve">
+    <value>Twitch</value>
   </data>
   <data name="Yes" xml:space="preserve">
-    <value>Yes</value>
+    <value>Ja</value>
   </data>
 </root>

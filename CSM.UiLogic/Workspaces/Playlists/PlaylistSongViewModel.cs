@@ -1,4 +1,5 @@
 ﻿using CSM.DataAccess.Entities.Offline;
+using CSM.UiLogic.Properties;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -22,7 +23,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
             get
             {
                 if (!string.IsNullOrWhiteSpace(playlistSong.SongName)) return playlistSong.SongName;
-                return "NA (Try to use Tools to fix this issue)";
+                return Resources.Playlists_SongName_NA;
             }
         }
 

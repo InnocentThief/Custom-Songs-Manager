@@ -3,7 +3,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" xmlns:settings="clr-namespace:CSM.App.Workspaces.Settings"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:p="clr-namespace:CSM.App.Properties"
+             xmlns:settings="clr-namespace:CSM.App.Workspaces.Settings"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -19,10 +21,10 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <!-- Title -->
-                <TextBlock Text="Settings" Margin="8,0" VerticalAlignment="Center" FontWeight="DemiBold"  />
+                <TextBlock Text="{x:Static p:Resources.Settings_Title}" Margin="8,0" VerticalAlignment="Center" FontWeight="DemiBold"  />
                 <!-- Commands -->
                 <telerik:RadToolBar Grid.Column="1" OverflowButtonVisibility="Collapsed" GripVisibility="Collapsed" Background="Transparent" BorderThickness="0" >
-                    <telerik:RadButton Command="{Binding CloseCommand}" ToolTip="Closes Settings">
+                    <telerik:RadButton Command="{Binding CloseCommand}" ToolTip="{x:Static p:Resources.Settings_Close}">
                         <telerik:RadGlyph Glyph="&#xe11b;" />
                     </telerik:RadButton>
                 </telerik:RadToolBar>

@@ -1,4 +1,6 @@
-﻿namespace CSM.Framework.Extensions
+﻿using CSM.Framework.Properties;
+
+namespace CSM.Framework.Extensions
 {
     public static class CSMTypeExtensions
     {
@@ -7,13 +9,13 @@
             switch (workspaceType)
             {
                 case WorkspaceType.CustomLevels:
-                    return "Custom Levels";
+                    return Resources.Extension_CustomLevels;
                 case WorkspaceType.Playlists:
-                    return "Playlists";
+                    return Resources.Extension_Playlists;
                 case WorkspaceType.TwitchIntegration:
-                    return "Twitch Integration";
+                    return Resources.Extension_Twitch;
                 case WorkspaceType.Tools:
-                    return "Tools";
+                    return Resources.Extension_Tools;
                 default:
                     return string.Empty;
             }
@@ -24,13 +26,13 @@
             switch (workspaceName)
             {
                 case "CustomLevels":
-                    return "Custom Levels";
+                    return Resources.Extension_CustomLevels;
                 case "Playlists":
-                    return "Playlists";
+                    return Resources.Extension_Playlists;
                 case "TwitchIntegration":
-                    return "Twitch Integration";
+                    return Resources.Extension_Twitch;
                 case "Tools":
-                    return "Tools";
+                    return Resources.Extension_Tools;
                 default:
                     return string.Empty;
             }

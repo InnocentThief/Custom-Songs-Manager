@@ -1,12 +1,11 @@
 ﻿<UserControl x:Class="CSM.App.Workspaces.Playlists.PlaylistTreeView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:CSM.App.Workspaces.Playlists"
-             xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:p="clr-namespace:CSM.App.Properties"
+             xmlns:local="clr-namespace:CSM.App.Workspaces.Playlists"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="400">
 
@@ -51,11 +50,11 @@
             <!-- Commands -->
             <telerik:RadToolBar Grid.Column="1" OverflowButtonVisibility="Collapsed" GripVisibility="Collapsed" Background="Transparent" BorderThickness="0" >
                 <TextBlock Text="{Binding PlaylistPath}" TextTrimming="CharacterEllipsis" Width="150" ToolTip="{Binding PlaylistPath}"/>
-                <telerik:RadButton Command="{Binding RefreshCommand}" ToolTip="Refresh the playlists">
+                <telerik:RadButton Command="{Binding RefreshCommand}" ToolTip="{x:Static p:Resources.Playlists_Refresh}">
                     <telerik:RadGlyph Glyph="&#xe103;" />
                 </telerik:RadButton>
                 <telerik:RadToolBarSeparator />
-                <telerik:RadButton Command="{Binding DeletePlaylistCommand}" ToolTip="Deletes the selected playlist / folder">
+                <telerik:RadButton Command="{Binding DeletePlaylistCommand}" ToolTip="{x:Static p:Resources.Playlists_Delete}">
                     <telerik:RadGlyph Glyph="&#xe10c;" />
                 </telerik:RadButton>
             </telerik:RadToolBar>

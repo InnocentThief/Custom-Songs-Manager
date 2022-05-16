@@ -117,6 +117,63 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CustomLevels_Detail_NoData" xml:space="preserve">
+    <value>No custom level selected</value>
+  </data>
+  <data name="MainWindow_Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Playlists_Author" xml:space="preserve">
+    <value>Author</value>
+  </data>
+  <data name="Playlists_AvailableCustomLevels_Title" xml:space="preserve">
+    <value>Available Custom Levels</value>
+  </data>
+  <data name="Playlists_Delete" xml:space="preserve">
+    <value>Deletes the selected playlist / folder</value>
+  </data>
+  <data name="Playlists_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Playlists_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Playlists_Refresh" xml:space="preserve">
+    <value>Refresh the playlists</value>
+  </data>
+  <data name="Playlist_Title" xml:space="preserve">
+    <value>Playlist</value>
+  </data>
+  <data name="Settings_BeatSaber_CustomLevelsPath" xml:space="preserve">
+    <value>Custom Levels Path</value>
+  </data>
+  <data name="Settings_BeatSaber_InstallPath" xml:space="preserve">
+    <value>Beat Saber Install Path</value>
+  </data>
+  <data name="Settings_BeatSaber_PlaylistsPath" xml:space="preserve">
+    <value>Playlists Path</value>
+  </data>
+  <data name="Settings_BeatSaber_Title" xml:space="preserve">
+    <value>Beat Saber</value>
+  </data>
+  <data name="Settings_Close" xml:space="preserve">
+    <value>Closes Settings</value>
+  </data>
+  <data name="Settings_Title" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Settings_Workspaces_Default" xml:space="preserve">
+    <value>Default Workspace</value>
+  </data>
+  <data name="Settings_Workspaces_Title" xml:space="preserve">
+    <value>Workspaces</value>
+  </data>
+  <data name="Settings_Workspace_CustomLevels" xml:space="preserve">
+    <value>Custom Levels</value>
+  </data>
+  <data name="Settings_Workspace_SongDetailPosition" xml:space="preserve">
+    <value>Song Detail Position</value>
+  </data>
   <data name="Workspace_CustomLevels_ColumnHeader_Artist" xml:space="preserve">
     <value>Artist</value>
     <comment>Header text for Artist column</comment>

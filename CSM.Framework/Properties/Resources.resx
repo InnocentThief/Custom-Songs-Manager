@@ -123,4 +123,16 @@
   <data name="DefaultPlaylistsPath" xml:space="preserve">
     <value>Default Playlists Path</value>
   </data>
+  <data name="Extension_CustomLevels" xml:space="preserve">
+    <value>Custom Levels</value>
+  </data>
+  <data name="Extension_Playlists" xml:space="preserve">
+    <value>Playlists</value>
+  </data>
+  <data name="Extension_Tools" xml:space="preserve">
+    <value>Tools</value>
+  </data>
+  <data name="Extension_Twitch" xml:space="preserve">
+    <value>Twitch</value>
+  </data>
 </root>

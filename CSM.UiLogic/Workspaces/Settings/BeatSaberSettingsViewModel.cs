@@ -1,5 +1,6 @@
 ﻿using CSM.Framework.Configuration.UserConfiguration;
 using CSM.Framework.Logging;
+using CSM.UiLogic.Properties;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
@@ -151,7 +152,7 @@ namespace CSM.UiLogic.Workspaces.Settings
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Unable to open file dialog");
+                MessageBox.Show(ex.ToString(), Resources.Settings_BeatSaber_FileDialog);
                 LoggerProvider.Logger.Error<BeatSaberSettingsViewModel>($"Unable to open file dialog: {ex}");
             }
         }
@@ -161,7 +162,7 @@ namespace CSM.UiLogic.Workspaces.Settings
             var ret = Directory.Exists(path);
             if (!ret)
             {
-                MessageBox.Show("Path does not exist. Please enter a new path", "Wrong path");
+                MessageBox.Show(Resources.Settings_BeatSaber_ValidatePath_Content, Resources.Settings_BeatSaber_ValidatePath_Caption);
             }
             return ret;
         }
