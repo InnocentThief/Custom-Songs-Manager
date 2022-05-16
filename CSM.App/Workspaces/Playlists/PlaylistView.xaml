@@ -69,13 +69,18 @@
                         <telerik:GridViewDataColumn Header="Difficulty" DataMemberBinding="{Binding Difficulties}">
                             <telerik:GridViewDataColumn.CellTemplate>
                                 <DataTemplate>
-                                    <ItemsControl ItemsSource="{Binding Difficulties}" Background="Transparent" BorderThickness="0" ItemTemplateSelector="{StaticResource CharacteristicDataTemplateSelector}">
-                                        <ItemsControl.ItemsPanel>
-                                            <ItemsPanelTemplate>
-                                                <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
-                                            </ItemsPanelTemplate>
-                                        </ItemsControl.ItemsPanel>
-                                    </ItemsControl>
+                                    <StackPanel Orientation="Horizontal">
+                                        <telerik:RadButton Margin="0,0,6,0" Background="Transparent" BorderThickness="0">
+                                            <telerik:RadGlyph Glyph="&#xe10b;" />
+                                        </telerik:RadButton>
+                                        <ItemsControl ItemsSource="{Binding Difficulties}" Background="Transparent" BorderThickness="0" ItemTemplateSelector="{StaticResource CharacteristicDataTemplateSelector}">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                        </ItemsControl>
+                                    </StackPanel>
                                 </DataTemplate>
                             </telerik:GridViewDataColumn.CellTemplate>
                         </telerik:GridViewDataColumn>
