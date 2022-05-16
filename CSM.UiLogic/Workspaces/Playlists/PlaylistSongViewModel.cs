@@ -11,6 +11,8 @@ namespace CSM.UiLogic.Workspaces.Playlists
     {
         private PlaylistSong playlistSong;
 
+        #region Public Properties
+
         /// <summary>
         /// The name of the song.
         /// </summary>
@@ -24,8 +26,14 @@ namespace CSM.UiLogic.Workspaces.Playlists
             }
         }
 
+        /// <summary>
+        /// Gets a list of difficulties this playlist song contains.
+        /// </summary>
         public List<PlaylistSongDifficultyViewModel> Difficulties { get; }
 
+        /// <summary>
+        /// Gets the the difficulties this playlist song contains as string.
+        /// </summary>
         public string Difficulty
         {
             get
@@ -35,6 +43,8 @@ namespace CSM.UiLogic.Workspaces.Playlists
                 return string.Join(" / ", characteristics.Select(c => $"{c.Key} ({string.Join(", ", c.Select(d => d.Name))})"));
             }
         }
+
+        #endregion
 
         /// <summary>
         /// Initializes a new <see cref="PlaylistSongViewModel"/>.

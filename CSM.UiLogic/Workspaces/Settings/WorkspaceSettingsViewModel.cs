@@ -23,8 +23,14 @@ namespace CSM.UiLogic.Workspaces.Settings
 
         #region Public Properties
 
+        /// <summary>
+        /// Contains the available workspaces. Used to select the default workspace.
+        /// </summary>
         public List<WorkspaceViewModel> Workspaces { get; }
 
+        /// <summary>
+        /// Gets or sets the selected workspace.
+        /// </summary>
         public WorkspaceViewModel SelectedWorkspace
         {
             get => workspaceViewModel;
@@ -38,6 +44,9 @@ namespace CSM.UiLogic.Workspaces.Settings
             }
         }
 
+        /// <summary>
+        /// Gets or sets whether the song detail position on the custom level workspace is set to right.
+        /// </summary>
         public bool SongDetailPositionRight
         {
             get => songDetailPositionRight;
@@ -56,6 +65,9 @@ namespace CSM.UiLogic.Workspaces.Settings
             }
         }
 
+        /// <summary>
+        /// Gets or sets whether the song detail position on the custom level workspace is set to bottom.
+        /// </summary>
         public bool SongDetailPositionBottom
         {
             get => songDetailPositionBottom;

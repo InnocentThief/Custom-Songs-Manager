@@ -12,14 +12,23 @@ namespace CSM.UiLogic.Workspaces.Playlists
     /// </summary>
     public class PlaylistViewModel : BasePlaylistViewModel
     {
+        #region Private fields
+
         private Playlist playlist;
         private PlaylistSongViewModel playlistSong;
+
+        #endregion
+
+        #region Public Properties
 
         /// <summary>
         /// Contains all songs of a playlist.
         /// </summary>
         public ObservableCollection<PlaylistSongViewModel> Songs { get; }
 
+        /// <summary>
+        /// Gets or sets the selected song.
+        /// </summary>
         public PlaylistSongViewModel SelectedPlaylistSong
         {
             get => playlistSong;
@@ -31,6 +40,9 @@ namespace CSM.UiLogic.Workspaces.Playlists
             }
         }
 
+        /// <summary>
+        /// Gets or sets the title of the playlist.
+        /// </summary>
         public string PlaylistTitle
         {
             get => playlist.PlaylistTitle;
@@ -42,6 +54,9 @@ namespace CSM.UiLogic.Workspaces.Playlists
             }
         }
 
+        /// <summary>
+        /// Gets the cover image of the playlist.
+        /// </summary>
         public ImageSource CoverImage
         {
             get
@@ -51,6 +66,9 @@ namespace CSM.UiLogic.Workspaces.Playlists
             }
         }
 
+        /// <summary>
+        /// Gets or sets the author of the playlist.
+        /// </summary>
         public string PlaylistAuthor
         {
             get => playlist.PlaylistAuthor;
@@ -62,6 +80,9 @@ namespace CSM.UiLogic.Workspaces.Playlists
             }
         }
 
+        /// <summary>
+        /// Gets or sets the description of the playlist.
+        /// </summary>
         public string PlaylistDescription
         {
             get => playlist.PlaylistDescription;
@@ -72,6 +93,8 @@ namespace CSM.UiLogic.Workspaces.Playlists
                 OnPropertyChanged();
             }
         }
+
+        #endregion
 
         /// <summary>
         /// Initializes a new <see cref="PlaylistViewModel"/>.

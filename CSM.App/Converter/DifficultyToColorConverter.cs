@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSM.DataAccess.Entities.Types;
+using System;
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
@@ -10,21 +11,13 @@ namespace CSM.App.Converter
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             string difficulty = value.ToString();
-            switch (difficulty)
-            {
-                case "Easy":
-                    return new SolidColorBrush(Color.FromArgb(255, 0, 128, 85));
-                case "Normal":
-                    return new SolidColorBrush(Color.FromArgb(255, 18, 104, 161));
-                case "Hard":
-                    return new SolidColorBrush(Color.FromArgb(255, 189, 85, 0));
-                case "Expert":
-                    return new SolidColorBrush(Color.FromArgb(255, 181, 42, 28));
-                case "ExpertPlus":
-                    return new SolidColorBrush(Color.FromArgb(255, 69, 64, 136));
-                default:
-                    return new SolidColorBrush(Colors.White);
-            }
+
+            if (difficulty == DifficultyTypes.Easy) return new SolidColorBrush(Color.FromArgb(255, 0, 128, 85));
+            if (difficulty == DifficultyTypes.Normal) return new SolidColorBrush(Color.FromArgb(255, 18, 104, 161));
+            if (difficulty == DifficultyTypes.Hard) return new SolidColorBrush(Color.FromArgb(255, 189, 85, 0));
+            if (difficulty == DifficultyTypes.Expert) return new SolidColorBrush(Color.FromArgb(255, 181, 42, 28));
+            if (difficulty == DifficultyTypes.ExpertPlus) return new SolidColorBrush(Color.FromArgb(255, 69, 64, 136));
+            return new SolidColorBrush(Colors.White);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

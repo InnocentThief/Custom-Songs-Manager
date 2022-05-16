@@ -89,6 +89,9 @@ namespace CSM.UiLogic.Workspaces
             }
         }
 
+        /// <summary>
+        /// Gets whether a custom level detail is available.
+        /// </summary>
         public bool HasCustomLevelDetail
         {
             get => customLevelDetail != null;
@@ -177,9 +180,8 @@ namespace CSM.UiLogic.Workspaces
         }
 
         /// <summary>
-        /// Loads the data in asynchronous fashion.
+        /// Used to load the workspace data.
         /// </summary>
-        /// <returns></returns>
         public override void LoadData()
         {
             base.LoadData();
@@ -207,6 +209,11 @@ namespace CSM.UiLogic.Workspaces
             CustomLevelDetail = null;
         }
 
+        /// <summary>
+        /// Loads the custom level data from BeatSaver.
+        /// </summary>
+        /// <param name="key">The key of the beat map.</param>
+        /// <returns>An awaitable task that yields no result.</returns>
         public async Task GetBeatSaverBeatMapDataAsync(string key)
         {
             var beatmap = await beatMapService.GetBeatMapDataAsync(key);

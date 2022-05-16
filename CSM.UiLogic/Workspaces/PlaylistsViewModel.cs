@@ -122,6 +122,9 @@ namespace CSM.UiLogic.Workspaces
             UserConfigManager.UserConfigChanged += UserConfigManager_UserConfigChanged;
         }
 
+        /// <summary>
+        /// Used to load the workspace data.
+        /// </summary>
         public override void LoadData()
         {
             base.LoadData();
@@ -138,6 +141,9 @@ namespace CSM.UiLogic.Workspaces
             bgWorker.RunWorkerAsync();
         }
 
+        /// <summary>
+        /// Used to unload the workspace data.
+        /// </summary>
         public override void UnloadData()
         {
             base.UnloadData();

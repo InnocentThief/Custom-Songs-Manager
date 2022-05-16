@@ -12,13 +12,22 @@ namespace CSM.UiLogic.Workspaces
     /// </summary>
     internal class TwitchIntegrationViewModel : BaseWorkspaceViewModel
     {
+        /// <summary>
+        /// Gets the workspace type.
+        /// </summary>
         public override WorkspaceType WorkspaceType => WorkspaceType.TwitchIntegration;
 
+        /// <summary>
+        /// Used to load the workspace data.
+        /// </summary>
         public override void LoadData()
         {
             
         }
 
+        /// <summary>
+        /// Used to unload the workspace data.
+        /// </summary>
         public override void UnloadData()
         {
 

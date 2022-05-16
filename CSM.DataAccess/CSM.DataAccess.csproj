@@ -74,6 +74,7 @@
     <Compile Include="..\VersionInfo.cs">
       <Link>VersionInfo.cs</Link>
     </Compile>
+    <Compile Include="Entities\Types\CharacteristicTypes.cs" />
     <Compile Include="Entities\Offline\BeatMapDifficulty.cs" />
     <Compile Include="Entities\Offline\BeatMapDifficultySet.cs" />
     <Compile Include="Entities\Offline\CustomLevel.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Entities\Online\Stats.cs" />
     <Compile Include="Entities\Online\Uploader.cs" />
     <Compile Include="Entities\Online\Version.cs" />
+    <Compile Include="Entities\Types\DifficultyTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

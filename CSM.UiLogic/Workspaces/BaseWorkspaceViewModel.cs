@@ -8,10 +8,19 @@ namespace CSM.UiLogic.Workspaces
     /// </summary>
     public abstract class BaseWorkspaceViewModel : ObservableObject
     {
+        /// <summary>
+        /// Gets or sets the title of the workspace.
+        /// </summary>
         public string Title { get; set; }
 
+        /// <summary>
+        /// Gets or sets the image of the workspace.
+        /// </summary>
         public string IconGlyph { get; set; }
 
+        /// <summary>
+        /// Gets the workspace type.
+        /// </summary>
         public abstract WorkspaceType WorkspaceType { get; }
 
         /// <summary>

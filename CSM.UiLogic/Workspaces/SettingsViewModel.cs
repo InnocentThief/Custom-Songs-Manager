@@ -23,6 +23,9 @@ namespace CSM.UiLogic.Workspaces
         /// </summary>
         public WorkspaceSettingsViewModel WorkspaceSettings { get; }
 
+        /// <summary>
+        /// Gets or sets whether the settings panel is visible.
+        /// </summary>
         public bool Visible
         {
             get => visible;

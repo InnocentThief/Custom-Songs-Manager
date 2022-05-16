@@ -24,6 +24,9 @@ namespace CSM.UiLogic.Workspaces.Settings
 
         #region Properties
 
+        /// <summary>
+        /// Gets or sets the Beat Saber installation path.
+        /// </summary>
         public string BeatSaberInstallPath
         {
             get => beatSaberInstallPath;
@@ -40,6 +43,9 @@ namespace CSM.UiLogic.Workspaces.Settings
             }
         }
 
+        /// <summary>
+        /// Gets or sets the Beat Saver custom level path.
+        /// </summary>
         public string CustomLevelsPath
         {
             get => customLevelsPath;
@@ -57,6 +63,9 @@ namespace CSM.UiLogic.Workspaces.Settings
             }
         }
 
+        /// <summary>
+        /// Gets or sets the Beat Saber playlist path.
+        /// </summary>
         public string PlaylistsPath
         {
             get => playlistsPath;
@@ -73,6 +82,9 @@ namespace CSM.UiLogic.Workspaces.Settings
             }
         }
 
+        /// <summary>
+        /// Command used to show the file dialog to select a directory.
+        /// </summary>
         public RelayCommand<object> SelectDirectoryCommand { get; }
 
         #endregion
@@ -140,7 +152,7 @@ namespace CSM.UiLogic.Workspaces.Settings
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString(), "Unable to open file dialog");
-                LoggerProvider.Logger.Error<BeatSaberSettingsViewModel>($"Unable to open file dialog: {ex.Message}");
+                LoggerProvider.Logger.Error<BeatSaberSettingsViewModel>($"Unable to open file dialog: {ex}");
             }
         }
 

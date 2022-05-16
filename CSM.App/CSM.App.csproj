@@ -178,8 +178,8 @@
       <Link>VersionInfo.cs</Link>
     </Compile>
     <Compile Include="Converter\DifficultyToColorConverter.cs" />
-    <Compile Include="Workspaces\CustomLevels\CustomLevelDetail.xaml.cs">
-      <DependentUpon>CustomLevelDetail.xaml</DependentUpon>
+    <Compile Include="Workspaces\CustomLevels\CustomLevelDetailView.xaml.cs">
+      <DependentUpon>CustomLevelDetailView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Workspaces\CustomLevels\CustomLevelDetailBottomView.xaml.cs">
       <DependentUpon>CustomLevelDetailBottomView.xaml</DependentUpon>
@@ -240,7 +240,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Workspaces\CustomLevels\CustomLevelDetail.xaml">
+    <Page Include="Workspaces\CustomLevels\CustomLevelDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -337,6 +337,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CSM.DataAccess\CSM.DataAccess.csproj">
+      <Project>{45E28E3B-CF56-4583-99CB-E115EECDF744}</Project>
+      <Name>CSM.DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CSM.Framework\CSM.Framework.csproj">
       <Project>{E4212929-E64D-4154-B381-958DE99A2932}</Project>
       <Name>CSM.Framework</Name>
