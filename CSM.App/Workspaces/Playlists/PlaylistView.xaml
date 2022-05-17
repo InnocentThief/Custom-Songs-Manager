@@ -10,6 +10,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
+        <telerik:InvertedBooleanToVisibilityConverter x:Key="InvBoolToVisConverter" />
+    </UserControl.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
@@ -29,14 +34,15 @@
         <Border Grid.Row="1" BorderBrush="DimGray" BorderThickness="1,0,1,1">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="62" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <!-- Header (Image and playlist informations -->
+                <!-- Header (Image and playlist informations) -->
                 <Grid Margin="6">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="60" />
                         <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <!-- Cover Image -->
                     <Image Source="{Binding CoverImage}" Height="50" Width="50" />
@@ -46,19 +52,39 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="20" />
+                            <RowDefinition Height="20" />
+                            <RowDefinition Height="20" />
                         </Grid.RowDefinitions>
                         <!-- Playlist name -->
-                        <TextBlock Text="{x:Static p:Resources.Playlists_Name}" FontWeight="DemiBold" />
-                        <TextBlock Grid.Column="1" Text="{Binding PlaylistTitle}" TextTrimming="CharacterEllipsis" ToolTip="{Binding PlaylistTitle}" />
+                        <TextBlock Text="{x:Static p:Resources.Playlists_Name}" FontWeight="DemiBold" VerticalAlignment="Center" />
+                        <TextBlock Grid.Column="1" Text="{Binding PlaylistTitle}" TextTrimming="CharacterEllipsis" ToolTip="{Binding PlaylistTitle}" VerticalAlignment="Center" />
+                        <TextBox Grid.Column="1" Text="{Binding PlaylistTitleEdit, UpdateSourceTrigger=PropertyChanged}" Margin="0,1" Visibility="{Binding InEditMode, Converter={StaticResource BoolToVisConverter}}" />
                         <!-- Author -->
-                        <TextBlock Grid.Row="1" Text="{x:Static p:Resources.Playlists_Author}" FontWeight="DemiBold" />
-                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding PlaylistAuthor}" TextTrimming="CharacterEllipsis" ToolTip="{Binding PlaylistAuthor}" />
+                        <TextBlock Grid.Row="1" Text="{x:Static p:Resources.Playlists_Author}" FontWeight="DemiBold" VerticalAlignment="Center" />
+                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding PlaylistAuthor}" TextTrimming="CharacterEllipsis" ToolTip="{Binding PlaylistAuthor}" VerticalAlignment="Center" />
+                        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding PlaylistAuthorEdit, UpdateSourceTrigger=PropertyChanged}" Margin="0,1" Visibility="{Binding InEditMode, Converter={StaticResource BoolToVisConverter}}" />
                         <!-- Description -->
-                        <TextBlock Grid.Row="2" Text="{x:Static p:Resources.Playlists_Description}" FontWeight="DemiBold" />
-                        <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding PlaylistDescription}" TextTrimming="CharacterEllipsis" ToolTip="{Binding PlaylistDescription}" />
+                        <TextBlock Grid.Row="2" Text="{x:Static p:Resources.Playlists_Description}" FontWeight="DemiBold" VerticalAlignment="Center" />
+                        <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding PlaylistDescription}" TextTrimming="CharacterEllipsis" ToolTip="{Binding PlaylistDescription}" VerticalAlignment="Center" />
+                        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding PlaylistDescriptionEdit, UpdateSourceTrigger=PropertyChanged}" Margin="0,1" Visibility="{Binding InEditMode, Converter={StaticResource BoolToVisConverter}}" />
+                    </Grid>
+                    <Grid Grid.Column="2" Visibility="{Binding InEditMode, Converter={StaticResource InvBoolToVisConverter}}">
+                        <telerik:RadButton Command="{Binding EditCommand}" Background="Transparent" BorderThickness="0">
+                            <telerik:RadGlyph Glyph="&#xe10b;" />
+                        </telerik:RadButton>
+                    </Grid>
+                    <Grid Grid.Column="2" Visibility="{Binding InEditMode, Converter={StaticResource BoolToVisConverter}}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <telerik:RadButton Margin="0,0,0,2" Command="{Binding SaveCommand}" Background="Transparent" BorderThickness="0">
+                            <telerik:RadGlyph Glyph="&#xe109;" />
+                        </telerik:RadButton>
+                        <telerik:RadButton Grid.Row="1" Margin="0,2,0,0" Command="{Binding CancelCommand}" Background="Transparent" BorderThickness="0">
+                            <telerik:RadGlyph Glyph="&#xe115;" />
+                        </telerik:RadButton>
                     </Grid>
                 </Grid>
                 <!-- Content -->
@@ -70,13 +96,6 @@
                             <telerik:GridViewDataColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <!--<Popup IsOpen="{Binding ElementName=radToggle, Path=IsChecked}" Height="150" Placement="Right" PlacementTarget="{Binding ElementName=radToggle}">
-                                            <Border BorderBrush="DarkRed" BorderThickness="3" Height="150">
-                                                <TextBlock Text="Hallo ich bin das Popup" Margin="8" />
-                                            </Border>
-
-
-                                        </Popup>-->
                                         <telerik:RadButton Margin="0,0,6,0" Background="Transparent" BorderThickness="0">
                                             <telerik:RadGlyph Glyph="&#xe10b;" />
                                         </telerik:RadButton>

@@ -211,6 +211,7 @@ namespace CSM.UiLogic.Workspaces
                         Playlist playlist = JsonSerializer.Deserialize<Playlist>(infoContent);
                         if (playlist != null)
                         {
+                            playlist.Path = file;
                             playlists.Add(new PlaylistViewModel(playlist));
                             i++;
                             bgWorker.ReportProgress(i);
@@ -247,6 +248,7 @@ namespace CSM.UiLogic.Workspaces
                     Playlist playlist = JsonSerializer.Deserialize<Playlist>(infoContent);
                     if (playlist != null)
                     {
+                        playlist.Path = file;
                         folder.Playlists.Add(new PlaylistViewModel(playlist));
                     }
                 }

@@ -22,5 +22,8 @@ namespace CSM.DataAccess.Entities.Offline
 
         [JsonPropertyName("songs")]
         public List<PlaylistSong> Songs { get; set; }
+
+        [JsonIgnore]
+        public string Path { get; set; }
     }
 }
