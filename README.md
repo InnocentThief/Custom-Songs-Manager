@@ -3,7 +3,7 @@
 # Features
 ## Custom Levels
 - Lists all your Beat Saber custom levels
-- Provides grouping and filtering
+- Provides grouping and filteringfor your custom levels
 - Shows detail song information based on BeatSaver.com
 ## Playlists
 - Lists your Beat Saber playlists (incl. the folder structure)
