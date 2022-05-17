@@ -25,4 +25,4 @@
 4. Enjoy!
 # Screenshots
 # Changelogs
-See CHANGELOG.md for the details of each release.
+See [CHANGELOG.md](CHANGELOG.md) for the details of each release.
