@@ -11,3 +11,6 @@
 - Lists the selected difficulties of the songs
 - Lets you change name, author, description and image of a playlist
 - Lets you add and remove songs (incl. the difficulty) 
+## Twitch integration
+
+## Tools
