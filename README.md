@@ -14,3 +14,12 @@
 ## Twitch integration
 
 ## Tools
+
+#Requirements
+- Windows with .NET 4.8
+- Optional (Beat Saber). You can change playlists and custom levels without the need of a Beat Saber installation.
+#Installation
+1. Download and unzip the lates version
+2. Insert your Beat Saver installation path (optional), custom levels path, and playlists path in the settings
+3. Select the Custom Levels workspace or the Playlists workspace to start browsing your files.
+4. Enjoy!
