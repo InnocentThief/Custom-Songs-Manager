@@ -23,3 +23,6 @@
 2. Insert your Beat Saver installation path (optional), custom levels path, and playlists path in the settings
 3. Select the Custom Levels workspace or the Playlists workspace to start browsing your files.
 4. Enjoy!
+# Screenshots
+# Changelogs
+See CHANGELOG.md for the details of each release.
