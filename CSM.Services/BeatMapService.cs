@@ -7,9 +7,9 @@ namespace CSM.Services
     {
         private readonly GenericServiceClient client;
 
-        public BeatMapService()
+        public BeatMapService(string api)
         {
-            client = new GenericServiceClient("https://api.beatsaver.com/maps/id");
+            client = new GenericServiceClient($"https://api.beatsaver.com/{api}");
         }
 
         public async Task<BeatMap> GetBeatMapDataAsync(string key)

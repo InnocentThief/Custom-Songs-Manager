@@ -3,7 +3,7 @@
   <Class Name="CSM.UiLogic.Workspaces.Playlists.PlaylistViewModel">
     <Position X="4" Y="3.25" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAQAAAAAAAAAAAEAQAAAAAQAAABAAAAAAAAEAA=</HashCode>
+      <HashCode>QAAAgIASQAQAYgBAAAAEAQQAAABQAAADAAAAAAAMEIA=</HashCode>
       <FileName>Workspaces\Playlists\PlaylistViewModel.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -11,11 +11,14 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="CSM.UiLogic.Workspaces.Playlists.PlaylistSongViewModel">
-    <Position X="7" Y="3.25" Width="2" />
+    <Position X="7" Y="3.25" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAIAAA=</HashCode>
+      <HashCode>AAIAAAAAAAAIAQAAAAAIAAAAAAAAAAAECAAAgAAIAAA=</HashCode>
       <FileName>Workspaces\Playlists\PlaylistSongViewModel.cs</FileName>
     </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Difficulties" />
+    </ShowAsCollectionAssociation>
   </Class>
   <Class Name="CSM.UiLogic.Workspaces.Playlists.BasePlaylistViewModel">
     <Position X="2.25" Y="0.5" Width="2" />
@@ -33,6 +36,18 @@
     <ShowAsCollectionAssociation>
       <Property Name="Playlists" />
     </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CSM.UiLogic.Workspaces.Playlists.PlaylistSongDifficultyViewModel">
+    <Position X="10.75" Y="3.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAACAAAAAQAAAAAAACAAAAAIAAAAAA=</HashCode>
+      <FileName>Workspaces\Playlists\PlaylistSongDifficultyViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="System.String" Collapsed="true">
+    <Position X="9.5" Y="2" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

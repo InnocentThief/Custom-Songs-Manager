@@ -24,6 +24,7 @@ namespace CSM.App.Workspaces.Common
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             var characteristic = item as PlaylistSongDifficultyViewModel;
+            if (characteristic == null) return base.SelectTemplate(item, container);
             if (characteristic.Characteristic == CharacteristicTypes.Degree360) return Degree360DataTemplate;
             if (characteristic.Characteristic == CharacteristicTypes.Degree90) return Degree90DataTemplate;
             if (characteristic.Characteristic == CharacteristicTypes.Standard) return StandardDataTemplate;

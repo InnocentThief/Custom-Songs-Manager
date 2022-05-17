@@ -90,15 +90,30 @@
                 <!-- Content -->
                 <telerik:RadGridView Grid.Row="1" ItemsSource="{Binding Songs}" AutoGenerateColumns="False" IsFilteringAllowed="True" RowIndicatorVisibility="Collapsed" FrozenColumnsSplitterVisibility="Collapsed" BorderThickness="0" AlternationCount="2" ShowGroupPanel="False" >
                     <telerik:RadGridView.Columns>
+                        <!-- Title of the song -->
                         <telerik:GridViewDataColumn Header="Title" DataMemberBinding="{Binding SongName}" Width="*" />
+                        <!-- Mapper of the song -->
                         <telerik:GridViewDataColumn Header="Mapper" DataMemberBinding="{Binding LevelAuthorName}" Width="*" />
+                        <!-- List with difficulties of the song -->
                         <telerik:GridViewDataColumn Header="Difficulty" DataMemberBinding="{Binding Difficulties}">
                             <telerik:GridViewDataColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <telerik:RadButton Margin="0,0,6,0" Background="Transparent" BorderThickness="0">
+                                        <!-- Edit Button with menu of available difficulties -->
+                                        <telerik:RadToggleButton Margin="0,0,6,0" Background="Transparent" BorderThickness="0" IsChecked="{Binding IsOpen, ElementName=radContextMenu, Mode=TwoWay}" Command="{Binding SetAvailableDifficultiesCommand}" >
                                             <telerik:RadGlyph Glyph="&#xe10b;" />
-                                        </telerik:RadButton>
+                                            <telerik:RadContextMenu.ContextMenu>
+                                                    <telerik:RadContextMenu x:Name="radContextMenu" IconColumnWidth="0" Placement="Bottom" ItemsSource="{Binding AvailableDifficulties}">
+                                                    <telerik:RadContextMenu.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <CheckBox Content="{Binding Difficulty}" IsChecked="{Binding IsSelectedDifficulty}" Foreground="White" />
+                                                        </DataTemplate>
+                                                    </telerik:RadContextMenu.ItemTemplate>
+                                                </telerik:RadContextMenu>
+                                            </telerik:RadContextMenu.ContextMenu>
+                                        </telerik:RadToggleButton>
+
+                                        <!-- List with the difficulties -->
                                         <ItemsControl ItemsSource="{Binding Difficulties}" Background="Transparent" BorderThickness="0" ItemTemplateSelector="{StaticResource CharacteristicDataTemplateSelector}">
                                             <ItemsControl.ItemsPanel>
                                                 <ItemsPanelTemplate>
@@ -110,10 +125,11 @@
                                 </DataTemplate>
                             </telerik:GridViewDataColumn.CellTemplate>
                         </telerik:GridViewDataColumn>
+                        <!-- Delete button (remove song from playlist) -->
                         <telerik:GridViewColumn>
                             <telerik:GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <telerik:RadButton Grid.Column="1" Background="Transparent" BorderThickness="0" Margin="0,0,10,0">
+                                    <telerik:RadButton Grid.Column="1" Background="Transparent" BorderThickness="0" Margin="0,0,10,0" ToolTip="Remove song from playlist">
                                         <telerik:RadGlyph Glyph="&#xe10c;" Foreground="Red" />
                                     </telerik:RadButton>
                                 </DataTemplate>

@@ -171,7 +171,7 @@ namespace CSM.UiLogic.Workspaces
         public CustomLevelsViewModel()
         {
             CustomLevelPath = UserConfigManager.Instance.Config.CustomLevelPaths.First().Path;
-            beatMapService = new BeatMapService();
+            beatMapService = new BeatMapService("maps/id");
             itemsObservable = new ObservableCollection<CustomLevelViewModel>();
             itemsCollection = DefaultSort();
             RefreshCommand = new RelayCommand(Refresh);

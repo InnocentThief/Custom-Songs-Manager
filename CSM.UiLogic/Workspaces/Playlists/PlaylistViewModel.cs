@@ -63,7 +63,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
         }
 
         /// <summary>
-        /// Gets or sets the title of the playlist.
+        /// Gets or sets the title of the playlist while in edit mode.
         /// </summary>
         public string PlaylistTitleEdit
         {
@@ -103,7 +103,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
         }
 
         /// <summary>
-        /// Gets or sets the author of the playlist.
+        /// Gets or sets the author of the playlist while in edit mode.
         /// </summary>
         public string PlaylistAuthorEdit
         {
@@ -131,7 +131,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
         }
 
         /// <summary>
-        /// Gets or sets the description of the playlist.
+        /// Gets or sets the description of the playlist while in edit mode.
         /// </summary>
         public string PlaylistDescriptionEdit
         {
@@ -144,6 +144,9 @@ namespace CSM.UiLogic.Workspaces.Playlists
             }
         }
 
+        /// <summary>
+        /// Gets or sets whether the playlist information is in edit mode.
+        /// </summary>
         public bool InEditMode
         {
             get => inEditMode;
@@ -155,10 +158,19 @@ namespace CSM.UiLogic.Workspaces.Playlists
             }
         }
 
+        /// <summary>
+        /// Command used to set the playlist information to edit mode.
+        /// </summary>
         public RelayCommand EditCommand { get; }
 
+        /// <summary>
+        /// Command used to save the changes made while in edit mode.
+        /// </summary>
         public RelayCommand SaveCommand { get; }
 
+        /// <summary>
+        /// Command used to reject the changes made while in edit mode.
+        /// </summary>
         public RelayCommand CancelCommand { get; }
 
         #endregion
@@ -178,8 +190,10 @@ namespace CSM.UiLogic.Workspaces.Playlists
             InEditMode = false;
 
             Songs = new ObservableCollection<PlaylistSongViewModel>();
-            Songs.AddRange(playlist.Songs.Select(s => new PlaylistSongViewModel(s)));
+            Songs.AddRange(playlist.Songs.Select(s => new PlaylistSongViewModel(s, playlist)));
         }
+
+        #region Helper methods
 
         private void Edit()
         {
@@ -198,8 +212,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
 
             // Save to file
             var options = new JsonSerializerOptions { WriteIndented = true };
-            var content = JsonSerializer.Serialize<Playlist>(playlist, options);
-
+            var content = JsonSerializer.Serialize(playlist, options);
             File.WriteAllText(playlist.Path, content);
         }
 
@@ -210,5 +223,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
             playlistDescriptionEdit = string.Empty;
             InEditMode = false;
         }
+
+        #endregion
     }
 }
