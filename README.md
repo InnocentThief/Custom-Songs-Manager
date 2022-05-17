@@ -1,5 +1,5 @@
 # Custom-Songs-Manager
-"Custom Songs Manager" is an app that lets you manage playlists and beatmaps for the game Beat Saber.
+"Custom Songs Manager" is an app that lets you manage playlists and beatmaps for the game Beat Saber. It also lets you receive and send !bsr request to a Twitch channel.
 # Features
 ## Custom Levels
 - Lists all your Beat Saber custom levels
