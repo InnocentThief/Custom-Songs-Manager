@@ -10,17 +10,21 @@
              d:DesignHeight="450" d:DesignWidth="400">
 
     <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
+
         <HierarchicalDataTemplate x:Key="FolderDataTemplate" ItemsSource="{Binding Playlists}">
             <StackPanel Orientation="Horizontal">
                 <telerik:RadGlyph Glyph="&#xe900;" />
                 <TextBlock Text="{Binding Name}" Margin="6,0" />
+                <telerik:RadGlyph Glyph="&#xe01a;" Foreground="Red" Visibility="{Binding ContainsSong, Converter={StaticResource BoolToVisConverter}}" Margin="3,0" />
             </StackPanel>
         </HierarchicalDataTemplate>
-
+        
         <HierarchicalDataTemplate  x:Key="PlaylistDataTempate">
             <StackPanel Orientation="Horizontal">
                 <telerik:RadGlyph Glyph="&#xe20a;" />
                 <TextBlock Text="{Binding Name}" Margin="6,0" />
+                <telerik:RadGlyph Glyph="&#xe01a;" Foreground="Red" Visibility="{Binding ContainsSong, Converter={StaticResource BoolToVisConverter}}" Margin="3,0" />
             </StackPanel>
         </HierarchicalDataTemplate>
 

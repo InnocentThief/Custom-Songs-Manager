@@ -31,6 +31,8 @@ namespace CSM.UiLogic.Workspaces.Playlists
 
         private BeatMapService beatMapService;
 
+
+
         #endregion
 
         #region Public Properties
@@ -51,6 +53,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
                 if (playlistSong == value) return;
                 playlistSong = value;
                 OnPropertyChanged();
+                SongChanged(playlistSong);
             }
         }
 
@@ -237,6 +240,15 @@ namespace CSM.UiLogic.Workspaces.Playlists
         {
             var beatmap = await beatMapService.GetBeatMapDataAsync(hash);
             PlaylistSongDetail = beatmap == null ? null : new PlaylistSongDetailViewModel(beatmap);
+        }
+
+        public override bool CheckContainsSong(string hash)
+        {
+            SelectedPlaylistSong = Songs.Where(s => s.Hash == hash).FirstOrDefault();
+
+
+            ContainsSong = Songs.Any(s => s.Hash == hash);
+            return ContainsSong;
         }
 
         #region Helper methods

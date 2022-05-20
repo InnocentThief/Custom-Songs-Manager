@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 
 namespace CSM.UiLogic.Workspaces.Playlists
 {
@@ -27,6 +28,12 @@ namespace CSM.UiLogic.Workspaces.Playlists
         {
             Playlists = new ObservableCollection<BasePlaylistViewModel>();
             FolderPath = path;
+        }
+
+        public override bool CheckContainsSong(string hash)
+        {
+            ContainsSong = Playlists.Any(p => p.CheckContainsSong(hash));
+            return ContainsSong;
         }
     }
 }

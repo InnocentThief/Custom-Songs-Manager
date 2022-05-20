@@ -214,7 +214,9 @@ namespace CSM.UiLogic.Workspaces
                         if (playlist != null)
                         {
                             playlist.Path = file;
-                            playlists.Add(new PlaylistViewModel(playlist));
+                            var playListViewModel = new PlaylistViewModel(playlist);
+                            playListViewModel.SongChangedEvent += PlayListViewModel_SongChangedEvent;
+                            playlists.Add(playListViewModel);
                             i++;
                             bgWorker.ReportProgress(i);
                         }
@@ -228,6 +230,14 @@ namespace CSM.UiLogic.Workspaces
                 LoggerProvider.Logger.Error<CustomLevelsViewModel>($"Unable to load playlists: {ex}");
             }
 
+        }
+
+        private void PlayListViewModel_SongChangedEvent(object sender, PlaylistSongChangedEventArgs e)
+        {
+            foreach (var playlist in Playlists)
+            {
+                playlist.CheckContainsSong(e.Hash);
+            }
         }
 
         private void GetDirectoriesRecursive(PlaylistFolderViewModel folder)
@@ -251,7 +261,9 @@ namespace CSM.UiLogic.Workspaces
                     if (playlist != null)
                     {
                         playlist.Path = file;
-                        folder.Playlists.Add(new PlaylistViewModel(playlist));
+                        var playlistViewModel = new PlaylistViewModel(playlist);
+                        playlistViewModel.SongChangedEvent += PlayListViewModel_SongChangedEvent;
+                        folder.Playlists.Add(playlistViewModel);
                     }
                 }
             }
@@ -316,7 +328,7 @@ namespace CSM.UiLogic.Workspaces
             }
             else
             {
-                foreach(var playlist in allPlaylists)
+                foreach (var playlist in allPlaylists)
                 {
                     if (playlist.GetType() == typeof(PlaylistFolderViewModel))
                     {
