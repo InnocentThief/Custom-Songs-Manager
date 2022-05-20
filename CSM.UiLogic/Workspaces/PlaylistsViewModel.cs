@@ -12,6 +12,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Windows;
 
 namespace CSM.UiLogic.Workspaces
 {
@@ -49,6 +50,7 @@ namespace CSM.UiLogic.Workspaces
                 if (value == selectedPlaylist) return;
                 selectedPlaylist = value;
                 OnPropertyChanged();
+                DeletePlaylistCommand.NotifyCanExecuteChanged();
             }
         }
 
@@ -60,7 +62,7 @@ namespace CSM.UiLogic.Workspaces
         /// <summary>
         /// Command used to delete the selected custom level.
         /// </summary>
-        public RelayCommand DeleteCustomLevelCommand { get; }
+        public RelayCommand DeletePlaylistCommand { get; }
 
         /// <summary>
         /// Gets or sets whether the data is loading.
@@ -118,7 +120,7 @@ namespace CSM.UiLogic.Workspaces
             PlaylistPath = UserConfigManager.Instance.Config.PlaylistPaths.First().Path;
             Playlists = new ObservableCollection<BasePlaylistViewModel>();
             RefreshCommand = new RelayCommand(Refresh);
-            DeleteCustomLevelCommand = new RelayCommand(DeletePlaylist, CanDeletePlaylist);
+            DeletePlaylistCommand = new RelayCommand(DeletePlaylist, CanDeletePlaylist);
             UserConfigManager.UserConfigChanged += UserConfigManager_UserConfigChanged;
         }
 
@@ -223,7 +225,7 @@ namespace CSM.UiLogic.Workspaces
             }
             catch (Exception ex)
             {
-                LoggerProvider.Logger.Error<CustomLevelsViewModel>( $"Unable to load playlists: {ex}");
+                LoggerProvider.Logger.Error<CustomLevelsViewModel>($"Unable to load playlists: {ex}");
             }
 
         }
@@ -272,20 +274,57 @@ namespace CSM.UiLogic.Workspaces
 
         private void DeletePlaylist()
         {
-            //if (Directory.Exists(SelectedCustomLevel.Path))
-            //{
-            //    if (MessageBox.Show("Do you want to delete the selected custom level?", "Delete custom level", MessageBoxButton.YesNo) == MessageBoxResult.OK)
-            //    {
-            //        Directory.Delete(SelectedCustomLevel.Path, true);
-            //        CustomLevels.Remove(SelectedCustomLevel);
-            //        OnPropertyChanged(nameof(CustomLevelCount));
-            //    }
-            //}
+            if (SelectedPlaylist == null) return;
+
+            if (SelectedPlaylist.GetType() == typeof(PlaylistViewModel))
+            {
+                var playlist = (PlaylistViewModel)SelectedPlaylist;
+                if (File.Exists(playlist.Path))
+                {
+                    if (MessageBox.Show("Do you want to delete the selected playlist?", "Delete playlist", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        File.Delete(playlist.Path);
+                        DeletePlaylistRecursive(Playlists, playlist);
+                        Playlists.Remove(SelectedPlaylist);
+                    }
+                }
+            }
+            else if (SelectedPlaylist.GetType() == typeof(PlaylistFolderViewModel))
+            {
+                var folder = (PlaylistFolderViewModel)SelectedPlaylist;
+                if (Directory.Exists(folder.FolderPath))
+                {
+                    if (MessageBox.Show("Do you want to delete the selected folder? All playlists within this folder will be deleted too!", "Delete folder", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        Directory.Delete(folder.FolderPath, true);
+                        Playlists.Remove(SelectedPlaylist);
+                    }
+                }
+            }
         }
 
-        public bool CanDeletePlaylist()
+        private bool CanDeletePlaylist()
         {
             return SelectedPlaylist != null;
+        }
+
+        private void DeletePlaylistRecursive(ObservableCollection<BasePlaylistViewModel> allPlaylists, PlaylistViewModel selectedPlaylist)
+        {
+            if (allPlaylists.Contains(selectedPlaylist))
+            {
+                allPlaylists.Remove(selectedPlaylist);
+            }
+            else
+            {
+                foreach(var playlist in allPlaylists)
+                {
+                    if (playlist.GetType() == typeof(PlaylistFolderViewModel))
+                    {
+                        var folder = playlist as PlaylistFolderViewModel;
+                        DeletePlaylistRecursive(folder.Playlists, selectedPlaylist);
+                    }
+                }
+            }
         }
 
         #endregion

@@ -36,6 +36,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>CSM.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=2.0.14.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.14\lib\net45\log4net.dll</HintPath>
@@ -200,10 +203,13 @@
     <Compile Include="Workspaces\Playlists\AvailableCustomLevelsView.xaml.cs">
       <DependentUpon>AvailableCustomLevelsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Workspaces\Playlists\CustomLevelDetail.xaml.cs">
-      <DependentUpon>CustomLevelDetail.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Workspaces\Playlists\PlaylistDataTemplateSelector.cs" />
+    <Compile Include="Workspaces\Playlists\PlaylistSongDetailDifficultyView.xaml.cs">
+      <DependentUpon>PlaylistSongDetailDifficultyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Workspaces\Playlists\PlaylistSongDetailView.xaml.cs">
+      <DependentUpon>PlaylistSongDetailView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Workspaces\Playlists\PlaylistsView.xaml.cs">
       <DependentUpon>PlaylistsView.xaml</DependentUpon>
     </Compile>
@@ -273,7 +279,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Workspaces\Playlists\CustomLevelDetail.xaml">
+    <Page Include="Workspaces\Playlists\PlaylistSongDetailDifficultyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Workspaces\Playlists\PlaylistSongDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -355,7 +365,9 @@
       <Name>CSM.UiLogic</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="CSM.ico" />
+  </ItemGroup>
   <ItemGroup>
     <None Update="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

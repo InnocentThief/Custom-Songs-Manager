@@ -136,7 +136,6 @@
                         </Grid>
 
                         <!-- Difficulty information -->
-                        <!--<TextBlock Grid.Column="6" Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_Difficulties}" FontWeight="bold" />-->
                         <ItemsControl Grid.Column="6" ItemsSource="{Binding Characteristics}" BorderThickness="0">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>

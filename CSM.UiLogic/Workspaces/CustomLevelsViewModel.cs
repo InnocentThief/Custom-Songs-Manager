@@ -325,7 +325,7 @@ namespace CSM.UiLogic.Workspaces
         {
             if (Directory.Exists(SelectedCustomLevel.Path))
             {
-                if (MessageBox.Show(Resources.CustomLevels_Delete_Content, Resources.CustomLevels_Delete_Caption, MessageBoxButton.YesNo) == MessageBoxResult.OK)
+                if (MessageBox.Show(Resources.CustomLevels_Delete_Content, Resources.CustomLevels_Delete_Caption, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     Directory.Delete(SelectedCustomLevel.Path, true);
                     CustomLevels.Remove(SelectedCustomLevel);

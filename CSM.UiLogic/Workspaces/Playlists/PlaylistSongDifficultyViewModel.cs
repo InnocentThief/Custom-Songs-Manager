@@ -1,6 +1,7 @@
 ﻿using CSM.DataAccess.Entities.Offline;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
+using System.Text;
 
 namespace CSM.UiLogic.Workspaces.Playlists
 {
@@ -28,6 +29,19 @@ namespace CSM.UiLogic.Workspaces.Playlists
         public string Name => playlistSongDifficulty.Name;
 
         public string Difficulty => $"{Characteristic} {Name}";
+
+        public string DifficultyDetail
+        {
+            get
+            {
+                var difficultyDetail = new StringBuilder();
+                difficultyDetail.Append($"NPS: {playlistSongDifficulty.NPS}");
+                if (playlistSongDifficulty.Chroma) difficultyDetail.Append(" / cr");
+                if (playlistSongDifficulty.MappingExtensions) difficultyDetail.Append(" / me");
+                if (playlistSongDifficulty.Noodle) difficultyDetail.Append(" / no");
+                return difficultyDetail.ToString();
+            }
+        }
 
         /// <summary>
         /// Gets or sets whether the current difficulty is part of the song in the playlist.

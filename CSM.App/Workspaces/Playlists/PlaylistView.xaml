@@ -88,7 +88,7 @@
                     </Grid>
                 </Grid>
                 <!-- Content -->
-                <telerik:RadGridView Grid.Row="1" ItemsSource="{Binding Songs}" AutoGenerateColumns="False" IsFilteringAllowed="True" RowIndicatorVisibility="Collapsed" FrozenColumnsSplitterVisibility="Collapsed" BorderThickness="0" AlternationCount="2" ShowGroupPanel="False" >
+                <telerik:RadGridView Grid.Row="1" ItemsSource="{Binding Songs}" SelectedItem="{Binding SelectedPlaylistSong}" AutoGenerateColumns="False" IsFilteringAllowed="True" RowIndicatorVisibility="Collapsed" FrozenColumnsSplitterVisibility="Collapsed" BorderThickness="0" AlternationCount="2" ShowGroupPanel="False" SelectionChanged="RadGridView_SelectionChanged" >
                     <telerik:RadGridView.Columns>
                         <!-- Title of the song -->
                         <telerik:GridViewDataColumn Header="Title" DataMemberBinding="{Binding SongName}" Width="*" />
@@ -140,6 +140,6 @@
             </Grid>
         </Border>
         <!-- Song detail -->
-        <local:CustomLevelDetail Grid.Row="2" Margin="0,6,0,0" />
+        <local:PlaylistSongDetailView Grid.Row="2" Margin="0,6,0,0" />
     </Grid>
 </UserControl>

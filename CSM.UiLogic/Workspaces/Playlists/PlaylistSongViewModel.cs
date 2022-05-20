@@ -23,6 +23,14 @@ namespace CSM.UiLogic.Workspaces.Playlists
         #region Public Properties
 
         /// <summary>
+        /// Gets the hash of the song.
+        /// </summary>
+        public string Hash
+        {
+            get => playlistSong.Hash;
+        }
+
+        /// <summary>
         /// The name of the song.
         /// </summary>
         /// <remarks>Can be string empty as it is not mandatory to provide this information.</remarks>

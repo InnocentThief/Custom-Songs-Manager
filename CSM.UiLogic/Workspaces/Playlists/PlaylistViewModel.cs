@@ -1,11 +1,13 @@
 ﻿using CSM.DataAccess.Entities.Offline;
 using CSM.Framework.Converter;
 using CSM.Framework.Extensions;
+using CSM.Services;
 using Microsoft.Toolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Threading.Tasks;
 using System.Windows.Media;
 
 namespace CSM.UiLogic.Workspaces.Playlists
@@ -24,6 +26,10 @@ namespace CSM.UiLogic.Workspaces.Playlists
         private string playlistTitleEdit;
         private string playlistAuthorEdit;
         private string playlistDescriptionEdit;
+
+        private PlaylistSongDetailViewModel playlistSongDetail;
+
+        private BeatMapService beatMapService;
 
         #endregion
 
@@ -46,6 +52,28 @@ namespace CSM.UiLogic.Workspaces.Playlists
                 playlistSong = value;
                 OnPropertyChanged();
             }
+        }
+
+        /// <summary>
+        /// Gets or sets the viewmodel for the detail area.
+        /// </summary>
+        public PlaylistSongDetailViewModel PlaylistSongDetail
+        {
+            get => playlistSongDetail;
+            set
+            {
+                if (value == playlistSongDetail) return;
+                playlistSongDetail = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Gets whether a playlist song detail is available.
+        /// </summary>
+        public bool HasPlaylistSongDetail
+        {
+            get => playlistSongDetail != null;
         }
 
         /// <summary>
@@ -159,6 +187,11 @@ namespace CSM.UiLogic.Workspaces.Playlists
         }
 
         /// <summary>
+        /// Gets the path of the playlist.
+        /// </summary>
+        public string Path => playlist.Path;
+
+        /// <summary>
         /// Command used to set the playlist information to edit mode.
         /// </summary>
         public RelayCommand EditCommand { get; }
@@ -189,8 +222,21 @@ namespace CSM.UiLogic.Workspaces.Playlists
 
             InEditMode = false;
 
+            beatMapService = new BeatMapService("maps/hash");
+
             Songs = new ObservableCollection<PlaylistSongViewModel>();
             Songs.AddRange(playlist.Songs.Select(s => new PlaylistSongViewModel(s, playlist)));
+        }
+
+        /// <summary>
+        /// Loads the custom level data from BeatSaver.
+        /// </summary>
+        /// <param name="hash">The hash of the beat map.</param>
+        /// <returns>An awaitable task that yields no result.</returns>
+        public async Task GetBeatSaverBeatMapDataAsync(string hash)
+        {
+            var beatmap = await beatMapService.GetBeatMapDataAsync(hash);
+            PlaylistSongDetail = beatmap == null ? null : new PlaylistSongDetailViewModel(beatmap);
         }
 
         #region Helper methods

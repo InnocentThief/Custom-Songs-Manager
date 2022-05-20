@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 
 namespace CSM.UiLogic.Workspaces.Playlists
@@ -16,7 +17,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
         /// <summary>
         /// Contains all playlist in the current folder (sub folders or playlists).
         /// </summary>
-        public List<BasePlaylistViewModel> Playlists { get; set; }
+        public ObservableCollection<BasePlaylistViewModel> Playlists { get; set; }
 
         /// <summary>
         /// Initializes a new <see cref="PlaylistFolderViewModel"/>.
@@ -24,7 +25,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
         /// <param name="path">The path to the directory.</param>
         public PlaylistFolderViewModel(string path) : base(Path.GetFileName(path))
         {
-            Playlists = new List<BasePlaylistViewModel>();
+            Playlists = new ObservableCollection<BasePlaylistViewModel>();
             FolderPath = path;
         }
     }
