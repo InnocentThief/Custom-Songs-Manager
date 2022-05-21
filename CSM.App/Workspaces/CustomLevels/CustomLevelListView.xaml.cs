@@ -34,5 +34,10 @@ namespace CSM.App.Workspaces.CustomLevels
                 await viewModel.GetBeatSaverBeatMapDataAsync(viewModel.SelectedCustomLevel.BsrKey);
             }
         }
+
+        private void RadGridView_FilterOperatorsLoading(object sender, Telerik.Windows.Controls.GridView.FilterOperatorsLoadingEventArgs e)
+        {
+            e.DefaultOperator1 = Telerik.Windows.Data.FilterOperator.Contains;
+        }
     }
 }

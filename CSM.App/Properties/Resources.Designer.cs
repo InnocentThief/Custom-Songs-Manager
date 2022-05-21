@@ -79,6 +79,24 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No song selected.
+        /// </summary>
+        public static string Playlist_Detail_NoData {
+            get {
+                return ResourceManager.GetString("Playlist_Detail_NoData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No playlist selected.
+        /// </summary>
+        public static string Playlist_NoData {
+            get {
+                return ResourceManager.GetString("Playlist_NoData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Playlist.
         /// </summary>
         public static string Playlist_Title {
@@ -507,6 +525,24 @@ namespace CSM.App.Properties {
         public static string Workspace_CustomLevels_Title {
             get {
                 return ResourceManager.GetString("Workspace_CustomLevels_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adds the song to the selected playlist.
+        /// </summary>
+        public static string Workspace_Playlist_AddCustomLevel {
+            get {
+                return ResourceManager.GetString("Workspace_Playlist_AddCustomLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove song from playlist.
+        /// </summary>
+        public static string Workspace_Playlist_RemoveSongFromPlaylist_ToolTip {
+            get {
+                return ResourceManager.GetString("Workspace_Playlist_RemoveSongFromPlaylist_ToolTip", resourceCulture);
             }
         }
         

@@ -171,7 +171,7 @@ namespace CSM.UiLogic.Workspaces
         public CustomLevelsViewModel()
         {
             CustomLevelPath = UserConfigManager.Instance.Config.CustomLevelPaths.First().Path;
-            beatMapService = new BeatMapService();
+            beatMapService = new BeatMapService("maps/id");
             itemsObservable = new ObservableCollection<CustomLevelViewModel>();
             itemsCollection = DefaultSort();
             RefreshCommand = new RelayCommand(Refresh);
@@ -325,7 +325,7 @@ namespace CSM.UiLogic.Workspaces
         {
             if (Directory.Exists(SelectedCustomLevel.Path))
             {
-                if (MessageBox.Show(Resources.CustomLevels_Delete_Content, Resources.CustomLevels_Delete_Caption, MessageBoxButton.YesNo) == MessageBoxResult.OK)
+                if (MessageBox.Show(Resources.CustomLevels_Delete_Content, Resources.CustomLevels_Delete_Caption, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     Directory.Delete(SelectedCustomLevel.Path, true);
                     CustomLevels.Remove(SelectedCustomLevel);

@@ -4,9 +4,55 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:p="clr-namespace:CSM.App.Properties"
              xmlns:local="clr-namespace:CSM.App.Workspaces.Playlists"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+
+        <!-- DataTemplate when a playlist is selected. -->
+        <DataTemplate x:Key="PlaylistDataTemplate">
+            <local:PlaylistView />
+        </DataTemplate>
+
+        <!-- DataTemplate when no playlist is selected. -->
+        <DataTemplate x:Key="NoDataDataTemplate">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <!-- Header -->
+                <Grid Background="#FF018574">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <!-- Title -->
+                    <TextBlock Text="{x:Static p:Resources.Playlist_Title}" Foreground="White" VerticalAlignment="Center" Margin="8,0" FontWeight="DemiBold" />
+                </Grid>
+                <!-- Content -->
+                <Border Grid.Row="1" BorderBrush="DimGray" BorderThickness="1,0,1,1">
+                    <Grid>
+                        <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <telerik:RadGlyph Glyph="&#xe20a;" FontSize="30" />
+                            <TextBlock Grid.Row="1" Text="{x:Static p:Resources.Playlist_NoData}" Margin="0,10" />
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+        </DataTemplate>
+
+        <local:PlaylistDataTemplateSelector x:Key="PlaylistDataTemplateSelector"
+                                            PlaylistTemplate="{StaticResource PlaylistDataTemplate}"
+                                            NoDataTemplate="{StaticResource NoDataDataTemplate}" />
+
+    </UserControl.Resources>
 
     <telerik:RadBusyIndicator IsIndeterminate="False" ProgressValue="{Binding LoadProgress}" IsBusy="{Binding IsLoading}">
         <Grid Margin="8" >
@@ -22,9 +68,9 @@
             <!-- Vertical splitter -->
             <GridSplitter Grid.Column="1" Grid.Row="1" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" HorizontalAlignment="Stretch" />
             <!-- Playlist -->
-            <local:PlaylistView Grid.Column="2" DataContext="{Binding SelectedPlaylist}" />
+            <ContentControl Grid.Column="2" Content="{Binding SelectedPlaylist}" ContentTemplateSelector="{StaticResource PlaylistDataTemplateSelector}" />
             <!-- Available Custom Levels -->
-            <local:AvailableCustomLevelsView Grid.Column="4" />
+            <local:AvailableCustomLevelsView Grid.Column="4" DataContext="{Binding CustomLevels}" />
         </Grid>
     </telerik:RadBusyIndicator>
 </UserControl>

@@ -12,5 +12,17 @@ namespace CSM.DataAccess.Entities.Offline
 
         [JsonPropertyName("name")]
         public string Name { get; set; }
+
+        [JsonIgnore]
+        public string NPS { get; set; }
+
+        [JsonIgnore]
+        public bool Noodle { get; set; }
+
+        [JsonIgnore]
+        public bool Chroma { get; set; }
+
+        [JsonIgnore]
+        public bool MappingExtensions { get; set; }
     }
 }

@@ -10,24 +10,31 @@
              d:DesignHeight="450" d:DesignWidth="400">
 
     <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
+
+        <!-- DataTemplate for a playlist folder -->
         <HierarchicalDataTemplate x:Key="FolderDataTemplate" ItemsSource="{Binding Playlists}">
             <StackPanel Orientation="Horizontal">
                 <telerik:RadGlyph Glyph="&#xe900;" />
                 <TextBlock Text="{Binding Name}" Margin="6,0" />
+                <telerik:RadGlyph Glyph="&#xe01a;" Foreground="Red" Visibility="{Binding ContainsSong, Converter={StaticResource BoolToVisConverter}}" Margin="3,0" />
             </StackPanel>
         </HierarchicalDataTemplate>
-
+        
+        <!-- DataTemplate for a playlist -->
         <HierarchicalDataTemplate  x:Key="PlaylistDataTempate">
             <StackPanel Orientation="Horizontal">
                 <telerik:RadGlyph Glyph="&#xe20a;" />
-                <TextBlock Text="{Binding Name}" Margin="6,0" />
+                <TextBlock Text="{Binding Name, Mode=TwoWay}" Margin="6,0" />
+                <telerik:RadGlyph Glyph="&#xe01a;" Foreground="Red" Visibility="{Binding ContainsSong, Converter={StaticResource BoolToVisConverter}}" Margin="3,0" />
             </StackPanel>
         </HierarchicalDataTemplate>
 
-        <local:PlaylistDataTemplateSelector x:Key="PlaylistDataTemplateSelector"
+        <local:PlaylistTreeDataTemplateSelector x:Key="PlaylistTreeDataTemplateSelector"
                                             FolderTemplate="{StaticResource FolderDataTemplate}"
                                             PlaylistTemplate="{StaticResource PlaylistDataTempate}"/>
 
+        <!-- Style for a tree item (always keep folders closed) -->
         <Style x:Key="ItemContainerStyle" TargetType="{x:Type telerik:RadTreeViewItem}">
             <Setter Property="IsExpanded" Value="False"/>
         </Style>
@@ -64,7 +71,7 @@
             <telerik:RadTreeView 
                 ItemsSource="{Binding Playlists}" 
                 SelectedItem="{Binding SelectedPlaylist, Mode=TwoWay}" 
-                ItemTemplateSelector="{StaticResource PlaylistDataTemplateSelector}"
+                ItemTemplateSelector="{StaticResource PlaylistTreeDataTemplateSelector}"
                 ItemContainerStyle="{StaticResource ItemContainerStyle}"/>
             
         </Border>

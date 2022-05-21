@@ -1,4 +1,5 @@
 ﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+using System;
 
 namespace CSM.UiLogic.Workspaces.Playlists
 {
@@ -7,18 +8,62 @@ namespace CSM.UiLogic.Workspaces.Playlists
     /// </summary>
     public abstract class BasePlaylistViewModel : ObservableObject
     {
+        #region Private fields
+
+        private bool containsSong;
+        private string name;
+
+        #endregion
+
         /// <summary>
         /// Name of the playlist or folder.
         /// </summary>
-        public string Name { get; set; }
+        public string Name
+        {
+            get => name;
+            set
+            {
+                if (value == name) return;
+                name = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool ContainsSong
+        {
+            get => containsSong;
+            set
+            {
+                if (containsSong == value) return;
+                containsSong = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Gets the path of the playlist.
+        /// </summary>
+        /// <remarks>Could be file path or directory. Based on the type.</remarks>
+        public string FilePath { get; }
+
+        public event EventHandler<PlaylistSongChangedEventArgs> SongChangedEvent;
 
         /// <summary>
         /// Initializes a new <see cref="BasePlaylistViewModel"/>.
         /// </summary>
         /// <param name="name">The name of the playlist or folder.</param>
-        public BasePlaylistViewModel(string name)
+        public BasePlaylistViewModel(string name, string path)
         {
             Name = name;
+            FilePath = path;
+        }
+
+        public abstract bool CheckContainsSong(string songName);
+
+        protected void SongChanged(PlaylistSongViewModel playlistSong)
+        {
+            if (playlistSong == null) return;
+            SongChangedEvent?.Invoke(this, new PlaylistSongChangedEventArgs() { Hash = playlistSong.Hash });
         }
     }
 }

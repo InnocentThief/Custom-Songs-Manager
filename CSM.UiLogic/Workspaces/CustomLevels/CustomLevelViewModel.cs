@@ -1,4 +1,6 @@
 ﻿using CSM.DataAccess.Entities.Offline;
+using CSM.UiLogic.Workspaces.Playlists;
+using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Linq;
 
@@ -9,7 +11,12 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
     /// </summary>
     public class CustomLevelViewModel
     {
+        #region Private fields
+
         private readonly CustomLevel customLevel;
+        private bool canAddToPlaylist;
+
+        #endregion
 
         #region Public Properties
 
@@ -37,7 +44,11 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
 
         public string Path => customLevel.Path;
 
+        public RelayCommand AddToPlaylistCommand { get; }
+
         #endregion
+
+        public event EventHandler<AddSongToPlaylistEventArgs> AddSongToPlaylistEvent;
 
         /// <summary>
         /// Initializes a new <see cref="CustomLevelViewModel"/>.
@@ -46,6 +57,28 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
         public CustomLevelViewModel(CustomLevel customLevel)
         {
             this.customLevel = customLevel;
+
+            AddToPlaylistCommand = new RelayCommand(AddToPlaylist, CanAddToPlaylist);
         }
+
+        public void SetCanAddToPlaylist(bool playlistSelected)
+        {
+            canAddToPlaylist = playlistSelected;
+            AddToPlaylistCommand.NotifyCanExecuteChanged();
+        }
+
+        #region Helper methods
+
+        private void AddToPlaylist()
+        {
+            AddSongToPlaylistEvent?.Invoke(this, new AddSongToPlaylistEventArgs { BsrKey = BsrKey });
+        }
+
+        private bool CanAddToPlaylist()
+        {
+            return canAddToPlaylist;
+        }
+
+        #endregion
     }
 }

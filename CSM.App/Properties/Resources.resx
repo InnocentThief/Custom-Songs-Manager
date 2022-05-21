@@ -141,6 +141,12 @@
   <data name="Playlists_Refresh" xml:space="preserve">
     <value>Refresh the playlists</value>
   </data>
+  <data name="Playlist_Detail_NoData" xml:space="preserve">
+    <value>No song selected</value>
+  </data>
+  <data name="Playlist_NoData" xml:space="preserve">
+    <value>No playlist selected</value>
+  </data>
   <data name="Playlist_Title" xml:space="preserve">
     <value>Playlist</value>
   </data>
@@ -281,5 +287,11 @@
   </data>
   <data name="Workspace_Playlists_Title" xml:space="preserve">
     <value>Playlists</value>
+  </data>
+  <data name="Workspace_Playlist_AddCustomLevel" xml:space="preserve">
+    <value>Adds the song to the selected playlist</value>
+  </data>
+  <data name="Workspace_Playlist_RemoveSongFromPlaylist_ToolTip" xml:space="preserve">
+    <value>Remove song from playlist</value>
   </data>
 </root>

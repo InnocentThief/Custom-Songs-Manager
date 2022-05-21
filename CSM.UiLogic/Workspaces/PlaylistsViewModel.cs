@@ -3,6 +3,7 @@ using CSM.Framework;
 using CSM.Framework.Configuration.UserConfiguration;
 using CSM.Framework.Extensions;
 using CSM.Framework.Logging;
+using CSM.UiLogic.Properties;
 using CSM.UiLogic.Workspaces.Playlists;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
@@ -12,6 +13,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Windows;
 
 namespace CSM.UiLogic.Workspaces
 {
@@ -28,6 +30,7 @@ namespace CSM.UiLogic.Workspaces
         private bool isLoading;
         private int loadProgress;
         private int playlistCount;
+        private PlaylistSelectionState playlistSelectionState;
 
         #endregion
 
@@ -49,6 +52,12 @@ namespace CSM.UiLogic.Workspaces
                 if (value == selectedPlaylist) return;
                 selectedPlaylist = value;
                 OnPropertyChanged();
+                DeletePlaylistCommand.NotifyCanExecuteChanged();
+                foreach (var playlist in Playlists)
+                {
+                    playlist.CheckContainsSong(String.Empty);
+                }
+                playlistSelectionState.PlaylistSelectionChanged(selectedPlaylist != null && selectedPlaylist.GetType() != typeof(PlaylistFolderViewModel));
             }
         }
 
@@ -60,7 +69,7 @@ namespace CSM.UiLogic.Workspaces
         /// <summary>
         /// Command used to delete the selected custom level.
         /// </summary>
-        public RelayCommand DeleteCustomLevelCommand { get; }
+        public RelayCommand DeletePlaylistCommand { get; }
 
         /// <summary>
         /// Gets or sets whether the data is loading.
@@ -103,6 +112,8 @@ namespace CSM.UiLogic.Workspaces
             }
         }
 
+        public PlaylistCustomLevelsViewModel CustomLevels { get; }
+
         /// <summary>
         /// Gets the workspace type.
         /// </summary>
@@ -118,8 +129,11 @@ namespace CSM.UiLogic.Workspaces
             PlaylistPath = UserConfigManager.Instance.Config.PlaylistPaths.First().Path;
             Playlists = new ObservableCollection<BasePlaylistViewModel>();
             RefreshCommand = new RelayCommand(Refresh);
-            DeleteCustomLevelCommand = new RelayCommand(DeletePlaylist, CanDeletePlaylist);
+            DeletePlaylistCommand = new RelayCommand(DeletePlaylist, CanDeletePlaylist);
             UserConfigManager.UserConfigChanged += UserConfigManager_UserConfigChanged;
+            playlistSelectionState = new PlaylistSelectionState();
+            CustomLevels = new PlaylistCustomLevelsViewModel(playlistSelectionState);
+            CustomLevels.AddSongToPlaylistEvent += CustomLevels_AddSongToPlaylistEvent;
         }
 
         /// <summary>
@@ -139,6 +153,8 @@ namespace CSM.UiLogic.Workspaces
             bgWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
             bgWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
             bgWorker.RunWorkerAsync();
+
+            CustomLevels.LoadData();
         }
 
         /// <summary>
@@ -153,6 +169,11 @@ namespace CSM.UiLogic.Workspaces
         }
 
         #region Helper methods
+
+        private void CustomLevels_AddSongToPlaylistEvent(object sender, AddSongToPlaylistEventArgs e)
+        {
+            ((PlaylistViewModel)SelectedPlaylist).AddPlaylistSong(e);
+        }
 
         private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
@@ -211,7 +232,10 @@ namespace CSM.UiLogic.Workspaces
                         Playlist playlist = JsonSerializer.Deserialize<Playlist>(infoContent);
                         if (playlist != null)
                         {
-                            playlists.Add(new PlaylistViewModel(playlist));
+                            playlist.Path = file;
+                            var playListViewModel = new PlaylistViewModel(playlist);
+                            playListViewModel.SongChangedEvent += PlayListViewModel_SongChangedEvent;
+                            playlists.Add(playListViewModel);
                             i++;
                             bgWorker.ReportProgress(i);
                         }
@@ -222,14 +246,22 @@ namespace CSM.UiLogic.Workspaces
             }
             catch (Exception ex)
             {
-                LoggerProvider.Logger.Error<CustomLevelsViewModel>( $"Unable to load playlists: {ex}");
+                LoggerProvider.Logger.Error<CustomLevelsViewModel>($"Unable to load playlists: {ex}");
             }
 
         }
 
+        private void PlayListViewModel_SongChangedEvent(object sender, PlaylistSongChangedEventArgs e)
+        {
+            foreach (var playlist in Playlists)
+            {
+                playlist.CheckContainsSong(e.Hash);
+            }
+        }
+
         private void GetDirectoriesRecursive(PlaylistFolderViewModel folder)
         {
-            IEnumerable<string> folderEntries = Directory.EnumerateDirectories(folder.FolderPath);
+            IEnumerable<string> folderEntries = Directory.EnumerateDirectories(folder.FilePath);
             foreach (string folderEntry in folderEntries)
             {
                 var directory = new DirectoryInfo(folderEntry);
@@ -238,7 +270,7 @@ namespace CSM.UiLogic.Workspaces
                 folder.Playlists.Add(playListFolder);
             }
 
-            IEnumerable<string> files = Directory.EnumerateFiles(folder.FolderPath);
+            IEnumerable<string> files = Directory.EnumerateFiles(folder.FilePath);
             foreach (string file in files)
             {
                 if (Path.GetExtension(file) == ".json" || Path.GetExtension(file) == ".bplist")
@@ -247,7 +279,10 @@ namespace CSM.UiLogic.Workspaces
                     Playlist playlist = JsonSerializer.Deserialize<Playlist>(infoContent);
                     if (playlist != null)
                     {
-                        folder.Playlists.Add(new PlaylistViewModel(playlist));
+                        playlist.Path = file;
+                        var playlistViewModel = new PlaylistViewModel(playlist);
+                        playlistViewModel.SongChangedEvent += PlayListViewModel_SongChangedEvent;
+                        folder.Playlists.Add(playlistViewModel);
                     }
                 }
             }
@@ -266,24 +301,66 @@ namespace CSM.UiLogic.Workspaces
                 PlaylistPath = UserConfigManager.Instance.Config.PlaylistPaths.First().Path;
                 if (IsActive) Refresh();
             }
+            if (e.CustomLevelsPathChanged)
+            {
+                CustomLevels.LoadData();
+            }
         }
 
         private void DeletePlaylist()
         {
-            //if (Directory.Exists(SelectedCustomLevel.Path))
-            //{
-            //    if (MessageBox.Show("Do you want to delete the selected custom level?", "Delete custom level", MessageBoxButton.YesNo) == MessageBoxResult.OK)
-            //    {
-            //        Directory.Delete(SelectedCustomLevel.Path, true);
-            //        CustomLevels.Remove(SelectedCustomLevel);
-            //        OnPropertyChanged(nameof(CustomLevelCount));
-            //    }
-            //}
+            if (SelectedPlaylist == null) return;
+
+            if (SelectedPlaylist.GetType() == typeof(PlaylistViewModel))
+            {
+                var playlist = (PlaylistViewModel)SelectedPlaylist;
+                if (File.Exists(playlist.FilePath))
+                {
+                    if (MessageBox.Show(Resources.Playlists_DeletePlaylist_Content, Resources.Playlists_DeletePlaylist_Caption, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        File.Delete(playlist.FilePath);
+                        SelectedPlaylist.SongChangedEvent -= PlayListViewModel_SongChangedEvent;
+                        DeletePlaylistRecursive(Playlists, playlist);
+                        Playlists.Remove(SelectedPlaylist);
+                    }
+                }
+            }
+            else if (SelectedPlaylist.GetType() == typeof(PlaylistFolderViewModel))
+            {
+                var folder = (PlaylistFolderViewModel)SelectedPlaylist;
+                if (Directory.Exists(folder.FilePath))
+                {
+                    if (MessageBox.Show(Resources.Playlists_DeletePlaylistFolder_Content, Resources.Playlists_DeletePlaylistFolder_Caption, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        Directory.Delete(folder.FilePath, true);
+                        Playlists.Remove(SelectedPlaylist);
+                    }
+                }
+            }
         }
 
-        public bool CanDeletePlaylist()
+        private bool CanDeletePlaylist()
         {
             return SelectedPlaylist != null;
+        }
+
+        private void DeletePlaylistRecursive(ObservableCollection<BasePlaylistViewModel> allPlaylists, PlaylistViewModel selectedPlaylist)
+        {
+            if (allPlaylists.Contains(selectedPlaylist))
+            {
+                allPlaylists.Remove(selectedPlaylist);
+            }
+            else
+            {
+                foreach (var playlist in allPlaylists)
+                {
+                    if (playlist.GetType() == typeof(PlaylistFolderViewModel))
+                    {
+                        var folder = playlist as PlaylistFolderViewModel;
+                        DeletePlaylistRecursive(folder.Playlists, selectedPlaylist);
+                    }
+                }
+            }
         }
 
         #endregion

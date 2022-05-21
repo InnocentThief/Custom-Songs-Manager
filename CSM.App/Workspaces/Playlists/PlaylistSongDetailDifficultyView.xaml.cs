@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace CSM.App.Workspaces.Playlists
 {
     /// <summary>
-    /// Interaction logic for CustomLevelDetail.xaml
+    /// Interaction logic for PlaylistSongDetailDifficultyView.xaml
     /// </summary>
-    public partial class CustomLevelDetail : UserControl
+    public partial class PlaylistSongDetailDifficultyView : UserControl
     {
-        public CustomLevelDetail()
+        public PlaylistSongDetailDifficultyView()
         {
             InitializeComponent();
         }
