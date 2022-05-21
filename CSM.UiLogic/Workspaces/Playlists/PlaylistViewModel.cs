@@ -3,6 +3,7 @@ using CSM.Framework.Converter;
 using CSM.Framework.Extensions;
 using CSM.Services;
 using Microsoft.Toolkit.Mvvm.Input;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
@@ -88,6 +89,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
                 if (value == playlist.PlaylistTitle) return;
                 playlist.PlaylistTitle = value;
                 OnPropertyChanged();
+                Name = playlist.PlaylistTitle;
             }
         }
 
@@ -229,13 +231,25 @@ namespace CSM.UiLogic.Workspaces.Playlists
             }
         }
 
-        private void SongViewModel_DeleteSongEvent(object sender, System.EventArgs e)
+        public void AddPlaylistSong(AddSongToPlaylistEventArgs e)
         {
-            var songViewModel = sender as PlaylistSongViewModel;
-            songViewModel.DeleteSongEvent -= SongViewModel_DeleteSongEvent;
-            Songs.Remove(songViewModel);
+            var playlistSong = new PlaylistSong
+            {
+
+                Hash = e.Hash,
+                Key = e.BsrKey,
+                LevelAuthorName = e.LevelAuthorName,
+                Levelid = e.LevelId,
+                SongName = e.SongName
+            };
+            if (playlistSong == null) playlist.Songs = new List<PlaylistSong>();
+            playlist.Songs.Add(playlistSong);
 
             SaveToFile();
+
+            var songViewModel = new PlaylistSongViewModel(playlistSong, playlist);
+            songViewModel.DeleteSongEvent += SongViewModel_DeleteSongEvent;
+            Songs.Add(songViewModel);
         }
 
         /// <summary>
@@ -259,6 +273,15 @@ namespace CSM.UiLogic.Workspaces.Playlists
         }
 
         #region Helper methods
+
+        private void SongViewModel_DeleteSongEvent(object sender, System.EventArgs e)
+        {
+            var songViewModel = sender as PlaylistSongViewModel;
+            songViewModel.DeleteSongEvent -= SongViewModel_DeleteSongEvent;
+            Songs.Remove(songViewModel);
+
+            SaveToFile();
+        }
 
         private void Edit()
         {

@@ -103,6 +103,7 @@
     <Compile Include="Workspaces\CustomLevels\CustomLevelDifficultyViewModel.cs" />
     <Compile Include="Workspaces\CustomLevels\CustomLevelViewModel.cs" />
     <Compile Include="Workspaces\PlaylistsViewModel.cs" />
+    <Compile Include="Workspaces\Playlists\AddSongToPlaylistEventArgs.cs" />
     <Compile Include="Workspaces\Playlists\BasePlaylistViewModel.cs" />
     <Compile Include="Workspaces\Playlists\PlaylistCustomLevelsViewModel.cs" />
     <Compile Include="Workspaces\Playlists\PlaylistFolderViewModel.cs" />

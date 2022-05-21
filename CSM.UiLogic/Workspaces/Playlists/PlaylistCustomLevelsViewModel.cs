@@ -97,6 +97,8 @@ namespace CSM.UiLogic.Workspaces.Playlists
 
         #endregion
 
+        public event EventHandler<AddSongToPlaylistEventArgs> AddSongToPlaylistEvent;
+
         public PlaylistCustomLevelsViewModel(PlaylistSelectionState playlistSelectionState)
         {
             this.playlistSelectionState = playlistSelectionState;
@@ -133,7 +135,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
         {
             foreach (var customLevel in CustomLevels)
             {
-                customLevel.CanAddToPlaylist(playlistSelectionState.PlaylistSelected);
+                customLevel.SetCanAddToPlaylist(playlistSelectionState.PlaylistSelected);
             }
         }
 
@@ -191,7 +193,12 @@ namespace CSM.UiLogic.Workspaces.Playlists
             var customLevels = (List<CustomLevel>)e.Result;
             if (customLevels != null)
             {
-                CustomLevels.AddRange(customLevels.Select(cl => new CustomLevelViewModel(cl)));
+                foreach (var customLevel in customLevels)
+                {
+                    var customLevelViewModel = new CustomLevelViewModel(customLevel);
+                    customLevelViewModel.AddSongToPlaylistEvent += CustomLevelViewModel_AddSongToPlaylistEvent;
+                    CustomLevels.Add(customLevelViewModel);
+                }
             }
             IsLoading = false;
 
@@ -203,6 +210,17 @@ namespace CSM.UiLogic.Workspaces.Playlists
                 bgWorker.Dispose();
                 bgWorker = null;
             }
+        }
+
+        private async void CustomLevelViewModel_AddSongToPlaylistEvent(object sender, AddSongToPlaylistEventArgs e)
+        {
+            var beatmap = await beatMapService.GetBeatMapDataAsync(e.BsrKey);
+            e.Hash = beatmap.Versions.First().Hash;
+            e.SongName = beatmap.Metadata.SongName;
+            e.LevelAuthorName = beatmap.Metadata.LevelAuthorName;
+            e.LevelId = $"custom_level_{e.Hash}";
+
+            AddSongToPlaylistEvent?.Invoke(this, e);
         }
 
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)

@@ -133,7 +133,7 @@ namespace CSM.UiLogic.Workspaces
             UserConfigManager.UserConfigChanged += UserConfigManager_UserConfigChanged;
             playlistSelectionState = new PlaylistSelectionState();
             CustomLevels = new PlaylistCustomLevelsViewModel(playlistSelectionState);
-
+            CustomLevels.AddSongToPlaylistEvent += CustomLevels_AddSongToPlaylistEvent;
         }
 
         /// <summary>
@@ -169,6 +169,11 @@ namespace CSM.UiLogic.Workspaces
         }
 
         #region Helper methods
+
+        private void CustomLevels_AddSongToPlaylistEvent(object sender, AddSongToPlaylistEventArgs e)
+        {
+            ((PlaylistViewModel)SelectedPlaylist).AddPlaylistSong(e);
+        }
 
         private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {

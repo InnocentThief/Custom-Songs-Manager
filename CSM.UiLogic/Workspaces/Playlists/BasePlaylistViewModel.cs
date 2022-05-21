@@ -8,12 +8,26 @@ namespace CSM.UiLogic.Workspaces.Playlists
     /// </summary>
     public abstract class BasePlaylistViewModel : ObservableObject
     {
+        #region Private fields
+
         private bool containsSong;
+        private string name;
+
+        #endregion
 
         /// <summary>
         /// Name of the playlist or folder.
         /// </summary>
-        public string Name { get; set; }
+        public string Name
+        {
+            get => name;
+            set
+            {
+                if (value == name) return;
+                name = value;
+                OnPropertyChanged();
+            }
+        }
 
         public bool ContainsSong
         {

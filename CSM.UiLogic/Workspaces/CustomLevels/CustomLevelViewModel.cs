@@ -1,4 +1,5 @@
 ﻿using CSM.DataAccess.Entities.Offline;
+using CSM.UiLogic.Workspaces.Playlists;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Linq;
@@ -47,6 +48,8 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
 
         #endregion
 
+        public event EventHandler<AddSongToPlaylistEventArgs> AddSongToPlaylistEvent;
+
         /// <summary>
         /// Initializes a new <see cref="CustomLevelViewModel"/>.
         /// </summary>
@@ -58,7 +61,7 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
             AddToPlaylistCommand = new RelayCommand(AddToPlaylist, CanAddToPlaylist);
         }
 
-        public void CanAddToPlaylist(bool playlistSelected)
+        public void SetCanAddToPlaylist(bool playlistSelected)
         {
             canAddToPlaylist = playlistSelected;
             AddToPlaylistCommand.NotifyCanExecuteChanged();
@@ -68,7 +71,7 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
 
         private void AddToPlaylist()
         {
-
+            AddSongToPlaylistEvent?.Invoke(this, new AddSongToPlaylistEventArgs { BsrKey = BsrKey });
         }
 
         private bool CanAddToPlaylist()
