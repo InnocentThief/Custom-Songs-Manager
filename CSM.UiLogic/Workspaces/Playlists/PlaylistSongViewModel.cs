@@ -4,6 +4,7 @@ using CSM.Services;
 using CSM.UiLogic.Properties;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
+using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
@@ -73,7 +74,11 @@ namespace CSM.UiLogic.Workspaces.Playlists
 
         public AsyncRelayCommand SetAvailableDifficultiesCommand { get; }
 
+        public RelayCommand DeleteSongCommand { get; }
+
         #endregion
+
+        public event EventHandler DeleteSongEvent;
 
         /// <summary>
         /// Initializes a new <see cref="PlaylistSongViewModel"/>.
@@ -84,6 +89,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
             this.playlistSong = playlistSong;
             this.playlist = playlist;
             SetAvailableDifficultiesCommand = new AsyncRelayCommand(SetAvailableDifficultiesAsync);
+            DeleteSongCommand = new RelayCommand(DeleteSong);
             AvailableDifficulties = new ObservableCollection<PlaylistSongDifficultyViewModel>();
 
             Difficulties = new ObservableCollection<PlaylistSongDifficultyViewModel>();
@@ -94,6 +100,12 @@ namespace CSM.UiLogic.Workspaces.Playlists
         }
 
         #region Helper methods
+
+        private void DeleteSong()
+        {
+            playlist.Songs.Remove(playlistSong);
+            DeleteSongEvent?.Invoke(this, EventArgs.Empty);
+        }
 
         private async Task SetAvailableDifficultiesAsync()
         {

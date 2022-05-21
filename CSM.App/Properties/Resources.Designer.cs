@@ -529,6 +529,15 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove song from playlist.
+        /// </summary>
+        public static string Workspace_Playlist_RemoveSongFromPlaylist_ToolTip {
+            get {
+                return ResourceManager.GetString("Workspace_Playlist_RemoveSongFromPlaylist_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Playlists.
         /// </summary>
         public static string Workspace_Playlists_Title {

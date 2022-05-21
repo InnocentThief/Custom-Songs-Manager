@@ -221,7 +221,21 @@ namespace CSM.UiLogic.Workspaces.Playlists
             beatMapService = new BeatMapService("maps/hash");
 
             Songs = new ObservableCollection<PlaylistSongViewModel>();
-            Songs.AddRange(playlist.Songs.Select(s => new PlaylistSongViewModel(s, playlist)));
+            foreach (var song in playlist.Songs)
+            {
+                var songViewModel = new PlaylistSongViewModel(song, playlist);
+                songViewModel.DeleteSongEvent += SongViewModel_DeleteSongEvent;
+                Songs.Add(songViewModel);
+            }
+        }
+
+        private void SongViewModel_DeleteSongEvent(object sender, System.EventArgs e)
+        {
+            var songViewModel = sender as PlaylistSongViewModel;
+            songViewModel.DeleteSongEvent -= SongViewModel_DeleteSongEvent;
+            Songs.Remove(songViewModel);
+
+            SaveToFile();
         }
 
         /// <summary>
@@ -261,10 +275,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
             PlaylistAuthor = PlaylistAuthorEdit;
             PlaylistDescription = PlaylistDescriptionEdit;
 
-            // Save to file
-            var options = new JsonSerializerOptions { WriteIndented = true };
-            var content = JsonSerializer.Serialize(playlist, options);
-            File.WriteAllText(playlist.Path, content);
+            SaveToFile();
         }
 
         private void Cancel()
@@ -273,6 +284,14 @@ namespace CSM.UiLogic.Workspaces.Playlists
             PlaylistAuthorEdit = string.Empty;
             playlistDescriptionEdit = string.Empty;
             InEditMode = false;
+        }
+
+        private void SaveToFile()
+        {
+            // Save to file
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            var content = JsonSerializer.Serialize(playlist, options);
+            File.WriteAllText(playlist.Path, content);
         }
 
         #endregion

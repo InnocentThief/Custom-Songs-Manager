@@ -288,4 +288,7 @@
   <data name="Workspace_Playlists_Title" xml:space="preserve">
     <value>Playlisten</value>
   </data>
+  <data name="Workspace_Playlist_RemoveSongFromPlaylist_ToolTip" xml:space="preserve">
+    <value>Song von Playliste entfernen</value>
+  </data>
 </root>
