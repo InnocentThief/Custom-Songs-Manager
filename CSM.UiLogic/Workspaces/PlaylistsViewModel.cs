@@ -379,7 +379,7 @@ namespace CSM.UiLogic.Workspaces
             var selectedFolder = SelectedPlaylist as PlaylistFolderViewModel;
             if (selectedFolder != null) playlistsPath = selectedFolder.FilePath;
 
-            string input = Interaction.InputBox("Name of the new folder", "Add new folder");
+            string input = Interaction.InputBox("Enter the name of the new folder", "Add new folder");
             if (string.IsNullOrEmpty(input)) return;
             try
             {
@@ -398,14 +398,54 @@ namespace CSM.UiLogic.Workspaces
             }
             catch (Exception)
             {
-                MessageBox.Show("Name not valid", "Add new folder");
+                MessageBox.Show("The name for the new folder is not valid", "Add new folder");
                 return;
             }
         }
 
         private void AddPlaylist()
         {
+            var playlistsPath = UserConfigManager.Instance.Config.PlaylistPaths.First().Path;
+            var selectedFolder = SelectedPlaylist as PlaylistFolderViewModel;
+            if (selectedFolder != null) playlistsPath = selectedFolder.FilePath;
+            string input = Interaction.InputBox("Enter the name of the new playlist", "Add new playlist");
+            if (string.IsNullOrEmpty(input)) return;
+            try
+            {
+                var playlistPath = Path.Combine(playlistsPath, $"{input}.json");
+                
+                var playlist = new Playlist
+                {
+                    Path = playlistPath,
+                    PlaylistAuthor = String.Empty,
+                    PlaylistDescription = String.Empty,
+                    PlaylistTitle = input,
+                    Songs = new List<PlaylistSong>()
+                };
 
+                // Save to file
+                var options = new JsonSerializerOptions { WriteIndented = true };
+                var content = JsonSerializer.Serialize(playlist, options);
+                File.WriteAllText(playlistPath, content);
+                
+
+                var playlistViewModel = new PlaylistViewModel(playlist);
+                playlistViewModel.SongChangedEvent += PlayListViewModel_SongChangedEvent;
+                if (selectedFolder != null)
+                {
+                    selectedFolder.Playlists.Add(playlistViewModel);
+                }
+                else
+                {
+                    Playlists.Add(playlistViewModel);
+                }
+                SelectedPlaylist = playlistViewModel;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("The name for the new playlist is not valid", "Add new folder");
+                return;
+            }
         }
 
         #endregion
