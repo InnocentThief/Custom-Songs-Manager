@@ -26,15 +26,22 @@ namespace CSM.UiLogic.Workspaces.Playlists
             }
         }
 
+        /// <summary>
+        /// Gets the path of the playlist.
+        /// </summary>
+        /// <remarks>Could be file path or directory. Based on the type.</remarks>
+        public string FilePath { get; }
+
         public event EventHandler<PlaylistSongChangedEventArgs> SongChangedEvent;
 
         /// <summary>
         /// Initializes a new <see cref="BasePlaylistViewModel"/>.
         /// </summary>
         /// <param name="name">The name of the playlist or folder.</param>
-        public BasePlaylistViewModel(string name)
+        public BasePlaylistViewModel(string name, string path)
         {
             Name = name;
+            FilePath = path;
         }
 
         public abstract bool CheckContainsSong(string songName);

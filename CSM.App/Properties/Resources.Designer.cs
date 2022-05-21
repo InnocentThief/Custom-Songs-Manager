@@ -79,6 +79,15 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No song selected.
+        /// </summary>
+        public static string Playlist_Detail_NoData {
+            get {
+                return ResourceManager.GetString("Playlist_Detail_NoData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Playlist.
         /// </summary>
         public static string Playlist_Title {

@@ -28,10 +28,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
         private string playlistDescriptionEdit;
 
         private PlaylistSongDetailViewModel playlistSongDetail;
-
         private BeatMapService beatMapService;
-
-
 
         #endregion
 
@@ -68,6 +65,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
                 if (value == playlistSongDetail) return;
                 playlistSongDetail = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(HasPlaylistSongDetail));
             }
         }
 
@@ -190,11 +188,6 @@ namespace CSM.UiLogic.Workspaces.Playlists
         }
 
         /// <summary>
-        /// Gets the path of the playlist.
-        /// </summary>
-        public string Path => playlist.Path;
-
-        /// <summary>
         /// Command used to set the playlist information to edit mode.
         /// </summary>
         public RelayCommand EditCommand { get; }
@@ -215,7 +208,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
         /// Initializes a new <see cref="PlaylistViewModel"/>.
         /// </summary>
         /// <param name="playlist">The <see cref="Playlist"/>.</param>
-        public PlaylistViewModel(Playlist playlist) : base(playlist.PlaylistTitle)
+        public PlaylistViewModel(Playlist playlist) : base(playlist.PlaylistTitle, playlist.Path)
         {
             this.playlist = playlist;
 

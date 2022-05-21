@@ -3,6 +3,7 @@ using CSM.Framework;
 using CSM.Framework.Configuration.UserConfiguration;
 using CSM.Framework.Extensions;
 using CSM.Framework.Logging;
+using CSM.UiLogic.Properties;
 using CSM.UiLogic.Workspaces.Playlists;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
@@ -242,7 +243,7 @@ namespace CSM.UiLogic.Workspaces
 
         private void GetDirectoriesRecursive(PlaylistFolderViewModel folder)
         {
-            IEnumerable<string> folderEntries = Directory.EnumerateDirectories(folder.FolderPath);
+            IEnumerable<string> folderEntries = Directory.EnumerateDirectories(folder.FilePath);
             foreach (string folderEntry in folderEntries)
             {
                 var directory = new DirectoryInfo(folderEntry);
@@ -251,7 +252,7 @@ namespace CSM.UiLogic.Workspaces
                 folder.Playlists.Add(playListFolder);
             }
 
-            IEnumerable<string> files = Directory.EnumerateFiles(folder.FolderPath);
+            IEnumerable<string> files = Directory.EnumerateFiles(folder.FilePath);
             foreach (string file in files)
             {
                 if (Path.GetExtension(file) == ".json" || Path.GetExtension(file) == ".bplist")
@@ -291,11 +292,12 @@ namespace CSM.UiLogic.Workspaces
             if (SelectedPlaylist.GetType() == typeof(PlaylistViewModel))
             {
                 var playlist = (PlaylistViewModel)SelectedPlaylist;
-                if (File.Exists(playlist.Path))
+                if (File.Exists(playlist.FilePath))
                 {
-                    if (MessageBox.Show("Do you want to delete the selected playlist?", "Delete playlist", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    if (MessageBox.Show(Resources.Playlists_DeletePlaylist_Content, Resources.Playlists_DeletePlaylist_Caption, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        File.Delete(playlist.Path);
+                        File.Delete(playlist.FilePath);
+                        SelectedPlaylist.SongChangedEvent -= PlayListViewModel_SongChangedEvent;
                         DeletePlaylistRecursive(Playlists, playlist);
                         Playlists.Remove(SelectedPlaylist);
                     }
@@ -304,11 +306,11 @@ namespace CSM.UiLogic.Workspaces
             else if (SelectedPlaylist.GetType() == typeof(PlaylistFolderViewModel))
             {
                 var folder = (PlaylistFolderViewModel)SelectedPlaylist;
-                if (Directory.Exists(folder.FolderPath))
+                if (Directory.Exists(folder.FilePath))
                 {
-                    if (MessageBox.Show("Do you want to delete the selected folder? All playlists within this folder will be deleted too!", "Delete folder", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    if (MessageBox.Show(Resources.Playlists_DeletePlaylistFolder_Content, Resources.Playlists_DeletePlaylistFolder_Caption, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        Directory.Delete(folder.FolderPath, true);
+                        Directory.Delete(folder.FilePath, true);
                         Playlists.Remove(SelectedPlaylist);
                     }
                 }

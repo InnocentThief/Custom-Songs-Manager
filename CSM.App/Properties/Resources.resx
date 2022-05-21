@@ -141,6 +141,9 @@
   <data name="Playlists_Refresh" xml:space="preserve">
     <value>Refresh the playlists</value>
   </data>
+  <data name="Playlist_Detail_NoData" xml:space="preserve">
+    <value>No song selected</value>
+  </data>
   <data name="Playlist_Title" xml:space="preserve">
     <value>Playlist</value>
   </data>

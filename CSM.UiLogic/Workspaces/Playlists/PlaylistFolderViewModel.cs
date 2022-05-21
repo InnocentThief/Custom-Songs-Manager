@@ -11,11 +11,6 @@ namespace CSM.UiLogic.Workspaces.Playlists
     public class PlaylistFolderViewModel : BasePlaylistViewModel
     {
         /// <summary>
-        /// Gets the directory path of the folder.
-        /// </summary>
-        public string FolderPath { get; }
-
-        /// <summary>
         /// Contains all playlist in the current folder (sub folders or playlists).
         /// </summary>
         public ObservableCollection<BasePlaylistViewModel> Playlists { get; set; }
@@ -24,10 +19,9 @@ namespace CSM.UiLogic.Workspaces.Playlists
         /// Initializes a new <see cref="PlaylistFolderViewModel"/>.
         /// </summary>
         /// <param name="path">The path to the directory.</param>
-        public PlaylistFolderViewModel(string path) : base(Path.GetFileName(path))
+        public PlaylistFolderViewModel(string path) : base(Path.GetFileName(path), path)
         {
             Playlists = new ObservableCollection<BasePlaylistViewModel>();
-            FolderPath = path;
         }
 
         public override bool CheckContainsSong(string hash)

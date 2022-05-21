@@ -115,6 +115,42 @@ namespace CSM.UiLogic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete playlist.
+        /// </summary>
+        public static string Playlists_DeletePlaylist_Caption {
+            get {
+                return ResourceManager.GetString("Playlists_DeletePlaylist_Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to delete the selected playlist?.
+        /// </summary>
+        public static string Playlists_DeletePlaylist_Content {
+            get {
+                return ResourceManager.GetString("Playlists_DeletePlaylist_Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete folder.
+        /// </summary>
+        public static string Playlists_DeletePlaylistFolder_Caption {
+            get {
+                return ResourceManager.GetString("Playlists_DeletePlaylistFolder_Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to delete the selected folder? All playlists within this folder will be deleted too!.
+        /// </summary>
+        public static string Playlists_DeletePlaylistFolder_Content {
+            get {
+                return ResourceManager.GetString("Playlists_DeletePlaylistFolder_Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to NA (Try to use Tools to fix this issue).
         /// </summary>
         public static string Playlists_SongName_NA {
