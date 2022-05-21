@@ -24,7 +24,7 @@
         </Grid>
         <!-- Content -->
         <Border Grid.Row="1" BorderBrush="DimGray" BorderThickness="1,0,1,1">
-            
+
         </Border>
         <local:PlaylistSongDetailView Grid.Row="2" Margin="0,6,0,0" />
     </Grid>

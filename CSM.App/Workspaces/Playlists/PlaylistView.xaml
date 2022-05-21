@@ -4,7 +4,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
-             xmlns:converter="clr-namespace:CSM.App.Converter"
              xmlns:p="clr-namespace:CSM.App.Properties"
              xmlns:local="clr-namespace:CSM.App.Workspaces.Playlists"
              mc:Ignorable="d" 
@@ -103,7 +102,7 @@
                                         <telerik:RadToggleButton Margin="0,0,6,0" Background="Transparent" BorderThickness="0" IsChecked="{Binding IsOpen, ElementName=radContextMenu, Mode=TwoWay}" Command="{Binding SetAvailableDifficultiesCommand}" >
                                             <telerik:RadGlyph Glyph="&#xe10b;" />
                                             <telerik:RadContextMenu.ContextMenu>
-                                                    <telerik:RadContextMenu x:Name="radContextMenu" IconColumnWidth="0" Placement="Bottom" ItemsSource="{Binding AvailableDifficulties}">
+                                                <telerik:RadContextMenu x:Name="radContextMenu" IconColumnWidth="0" Placement="Bottom" ItemsSource="{Binding AvailableDifficulties}">
                                                     <telerik:RadContextMenu.ItemTemplate>
                                                         <DataTemplate>
                                                             <CheckBox Content="{Binding Difficulty}" IsChecked="{Binding IsSelectedDifficulty}" Foreground="White" />
