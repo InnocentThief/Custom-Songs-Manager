@@ -8,6 +8,7 @@
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="SelectedPlaylistSong" />
+      <Property Name="PlaylistSongDetail" />
     </ShowAsAssociation>
     <ShowAsCollectionAssociation>
       <Property Name="Songs" />
@@ -27,7 +28,7 @@
   <Class Name="CSM.UiLogic.Workspaces.Playlists.BasePlaylistViewModel">
     <Position X="5.75" Y="0.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAgAAAAAAAAAACQAAAAAAQAAAAAAAAAAABAgAAAAIA=</HashCode>
+      <HashCode>AAAgAAAAAAAAAACQAAAAAAQAAAAEAAAAAABAgAAAAIA=</HashCode>
       <FileName>Workspaces\Playlists\BasePlaylistViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -65,12 +66,12 @@
   <Class Name="CSM.UiLogic.Workspaces.Playlists.PlaylistCustomLevelsViewModel">
     <Position X="0.75" Y="12.25" Width="3.5" />
     <TypeIdentifier>
-      <HashCode>BAAAAgAACgAQAAgogACAIAAAgQAAIAEACAAAAAIEAAI=</HashCode>
+      <HashCode>BAAAAgASCgAQAAgIgACAIAAAgQAAIBEAAAAAAAIAAAI=</HashCode>
       <FileName>Workspaces\Playlists\PlaylistCustomLevelsViewModel.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="SelectedCustomLevel" />
-      <Property Name="CustomLevelDetail" />
+      <Property Name="PlaylistSongDetail" />
     </ShowAsAssociation>
     <ShowAsCollectionAssociation>
       <Property Name="CustomLevels" />
@@ -88,6 +89,13 @@
     <TypeIdentifier>
       <HashCode>AAACEAAAQIAiAAgADAEAABCAAAEAAEAkAAgAgAAAAQA=</HashCode>
       <FileName>Workspaces\CustomLevels\CustomLevelDetailViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSM.UiLogic.Workspaces.Playlists.PlaylistSongDetailViewModel">
+    <Position X="11.25" Y="9.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAIAEAAAAIAAAAgABAEAABAAAAAAAAAkAAgAgAAAAAA=</HashCode>
+      <FileName>Workspaces\Playlists\PlaylistSongDetailViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

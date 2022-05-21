@@ -24,7 +24,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
         private BackgroundWorker bgWorker;
         private bool isLoading;
         private int loadProgress;
-        private CustomLevelDetailViewModel customLevelDetail;
+        private PlaylistSongDetailViewModel playlistSongDetail;
         private BeatMapService beatMapService;
         private PlaylistSelectionState playlistSelectionState;
 
@@ -48,24 +48,24 @@ namespace CSM.UiLogic.Workspaces.Playlists
         /// <summary>
         /// Gets or sets the viewmodel for the detail area.
         /// </summary>
-        public CustomLevelDetailViewModel CustomLevelDetail
+        public PlaylistSongDetailViewModel PlaylistSongDetail
         {
-            get => customLevelDetail;
+            get => playlistSongDetail;
             set
             {
-                if (value == customLevelDetail) return;
-                customLevelDetail = value;
+                if (value == playlistSongDetail) return;
+                playlistSongDetail = value;
                 OnPropertyChanged();
-                OnPropertyChanged(nameof(HasCustomLevelDetail));
+                OnPropertyChanged(nameof(HasPlaylistSongDetail));
             }
         }
 
         /// <summary>
-        /// Gets whether a custom level detail is available.
+        /// Gets whether a playlist song detail is available.
         /// </summary>
-        public bool HasCustomLevelDetail
+        public bool HasPlaylistSongDetail
         {
-            get => customLevelDetail != null;
+            get => playlistSongDetail != null;
         }
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
         public async Task GetBeatSaverBeatMapDataAsync(string key)
         {
             var beatmap = await beatMapService.GetBeatMapDataAsync(key);
-            CustomLevelDetail = beatmap == null ? null : new CustomLevelDetailViewModel(beatmap);
+            PlaylistSongDetail = beatmap == null ? null : new PlaylistSongDetailViewModel(beatmap);
         }
 
         public void LoadData()
