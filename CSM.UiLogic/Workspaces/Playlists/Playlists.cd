@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="CSM.UiLogic.Workspaces.Playlists.PlaylistViewModel">
-    <Position X="7" Y="4.5" Width="2.5" />
+    <Position X="7" Y="4.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>QAAAgIAyQAQAYgDAAAAEIQQAAABQIBADAAAAAAANEIA=</HashCode>
       <FileName>Workspaces\Playlists\PlaylistViewModel.cs</FileName>
@@ -33,7 +33,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="CSM.UiLogic.Workspaces.Playlists.PlaylistFolderViewModel">
-    <Position X="4.25" Y="4.5" Width="2" />
+    <Position X="4.25" Y="4.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAQAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Workspaces\Playlists\PlaylistFolderViewModel.cs</FileName>
@@ -64,7 +64,7 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="CSM.UiLogic.Workspaces.Playlists.PlaylistCustomLevelsViewModel">
-    <Position X="0.75" Y="12.25" Width="3.5" />
+    <Position X="0.75" Y="12.75" Width="3.5" />
     <TypeIdentifier>
       <HashCode>BAAAAgASCgAQAAgIgACAIAAAgQAAIBEAAAAAAAIAAAI=</HashCode>
       <FileName>Workspaces\Playlists\PlaylistCustomLevelsViewModel.cs</FileName>
@@ -78,17 +78,10 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="CSM.UiLogic.Workspaces.CustomLevels.CustomLevelViewModel">
-    <Position X="7" Y="12.25" Width="2.5" />
+    <Position X="7" Y="12.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>BAAAAAAAACAEAAIABAEBAAAAIAAJBMAEAAAAgAooAAA=</HashCode>
       <FileName>Workspaces\CustomLevels\CustomLevelViewModel.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="CSM.UiLogic.Workspaces.CustomLevels.CustomLevelDetailViewModel">
-    <Position X="7" Y="18.25" Width="2.25" />
-    <TypeIdentifier>
-      <HashCode>AAACEAAAQIAiAAgADAEAABCAAAEAAEAkAAgAgAAAAQA=</HashCode>
-      <FileName>Workspaces\CustomLevels\CustomLevelDetailViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CSM.UiLogic.Workspaces.Playlists.PlaylistSongDetailViewModel">

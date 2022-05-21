@@ -6,6 +6,7 @@ using CSM.Framework.Logging;
 using CSM.UiLogic.Properties;
 using CSM.UiLogic.Workspaces.Playlists;
 using Microsoft.Toolkit.Mvvm.Input;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -65,6 +66,16 @@ namespace CSM.UiLogic.Workspaces
         /// Command used to refresh the workspace data.
         /// </summary>
         public RelayCommand RefreshCommand { get; }
+
+        /// <summary>
+        /// Command used to add a new folder to the playlist directory.
+        /// </summary>
+        public RelayCommand AddFolderCommand { get; }
+
+        /// <summary>
+        /// Command used to add a new playlist to the selected folder.
+        /// </summary>
+        public RelayCommand AddPlaylistCommand { get; }
 
         /// <summary>
         /// Command used to delete the selected custom level.
@@ -129,6 +140,8 @@ namespace CSM.UiLogic.Workspaces
             PlaylistPath = UserConfigManager.Instance.Config.PlaylistPaths.First().Path;
             Playlists = new ObservableCollection<BasePlaylistViewModel>();
             RefreshCommand = new RelayCommand(Refresh);
+            AddFolderCommand = new RelayCommand(AddFolder);
+            AddPlaylistCommand = new RelayCommand(AddPlaylist);
             DeletePlaylistCommand = new RelayCommand(DeletePlaylist, CanDeletePlaylist);
             UserConfigManager.UserConfigChanged += UserConfigManager_UserConfigChanged;
             playlistSelectionState = new PlaylistSelectionState();
@@ -311,28 +324,26 @@ namespace CSM.UiLogic.Workspaces
         {
             if (SelectedPlaylist == null) return;
 
-            if (SelectedPlaylist.GetType() == typeof(PlaylistViewModel))
+            if (SelectedPlaylist is PlaylistViewModel playlistViewModel)
             {
-                var playlist = (PlaylistViewModel)SelectedPlaylist;
-                if (File.Exists(playlist.FilePath))
+                if (File.Exists(playlistViewModel.FilePath))
                 {
                     if (MessageBox.Show(Resources.Playlists_DeletePlaylist_Content, Resources.Playlists_DeletePlaylist_Caption, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        File.Delete(playlist.FilePath);
+                        File.Delete(playlistViewModel.FilePath);
                         SelectedPlaylist.SongChangedEvent -= PlayListViewModel_SongChangedEvent;
-                        DeletePlaylistRecursive(Playlists, playlist);
+                        DeletePlaylistRecursive(Playlists, playlistViewModel);
                         Playlists.Remove(SelectedPlaylist);
                     }
                 }
             }
-            else if (SelectedPlaylist.GetType() == typeof(PlaylistFolderViewModel))
+            else if (SelectedPlaylist is PlaylistFolderViewModel playlistFolderViewModel)
             {
-                var folder = (PlaylistFolderViewModel)SelectedPlaylist;
-                if (Directory.Exists(folder.FilePath))
+                if (Directory.Exists(playlistFolderViewModel.FilePath))
                 {
                     if (MessageBox.Show(Resources.Playlists_DeletePlaylistFolder_Content, Resources.Playlists_DeletePlaylistFolder_Caption, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        Directory.Delete(folder.FilePath, true);
+                        Directory.Delete(playlistFolderViewModel.FilePath, true);
                         Playlists.Remove(SelectedPlaylist);
                     }
                 }
@@ -354,13 +365,47 @@ namespace CSM.UiLogic.Workspaces
             {
                 foreach (var playlist in allPlaylists)
                 {
-                    if (playlist.GetType() == typeof(PlaylistFolderViewModel))
+                    if (playlist is PlaylistFolderViewModel playlistFolderVieWModel)
                     {
-                        var folder = playlist as PlaylistFolderViewModel;
-                        DeletePlaylistRecursive(folder.Playlists, selectedPlaylist);
+                        DeletePlaylistRecursive(playlistFolderVieWModel.Playlists, selectedPlaylist);
                     }
                 }
             }
+        }
+
+        private void AddFolder()
+        {
+            var playlistsPath = UserConfigManager.Instance.Config.PlaylistPaths.First().Path;
+            var selectedFolder = SelectedPlaylist as PlaylistFolderViewModel;
+            if (selectedFolder != null) playlistsPath = selectedFolder.FilePath;
+
+            string input = Interaction.InputBox("Name of the new folder", "Add new folder");
+            if (string.IsNullOrEmpty(input)) return;
+            try
+            {
+                var newDirectoryPath = Path.Combine(playlistPath, input);
+                Directory.CreateDirectory(newDirectoryPath);
+
+                var playlistFolderviewModel = new PlaylistFolderViewModel(newDirectoryPath);
+                if (selectedFolder != null)
+                {
+                    selectedFolder.Playlists.Add(playlistFolderviewModel);
+                }
+                else
+                {
+                    Playlists.Add(playlistFolderviewModel);
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Name not valid", "Add new folder");
+                return;
+            }
+        }
+
+        private void AddPlaylist()
+        {
+
         }
 
         #endregion

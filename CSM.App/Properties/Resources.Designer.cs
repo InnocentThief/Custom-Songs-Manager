@@ -547,6 +547,24 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add folder.
+        /// </summary>
+        public static string Workspace_Playlists_AddFolderCommand {
+            get {
+                return ResourceManager.GetString("Workspace_Playlists_AddFolderCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add playlist.
+        /// </summary>
+        public static string Workspace_Playlists_AddPlaylistCommand {
+            get {
+                return ResourceManager.GetString("Workspace_Playlists_AddPlaylistCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Playlists.
         /// </summary>
         public static string Workspace_Playlists_Title {

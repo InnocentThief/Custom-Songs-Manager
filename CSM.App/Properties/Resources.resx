@@ -285,6 +285,12 @@
     <value>Custom Levels</value>
     <comment>Title for the list area on the custom levels workspace</comment>
   </data>
+  <data name="Workspace_Playlists_AddFolderCommand" xml:space="preserve">
+    <value>Add folder</value>
+  </data>
+  <data name="Workspace_Playlists_AddPlaylistCommand" xml:space="preserve">
+    <value>Add playlist</value>
+  </data>
   <data name="Workspace_Playlists_Title" xml:space="preserve">
     <value>Playlists</value>
   </data>

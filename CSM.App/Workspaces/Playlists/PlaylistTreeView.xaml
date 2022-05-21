@@ -56,9 +56,16 @@
             <TextBlock Text="{x:Static p:Resources.Workspace_Playlists_Title}" Foreground="White" VerticalAlignment="Center" Margin="8,0" FontWeight="DemiBold" />
             <!-- Commands -->
             <telerik:RadToolBar Grid.Column="1" OverflowButtonVisibility="Collapsed" GripVisibility="Collapsed" Background="Transparent" BorderThickness="0" >
-                <TextBlock Text="{Binding PlaylistPath}" TextTrimming="CharacterEllipsis" Width="150" ToolTip="{Binding PlaylistPath}"/>
+                <!--<TextBlock Text="{Binding PlaylistPath}" TextTrimming="CharacterEllipsis" Width="150" ToolTip="{Binding PlaylistPath}"/>-->
                 <telerik:RadButton Command="{Binding RefreshCommand}" ToolTip="{x:Static p:Resources.Playlists_Refresh}">
                     <telerik:RadGlyph Glyph="&#xe103;" />
+                </telerik:RadButton>
+                <telerik:RadToolBarSeparator />
+                <telerik:RadButton Command="{Binding AddFolderCommand}" ToolTip="{x:Static p:Resources.Workspace_Playlists_AddFolderCommand}">
+                    <telerik:RadGlyph Glyph="&#xe902;" />
+                </telerik:RadButton>
+                <telerik:RadButton Command="{Binding AddPlaylistCommand}" ToolTip="{x:Static p:Resources.Workspace_Playlists_AddPlaylistCommand}">
+                    <telerik:RadGlyph Glyph="&#xe907;" />
                 </telerik:RadButton>
                 <telerik:RadToolBarSeparator />
                 <telerik:RadButton Command="{Binding DeletePlaylistCommand}" ToolTip="{x:Static p:Resources.Playlists_Delete}">
