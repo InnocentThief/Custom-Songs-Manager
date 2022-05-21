@@ -29,10 +29,15 @@ namespace CSM.App.Workspaces.Playlists
         private async void RadGridView_SelectionChanged(object sender, Telerik.Windows.Controls.SelectionChangeEventArgs e)
         {
             var viewModel = DataContext as PlaylistViewModel;
-                if (viewModel?.SelectedPlaylistSong!= null)
+            if (viewModel?.SelectedPlaylistSong != null)
             {
                 await viewModel.GetBeatSaverBeatMapDataAsync(viewModel.SelectedPlaylistSong.Hash);
             }
+        }
+
+        private void RadGridView_FilterOperatorsLoading(object sender, Telerik.Windows.Controls.GridView.FilterOperatorsLoadingEventArgs e)
+        {
+            e.DefaultOperator1 = Telerik.Windows.Data.FilterOperator.Contains;
         }
     }
 }
