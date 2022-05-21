@@ -52,6 +52,10 @@ namespace CSM.UiLogic.Workspaces
                 selectedPlaylist = value;
                 OnPropertyChanged();
                 DeletePlaylistCommand.NotifyCanExecuteChanged();
+                foreach (var playlist in Playlists)
+                {
+                    playlist.CheckContainsSong(String.Empty);
+                }
             }
         }
 

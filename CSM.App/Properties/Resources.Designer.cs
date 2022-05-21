@@ -88,6 +88,15 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No playlist selected.
+        /// </summary>
+        public static string Playlist_NoData {
+            get {
+                return ResourceManager.GetString("Playlist_NoData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Playlist.
         /// </summary>
         public static string Playlist_Title {

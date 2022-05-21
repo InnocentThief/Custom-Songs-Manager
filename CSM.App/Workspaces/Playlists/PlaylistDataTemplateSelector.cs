@@ -6,25 +6,20 @@ namespace CSM.App.Workspaces.Playlists
 {
     public class PlaylistDataTemplateSelector : DataTemplateSelector
     {
-        public HierarchicalDataTemplate FolderTemplate { get; set; }
+        public DataTemplate PlaylistTemplate { get; set; }
 
-        public HierarchicalDataTemplate PlaylistTemplate { get; set; }
+        public DataTemplate NoDataTemplate { get; set; }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            if (item is PlaylistFolderViewModel)
-            {
-                return FolderTemplate;
-            }
-            else if (item is PlaylistViewModel)
+            if (item is PlaylistViewModel)
             {
                 return PlaylistTemplate;
             }
             else
             {
-                return base.SelectTemplate(item, container);
+                return NoDataTemplate;
             }
-
         }
     }
 }

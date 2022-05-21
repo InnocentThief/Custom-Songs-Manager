@@ -204,6 +204,7 @@
       <DependentUpon>AvailableCustomLevelsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Workspaces\Playlists\PlaylistDataTemplateSelector.cs" />
+    <Compile Include="Workspaces\Playlists\PlaylistTreeDataTemplateSelector.cs" />
     <Compile Include="Workspaces\Playlists\PlaylistSongDetailDifficultyView.xaml.cs">
       <DependentUpon>PlaylistSongDetailDifficultyView.xaml</DependentUpon>
     </Compile>
