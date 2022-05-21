@@ -3,7 +3,7 @@
   <Class Name="CSM.UiLogic.Workspaces.Playlists.PlaylistViewModel">
     <Position X="7" Y="4.5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>QAAAgIASQAQAYgDAAAAEIQQAAABQIBADAAAAAAAMEIA=</HashCode>
+      <HashCode>QAAAgIAyQAQAYgDAAAAEIQQAAABQIBADAAAAAAAMEIA=</HashCode>
       <FileName>Workspaces\Playlists\PlaylistViewModel.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -14,7 +14,7 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="CSM.UiLogic.Workspaces.Playlists.PlaylistSongViewModel">
-    <Position X="11.25" Y="4.5" Width="2.5" />
+    <Position X="11.25" Y="4.5" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAIAAAACAAIAAQABAAAIAAACAAAgAAAFCAAAgAAIEAA=</HashCode>
       <FileName>Workspaces\Playlists\PlaylistSongViewModel.cs</FileName>
@@ -51,15 +51,36 @@
   <Class Name="CSM.UiLogic.Workspaces.PlaylistsViewModel">
     <Position X="0.5" Y="0.5" Width="3" />
     <TypeIdentifier>
-      <HashCode>BgAQAxAACgFQIggBgCKAAAQAAAAEAAMAAAAAAAAAAAI=</HashCode>
+      <HashCode>BgAQAxAACgFQIggBgCKAAAQAgAAEAAMAAAAAAAAAAAI=</HashCode>
       <FileName>Workspaces\PlaylistsViewModel.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="SelectedPlaylist" />
+      <Property Name="CustomLevels" />
     </ShowAsAssociation>
     <ShowAsCollectionAssociation>
       <Property Name="Playlists" />
     </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CSM.UiLogic.Workspaces.Playlists.PlaylistCustomLevelsViewModel">
+    <Position X="4.25" Y="12.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>BAAAAgAACgAQAAgggACAIAAAgQAAIAEACAAAAAAEAAI=</HashCode>
+      <FileName>Workspaces\Playlists\PlaylistCustomLevelsViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="SelectedCustomLevel" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="CustomLevels" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CSM.UiLogic.Workspaces.CustomLevels.CustomLevelViewModel">
+    <Position X="9" Y="12.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAIABAEBAAAAIAAJAIAEAAAAgAAoAAA=</HashCode>
+      <FileName>Workspaces\CustomLevels\CustomLevelViewModel.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

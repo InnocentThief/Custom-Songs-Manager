@@ -4,28 +4,57 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:p="clr-namespace:CSM.App.Properties"
-             xmlns:local="clr-namespace:CSM.App.Workspaces.Playlists"
+             xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
+             xmlns:local="clr-namespace:CSM.App.Workspaces.Playlists" xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="150" />
-        </Grid.RowDefinitions>
-        <!-- Header -->
-        <Grid Background="#FF018574">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <!-- Title -->
-            <TextBlock Text="{x:Static p:Resources.Playlists_AvailableCustomLevels_Title}" Foreground="White" VerticalAlignment="Center" Margin="8,0" FontWeight="DemiBold" />
-        </Grid>
-        <!-- Content -->
-        <Border Grid.Row="1" BorderBrush="DimGray" BorderThickness="1,0,1,1">
 
-        </Border>
-        <local:PlaylistSongDetailView Grid.Row="2" Margin="0,6,0,0" />
-    </Grid>
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
+    </UserControl.Resources>
+
+    <telerik:RadBusyIndicator IsIndeterminate="False" ProgressValue="{Binding LoadProgress}" IsBusy="{Binding IsLoading}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="150" />
+            </Grid.RowDefinitions>
+            <!-- Header -->
+            <Grid Background="#FF018574">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <!-- Title -->
+                <TextBlock Text="{x:Static p:Resources.Playlists_AvailableCustomLevels_Title}" Foreground="White" VerticalAlignment="Center" Margin="8,0" FontWeight="DemiBold" />
+            </Grid>
+            <!-- Content -->
+            <Border Grid.Row="1" BorderBrush="DimGray" BorderThickness="1,0,1,1">
+                <telerik:RadGridView ItemsSource="{Binding CustomLevels}" SelectedItem="{Binding SelectedCustomLevel}" FilteringMode="FilterRow" AutoGenerateColumns="False" RowIndicatorVisibility="Collapsed" FrozenColumnsSplitterVisibility="Collapsed" BorderThickness="0" AlternationCount="2" SelectionChanged="RadGridView_SelectionChanged" FilterOperatorsLoading="RadGridView_FilterOperatorsLoading"   >
+                    <telerik:RadGridView.Columns>
+                        <!-- Add button (will add song to selected playlist) -->
+                        <telerik:GridViewColumn Width="SizeToCells">
+                            <telerik:GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <telerik:RadButton Command="{Binding AddToPlaylistCommand}" Grid.Column="1" Background="Transparent" BorderThickness="0" ToolTip="{x:Static p:Resources.Workspace_Playlist_AddCustomLevel}">
+                                        <telerik:RadGlyph Glyph="&#xe11e;" Foreground="Green" />
+                                    </telerik:RadButton>
+                                </DataTemplate>
+                            </telerik:GridViewColumn.CellTemplate>
+                        </telerik:GridViewColumn>
+                        <!-- Song Name -->
+                        <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_CulumnHeader_Title}" Width="*" DataMemberBinding="{Binding SongName}" />
+                        <!-- Song Author Name -->
+                        <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_Artist}" Width="*" DataMemberBinding="{Binding SongAuthorName}" />
+                        <!-- Level Author Name -->
+                        <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_Mapper}" Width="*" DataMemberBinding="{Binding LevelAuthorName}" />
+                        <!-- Change Date -->
+                        <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_ChangeDate}" Width="SizeToCells" DataMemberBinding="{Binding ChangeDate, StringFormat='g', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
+                    </telerik:RadGridView.Columns>
+                </telerik:RadGridView>
+            </Border>
+            <local:PlaylistSongDetailView Grid.Row="2" Margin="0,6,0,0" />
+        </Grid>
+    </telerik:RadBusyIndicator>
 </UserControl>

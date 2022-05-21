@@ -70,7 +70,7 @@
             <!-- Playlist -->
             <ContentControl Grid.Column="2" Content="{Binding SelectedPlaylist}" ContentTemplateSelector="{StaticResource PlaylistDataTemplateSelector}" />
             <!-- Available Custom Levels -->
-            <local:AvailableCustomLevelsView Grid.Column="4" />
+            <local:AvailableCustomLevelsView Grid.Column="4" DataContext="{Binding CustomLevels}" />
         </Grid>
     </telerik:RadBusyIndicator>
 </UserControl>

@@ -30,6 +30,7 @@ namespace CSM.UiLogic.Workspaces
         private bool isLoading;
         private int loadProgress;
         private int playlistCount;
+        private PlaylistSelectionState playlistSelectionState;
 
         #endregion
 
@@ -56,6 +57,7 @@ namespace CSM.UiLogic.Workspaces
                 {
                     playlist.CheckContainsSong(String.Empty);
                 }
+                playlistSelectionState.PlaylistSelectionChanged(selectedPlaylist != null && selectedPlaylist.GetType() != typeof(PlaylistFolderViewModel));
             }
         }
 
@@ -110,6 +112,8 @@ namespace CSM.UiLogic.Workspaces
             }
         }
 
+        public PlaylistCustomLevelsViewModel CustomLevels { get; }
+
         /// <summary>
         /// Gets the workspace type.
         /// </summary>
@@ -127,6 +131,9 @@ namespace CSM.UiLogic.Workspaces
             RefreshCommand = new RelayCommand(Refresh);
             DeletePlaylistCommand = new RelayCommand(DeletePlaylist, CanDeletePlaylist);
             UserConfigManager.UserConfigChanged += UserConfigManager_UserConfigChanged;
+            playlistSelectionState = new PlaylistSelectionState();
+            CustomLevels = new PlaylistCustomLevelsViewModel(playlistSelectionState);
+
         }
 
         /// <summary>
@@ -146,6 +153,8 @@ namespace CSM.UiLogic.Workspaces
             bgWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
             bgWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
             bgWorker.RunWorkerAsync();
+
+            CustomLevels.LoadData();
         }
 
         /// <summary>
@@ -286,6 +295,10 @@ namespace CSM.UiLogic.Workspaces
             {
                 PlaylistPath = UserConfigManager.Instance.Config.PlaylistPaths.First().Path;
                 if (IsActive) Refresh();
+            }
+            if (e.CustomLevelsPathChanged)
+            {
+                CustomLevels.LoadData();
             }
         }
 

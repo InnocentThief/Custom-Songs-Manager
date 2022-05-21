@@ -104,7 +104,9 @@
     <Compile Include="Workspaces\CustomLevels\CustomLevelViewModel.cs" />
     <Compile Include="Workspaces\PlaylistsViewModel.cs" />
     <Compile Include="Workspaces\Playlists\BasePlaylistViewModel.cs" />
+    <Compile Include="Workspaces\Playlists\PlaylistCustomLevelsViewModel.cs" />
     <Compile Include="Workspaces\Playlists\PlaylistFolderViewModel.cs" />
+    <Compile Include="Workspaces\Playlists\PlaylistSelectionState.cs" />
     <Compile Include="Workspaces\Playlists\PlaylistSongChangedEventArgs.cs" />
     <Compile Include="Workspaces\Playlists\PlaylistSongDetailViewModel.cs" />
     <Compile Include="Workspaces\Playlists\PlaylistSongDifficultyViewModel.cs" />

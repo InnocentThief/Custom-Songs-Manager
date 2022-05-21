@@ -129,7 +129,7 @@
                             <telerik:GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <telerik:RadButton Command="{Binding DeleteSongCommand}" Grid.Column="1" Background="Transparent" BorderThickness="0" Margin="0,0,10,0" ToolTip="{x:Static p:Resources.Workspace_Playlist_RemoveSongFromPlaylist_ToolTip}">
-                                        <telerik:RadGlyph Glyph="&#xe10c;" Foreground="Red" />
+                                        <telerik:RadGlyph Glyph="&#xe121;" Foreground="Red" />
                                     </telerik:RadButton>
                                 </DataTemplate>
                             </telerik:GridViewColumn.CellTemplate>

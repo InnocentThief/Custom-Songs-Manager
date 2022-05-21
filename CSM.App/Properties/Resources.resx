@@ -288,6 +288,9 @@
   <data name="Workspace_Playlists_Title" xml:space="preserve">
     <value>Playlists</value>
   </data>
+  <data name="Workspace_Playlist_AddCustomLevel" xml:space="preserve">
+    <value>Adds the song to the selected playlist</value>
+  </data>
   <data name="Workspace_Playlist_RemoveSongFromPlaylist_ToolTip" xml:space="preserve">
     <value>Remove song from playlist</value>
   </data>

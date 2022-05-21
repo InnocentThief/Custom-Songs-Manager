@@ -5,6 +5,7 @@ using CSM.UiLogic.Properties;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
@@ -146,6 +147,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
                     Characteristic = viewModel.Characteristic,
                     Name = viewModel.Name,
                 };
+                if (playlistSong.Difficulties == null) playlistSong.Difficulties = new List<PlaylistSongDifficulty>();
                 playlistSong.Difficulties.Add(difficulty);
                 Difficulties.Add(viewModel);
             }
