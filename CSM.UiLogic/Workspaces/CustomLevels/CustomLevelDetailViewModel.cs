@@ -55,7 +55,15 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
             }
         }
 
+        /// <summary>
+        /// Gets the description of the beatmap.
+        /// </summary>
         public string Description => beatMap.Description;
+
+        /// <summary>
+        /// Gets whether a description is available.
+        /// </summary>
+        public bool HasDescription => !string.IsNullOrWhiteSpace(beatMap.Description);
 
         /// <summary>
         /// Contains the <see cref="CustomLevelDifficultyViewModel"/> grouped by characteristc.
