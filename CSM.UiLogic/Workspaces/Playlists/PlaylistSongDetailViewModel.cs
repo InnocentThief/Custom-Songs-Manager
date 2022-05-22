@@ -9,6 +9,9 @@ using System.Windows;
 
 namespace CSM.UiLogic.Workspaces.Playlists
 {
+    /// <summary>
+    /// Represents the playlist sond detail.
+    /// </summary>
     public class PlaylistSongDetailViewModel
     {
         private BeatMap beatMap;
@@ -41,6 +44,10 @@ namespace CSM.UiLogic.Workspaces.Playlists
 
         #endregion
 
+        /// <summary>
+        /// Initialies a new <see cref="PlaylistSongDetailViewModel"/>.
+        /// </summary>
+        /// <param name="beatMap">The beatmap of the song.</param>
         public PlaylistSongDetailViewModel(BeatMap beatMap)
         {
             this.beatMap = beatMap;

@@ -231,6 +231,10 @@ namespace CSM.UiLogic.Workspaces.Playlists
             }
         }
 
+        /// <summary>
+        /// Adds a song to the playlist.
+        /// </summary>
+        /// <param name="e">EventArgs containing the song informations.</param>
         public void AddPlaylistSong(AddSongToPlaylistEventArgs e)
         {
             var playlistSong = new PlaylistSong
@@ -263,6 +267,11 @@ namespace CSM.UiLogic.Workspaces.Playlists
             PlaylistSongDetail = beatmap == null ? null : new PlaylistSongDetailViewModel(beatmap);
         }
 
+        /// <summary>
+        /// Checks if the playlist contains a song with the given hash.
+        /// </summary>
+        /// <param name="hash">Hash of the song.</param>
+        /// <returns>True if the playlist contains the song; otherwise false.</returns>
         public override bool CheckContainsSong(string hash)
         {
             SelectedPlaylistSong = Songs.Where(s => s.Hash == hash).FirstOrDefault();

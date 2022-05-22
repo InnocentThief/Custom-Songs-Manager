@@ -19,8 +19,12 @@ namespace CSM.UiLogic.Workspaces.Playlists
     /// </summary>
     public class PlaylistSongViewModel : ObservableObject
     {
+        #region Private fields
+
         private Playlist playlist;
         private PlaylistSong playlistSong;
+
+        #endregion
 
         #region Public Properties
 
@@ -79,6 +83,9 @@ namespace CSM.UiLogic.Workspaces.Playlists
 
         #endregion
 
+        /// <summary>
+        /// Occurs on song deletion.
+        /// </summary>
         public event EventHandler DeleteSongEvent;
 
         /// <summary>

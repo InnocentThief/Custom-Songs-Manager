@@ -28,10 +28,15 @@
                 </Grid.ColumnDefinitions>
                 <!-- Title -->
                 <TextBlock Text="{x:Static p:Resources.Playlists_AvailableCustomLevels_Title}" Foreground="White" VerticalAlignment="Center" Margin="8,0" FontWeight="DemiBold" />
+                <telerik:RadToolBar Grid.Column="1" OverflowButtonVisibility="Collapsed" GripVisibility="Collapsed" Background="Transparent" BorderThickness="0" >
+                    <telerik:RadButton Grid.Column="1" Background="Transparent" BorderThickness="0" Command="{Binding RefreshCommand}" ToolTip="Refresh">
+                        <telerik:RadGlyph Glyph="&#xe103;" />
+                    </telerik:RadButton>
+                </telerik:RadToolBar>
             </Grid>
             <!-- Content -->
             <Border Grid.Row="1" BorderBrush="DimGray" BorderThickness="1,0,1,1">
-                <telerik:RadTabControl SelectionChanged="RadTabControl_SelectionChanged">
+                <telerik:RadTabControl SelectionChanged="RadTabControl_SelectionChanged" SelectedIndex="{Binding SelectedTabIndex}">
                     <telerik:RadTabItem x:Name="CustomLevels" Header="Custom Levels">
                         <telerik:RadGridView ItemsSource="{Binding CustomLevels}" SelectedItem="{Binding SelectedCustomLevel}" FilteringMode="FilterRow" AutoGenerateColumns="False" RowIndicatorVisibility="Collapsed" FrozenColumnsSplitterVisibility="Collapsed" BorderThickness="0" AlternationCount="2" SelectionChanged="RadGridView_SelectionChanged" FilterOperatorsLoading="RadGridView_FilterOperatorsLoading"   >
                             <telerik:RadGridView.Columns>
@@ -57,8 +62,25 @@
                         </telerik:RadGridView>
                     </telerik:RadTabItem>
                     <telerik:RadTabItem x:Name="Favorites" Header="Beat Saber Favorites">
-                        <telerik:RadGridView ItemsSource="{Binding Favorites}" AutoGenerateColumns="True" >
-                            
+                        <telerik:RadGridView ItemsSource="{Binding Favorites}" SelectedItem="{Binding SelectedFavorite}" FilteringMode="FilterRow" AutoGenerateColumns="False" RowIndicatorVisibility="Collapsed" FrozenColumnsSplitterVisibility="Collapsed" BorderThickness="0" AlternationCount="2" SelectionChanged="Favorites_SelectionChanged" FilterOperatorsLoading="Favorites_FilterOperatorsLoading"  >
+                            <telerik:RadGridView.Columns>
+                                <!-- Add button (will add song to selected playlist) -->
+                                <telerik:GridViewColumn Width="SizeToCells">
+                                    <telerik:GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <telerik:RadButton Command="{Binding AddToPlaylistCommand}" Grid.Column="1" Background="Transparent" BorderThickness="0" ToolTip="{x:Static p:Resources.Workspace_Playlist_AddCustomLevel}">
+                                                <telerik:RadGlyph Glyph="&#xe11e;" Foreground="Green" />
+                                            </telerik:RadButton>
+                                        </DataTemplate>
+                                    </telerik:GridViewColumn.CellTemplate>
+                                </telerik:GridViewColumn>
+                                <!-- Song Name -->
+                                <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_CulumnHeader_Title}" Width="*" DataMemberBinding="{Binding SongName}" />
+                                <!-- Song Author Name -->
+                                <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_Artist}" Width="*" DataMemberBinding="{Binding SongAuthorName}" />
+                                <!-- Level Author Name -->
+                                <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_Mapper}" Width="*" DataMemberBinding="{Binding LevelAuthorName}" />
+                            </telerik:RadGridView.Columns>
                         </telerik:RadGridView>
                     </telerik:RadTabItem>
                 </telerik:RadTabControl>

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 
@@ -24,6 +23,11 @@ namespace CSM.UiLogic.Workspaces.Playlists
             Playlists = new ObservableCollection<BasePlaylistViewModel>();
         }
 
+        /// <summary>
+        /// Checks if the folder contains a playlist that contains a song with the given hash.
+        /// </summary>
+        /// <param name="hash">The hash of the song to check.</param>
+        /// <returns>True if the folder contains the song.</returns>
         public override bool CheckContainsSong(string hash)
         {
             ContainsSong = Playlists.Any(p => p.CheckContainsSong(hash));

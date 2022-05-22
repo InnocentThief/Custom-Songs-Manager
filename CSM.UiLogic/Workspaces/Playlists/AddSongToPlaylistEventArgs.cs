@@ -2,6 +2,9 @@
 
 namespace CSM.UiLogic.Workspaces.Playlists
 {
+    /// <summary>
+    /// Event Args used to add a song or a favorite to a playlist.
+    /// </summary>
     public class AddSongToPlaylistEventArgs : EventArgs
     {
         public string BsrKey { get; set; }

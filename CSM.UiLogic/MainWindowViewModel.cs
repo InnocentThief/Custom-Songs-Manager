@@ -8,6 +8,9 @@ using System.Linq;
 
 namespace CSM.UiLogic
 {
+    /// <summary>
+    /// Represents the main window view model.
+    /// </summary>
     public class MainWindowViewModel : ObservableObject
     {
         #region Private fields

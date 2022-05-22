@@ -52,7 +52,7 @@
   <Class Name="CSM.UiLogic.Workspaces.PlaylistsViewModel">
     <Position X="0.5" Y="0.5" Width="3" />
     <TypeIdentifier>
-      <HashCode>BgCQAxAACgFQIggJgCKAAAQAgAAEAAMAAAAAAAAAAAI=</HashCode>
+      <HashCode>BgCQAzAACgFQIggJgCKAAAQAgAIEAAMAAAAAAAAAACI=</HashCode>
       <FileName>Workspaces\PlaylistsViewModel.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -66,21 +66,23 @@
   <Class Name="CSM.UiLogic.Workspaces.Playlists.PlaylistCustomLevelsViewModel">
     <Position X="0.75" Y="12.75" Width="3.5" />
     <TypeIdentifier>
-      <HashCode>BAAAAgASCgAQAAgIgACAIAAAgQAAIBEAAAAAAAIAAAI=</HashCode>
+      <HashCode>BAAAAgASCgAQAAgMgACBIAAAgQAAIBEBACCAAQIAAAY=</HashCode>
       <FileName>Workspaces\Playlists\PlaylistCustomLevelsViewModel.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="SelectedCustomLevel" />
+      <Property Name="SelectedFavorite" />
       <Property Name="PlaylistSongDetail" />
     </ShowAsAssociation>
     <ShowAsCollectionAssociation>
       <Property Name="CustomLevels" />
+      <Property Name="Favorites" />
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="CSM.UiLogic.Workspaces.CustomLevels.CustomLevelViewModel">
     <Position X="7" Y="12.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>BAAAAAAAACAEAAIABAEBAAAAIAAJBMAEAAAAgAooAAA=</HashCode>
+      <HashCode>BAAAAAAAACAEAAIABAEBAAAAJAAJBMAEAAAAgAooAAA=</HashCode>
       <FileName>Workspaces\CustomLevels\CustomLevelViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -89,6 +91,13 @@
     <TypeIdentifier>
       <HashCode>AAIAEAAAAIAAAAgABAEAABAAAAAAAAAkAAgAgAAAAAA=</HashCode>
       <FileName>Workspaces\Playlists\PlaylistSongDetailViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSM.UiLogic.Workspaces.Playlists.FavoriteViewModel">
+    <Position X="7" Y="19.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAEAAQABAAAABAAAAAABEAEAAAAgAoAAAA=</HashCode>
+      <FileName>Workspaces\Playlists\FavoriteViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

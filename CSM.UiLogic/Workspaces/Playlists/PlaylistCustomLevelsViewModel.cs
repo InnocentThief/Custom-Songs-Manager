@@ -4,6 +4,7 @@ using CSM.Framework.Logging;
 using CSM.Services;
 using CSM.UiLogic.Workspaces.CustomLevels;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,6 +16,9 @@ using System.Threading.Tasks;
 
 namespace CSM.UiLogic.Workspaces.Playlists
 {
+    /// <summary>
+    /// ViewModel used to handle custom levels and favorites on the playlist workspace.
+    /// </summary>
     public class PlaylistCustomLevelsViewModel : ObservableObject
     {
         #region Private fields
@@ -26,13 +30,20 @@ namespace CSM.UiLogic.Workspaces.Playlists
         private PlaylistSongDetailViewModel playlistSongDetail;
         private BeatMapService beatMapService;
         private PlaylistSelectionState playlistSelectionState;
+        private FavoriteViewModel selectedFavorite;
 
         #endregion
 
         #region Public Properties
 
+        /// <summary>
+        /// Contains all custom levels.
+        /// </summary>
         public ObservableCollection<CustomLevelViewModel> CustomLevels { get; }
 
+        /// <summary>
+        /// Gets or sets the selected custom level.
+        /// </summary>
         public CustomLevelViewModel SelectedCustomLevel
         {
             get => selectedCustomLevel;
@@ -44,7 +55,24 @@ namespace CSM.UiLogic.Workspaces.Playlists
             }
         }
 
+        /// <summary>
+        /// Contains all favorites.
+        /// </summary>
         public ObservableCollection<FavoriteViewModel> Favorites { get; }
+
+        /// <summary>
+        /// Gets or sets the selected favorite.
+        /// </summary>
+        public FavoriteViewModel SelectedFavorite
+        {
+            get => selectedFavorite;
+            set
+            {
+                if (value == selectedFavorite) return;
+                selectedFavorite = value;
+                OnPropertyChanged();
+            }
+        }
 
         /// <summary>
         /// Gets or sets the viewmodel for the detail area.
@@ -96,10 +124,27 @@ namespace CSM.UiLogic.Workspaces.Playlists
             }
         }
 
+        /// <summary>
+        /// Gets or sets the selected tab.
+        /// </summary>
+        public int SelectedTabIndex { get; set; }
+
+        /// <summary>
+        /// Command used to refresh either custom levels or favorites.
+        /// </summary>
+        public AsyncRelayCommand RefreshCommand { get; }
+
         #endregion
 
+        /// <summary>
+        /// Occurs on adding a song to a playlist.
+        /// </summary>
         public event EventHandler<AddSongToPlaylistEventArgs> AddSongToPlaylistEvent;
 
+        /// <summary>
+        /// Initializes a new <see cref="PlaylistCustomLevelsViewModel"/>.
+        /// </summary>
+        /// <param name="playlistSelectionState">The current playlistSelectionState.</param>
         public PlaylistCustomLevelsViewModel(PlaylistSelectionState playlistSelectionState)
         {
             this.playlistSelectionState = playlistSelectionState;
@@ -108,16 +153,30 @@ namespace CSM.UiLogic.Workspaces.Playlists
             CustomLevels = new ObservableCollection<CustomLevelViewModel>();
             Favorites = new ObservableCollection<FavoriteViewModel>();
             beatMapService = new BeatMapService("maps/id");
+
+            RefreshCommand = new AsyncRelayCommand(RefreshAsync);
         }
 
+        /// <summary>
+        /// Gets the BeatSaver data for the given key.
+        /// </summary>
+        /// <param name="key">BSR key of the beatmap.</param>
+        /// <returns>An awaitable task that yields no result.</returns>
         public async Task GetBeatSaverBeatMapDataAsync(string key)
         {
             var beatmap = await beatMapService.GetBeatMapDataAsync(key);
             PlaylistSongDetail = beatmap == null ? null : new PlaylistSongDetailViewModel(beatmap);
         }
 
+        /// <summary>
+        /// Loads the custom level data.
+        /// </summary>
         public void LoadData()
         {
+            foreach (var customLevel in CustomLevels)
+            {
+                customLevel.AddSongToPlaylistEvent -= CustomLevelOrFavorite_AddSongToPlaylistEvent;
+            }
             CustomLevels.Clear();
 
             bgWorker = new BackgroundWorker
@@ -131,8 +190,20 @@ namespace CSM.UiLogic.Workspaces.Playlists
             bgWorker.RunWorkerAsync();
         }
 
-        public async Task LoadFavoritesAsync()
+        /// <summary>
+        /// Loads the favorites in asynchronous fashion.
+        /// </summary>
+        /// <param name="forceRefresh">Indicates whether to force the loading.</param>
+        /// <returns>An awaitable task that yields no result.</returns>
+        public async Task LoadFavoritesAsync(bool forceRefresh)
         {
+            if (!forceRefresh && Favorites.Any()) return;
+            foreach (var favorite in Favorites)
+            {
+                favorite.AddSongToPlaylistEvent -= CustomLevelOrFavorite_AddSongToPlaylistEvent;
+            }
+            Favorites.Clear();
+
             var locallow = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData).Replace("Roaming", "LocalLow");
             var playerDataFile = Path.Combine(locallow, "Hyperbolic Magnetism\\Beat Saber\\PlayerData.dat");
             var playerDataContent = File.ReadAllText(playerDataFile);
@@ -146,17 +217,35 @@ namespace CSM.UiLogic.Workspaces.Playlists
                 var beatmap = await favoriteBeatMapService.GetBeatMapDataAsync(hash);
                 if (beatmap == null) continue;
                 var favoriteViewModel = new FavoriteViewModel(beatmap);
+                favoriteViewModel.AddSongToPlaylistEvent += CustomLevelOrFavorite_AddSongToPlaylistEvent;
                 Favorites.Add(favoriteViewModel);
             }
         }
 
         #region Helper methods
 
+        private async Task RefreshAsync()
+        {
+            if (SelectedTabIndex == 0)
+            {
+                LoadData();
+            }
+            else
+            {
+                await LoadFavoritesAsync(true);
+            }
+        }
+
         private void PlaylistSelectionState_PlaylistSelectionChangedEvent(object sender, EventArgs e)
         {
             foreach (var customLevel in CustomLevels)
             {
                 customLevel.SetCanAddToPlaylist(playlistSelectionState.PlaylistSelected);
+            }
+
+            foreach (var favorite in Favorites)
+            {
+                favorite.SetCanAddToPlaylist(playlistSelectionState.PlaylistSelected);
             }
         }
 
@@ -217,7 +306,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
                 foreach (var customLevel in customLevels)
                 {
                     var customLevelViewModel = new CustomLevelViewModel(customLevel);
-                    customLevelViewModel.AddSongToPlaylistEvent += CustomLevelViewModel_AddSongToPlaylistEvent;
+                    customLevelViewModel.AddSongToPlaylistEvent += CustomLevelOrFavorite_AddSongToPlaylistEvent;
                     CustomLevels.Add(customLevelViewModel);
                 }
             }
@@ -233,7 +322,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
             }
         }
 
-        private async void CustomLevelViewModel_AddSongToPlaylistEvent(object sender, AddSongToPlaylistEventArgs e)
+        private async void CustomLevelOrFavorite_AddSongToPlaylistEvent(object sender, AddSongToPlaylistEventArgs e)
         {
             var beatmap = await beatMapService.GetBeatMapDataAsync(e.BsrKey);
             e.Hash = beatmap.Versions.First().Hash;

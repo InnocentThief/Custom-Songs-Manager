@@ -15,6 +15,8 @@ namespace CSM.UiLogic.Workspaces.Playlists
 
         #endregion
 
+        #region Public Properties
+
         /// <summary>
         /// Name of the playlist or folder.
         /// </summary>
@@ -29,6 +31,9 @@ namespace CSM.UiLogic.Workspaces.Playlists
             }
         }
 
+        /// <summary>
+        /// Gets or sets whether the playlist or the folder contains the song.
+        /// </summary>
         public bool ContainsSong
         {
             get => containsSong;
@@ -46,6 +51,8 @@ namespace CSM.UiLogic.Workspaces.Playlists
         /// <remarks>Could be file path or directory. Based on the type.</remarks>
         public string FilePath { get; }
 
+        #endregion
+
         public event EventHandler<PlaylistSongChangedEventArgs> SongChangedEvent;
 
         /// <summary>
@@ -58,8 +65,17 @@ namespace CSM.UiLogic.Workspaces.Playlists
             FilePath = path;
         }
 
-        public abstract bool CheckContainsSong(string songName);
+        /// <summary>
+        /// Checks if the playlist or folder contains the song with the given hash.
+        /// </summary>
+        /// <param name="hash">The hash of the song to check.</param>
+        /// <returns>True if the playlist or folder contains the song.</returns>
+        public abstract bool CheckContainsSong(string hash);
 
+        /// <summary>
+        /// Occurs when the selected playlist song changes.
+        /// </summary>
+        /// <param name="playlistSong"></param>
         protected void SongChanged(PlaylistSongViewModel playlistSong)
         {
             if (playlistSong == null) return;

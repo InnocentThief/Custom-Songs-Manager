@@ -10,13 +10,14 @@ namespace CSM.UiLogic.Workspaces.Playlists
     /// </summary>
     public class PlaylistSongDifficultyViewModel : ObservableObject
     {
+        #region Private fields
+
         private bool isSelectedDifficulty;
-
-        /// <summary>
-        /// Gets the song difficulty data.
-        /// </summary>
-
         private PlaylistSongDifficulty playlistSongDifficulty;
+
+        #endregion
+
+        #region Public Properties
 
         /// <summary>
         /// Gets the difficulty characteristics.
@@ -28,8 +29,14 @@ namespace CSM.UiLogic.Workspaces.Playlists
         /// </summary>
         public string Name => playlistSongDifficulty.Name;
 
+        /// <summary>
+        /// Gets the characteristic combined with the difficulty.
+        /// </summary>
         public string Difficulty => $"{Characteristic} {Name}";
 
+        /// <summary>
+        /// Gets the difficulty detail (NPS, Chroma, Mapping Extensions, Noodle).
+        /// </summary>
         public string DifficultyDetail
         {
             get
@@ -58,6 +65,11 @@ namespace CSM.UiLogic.Workspaces.Playlists
             }
         }
 
+        #endregion
+
+        /// <summary>
+        /// Occures when the difficulty changes.
+        /// </summary>
         public event EventHandler DifficultyChanged;
 
         /// <summary>

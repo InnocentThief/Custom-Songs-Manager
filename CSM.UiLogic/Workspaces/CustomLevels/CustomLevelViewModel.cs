@@ -22,6 +22,8 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
 
         public string BsrKey => customLevel.BsrKey;
 
+        public int BsrKeyHex => int.Parse(customLevel.BsrKey, System.Globalization.NumberStyles.HexNumber);
+
         public string SongName => customLevel.SongName;
 
         public string SongSubName => customLevel.SongSubName;
@@ -61,6 +63,10 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
             AddToPlaylistCommand = new RelayCommand(AddToPlaylist, CanAddToPlaylist);
         }
 
+        /// <summary>
+        /// Sets whether adding the song to a playlist is available.
+        /// </summary>
+        /// <param name="playlistSelected">Indicates whether a playlist is selected.</param>
         public void SetCanAddToPlaylist(bool playlistSelected)
         {
             canAddToPlaylist = playlistSelected;

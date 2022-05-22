@@ -51,11 +51,22 @@ namespace CSM.App.Workspaces.Playlists
             if ((e.AddedItems[0] as RadTabItem).Name == "Favorites")
             {
                 var viewModel = DataContext as PlaylistCustomLevelsViewModel;
-                if (viewModel != null) await viewModel.LoadFavoritesAsync();
-                            }
+                if (viewModel != null) await viewModel.LoadFavoritesAsync(false);
+            }
+        }
 
+        private async void Favorites_SelectionChanged(object sender, SelectionChangeEventArgs e)
+        {
+            var viewModel = DataContext as PlaylistCustomLevelsViewModel;
+            if (viewModel?.SelectedFavorite != null)
+            {
+                await viewModel.GetBeatSaverBeatMapDataAsync(viewModel.SelectedFavorite.Key);
+            }
+        }
 
-            //if (e.AddedItems[0])
+        private void Favorites_FilterOperatorsLoading(object sender, Telerik.Windows.Controls.GridView.FilterOperatorsLoadingEventArgs e)
+        {
+            e.DefaultOperator1 = Telerik.Windows.Data.FilterOperator.Contains;
         }
     }
 }
