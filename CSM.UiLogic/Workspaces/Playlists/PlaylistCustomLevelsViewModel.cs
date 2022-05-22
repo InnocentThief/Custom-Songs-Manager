@@ -1,6 +1,5 @@
 ﻿using CSM.DataAccess.Entities.Offline;
 using CSM.Framework.Configuration.UserConfiguration;
-using CSM.Framework.Extensions;
 using CSM.Framework.Logging;
 using CSM.Services;
 using CSM.UiLogic.Workspaces.CustomLevels;
@@ -44,6 +43,8 @@ namespace CSM.UiLogic.Workspaces.Playlists
                 OnPropertyChanged();
             }
         }
+
+        public ObservableCollection<FavoriteViewModel> Favorites { get; }
 
         /// <summary>
         /// Gets or sets the viewmodel for the detail area.
@@ -105,6 +106,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
             playlistSelectionState.PlaylistSelectionChangedEvent += PlaylistSelectionState_PlaylistSelectionChangedEvent;
 
             CustomLevels = new ObservableCollection<CustomLevelViewModel>();
+            Favorites = new ObservableCollection<FavoriteViewModel>();
             beatMapService = new BeatMapService("maps/id");
         }
 
@@ -127,6 +129,25 @@ namespace CSM.UiLogic.Workspaces.Playlists
             bgWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
             bgWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
             bgWorker.RunWorkerAsync();
+        }
+
+        public async Task LoadFavoritesAsync()
+        {
+            var locallow = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData).Replace("Roaming", "LocalLow");
+            var playerDataFile = Path.Combine(locallow, "Hyperbolic Magnetism\\Beat Saber\\PlayerData.dat");
+            var playerDataContent = File.ReadAllText(playerDataFile);
+            var playerData = JsonSerializer.Deserialize<PlayerData>(playerDataContent);
+
+            var favoriteBeatMapService = new BeatMapService("maps/hash");
+
+            foreach (var favorite_levelId in playerData.LocalPlayers.First().FavoritesLevelIds)
+            {
+                var hash = favorite_levelId.Substring(13);
+                var beatmap = await favoriteBeatMapService.GetBeatMapDataAsync(hash);
+                if (beatmap == null) continue;
+                var favoriteViewModel = new FavoriteViewModel(beatmap);
+                Favorites.Add(favoriteViewModel);
+            }
         }
 
         #region Helper methods

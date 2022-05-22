@@ -106,6 +106,7 @@
     <Compile Include="Workspaces\PlaylistsViewModel.cs" />
     <Compile Include="Workspaces\Playlists\AddSongToPlaylistEventArgs.cs" />
     <Compile Include="Workspaces\Playlists\BasePlaylistViewModel.cs" />
+    <Compile Include="Workspaces\Playlists\FavoriteViewModel.cs" />
     <Compile Include="Workspaces\Playlists\PlaylistCustomLevelsViewModel.cs" />
     <Compile Include="Workspaces\Playlists\PlaylistFolderViewModel.cs" />
     <Compile Include="Workspaces\Playlists\PlaylistSelectionState.cs" />

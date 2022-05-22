@@ -1,8 +1,11 @@
-﻿using CSM.UiLogic.Workspaces.Playlists;
+﻿using CSM.DataAccess.Entities.Offline;
+using CSM.UiLogic.Workspaces.Playlists;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,7 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Telerik.Windows.Controls;
 
 namespace CSM.App.Workspaces.Playlists
 {
@@ -38,6 +41,21 @@ namespace CSM.App.Workspaces.Playlists
         private void RadGridView_FilterOperatorsLoading(object sender, Telerik.Windows.Controls.GridView.FilterOperatorsLoadingEventArgs e)
         {
             e.DefaultOperator1 = Telerik.Windows.Data.FilterOperator.Contains;
+        }
+
+        private async void RadTabControl_SelectionChanged(object sender, Telerik.Windows.Controls.RadSelectionChangedEventArgs e)
+        {
+
+
+            if (e.AddedItems.Count == 0) return;
+            if ((e.AddedItems[0] as RadTabItem).Name == "Favorites")
+            {
+                var viewModel = DataContext as PlaylistCustomLevelsViewModel;
+                if (viewModel != null) await viewModel.LoadFavoritesAsync();
+                            }
+
+
+            //if (e.AddedItems[0])
         }
     }
 }

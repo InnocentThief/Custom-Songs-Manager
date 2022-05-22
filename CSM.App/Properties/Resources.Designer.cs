@@ -115,7 +115,7 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Available Custom Levels.
+        ///   Looks up a localized string similar to Available Custom Levels / Beat Saber Favorites.
         /// </summary>
         public static string Playlists_AvailableCustomLevels_Title {
             get {

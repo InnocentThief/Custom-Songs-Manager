@@ -74,6 +74,8 @@
     <Compile Include="..\VersionInfo.cs">
       <Link>VersionInfo.cs</Link>
     </Compile>
+    <Compile Include="Entities\Offline\LocalPlayer.cs" />
+    <Compile Include="Entities\Offline\PlayerData.cs" />
     <Compile Include="Entities\Types\CharacteristicTypes.cs" />
     <Compile Include="Entities\Offline\BeatMapDifficulty.cs" />
     <Compile Include="Entities\Offline\BeatMapDifficultySet.cs" />
