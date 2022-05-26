@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -84,6 +85,11 @@ namespace CSM.UiLogic.Workspaces
         public RelayCommand DeletePlaylistCommand { get; }
 
         /// <summary>
+        /// Command used to open the playlists path in file explorer.
+        /// </summary>
+        public RelayCommand OpenInFileExplorerCommand { get; }
+
+        /// <summary>
         /// Gets or sets whether the data is loading.
         /// </summary>
         public bool IsLoading
@@ -144,6 +150,7 @@ namespace CSM.UiLogic.Workspaces
             AddFolderCommand = new RelayCommand(AddFolder);
             AddPlaylistCommand = new RelayCommand(AddPlaylist);
             DeletePlaylistCommand = new RelayCommand(DeletePlaylist, CanDeletePlaylist);
+            OpenInFileExplorerCommand = new RelayCommand(OpenInFileExplorer);
             UserConfigManager.UserConfigChanged += UserConfigManager_UserConfigChanged;
             playlistSelectionState = new PlaylistSelectionState();
             CustomLevels = new PlaylistCustomLevelsViewModel(playlistSelectionState);
@@ -461,6 +468,11 @@ namespace CSM.UiLogic.Workspaces
                 MessageBox.Show("The name for the new playlist is not valid", "Add new folder");
                 return;
             }
+        }
+
+        private void OpenInFileExplorer()
+        {
+            Process.Start(UserConfigManager.Instance.Config.PlaylistPaths.First().Path);
         }
 
         #endregion

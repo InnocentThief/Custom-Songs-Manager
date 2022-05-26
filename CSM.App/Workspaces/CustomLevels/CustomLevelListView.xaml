@@ -29,6 +29,9 @@
             <!-- Commands -->
             <telerik:RadToolBar Grid.Column="1" OverflowButtonVisibility="Collapsed" GripVisibility="Collapsed" Background="Transparent" BorderThickness="0" >
                 <TextBlock Text="{Binding CustomLevelPath}" TextTrimming="CharacterEllipsis" Width="300" ToolTip="{Binding CustomLevelPath}"/>
+                <telerik:RadButton Command="{Binding OpenInFileExplorerCommand}" ToolTip="{x:Static p:Resources.Workspace_CustomLevels_OpenPathInFileExplorer}">
+                    <telerik:RadGlyph Glyph="&#xe134;" />
+                </telerik:RadButton>
                 <telerik:RadButton Command="{Binding RefreshCommand}" ToolTip="{x:Static p:Resources.Workspace_CustomLevels_Command_Refresh}">
                     <telerik:RadGlyph Glyph="&#xe103;" />
                 </telerik:RadButton>

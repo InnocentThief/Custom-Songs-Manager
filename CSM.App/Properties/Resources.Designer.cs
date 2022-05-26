@@ -520,6 +520,15 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open path in file explorer.
+        /// </summary>
+        public static string Workspace_CustomLevels_OpenPathInFileExplorer {
+            get {
+                return ResourceManager.GetString("Workspace_CustomLevels_OpenPathInFileExplorer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Custom Levels.
         /// </summary>
         public static string Workspace_CustomLevels_Title {
@@ -561,6 +570,15 @@ namespace CSM.App.Properties {
         public static string Workspace_Playlists_AddPlaylistCommand {
             get {
                 return ResourceManager.GetString("Workspace_Playlists_AddPlaylistCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open path in file explorer.
+        /// </summary>
+        public static string Workspace_Playlists_OpenPathInFileExplorer {
+            get {
+                return ResourceManager.GetString("Workspace_Playlists_OpenPathInFileExplorer", resourceCulture);
             }
         }
         

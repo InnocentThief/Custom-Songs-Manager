@@ -281,6 +281,9 @@
   <data name="Workspace_CustomLevels_Detail_Upvotes" xml:space="preserve">
     <value>Upvotes</value>
   </data>
+  <data name="Workspace_CustomLevels_OpenPathInFileExplorer" xml:space="preserve">
+    <value>Open path in file explorer</value>
+  </data>
   <data name="Workspace_CustomLevels_Title" xml:space="preserve">
     <value>Custom Levels</value>
     <comment>Title for the list area on the custom levels workspace</comment>
@@ -290,6 +293,9 @@
   </data>
   <data name="Workspace_Playlists_AddPlaylistCommand" xml:space="preserve">
     <value>Add playlist</value>
+  </data>
+  <data name="Workspace_Playlists_OpenPathInFileExplorer" xml:space="preserve">
+    <value>Open path in file explorer</value>
   </data>
   <data name="Workspace_Playlists_Title" xml:space="preserve">
     <value>Playlisten</value>

@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -119,6 +120,11 @@ namespace CSM.UiLogic.Workspaces
         public RelayCommand DeleteCustomLevelCommand { get; }
 
         /// <summary>
+        /// Command used to open the custom levels path in file explorer.
+        /// </summary>
+        public RelayCommand OpenInFileExplorerCommand { get; }
+
+        /// <summary>
         /// Gets or sets whether the data is loading.
         /// </summary>
         public bool IsLoading
@@ -177,6 +183,7 @@ namespace CSM.UiLogic.Workspaces
             itemsCollection = DefaultSort();
             RefreshCommand = new RelayCommand(Refresh);
             DeleteCustomLevelCommand = new RelayCommand(DeleteCustomLevel, CanDeleteCustomLevel);
+            OpenInFileExplorerCommand = new RelayCommand(OpenInFileExplorer);
             UserConfigManager.UserConfigChanged += UserConfigManager_UserConfigChanged;
         }
 
@@ -345,6 +352,11 @@ namespace CSM.UiLogic.Workspaces
         public bool CanDeleteCustomLevel()
         {
             return SelectedCustomLevel != null;
+        }
+
+        private void OpenInFileExplorer()
+        {
+            Process.Start(UserConfigManager.Instance.Config.CustomLevelPaths.First().Path);
         }
 
         #endregion
