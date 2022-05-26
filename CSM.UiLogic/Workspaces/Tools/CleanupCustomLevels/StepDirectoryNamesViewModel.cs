@@ -2,13 +2,14 @@
 using CSM.Framework.Configuration.UserConfiguration;
 using CSM.Framework.Extensions;
 using CSM.Framework.Logging;
+using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -27,11 +28,6 @@ namespace CSM.UiLogic.Workspaces.Tools.CleanupCustomLevels
         #region Public Properties
 
         public ObservableCollection<CustomLevelViewModel> CustomLevels { get; }
-
-        public StepDirectoryNamesViewModel() : base("Directory Names", "Cleanup wrong directory names")
-        {
-            CustomLevels = new ObservableCollection<CustomLevelViewModel>();
-        }
 
         /// <summary>
         /// Gets or sets whether the data is loading.
@@ -60,7 +56,21 @@ namespace CSM.UiLogic.Workspaces.Tools.CleanupCustomLevels
             }
         }
 
+        public bool Processed { get; set; }
+
+        public AsyncRelayCommand StartCleanupCommand { get; }
+
+        public RelayCommand ProgressStepCommand { get; }
+
         #endregion
+
+        public StepDirectoryNamesViewModel() : base("Directory Names", "Cleanup wrong directory names")
+        {
+            CustomLevels = new ObservableCollection<CustomLevelViewModel>();
+
+            StartCleanupCommand = new AsyncRelayCommand(StartCleanupAsync);
+            ProgressStepCommand = new RelayCommand(ProgressStep, CanProgressStep);
+        }
 
         public override async Task LoadDataAsync()
         {
@@ -96,13 +106,26 @@ namespace CSM.UiLogic.Workspaces.Tools.CleanupCustomLevels
                 {
                     if (bgWorker.CancellationPending) return;
 
-                    var directory = new DirectoryInfo(folderEntry);
-                    var bsrKey = directory.Name.Substring(0, directory.Name.IndexOf(" "));
-                    try
+                    var directoryInfo = new DirectoryInfo(folderEntry);
+                    var errorText = string.Empty;
+                    var bsrKey = directoryInfo.Name.Substring(0, directoryInfo.Name.IndexOf(" "));
+                    if (HasMissingOrWrongKey(directoryInfo))
                     {
-                        var bsrKeyHex = int.Parse(bsrKey, System.Globalization.NumberStyles.HexNumber);
+                        errorText = "Missing or wrong BSR key";
+                        bsrKey = string.Empty;
                     }
-                    catch (Exception)
+                    else if (HasMissingFiles(directoryInfo))
+                    {
+                        if (string.IsNullOrWhiteSpace(errorText)) errorText = "Missing files";
+                        else errorText += " + more";
+                    }
+                    else if (HasSubDirectery(directoryInfo))
+                    {
+                        if (string.IsNullOrWhiteSpace(errorText)) errorText = "Contains sub directory";
+                        else if (!errorText.Contains("more")) errorText += " + more";
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(errorText))
                     {
                         var info = Path.Combine(folderEntry, "Info.dat");
                         if (File.Exists(info))
@@ -111,6 +134,8 @@ namespace CSM.UiLogic.Workspaces.Tools.CleanupCustomLevels
                             CustomLevel customLevel = JsonSerializer.Deserialize<CustomLevel>(infoContent);
                             if (customLevel != null)
                             {
+                                customLevel.BsrKey = bsrKey;
+                                customLevel.ErrorFound = errorText;
                                 customLevel.ChangeDate = Directory.GetLastWriteTime(folderEntry);
                                 customLevel.Path = folderEntry;
                             }
@@ -150,6 +175,50 @@ namespace CSM.UiLogic.Workspaces.Tools.CleanupCustomLevels
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             LoadProgress = e.ProgressPercentage;
+        }
+
+        private bool HasMissingOrWrongKey(DirectoryInfo directoryInfo)
+        {
+            var bsrKey = directoryInfo.Name.Substring(0, directoryInfo.Name.IndexOf(" "));
+            if (string.IsNullOrWhiteSpace(bsrKey)) return true;
+            int.TryParse(bsrKey, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out int result);
+            if (result == 0) return true;
+            return false;
+        }
+
+        private bool HasMissingFiles(DirectoryInfo directoryInfo)
+        {
+            var directoryPath = directoryInfo.FullName;
+            if (!Directory.EnumerateFiles(directoryPath, "*.*").Any(f => f.EndsWith("jpg") || f.EndsWith("jpeg") || f.EndsWith("png"))) return true;
+            if (!File.Exists(Path.Combine(directoryPath, "Info.dat"))) return true;
+            if (!Directory.EnumerateFiles(directoryPath, "*.egg").Any()) return true;
+            return !Directory.EnumerateFiles(directoryPath, "*.dat", SearchOption.TopDirectoryOnly)
+                .Any(f => f.Contains("Easy") || f.Contains("Normal") || f.Contains("Hard") || f.Contains("Expert"));
+        }
+
+        private bool HasSubDirectery(DirectoryInfo directoryInfo)
+        {
+            return Directory.EnumerateDirectories(directoryInfo.FullName).Any();
+        }
+
+        private async Task StartCleanupAsync()
+        {
+
+
+
+
+            Processed = true;
+            ProgressStepCommand.NotifyCanExecuteChanged();
+        }
+
+        public void ProgressStep()
+        {
+            Progress();
+        }
+
+        public bool CanProgressStep()
+        {
+            return Processed;
         }
 
         #endregion

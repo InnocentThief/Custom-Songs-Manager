@@ -1,15 +1,35 @@
 ﻿using CSM.DataAccess.Entities.Offline;
+using Microsoft.Toolkit.Mvvm.Input;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Globalization;
 
 namespace CSM.UiLogic.Workspaces.Tools.CleanupCustomLevels
 {
     public class CustomLevelViewModel
     {
         private CustomLevel customLevel;
+
+        #region Public Properties
+
+        public string BsrKey
+        {
+            get
+            {
+                int.TryParse(customLevel.BsrKey, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out int result);
+                if (BsrKeyHex > 0) return customLevel.BsrKey;
+                return string.Empty;
+            }
+        }
+
+        public int BsrKeyHex
+        {
+            get
+            {
+                int.TryParse(customLevel.BsrKey, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out int result);
+                return result;
+            }
+        }
 
         public string SongName => customLevel.SongName;
 
@@ -19,28 +39,28 @@ namespace CSM.UiLogic.Workspaces.Tools.CleanupCustomLevels
 
         public DateTime ChangeDate => customLevel.ChangeDate;
 
-        public string ErrorFound
-        {
-            get
-            {
-                if (string.IsNullOrWhiteSpace(customLevel.BsrKey)) return "Missing BSR Key";
-                try
-                {
-                    var hex = int.Parse(customLevel.BsrKey, System.Globalization.NumberStyles.HexNumber);
-                }
-                catch (Exception)
-                {
-                    return "Wrong BSR key format";
-                }
-                return "Unknown error";
-            }
-        }
+        public string ErrorFound => customLevel.ErrorFound;
+
+        public string Path => customLevel.Path;
 
         public bool Cleanup { get; set; }
+
+        public string Result { get; set; }
+
+        public RelayCommand OpenInFileExplorerCommand { get; }
+
+        #endregion
 
         public CustomLevelViewModel(CustomLevel customLevel)
         {
             this.customLevel = customLevel;
+            Cleanup = true;
+            OpenInFileExplorerCommand = new RelayCommand(OpenInFileExplorer);
+        }
+
+        private void OpenInFileExplorer()
+        {
+            Process.Start(Path);
         }
     }
 }

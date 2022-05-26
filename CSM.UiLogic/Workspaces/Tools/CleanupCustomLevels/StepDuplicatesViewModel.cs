@@ -14,7 +14,7 @@ namespace CSM.UiLogic.Workspaces.Tools.CleanupCustomLevels
 
         public override async Task LoadDataAsync()
         {
-            throw new NotImplementedException();
+          
         }
     }
 }

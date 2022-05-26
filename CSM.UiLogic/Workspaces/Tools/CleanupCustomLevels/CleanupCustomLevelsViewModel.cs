@@ -58,7 +58,8 @@ namespace CSM.UiLogic.Workspaces.Tools.CleanupCustomLevels
 
         private async void ProgressStep(object sender, EventArgs e)
         {
-            SelectedStep = Steps[SelectedIndex + 1];
+            SelectedIndex++;
+            SelectedStep = Steps[SelectedIndex];
             await SelectedStep.LoadDataAsync();
         }
     }

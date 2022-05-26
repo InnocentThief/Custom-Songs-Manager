@@ -2,6 +2,7 @@
 using CSM.UiLogic.Workspaces.Playlists;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
+using System.Globalization;
 using System.Linq;
 
 namespace CSM.UiLogic.Workspaces.CustomLevels
@@ -20,9 +21,24 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
 
         #region Public Properties
 
-        public string BsrKey => customLevel.BsrKey;
+        public string BsrKey
+        {
+            get
+            {
+                int.TryParse(customLevel.BsrKey, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out int result);
+                if (BsrKeyHex > 0) return customLevel.BsrKey;
+                return string.Empty;
+            }
+        }
 
-        public int BsrKeyHex => int.Parse(customLevel.BsrKey, System.Globalization.NumberStyles.HexNumber);
+        public int BsrKeyHex
+        {
+            get
+            {
+                int.TryParse(customLevel.BsrKey, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out int result);
+                return result;
+            }
+        }
 
         public string SongName => customLevel.SongName;
 

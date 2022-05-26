@@ -55,6 +55,9 @@ namespace CSM.DataAccess.Entities.Offline
         public decimal SongTimeOffset { get; set; }
 
         [JsonIgnore]
+        public string ErrorFound { get; set; }
+
+        [JsonIgnore]
         public DateTime ChangeDate { get; set; }
 
         [JsonIgnore]
