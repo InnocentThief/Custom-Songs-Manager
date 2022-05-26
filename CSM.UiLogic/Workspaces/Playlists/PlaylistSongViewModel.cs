@@ -37,6 +37,20 @@ namespace CSM.UiLogic.Workspaces.Playlists
         }
 
         /// <summary>
+        /// Gets the bsr key of the song.
+        /// </summary>
+        public string BsrKey => playlistSong.Key;
+
+        public int BsrKeyHex
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(playlistSong.Key)) return 0;
+                return int.Parse(playlistSong.Key, System.Globalization.NumberStyles.HexNumber);
+            }
+        }
+
+        /// <summary>
         /// The name of the song.
         /// </summary>
         /// <remarks>Can be string empty as it is not mandatory to provide this information.</remarks>
