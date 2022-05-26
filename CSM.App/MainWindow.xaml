@@ -10,7 +10,7 @@
         xmlns:playlists="clr-namespace:CSM.App.Workspaces.Playlists"
         xmlns:settings="clr-namespace:CSM.App.Workspaces.Settings"
         xmlns:tools="clr-namespace:CSM.App.Workspaces.Tools"
-        xmlns:twitchintegration="clr-namespace:CSM.App.Workspaces.TwitchIntegration"
+        xmlns:twitchintegration="clr-namespace:CSM.App.Workspaces.TwitchIntegration" xmlns:songsearch="clr-namespace:CSM.App.Workspaces.SongSearch"
         mc:Ignorable="d"
         Title="Custom Songs Manager" Height="450" Width="800">
 
@@ -38,11 +38,16 @@
             <tools:ToolsView />
         </DataTemplate>
 
+        <DataTemplate x:Key="SongSearchDataTemplate">
+            <songsearch:SongSearchView />
+        </DataTemplate>
+
         <workspaces:WorkspaceContentTemplateSelector x:Key="WorkspaceContentTemplateSelector"
                                                      CustomLevels="{StaticResource CustomLevelsDataTemplate}"
                                                      Playlists="{StaticResource PlaylistsDataTemplate}"
                                                      TwitchIntegration="{StaticResource TwitchIntegrationDataTemplate}"
-                                                     Tools="{StaticResource ToolsDataTemplate}" />
+                                                     Tools="{StaticResource ToolsDataTemplate}"
+                                                     SongSearch="{StaticResource SongSearchDataTemplate}"/>
 
 
         <Style x:Key="BaseNavigationViewItemStyle" TargetType="telerik:RadNavigationViewItem">

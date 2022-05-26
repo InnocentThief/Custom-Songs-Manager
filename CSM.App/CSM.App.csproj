@@ -235,6 +235,25 @@
     <Compile Include="Workspaces\Settings\WorkspaceSettingsView.xaml.cs">
       <DependentUpon>WorkspaceSettingsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Workspaces\SongSearch\SongSearchView.xaml.cs">
+      <DependentUpon>SongSearchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Workspaces\Tools\CleanupCustomLevels\CleanupCustomLevelsContentTemplateSelector.cs" />
+    <Compile Include="Workspaces\Tools\CleanupCustomLevels\CleanupCustomLevelsView.xaml.cs">
+      <DependentUpon>CleanupCustomLevelsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Workspaces\Tools\CleanupCustomLevels\CleanupDirectoryNamesView.xaml.cs">
+      <DependentUpon>CleanupDirectoryNamesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Workspaces\Tools\CleanupCustomLevels\CleanupDuplicatesView.xaml.cs">
+      <DependentUpon>CleanupDuplicatesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Workspaces\Tools\CleanupCustomLevels\CleanupStartView.xaml.cs">
+      <DependentUpon>CleanupStartView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Workspaces\Tools\CleanupCustomLevels\CleanupVersionsView.xaml.cs">
+      <DependentUpon>CleanupVersionsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Workspaces\Tools\ToolsView.xaml.cs">
       <DependentUpon>ToolsView.xaml</DependentUpon>
     </Compile>
@@ -326,6 +345,30 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Workspaces\SongSearch\SongSearchView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Workspaces\Tools\CleanupCustomLevels\CleanupCustomLevelsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Workspaces\Tools\CleanupCustomLevels\CleanupDirectoryNamesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Workspaces\Tools\CleanupCustomLevels\CleanupDuplicatesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Workspaces\Tools\CleanupCustomLevels\CleanupStartView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Workspaces\Tools\CleanupCustomLevels\CleanupVersionsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Workspaces\Tools\ToolsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -388,6 +431,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Text.Json.6.0.4\build\System.Text.Json.targets" Condition="Exists('..\packages\System.Text.Json.6.0.4\build\System.Text.Json.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

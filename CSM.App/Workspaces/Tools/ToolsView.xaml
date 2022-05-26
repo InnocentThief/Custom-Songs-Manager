@@ -3,10 +3,44 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:CSM.App.Workspaces.Tools"
+             xmlns:local="clr-namespace:CSM.App.Workspaces.Tools" xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" xmlns:cleanupcustomlevels="clr-namespace:CSM.App.Workspaces.Tools.CleanupCustomLevels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
     <Grid Margin="6">
-        <TextBlock Text="Tools" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <!-- Header -->
+        <Grid Background="#FF018574">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <!-- Title -->
+            <TextBlock Text="Tools" Foreground="White" VerticalAlignment="Center" Margin="8,0" FontWeight="DemiBold" />
+            <!--<telerik:RadToolBar Grid.Column="1" OverflowButtonVisibility="Collapsed" GripVisibility="Collapsed" Background="Transparent" BorderThickness="0" >
+                <telerik:RadButton Grid.Column="1" Background="Transparent" BorderThickness="0" Command="{Binding RefreshCommand}" ToolTip="Refresh">
+                    <telerik:RadGlyph Glyph="&#xe103;" />
+                </telerik:RadButton>
+            </telerik:RadToolBar>-->
+
+
+        </Grid>
+        <!-- Content -->
+        <Border Grid.Row="1" BorderBrush="DimGray" BorderThickness="1,0,1,1">
+            <telerik:RadTabControl>
+                <!-- Cleanup custom levels -->
+                <telerik:RadTabItem Header="Cleanup Custom Levels" >
+                    <cleanupcustomlevels:CleanupCustomLevelsView DataContext="{Binding CustomLevels}" />
+                </telerik:RadTabItem>
+
+                <!-- Cleanup playlists -->
+                <telerik:RadTabItem Header="Cleanup Playlists">
+
+                </telerik:RadTabItem>
+            </telerik:RadTabControl>
+        </Border>
     </Grid>
 </UserControl>

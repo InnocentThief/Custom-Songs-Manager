@@ -283,6 +283,7 @@ namespace CSM.UiLogic.Workspaces
                             try
                             {
                                 customLevel.BsrKey = directory.Name.Substring(0, directory.Name.IndexOf(" "));
+                                var bsrKeyHex = int.Parse(customLevel.BsrKey, System.Globalization.NumberStyles.HexNumber);
                                 customLevel.ChangeDate = Directory.GetLastWriteTime(folderEntry);
                                 customLevel.Path = folderEntry;
                             }

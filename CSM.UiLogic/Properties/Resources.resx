@@ -177,6 +177,9 @@
   <data name="Workspace_Playlists" xml:space="preserve">
     <value>Playlists</value>
   </data>
+  <data name="Workspace_SearchSong" xml:space="preserve">
+    <value>Song Search</value>
+  </data>
   <data name="Workspace_Tools" xml:space="preserve">
     <value>Tools</value>
   </data>

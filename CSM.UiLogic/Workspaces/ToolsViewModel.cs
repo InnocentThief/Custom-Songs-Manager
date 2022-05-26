@@ -1,4 +1,5 @@
 ﻿using CSM.Framework;
+using CSM.UiLogic.Workspaces.Tools.CleanupCustomLevels;
 
 namespace CSM.UiLogic.Workspaces
 {
@@ -13,11 +14,24 @@ namespace CSM.UiLogic.Workspaces
         public override WorkspaceType WorkspaceType => WorkspaceType.Tools;
 
         /// <summary>
+        /// Gets the view model for the custom levels tools.
+        /// </summary>
+        public CleanupCustomLevelsViewModel CustomLevels { get; }
+
+        /// <summary>
+        /// Initializes a new <see cref="ToolsViewModel"/>.
+        /// </summary>
+        public ToolsViewModel()
+        {
+            CustomLevels = new CleanupCustomLevelsViewModel();
+        }
+
+        /// <summary>
         /// Used to load the workspace data.
         /// </summary>
         public override void LoadData()
         {
-            
+
         }
 
         /// <summary>

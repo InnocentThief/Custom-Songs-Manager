@@ -123,7 +123,15 @@
     <Compile Include="Workspaces\Settings\BeatSaberSettingsViewModel.cs" />
     <Compile Include="Workspaces\Settings\WorkspaceSettingsViewModel.cs" />
     <Compile Include="Workspaces\Settings\WorkspaceViewModel.cs" />
+    <Compile Include="Workspaces\SongSearchViewModel.cs" />
     <Compile Include="Workspaces\ToolsViewModel.cs" />
+    <Compile Include="Workspaces\Tools\CleanupCustomLevels\CleanupCustomLevelsViewModel.cs" />
+    <Compile Include="Workspaces\Tools\CleanupCustomLevels\CustomLevelViewModel.cs" />
+    <Compile Include="Workspaces\Tools\CleanupCustomLevels\StepBaseViewModel.cs" />
+    <Compile Include="Workspaces\Tools\CleanupCustomLevels\StepDirectoryNamesViewModel.cs" />
+    <Compile Include="Workspaces\Tools\CleanupCustomLevels\StepDuplicatesViewModel.cs" />
+    <Compile Include="Workspaces\Tools\CleanupCustomLevels\StepStartViewModel.cs" />
+    <Compile Include="Workspaces\Tools\CleanupCustomLevels\StepVersionsViewModel.cs" />
     <Compile Include="Workspaces\TwitchIntegrationViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -142,7 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Workspaces\Common\" />
-    <Folder Include="Workspaces\Tools\" />
+    <Folder Include="Workspaces\SongSearch\" />
     <Folder Include="Workspaces\TwitchIntegration\" />
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +159,7 @@
     <None Include="Workspaces\CustomLevels\CustomLevels.cd" />
     <None Include="Workspaces\Playlists\Playlists.cd" />
     <None Include="Workspaces\Settings\Settings.cd" />
+    <None Include="Workspaces\Tools\Tools.cd" />
     <None Include="Workspaces\Workspaces.cd" />
   </ItemGroup>
   <ItemGroup>

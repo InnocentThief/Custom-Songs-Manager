@@ -5,6 +5,7 @@
         CustomLevels = 0,
         Playlists = 1,
         TwitchIntegration = 2,
-        Tools = 3
+        Tools = 3,
+        SongSearch = 4
     }
 }

@@ -232,6 +232,15 @@ namespace CSM.UiLogic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Song Search.
+        /// </summary>
+        public static string Workspace_SearchSong {
+            get {
+                return ResourceManager.GetString("Workspace_SearchSong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tools.
         /// </summary>
         public static string Workspace_Tools {
