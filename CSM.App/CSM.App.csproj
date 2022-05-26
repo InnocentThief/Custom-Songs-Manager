@@ -181,6 +181,12 @@
       <Link>VersionInfo.cs</Link>
     </Compile>
     <Compile Include="Converter\DifficultyToColorConverter.cs" />
+    <Compile Include="Wizards\EditWizardWindow.xaml.cs">
+      <DependentUpon>EditWizardWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wizards\MessageBoxWindow.xaml.cs">
+      <DependentUpon>MessageBoxWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Workspaces\Common\CharacteristicDataTemplateSelector.cs" />
     <Compile Include="Workspaces\CustomLevels\CustomLevelDetailView.xaml.cs">
       <DependentUpon>CustomLevelDetailView.xaml</DependentUpon>
@@ -248,6 +254,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Wizards\EditWizardWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Wizards\MessageBoxWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Workspaces\Common\Characteristics.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

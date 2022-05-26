@@ -97,6 +97,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Wizards\MessageBoxButtonColor.cs" />
+    <Compile Include="Wizards\MessageBoxController.cs" />
+    <Compile Include="Wizards\MessageBoxEventArgs.cs" />
+    <Compile Include="Wizards\MessageBoxViewModel.cs" />
     <Compile Include="Workspaces\BaseWorkspaceViewModel.cs" />
     <Compile Include="Workspaces\CustomLevelsViewModel.cs" />
     <Compile Include="Workspaces\CustomLevels\CustomLevelCharactersisticViewModel.cs" />
@@ -153,10 +157,12 @@
     <EmbeddedResource Include="Properties\Resources.de.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.de.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

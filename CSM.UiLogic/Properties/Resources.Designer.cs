@@ -61,6 +61,15 @@ namespace CSM.UiLogic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete custom level.
         /// </summary>
         public static string CustomLevels_Delete_Caption {
@@ -115,6 +124,15 @@ namespace CSM.UiLogic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        public static string OK {
+            get {
+                return ResourceManager.GetString("OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete playlist.
         /// </summary>
         public static string Playlists_DeletePlaylist_Caption {
@@ -165,6 +183,15 @@ namespace CSM.UiLogic.Properties {
         public static string Settings_BeatSaber_FileDialog {
             get {
                 return ResourceManager.GetString("Settings_BeatSaber_FileDialog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to open file dialog. You can find more information in the log file..
+        /// </summary>
+        public static string Settings_BeatSaber_FileDialog_Error {
+            get {
+                return ResourceManager.GetString("Settings_BeatSaber_FileDialog_Error", resourceCulture);
             }
         }
         

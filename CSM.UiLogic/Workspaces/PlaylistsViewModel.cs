@@ -4,6 +4,7 @@ using CSM.Framework.Configuration.UserConfiguration;
 using CSM.Framework.Extensions;
 using CSM.Framework.Logging;
 using CSM.UiLogic.Properties;
+using CSM.UiLogic.Wizards;
 using CSM.UiLogic.Workspaces.Playlists;
 using Microsoft.Toolkit.Mvvm.Input;
 using Microsoft.VisualBasic;
@@ -11,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -83,6 +85,11 @@ namespace CSM.UiLogic.Workspaces
         public RelayCommand DeletePlaylistCommand { get; }
 
         /// <summary>
+        /// Command used to open the playlists path in file explorer.
+        /// </summary>
+        public RelayCommand OpenInFileExplorerCommand { get; }
+
+        /// <summary>
         /// Gets or sets whether the data is loading.
         /// </summary>
         public bool IsLoading
@@ -143,6 +150,7 @@ namespace CSM.UiLogic.Workspaces
             AddFolderCommand = new RelayCommand(AddFolder);
             AddPlaylistCommand = new RelayCommand(AddPlaylist);
             DeletePlaylistCommand = new RelayCommand(DeletePlaylist, CanDeletePlaylist);
+            OpenInFileExplorerCommand = new RelayCommand(OpenInFileExplorer);
             UserConfigManager.UserConfigChanged += UserConfigManager_UserConfigChanged;
             playlistSelectionState = new PlaylistSelectionState();
             CustomLevels = new PlaylistCustomLevelsViewModel(playlistSelectionState);
@@ -328,7 +336,14 @@ namespace CSM.UiLogic.Workspaces
             {
                 if (File.Exists(playlistViewModel.FilePath))
                 {
-                    if (MessageBox.Show(Resources.Playlists_DeletePlaylist_Content, Resources.Playlists_DeletePlaylist_Caption, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    var messageBoxViewModel = new MessageBoxViewModel(Resources.Playlists_DeletePlaylist_Caption, MessageBoxButtonColor.Attention, Resources.Cancel, MessageBoxButtonColor.Default)
+                    {
+                        Title = Resources.Playlists_DeletePlaylist_Caption,
+                        Message = Resources.Playlists_DeletePlaylist_Content,
+                        MessageBoxType = DataAccess.Entities.Types.MessageBoxTypes.Question
+                    };
+                    MessageBoxController.Instance().ShowMessageBox(messageBoxViewModel);
+                    if (messageBoxViewModel.Continue)
                     {
                         File.Delete(playlistViewModel.FilePath);
                         SelectedPlaylist.SongChangedEvent -= PlayListViewModel_SongChangedEvent;
@@ -341,7 +356,14 @@ namespace CSM.UiLogic.Workspaces
             {
                 if (Directory.Exists(playlistFolderViewModel.FilePath))
                 {
-                    if (MessageBox.Show(Resources.Playlists_DeletePlaylistFolder_Content, Resources.Playlists_DeletePlaylistFolder_Caption, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    var messageBoxViewModel = new MessageBoxViewModel(Resources.Playlists_DeletePlaylistFolder_Caption, MessageBoxButtonColor.Attention, Resources.Cancel, MessageBoxButtonColor.Default)
+                    {
+                        Title = Resources.Playlists_DeletePlaylistFolder_Caption,
+                        Message = Resources.Playlists_DeletePlaylistFolder_Content,
+                        MessageBoxType = DataAccess.Entities.Types.MessageBoxTypes.Question
+                    };
+                    MessageBoxController.Instance().ShowMessageBox(messageBoxViewModel);
+                    if (messageBoxViewModel.Continue)
                     {
                         Directory.Delete(playlistFolderViewModel.FilePath, true);
                         Playlists.Remove(SelectedPlaylist);
@@ -413,7 +435,7 @@ namespace CSM.UiLogic.Workspaces
             try
             {
                 var playlistPath = Path.Combine(playlistsPath, $"{input}.json");
-                
+
                 var playlist = new Playlist
                 {
                     Path = playlistPath,
@@ -427,7 +449,7 @@ namespace CSM.UiLogic.Workspaces
                 var options = new JsonSerializerOptions { WriteIndented = true };
                 var content = JsonSerializer.Serialize(playlist, options);
                 File.WriteAllText(playlistPath, content);
-                
+
 
                 var playlistViewModel = new PlaylistViewModel(playlist);
                 playlistViewModel.SongChangedEvent += PlayListViewModel_SongChangedEvent;
@@ -446,6 +468,11 @@ namespace CSM.UiLogic.Workspaces
                 MessageBox.Show("The name for the new playlist is not valid", "Add new folder");
                 return;
             }
+        }
+
+        private void OpenInFileExplorer()
+        {
+            Process.Start(UserConfigManager.Instance.Config.PlaylistPaths.First().Path);
         }
 
         #endregion

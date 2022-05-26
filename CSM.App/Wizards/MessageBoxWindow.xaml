@@ -1,0 +1,52 @@
+﻿<Window x:Class="CSM.App.Wizards.MessageBoxWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        mc:Ignorable="d"
+        Height="150" Width="400" Title="{Binding Title}" Background="DimGray" WindowStartupLocation="CenterOwner">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="35" />
+                <ColumnDefinition Width="300" />
+            </Grid.ColumnDefinitions>
+            <telerik:RadGlyph Glyph="&#xe400;" Foreground="#FF018574" FontSize="40" Visibility="{Binding NotificationVisible, Converter={StaticResource BoolToVisConverter}}" />
+            <telerik:RadGlyph Glyph="&#xe401;" Foreground="CornflowerBlue" FontSize="40" Visibility="{Binding InformationVisible, Converter={StaticResource BoolToVisConverter}}" />
+            <telerik:RadGlyph Glyph="&#xe402;" Foreground="DarkOrange" FontSize="40" Visibility="{Binding QuestionVisible, Converter={StaticResource BoolToVisConverter}}" />
+            <telerik:RadGlyph Glyph="&#xe403;" Foreground="DarkRed" FontSize="40" Visibility="{Binding WarningVisible, Converter={StaticResource BoolToVisConverter}}" />
+            <TextBlock Grid.Column="1" Text="{Binding Message}" Foreground="White" TextWrapping="Wrap" Margin="10" VerticalAlignment="Center" />
+        </Grid>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
+            <telerik:RadButton 
+                Command="{Binding FirstCommand}" 
+                Content="{Binding FirstCommandText}" 
+                Visibility="{Binding FirstCommandVisible, Converter={StaticResource BoolToVisConverter}}" 
+                Width="Auto" 
+                Padding="10,5" 
+                Margin="10"
+                Background="{Binding FirstCommandColor}"
+                />
+            <telerik:RadButton 
+                Command="{Binding SecondCommand}" 
+                Content="{Binding SecondCommandText}"
+                Visibility="{Binding SecondCommandVisible, Converter={StaticResource BoolToVisConverter}}" 
+                Width="Auto" 
+                Padding="10,5" 
+                Margin="10"
+                Background="{Binding SecondCommandColor}"
+                />
+        </StackPanel>
+    </Grid>
+</Window>

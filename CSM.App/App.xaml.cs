@@ -1,4 +1,6 @@
-﻿using CSM.Framework.Logging;
+﻿using CSM.App.Wizards;
+using CSM.Framework.Logging;
+using CSM.UiLogic.Wizards;
 using System;
 using System.Windows;
 using System.Windows.Media;
@@ -23,6 +25,19 @@ namespace CSM.App
         {
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             Logger.Create();
+
+            var messageBoxController = MessageBoxController.Instance();
+            messageBoxController.ShowMessageBoxEvent += MessageBoxController_ShowMessageBoxEvent;
+        }
+
+        private void MessageBoxController_ShowMessageBoxEvent(object sender, MessageBoxEventArgs e)
+        {
+            var messageBox = new MessageBoxWindow();
+            var viewModel = e.MessageBoxViewModel;
+            viewModel.CloseAction = new Action(() => messageBox.Close());
+            messageBox.DataContext = e.MessageBoxViewModel;
+            messageBox.Owner = Current.MainWindow;
+            messageBox.ShowDialog();
         }
 
         protected sealed override void OnStartup(StartupEventArgs e)

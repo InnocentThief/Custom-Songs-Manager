@@ -5,12 +5,14 @@ using CSM.Framework.Extensions;
 using CSM.Framework.Logging;
 using CSM.Services;
 using CSM.UiLogic.Properties;
+using CSM.UiLogic.Wizards;
 using CSM.UiLogic.Workspaces.CustomLevels;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -118,6 +120,11 @@ namespace CSM.UiLogic.Workspaces
         public RelayCommand DeleteCustomLevelCommand { get; }
 
         /// <summary>
+        /// Command used to open the custom levels path in file explorer.
+        /// </summary>
+        public RelayCommand OpenInFileExplorerCommand { get; }
+
+        /// <summary>
         /// Gets or sets whether the data is loading.
         /// </summary>
         public bool IsLoading
@@ -176,6 +183,7 @@ namespace CSM.UiLogic.Workspaces
             itemsCollection = DefaultSort();
             RefreshCommand = new RelayCommand(Refresh);
             DeleteCustomLevelCommand = new RelayCommand(DeleteCustomLevel, CanDeleteCustomLevel);
+            OpenInFileExplorerCommand = new RelayCommand(OpenInFileExplorer);
             UserConfigManager.UserConfigChanged += UserConfigManager_UserConfigChanged;
         }
 
@@ -275,7 +283,7 @@ namespace CSM.UiLogic.Workspaces
                             try
                             {
                                 customLevel.BsrKey = directory.Name.Substring(0, directory.Name.IndexOf(" "));
-                                customLevel.ChangeDate = File.GetLastWriteTime(info);
+                                customLevel.ChangeDate = Directory.GetLastWriteTime(folderEntry);
                                 customLevel.Path = folderEntry;
                             }
                             catch (Exception)
@@ -325,7 +333,14 @@ namespace CSM.UiLogic.Workspaces
         {
             if (Directory.Exists(SelectedCustomLevel.Path))
             {
-                if (MessageBox.Show(Resources.CustomLevels_Delete_Content, Resources.CustomLevels_Delete_Caption, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                var messageBoxViewModel = new MessageBoxViewModel(Resources.CustomLevels_Delete_Caption, MessageBoxButtonColor.Attention, Resources.Cancel, MessageBoxButtonColor.Default)
+                {
+                    Title = Resources.CustomLevels_Delete_Caption,
+                    Message = Resources.CustomLevels_Delete_Content,
+                    MessageBoxType = DataAccess.Entities.Types.MessageBoxTypes.Question
+                };
+                MessageBoxController.Instance().ShowMessageBox(messageBoxViewModel);
+                if (messageBoxViewModel.Continue)
                 {
                     Directory.Delete(SelectedCustomLevel.Path, true);
                     CustomLevels.Remove(SelectedCustomLevel);
@@ -337,6 +352,11 @@ namespace CSM.UiLogic.Workspaces
         public bool CanDeleteCustomLevel()
         {
             return SelectedCustomLevel != null;
+        }
+
+        private void OpenInFileExplorer()
+        {
+            Process.Start(UserConfigManager.Instance.Config.CustomLevelPaths.First().Path);
         }
 
         #endregion
