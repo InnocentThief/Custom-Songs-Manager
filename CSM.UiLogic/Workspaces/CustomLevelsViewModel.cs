@@ -276,7 +276,7 @@ namespace CSM.UiLogic.Workspaces
                             try
                             {
                                 customLevel.BsrKey = directory.Name.Substring(0, directory.Name.IndexOf(" "));
-                                customLevel.ChangeDate = File.GetLastWriteTime(info);
+                                customLevel.ChangeDate = Directory.GetLastWriteTime(folderEntry);
                                 customLevel.Path = folderEntry;
                             }
                             catch (Exception)
