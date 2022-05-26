@@ -1,12 +1,12 @@
 ﻿using CSM.Framework.Configuration.UserConfiguration;
 using CSM.Framework.Logging;
 using CSM.UiLogic.Properties;
+using CSM.UiLogic.Wizards;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.IO;
 using System.Linq;
-using System.Windows;
 
 namespace CSM.UiLogic.Workspaces.Settings
 {
@@ -152,7 +152,13 @@ namespace CSM.UiLogic.Workspaces.Settings
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), Resources.Settings_BeatSaber_FileDialog);
+                var messageBoxViewModel = new MessageBoxViewModel(Resources.OK, MessageBoxButtonColor.Default, string.Empty, MessageBoxButtonColor.Default)
+                {
+                    Title = Resources.Settings_BeatSaber_FileDialog,
+                    Message = Resources.Settings_BeatSaber_FileDialog_Error,
+                    MessageBoxType = DataAccess.Entities.Types.MessageBoxTypes.Warning
+                };
+                MessageBoxController.Instance().ShowMessageBox(messageBoxViewModel);
                 LoggerProvider.Logger.Error<BeatSaberSettingsViewModel>($"Unable to open file dialog: {ex}");
             }
         }
@@ -162,7 +168,13 @@ namespace CSM.UiLogic.Workspaces.Settings
             var ret = Directory.Exists(path);
             if (!ret)
             {
-                MessageBox.Show(Resources.Settings_BeatSaber_ValidatePath_Content, Resources.Settings_BeatSaber_ValidatePath_Caption);
+                var messageBoxViewModel = new MessageBoxViewModel(Resources.OK, MessageBoxButtonColor.Default, string.Empty, MessageBoxButtonColor.Default)
+                {
+                    Title = Resources.Settings_BeatSaber_ValidatePath_Caption,
+                    Message = Resources.Settings_BeatSaber_ValidatePath_Content,
+                    MessageBoxType = DataAccess.Entities.Types.MessageBoxTypes.Warning
+                };
+                MessageBoxController.Instance().ShowMessageBox(messageBoxViewModel);
             }
             return ret;
         }

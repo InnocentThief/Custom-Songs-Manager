@@ -5,6 +5,7 @@ using CSM.Framework.Extensions;
 using CSM.Framework.Logging;
 using CSM.Services;
 using CSM.UiLogic.Properties;
+using CSM.UiLogic.Wizards;
 using CSM.UiLogic.Workspaces.CustomLevels;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
@@ -325,7 +326,14 @@ namespace CSM.UiLogic.Workspaces
         {
             if (Directory.Exists(SelectedCustomLevel.Path))
             {
-                if (MessageBox.Show(Resources.CustomLevels_Delete_Content, Resources.CustomLevels_Delete_Caption, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                var messageBoxViewModel = new MessageBoxViewModel(Resources.CustomLevels_Delete_Caption, MessageBoxButtonColor.Attention, Resources.Cancel, MessageBoxButtonColor.Default)
+                {
+                    Title = Resources.CustomLevels_Delete_Caption,
+                    Message = Resources.CustomLevels_Delete_Content,
+                    MessageBoxType = DataAccess.Entities.Types.MessageBoxTypes.Question
+                };
+                MessageBoxController.Instance().ShowMessageBox(messageBoxViewModel);
+                if (messageBoxViewModel.Continue)
                 {
                     Directory.Delete(SelectedCustomLevel.Path, true);
                     CustomLevels.Remove(SelectedCustomLevel);

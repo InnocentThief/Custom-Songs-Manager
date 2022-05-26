@@ -4,6 +4,7 @@ using CSM.Framework.Configuration.UserConfiguration;
 using CSM.Framework.Extensions;
 using CSM.Framework.Logging;
 using CSM.UiLogic.Properties;
+using CSM.UiLogic.Wizards;
 using CSM.UiLogic.Workspaces.Playlists;
 using Microsoft.Toolkit.Mvvm.Input;
 using Microsoft.VisualBasic;
@@ -328,7 +329,14 @@ namespace CSM.UiLogic.Workspaces
             {
                 if (File.Exists(playlistViewModel.FilePath))
                 {
-                    if (MessageBox.Show(Resources.Playlists_DeletePlaylist_Content, Resources.Playlists_DeletePlaylist_Caption, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    var messageBoxViewModel = new MessageBoxViewModel(Resources.Playlists_DeletePlaylist_Caption, MessageBoxButtonColor.Attention, Resources.Cancel, MessageBoxButtonColor.Default)
+                    {
+                        Title = Resources.Playlists_DeletePlaylist_Caption,
+                        Message = Resources.Playlists_DeletePlaylist_Content,
+                        MessageBoxType = DataAccess.Entities.Types.MessageBoxTypes.Question
+                    };
+                    MessageBoxController.Instance().ShowMessageBox(messageBoxViewModel);
+                    if (messageBoxViewModel.Continue)
                     {
                         File.Delete(playlistViewModel.FilePath);
                         SelectedPlaylist.SongChangedEvent -= PlayListViewModel_SongChangedEvent;
@@ -341,7 +349,14 @@ namespace CSM.UiLogic.Workspaces
             {
                 if (Directory.Exists(playlistFolderViewModel.FilePath))
                 {
-                    if (MessageBox.Show(Resources.Playlists_DeletePlaylistFolder_Content, Resources.Playlists_DeletePlaylistFolder_Caption, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    var messageBoxViewModel = new MessageBoxViewModel(Resources.Playlists_DeletePlaylistFolder_Caption, MessageBoxButtonColor.Attention, Resources.Cancel, MessageBoxButtonColor.Default)
+                    {
+                        Title = Resources.Playlists_DeletePlaylistFolder_Caption,
+                        Message = Resources.Playlists_DeletePlaylistFolder_Content,
+                        MessageBoxType = DataAccess.Entities.Types.MessageBoxTypes.Question
+                    };
+                    MessageBoxController.Instance().ShowMessageBox(messageBoxViewModel);
+                    if (messageBoxViewModel.Continue)
                     {
                         Directory.Delete(playlistFolderViewModel.FilePath, true);
                         Playlists.Remove(SelectedPlaylist);
@@ -413,7 +428,7 @@ namespace CSM.UiLogic.Workspaces
             try
             {
                 var playlistPath = Path.Combine(playlistsPath, $"{input}.json");
-                
+
                 var playlist = new Playlist
                 {
                     Path = playlistPath,
@@ -427,7 +442,7 @@ namespace CSM.UiLogic.Workspaces
                 var options = new JsonSerializerOptions { WriteIndented = true };
                 var content = JsonSerializer.Serialize(playlist, options);
                 File.WriteAllText(playlistPath, content);
-                
+
 
                 var playlistViewModel = new PlaylistViewModel(playlist);
                 playlistViewModel.SongChangedEvent += PlayListViewModel_SongChangedEvent;

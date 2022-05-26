@@ -91,6 +91,7 @@
     <Compile Include="Entities\Online\Uploader.cs" />
     <Compile Include="Entities\Online\Version.cs" />
     <Compile Include="Entities\Types\DifficultyTypes.cs" />
+    <Compile Include="Entities\Types\MessageBoxTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
