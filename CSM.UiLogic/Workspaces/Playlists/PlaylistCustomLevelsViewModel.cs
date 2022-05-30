@@ -86,6 +86,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
                 playlistSongDetail = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(HasPlaylistSongDetail));
+                SongChanged(playlistSongDetail);
             }
         }
 
@@ -140,6 +141,8 @@ namespace CSM.UiLogic.Workspaces.Playlists
         /// Occurs on adding a song to a playlist.
         /// </summary>
         public event EventHandler<AddSongToPlaylistEventArgs> AddSongToPlaylistEvent;
+
+        public event EventHandler<PlaylistSongChangedEventArgs> SongChangedEvent;
 
         /// <summary>
         /// Initializes a new <see cref="PlaylistCustomLevelsViewModel"/>.
@@ -213,6 +216,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
 
             foreach (var favorite_levelId in playerData.LocalPlayers.First().FavoritesLevelIds)
             {
+                if (!favorite_levelId.StartsWith("custom_level")) continue;
                 var hash = favorite_levelId.Substring(13);
                 var beatmap = await favoriteBeatMapService.GetBeatMapDataAsync(hash);
                 if (beatmap == null) continue;
@@ -336,6 +340,12 @@ namespace CSM.UiLogic.Workspaces.Playlists
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             LoadProgress = e.ProgressPercentage;
+        }
+
+        private void SongChanged(PlaylistSongDetailViewModel playlistSongDetail)
+        {
+            if (playlistSongDetail == null) return;
+            SongChangedEvent?.Invoke(this, new PlaylistSongChangedEventArgs() { RightHash = playlistSongDetail.Hash });
         }
 
         #endregion

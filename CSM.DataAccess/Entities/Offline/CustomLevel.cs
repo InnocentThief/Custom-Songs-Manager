@@ -67,6 +67,6 @@ namespace CSM.DataAccess.Entities.Offline
         public CustomLevelCustomData CustomData { get; set; }
 
         [JsonPropertyName("_difficultyBeatmapSets")]
-        public List<BeatMapDifficultySet> DifficultiySets { get; set; }
+        public List<BeatMapDifficultySet> DifficultySets { get; set; }
     }
 }

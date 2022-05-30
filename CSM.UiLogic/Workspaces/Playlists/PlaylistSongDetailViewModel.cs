@@ -32,6 +32,8 @@ namespace CSM.UiLogic.Workspaces.Playlists
 
         public string CoverUrl => beatMap.Versions.First().CoverUrl;
 
+        public string Hash => beatMap.Versions.First().Hash;
+
         /// <summary>
         /// Contains the <see cref="CustomLevelDifficultyViewModel"/> grouped by characteristc.
         /// </summary>

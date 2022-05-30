@@ -48,15 +48,15 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
 
         public string SongAuthorName => customLevel.SongAuthorName;
 
-        public bool Easy => customLevel.DifficultiySets.SelectMany(ds => ds.Difficulties).Any(d => d.DifficultyRank == 1);
+        public bool Easy => customLevel.DifficultySets.SelectMany(ds => ds.Difficulties).Any(d => d.DifficultyRank == 1);
 
-        public bool Normal => customLevel.DifficultiySets.SelectMany(ds => ds.Difficulties).Any(d => d.DifficultyRank == 3);
+        public bool Normal => customLevel.DifficultySets.SelectMany(ds => ds.Difficulties).Any(d => d.DifficultyRank == 3);
 
-        public bool Hard => customLevel.DifficultiySets.SelectMany(ds => ds.Difficulties).Any(d => d.DifficultyRank == 5);
+        public bool Hard => customLevel.DifficultySets.SelectMany(ds => ds.Difficulties).Any(d => d.DifficultyRank == 5);
 
-        public bool Expert => customLevel.DifficultiySets.SelectMany(ds => ds.Difficulties).Any(d => d.DifficultyRank == 7);
+        public bool Expert => customLevel.DifficultySets.SelectMany(ds => ds.Difficulties).Any(d => d.DifficultyRank == 7);
 
-        public bool ExpertPlus => customLevel.DifficultiySets.SelectMany(ds => ds.Difficulties).Any(d => d.DifficultyRank == 9);
+        public bool ExpertPlus => customLevel.DifficultySets.SelectMany(ds => ds.Difficulties).Any(d => d.DifficultyRank == 9);
 
         public DateTime ChangeDate => customLevel.ChangeDate;
 

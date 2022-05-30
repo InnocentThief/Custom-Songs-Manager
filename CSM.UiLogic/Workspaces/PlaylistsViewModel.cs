@@ -60,7 +60,8 @@ namespace CSM.UiLogic.Workspaces
                 DeletePlaylistCommand.NotifyCanExecuteChanged();
                 foreach (var playlist in Playlists)
                 {
-                    playlist.CheckContainsSong(String.Empty);
+                    playlist.CheckContainsLeftSong(String.Empty);
+                    playlist.CheckContainsRightSong(String.Empty);
                 }
                 playlistSelectionState.PlaylistSelectionChanged(selectedPlaylist != null && selectedPlaylist.GetType() != typeof(PlaylistFolderViewModel));
             }
@@ -157,6 +158,7 @@ namespace CSM.UiLogic.Workspaces
             playlistSelectionState = new PlaylistSelectionState();
             CustomLevels = new PlaylistCustomLevelsViewModel(playlistSelectionState);
             CustomLevels.AddSongToPlaylistEvent += CustomLevels_AddSongToPlaylistEvent;
+            CustomLevels.SongChangedEvent += SongChangedEvent;
         }
 
         /// <summary>
@@ -257,7 +259,7 @@ namespace CSM.UiLogic.Workspaces
                         {
                             playlist.Path = file;
                             var playListViewModel = new PlaylistViewModel(playlist);
-                            playListViewModel.SongChangedEvent += PlayListViewModel_SongChangedEvent;
+                            playListViewModel.SongChangedEvent += SongChangedEvent;
                             playlists.Add(playListViewModel);
                             i++;
                             bgWorker.ReportProgress(i);
@@ -274,11 +276,12 @@ namespace CSM.UiLogic.Workspaces
 
         }
 
-        private void PlayListViewModel_SongChangedEvent(object sender, PlaylistSongChangedEventArgs e)
+        private void SongChangedEvent(object sender, PlaylistSongChangedEventArgs e)
         {
             foreach (var playlist in Playlists)
             {
-                playlist.CheckContainsSong(e.Hash);
+                if (!string.IsNullOrWhiteSpace(e.LeftHash)) playlist.CheckContainsLeftSong(e.LeftHash);
+                if (!string.IsNullOrWhiteSpace(e.RightHash)) playlist.CheckContainsRightSong(e.RightHash);
             }
         }
 
@@ -304,7 +307,7 @@ namespace CSM.UiLogic.Workspaces
                     {
                         playlist.Path = file;
                         var playlistViewModel = new PlaylistViewModel(playlist);
-                        playlistViewModel.SongChangedEvent += PlayListViewModel_SongChangedEvent;
+                        playlistViewModel.SongChangedEvent += SongChangedEvent;
                         folder.Playlists.Add(playlistViewModel);
                     }
                 }
@@ -348,7 +351,7 @@ namespace CSM.UiLogic.Workspaces
                     if (messageBoxViewModel.Continue)
                     {
                         File.Delete(playlistViewModel.FilePath);
-                        SelectedPlaylist.SongChangedEvent -= PlayListViewModel_SongChangedEvent;
+                        SelectedPlaylist.SongChangedEvent -= SongChangedEvent;
                         DeletePlaylistRecursive(Playlists, playlistViewModel);
                         Playlists.Remove(SelectedPlaylist);
                     }
@@ -456,7 +459,7 @@ namespace CSM.UiLogic.Workspaces
 
 
                 var playlistViewModel = new PlaylistViewModel(playlist);
-                playlistViewModel.SongChangedEvent += PlayListViewModel_SongChangedEvent;
+                playlistViewModel.SongChangedEvent += SongChangedEvent;
                 if (selectedFolder != null)
                 {
                     selectedFolder.Playlists.Add(playlistViewModel);

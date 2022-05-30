@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="CSM.UiLogic.Workspaces.Playlists.PlaylistViewModel">
-    <Position X="7" Y="4.75" Width="2.5" />
+    <Position X="7" Y="5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>QAAAgIAyQAQAYgDAAAAEIQQAAABQIBADAAAAAAANEIA=</HashCode>
+      <HashCode>QAAAkIAyQgQAYgBAAAAEIQQAAABQIBADAAAAAAANEIA=</HashCode>
       <FileName>Workspaces\Playlists\PlaylistViewModel.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -17,7 +17,7 @@
   <Class Name="CSM.UiLogic.Workspaces.Playlists.PlaylistSongViewModel">
     <Position X="11.25" Y="4.5" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AAIAAAACAAIAAQABAAAIAAACAAAgAAAFCAAAgAAIEAA=</HashCode>
+      <HashCode>AAIAAAACAAIAAQABAAAIAAACJAAgAAAFCAAAgAAIEAA=</HashCode>
       <FileName>Workspaces\Playlists\PlaylistSongViewModel.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -28,14 +28,14 @@
   <Class Name="CSM.UiLogic.Workspaces.Playlists.BasePlaylistViewModel">
     <Position X="5.75" Y="0.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAgAAAAAAAAAACQAAAAAAQAAAAEAAAAAABAgAAAAIA=</HashCode>
+      <HashCode>AAAgEAAAAgAAAAAQAAAAAEQAAEQEAAAABABAAAAAAAA=</HashCode>
       <FileName>Workspaces\Playlists\BasePlaylistViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CSM.UiLogic.Workspaces.Playlists.PlaylistFolderViewModel">
-    <Position X="4.25" Y="4.75" Width="2" />
+    <Position X="4.25" Y="5.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAQAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAQEAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Workspaces\Playlists\PlaylistFolderViewModel.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -52,7 +52,7 @@
   <Class Name="CSM.UiLogic.Workspaces.PlaylistsViewModel">
     <Position X="0.5" Y="0.5" Width="3" />
     <TypeIdentifier>
-      <HashCode>BgCQAzAACgFQIggJgCKAAAQAgAIEAAMAAAAAAAAAACI=</HashCode>
+      <HashCode>BgCwAzAACgFQIggJgCKAQAQAgAIEAAIAAAAAAAAAACI=</HashCode>
       <FileName>Workspaces\PlaylistsViewModel.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -66,7 +66,7 @@
   <Class Name="CSM.UiLogic.Workspaces.Playlists.PlaylistCustomLevelsViewModel">
     <Position X="0.75" Y="12.75" Width="3.5" />
     <TypeIdentifier>
-      <HashCode>BAAAAgASCgAQAAgMgACBIAAAgQAAIBEBACCAAQIAAAY=</HashCode>
+      <HashCode>BAAgAgASCgAQAAgcgACBIAAAgQAAIBEBACCAAQIAAAY=</HashCode>
       <FileName>Workspaces\Playlists\PlaylistCustomLevelsViewModel.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -89,7 +89,7 @@
   <Class Name="CSM.UiLogic.Workspaces.Playlists.PlaylistSongDetailViewModel">
     <Position X="11.25" Y="9.75" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAIAEAAAAIAAAAgABAEAABAAAAAAAAAkAAgAgAAAAAA=</HashCode>
+      <HashCode>AAIAEAAAAIIAAAgABAEAABAAAAAAAAAkAAgAgAAAAAA=</HashCode>
       <FileName>Workspaces\Playlists\PlaylistSongDetailViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>

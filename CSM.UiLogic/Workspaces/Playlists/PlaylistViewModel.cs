@@ -270,15 +270,18 @@ namespace CSM.UiLogic.Workspaces.Playlists
         /// <summary>
         /// Checks if the playlist contains a song with the given hash.
         /// </summary>
-        /// <param name="hash">Hash of the song.</param>
+        /// <param name="leftHash">Hash of the song.</param>
         /// <returns>True if the playlist contains the song; otherwise false.</returns>
-        public override bool CheckContainsSong(string hash)
+        public override bool CheckContainsLeftSong(string leftHash)
         {
-            SelectedPlaylistSong = Songs.Where(s => s.Hash == hash).FirstOrDefault();
+            ContainsLeftSong = Songs.Any(s => s.Hash == leftHash);
+            return ContainsLeftSong;
+        }
 
-
-            ContainsSong = Songs.Any(s => s.Hash == hash);
-            return ContainsSong;
+        public override bool CheckContainsRightSong(string rightHash)
+        {
+            ContainsRightSong = Songs.Any(s => s.Hash == rightHash);
+            return ContainsRightSong;
         }
 
         #region Helper methods

@@ -2,6 +2,7 @@
 using CSM.Framework.Configuration.UserConfiguration;
 using CSM.Framework.Extensions;
 using CSM.Framework.Logging;
+using CSM.Services;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -22,6 +24,7 @@ namespace CSM.UiLogic.Workspaces.Tools.CleanupCustomLevels
         private BackgroundWorker bgWorker;
         private bool isLoading;
         private int loadProgress;
+        private BeatMapService beatMapService;
 
         #endregion
 
@@ -70,6 +73,8 @@ namespace CSM.UiLogic.Workspaces.Tools.CleanupCustomLevels
 
             StartCleanupCommand = new AsyncRelayCommand(StartCleanupAsync);
             ProgressStepCommand = new RelayCommand(ProgressStep, CanProgressStep);
+
+            beatMapService = new BeatMapService(String.Empty);
         }
 
         public override async Task LoadDataAsync()
@@ -203,6 +208,51 @@ namespace CSM.UiLogic.Workspaces.Tools.CleanupCustomLevels
 
         private async Task StartCleanupAsync()
         {
+            foreach (var customLevel in CustomLevels)
+            {
+
+                //var infoPath = Path.Combine(customLevel.Path, "Info.dat");
+             
+
+                //var infoContent = File.ReadAllText(infoPath);
+                //var hasher = SHA1.Create();
+                //hasher.ComputeHash(infoContent);
+
+                //var cl = JsonSerializer.Deserialize<CustomLevel>(infoContent);
+
+                //foreach (var difficultySet in cl.DifficultySets)
+                //{
+                //    foreach (var difficulty in difficultySet.Difficulties)
+                //    {
+                //        var diffFile = Path.Combine(customLevel.Path, difficulty.BeatmapFilename);
+                //        var diffFileContent = File.ReadAllText(diffFile);
+                //    }
+                //}
+
+
+
+
+
+
+
+
+
+
+                var user = await beatMapService.GetUserByNameAsync(customLevel.LevelAuthorName);
+                if (user != null)
+                {
+                    var beatmaps = await beatMapService.GetBeatMapsByUserIdAsync(user.Id);
+
+                }
+            }
+
+
+
+
+
+
+
+
 
 
 
