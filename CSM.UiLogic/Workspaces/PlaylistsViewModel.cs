@@ -1,6 +1,7 @@
 ﻿using CSM.DataAccess.Entities.Offline;
 using CSM.Framework;
 using CSM.Framework.Configuration.UserConfiguration;
+using CSM.Framework.Converter;
 using CSM.Framework.Extensions;
 using CSM.Framework.Logging;
 using CSM.UiLogic.Properties;
@@ -15,6 +16,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text.Json;
 using System.Windows;
 
@@ -434,15 +436,17 @@ namespace CSM.UiLogic.Workspaces
             if (string.IsNullOrEmpty(input)) return;
             try
             {
-                var playlistPath = Path.Combine(playlistsPath, $"{input}.json");
+                var defaultImageLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "CSM_Logo_400px.png");
 
+                var playlistPath = Path.Combine(playlistsPath, $"{input}.json");
                 var playlist = new Playlist
                 {
                     Path = playlistPath,
                     PlaylistAuthor = String.Empty,
                     PlaylistDescription = String.Empty,
                     PlaylistTitle = input,
-                    Songs = new List<PlaylistSong>()
+                    Songs = new List<PlaylistSong>(),
+                    Image = $"base64,{ImageConverter.StringFromBitmap(defaultImageLocation)}"
                 };
 
                 // Save to file
