@@ -1,4 +1,5 @@
-﻿using CSM.UiLogic.Workspaces.Settings;
+﻿using CSM.UiLogic.Wizards;
+using CSM.UiLogic.Workspaces.Settings;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 
@@ -7,7 +8,7 @@ namespace CSM.UiLogic.Workspaces
     /// <summary>
     /// ViewModel for the settings workspace.
     /// </summary>
-    public class SettingsViewModel : ObservableObject
+    public class SettingsViewModel : EditWindowBaseViewModel
     {
         private bool visible;
 
@@ -41,6 +42,12 @@ namespace CSM.UiLogic.Workspaces
         /// Command used to close the settings workspace.
         /// </summary>
         public RelayCommand CloseCommand { get; }
+
+        public override int Height => 400;
+
+        public override int Width => 800;
+
+        public override string Title => "Settings";
 
         #endregion
 

@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\CSM.App",
+    "\\CSM.App\\Properties"
   ],
-  "SelectedNode": "\\Custom Songs Manager.sln",
+  "SelectedNode": "\\CSM.App\\Properties\\Resources.de.resx",
   "PreviewInSolutionExplorer": false
 }

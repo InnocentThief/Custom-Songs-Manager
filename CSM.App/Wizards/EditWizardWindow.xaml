@@ -1,12 +1,23 @@
-﻿<Window x:Class="CSM.App.Wizards.EditWizardWindow"
+﻿<telerik:RadWindow  xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" x:Class="CSM.App.Wizards.EditWizardWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CSM.App.Wizards"
-        mc:Ignorable="d"
-        Title="EditWizardWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
-</Window>
+        xmlns:local="clr-namespace:CSM.App.Wizards" xmlns:infos="clr-namespace:CSM.App.Workspaces.Infos"
+                    xmlns:settingsViewModel="clr-namespace:CSM.UiLogic.Workspaces;assembly=CSM.UiLogic"
+                    xmlns:infosViewModel="clr-namespace:CSM.UiLogic.Workspaces.Infos;assembly=CSM.UiLogic" xmlns:settings="clr-namespace:CSM.App.Workspaces.Settings"
+                    mc:Ignorable="d"
+     Height="{Binding Height}" Width="{Binding Width}" Header="{Binding Title}" WindowStartupLocation="CenterOwner">
+
+    <telerik:RadWindow.Resources>
+        <DataTemplate DataType="{x:Type infosViewModel:EditWindowInfoViewModel}">
+            <infos:EditWindowInfoView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type settingsViewModel:SettingsViewModel}">
+            <settings:SettingsView />
+        </DataTemplate>
+    </telerik:RadWindow.Resources>
+
+
+    <ContentControl Content="{Binding}" x:Name="contentControl" />
+</telerik:RadWindow>

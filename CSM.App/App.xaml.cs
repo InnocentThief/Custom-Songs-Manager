@@ -3,7 +3,9 @@ using CSM.Framework.Logging;
 using CSM.UiLogic.Wizards;
 using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using Telerik.Windows.Controls;
 
 namespace CSM.App
@@ -26,8 +28,21 @@ namespace CSM.App
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             Logger.Create();
 
+            var editWindowController = EditWindowController.Instance();
+            editWindowController.ShowEditWindowEvent += EditWindowController_ShowEditWindowEvent;
+
             var messageBoxController = MessageBoxController.Instance();
             messageBoxController.ShowMessageBoxEvent += MessageBoxController_ShowMessageBoxEvent;
+        }
+
+        private void EditWindowController_ShowEditWindowEvent(object sender, EditWindowEventArgs e)
+        {
+            var editWindow = new EditWizardWindow();
+            var viewModel = e.EditWindowViewModel;
+            viewModel.CloseAction = new Action(() => editWindow.Close());
+            editWindow.DataContext = e.EditWindowViewModel;
+            editWindow.Owner = Current.MainWindow;
+            editWindow.ShowDialog();
         }
 
         private void MessageBoxController_ShowMessageBoxEvent(object sender, MessageBoxEventArgs e)
@@ -44,6 +59,13 @@ namespace CSM.App
         {
             base.OnStartup(e);
             SetStyle();
+
+            MainWindow window = new MainWindow();
+            //window.Icon = new Image()
+            //{
+            //    Source = new BitmapImage(new Uri("CSM.ico", UriKind.Relative))
+            //};
+            window.Show();
         }
 
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
@@ -54,6 +76,32 @@ namespace CSM.App
         private void SetStyle()
         {
             StyleManager.ApplicationTheme = new FluentTheme();
+            FluentPalette.Palette.AccentColor = (Color)ColorConverter.ConvertFromString("#FF018574");
+            FluentPalette.Palette.AccentFocusedColor = (Color)ColorConverter.ConvertFromString("#FF0AE8CB");
+            FluentPalette.Palette.AccentMouseOverColor = (Color)ColorConverter.ConvertFromString("#FF00B294");
+            FluentPalette.Palette.AccentPressedColor = (Color)ColorConverter.ConvertFromString("#FF017566");
+            FluentPalette.Palette.AlternativeColor = (Color)ColorConverter.ConvertFromString("#FF2B2B2B");
+            FluentPalette.Palette.BasicColor = (Color)ColorConverter.ConvertFromString("#4CFFFFFF");
+            FluentPalette.Palette.BasicSolidColor = (Color)ColorConverter.ConvertFromString("#FF4D4D4D");
+            FluentPalette.Palette.ComplementaryColor = (Color)ColorConverter.ConvertFromString("#FF333333");
+            FluentPalette.Palette.IconColor = (Color)ColorConverter.ConvertFromString("#CCFFFFFF");
+            FluentPalette.Palette.MainColor = (Color)ColorConverter.ConvertFromString("#33FFFFFF");
+            FluentPalette.Palette.MarkerColor = (Color)ColorConverter.ConvertFromString("#FFFFFFFF");
+            FluentPalette.Palette.MarkerInvertedColor = (Color)ColorConverter.ConvertFromString("#FFFFFFFF");
+            FluentPalette.Palette.MarkerMouseOverColor = (Color)ColorConverter.ConvertFromString("#FF000000");
+            FluentPalette.Palette.MouseOverColor = (Color)ColorConverter.ConvertFromString("#4CFFFFFF");
+            FluentPalette.Palette.PressedColor = (Color)ColorConverter.ConvertFromString("#26FFFFFF");
+            FluentPalette.Palette.PrimaryBackgroundColor = (Color)ColorConverter.ConvertFromString("#FF000000");
+            FluentPalette.Palette.PrimaryColor = (Color)ColorConverter.ConvertFromString("#66FFFFFF");
+            FluentPalette.Palette.PrimaryMouseOverColor = (Color)ColorConverter.ConvertFromString("#FFFFFFFF");
+            FluentPalette.Palette.ReadOnlyBackgroundColor = (Color)ColorConverter.ConvertFromString("#00FFFFFF");
+            FluentPalette.Palette.ReadOnlyBorderColor = (Color)ColorConverter.ConvertFromString("#FF4C4C4C");
+            FluentPalette.Palette.ValidationColor = (Color)ColorConverter.ConvertFromString("#FFE81123");
+            FluentPalette.Palette.DisabledOpacity = 0.3;
+            FluentPalette.Palette.InputOpacity = 0.6;
+            FluentPalette.Palette.ReadOnlyOpacity = 0.5;
+
+            //StyleManager.ApplicationTheme = new Windows11Theme();
             //Windows11Palette.Palette.PrimaryForegroundColor = (Color)ColorConverter.ConvertFromString("#FFFFFFFF");
             //Windows11Palette.Palette.SecondaryForegroundColor = (Color)ColorConverter.ConvertFromString("#C8FFFFFF");
             //Windows11Palette.Palette.TertiaryForegroundColor = (Color)ColorConverter.ConvertFromString("#8BFFFFFF");
@@ -102,30 +150,7 @@ namespace CSM.App
             //Windows11Palette.Palette.DisabledOpacity = 0.36;
             //Windows11Palette.Palette.ReadOnlyOpacity = 0.79;
 
-            FluentPalette.Palette.AccentColor = (Color)ColorConverter.ConvertFromString("#FF018574");
-            FluentPalette.Palette.AccentFocusedColor = (Color)ColorConverter.ConvertFromString("#FF0AE8CB");
-            FluentPalette.Palette.AccentMouseOverColor = (Color)ColorConverter.ConvertFromString("#FF00B294");
-            FluentPalette.Palette.AccentPressedColor = (Color)ColorConverter.ConvertFromString("#FF017566");
-            FluentPalette.Palette.AlternativeColor = (Color)ColorConverter.ConvertFromString("#FF2B2B2B");
-            FluentPalette.Palette.BasicColor = (Color)ColorConverter.ConvertFromString("#4CFFFFFF");
-            FluentPalette.Palette.BasicSolidColor = (Color)ColorConverter.ConvertFromString("#FF4D4D4D");
-            FluentPalette.Palette.ComplementaryColor = (Color)ColorConverter.ConvertFromString("#FF333333");
-            FluentPalette.Palette.IconColor = (Color)ColorConverter.ConvertFromString("#CCFFFFFF");
-            FluentPalette.Palette.MainColor = (Color)ColorConverter.ConvertFromString("#33FFFFFF");
-            FluentPalette.Palette.MarkerColor = (Color)ColorConverter.ConvertFromString("#FFFFFFFF");
-            FluentPalette.Palette.MarkerInvertedColor = (Color)ColorConverter.ConvertFromString("#FFFFFFFF");
-            FluentPalette.Palette.MarkerMouseOverColor = (Color)ColorConverter.ConvertFromString("#FF000000");
-            FluentPalette.Palette.MouseOverColor = (Color)ColorConverter.ConvertFromString("#4CFFFFFF");
-            FluentPalette.Palette.PressedColor = (Color)ColorConverter.ConvertFromString("#26FFFFFF");
-            FluentPalette.Palette.PrimaryBackgroundColor = (Color)ColorConverter.ConvertFromString("#FF000000");
-            FluentPalette.Palette.PrimaryColor = (Color)ColorConverter.ConvertFromString("#66FFFFFF");
-            FluentPalette.Palette.PrimaryMouseOverColor = (Color)ColorConverter.ConvertFromString("#FFFFFFFF");
-            FluentPalette.Palette.ReadOnlyBackgroundColor = (Color)ColorConverter.ConvertFromString("#00FFFFFF");
-            FluentPalette.Palette.ReadOnlyBorderColor = (Color)ColorConverter.ConvertFromString("#FF4C4C4C");
-            FluentPalette.Palette.ValidationColor = (Color)ColorConverter.ConvertFromString("#FFE81123");
-            FluentPalette.Palette.DisabledOpacity = 0.3;
-            FluentPalette.Palette.InputOpacity = 0.6;
-            FluentPalette.Palette.ReadOnlyOpacity = 0.5;
+
 
         }
 

@@ -97,6 +97,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Wizards\EditWindowBaseViewModel.cs" />
+    <Compile Include="Wizards\EditWindowController.cs" />
+    <Compile Include="Wizards\EditWindowEventArgs.cs" />
     <Compile Include="Wizards\MessageBoxButtonColor.cs" />
     <Compile Include="Wizards\MessageBoxController.cs" />
     <Compile Include="Wizards\MessageBoxEventArgs.cs" />
@@ -107,6 +110,7 @@
     <Compile Include="Workspaces\CustomLevels\CustomLevelDetailViewModel.cs" />
     <Compile Include="Workspaces\CustomLevels\CustomLevelDifficultyViewModel.cs" />
     <Compile Include="Workspaces\CustomLevels\CustomLevelViewModel.cs" />
+    <Compile Include="Workspaces\Infos\EditWindowInfoViewModel.cs" />
     <Compile Include="Workspaces\PlaylistsViewModel.cs" />
     <Compile Include="Workspaces\Playlists\AddSongToPlaylistEventArgs.cs" />
     <Compile Include="Workspaces\Playlists\BasePlaylistViewModel.cs" />

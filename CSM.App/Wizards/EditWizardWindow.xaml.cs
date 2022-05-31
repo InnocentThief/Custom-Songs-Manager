@@ -11,13 +11,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Telerik.Windows.Controls;
 
 namespace CSM.App.Wizards
 {
     /// <summary>
     /// Interaction logic for EditWizardWindow.xaml
     /// </summary>
-    public partial class EditWizardWindow : Window
+    public partial class EditWizardWindow : RadWindow
     {
         public EditWizardWindow()
         {

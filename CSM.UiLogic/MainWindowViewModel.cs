@@ -1,6 +1,8 @@
 ﻿using CSM.Framework.Configuration.UserConfiguration;
 using CSM.UiLogic.Properties;
+using CSM.UiLogic.Wizards;
 using CSM.UiLogic.Workspaces;
+using CSM.UiLogic.Workspaces.Infos;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
@@ -17,7 +19,6 @@ namespace CSM.UiLogic
 
         private ObservableCollection<BaseWorkspaceViewModel> workspaces;
         private BaseWorkspaceViewModel selectedWorkspace;
-
 
         #endregion
 
@@ -72,9 +73,9 @@ namespace CSM.UiLogic
         public RelayCommand SettingsCommand { get; }
 
         /// <summary>
-        /// Gets the viewmodel for the settings panel.
+        /// Command used to show the info window.
         /// </summary>
-        public SettingsViewModel Settings { get; }
+        public RelayCommand InfoCommand { get; }
 
         #endregion
 
@@ -83,8 +84,9 @@ namespace CSM.UiLogic
         /// </summary>
         public MainWindowViewModel()
         {
-            Settings = new SettingsViewModel();
+            //Settings = new SettingsViewModel();
             SettingsCommand = new RelayCommand(ShowSettings);
+            InfoCommand = new RelayCommand(ShowInfo);
         }
 
         /// <summary>
@@ -98,12 +100,26 @@ namespace CSM.UiLogic
             }
         }
 
+        #region Helper methods
+
         /// <summary>
         /// Shows the settings panel.
         /// </summary>
-        public void ShowSettings()
+        private void ShowSettings()
         {
-            Settings.Visible = true;
+            var viewModel = new SettingsViewModel();
+            EditWindowController.Instance().ShowEditWindow(viewModel);
         }
+
+        /// <summary>
+        /// Shows the info window.
+        /// </summary>
+        private void ShowInfo()
+        {
+            var viewModel = new EditWindowInfoViewModel();
+            EditWindowController.Instance().ShowEditWindow(viewModel);
+        }
+
+        #endregion
     }
 }
