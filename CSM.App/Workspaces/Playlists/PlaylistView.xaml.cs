@@ -39,5 +39,11 @@ namespace CSM.App.Workspaces.Playlists
         {
             e.DefaultOperator1 = Telerik.Windows.Data.FilterOperator.Contains;
         }
+
+        private void RadGridView_Sorted(object sender, Telerik.Windows.Controls.GridViewSortedEventArgs e)
+        {
+            var viewModel = DataContext as PlaylistViewModel;
+            viewModel.SetSortOrder(e.Column.UniqueName, e.Column.SortingState);
+        }
     }
 }

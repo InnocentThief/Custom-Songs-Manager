@@ -11,6 +11,16 @@ namespace CSM.DataAccess.Entities.Offline
         [JsonPropertyName("key")]
         public string Key { get; set; }
 
+        [JsonIgnore]
+        public int BsrKeyHex
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(Key)) return 0;
+                return int.Parse(Key, System.Globalization.NumberStyles.HexNumber);
+            }
+        }
+
         [JsonPropertyName("songName")]
         public string SongName { get; set; }
 

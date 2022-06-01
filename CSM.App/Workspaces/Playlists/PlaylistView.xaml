@@ -28,6 +28,12 @@
             </Grid.ColumnDefinitions>
             <!-- Title -->
             <TextBlock Text="{x:Static p:Resources.Playlist_Title}" Foreground="White" VerticalAlignment="Center" Margin="8,0" FontWeight="DemiBold" />
+            <!-- Save playlist with current song order -->
+            <telerik:RadToolBar Grid.Column="1" OverflowButtonVisibility="Collapsed" GripVisibility="Collapsed" Background="Transparent" BorderThickness="0" >
+                <telerik:RadButton Command="{Binding SavePlaylistCommand}" ToolTip="Save playlist with the current song order">
+                    <telerik:RadGlyph Glyph="&#xe109;" />
+                </telerik:RadButton>
+            </telerik:RadToolBar>
         </Grid>
         <!-- Content -->
         <Border Grid.Row="1" BorderBrush="DimGray" BorderThickness="1,0,1,1">
@@ -87,7 +93,7 @@
                     </Grid>
                 </Grid>
                 <!-- Content -->
-                <telerik:RadGridView Grid.Row="1" ItemsSource="{Binding Songs}" SelectedItem="{Binding SelectedPlaylistSong}" AutoGenerateColumns="False" IsFilteringAllowed="True" FilteringMode="FilterRow" RowIndicatorVisibility="Collapsed" FrozenColumnsSplitterVisibility="Collapsed" BorderThickness="0" AlternationCount="2" ShowGroupPanel="False" SelectionChanged="RadGridView_SelectionChanged" FilterOperatorsLoading="RadGridView_FilterOperatorsLoading"  >
+                <telerik:RadGridView Grid.Row="1" ItemsSource="{Binding Songs}" SelectedItem="{Binding SelectedPlaylistSong}" AutoGenerateColumns="False" IsFilteringAllowed="True" FilteringMode="FilterRow" RowIndicatorVisibility="Collapsed" FrozenColumnsSplitterVisibility="Collapsed" BorderThickness="0" AlternationCount="2" ShowGroupPanel="False" SelectionChanged="RadGridView_SelectionChanged" FilterOperatorsLoading="RadGridView_FilterOperatorsLoading" Sorted="RadGridView_Sorted"  >
                     <telerik:RadGridView.Columns>
                         <!-- Key -->
                         <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_BSR}" Width="Auto" DataMemberBinding="{Binding BsrKeyHex}" IsFilterable="False">

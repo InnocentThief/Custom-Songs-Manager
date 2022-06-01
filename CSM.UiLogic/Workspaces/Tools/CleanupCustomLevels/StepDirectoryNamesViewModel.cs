@@ -212,7 +212,7 @@ namespace CSM.UiLogic.Workspaces.Tools.CleanupCustomLevels
             {
 
                 //var infoPath = Path.Combine(customLevel.Path, "Info.dat");
-             
+
 
                 //var infoContent = File.ReadAllText(infoPath);
                 //var hasher = SHA1.Create();

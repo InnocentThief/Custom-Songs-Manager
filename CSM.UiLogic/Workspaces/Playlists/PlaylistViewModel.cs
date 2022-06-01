@@ -31,6 +31,9 @@ namespace CSM.UiLogic.Workspaces.Playlists
         private PlaylistSongDetailViewModel playlistSongDetail;
         private BeatMapService beatMapService;
 
+        private string sortColumnName;
+        private Telerik.Windows.Controls.SortingState sortingState;
+
         #endregion
 
         #region Public Properties
@@ -204,6 +207,11 @@ namespace CSM.UiLogic.Workspaces.Playlists
         /// </summary>
         public RelayCommand CancelCommand { get; }
 
+        /// <summary>
+        /// Command used to save the playlist with the current song order.
+        /// </summary>
+        public RelayCommand SavePlaylistCommand { get; }
+
         #endregion
 
         /// <summary>
@@ -217,6 +225,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
             EditCommand = new RelayCommand(Edit);
             SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);
+            SavePlaylistCommand = new RelayCommand(SavePlaylist);
 
             InEditMode = false;
 
@@ -284,6 +293,12 @@ namespace CSM.UiLogic.Workspaces.Playlists
             return ContainsRightSong;
         }
 
+        public void SetSortOrder(string sortColumnName, Telerik.Windows.Controls.SortingState sortingState)
+        {
+            this.sortColumnName = sortColumnName;
+            this.sortingState = sortingState;
+        }
+
         #region Helper methods
 
         private void SongViewModel_DeleteSongEvent(object sender, System.EventArgs e)
@@ -327,6 +342,50 @@ namespace CSM.UiLogic.Workspaces.Playlists
             var options = new JsonSerializerOptions { WriteIndented = true };
             var content = JsonSerializer.Serialize(playlist, options);
             File.WriteAllText(playlist.Path, content);
+        }
+
+        private void SavePlaylist()
+        {
+            if (string.IsNullOrWhiteSpace(sortColumnName)) return;
+            if (sortingState == Telerik.Windows.Controls.SortingState.None) return;
+            var currentSongs = playlist.Songs.ToList();
+            playlist.Songs.Clear();
+            switch (sortColumnName)
+            {
+                case "BsrKeyHex":
+                    if (sortingState == Telerik.Windows.Controls.SortingState.Ascending)
+                    {
+                        playlist.Songs.AddRange(currentSongs.OrderBy(s => s.BsrKeyHex));
+                    }
+                    else
+                    {
+                        playlist.Songs.AddRange(currentSongs.OrderByDescending(s => s.BsrKeyHex));
+                    }
+                    break;
+                case "SongName":
+                    if (sortingState == Telerik.Windows.Controls.SortingState.Ascending)
+                    {
+                        playlist.Songs.AddRange(currentSongs.OrderBy(s => s.SongName));
+                    }
+                    else
+                    {
+                        playlist.Songs.AddRange(currentSongs.OrderByDescending(s => s.SongName));
+                    }
+                    break;
+                case "LevelAuthorName":
+                    if (sortingState == Telerik.Windows.Controls.SortingState.Ascending)
+                    {
+                        playlist.Songs.AddRange(currentSongs.OrderBy(s => s.LevelAuthorName));
+                    }
+                    else
+                    {
+                        playlist.Songs.AddRange(currentSongs.OrderByDescending(s => s.LevelAuthorName));
+                    }
+                    break;
+                default:
+                    break;
+            }
+            SaveToFile();
         }
 
         #endregion
