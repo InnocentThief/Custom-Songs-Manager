@@ -105,6 +105,7 @@
     <Compile Include="Wizards\MessageBoxEventArgs.cs" />
     <Compile Include="Wizards\MessageBoxViewModel.cs" />
     <Compile Include="Workspaces\BaseWorkspaceViewModel.cs" />
+    <Compile Include="Workspaces\Common\EditWindowNewFileOrFolderNameViewModel.cs" />
     <Compile Include="Workspaces\CustomLevelsViewModel.cs" />
     <Compile Include="Workspaces\CustomLevels\CustomLevelCharactersisticViewModel.cs" />
     <Compile Include="Workspaces\CustomLevels\CustomLevelDetailViewModel.cs" />
@@ -145,7 +146,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Workspaces\Common\" />
     <Folder Include="Workspaces\Tools\" />
     <Folder Include="Workspaces\TwitchIntegration\" />
   </ItemGroup>

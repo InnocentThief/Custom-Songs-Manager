@@ -2,8 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\CSM.App",
-    "\\CSM.App\\Properties"
+    "\\CSM.App\\Properties",
+    "\\CSM.App\\Workspaces",
+    "\\CSM.App\\Workspaces\\Settings"
   ],
-  "SelectedNode": "\\CSM.App\\Properties\\Resources.de.resx",
+  "SelectedNode": "\\CSM.App\\Workspaces\\Settings\\WorkspaceSettingsView.xaml",
   "PreviewInSolutionExplorer": false
 }

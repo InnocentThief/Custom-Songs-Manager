@@ -192,6 +192,9 @@
       <DependentUpon>MessageBoxWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Workspaces\Common\CharacteristicDataTemplateSelector.cs" />
+    <Compile Include="Workspaces\Common\NewFileOrFolderNameView.xaml.cs">
+      <DependentUpon>NewFileOrFolderNameView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Workspaces\CustomLevels\CustomLevelDetailView.xaml.cs">
       <DependentUpon>CustomLevelDetailView.xaml</DependentUpon>
     </Compile>
@@ -270,6 +273,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Workspaces\Common\Characteristics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Workspaces\Common\NewFileOrFolderNameView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

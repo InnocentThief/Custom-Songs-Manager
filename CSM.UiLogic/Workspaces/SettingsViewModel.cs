@@ -1,7 +1,5 @@
 ﻿using CSM.UiLogic.Wizards;
 using CSM.UiLogic.Workspaces.Settings;
-using Microsoft.Toolkit.Mvvm.ComponentModel;
-using Microsoft.Toolkit.Mvvm.Input;
 
 namespace CSM.UiLogic.Workspaces
 {
@@ -38,11 +36,6 @@ namespace CSM.UiLogic.Workspaces
             }
         }
 
-        /// <summary>
-        /// Command used to close the settings workspace.
-        /// </summary>
-        public RelayCommand CloseCommand { get; }
-
         public override int Height => 400;
 
         public override int Width => 800;
@@ -54,16 +47,10 @@ namespace CSM.UiLogic.Workspaces
         /// <summary>
         /// Initializes a new <see cref="SettingsViewModel"/>.
         /// </summary>
-        public SettingsViewModel()
+        public SettingsViewModel(): base(string.Empty, string.Empty)
         {
-            CloseCommand = new RelayCommand(Close);
             BeatSaberSettings = new BeatSaberSettingsViewModel();
             WorkspaceSettings = new WorkspaceSettingsViewModel();
-        }
-
-        private void Close()
-        {
-            Visible = false;
         }
     }
 }
