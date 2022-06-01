@@ -14,10 +14,10 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <!-- Title -->
-        <Border Background="DarkRed">
+        <Border Background="#FF018574">
             <TextBlock Text="{x:Static p:Resources.Settings_BeatSaber_Title}" FontWeight="DemiBold" Margin="8" />
         </Border>
-        <Border Grid.Row="1" BorderBrush="DarkRed" BorderThickness="1, 0, 1, 1">
+        <Border Grid.Row="1" BorderBrush="DimGray" BorderThickness="1, 0, 1, 1">
             <Grid Margin="8">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150" />

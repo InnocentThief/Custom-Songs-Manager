@@ -1,4 +1,4 @@
-﻿<Window x:Class="CSM.App.MainWindow"
+﻿<telerik:RadWindow x:Class="CSM.App.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -12,9 +12,9 @@
         xmlns:tools="clr-namespace:CSM.App.Workspaces.Tools"
         xmlns:twitchintegration="clr-namespace:CSM.App.Workspaces.TwitchIntegration" xmlns:songsearch="clr-namespace:CSM.App.Workspaces.SongSearch"
         mc:Ignorable="d"
-        Title="Custom Songs Manager" Height="450" Width="800">
+        Header="Custom Songs Manager" Height="800" Width="1200">
 
-    <Window.Resources>
+    <telerik:RadWindow.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
         <telerik:StringToGlyphConverter x:Key="StringToGlyphConverter" />
 
@@ -61,7 +61,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-    </Window.Resources>
+    </telerik:RadWindow.Resources>
 
     <telerik:RadNavigationView ItemsSource="{Binding Workspaces}"
                                SelectedItem="{Binding SelectedWorkspace}"
@@ -72,8 +72,8 @@
                                ItemContainerStyle="{StaticResource BaseNavigationViewItemStyle}" 
                                SelectionChanged="RadNavigationView_SelectionChanged"
                                PaneHeader="Custom Songs Mananger">
-
-        <!-- Content -->
+        
+         <!-- Content --> 
         <telerik:RadNavigationView.Content>
             <Grid>
                 <telerik:RadTransitionControl Content="{Binding SelectedWorkspace}" ContentTemplateSelector="{StaticResource WorkspaceContentTemplateSelector}" Duration="0:0:0.4">
@@ -81,19 +81,27 @@
                         <telerik:FadeTransition />
                     </telerik:RadTransitionControl.Transition>
                 </telerik:RadTransitionControl>
-                <settings:SettingsView Margin="100" DataContext="{Binding Settings}" Visibility="{Binding Visible, Converter={StaticResource BoolToVisConverter}}" />
             </Grid>
         </telerik:RadNavigationView.Content>
 
-        <!-- Footer -->
+         <!-- Footer --> 
         <telerik:RadNavigationView.PaneFooter>
-            <telerik:RadNavigationViewItem Content="{x:Static p:Resources.MainWindow_Settings}" 
+            <StackPanel>
+                <telerik:RadNavigationViewItem Content="{x:Static p:Resources.MainWindow_Settings}" 
+                                               Command="{Binding InfoCommand}"
+                                               IconTemplate="{x:Null}">
+                    <telerik:RadNavigationViewItem.Icon>
+                        <telerik:RadGlyph Glyph="&#xe401;" FontSize="20" />
+                    </telerik:RadNavigationViewItem.Icon>
+                </telerik:RadNavigationViewItem>
+                <telerik:RadNavigationViewItem Content="{x:Static p:Resources.MainWindow_Settings}" 
                                                Command="{Binding SettingsCommand}"
                                                IconTemplate="{x:Null}">
-                <telerik:RadNavigationViewItem.Icon>
-                    <telerik:RadGlyph Glyph="&#xe13a;" FontSize="20" />
-                </telerik:RadNavigationViewItem.Icon>
-            </telerik:RadNavigationViewItem>
+                    <telerik:RadNavigationViewItem.Icon>
+                        <telerik:RadGlyph Glyph="&#xe13a;" FontSize="20" />
+                    </telerik:RadNavigationViewItem.Icon>
+                </telerik:RadNavigationViewItem>
+            </StackPanel>
         </telerik:RadNavigationView.PaneFooter>
     </telerik:RadNavigationView>
-</Window>
+</telerik:RadWindow>

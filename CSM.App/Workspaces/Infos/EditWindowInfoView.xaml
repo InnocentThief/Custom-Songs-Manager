@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="CSM.App.Workspaces.Infos.EditWindowInfoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CSM.App.Workspaces.Infos" xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             mc:Ignorable="d"
+             d:DesignHeight="200" d:DesignWidth="400">
+
+    <Grid Margin="8">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <!-- CSM Image -->
+        <Image  Source="../../CSM.png" />
+        <!-- Contributors -->
+        <Grid Grid.Column="1" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <!-- CSM name -->
+            <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" Margin="0,0,0,6">
+                <TextBlock Text="Custom Songs Manager" FontWeight="Bold" FontSize="14" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding Version}" Margin="10,0" FontWeight="DemiBold" VerticalAlignment="Center" />
+                <telerik:RadButton Background="{x:Null}" BorderThickness="0" Margin="10,0" ToolTip="GitHub" Command="{Binding GithubCommand}">
+                    <telerik:RadGlyph Glyph="&#xe134;" />
+                </telerik:RadButton>
+            </StackPanel>
+            <!-- Idea -->
+            <TextBlock Grid.Row="1" Text="Idea" Margin="0,3" FontWeight="DemiBold" />
+            <TextBlock Grid.Column="1" Grid.Row="1" Text="GoodOldNervy" Margin="0,3" />
+            <!-- Development -->
+            <TextBlock Grid.Row="2" Text="Development" Margin="0,3" FontWeight="DemiBold" />
+            <TextBlock Grid.Column="1" Grid.Row="2" Text="InnocentThief" Margin="0,3" />
+            <!-- Icon -->
+            <TextBlock Grid.Row="3" Text="Icon" Margin="0,3" FontWeight="DemiBold" />
+            <TextBlock Grid.Column="1" Grid.Row="3" Text="SmokyJoe" Margin="0,3" />
+            <!-- Testing -->
+            <TextBlock Grid.Row="4" Text="Testing" Margin="0,3" FontWeight="DemiBold" />
+            <TextBlock Grid.Column="1" Grid.Row="4" Text="DonOfCrumb, Pedder, meryyll, rechtzanwalt, Sebi" TextWrapping="Wrap" Margin="0,3" />
+        </Grid>
+
+
+
+
+    </Grid>
+</UserControl>

@@ -1,6 +1,7 @@
 ﻿using CSM.Framework;
 using CSM.Framework.Configuration.UserConfiguration;
 using CSM.Framework.Extensions;
+using CSM.UiLogic.Wizards;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
@@ -85,6 +86,8 @@ namespace CSM.UiLogic.Workspaces.Settings
                 OnPropertyChanged();
             }
         }
+
+
 
         #endregion
 
