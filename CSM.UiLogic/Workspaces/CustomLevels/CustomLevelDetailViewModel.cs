@@ -43,7 +43,7 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
 
         public string Qualified => beatMap.Qualified ? Resources.Yes : Resources.No;
 
-        public string CoverUrl => beatMap.Versions.First().CoverUrl;
+        public string CoverUrl => beatMap.LatestVersion.CoverUrl;
 
         public string Tags
         {
@@ -84,8 +84,7 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
         public CustomLevelDetailViewModel(BeatMap beatMap)
         {
             this.beatMap = beatMap;
-            var difficulties = beatMap.Versions.SelectMany(v => v.Difficulties);
-            var characteristics = difficulties.GroupBy(d => d.Characteristic);
+            var characteristics = beatMap.LatestVersion.Difficulties.GroupBy(d => d.Characteristic);
             Characteristics = new List<CustomLevelCharactersisticViewModel>(characteristics.Select(c => new CustomLevelCharactersisticViewModel(c)));
             CopyBsrKeyCommand = new RelayCommand(CopyBsrKey);
         }

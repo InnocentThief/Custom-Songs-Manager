@@ -6,6 +6,5 @@
         Playlists = 1,
         TwitchIntegration = 2,
         Tools = 3,
-        SongSearch = 4
     }
 }

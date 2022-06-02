@@ -15,8 +15,6 @@ namespace CSM.App.Workspaces
 
         public DataTemplate Tools { get; set; }
 
-        public DataTemplate SongSearch { get; set; }
-
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             if (!(item is BaseWorkspaceViewModel workspaceViewModel)) return base.SelectTemplate(item, container);
@@ -31,8 +29,6 @@ namespace CSM.App.Workspaces
                     return TwitchIntegration;
                 case WorkspaceType.Tools:
                     return Tools;
-                case WorkspaceType.SongSearch:
-                    return SongSearch;
                 default:
                     return base.SelectTemplate(item, container);
             }

@@ -30,7 +30,7 @@
             <TextBlock Text="{x:Static p:Resources.Playlist_Title}" Foreground="White" VerticalAlignment="Center" Margin="8,0" FontWeight="DemiBold" />
             <!-- Save playlist with current song order -->
             <telerik:RadToolBar Grid.Column="1" OverflowButtonVisibility="Collapsed" GripVisibility="Collapsed" Background="Transparent" BorderThickness="0" >
-                <telerik:RadButton Command="{Binding SavePlaylistCommand}" ToolTip="Save playlist with the current song order">
+                <telerik:RadButton Command="{Binding SavePlaylistCommand}" ToolTip="{x:Static p:Resources.Workspace_Playlist_SavePlaylistWithSongOrder}">
                     <telerik:RadGlyph Glyph="&#xe109;" />
                 </telerik:RadButton>
             </telerik:RadToolBar>
@@ -104,11 +104,11 @@
                             </telerik:GridViewDataColumn.CellTemplate>
                         </telerik:GridViewDataColumn>
                         <!-- Title of the song -->
-                        <telerik:GridViewDataColumn Header="Title" DataMemberBinding="{Binding SongName}" Width="*" />
+                        <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_Artist}" DataMemberBinding="{Binding SongName}" Width="*" />
                         <!-- Mapper of the song -->
-                        <telerik:GridViewDataColumn Header="Mapper" DataMemberBinding="{Binding LevelAuthorName}" Width="*" />
+                        <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_Mapper}" DataMemberBinding="{Binding LevelAuthorName}" Width="*" />
                         <!-- List with difficulties of the song -->
-                        <telerik:GridViewDataColumn Header="Difficulty" DataMemberBinding="{Binding Difficulties}">
+                        <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_Playlist_ColumnHeader_Difficultiy}" DataMemberBinding="{Binding Difficulties}">
                             <telerik:GridViewDataColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">

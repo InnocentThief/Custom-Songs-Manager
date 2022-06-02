@@ -367,7 +367,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
         private async void CustomLevelOrFavorite_AddSongToPlaylistEvent(object sender, AddSongToPlaylistEventArgs e)
         {
             var beatmap = await beatMapService.GetBeatMapDataAsync(e.BsrKey);
-            e.Hash = beatmap.Versions.First().Hash;
+            e.Hash = beatmap.LatestVersion.Hash;
             e.SongName = beatmap.Metadata.SongName;
             e.LevelAuthorName = beatmap.Metadata.LevelAuthorName;
             e.LevelId = $"custom_level_{e.Hash}";

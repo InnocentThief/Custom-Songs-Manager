@@ -61,6 +61,42 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Development.
+        /// </summary>
+        public static string About_Development {
+            get {
+                return ResourceManager.GetString("About_Development", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Icon.
+        /// </summary>
+        public static string About_Icon {
+            get {
+                return ResourceManager.GetString("About_Icon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Idea.
+        /// </summary>
+        public static string About_Idea {
+            get {
+                return ResourceManager.GetString("About_Idea", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Testing.
+        /// </summary>
+        public static string About_Testing {
+            get {
+                return ResourceManager.GetString("About_Testing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No custom level selected.
         /// </summary>
         public static string CustomLevels_Detail_NoData {
@@ -115,7 +151,7 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Available Custom Levels / Beat Saber Favorites.
+        ///   Looks up a localized string similar to Available Custom Levels / Beat Saber Favorites / Song Search.
         /// </summary>
         public static string Playlists_AvailableCustomLevels_Title {
             get {
@@ -246,6 +282,609 @@ namespace CSM.App.Properties {
         public static string Settings_Workspaces_Title {
             get {
                 return ResourceManager.GetString("Settings_Workspaces_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clears all filters.
+        /// </summary>
+        public static string SongSearch_Search_ClearFilter {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_ClearFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enhanced Search.
+        /// </summary>
+        public static string SongSearch_Search_Enhanced {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Enhanced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to General.
+        /// </summary>
+        public static string SongSearch_Search_General {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_General", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AI.
+        /// </summary>
+        public static string SongSearch_Search_General_AI {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_General_AI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Curated.
+        /// </summary>
+        public static string SongSearch_Search_General_Curated {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_General_Curated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Full Spread.
+        /// </summary>
+        public static string SongSearch_Search_General_FullSpread {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_General_FullSpread", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ranked.
+        /// </summary>
+        public static string SongSearch_Search_General_Ranked {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_General_Ranked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verified Mapper.
+        /// </summary>
+        public static string SongSearch_Search_General_Verified {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_General_Verified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Relevance.
+        /// </summary>
+        public static string SongSearch_Search_Relevance {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Relevance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Curated.
+        /// </summary>
+        public static string SongSearch_Search_Relevance_Curated {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Relevance_Curated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Latest.
+        /// </summary>
+        public static string SongSearch_Search_Relevance_Latest {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Relevance_Latest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rating.
+        /// </summary>
+        public static string SongSearch_Search_Relevance_Rating {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Relevance_Rating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Relevance.
+        /// </summary>
+        public static string SongSearch_Search_Relevance_Relevance {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Relevance_Relevance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requirements.
+        /// </summary>
+        public static string SongSearch_Search_Requirements {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Requirements", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chroma.
+        /// </summary>
+        public static string SongSearch_Search_Requirements_Chroma {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Requirements_Chroma", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cinema.
+        /// </summary>
+        public static string SongSearch_Search_Requirements_Cinema {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Requirements_Cinema", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mapping Extensions.
+        /// </summary>
+        public static string SongSearch_Search_Requirements_ME {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Requirements_ME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Noodle.
+        /// </summary>
+        public static string SongSearch_Search_Requirements_Noodle {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Requirements_Noodle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tags (Map-Style).
+        /// </summary>
+        public static string SongSearch_Search_Tags_MapStyle {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_MapStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accuracy.
+        /// </summary>
+        public static string SongSearch_Search_Tags_MapStyle_Accuracy {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_MapStyle_Accuracy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Balanced.
+        /// </summary>
+        public static string SongSearch_Search_Tags_MapStyle_Balanced {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_MapStyle_Balanced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Challenge.
+        /// </summary>
+        public static string SongSearch_Search_Tags_MapStyle_Challenge {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_MapStyle_Challenge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dance.
+        /// </summary>
+        public static string SongSearch_Search_Tags_MapStyle_Dance {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_MapStyle_Dance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fitness.
+        /// </summary>
+        public static string SongSearch_Search_Tags_MapStyle_Fitness {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_MapStyle_Fitness", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        public static string SongSearch_Search_Tags_MapStyle_None {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_MapStyle_None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Speed.
+        /// </summary>
+        public static string SongSearch_Search_Tags_MapStyle_Speed {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_MapStyle_Speed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tech.
+        /// </summary>
+        public static string SongSearch_Search_Tags_MapStyle_Tech {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_MapStyle_Tech", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tags (Song-Style).
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alternative.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_Alternative {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_Alternative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ambient.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_Ambient {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_Ambient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anime.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_Anime {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_Anime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comedy &amp; Meme.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_ComedyMeme {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_ComedyMeme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dance.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_Dance {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_Dance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Drum and Bass.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_DrumAndBass {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_DrumAndBass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dubstep.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_Dubstep {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_Dubstep", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Electronic.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_Electronic {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_Electronic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Folk &amp; Acoustic.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_FoldAcoustic {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_FoldAcoustic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Funk &amp; Disco.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_FunkDisco {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_FunkDisco", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hardcore.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_Hardcore {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_Hardcore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Holiday.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_Holiday {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_Holiday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to House.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_House {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_House", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Indie.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_Indie {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_Indie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Instrumental.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_Instrumental {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_Instrumental", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jazz.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_Jazz {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_Jazz", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to J-Pop.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_JPop {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_JPop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to J-Rock.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_JRock {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_JRock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to K-Pop.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_KPop {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_KPop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Metal.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_Metal {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_Metal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nightcore.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_Nightcore {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_Nightcore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_None {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pop.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_Pop {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_Pop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Punk.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_Punk {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_Punk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to R&amp;B.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_RB {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_RB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rock.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_Rock {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_Rock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Soul.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_Soul {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_Soul", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Speedcore.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_Speedcore {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_Speedcore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Swing.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_Swing {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_Swing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Techno.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_Techno {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_Techno", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trance.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_Trance {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_Trance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TV &amp; Film.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_TVFilm {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_TVFilm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Video Game.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_VideoGame {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_VideoGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vocaloid.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyle_Vocaloid {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyle_Vocaloid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Classical &amp; Orchestral.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyleClassicalOrchestral {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyleClassicalOrchestral", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hip Hop &amp; Rap.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyleHipHopRap {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyleHipHopRap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kids &amp; Family.
+        /// </summary>
+        public static string SongSearch_Search_Tags_SongStyleKidsFamily {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Tags_SongStyleKidsFamily", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Searches for songs.
+        /// </summary>
+        public static string SongSearch_Search_ToolTip {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        public static string SongSearch_Search_Watermark {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_Watermark", resourceCulture);
             }
         }
         
@@ -394,6 +1033,15 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string Workspace_CustomLevels_Detail_Description {
+            get {
+                return ResourceManager.GetString("Workspace_CustomLevels_Detail_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Difficulties.
         /// </summary>
         public static string Workspace_CustomLevels_Detail_Difficulties {
@@ -426,6 +1074,15 @@ namespace CSM.App.Properties {
         public static string Workspace_CustomLevels_Detail_Mapper {
             get {
                 return ResourceManager.GetString("Workspace_CustomLevels_Detail_Mapper", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No description available.
+        /// </summary>
+        public static string Workspace_CustomLevels_Detail_NoDescription {
+            get {
+                return ResourceManager.GetString("Workspace_CustomLevels_Detail_NoDescription", resourceCulture);
             }
         }
         
@@ -547,11 +1204,29 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Difficulty.
+        /// </summary>
+        public static string Workspace_Playlist_ColumnHeader_Difficultiy {
+            get {
+                return ResourceManager.GetString("Workspace_Playlist_ColumnHeader_Difficultiy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remove song from playlist.
         /// </summary>
         public static string Workspace_Playlist_RemoveSongFromPlaylist_ToolTip {
             get {
                 return ResourceManager.GetString("Workspace_Playlist_RemoveSongFromPlaylist_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save playlist with the current song order.
+        /// </summary>
+        public static string Workspace_Playlist_SavePlaylistWithSongOrder {
+            get {
+                return ResourceManager.GetString("Workspace_Playlist_SavePlaylistWithSongOrder", resourceCulture);
             }
         }
         

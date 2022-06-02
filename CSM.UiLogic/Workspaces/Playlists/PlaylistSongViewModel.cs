@@ -33,7 +33,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
         /// </summary>
         public string Hash
         {
-            get => playlistSong.Hash;
+            get => playlistSong.Hash.ToLower();
         }
 
         /// <summary>
@@ -140,8 +140,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
             var beatmapService = new BeatMapService("maps/hash");
             var beatmap = await beatmapService.GetBeatMapDataAsync(playlistSong.Hash);
 
-            var difficulties = beatmap.Versions.SelectMany(v => v.Difficulties);
-            foreach (var difficulty in difficulties)
+            foreach (var difficulty in beatmap.LatestVersion.Difficulties)
             {
                 var difficultyViewModel = Difficulties.SingleOrDefault(d => d.Characteristic == difficulty.Characteristic && d.Name == difficulty.Diff);
                 if (difficultyViewModel == null)

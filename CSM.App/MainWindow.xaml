@@ -1,19 +1,19 @@
 ﻿<telerik:RadWindow x:Class="CSM.App.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
-        xmlns:p="clr-namespace:CSM.App.Properties"
-        xmlns:workspaces="clr-namespace:CSM.App.Workspaces"
-        xmlns:customlevels="clr-namespace:CSM.App.Workspaces.CustomLevels"
-        xmlns:playlists="clr-namespace:CSM.App.Workspaces.Playlists"
-        xmlns:settings="clr-namespace:CSM.App.Workspaces.Settings"
-        xmlns:tools="clr-namespace:CSM.App.Workspaces.Tools"
-        xmlns:twitchintegration="clr-namespace:CSM.App.Workspaces.TwitchIntegration" xmlns:songsearch="clr-namespace:CSM.App.Workspaces.SongSearch"
-        mc:Ignorable="d"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+                   xmlns:p="clr-namespace:CSM.App.Properties"
+                   xmlns:workspaces="clr-namespace:CSM.App.Workspaces"
+                   xmlns:customlevels="clr-namespace:CSM.App.Workspaces.CustomLevels"
+                   xmlns:playlists="clr-namespace:CSM.App.Workspaces.Playlists"
+                   xmlns:settings="clr-namespace:CSM.App.Workspaces.Settings"
+                   xmlns:tools="clr-namespace:CSM.App.Workspaces.Tools"
+                   xmlns:twitchintegration="clr-namespace:CSM.App.Workspaces.TwitchIntegration"
                    xmlns:navigation="clr-namespace:Telerik.Windows.Controls.Navigation;assembly=Telerik.Windows.Controls.Navigation"
-        Header="Custom Songs Manager" Height="800" Width="1200"
+                   mc:Ignorable="d"
+                   Header="Custom Songs Manager" Height="800" Width="1200"
                    navigation:RadWindowInteropHelper.Title="Custom Songs Manager" 
     navigation:RadWindowInteropHelper.ShowInTaskbar="True">
 
@@ -46,16 +46,11 @@
             <tools:ToolsView />
         </DataTemplate>
 
-        <DataTemplate x:Key="SongSearchDataTemplate">
-            <songsearch:SongSearchView />
-        </DataTemplate>
-
         <workspaces:WorkspaceContentTemplateSelector x:Key="WorkspaceContentTemplateSelector"
                                                      CustomLevels="{StaticResource CustomLevelsDataTemplate}"
                                                      Playlists="{StaticResource PlaylistsDataTemplate}"
                                                      TwitchIntegration="{StaticResource TwitchIntegrationDataTemplate}"
-                                                     Tools="{StaticResource ToolsDataTemplate}"
-                                                     SongSearch="{StaticResource SongSearchDataTemplate}"/>
+                                                     Tools="{StaticResource ToolsDataTemplate}"/>
 
 
         <Style x:Key="BaseNavigationViewItemStyle" TargetType="telerik:RadNavigationViewItem">

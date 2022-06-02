@@ -132,7 +132,6 @@
     <Compile Include="Workspaces\Settings\BeatSaberSettingsViewModel.cs" />
     <Compile Include="Workspaces\Settings\WorkspaceSettingsViewModel.cs" />
     <Compile Include="Workspaces\Settings\WorkspaceViewModel.cs" />
-    <Compile Include="Workspaces\SongSearchViewModel.cs" />
     <Compile Include="Workspaces\ToolsViewModel.cs" />
     <Compile Include="Workspaces\Tools\CleanupCustomLevels\CleanupCustomLevelsViewModel.cs" />
     <Compile Include="Workspaces\Tools\CleanupCustomLevels\CustomLevelViewModel.cs" />
@@ -158,7 +157,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Workspaces\SongSearch\" />
     <Folder Include="Workspaces\TwitchIntegration\" />
   </ItemGroup>
   <ItemGroup>

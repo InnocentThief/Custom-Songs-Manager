@@ -248,9 +248,6 @@
     <Compile Include="Workspaces\Settings\WorkspaceSettingsView.xaml.cs">
       <DependentUpon>WorkspaceSettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Workspaces\SongSearch\SongSearchView.xaml.cs">
-      <DependentUpon>SongSearchView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Workspaces\Tools\CleanupCustomLevels\CleanupCustomLevelsContentTemplateSelector.cs" />
     <Compile Include="Workspaces\Tools\CleanupCustomLevels\CleanupCustomLevelsView.xaml.cs">
       <DependentUpon>CleanupCustomLevelsView.xaml</DependentUpon>
@@ -367,10 +364,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Workspaces\Settings\WorkspaceSettingsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Workspaces\SongSearch\SongSearchView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
