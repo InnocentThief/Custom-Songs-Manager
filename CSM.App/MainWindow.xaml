@@ -18,8 +18,13 @@
     navigation:RadWindowInteropHelper.ShowInTaskbar="True">
 
     <telerik:RadWindow.Resources>
+
         <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
         <telerik:StringToGlyphConverter x:Key="StringToGlyphConverter" />
+
+        <DataTemplate x:Key="WindowIconTemplate">
+            <Image Source="/Images/CSM_16.png" Stretch="None" Margin="6,0,0,0" />
+        </DataTemplate>
 
         <DataTemplate x:Key="CustomLevelsDataTemplate">
             <customlevels:CustomLevelsView />

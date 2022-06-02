@@ -20,6 +20,10 @@
     <telerik:RadWindow.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
 
+        <DataTemplate x:Key="WindowIconTemplate">
+            <Image Source="/Images/CSM_16.png" Stretch="None" Margin="6,0,0,0" />
+        </DataTemplate>
+
         <DataTemplate DataType="{x:Type infosViewModel:EditWindowInfoViewModel}">
             <infos:EditWindowInfoView />
         </DataTemplate>

@@ -37,7 +37,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>CSM.ico</ApplicationIcon>
+    <ApplicationIcon>Images\CSM.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=2.0.14.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
@@ -449,7 +449,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="CSM.ico" />
+    <Resource Include="Images\CSM.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Update="appsettings.json">
@@ -457,12 +457,17 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <AdditionalFiles Include="CSM_Logo_400px.png">
+    <AdditionalFiles Include="Images\CSM_Logo_400px.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </AdditionalFiles>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="CSM.png">
+    <Resource Include="Images\CSM.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CSM_16.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

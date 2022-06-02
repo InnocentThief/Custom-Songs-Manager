@@ -201,7 +201,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
 
         public void ShowSongDetailForSelectedSong()
         {
-            playlistSongDetail = new PlaylistSongDetailViewModel(SelectedSearchedSong.BeatMap);
+            PlaylistSongDetail = new PlaylistSongDetailViewModel(SelectedSearchedSong.BeatMap);
         }
 
         /// <summary>

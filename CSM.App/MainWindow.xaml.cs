@@ -30,6 +30,8 @@ namespace CSM.App
             InitializeComponent();
             //Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("de-CH");
             DataContext = new MainWindowViewModel();
+
+            IconTemplate = this.Resources["WindowIconTemplate"] as DataTemplate;
         }
 
         private void RadNavigationView_SelectionChanged(object sender, SelectionChangedEventArgs e)

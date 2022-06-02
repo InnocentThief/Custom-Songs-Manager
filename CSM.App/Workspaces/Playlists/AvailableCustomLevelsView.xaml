@@ -92,7 +92,7 @@
                             <!-- Search fields -->
                             <local:SongSearchView DataContext="{Binding SongSearch}" />
                             <!-- List with search results -->
-                            <telerik:RadGridView Grid.Row="1" ItemsSource="{Binding SearchedSongs}" SelectedItem="{Binding SelectedSearchedSong}" FilteringMode="FilterRow" AutoGenerateColumns="False" RowIndicatorVisibility="Collapsed" FrozenColumnsSplitterVisibility="Collapsed" BorderThickness="0" AlternationCount="2" SelectionChanged="SearchedSongs_SelectionChanged_1" FilterOperatorsLoading="SearchedSongs_FilterOperatorsLoading_1" >
+                            <telerik:RadGridView Grid.Row="1" ItemsSource="{Binding SearchedSongs}" SelectedItem="{Binding SelectedSearchedSong}" FilteringMode="FilterRow" AutoGenerateColumns="False" RowIndicatorVisibility="Collapsed" FrozenColumnsSplitterVisibility="Collapsed" BorderThickness="0" AlternationCount="2" SelectionChanged="SearchedSongs_SelectionChanged" FilterOperatorsLoading="SearchedSongs_FilterOperatorsLoading" >
                                 <telerik:RadGridView.Columns>
                                     <!-- Add button (will add song to selected playlist) -->
                                     <telerik:GridViewColumn Width="SizeToCells">

@@ -13,7 +13,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <!-- CSM Image -->
-        <Image  Source="../../CSM.png" />
+        <Image Source="../../Images/CSM.png" />
         <!-- Contributors -->
         <Grid Grid.Column="1" Margin="10">
             <Grid.ColumnDefinitions>
@@ -48,9 +48,5 @@
             <TextBlock Grid.Row="4" Text="Testing" Margin="0,3" FontWeight="DemiBold" />
             <TextBlock Grid.Column="1" Grid.Row="4" Text="DonOfCrumb, Pedder, meryyll, rechtzanwalt, Sebi" TextWrapping="Wrap" Margin="0,3" />
         </Grid>
-
-
-
-
     </Grid>
 </UserControl>

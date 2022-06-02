@@ -9,7 +9,6 @@ using CSM.UiLogic.Wizards;
 using CSM.UiLogic.Workspaces.Common;
 using CSM.UiLogic.Workspaces.Playlists;
 using Microsoft.Toolkit.Mvvm.Input;
-using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -446,7 +445,7 @@ namespace CSM.UiLogic.Workspaces
             {
                 try
                 {
-                    var defaultImageLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "CSM_Logo_400px.png");
+                    var defaultImageLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Images\\CSM_Logo_400px.png");
 
                     var playlistPath = Path.Combine(playlistsPath, $"{fileViewModel.FileOrFolderName}.json");
                     var playlist = new Playlist
@@ -464,7 +463,7 @@ namespace CSM.UiLogic.Workspaces
                     var content = JsonSerializer.Serialize(playlist, options);
                     File.WriteAllText(playlistPath, content);
 
-
+                    // Create view model
                     var playlistViewModel = new PlaylistViewModel(playlist);
                     playlistViewModel.SongChangedEvent += SongChangedEvent;
                     if (selectedFolder != null)
