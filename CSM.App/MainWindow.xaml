@@ -12,7 +12,10 @@
         xmlns:tools="clr-namespace:CSM.App.Workspaces.Tools"
         xmlns:twitchintegration="clr-namespace:CSM.App.Workspaces.TwitchIntegration" xmlns:songsearch="clr-namespace:CSM.App.Workspaces.SongSearch"
         mc:Ignorable="d"
-        Header="Custom Songs Manager" Height="800" Width="1200">
+                   xmlns:navigation="clr-namespace:Telerik.Windows.Controls.Navigation;assembly=Telerik.Windows.Controls.Navigation"
+        Header="Custom Songs Manager" Height="800" Width="1200"
+                   navigation:RadWindowInteropHelper.Title="Custom Songs Manager" 
+    navigation:RadWindowInteropHelper.ShowInTaskbar="True">
 
     <telerik:RadWindow.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
@@ -72,8 +75,8 @@
                                ItemContainerStyle="{StaticResource BaseNavigationViewItemStyle}" 
                                SelectionChanged="RadNavigationView_SelectionChanged"
                                PaneHeader="Custom Songs Mananger">
-        
-         <!-- Content --> 
+
+        <!-- Content -->
         <telerik:RadNavigationView.Content>
             <Grid>
                 <telerik:RadTransitionControl Content="{Binding SelectedWorkspace}" ContentTemplateSelector="{StaticResource WorkspaceContentTemplateSelector}" Duration="0:0:0.4">
@@ -84,7 +87,7 @@
             </Grid>
         </telerik:RadNavigationView.Content>
 
-         <!-- Footer --> 
+        <!-- Footer -->
         <telerik:RadNavigationView.PaneFooter>
             <StackPanel>
                 <telerik:RadNavigationViewItem Content="{x:Static p:Resources.MainWindow_Settings}" 

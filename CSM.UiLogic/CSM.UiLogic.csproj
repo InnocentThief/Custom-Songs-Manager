@@ -125,6 +125,9 @@
     <Compile Include="Workspaces\Playlists\PlaylistSongDifficultyViewModel.cs" />
     <Compile Include="Workspaces\Playlists\PlaylistViewModel.cs" />
     <Compile Include="Workspaces\Playlists\PlaylistSongViewModel.cs" />
+    <Compile Include="Workspaces\Playlists\SearchedSongViewModel.cs" />
+    <Compile Include="Workspaces\Playlists\SongSearchEventArgs.cs" />
+    <Compile Include="Workspaces\Playlists\SongSearchViewModel.cs" />
     <Compile Include="Workspaces\SettingsViewModel.cs" />
     <Compile Include="Workspaces\Settings\BeatSaberSettingsViewModel.cs" />
     <Compile Include="Workspaces\Settings\WorkspaceSettingsViewModel.cs" />

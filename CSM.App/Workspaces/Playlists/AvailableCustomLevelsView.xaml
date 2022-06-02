@@ -90,147 +90,27 @@
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
                             <!-- Search fields -->
-                            <Grid Margin="10">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <!-- SearchBox -->
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <telerik:RadWatermarkTextBox WatermarkContent="Search" Text="{Binding SearchText}" />
-                                    <!-- Search Button -->
-                                    <telerik:RadButton Grid.Column="1" ToolTip="Searches for songs">
-                                        <telerik:RadGlyph Glyph="&#xe13e;" />
-                                    </telerik:RadButton>
-                                    <!-- Clear Button -->
-                                    <telerik:RadButton Grid.Column="2" Background="DarkRed" Margin="3,0" ToolTip="Clears all filters" >
-                                        <telerik:RadGlyph Glyph="&#xe12a;" />
-                                    </telerik:RadButton>
-                                </Grid>
-                                <telerik:RadExpander Grid.Row="1" Margin="0,6" Header="Enhanced Search">
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="Auto" />
-                                        </Grid.RowDefinitions>
-                                        <!-- General, Requirements, Relevance -->
-                                        <Grid Margin="0,6">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto" />
-                                                <RowDefinition Height="Auto" />
-                                                <RowDefinition Height="Auto" />
-                                                <RowDefinition Height="Auto" />
-                                                <RowDefinition Height="Auto" />
-                                                <RowDefinition Height="Auto" />
-                                                <RowDefinition Height="Auto" />
-                                            </Grid.RowDefinitions>
-                                            <!-- Genreral -->
-                                            <TextBlock Text="General" FontWeight="DemiBold" Margin="0,0,0,6" />
-                                            <telerik:RadToggleSwitchButton TrackWidth="35" TrackHeight="20" Margin="0,1" Grid.Row="1" IsChecked="False" CheckedContent="AI" UncheckedContent="AI" />
-                                            <telerik:RadToggleSwitchButton TrackWidth="35" TrackHeight="20" Margin="0,1" Grid.Row="2" IsChecked="False" CheckedContent="Ranked" UncheckedContent="Ranked" />
-                                            <telerik:RadToggleSwitchButton TrackWidth="35" TrackHeight="20" Margin="0,1" Grid.Row="3" IsChecked="False" CheckedContent="Curated" UncheckedContent="Curated" />
-                                            <telerik:RadToggleSwitchButton TrackWidth="35" TrackHeight="20" Margin="0,1" Grid.Row="4" IsChecked="False" CheckedContent="Verified Mapper" UncheckedContent="Verified Mapper" />
-                                            <telerik:RadToggleSwitchButton TrackWidth="35" TrackHeight="20" Margin="0,1" Grid.Row="5" IsChecked="False" CheckedContent="Full Spread" UncheckedContent="Full Spread" />
-
-                                            <!-- Requirements -->
-                                            <TextBlock Grid.Column="1" Text="Requirements" FontWeight="DemiBold" />
-                                            <telerik:RadToggleSwitchButton TrackWidth="35" TrackHeight="20" Margin="0,1" Grid.Column="1" Grid.Row="1" IsChecked="False" CheckedContent="Chroma" UncheckedContent="Chroma" />
-                                            <telerik:RadToggleSwitchButton TrackWidth="35" TrackHeight="20" Margin="0,1" Grid.Column="1" Grid.Row="2" IsChecked="False" CheckedContent="Noodle" UncheckedContent="Noodle" />
-                                            <telerik:RadToggleSwitchButton TrackWidth="35" TrackHeight="20" Margin="0,1" Grid.Column="1" Grid.Row="3" IsChecked="False" CheckedContent="Mapping Extensions" UncheckedContent="Mapping Extensions" />
-                                            <telerik:RadToggleSwitchButton TrackWidth="35" TrackHeight="20" Margin="0,1" Grid.Column="1" Grid.Row="4" IsChecked="False" CheckedContent="Cinema" UncheckedContent="Cinema" />
-
-                                            <!-- Relevance -->
-                                            <TextBlock Grid.Column="2" Text="Relevance" FontWeight="DemiBold" />
-                                            <telerik:RadWrapPanel Grid.Column="2" Grid.Row="1">
-                                                <telerik:RadRadioButton Margin="0,1" Grid.Row="1" IsChecked="False" Content="Latest" />
-                                                <telerik:RadRadioButton Margin="0,1" Grid.Column="2" Grid.Row="2" IsChecked="False" Content="Relevance" />
-                                                <telerik:RadRadioButton Margin="0,1" Grid.Column="2" Grid.Row="3" IsChecked="False" Content="Rating" />
-                                                <telerik:RadRadioButton Margin="0,1" Grid.Column="2" Grid.Row="4" IsChecked="False" Content="Curated" />
-                                            </telerik:RadWrapPanel>
-                                            
-                                        </Grid>
-                                        <!-- Tags -->
-                                        <Grid Grid.Row="1">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto" />
-                                                <RowDefinition Height="Auto" />
-                                            </Grid.RowDefinitions>
-                                            <!-- Tags (Map-Style) -->
-                                            <TextBlock Text="Tags (Map-Style)" FontWeight="DemiBold" VerticalAlignment="Center" />
-                                            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="10,0">
-                                                <telerik:RadRadioButton Margin="0,0,3,0" GroupName="MapStyle" IsChecked="True" Content="None" />
-                                                <telerik:RadRadioButton Margin="0,0,3,0" GroupName="MapStyle" Content="Accuracy" />
-                                                <telerik:RadRadioButton Margin="0,0,3,0" GroupName="MapStyle" Content="Balanced" />
-                                                <telerik:RadRadioButton Margin="0,0,3,0" GroupName="MapStyle" Content="Challenge" />
-                                                <telerik:RadRadioButton Margin="0,0,3,0" GroupName="MapStyle" Content="Dance" />
-                                                <telerik:RadRadioButton Margin="0,0,3,0" GroupName="MapStyle" Content="Fitness" />
-                                                <telerik:RadRadioButton Margin="0,0,3,0" GroupName="MapStyle" Content="Speed" />
-                                                <telerik:RadRadioButton Margin="0,0,3,0" GroupName="MapStyle" Content="Tech" />
-                                            </StackPanel>
-                                            <!-- Tags (Song-Style) -->
-                                            <TextBlock Grid.Row="1" Text="Tags (Song-Style)" FontWeight="DemiBold" VerticalAlignment="Top" Margin="0,10" />
-                                            <telerik:RadWrapPanel Grid.Column="1" Grid.Row="1" Margin="10,3" Orientation="Horizontal">
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" IsChecked="True" Content="None" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="Alternative" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="Ambient" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="Anime" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="Classical / Orchestral" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="Comedy / Meme" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="Dance" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="Drum and Bass" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="Dubstep" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="Electronic" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="Folk / Acoustic" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="Funk / Disco" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="Hardcore" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="Hip Hop / Rap" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="Holiday" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="House" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="Indie" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="Instrumental" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="J-Pop" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="J-Rock" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="Jazz" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="K-Pop" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="Kids / Family" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="Metal" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="Nightcore" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="Pop" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="Punk" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="RB" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="Rock" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="Soul" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="Speedcore" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="Swing" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="TV / Film" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="Techno" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="Trance" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="Video Game" />
-                                                <telerik:RadRadioButton Margin="0,3,3,0" GroupName="SongStyle" Content="Vocaloid" />
-                                            </telerik:RadWrapPanel>
-                                        </Grid>
-                                    </Grid>
-                                    
-
-                                </telerik:RadExpander>
-                            </Grid>
+                            <local:SongSearchView DataContext="{Binding SongSearch}" />
                             <!-- List with search results -->
-                            <telerik:RadGridView Grid.Row="1">
-
+                            <telerik:RadGridView Grid.Row="1" ItemsSource="{Binding SearchedSongs}" SelectedItem="{Binding SelectedSearchedSong}" FilteringMode="FilterRow" AutoGenerateColumns="False" RowIndicatorVisibility="Collapsed" FrozenColumnsSplitterVisibility="Collapsed" BorderThickness="0" AlternationCount="2" SelectionChanged="SearchedSongs_SelectionChanged_1" FilterOperatorsLoading="SearchedSongs_FilterOperatorsLoading_1" >
+                                <telerik:RadGridView.Columns>
+                                    <!-- Add button (will add song to selected playlist) -->
+                                    <telerik:GridViewColumn Width="SizeToCells">
+                                        <telerik:GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <telerik:RadButton Command="{Binding AddToPlaylistCommand}" Grid.Column="1" Background="Transparent" BorderThickness="0" ToolTip="{x:Static p:Resources.Workspace_Playlist_AddCustomLevel}">
+                                                    <telerik:RadGlyph Glyph="&#xe11e;" Foreground="Green" />
+                                                </telerik:RadButton>
+                                            </DataTemplate>
+                                        </telerik:GridViewColumn.CellTemplate>
+                                    </telerik:GridViewColumn>
+                                    <!-- Song Name -->
+                                    <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_CulumnHeader_Title}" Width="*" DataMemberBinding="{Binding SongName}" />
+                                    <!-- Song Author Name -->
+                                    <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_Artist}" Width="*" DataMemberBinding="{Binding SongAuthorName}" />
+                                    <!-- Level Author Name -->
+                                    <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_Mapper}" Width="*" DataMemberBinding="{Binding LevelAuthorName}" />
+                                </telerik:RadGridView.Columns>
                             </telerik:RadGridView>
                         </Grid>
                     </telerik:RadTabItem>

@@ -31,6 +31,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
         private BeatMapService beatMapService;
         private PlaylistSelectionState playlistSelectionState;
         private FavoriteViewModel selectedFavorite;
+        private SearchedSongViewModel selectedSearchedSong;
 
         #endregion
 
@@ -70,6 +71,30 @@ namespace CSM.UiLogic.Workspaces.Playlists
             {
                 if (value == selectedFavorite) return;
                 selectedFavorite = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// ViewModel for song search.
+        /// </summary>
+        public SongSearchViewModel SongSearch { get; }
+
+        /// <summary>
+        /// Contains all search songs.
+        /// </summary>
+        public ObservableCollection<SearchedSongViewModel> SearchedSongs { get; }
+
+        /// <summary>
+        /// Gets or sets the selected searched song.
+        /// </summary>
+        public SearchedSongViewModel SelectedSearchedSong
+        {
+            get => selectedSearchedSong;
+            set
+            {
+                if (value == selectedSearchedSong) return;
+                selectedSearchedSong = value;
                 OnPropertyChanged();
             }
         }
@@ -155,6 +180,9 @@ namespace CSM.UiLogic.Workspaces.Playlists
 
             CustomLevels = new ObservableCollection<CustomLevelViewModel>();
             Favorites = new ObservableCollection<FavoriteViewModel>();
+            SearchedSongs = new ObservableCollection<SearchedSongViewModel>();
+            SongSearch = new SongSearchViewModel();
+            SongSearch.SearchSongEvent += SongSearch_SearchSongEvent;
             beatMapService = new BeatMapService("maps/id");
 
             RefreshCommand = new AsyncRelayCommand(RefreshAsync);
@@ -169,6 +197,11 @@ namespace CSM.UiLogic.Workspaces.Playlists
         {
             var beatmap = await beatMapService.GetBeatMapDataAsync(key);
             PlaylistSongDetail = beatmap == null ? null : new PlaylistSongDetailViewModel(beatmap);
+        }
+
+        public void ShowSongDetailForSelectedSong()
+        {
+            playlistSongDetail = new PlaylistSongDetailViewModel(SelectedSearchedSong.BeatMap);
         }
 
         /// <summary>
@@ -250,6 +283,11 @@ namespace CSM.UiLogic.Workspaces.Playlists
             foreach (var favorite in Favorites)
             {
                 favorite.SetCanAddToPlaylist(playlistSelectionState.PlaylistSelected);
+            }
+
+            foreach (var searchedSong in SearchedSongs)
+            {
+                searchedSong.SetCanAddToPlaylist(playlistSelectionState.PlaylistSelected);
             }
         }
 
@@ -346,6 +384,28 @@ namespace CSM.UiLogic.Workspaces.Playlists
         {
             if (playlistSongDetail == null) return;
             SongChangedEvent?.Invoke(this, new PlaylistSongChangedEventArgs() { RightHash = playlistSongDetail.Hash });
+        }
+
+        private async void SongSearch_SearchSongEvent(object sender, SongSearchEventArgs e)
+        {
+            foreach (var searchedSong in SearchedSongs)
+            {
+                searchedSong.AddSongToPlaylistEvent -= CustomLevelOrFavorite_AddSongToPlaylistEvent;
+            }
+            SearchedSongs.Clear();
+
+            var searchService = new BeatMapService("search/text/0");
+            var beatmaps = await searchService.SearchSongsAsync(e.SearchString);
+
+            foreach (var beatmap in beatmaps.Docs)
+            {
+                var searchedSong = new SearchedSongViewModel(beatmap);
+                searchedSong.AddSongToPlaylistEvent += CustomLevelOrFavorite_AddSongToPlaylistEvent;
+                searchedSong.SetCanAddToPlaylist(playlistSelectionState.PlaylistSelected);
+                SearchedSongs.Add(searchedSong);
+            }
+
+            SongSearch.SetSearchParametersVisibility(!SearchedSongs.Any());
         }
 
         #endregion

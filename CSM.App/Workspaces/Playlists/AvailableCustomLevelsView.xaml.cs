@@ -68,5 +68,19 @@ namespace CSM.App.Workspaces.Playlists
         {
             e.DefaultOperator1 = Telerik.Windows.Data.FilterOperator.Contains;
         }
+
+        private void SearchedSongs_SelectionChanged_1(object sender, SelectionChangeEventArgs e)
+        {
+            var viewModel = DataContext as PlaylistCustomLevelsViewModel;
+            if (viewModel.SelectedSearchedSong != null)
+            {
+                viewModel.ShowSongDetailForSelectedSong();
+            }
+        }
+
+        private void SearchedSongs_FilterOperatorsLoading_1(object sender, Telerik.Windows.Controls.GridView.FilterOperatorsLoadingEventArgs e)
+        {
+            e.DefaultOperator1 = Telerik.Windows.Data.FilterOperator.Contains;
+        }
     }
 }
