@@ -25,5 +25,11 @@
 3. Select the Custom Levels workspace or the Playlists workspace to start browsing your files.
 4. Enjoy!
 # Screenshots
+## Custom Levels
+![image](https://user-images.githubusercontent.com/65510170/171868905-56513f9d-04fd-4eab-9071-7e96beb3dfdd.png)
+## Playlists
+![image](https://user-images.githubusercontent.com/65510170/171869191-bc9ec386-203e-408d-8733-a8bff173e0e4.png)
+![image](https://user-images.githubusercontent.com/65510170/171869447-81987f35-d673-4fa4-9f9d-81fc57531087.png)
+
 # Changelogs
 See [CHANGELOG.md](CHANGELOG.md) for the details of each release.
