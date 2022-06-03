@@ -400,7 +400,7 @@
     <value>Searches for songs</value>
   </data>
   <data name="SongSearch_Search_Watermark" xml:space="preserve">
-    <value>Search</value>
+    <value>Enter song name, artist, mapper, or bsr key</value>
   </data>
   <data name="Workspace_CustomLevels_ColumnHeader_Artist" xml:space="preserve">
     <value>Artist</value>

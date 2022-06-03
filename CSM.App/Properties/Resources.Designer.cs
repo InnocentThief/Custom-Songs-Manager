@@ -907,7 +907,7 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Search.
+        ///   Looks up a localized string similar to Enter song name, artist, mapper, or bsr key.
         /// </summary>
         public static string SongSearch_Search_Watermark {
             get {
