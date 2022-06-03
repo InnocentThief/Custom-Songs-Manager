@@ -150,10 +150,22 @@ namespace CSM.UiLogic.Workspaces.Playlists
             }
         }
 
+        private int selectedTabIndex;
+
         /// <summary>
         /// Gets or sets the selected tab.
         /// </summary>
-        public int SelectedTabIndex { get; set; }
+        public int SelectedTabIndex
+        {
+            get => selectedTabIndex;
+            set
+            {
+                if (value == selectedTabIndex) return;
+                selectedTabIndex = value;
+                OnPropertyChanged();
+                SongChangedEvent?.Invoke(this, new PlaylistSongChangedEventArgs() { RightHash = "XXX" });
+            }
+        }
 
         /// <summary>
         /// Command used to refresh either custom levels or favorites.
@@ -244,22 +256,33 @@ namespace CSM.UiLogic.Workspaces.Playlists
             Favorites.Clear();
 
             var locallow = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData).Replace("Roaming", "LocalLow");
-            var playerDataFile = Path.Combine(locallow, "Hyperbolic Magnetism\\Beat Saber\\PlayerData.dat");
-            var playerDataContent = File.ReadAllText(playerDataFile);
-            var playerData = JsonSerializer.Deserialize<PlayerData>(playerDataContent);
-
-            var favoriteBeatMapService = new BeatMapService("maps/hash");
-
-            foreach (var favorite_levelId in playerData.LocalPlayers.First().FavoritesLevelIds)
+            try
             {
-                if (!favorite_levelId.StartsWith("custom_level")) continue;
-                var hash = favorite_levelId.Substring(13);
-                var beatmap = await favoriteBeatMapService.GetBeatMapDataAsync(hash);
-                if (beatmap == null) continue;
-                var favoriteViewModel = new FavoriteViewModel(beatmap);
-                favoriteViewModel.AddSongToPlaylistEvent += CustomLevelOrFavorite_AddSongToPlaylistEvent;
-                Favorites.Add(favoriteViewModel);
+                var playerDataFile = Path.Combine(locallow, "Hyperbolic Magnetism\\Beat Saber\\PlayerData.dat");
+                if (File.Exists(playerDataFile))
+                {
+                    var playerDataContent = File.ReadAllText(playerDataFile);
+                    var playerData = JsonSerializer.Deserialize<PlayerData>(playerDataContent);
+
+                    var favoriteBeatMapService = new BeatMapService("maps/hash");
+
+                    foreach (var favorite_levelId in playerData.LocalPlayers.First().FavoritesLevelIds)
+                    {
+                        if (!favorite_levelId.StartsWith("custom_level")) continue;
+                        var hash = favorite_levelId.Substring(13);
+                        var beatmap = await favoriteBeatMapService.GetBeatMapDataAsync(hash);
+                        if (beatmap == null) continue;
+                        var favoriteViewModel = new FavoriteViewModel(beatmap);
+                        favoriteViewModel.AddSongToPlaylistEvent += CustomLevelOrFavorite_AddSongToPlaylistEvent;
+                        Favorites.Add(favoriteViewModel);
+                    }
+                }
             }
+            catch (Exception)
+            {
+                LoggerProvider.Logger.Warn<PlaylistCustomLevelsViewModel>("Unable to load Beat Saver favorites");
+            }
+
         }
 
         #region Helper methods

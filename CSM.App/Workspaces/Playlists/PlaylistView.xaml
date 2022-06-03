@@ -104,7 +104,7 @@
                             </telerik:GridViewDataColumn.CellTemplate>
                         </telerik:GridViewDataColumn>
                         <!-- Title of the song -->
-                        <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_Artist}" DataMemberBinding="{Binding SongName}" Width="*" />
+                        <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_CulumnHeader_Title}" DataMemberBinding="{Binding SongName}" Width="*" />
                         <!-- Mapper of the song -->
                         <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_Mapper}" DataMemberBinding="{Binding LevelAuthorName}" Width="*" />
                         <!-- List with difficulties of the song -->

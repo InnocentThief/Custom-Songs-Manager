@@ -30,8 +30,6 @@ namespace CSM.App.Workspaces.Playlists
 
         private async void RadTabControl_SelectionChanged(object sender, Telerik.Windows.Controls.RadSelectionChangedEventArgs e)
         {
-
-
             if (e.AddedItems.Count == 0) return;
             if ((e.AddedItems[0] as RadTabItem).Name == "Favorites")
             {
