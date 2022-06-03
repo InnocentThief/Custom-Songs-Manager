@@ -20,7 +20,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
     {
         #region Private fields
 
-        private Playlist playlist;
+        private readonly Playlist playlist;
         private PlaylistSongViewModel playlistSong;
         private bool inEditMode;
 
@@ -29,7 +29,10 @@ namespace CSM.UiLogic.Workspaces.Playlists
         private string playlistDescriptionEdit;
 
         private PlaylistSongDetailViewModel playlistSongDetail;
-        private BeatMapService beatMapService;
+        private readonly BeatMapService beatMapService;
+
+        private string sortColumnName;
+        private Telerik.Windows.Controls.SortingState sortingState;
 
         #endregion
 
@@ -204,6 +207,11 @@ namespace CSM.UiLogic.Workspaces.Playlists
         /// </summary>
         public RelayCommand CancelCommand { get; }
 
+        /// <summary>
+        /// Command used to save the playlist with the current song order.
+        /// </summary>
+        public RelayCommand SavePlaylistCommand { get; }
+
         #endregion
 
         /// <summary>
@@ -217,6 +225,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
             EditCommand = new RelayCommand(Edit);
             SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);
+            SavePlaylistCommand = new RelayCommand(SavePlaylist);
 
             InEditMode = false;
 
@@ -239,7 +248,6 @@ namespace CSM.UiLogic.Workspaces.Playlists
         {
             var playlistSong = new PlaylistSong
             {
-
                 Hash = e.Hash,
                 Key = e.BsrKey,
                 LevelAuthorName = e.LevelAuthorName,
@@ -270,15 +278,24 @@ namespace CSM.UiLogic.Workspaces.Playlists
         /// <summary>
         /// Checks if the playlist contains a song with the given hash.
         /// </summary>
-        /// <param name="hash">Hash of the song.</param>
+        /// <param name="leftHash">Hash of the song.</param>
         /// <returns>True if the playlist contains the song; otherwise false.</returns>
-        public override bool CheckContainsSong(string hash)
+        public override bool CheckContainsLeftSong(string leftHash)
         {
-            SelectedPlaylistSong = Songs.Where(s => s.Hash == hash).FirstOrDefault();
+            ContainsLeftSong = Songs.Any(s => s.Hash == leftHash);
+            return ContainsLeftSong;
+        }
 
+        public override bool CheckContainsRightSong(string rightHash)
+        {
+            ContainsRightSong = Songs.Any(s => s.Hash == rightHash);
+            return ContainsRightSong;
+        }
 
-            ContainsSong = Songs.Any(s => s.Hash == hash);
-            return ContainsSong;
+        public void SetSortOrder(string sortColumnName, Telerik.Windows.Controls.SortingState sortingState)
+        {
+            this.sortColumnName = sortColumnName;
+            this.sortingState = sortingState;
         }
 
         #region Helper methods
@@ -324,6 +341,50 @@ namespace CSM.UiLogic.Workspaces.Playlists
             var options = new JsonSerializerOptions { WriteIndented = true };
             var content = JsonSerializer.Serialize(playlist, options);
             File.WriteAllText(playlist.Path, content);
+        }
+
+        private void SavePlaylist()
+        {
+            if (string.IsNullOrWhiteSpace(sortColumnName)) return;
+            if (sortingState == Telerik.Windows.Controls.SortingState.None) return;
+            var currentSongs = playlist.Songs.ToList();
+            playlist.Songs.Clear();
+            switch (sortColumnName)
+            {
+                case "BsrKeyHex":
+                    if (sortingState == Telerik.Windows.Controls.SortingState.Ascending)
+                    {
+                        playlist.Songs.AddRange(currentSongs.OrderBy(s => s.BsrKeyHex));
+                    }
+                    else
+                    {
+                        playlist.Songs.AddRange(currentSongs.OrderByDescending(s => s.BsrKeyHex));
+                    }
+                    break;
+                case "SongName":
+                    if (sortingState == Telerik.Windows.Controls.SortingState.Ascending)
+                    {
+                        playlist.Songs.AddRange(currentSongs.OrderBy(s => s.SongName));
+                    }
+                    else
+                    {
+                        playlist.Songs.AddRange(currentSongs.OrderByDescending(s => s.SongName));
+                    }
+                    break;
+                case "LevelAuthorName":
+                    if (sortingState == Telerik.Windows.Controls.SortingState.Ascending)
+                    {
+                        playlist.Songs.AddRange(currentSongs.OrderBy(s => s.LevelAuthorName));
+                    }
+                    else
+                    {
+                        playlist.Songs.AddRange(currentSongs.OrderByDescending(s => s.LevelAuthorName));
+                    }
+                    break;
+                default:
+                    break;
+            }
+            SaveToFile();
         }
 
         #endregion

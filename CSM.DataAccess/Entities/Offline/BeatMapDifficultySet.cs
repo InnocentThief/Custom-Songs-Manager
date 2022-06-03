@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 namespace CSM.DataAccess.Entities.Offline
 {
     /// <summary>
-    /// Represents a difficulty set.
+    /// Represents a beat map difficulty set.
     /// </summary>
     public class BeatMapDifficultySet
     {

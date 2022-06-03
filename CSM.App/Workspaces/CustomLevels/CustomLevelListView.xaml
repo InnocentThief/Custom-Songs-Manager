@@ -89,7 +89,7 @@
                                 </DataTemplate>
                             </telerik:GridViewDataColumn.CellTemplate>
                         </telerik:GridViewDataColumn>
-                        <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_ExPlus}" Width="SizeToCells" DataMemberBinding="{Binding ExpertPlus}" IsFilterable="False">
+                        <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_ExPlus}" Width="Auto" DataMemberBinding="{Binding ExpertPlus}" IsFilterable="False">
                             <telerik:GridViewDataColumn.CellTemplate>
                                 <DataTemplate>
                                     <telerik:RadGlyph Glyph="&#xe118;" Foreground="#FF018574" Visibility="{Binding ExpertPlus, Converter={StaticResource BoolToVisConverter}}" />

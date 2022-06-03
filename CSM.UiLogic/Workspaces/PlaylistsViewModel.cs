@@ -1,6 +1,7 @@
 ﻿using CSM.DataAccess.Entities.Offline;
 using CSM.Framework;
 using CSM.Framework.Configuration.UserConfiguration;
+using CSM.Framework.Converter;
 using CSM.Framework.Extensions;
 using CSM.Framework.Logging;
 using CSM.UiLogic.Properties;
@@ -8,7 +9,6 @@ using CSM.UiLogic.Wizards;
 using CSM.UiLogic.Workspaces.Common;
 using CSM.UiLogic.Workspaces.Playlists;
 using Microsoft.Toolkit.Mvvm.Input;
-using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,6 +16,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text.Json;
 using System.Windows;
 
@@ -34,7 +35,7 @@ namespace CSM.UiLogic.Workspaces
         private bool isLoading;
         private int loadProgress;
         private int playlistCount;
-        private PlaylistSelectionState playlistSelectionState;
+        private readonly PlaylistSelectionState playlistSelectionState;
 
         #endregion
 
@@ -59,7 +60,8 @@ namespace CSM.UiLogic.Workspaces
                 DeletePlaylistCommand.NotifyCanExecuteChanged();
                 foreach (var playlist in Playlists)
                 {
-                    playlist.CheckContainsSong(String.Empty);
+                    playlist.CheckContainsLeftSong(String.Empty);
+                    playlist.CheckContainsRightSong(String.Empty);
                 }
                 playlistSelectionState.PlaylistSelectionChanged(selectedPlaylist != null && selectedPlaylist.GetType() != typeof(PlaylistFolderViewModel));
             }
@@ -156,6 +158,7 @@ namespace CSM.UiLogic.Workspaces
             playlistSelectionState = new PlaylistSelectionState();
             CustomLevels = new PlaylistCustomLevelsViewModel(playlistSelectionState);
             CustomLevels.AddSongToPlaylistEvent += CustomLevels_AddSongToPlaylistEvent;
+            CustomLevels.SongChangedEvent += SongChangedEvent;
         }
 
         /// <summary>
@@ -256,7 +259,7 @@ namespace CSM.UiLogic.Workspaces
                         {
                             playlist.Path = file;
                             var playListViewModel = new PlaylistViewModel(playlist);
-                            playListViewModel.SongChangedEvent += PlayListViewModel_SongChangedEvent;
+                            playListViewModel.SongChangedEvent += SongChangedEvent;
                             playlists.Add(playListViewModel);
                             i++;
                             bgWorker.ReportProgress(i);
@@ -273,11 +276,12 @@ namespace CSM.UiLogic.Workspaces
 
         }
 
-        private void PlayListViewModel_SongChangedEvent(object sender, PlaylistSongChangedEventArgs e)
+        private void SongChangedEvent(object sender, PlaylistSongChangedEventArgs e)
         {
             foreach (var playlist in Playlists)
             {
-                playlist.CheckContainsSong(e.Hash);
+                if (!string.IsNullOrWhiteSpace(e.LeftHash)) playlist.CheckContainsLeftSong(e.LeftHash);
+                if (!string.IsNullOrWhiteSpace(e.RightHash)) playlist.CheckContainsRightSong(e.RightHash);
             }
         }
 
@@ -303,7 +307,7 @@ namespace CSM.UiLogic.Workspaces
                     {
                         playlist.Path = file;
                         var playlistViewModel = new PlaylistViewModel(playlist);
-                        playlistViewModel.SongChangedEvent += PlayListViewModel_SongChangedEvent;
+                        playlistViewModel.SongChangedEvent += SongChangedEvent;
                         folder.Playlists.Add(playlistViewModel);
                     }
                 }
@@ -347,7 +351,7 @@ namespace CSM.UiLogic.Workspaces
                     if (messageBoxViewModel.Continue)
                     {
                         File.Delete(playlistViewModel.FilePath);
-                        SelectedPlaylist.SongChangedEvent -= PlayListViewModel_SongChangedEvent;
+                        SelectedPlaylist.SongChangedEvent -= SongChangedEvent;
                         DeletePlaylistRecursive(Playlists, playlistViewModel);
                         Playlists.Remove(SelectedPlaylist);
                     }
@@ -402,7 +406,7 @@ namespace CSM.UiLogic.Workspaces
             var selectedFolder = SelectedPlaylist as PlaylistFolderViewModel;
             if (selectedFolder != null) playlistsPath = selectedFolder.FilePath;
 
-            var folderViewModel = new EditWindowNewFileOrFolderNameViewModel("Add a new playlist folder", "Enter the name of the new playlist folder", true);
+            var folderViewModel = new EditWindowNewFileOrFolderNameViewModel(Resources.Playlists_AddPlaylistFolder_Caption, Resources.Playlists_AddPlaylistFolder_Content, true);
             EditWindowController.Instance().ShowEditWindow(folderViewModel);
             if (folderViewModel.Continue)
             {
@@ -423,7 +427,7 @@ namespace CSM.UiLogic.Workspaces
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("The name for the new folder is not valid", "Add new folder");
+                    MessageBox.Show(Resources.Playlist_WrongFolderName_Content, Resources.Playlists_WrongFolderName_Caption);
                     return;
                 }
             }
@@ -435,21 +439,23 @@ namespace CSM.UiLogic.Workspaces
             var selectedFolder = SelectedPlaylist as PlaylistFolderViewModel;
             if (selectedFolder != null) playlistsPath = selectedFolder.FilePath;
 
-            var fileViewModel = new EditWindowNewFileOrFolderNameViewModel("Add new playlist", "Enter the name of the new playlist", false);
+            var fileViewModel = new EditWindowNewFileOrFolderNameViewModel(Resources.Playlists_AddPlaylist_Caption, Resources.Playlists_AddPlaylist_Content, false);
             EditWindowController.Instance().ShowEditWindow(fileViewModel);
             if (fileViewModel.Continue)
             {
                 try
                 {
-                    var playlistPath = Path.Combine(playlistsPath, $"{fileViewModel.FileOrFolderName}.json");
+                    var defaultImageLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Images\\CSM_Logo_400px.png");
 
+                    var playlistPath = Path.Combine(playlistsPath, $"{fileViewModel.FileOrFolderName}.json");
                     var playlist = new Playlist
                     {
                         Path = playlistPath,
                         PlaylistAuthor = String.Empty,
                         PlaylistDescription = String.Empty,
                         PlaylistTitle = fileViewModel.FileOrFolderName,
-                        Songs = new List<PlaylistSong>()
+                        Songs = new List<PlaylistSong>(),
+                        Image = $"base64,{ImageConverter.StringFromBitmap(defaultImageLocation)}"
                     };
 
                     // Save to file
@@ -457,9 +463,9 @@ namespace CSM.UiLogic.Workspaces
                     var content = JsonSerializer.Serialize(playlist, options);
                     File.WriteAllText(playlistPath, content);
 
-
+                    // Create view model
                     var playlistViewModel = new PlaylistViewModel(playlist);
-                    playlistViewModel.SongChangedEvent += PlayListViewModel_SongChangedEvent;
+                    playlistViewModel.SongChangedEvent += SongChangedEvent;
                     if (selectedFolder != null)
                     {
                         selectedFolder.Playlists.Add(playlistViewModel);
@@ -472,7 +478,7 @@ namespace CSM.UiLogic.Workspaces
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("The name for the new playlist is not valid", "Add new folder");
+                    MessageBox.Show(Resources.Playlist_WrongFileName_Content, Resources.Playlist_WrongFileName_Caption);
                     return;
                 }
             }

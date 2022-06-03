@@ -2,12 +2,21 @@
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="CSM.Framework.Configuration.UserConfiguration.UserConfigManager">
     <Position X="0.75" Y="2.75" Width="2" />
+    <AssociationLine Name="Instance" Type="CSM.Framework.Configuration.UserConfiguration.UserConfigManager" ManuallyRouted="true">
+      <Path>
+        <Point X="1.459" Y="6.555" />
+        <Point X="1.459" Y="6.971" />
+        <Point X="2.055" Y="6.971" />
+        <Point X="2.055" Y="6.555" />
+      </Path>
+    </AssociationLine>
     <TypeIdentifier>
       <HashCode>AAAAQAAAAgAQAAAAFIQAAAAEAABAAAAAQAAAAEAEAAA=</HashCode>
       <FileName>Configuration\UserConfiguration\UserConfigManager.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Config" />
+      <Property Name="Instance" />
     </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
@@ -18,8 +27,8 @@
       <FileName>Configuration\UserConfiguration\UserConfig.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
-      <Property Name="PlaylistPaths" />
       <Property Name="CustomLevelPaths" />
+      <Property Name="PlaylistPaths" />
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="CSM.Framework.Configuration.UserConfiguration.PlaylistPath">

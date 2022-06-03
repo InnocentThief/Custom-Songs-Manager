@@ -79,6 +79,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="Telerik.Windows.Controls, Version=2022.2.511.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -124,11 +125,21 @@
     <Compile Include="Workspaces\Playlists\PlaylistSongDifficultyViewModel.cs" />
     <Compile Include="Workspaces\Playlists\PlaylistViewModel.cs" />
     <Compile Include="Workspaces\Playlists\PlaylistSongViewModel.cs" />
+    <Compile Include="Workspaces\Playlists\SearchedSongViewModel.cs" />
+    <Compile Include="Workspaces\Playlists\SongSearchEventArgs.cs" />
+    <Compile Include="Workspaces\Playlists\SongSearchViewModel.cs" />
     <Compile Include="Workspaces\SettingsViewModel.cs" />
     <Compile Include="Workspaces\Settings\BeatSaberSettingsViewModel.cs" />
     <Compile Include="Workspaces\Settings\WorkspaceSettingsViewModel.cs" />
     <Compile Include="Workspaces\Settings\WorkspaceViewModel.cs" />
     <Compile Include="Workspaces\ToolsViewModel.cs" />
+    <Compile Include="Workspaces\Tools\CleanupCustomLevels\CleanupCustomLevelsViewModel.cs" />
+    <Compile Include="Workspaces\Tools\CleanupCustomLevels\CustomLevelViewModel.cs" />
+    <Compile Include="Workspaces\Tools\CleanupCustomLevels\StepBaseViewModel.cs" />
+    <Compile Include="Workspaces\Tools\CleanupCustomLevels\StepDirectoryNamesViewModel.cs" />
+    <Compile Include="Workspaces\Tools\CleanupCustomLevels\StepDuplicatesViewModel.cs" />
+    <Compile Include="Workspaces\Tools\CleanupCustomLevels\StepStartViewModel.cs" />
+    <Compile Include="Workspaces\Tools\CleanupCustomLevels\StepVersionsViewModel.cs" />
     <Compile Include="Workspaces\TwitchIntegrationViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -146,7 +157,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Workspaces\Tools\" />
     <Folder Include="Workspaces\TwitchIntegration\" />
   </ItemGroup>
   <ItemGroup>
@@ -155,6 +165,7 @@
     <None Include="Workspaces\CustomLevels\CustomLevels.cd" />
     <None Include="Workspaces\Playlists\Playlists.cd" />
     <None Include="Workspaces\Settings\Settings.cd" />
+    <None Include="Workspaces\Tools\Tools.cd" />
     <None Include="Workspaces\Workspaces.cd" />
   </ItemGroup>
   <ItemGroup>

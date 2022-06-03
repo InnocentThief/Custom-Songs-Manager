@@ -10,7 +10,8 @@ namespace CSM.UiLogic.Workspaces.Playlists
     {
         #region Private fields
 
-        private bool containsSong;
+        private bool containsLeftSong;
+        private bool containsRightSong;
         private string name;
 
         #endregion
@@ -32,15 +33,29 @@ namespace CSM.UiLogic.Workspaces.Playlists
         }
 
         /// <summary>
-        /// Gets or sets whether the playlist or the folder contains the song.
+        /// Gets or sets whether the playlist or the folder contains the playlist song.
         /// </summary>
-        public bool ContainsSong
+        public bool ContainsLeftSong
         {
-            get => containsSong;
+            get => containsLeftSong;
             set
             {
-                if (containsSong == value) return;
-                containsSong = value;
+                if (containsLeftSong == value) return;
+                containsLeftSong = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets whether the playlist or the folder contains the custom level, beat saber favorite, or searched song.
+        /// </summary>
+        public bool ContainsRightSong
+        {
+            get => containsRightSong;
+            set
+            {
+                if (containsRightSong == value) return;
+                containsRightSong = value;
                 OnPropertyChanged();
             }
         }
@@ -66,11 +81,18 @@ namespace CSM.UiLogic.Workspaces.Playlists
         }
 
         /// <summary>
-        /// Checks if the playlist or folder contains the song with the given hash.
+        /// Checks if the playlist or folder contains the song with the given hash (Check for playlist songs).
         /// </summary>
-        /// <param name="hash">The hash of the song to check.</param>
+        /// <param name="leftHash">The hash of the song to check.</param>
         /// <returns>True if the playlist or folder contains the song.</returns>
-        public abstract bool CheckContainsSong(string hash);
+        public abstract bool CheckContainsLeftSong(string leftHash);
+
+        /// <summary>
+        /// Checks if the playlist or folder contains the song with the given hash (Check for custom songs, favorites, and song search).
+        /// </summary>
+        /// <param name="rightHash">The hash of the song to check.</param>
+        /// <returns>True if the playlist or folder contains the song.</returns>
+        public abstract bool CheckContainsRightSong(string rightHash);
 
         /// <summary>
         /// Occurs when the selected playlist song changes.
@@ -79,7 +101,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
         protected void SongChanged(PlaylistSongViewModel playlistSong)
         {
             if (playlistSong == null) return;
-            SongChangedEvent?.Invoke(this, new PlaylistSongChangedEventArgs() { Hash = playlistSong.Hash });
+            SongChangedEvent?.Invoke(this, new PlaylistSongChangedEventArgs() { LeftHash = playlistSong.Hash });
         }
     }
 }

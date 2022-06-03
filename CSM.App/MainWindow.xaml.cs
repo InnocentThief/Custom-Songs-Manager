@@ -1,21 +1,7 @@
 ﻿using CSM.UiLogic;
 using CSM.UiLogic.Workspaces;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Telerik.Windows.Controls;
 
 namespace CSM.App
@@ -30,6 +16,8 @@ namespace CSM.App
             InitializeComponent();
             //Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("de-CH");
             DataContext = new MainWindowViewModel();
+
+            IconTemplate = this.Resources["WindowIconTemplate"] as DataTemplate;
         }
 
         private void RadNavigationView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -37,8 +25,7 @@ namespace CSM.App
             // Unload removed workspace
             if (e.RemovedItems.Count > 0)
             {
-                var workspaceViewModel = e.RemovedItems[0] as BaseWorkspaceViewModel;
-                if (workspaceViewModel != null) workspaceViewModel.UnloadData();
+                if (e.RemovedItems[0] is BaseWorkspaceViewModel workspaceViewModel) workspaceViewModel.UnloadData();
             }
 
             // Load added workspace

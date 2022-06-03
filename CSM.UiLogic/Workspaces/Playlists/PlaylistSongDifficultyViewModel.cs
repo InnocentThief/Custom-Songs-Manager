@@ -13,7 +13,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
         #region Private fields
 
         private bool isSelectedDifficulty;
-        private PlaylistSongDifficulty playlistSongDifficulty;
+        private readonly PlaylistSongDifficulty playlistSongDifficulty;
 
         #endregion
 

@@ -3,11 +3,14 @@
   <Class Name="CSM.DataAccess.Entities.Offline.CustomLevel">
     <Position X="1.25" Y="1.25" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>IAAAAAgAAAAAAAogBAEAAABAIAABQAAEAACAgAAAGQI=</HashCode>
+      <HashCode>IAAAAAgAEAAAEAogBAEAAAAAIAABQAAEAACAgAAAGQI=</HashCode>
       <FileName>Entities\Offline\CustomLevel.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CustomData" />
+    </ShowAsAssociation>
     <ShowAsCollectionAssociation>
-      <Property Name="DifficultiySets" />
+      <Property Name="DifficultySets" />
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="CSM.DataAccess.Entities.Offline.BeatMapDifficultySet">
@@ -28,9 +31,9 @@
     </TypeIdentifier>
   </Class>
   <Class Name="CSM.DataAccess.Entities.Offline.Playlist">
-    <Position X="4.75" Y="4.5" Width="1.75" />
+    <Position X="1.5" Y="7" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAQAAAAAAAAAAAEAQAAAAAQABAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAQAAAAAAIAAAAEAQAAAAAQABAAAAAAAAAAAAA=</HashCode>
       <FileName>Entities\Offline\Playlist.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -38,10 +41,44 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="CSM.DataAccess.Entities.Offline.PlaylistSong">
-    <Position X="7.75" Y="4.5" Width="1.5" />
+    <Position X="4.5" Y="7" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <HashCode>AAIAAAAAAAIAAAQAAAAAAAAABBAAAAAEAAAAgAAAAAA=</HashCode>
       <FileName>Entities\Offline\PlaylistSong.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Difficulties" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CSM.DataAccess.Entities.Offline.PlayerData">
+    <Position X="10" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Offline\PlayerData.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="LocalPlayers" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CSM.DataAccess.Entities.Offline.LocalPlayer">
+    <Position X="13" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Offline\LocalPlayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSM.DataAccess.Entities.Offline.CustomLevelCustomData">
+    <Position X="4.25" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Offline\CustomLevelCustomData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSM.DataAccess.Entities.Offline.PlaylistSongDifficulty">
+    <Position X="7.5" Y="7" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACgAAAAAAACCAAAAQAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Offline\PlaylistSongDifficulty.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

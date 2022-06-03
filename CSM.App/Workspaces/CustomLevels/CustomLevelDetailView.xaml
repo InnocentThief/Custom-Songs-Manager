@@ -139,14 +139,14 @@
                                     <TextBlock Grid.Row="9" Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_Tags}" FontWeight="DemiBold" Margin="0,1" />
                                     <TextBlock Grid.Row="9" Grid.Column="1" Text="{Binding Tags}" TextWrapping="Wrap" Margin="0,1" />
                                     <!-- Description -->
-                                    <TextBlock Grid.Row="10" Text="Description" FontWeight="DemiBold" Margin="0,1" />
+                                    <TextBlock Grid.Row="10" Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_Description}" FontWeight="DemiBold" Margin="0,1" />
                                     <telerik:RadToggleButton x:Name="DescriptionToggle" Grid.Row="10" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{Binding IsOpen, ElementName=DescriptionPopup, Mode=TwoWay}" Background="Transparent" BorderThickness="0" Visibility="{Binding HasDescription, Converter={StaticResource BoolToVisConverter}}" >
                                         <telerik:RadGlyph Glyph="&#xe401;" />
                                     </telerik:RadToggleButton>
                                     <Popup x:Name="DescriptionPopup" PlacementTarget="{Binding ElementName=DescriptionToggle}" StaysOpen="False" Placement="Left" MaxWidth="400">
                                         <TextBlock Text="{Binding Description}" Margin="10" TextWrapping="Wrap" />
                                     </Popup>
-                                    <TextBlock Grid.Row="10" Grid.Column="1" Text="No description available" Margin="0,1"  Visibility="{Binding HasDescription, Converter={StaticResource InvBoolToVisConverter}}" />
+                                    <TextBlock Grid.Row="10" Grid.Column="1" Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_NoDescription}" Margin="0,1"  Visibility="{Binding HasDescription, Converter={StaticResource InvBoolToVisConverter}}" />
                                 </Grid>
                             </Grid>
 

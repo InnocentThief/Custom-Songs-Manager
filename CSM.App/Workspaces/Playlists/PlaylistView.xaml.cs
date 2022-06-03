@@ -1,18 +1,5 @@
 ﻿using CSM.UiLogic.Workspaces.Playlists;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CSM.App.Workspaces.Playlists
 {
@@ -38,6 +25,12 @@ namespace CSM.App.Workspaces.Playlists
         private void RadGridView_FilterOperatorsLoading(object sender, Telerik.Windows.Controls.GridView.FilterOperatorsLoadingEventArgs e)
         {
             e.DefaultOperator1 = Telerik.Windows.Data.FilterOperator.Contains;
+        }
+
+        private void RadGridView_Sorted(object sender, Telerik.Windows.Controls.GridViewSortedEventArgs e)
+        {
+            var viewModel = DataContext as PlaylistViewModel;
+            viewModel.SetSortOrder(e.Column.UniqueName, e.Column.SortingState);
         }
     }
 }

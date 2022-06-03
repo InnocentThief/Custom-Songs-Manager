@@ -3,9 +3,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:p="clr-namespace:CSM.App.Properties"
+             xmlns:local="clr-namespace:CSM.App.Workspaces.Playlists"
              xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
-             xmlns:local="clr-namespace:CSM.App.Workspaces.Playlists" xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -82,6 +83,37 @@
                                 <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_Mapper}" Width="*" DataMemberBinding="{Binding LevelAuthorName}" />
                             </telerik:RadGridView.Columns>
                         </telerik:RadGridView>
+                    </telerik:RadTabItem>
+                    <telerik:RadTabItem x:Name="SongSearch" Header="Song Search">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <!-- Search fields -->
+                            <local:SongSearchView DataContext="{Binding SongSearch}" />
+                            <!-- List with search results -->
+                            <telerik:RadGridView Grid.Row="1" ItemsSource="{Binding SearchedSongs}" SelectedItem="{Binding SelectedSearchedSong}" FilteringMode="FilterRow" AutoGenerateColumns="False" RowIndicatorVisibility="Collapsed" FrozenColumnsSplitterVisibility="Collapsed" BorderThickness="0" AlternationCount="2" SelectionChanged="SearchedSongs_SelectionChanged" FilterOperatorsLoading="SearchedSongs_FilterOperatorsLoading" >
+                                <telerik:RadGridView.Columns>
+                                    <!-- Add button (will add song to selected playlist) -->
+                                    <telerik:GridViewColumn Width="SizeToCells">
+                                        <telerik:GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <telerik:RadButton Command="{Binding AddToPlaylistCommand}" Grid.Column="1" Background="Transparent" BorderThickness="0" ToolTip="{x:Static p:Resources.Workspace_Playlist_AddCustomLevel}">
+                                                    <telerik:RadGlyph Glyph="&#xe11e;" Foreground="Green" />
+                                                </telerik:RadButton>
+                                            </DataTemplate>
+                                        </telerik:GridViewColumn.CellTemplate>
+                                    </telerik:GridViewColumn>
+                                    <!-- Song Name -->
+                                    <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_CulumnHeader_Title}" Width="*" DataMemberBinding="{Binding SongName}" />
+                                    <!-- Song Author Name -->
+                                    <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_Artist}" Width="*" DataMemberBinding="{Binding SongAuthorName}" />
+                                    <!-- Level Author Name -->
+                                    <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_Mapper}" Width="*" DataMemberBinding="{Binding LevelAuthorName}" />
+                                </telerik:RadGridView.Columns>
+                            </telerik:RadGridView>
+                        </Grid>
                     </telerik:RadTabItem>
                 </telerik:RadTabControl>
             </Border>

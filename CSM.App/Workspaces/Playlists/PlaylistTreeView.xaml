@@ -17,7 +17,8 @@
             <StackPanel Orientation="Horizontal">
                 <telerik:RadGlyph Glyph="&#xe900;" />
                 <TextBlock Text="{Binding Name}" Margin="6,0" />
-                <telerik:RadGlyph Glyph="&#xe01a;" Foreground="Red" Visibility="{Binding ContainsSong, Converter={StaticResource BoolToVisConverter}}" Margin="3,0" />
+                <telerik:RadGlyph Glyph="&#xe01a;" Foreground="Red" Visibility="{Binding ContainsLeftSong, Converter={StaticResource BoolToVisConverter}}" Margin="3,0" />
+                <telerik:RadGlyph Glyph="&#xe01a;" Foreground="blue" Visibility="{Binding ContainsRightSong, Converter={StaticResource BoolToVisConverter}}" Margin="3,0" />
             </StackPanel>
         </HierarchicalDataTemplate>
         
@@ -26,7 +27,8 @@
             <StackPanel Orientation="Horizontal">
                 <telerik:RadGlyph Glyph="&#xe20a;" />
                 <TextBlock Text="{Binding Name, Mode=TwoWay}" Margin="6,0" />
-                <telerik:RadGlyph Glyph="&#xe01a;" Foreground="Red" Visibility="{Binding ContainsSong, Converter={StaticResource BoolToVisConverter}}" Margin="3,0" />
+                <telerik:RadGlyph Glyph="&#xe01a;" Foreground="Red" Visibility="{Binding ContainsLeftSong, Converter={StaticResource BoolToVisConverter}}" Margin="3,0" />
+                <telerik:RadGlyph Glyph="&#xe01a;" Foreground="blue" Visibility="{Binding ContainsRightSong, Converter={StaticResource BoolToVisConverter}}" Margin="3,0" />
             </StackPanel>
         </HierarchicalDataTemplate>
 

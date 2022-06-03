@@ -14,7 +14,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
     /// </summary>
     public class PlaylistSongDetailViewModel
     {
-        private BeatMap beatMap;
+        private readonly BeatMap beatMap;
 
         #region Public Properties
 
@@ -30,7 +30,9 @@ namespace CSM.UiLogic.Workspaces.Playlists
 
         public string Ranked => beatMap.Ranked ? Resources.Yes : Resources.No;
 
-        public string CoverUrl => beatMap.Versions.First().CoverUrl;
+        public string CoverUrl => beatMap.LatestVersion.CoverUrl;
+
+        public string Hash => beatMap.LatestVersion.Hash;
 
         /// <summary>
         /// Contains the <see cref="CustomLevelDifficultyViewModel"/> grouped by characteristc.
@@ -53,8 +55,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
             this.beatMap = beatMap;
             CopyBsrKeyCommand = new RelayCommand(CopyBsrKey);
 
-            var difficulties = beatMap.Versions.SelectMany(v => v.Difficulties);
-            var playlistSongDifficulties = difficulties.Select(d => new PlaylistSongDifficulty
+            var playlistSongDifficulties = beatMap.LatestVersion.Difficulties.Select(d => new PlaylistSongDifficulty
             {
                 Characteristic = d.Characteristic,
                 Name = d.Diff,

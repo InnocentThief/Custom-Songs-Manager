@@ -37,7 +37,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>CSM.ico</ApplicationIcon>
+    <ApplicationIcon>Images\CSM.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=2.0.14.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
@@ -236,6 +236,9 @@
     <Compile Include="Workspaces\Playlists\PlaylistView.xaml.cs">
       <DependentUpon>PlaylistView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Workspaces\Playlists\SongSearchView.xaml.cs">
+      <DependentUpon>SongSearchView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Workspaces\Settings\BeatSaberSettingsView.xaml.cs">
       <DependentUpon>BeatSaberSettingsView.xaml</DependentUpon>
     </Compile>
@@ -244,6 +247,22 @@
     </Compile>
     <Compile Include="Workspaces\Settings\WorkspaceSettingsView.xaml.cs">
       <DependentUpon>WorkspaceSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Workspaces\Tools\CleanupCustomLevels\CleanupCustomLevelsContentTemplateSelector.cs" />
+    <Compile Include="Workspaces\Tools\CleanupCustomLevels\CleanupCustomLevelsView.xaml.cs">
+      <DependentUpon>CleanupCustomLevelsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Workspaces\Tools\CleanupCustomLevels\CleanupDirectoryNamesView.xaml.cs">
+      <DependentUpon>CleanupDirectoryNamesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Workspaces\Tools\CleanupCustomLevels\CleanupDuplicatesView.xaml.cs">
+      <DependentUpon>CleanupDuplicatesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Workspaces\Tools\CleanupCustomLevels\CleanupStartView.xaml.cs">
+      <DependentUpon>CleanupStartView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Workspaces\Tools\CleanupCustomLevels\CleanupVersionsView.xaml.cs">
+      <DependentUpon>CleanupVersionsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Workspaces\Tools\ToolsView.xaml.cs">
       <DependentUpon>ToolsView.xaml</DependentUpon>
@@ -332,6 +351,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Workspaces\Playlists\SongSearchView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Workspaces\Settings\BeatSaberSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -341,6 +364,26 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Workspaces\Settings\WorkspaceSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Workspaces\Tools\CleanupCustomLevels\CleanupCustomLevelsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Workspaces\Tools\CleanupCustomLevels\CleanupDirectoryNamesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Workspaces\Tools\CleanupCustomLevels\CleanupDuplicatesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Workspaces\Tools\CleanupCustomLevels\CleanupStartView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Workspaces\Tools\CleanupCustomLevels\CleanupVersionsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -399,7 +442,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="CSM.ico" />
+    <Resource Include="Images\CSM.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Update="appsettings.json">
@@ -407,12 +450,17 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <AdditionalFiles Include="CSM_Logo_400px.png">
+    <AdditionalFiles Include="Images\CSM_Logo_400px.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </AdditionalFiles>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="CSM.png">
+    <Resource Include="Images\CSM.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CSM_16.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace CSM.DataAccess.Entities.Online
@@ -10,6 +11,9 @@ namespace CSM.DataAccess.Entities.Online
     {
         [JsonPropertyName("hash")]
         public string Hash { get; set; }
+
+        [JsonPropertyName("createdAt")]
+        public DateTime CreatedAt { get; set; }
 
         [JsonPropertyName("diffs")]
         public List<Difficulty> Difficulties { get; set; }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json.Serialization;
 
 namespace CSM.DataAccess.Entities.Online
@@ -41,6 +42,9 @@ namespace CSM.DataAccess.Entities.Online
 
         [JsonPropertyName("versions")]
         public List<Version> Versions { get; set; }
+
+        [JsonIgnore]
+        public Version LatestVersion => Versions.OrderByDescending(v => v.CreatedAt).First();
 
         [JsonPropertyName("createdAt")]
         public DateTime CreatedAt { get; set; }

@@ -2,6 +2,7 @@
 using CSM.UiLogic.Workspaces.Playlists;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
+using System.Globalization;
 using System.Linq;
 
 namespace CSM.UiLogic.Workspaces.CustomLevels
@@ -20,9 +21,24 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
 
         #region Public Properties
 
-        public string BsrKey => customLevel.BsrKey;
+        public string BsrKey
+        {
+            get
+            {
+                int.TryParse(customLevel.BsrKey, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out int result);
+                if (BsrKeyHex > 0) return customLevel.BsrKey;
+                return string.Empty;
+            }
+        }
 
-        public int BsrKeyHex => int.Parse(customLevel.BsrKey, System.Globalization.NumberStyles.HexNumber);
+        public int BsrKeyHex
+        {
+            get
+            {
+                int.TryParse(customLevel.BsrKey, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out int result);
+                return result;
+            }
+        }
 
         public string SongName => customLevel.SongName;
 
@@ -32,15 +48,15 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
 
         public string SongAuthorName => customLevel.SongAuthorName;
 
-        public bool Easy => customLevel.DifficultiySets.SelectMany(ds => ds.Difficulties).Any(d => d.DifficultyRank == 1);
+        public bool Easy => customLevel.DifficultySets.SelectMany(ds => ds.Difficulties).Any(d => d.DifficultyRank == 1);
 
-        public bool Normal => customLevel.DifficultiySets.SelectMany(ds => ds.Difficulties).Any(d => d.DifficultyRank == 3);
+        public bool Normal => customLevel.DifficultySets.SelectMany(ds => ds.Difficulties).Any(d => d.DifficultyRank == 3);
 
-        public bool Hard => customLevel.DifficultiySets.SelectMany(ds => ds.Difficulties).Any(d => d.DifficultyRank == 5);
+        public bool Hard => customLevel.DifficultySets.SelectMany(ds => ds.Difficulties).Any(d => d.DifficultyRank == 5);
 
-        public bool Expert => customLevel.DifficultiySets.SelectMany(ds => ds.Difficulties).Any(d => d.DifficultyRank == 7);
+        public bool Expert => customLevel.DifficultySets.SelectMany(ds => ds.Difficulties).Any(d => d.DifficultyRank == 7);
 
-        public bool ExpertPlus => customLevel.DifficultiySets.SelectMany(ds => ds.Difficulties).Any(d => d.DifficultyRank == 9);
+        public bool ExpertPlus => customLevel.DifficultySets.SelectMany(ds => ds.Difficulties).Any(d => d.DifficultyRank == 9);
 
         public DateTime ChangeDate => customLevel.ChangeDate;
 

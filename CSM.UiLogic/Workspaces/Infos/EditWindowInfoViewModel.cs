@@ -5,6 +5,9 @@ using System.Reflection;
 
 namespace CSM.UiLogic.Workspaces.Infos
 {
+    /// <summary>
+    /// ViewModel for the "About Custom Songs Manager" window.
+    /// </summary>
     public class EditWindowInfoViewModel : EditWindowBaseViewModel
     {
         /// <summary>

@@ -61,10 +61,6 @@ namespace CSM.App
             SetStyle();
 
             MainWindow window = new MainWindow();
-            //window.Icon = new Image()
-            //{
-            //    Source = new BitmapImage(new Uri("CSM.ico", UriKind.Relative))
-            //};
             window.Show();
         }
 

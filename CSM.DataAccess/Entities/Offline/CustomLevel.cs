@@ -55,6 +55,9 @@ namespace CSM.DataAccess.Entities.Offline
         public decimal SongTimeOffset { get; set; }
 
         [JsonIgnore]
+        public string ErrorFound { get; set; }
+
+        [JsonIgnore]
         public DateTime ChangeDate { get; set; }
 
         [JsonIgnore]
@@ -64,6 +67,6 @@ namespace CSM.DataAccess.Entities.Offline
         public CustomLevelCustomData CustomData { get; set; }
 
         [JsonPropertyName("_difficultyBeatmapSets")]
-        public List<BeatMapDifficultySet> DifficultiySets { get; set; }
+        public List<BeatMapDifficultySet> DifficultySets { get; set; }
     }
 }

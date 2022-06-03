@@ -1,11 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\CSM.App",
-    "\\CSM.App\\Properties",
-    "\\CSM.App\\Workspaces",
-    "\\CSM.App\\Workspaces\\Settings"
+    ""
   ],
-  "SelectedNode": "\\CSM.App\\Workspaces\\Settings\\WorkspaceSettingsView.xaml",
+  "SelectedNode": "\\Custom Songs Manager.sln",
   "PreviewInSolutionExplorer": false
 }

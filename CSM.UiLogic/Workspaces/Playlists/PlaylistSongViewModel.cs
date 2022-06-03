@@ -21,8 +21,8 @@ namespace CSM.UiLogic.Workspaces.Playlists
     {
         #region Private fields
 
-        private Playlist playlist;
-        private PlaylistSong playlistSong;
+        private readonly Playlist playlist;
+        private readonly PlaylistSong playlistSong;
 
         #endregion
 
@@ -33,7 +33,21 @@ namespace CSM.UiLogic.Workspaces.Playlists
         /// </summary>
         public string Hash
         {
-            get => playlistSong.Hash;
+            get => playlistSong.Hash.ToLower();
+        }
+
+        /// <summary>
+        /// Gets the bsr key of the song.
+        /// </summary>
+        public string BsrKey => playlistSong.Key;
+
+        public int BsrKeyHex
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(playlistSong.Key)) return 0;
+                return int.Parse(playlistSong.Key, System.Globalization.NumberStyles.HexNumber);
+            }
         }
 
         /// <summary>
@@ -126,8 +140,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
             var beatmapService = new BeatMapService("maps/hash");
             var beatmap = await beatmapService.GetBeatMapDataAsync(playlistSong.Hash);
 
-            var difficulties = beatmap.Versions.SelectMany(v => v.Difficulties);
-            foreach (var difficulty in difficulties)
+            foreach (var difficulty in beatmap.LatestVersion.Difficulties)
             {
                 var difficultyViewModel = Difficulties.SingleOrDefault(d => d.Characteristic == difficulty.Characteristic && d.Name == difficulty.Diff);
                 if (difficultyViewModel == null)
