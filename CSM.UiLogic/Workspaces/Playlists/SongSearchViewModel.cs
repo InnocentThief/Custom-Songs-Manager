@@ -18,6 +18,9 @@ namespace CSM.UiLogic.Workspaces.Playlists
         private string songStyle;
         private int currentPageIndex;
 
+        private int dateSelectionStart;
+        private int dateSelectionEnd;
+
         #endregion
 
         #region Public Properties
@@ -117,7 +120,55 @@ namespace CSM.UiLogic.Workspaces.Playlists
         /// </summary>
         public RelayCommand ShowMeMoreCommand { get; }
 
+        /// <summary>
+        /// Gets or sets whether the enhanced search is visible.
+        /// </summary>
         public bool SearchExpanded { get; set; }
+
+        /// <summary>
+        /// Gets the text for the selected date range.
+        /// </summary>
+        public string DateRange => $"{DateTime.FromOADate((double)dateSelectionStart).Date.ToString("d")} - {DateTime.FromOADate((double)dateSelectionEnd).Date.ToString("d")}";
+
+        /// <summary>
+        /// Gets the minimum date.
+        /// </summary>
+        public int DateMinimum => (int)new DateTime(2018, 5, 8).ToOADate();
+
+        /// <summary>
+        /// Gets the maximum date.
+        /// </summary>
+        public int DateMaximum => (int)DateTime.Today.ToOADate();
+
+        /// <summary>
+        /// Gets or sets the selected start date.
+        /// </summary>
+        public int DateSelectionStart
+        {
+            get => dateSelectionStart;
+            set
+            {
+                if (value == dateSelectionStart) return;
+                dateSelectionStart = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(DateRange));
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the selected end date.
+        /// </summary>
+        public int DateSelectionEnd
+        {
+            get => dateSelectionEnd;
+            set
+            {
+                if (value == dateSelectionEnd) return;
+                dateSelectionEnd = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(DateRange));
+            }
+        }
 
         #endregion
 
@@ -141,6 +192,9 @@ namespace CSM.UiLogic.Workspaces.Playlists
             RelevanceNone = true;
             MapStyleNone = true;
             SongStyleNone = true;
+
+            DateSelectionStart = DateMinimum;
+            DateSelectionEnd = DateMaximum;
         }
 
         /// <summary>
@@ -224,15 +278,15 @@ namespace CSM.UiLogic.Workspaces.Playlists
                 if (searchString.Length == 0) searchString.Append($"order={relevance}");
                 else searchString.Append($"&order={relevance}");
             }
-            if (false)
+            if (dateSelectionStart != DateMinimum)
             {
-                if (searchString.Length == 0) searchString.Append($"from={0}");
-                else searchString.Append($"&from={0}");
+                if (searchString.Length == 0) searchString.Append($"from={DateTime.FromOADate(dateSelectionStart).Date.ToString("yyyy-MM-dd")}");
+                else searchString.Append($"&from={DateTime.FromOADate(dateSelectionStart).Date.ToString("yyyy-MM-dd")}");
             }
-            if (false)
+            if (dateSelectionEnd != DateMaximum)
             {
-                if (searchString.Length == 0) searchString.Append($"to={0}");
-                else searchString.Append($"&to={0}");
+                if (searchString.Length == 0) searchString.Append($"to={DateTime.FromOADate(dateSelectionEnd).Date.ToString("yyyy-MM-dd")}");
+                else searchString.Append($"&to={DateTime.FromOADate(dateSelectionEnd).Date.ToString("yyyy-MM-dd")}");
             }
             if (!string.IsNullOrWhiteSpace(mapStyle) && !string.IsNullOrWhiteSpace(songStyle))
             {
@@ -308,6 +362,8 @@ namespace CSM.UiLogic.Workspaces.Playlists
             OnPropertyChanged(nameof(MapStyleNone));
             SongStyleNone = true;
             OnPropertyChanged(nameof(SongStyleNone));
+            DateSelectionStart = DateMinimum;
+            DateSelectionEnd = DateMaximum;
         }
 
         private void StartSearch()
