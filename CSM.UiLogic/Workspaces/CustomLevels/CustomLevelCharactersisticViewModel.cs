@@ -9,7 +9,7 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
     /// </summary>
     public class CustomLevelCharactersisticViewModel
     {
-        private IGrouping<string, Difficulty> characteristic;
+        private readonly IGrouping<string, Difficulty> characteristic;
 
         /// <summary>
         /// Gets the name of the characteristic.

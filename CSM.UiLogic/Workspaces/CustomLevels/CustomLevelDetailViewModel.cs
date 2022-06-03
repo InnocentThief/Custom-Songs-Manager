@@ -13,7 +13,7 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
     /// </summary>
     public class CustomLevelDetailViewModel
     {
-        private BeatMap beatMap;
+        private readonly BeatMap beatMap;
 
         #region Public Properties
 

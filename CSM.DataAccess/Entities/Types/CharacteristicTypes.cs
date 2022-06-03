@@ -1,5 +1,8 @@
 ﻿namespace CSM.DataAccess.Entities.Types
 {
+    /// <summary>
+    /// Contains the strings for the different characteristics.
+    /// </summary>
     public static class CharacteristicTypes
     {
         public static readonly string Degree360 = "360Degree";

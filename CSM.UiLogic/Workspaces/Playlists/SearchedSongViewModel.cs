@@ -4,6 +4,9 @@ using System;
 
 namespace CSM.UiLogic.Workspaces.Playlists
 {
+    /// <summary>
+    /// Represents one result of a song search.
+    /// </summary>
     public class SearchedSongViewModel
     {
         private bool canAddToPlaylist;
@@ -24,8 +27,15 @@ namespace CSM.UiLogic.Workspaces.Playlists
 
         #endregion
 
+        /// <summary>
+        /// Occurs on song add event.
+        /// </summary>
         public event EventHandler<AddSongToPlaylistEventArgs> AddSongToPlaylistEvent;
 
+        /// <summary>
+        /// Initializes a new <see cref="SearchedSongViewModel"/>.
+        /// </summary>
+        /// <param name="beatmap">The beat map of the song.</param>
         public SearchedSongViewModel(BeatMap beatmap)
         {
             BeatMap = beatmap;

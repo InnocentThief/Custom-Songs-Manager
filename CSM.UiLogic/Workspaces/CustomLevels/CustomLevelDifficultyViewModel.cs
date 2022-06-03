@@ -8,7 +8,7 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
     /// </summary>
     public class CustomLevelDifficultyViewModel
     {
-        private Difficulty difficulty;
+        private readonly Difficulty difficulty;
 
         #region Public Properties
 

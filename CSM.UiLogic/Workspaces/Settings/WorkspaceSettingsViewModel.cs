@@ -86,8 +86,6 @@ namespace CSM.UiLogic.Workspaces.Settings
             }
         }
 
-
-
         #endregion
 
         /// <summary>

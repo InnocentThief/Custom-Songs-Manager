@@ -2,8 +2,16 @@
 
 namespace CSM.Framework.Extensions
 {
+    /// <summary>
+    /// Extensions for workspaces.
+    /// </summary>
     public static class CSMTypeExtensions
     {
+        /// <summary>
+        /// Gets the name for the given workspace type.
+        /// </summary>
+        /// <param name="workspaceType">Workspace type to get the name for.</param>
+        /// <returns>A string with the name for the given workspace type.</returns>
         public static string ToText(this WorkspaceType workspaceType)
         {
             switch (workspaceType)
@@ -21,6 +29,11 @@ namespace CSM.Framework.Extensions
             }
         }
 
+        /// <summary>
+        /// Gets the name of a workspace for the given string.
+        /// </summary>
+        /// <param name="workspaceName">The string to get the workspace name for.</param>
+        /// <returns>A string with the name for the given workspacename.</returns>
         public static string ToWorkspaceType(this string workspaceName)
         {
             switch (workspaceName)

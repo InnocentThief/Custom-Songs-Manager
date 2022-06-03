@@ -29,11 +29,11 @@ namespace CSM.UiLogic.Workspaces
     {
         #region Private fields
 
-        private ListCollectionView itemsCollection;
-        private ObservableCollection<CustomLevelViewModel> itemsObservable;
+        private readonly ListCollectionView itemsCollection;
+        private readonly ObservableCollection<CustomLevelViewModel> itemsObservable;
         private CustomLevelViewModel selectedCustomLevel;
         private CustomLevelDetailViewModel customLevelDetail;
-        private BeatMapService beatMapService;
+        private readonly BeatMapService beatMapService;
         private BackgroundWorker bgWorker;
         private bool isLoading;
         private int loadProgress;

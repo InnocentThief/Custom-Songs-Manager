@@ -15,7 +15,7 @@
                    mc:Ignorable="d"
                    Header="Custom Songs Manager" Height="800" Width="1200"
                    navigation:RadWindowInteropHelper.Title="Custom Songs Manager" 
-    navigation:RadWindowInteropHelper.ShowInTaskbar="True">
+                   navigation:RadWindowInteropHelper.ShowInTaskbar="True">
 
     <telerik:RadWindow.Resources>
 

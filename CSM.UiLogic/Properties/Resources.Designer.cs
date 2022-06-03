@@ -133,6 +133,69 @@ namespace CSM.UiLogic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add new playlist.
+        /// </summary>
+        public static string Playlist_WrongFileName_Caption {
+            get {
+                return ResourceManager.GetString("Playlist_WrongFileName_Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The name for the new playlist is not valid.
+        /// </summary>
+        public static string Playlist_WrongFileName_Content {
+            get {
+                return ResourceManager.GetString("Playlist_WrongFileName_Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The name for the new folder is not valid.
+        /// </summary>
+        public static string Playlist_WrongFolderName_Content {
+            get {
+                return ResourceManager.GetString("Playlist_WrongFolderName_Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add new playlist.
+        /// </summary>
+        public static string Playlists_AddPlaylist_Caption {
+            get {
+                return ResourceManager.GetString("Playlists_AddPlaylist_Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the name of the new playlist.
+        /// </summary>
+        public static string Playlists_AddPlaylist_Content {
+            get {
+                return ResourceManager.GetString("Playlists_AddPlaylist_Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add new playlist folder.
+        /// </summary>
+        public static string Playlists_AddPlaylistFolder_Caption {
+            get {
+                return ResourceManager.GetString("Playlists_AddPlaylistFolder_Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the name of the new playlist folder.
+        /// </summary>
+        public static string Playlists_AddPlaylistFolder_Content {
+            get {
+                return ResourceManager.GetString("Playlists_AddPlaylistFolder_Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete playlist.
         /// </summary>
         public static string Playlists_DeletePlaylist_Caption {
@@ -178,6 +241,15 @@ namespace CSM.UiLogic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add new folder.
+        /// </summary>
+        public static string Playlists_WrongFolderName_Caption {
+            get {
+                return ResourceManager.GetString("Playlists_WrongFolderName_Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unable to open file dialog.
         /// </summary>
         public static string Settings_BeatSaber_FileDialog {
@@ -214,6 +286,15 @@ namespace CSM.UiLogic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string Settings_Title {
+            get {
+                return ResourceManager.GetString("Settings_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Custom Levels.
         /// </summary>
         public static string Workspace_CustomLevels {
@@ -228,15 +309,6 @@ namespace CSM.UiLogic.Properties {
         public static string Workspace_Playlists {
             get {
                 return ResourceManager.GetString("Workspace_Playlists", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Song Search.
-        /// </summary>
-        public static string Workspace_SearchSong {
-            get {
-                return ResourceManager.GetString("Workspace_SearchSong", resourceCulture);
             }
         }
         

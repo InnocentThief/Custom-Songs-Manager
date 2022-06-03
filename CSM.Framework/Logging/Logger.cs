@@ -5,14 +5,22 @@ using System.IO;
 
 namespace CSM.Framework.Logging
 {
+    /// <summary>
+    /// Logger for exceptions.
+    /// </summary>
     public class Logger
     {
+        /// <summary>
+        /// Initializes a new <see cref="Logger"/>.
+        /// </summary>
         private Logger()
         {
             XmlConfigurator.Configure(new System.IO.FileInfo(AppDomain.CurrentDomain.BaseDirectory + "log4net.config"));
-
         }
 
+        /// <summary>
+        /// Creates an instance of the logger.
+        /// </summary>
         public static void Create()
         {
             LoggerProvider.Register(new Logger());

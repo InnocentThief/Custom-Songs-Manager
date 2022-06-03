@@ -4,6 +4,9 @@ using System.Windows.Media.Imaging;
 
 namespace CSM.Framework.Converter
 {
+    /// <summary>
+    /// Converts a base64 string to an image and back.
+    /// </summary>
     public static class ImageConverter
     {
         /// <summary>

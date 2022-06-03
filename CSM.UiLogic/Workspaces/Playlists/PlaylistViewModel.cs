@@ -20,7 +20,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
     {
         #region Private fields
 
-        private Playlist playlist;
+        private readonly Playlist playlist;
         private PlaylistSongViewModel playlistSong;
         private bool inEditMode;
 
@@ -29,7 +29,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
         private string playlistDescriptionEdit;
 
         private PlaylistSongDetailViewModel playlistSongDetail;
-        private BeatMapService beatMapService;
+        private readonly BeatMapService beatMapService;
 
         private string sortColumnName;
         private Telerik.Windows.Controls.SortingState sortingState;
@@ -248,7 +248,6 @@ namespace CSM.UiLogic.Workspaces.Playlists
         {
             var playlistSong = new PlaylistSong
             {
-
                 Hash = e.Hash,
                 Key = e.BsrKey,
                 LevelAuthorName = e.LevelAuthorName,

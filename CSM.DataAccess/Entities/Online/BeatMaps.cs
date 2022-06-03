@@ -3,6 +3,9 @@ using System.Text.Json.Serialization;
 
 namespace CSM.DataAccess.Entities.Online
 {
+    /// <summary>
+    /// Represents the return value of a search request. Containing a list of BeatMaps.
+    /// </summary>
     public class BeatMaps
     {
         [JsonPropertyName("docs")]

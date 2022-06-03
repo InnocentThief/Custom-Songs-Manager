@@ -3,34 +3,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
-             xmlns:p="clr-namespace:CSM.App.Properties"
              xmlns:settings="clr-namespace:CSM.App.Workspaces.Settings"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <!--<Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>-->
-        <!--<Border Background="DarkRed" Opacity="0.9">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                --><!-- Title --><!--
-                <TextBlock Text="{x:Static p:Resources.Settings_Title}" Margin="8,0" VerticalAlignment="Center" FontWeight="DemiBold"  />
-                --><!-- Commands --><!--
-                <telerik:RadToolBar Grid.Column="1" OverflowButtonVisibility="Collapsed" GripVisibility="Collapsed" Background="Transparent" BorderThickness="0" >
-                    <telerik:RadButton Command="{Binding CloseCommand}" ToolTip="{x:Static p:Resources.Settings_Close}">
-                        <telerik:RadGlyph Glyph="&#xe11b;" />
-                    </telerik:RadButton>
-                </telerik:RadToolBar>
-            </Grid>
-        </Border>-->
-        <!--<Border Grid.Row="1" Background="Black" Opacity="0.9" BorderBrush="DarkRed" BorderThickness="4,0,4,4">-->
             <Grid Margin="8">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -40,6 +16,4 @@
                 <settings:BeatSaberSettingsView DataContext="{Binding BeatSaberSettings}" />
                 <settings:WorkspaceSettingsView Grid.Column="2" DataContext="{Binding WorkspaceSettings}" />
             </Grid>
-        <!--</Border>-->
-    <!--</Grid>-->
 </UserControl>

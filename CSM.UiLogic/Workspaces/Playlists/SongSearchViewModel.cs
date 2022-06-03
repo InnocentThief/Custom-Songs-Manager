@@ -135,6 +135,10 @@ namespace CSM.UiLogic.Workspaces.Playlists
             SongStyleNone = true;
         }
 
+        /// <summary>
+        /// Sets the visibility of the enhanced search parameters.
+        /// </summary>
+        /// <param name="visible">Indicator of the visibility.</param>
         public void SetSearchParametersVisibility(bool visible)
         {
             SearchExpanded = visible;

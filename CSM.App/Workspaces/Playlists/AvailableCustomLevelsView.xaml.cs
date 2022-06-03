@@ -35,8 +35,7 @@ namespace CSM.App.Workspaces.Playlists
             if (e.AddedItems.Count == 0) return;
             if ((e.AddedItems[0] as RadTabItem).Name == "Favorites")
             {
-                var viewModel = DataContext as PlaylistCustomLevelsViewModel;
-                if (viewModel != null) await viewModel.LoadFavoritesAsync(false);
+                if (DataContext is PlaylistCustomLevelsViewModel viewModel) await viewModel.LoadFavoritesAsync(false);
             }
         }
 

@@ -5,6 +5,9 @@ using System.Text.Json;
 
 namespace CSM.Framework.Configuration.UserConfiguration
 {
+    /// <summary>
+    /// Handles the user configuration.
+    /// </summary>
     public class UserConfigManager : IUserConfigManager
     {
         #region Private fields
@@ -17,19 +20,34 @@ namespace CSM.Framework.Configuration.UserConfiguration
 
         #region Public Properties
 
+        /// <summary>
+        /// Gets the temp directory for the user.
+        /// </summary>
         public string TempDirectory => tempDirectory;
 
+        /// <summary>
+        /// Gets the config for the user.
+        /// </summary>
         public UserConfig Config => userConfig;
 
         #endregion
 
+        /// <summary>
+        /// Occurs on settings change.
+        /// </summary>
         public static event EventHandler<UserConfigChangedEventArgs> UserConfigChanged;
 
+        /// <summary>
+        /// Initializes a new <see cref="UserConfigManager"/>.
+        /// </summary>
         private UserConfigManager()
         {
             LoadOrCreateUserConfig();
         }
 
+        /// <summary>
+        /// Saves the user config to the file.
+        /// </summary>
         public void SaveUserConfig()
         {
             if (userConfig != null)
@@ -39,6 +57,10 @@ namespace CSM.Framework.Configuration.UserConfiguration
             }
         }
 
+        /// <summary>
+        /// Invokes the user config changed event.
+        /// </summary>
+        /// <param name="userConfigChangedEventArgs">EventArgs containing the information on what setting has changed.</param>
         public void Changed(UserConfigChangedEventArgs userConfigChangedEventArgs)
         {
             UserConfigChanged?.Invoke(this, userConfigChangedEventArgs);

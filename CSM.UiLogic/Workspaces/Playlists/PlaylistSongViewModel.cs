@@ -21,8 +21,8 @@ namespace CSM.UiLogic.Workspaces.Playlists
     {
         #region Private fields
 
-        private Playlist playlist;
-        private PlaylistSong playlistSong;
+        private readonly Playlist playlist;
+        private readonly PlaylistSong playlistSong;
 
         #endregion
 

@@ -1,4 +1,5 @@
-﻿using CSM.UiLogic.Wizards;
+﻿using CSM.UiLogic.Properties;
+using CSM.UiLogic.Wizards;
 using CSM.UiLogic.Workspaces.Settings;
 
 namespace CSM.UiLogic.Workspaces
@@ -36,11 +37,20 @@ namespace CSM.UiLogic.Workspaces
             }
         }
 
+        /// <summary>
+        /// Gets the height of the window.
+        /// </summary>
         public override int Height => 400;
 
+        /// <summary>
+        /// Gets the width of the window.
+        /// </summary>
         public override int Width => 800;
 
-        public override string Title => "Settings";
+        /// <summary>
+        /// Gets the title of the window.
+        /// </summary>
+        public override string Title => Resources.Settings_Title;
 
         #endregion
 

@@ -1,5 +1,8 @@
 ﻿namespace CSM.Framework
 {
+    /// <summary>
+    /// Enum with the available workspaces.
+    /// </summary>
     public enum WorkspaceType
     {
         CustomLevels = 0,

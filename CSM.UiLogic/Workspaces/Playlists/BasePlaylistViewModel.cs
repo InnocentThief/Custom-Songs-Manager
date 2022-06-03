@@ -81,12 +81,17 @@ namespace CSM.UiLogic.Workspaces.Playlists
         }
 
         /// <summary>
-        /// Checks if the playlist or folder contains the song with the given hash.
+        /// Checks if the playlist or folder contains the song with the given hash (Check for playlist songs).
         /// </summary>
         /// <param name="leftHash">The hash of the song to check.</param>
         /// <returns>True if the playlist or folder contains the song.</returns>
         public abstract bool CheckContainsLeftSong(string leftHash);
 
+        /// <summary>
+        /// Checks if the playlist or folder contains the song with the given hash (Check for custom songs, favorites, and song search).
+        /// </summary>
+        /// <param name="rightHash">The hash of the song to check.</param>
+        /// <returns>True if the playlist or folder contains the song.</returns>
         public abstract bool CheckContainsRightSong(string rightHash);
 
         /// <summary>

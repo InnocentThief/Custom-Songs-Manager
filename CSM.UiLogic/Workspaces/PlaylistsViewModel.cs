@@ -35,7 +35,7 @@ namespace CSM.UiLogic.Workspaces
         private bool isLoading;
         private int loadProgress;
         private int playlistCount;
-        private PlaylistSelectionState playlistSelectionState;
+        private readonly PlaylistSelectionState playlistSelectionState;
 
         #endregion
 
@@ -406,7 +406,7 @@ namespace CSM.UiLogic.Workspaces
             var selectedFolder = SelectedPlaylist as PlaylistFolderViewModel;
             if (selectedFolder != null) playlistsPath = selectedFolder.FilePath;
 
-            var folderViewModel = new EditWindowNewFileOrFolderNameViewModel("Add a new playlist folder", "Enter the name of the new playlist folder", true);
+            var folderViewModel = new EditWindowNewFileOrFolderNameViewModel(Resources.Playlists_AddPlaylistFolder_Caption, Resources.Playlists_AddPlaylistFolder_Content, true);
             EditWindowController.Instance().ShowEditWindow(folderViewModel);
             if (folderViewModel.Continue)
             {
@@ -427,7 +427,7 @@ namespace CSM.UiLogic.Workspaces
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("The name for the new folder is not valid", "Add new folder");
+                    MessageBox.Show(Resources.Playlist_WrongFolderName_Content, Resources.Playlists_WrongFolderName_Caption);
                     return;
                 }
             }
@@ -439,7 +439,7 @@ namespace CSM.UiLogic.Workspaces
             var selectedFolder = SelectedPlaylist as PlaylistFolderViewModel;
             if (selectedFolder != null) playlistsPath = selectedFolder.FilePath;
 
-            var fileViewModel = new EditWindowNewFileOrFolderNameViewModel("Add new playlist", "Enter the name of the new playlist", false);
+            var fileViewModel = new EditWindowNewFileOrFolderNameViewModel(Resources.Playlists_AddPlaylist_Caption, Resources.Playlists_AddPlaylist_Content, false);
             EditWindowController.Instance().ShowEditWindow(fileViewModel);
             if (fileViewModel.Continue)
             {
@@ -478,7 +478,7 @@ namespace CSM.UiLogic.Workspaces
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("The name for the new playlist is not valid", "Add new folder");
+                    MessageBox.Show(Resources.Playlist_WrongFileName_Content, Resources.Playlist_WrongFileName_Caption);
                     return;
                 }
             }

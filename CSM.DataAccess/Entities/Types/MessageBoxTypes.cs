@@ -1,5 +1,8 @@
 ﻿namespace CSM.DataAccess.Entities.Types
 {
+    /// <summary>
+    /// Enum for the available messagebox types.
+    /// </summary>
     public enum MessageBoxTypes
     {
         Notification = 0,

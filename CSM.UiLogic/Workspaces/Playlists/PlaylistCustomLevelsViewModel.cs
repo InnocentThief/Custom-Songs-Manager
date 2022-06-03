@@ -28,8 +28,8 @@ namespace CSM.UiLogic.Workspaces.Playlists
         private bool isLoading;
         private int loadProgress;
         private PlaylistSongDetailViewModel playlistSongDetail;
-        private BeatMapService beatMapService;
-        private PlaylistSelectionState playlistSelectionState;
+        private readonly BeatMapService beatMapService;
+        private readonly PlaylistSelectionState playlistSelectionState;
         private FavoriteViewModel selectedFavorite;
         private SearchedSongViewModel selectedSearchedSong;
 
@@ -167,6 +167,9 @@ namespace CSM.UiLogic.Workspaces.Playlists
         /// </summary>
         public event EventHandler<AddSongToPlaylistEventArgs> AddSongToPlaylistEvent;
 
+        /// <summary>
+        /// Occurs when a selected song changes.
+        /// </summary>
         public event EventHandler<PlaylistSongChangedEventArgs> SongChangedEvent;
 
         /// <summary>

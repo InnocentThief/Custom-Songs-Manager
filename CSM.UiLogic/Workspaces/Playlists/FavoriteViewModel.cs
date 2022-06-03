@@ -11,7 +11,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
     {
         #region Private fields
 
-        private BeatMap beatmap;
+        private readonly BeatMap beatmap;
         private bool canAddToPlaylist;
 
         #endregion

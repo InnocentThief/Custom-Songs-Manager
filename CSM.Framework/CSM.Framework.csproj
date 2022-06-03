@@ -97,7 +97,6 @@
     <Compile Include="Extensions\BeatMapExtensions.cs" />
     <Compile Include="Extensions\CollectionExtension.cs" />
     <Compile Include="FolderPicker.cs" />
-    <Compile Include="IoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

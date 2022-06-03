@@ -1,5 +1,8 @@
 ﻿namespace CSM.DataAccess.Entities.Types
 {
+    /// <summary>
+    /// Contains the strings for the different difficulty types.
+    /// </summary>
     public static class DifficultyTypes
     {
         public static readonly string Easy = "Easy";
@@ -9,6 +12,9 @@
         public static readonly string ExpertPlus = "ExpertPlus";
     }
 
+    /// <summary>
+    /// Contains the abbreviations for the different difficulty types.
+    /// </summary>
     public static class DifficultyTypeAbbreviations
     {
         public static readonly string Easy = "E";

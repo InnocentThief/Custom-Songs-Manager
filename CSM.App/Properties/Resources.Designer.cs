@@ -268,6 +268,24 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bottom.
+        /// </summary>
+        public static string Settings_Workspace_SongDetailPosition_Bottom {
+            get {
+                return ResourceManager.GetString("Settings_Workspace_SongDetailPosition_Bottom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Right.
+        /// </summary>
+        public static string Settings_Workspace_SongDetailPosition_Right {
+            get {
+                return ResourceManager.GetString("Settings_Workspace_SongDetailPosition_Right", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Default Workspace.
         /// </summary>
         public static string Settings_Workspaces_Default {

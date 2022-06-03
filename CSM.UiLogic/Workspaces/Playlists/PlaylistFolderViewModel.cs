@@ -24,7 +24,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
         }
 
         /// <summary>
-        /// Checks if the folder contains a playlist that contains a song with the given hash.
+        /// Checks if the folder contains the song with the given hash (Check for playlist songs).
         /// </summary>
         /// <param name="leftHash">The hash of the song to check.</param>
         /// <returns>True if the folder contains the song.</returns>
@@ -34,6 +34,11 @@ namespace CSM.UiLogic.Workspaces.Playlists
             return ContainsLeftSong;
         }
 
+        /// <summary>
+        /// Checks if the folder contains the song with the given hash (Check for custom songs, favorites, and song search).
+        /// </summary>
+        /// <param name="rightHash">The hash of the song to check.</param>
+        /// <returns>True if the folder contains the song.</returns>
         public override bool CheckContainsRightSong(string rightHash)
         {
             ContainsRightSong = Playlists.Any(p => p.CheckContainsRightSong(rightHash));

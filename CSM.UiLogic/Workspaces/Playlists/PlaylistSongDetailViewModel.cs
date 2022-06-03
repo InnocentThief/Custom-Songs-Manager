@@ -14,7 +14,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
     /// </summary>
     public class PlaylistSongDetailViewModel
     {
-        private BeatMap beatMap;
+        private readonly BeatMap beatMap;
 
         #region Public Properties
 
