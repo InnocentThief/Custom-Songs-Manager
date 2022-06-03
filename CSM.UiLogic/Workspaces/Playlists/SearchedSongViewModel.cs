@@ -23,6 +23,10 @@ namespace CSM.UiLogic.Workspaces.Playlists
 
         public string SongAuthorName => BeatMap.Metadata.SongAuthorName;
 
+        public int Upvotes => BeatMap.Stats.Upvotes;
+
+        public int Downvotes => BeatMap.Stats.Downvotes;
+
         public RelayCommand AddToPlaylistCommand { get; }
 
         #endregion

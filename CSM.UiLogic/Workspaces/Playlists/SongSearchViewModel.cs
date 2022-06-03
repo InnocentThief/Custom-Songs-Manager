@@ -135,34 +135,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
             SongStyleNone = true;
         }
 
-        /// <summary>
-        /// Sets the visibility of the enhanced search parameters.
-        /// </summary>
-        /// <param name="visible">Indicator of the visibility.</param>
-        public void SetSearchParametersVisibility(bool visible)
-        {
-            SearchExpanded = visible;
-            OnPropertyChanged(nameof(SearchExpanded));
-        }
-
-        #region Helper methods
-
-        private void RelevanceClick(string name)
-        {
-            relevance = name;
-        }
-
-        private void MapStyleClick(string name)
-        {
-            mapStyle = name;
-        }
-
-        private void SongStyleClick(string name)
-        {
-            songStyle = name;
-        }
-
-        private void Search()
+        public void Search()
         {
             var searchString = new StringBuilder();
             if (!string.IsNullOrWhiteSpace(Query)) searchString.Append($"q={Query}");
@@ -253,6 +226,33 @@ namespace CSM.UiLogic.Workspaces.Playlists
             }
 
             SearchSongEvent?.Invoke(this, new SongSearchEventArgs(searchString.ToString()));
+        }
+
+        /// <summary>
+        /// Sets the visibility of the enhanced search parameters.
+        /// </summary>
+        /// <param name="visible">Indicator of the visibility.</param>
+        public void SetSearchParametersVisibility(bool visible)
+        {
+            SearchExpanded = visible;
+            OnPropertyChanged(nameof(SearchExpanded));
+        }
+
+        #region Helper methods
+
+        private void RelevanceClick(string name)
+        {
+            relevance = name;
+        }
+
+        private void MapStyleClick(string name)
+        {
+            mapStyle = name;
+        }
+
+        private void SongStyleClick(string name)
+        {
+            songStyle = name;
         }
 
         private void ResetSearchParameters()

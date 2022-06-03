@@ -111,6 +111,25 @@
                                     <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_Artist}" Width="*" DataMemberBinding="{Binding SongAuthorName}" />
                                     <!-- Level Author Name -->
                                     <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_Mapper}" Width="*" DataMemberBinding="{Binding LevelAuthorName}" />
+                                    <!-- Up / Downvotes -->
+                                    <telerik:GridViewColumn Header="{x:Static p:Resources.SongSearch_ColumnHeader_Rating}">
+                                        <telerik:GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Grid Margin="0,0,6,0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <telerik:RadGlyph Glyph="&#xe013;" Foreground="DarkGreen" />
+                                                    <TextBlock Grid.Column="1" Text="{Binding Upvotes}" Margin="1,0,0,0" />
+                                                    <telerik:RadGlyph Grid.Column="2" Glyph="&#xe015;" Foreground="DarkRed" Margin="5,0,0,0" />
+                                                    <TextBlock Grid.Column="3" Text="{Binding Downvotes}" Margin="1,0,0,0" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </telerik:GridViewColumn.CellTemplate>
+                                    </telerik:GridViewColumn>
                                 </telerik:RadGridView.Columns>
                             </telerik:RadGridView>
                         </Grid>

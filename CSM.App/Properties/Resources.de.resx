@@ -198,6 +198,9 @@
   <data name="Settings_Workspace_SongDetailPosition_Right" xml:space="preserve">
     <value>Right</value>
   </data>
+  <data name="SongSearch_ColumnHeader_Rating" xml:space="preserve">
+    <value>Rating</value>
+  </data>
   <data name="SongSearch_Search_ClearFilter" xml:space="preserve">
     <value>Clears all filters</value>
   </data>

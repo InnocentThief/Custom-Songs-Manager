@@ -304,6 +304,15 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rating.
+        /// </summary>
+        public static string SongSearch_ColumnHeader_Rating {
+            get {
+                return ResourceManager.GetString("SongSearch_ColumnHeader_Rating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clears all filters.
         /// </summary>
         public static string SongSearch_Search_ClearFilter {
