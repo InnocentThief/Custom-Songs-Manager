@@ -414,11 +414,14 @@ namespace CSM.UiLogic.Workspaces.Playlists
 
         private async void SongSearch_SearchSongEvent(object sender, SongSearchEventArgs e)
         {
-            foreach (var searchedSong in SearchedSongs)
+            if (e.PageIndex == 0)
             {
-                searchedSong.AddSongToPlaylistEvent -= CustomLevelOrFavorite_AddSongToPlaylistEvent;
-            }
-            SearchedSongs.Clear();
+                foreach (var searchedSong in SearchedSongs)
+                {
+                    searchedSong.AddSongToPlaylistEvent -= CustomLevelOrFavorite_AddSongToPlaylistEvent;
+                }
+                SearchedSongs.Clear();
+            }    
 
             if (e.IsKey)
             {
@@ -434,7 +437,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
             }
             else
             {
-                var searchService = new BeatMapService("search/text/0");
+                var searchService = new BeatMapService($"search/text/{e.PageIndex}");
                 var beatmaps = await searchService.SearchSongsAsync(e.SearchString);
 
                 if (beatmaps.Docs == null) return;

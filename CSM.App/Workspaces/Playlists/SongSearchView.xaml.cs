@@ -17,7 +17,7 @@ namespace CSM.App.Workspaces.Playlists
         {
             if (e.Key != System.Windows.Input.Key.Enter) return;
             var viewModel = DataContext as SongSearchViewModel;
-            viewModel.Search();
+            viewModel.Search(0);
         }
     }
 }

@@ -19,14 +19,19 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <telerik:RadWatermarkTextBox WatermarkContent="{x:Static p:Resources.SongSearch_Search_Watermark}" Text="{Binding Query, UpdateSourceTrigger=PropertyChanged}" KeyUp="RadWatermarkTextBox_KeyUp" />
             <!-- Search Button -->
             <telerik:RadButton Grid.Column="1" Command="{Binding SearchCommand}" ToolTip="{x:Static p:Resources.SongSearch_Search_ToolTip}">
                 <telerik:RadGlyph Glyph="&#xe13e;" />
             </telerik:RadButton>
+            <!-- Show me more -->
+            <telerik:RadButton Grid.Column="2" Command="{Binding ShowMeMoreCommand}" Margin="3,0" ToolTip="{x:Static p:Resources.SongSearch_Search_ShowMeMore_ToolTip}">
+                <telerik:RadGlyph Glyph="&#xe13f;" />
+            </telerik:RadButton>
             <!-- Clear Button -->
-            <telerik:RadButton Grid.Column="2" Command="{Binding ResetSearchParametersCommand}" Background="DarkRed" Margin="3,0" ToolTip="{x:Static p:Resources.SongSearch_Search_ClearFilter}" >
+            <telerik:RadButton Grid.Column="3" Command="{Binding ResetSearchParametersCommand}" Background="DarkRed" Margin="3,0" ToolTip="{x:Static p:Resources.SongSearch_Search_ClearFilter}" >
                 <telerik:RadGlyph Glyph="&#xe12a;" />
             </telerik:RadButton>
         </Grid>

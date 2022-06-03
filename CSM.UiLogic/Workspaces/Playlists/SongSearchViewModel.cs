@@ -16,6 +16,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
         private string relevance;
         private string mapStyle;
         private string songStyle;
+        private int currentPageIndex;
 
         #endregion
 
@@ -111,6 +112,11 @@ namespace CSM.UiLogic.Workspaces.Playlists
         /// </summary>
         public RelayCommand ResetSearchParametersCommand { get; }
 
+        /// <summary>
+        /// Command used to load the next page of the search result.
+        /// </summary>
+        public RelayCommand ShowMeMoreCommand { get; }
+
         public bool SearchExpanded { get; set; }
 
         #endregion
@@ -128,15 +134,20 @@ namespace CSM.UiLogic.Workspaces.Playlists
             RelevanceCommand = new RelayCommand<string>(RelevanceClick);
             MapStyleCommand = new RelayCommand<string>(MapStyleClick);
             SongStyleCommand = new RelayCommand<string>(SongStyleClick);
-            SearchCommand = new RelayCommand(Search);
+            SearchCommand = new RelayCommand(StartSearch);
             ResetSearchParametersCommand = new RelayCommand(ResetSearchParameters);
+            ShowMeMoreCommand = new RelayCommand(ShowMeMore);
 
             RelevanceNone = true;
             MapStyleNone = true;
             SongStyleNone = true;
         }
 
-        public void Search()
+        /// <summary>
+        /// Starts the song search
+        /// </summary>
+        /// <param name="pageIndex">The current page index.</param>
+        public void Search(int pageIndex)
         {
             var searchString = new StringBuilder();
 
@@ -146,7 +157,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
                 int.TryParse(Query, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out int result);
                 if (result > 0)
                 {
-                    SearchSongEvent?.Invoke(this, new SongSearchEventArgs(Query, true));
+                    SearchSongEvent?.Invoke(this, new SongSearchEventArgs(Query, pageIndex, true));
                     return;
                 }
             }
@@ -239,7 +250,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
                 else searchString.Append($"&tags={songStyle}");
             }
 
-            SearchSongEvent?.Invoke(this, new SongSearchEventArgs(searchString.ToString(), false));
+            SearchSongEvent?.Invoke(this, new SongSearchEventArgs(searchString.ToString(), currentPageIndex, false));
         }
 
         /// <summary>
@@ -297,6 +308,18 @@ namespace CSM.UiLogic.Workspaces.Playlists
             OnPropertyChanged(nameof(MapStyleNone));
             SongStyleNone = true;
             OnPropertyChanged(nameof(SongStyleNone));
+        }
+
+        private void StartSearch()
+        {
+            currentPageIndex = 0;
+            Search(currentPageIndex);
+        }
+
+        private void ShowMeMore()
+        {
+            currentPageIndex++;
+            Search(currentPageIndex);
         }
 
         #endregion

@@ -255,6 +255,9 @@
   <data name="SongSearch_Search_Requirements_Noodle" xml:space="preserve">
     <value>Noodle</value>
   </data>
+  <data name="SongSearch_Search_ShowMeMore_ToolTip" xml:space="preserve">
+    <value>Shows more results</value>
+  </data>
   <data name="SongSearch_Search_Tags_MapStyle" xml:space="preserve">
     <value>Tags (Map-Style)</value>
   </data>

@@ -475,6 +475,15 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Shows more results.
+        /// </summary>
+        public static string SongSearch_Search_ShowMeMore_ToolTip {
+            get {
+                return ResourceManager.GetString("SongSearch_Search_ShowMeMore_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tags (Map-Style).
         /// </summary>
         public static string SongSearch_Search_Tags_MapStyle {
