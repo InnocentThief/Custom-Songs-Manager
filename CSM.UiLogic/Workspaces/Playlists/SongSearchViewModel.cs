@@ -21,6 +21,9 @@ namespace CSM.UiLogic.Workspaces.Playlists
         private int dateSelectionStart;
         private int dateSelectionEnd;
 
+        private double npsSelectionStart;
+        private double npsSelectionEnd;
+
         #endregion
 
         #region Public Properties
@@ -170,6 +173,50 @@ namespace CSM.UiLogic.Workspaces.Playlists
             }
         }
 
+        /// <summary>
+        /// Gets the NPS text.
+        /// </summary>
+        public string NPSText
+        {
+            get
+            {
+                var from = Math.Round(npsSelectionStart, 1).ToString();
+                var to = Math.Round(npsSelectionEnd, 1).ToString();
+                if (to == "16") to = "∞";
+                return $"{from}-{to}";
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the selected nps start.
+        /// </summary>
+        public double NPSSelectionStart
+        {
+            get => npsSelectionStart;
+            set
+            {
+                if (value == npsSelectionStart) return;
+                npsSelectionStart = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(NPSText));
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the selected nps end.
+        /// </summary>
+        public double NPSSelectionEnd
+        {
+            get => npsSelectionEnd;
+            set
+            {
+                if (value == npsSelectionEnd) return;
+                npsSelectionEnd = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(NPSText));
+            }
+        }
+
         #endregion
 
         /// <summary>
@@ -195,6 +242,9 @@ namespace CSM.UiLogic.Workspaces.Playlists
 
             DateSelectionStart = DateMinimum;
             DateSelectionEnd = DateMaximum;
+
+            NPSSelectionStart = 0;
+            NPSSelectionEnd = 16;
         }
 
         /// <summary>
@@ -263,15 +313,15 @@ namespace CSM.UiLogic.Workspaces.Playlists
                 if (searchString.Length == 0) searchString.Append("fullSpread=true");
                 else searchString.Append("&fullSpread=true");
             }
-            if (false)
+            if (npsSelectionStart!= 0)
             {
-                if (searchString.Length == 0) searchString.Append($"maxNps={0}");
-                else searchString.Append($"&maxNps={0}");
+                if (searchString.Length == 0) searchString.Append($"minNps={Math.Round(npsSelectionStart,1)}");
+                else searchString.Append($"&minNps={Math.Round(npsSelectionStart, 1)}");
             }
-            if (false)
+            if (npsSelectionEnd!= 16)
             {
-                if (searchString.Length == 0) searchString.Append($"minNps={0}");
-                else searchString.Append($"&minNps={0}");
+                if (searchString.Length == 0) searchString.Append($"maxNps={Math.Round(npsSelectionEnd, 1)}");
+                else searchString.Append($"&maxNps={Math.Round(npsSelectionEnd, 1)}");
             }
             if (!string.IsNullOrWhiteSpace(relevance))
             {
@@ -364,6 +414,8 @@ namespace CSM.UiLogic.Workspaces.Playlists
             OnPropertyChanged(nameof(SongStyleNone));
             DateSelectionStart = DateMinimum;
             DateSelectionEnd = DateMaximum;
+            NPSSelectionStart = 0;
+            NPSSelectionEnd = 16;
         }
 
         private void StartSearch()

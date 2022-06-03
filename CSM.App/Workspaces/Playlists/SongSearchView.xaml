@@ -46,7 +46,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -71,6 +71,17 @@
                     <telerik:RadToggleSwitchButton TrackWidth="35" TrackHeight="20" Margin="0,1" Grid.Column="1" Grid.Row="2" IsChecked="{Binding Noodle}" CheckedContent="{x:Static p:Resources.SongSearch_Search_Requirements_Noodle}" UncheckedContent="{x:Static p:Resources.SongSearch_Search_Requirements_Noodle}" />
                     <telerik:RadToggleSwitchButton TrackWidth="35" TrackHeight="20" Margin="0,1" Grid.Column="1" Grid.Row="3" IsChecked="{Binding MappingExtensions}" CheckedContent="{x:Static p:Resources.SongSearch_Search_Requirements_ME}" UncheckedContent="{x:Static p:Resources.SongSearch_Search_Requirements_ME}" />
                     <telerik:RadToggleSwitchButton TrackWidth="35" TrackHeight="20" Margin="0,1" Grid.Column="1" Grid.Row="4" IsChecked="{Binding Cinema}" CheckedContent="{x:Static p:Resources.SongSearch_Search_Requirements_Cinema}" UncheckedContent="{x:Static p:Resources.SongSearch_Search_Requirements_Cinema}" />
+                    <!-- NPS -->
+                    <Grid Grid.Column="1" Grid.Row="5" Margin="0,0,10,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="60" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="NPS" Margin="0,0,6,0" VerticalAlignment="Center" />
+                        <telerik:RadSlider Grid.Column="1"  HandlesVisibility="Visible" LargeChange="2" SmallChange="0.1" Minimum="0" Maximum="16" IsSelectionRangeEnabled="True" SelectionStart="{Binding NPSSelectionStart, Mode=TwoWay}" SelectionEnd="{Binding NPSSelectionEnd, Mode=TwoWay}" />
+                        <TextBlock Grid.Column="2" Text="{Binding NPSText}" Margin="6,0,0,0" VerticalAlignment="Center" />
+                    </Grid>
 
                     <!-- Relevance -->
                     <TextBlock Grid.Column="2" Text="{x:Static p:Resources.SongSearch_Search_Relevance}" FontWeight="DemiBold" />
