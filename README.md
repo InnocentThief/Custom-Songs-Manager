@@ -10,7 +10,7 @@
 - Lists the songs for a playlist
 - Lists the selected difficulties of the songs
 - Lets you change name, author, description and image of a playlist
-- Lets you add and remove songs (incl. the difficulty) 
+- Lets you add and remove songs (incl. the difficulty) from custom levels, Beat Saber favorites, and song search (BeatSaver.com)
 ## Twitch integration
 
 ## Tools
