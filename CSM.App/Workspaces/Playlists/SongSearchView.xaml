@@ -70,10 +70,10 @@
                     <!-- Relevance -->
                     <TextBlock Grid.Column="2" Text="{x:Static p:Resources.SongSearch_Search_Relevance}" FontWeight="DemiBold" />
                     <telerik:RadWrapPanel Grid.Column="2" Grid.Row="1" Grid.RowSpan="6" >
-                        <telerik:RadRadioButton Command="{Binding RelevanceCommand}" CommandParameter="latest" Margin="0,1" Grid.Row="1" Content="{x:Static p:Resources.SongSearch_Search_Relevance_Latest}" />
+                        <telerik:RadRadioButton Command="{Binding RelevanceCommand}" CommandParameter="Latest" Margin="0,1" Grid.Row="1" Content="{x:Static p:Resources.SongSearch_Search_Relevance_Latest}" />
                         <telerik:RadRadioButton Command="{Binding RelevanceCommand}" CommandParameter="" Margin="0,1" Grid.Column="2" Grid.Row="2" IsChecked="{Binding RelevanceNone, Mode=TwoWay}" Content="{x:Static p:Resources.SongSearch_Search_Relevance_Relevance}" />
-                        <telerik:RadRadioButton Command="{Binding RelevanceCommand}" CommandParameter="rating" Margin="0,1" Grid.Column="2" Grid.Row="3" Content="{x:Static p:Resources.SongSearch_Search_Relevance_Rating}" />
-                        <telerik:RadRadioButton Command="{Binding RelevanceCommand}" CommandParameter="curated" Margin="0,1" Grid.Column="2" Grid.Row="4" Content="{x:Static p:Resources.SongSearch_Search_Relevance_Curated}" />
+                        <telerik:RadRadioButton Command="{Binding RelevanceCommand}" CommandParameter="Rating" Margin="0,1" Grid.Column="2" Grid.Row="3" Content="{x:Static p:Resources.SongSearch_Search_Relevance_Rating}" />
+                        <telerik:RadRadioButton Command="{Binding RelevanceCommand}" CommandParameter="Curated" Margin="0,1" Grid.Column="2" Grid.Row="4" Content="{x:Static p:Resources.SongSearch_Search_Relevance_Curated}" />
                     </telerik:RadWrapPanel>
                 </Grid>
                 <!-- Tags -->
