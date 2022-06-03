@@ -12,8 +12,9 @@
 - Lets you change name, author, description and image of a playlist
 - Lets you add and remove songs (incl. the difficulty) from custom levels, Beat Saber favorites, and song search (BeatSaver.com)
 ## Twitch integration
-
+- In progress
 ## Tools
+- In progress
 
 # Requirements
 - Windows with .NET 4.8
