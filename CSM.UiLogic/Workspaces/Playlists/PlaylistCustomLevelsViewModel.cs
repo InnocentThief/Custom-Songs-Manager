@@ -420,15 +420,32 @@ namespace CSM.UiLogic.Workspaces.Playlists
             }
             SearchedSongs.Clear();
 
-            var searchService = new BeatMapService("search/text/0");
-            var beatmaps = await searchService.SearchSongsAsync(e.SearchString);
-
-            foreach (var beatmap in beatmaps.Docs)
+            if (e.IsKey)
             {
+                var searchService = new BeatMapService("maps/id");
+                var beatmap = await searchService.GetBeatMapDataAsync(e.SearchString);
+
+                if (beatmap == null) return;
+
                 var searchedSong = new SearchedSongViewModel(beatmap);
                 searchedSong.AddSongToPlaylistEvent += CustomLevelOrFavorite_AddSongToPlaylistEvent;
                 searchedSong.SetCanAddToPlaylist(playlistSelectionState.PlaylistSelected);
                 SearchedSongs.Add(searchedSong);
+            }
+            else
+            {
+                var searchService = new BeatMapService("search/text/0");
+                var beatmaps = await searchService.SearchSongsAsync(e.SearchString);
+
+                if (beatmaps.Docs == null) return;
+
+                foreach (var beatmap in beatmaps.Docs)
+                {
+                    var searchedSong = new SearchedSongViewModel(beatmap);
+                    searchedSong.AddSongToPlaylistEvent += CustomLevelOrFavorite_AddSongToPlaylistEvent;
+                    searchedSong.SetCanAddToPlaylist(playlistSelectionState.PlaylistSelected);
+                    SearchedSongs.Add(searchedSong);
+                }
             }
 
             SongSearch.SetSearchParametersVisibility(!SearchedSongs.Any());

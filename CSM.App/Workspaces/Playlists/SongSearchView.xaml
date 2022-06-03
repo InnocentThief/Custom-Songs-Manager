@@ -20,7 +20,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <telerik:RadWatermarkTextBox WatermarkContent="{x:Static p:Resources.SongSearch_Search_Watermark}" Text="{Binding Query}" KeyUp="RadWatermarkTextBox_KeyUp" />
+            <telerik:RadWatermarkTextBox WatermarkContent="{x:Static p:Resources.SongSearch_Search_Watermark}" Text="{Binding Query, UpdateSourceTrigger=PropertyChanged}" KeyUp="RadWatermarkTextBox_KeyUp" />
             <!-- Search Button -->
             <telerik:RadButton Grid.Column="1" Command="{Binding SearchCommand}" ToolTip="{x:Static p:Resources.SongSearch_Search_ToolTip}">
                 <telerik:RadGlyph Glyph="&#xe13e;" />

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
+using System.Globalization;
 using System.Text;
 
 namespace CSM.UiLogic.Workspaces.Playlists
@@ -138,6 +139,19 @@ namespace CSM.UiLogic.Workspaces.Playlists
         public void Search()
         {
             var searchString = new StringBuilder();
+
+            // BSR Search
+            if (!string.IsNullOrWhiteSpace(Query))
+            {
+                int.TryParse(Query, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out int result);
+                if (result > 0)
+                {
+                    SearchSongEvent?.Invoke(this, new SongSearchEventArgs(Query, true));
+                    return;
+                }
+            }
+
+            // Enhanced Search
             if (!string.IsNullOrWhiteSpace(Query)) searchString.Append($"q={Query}");
             if (Chroma)
             {
@@ -225,7 +239,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
                 else searchString.Append($"&tags={songStyle}");
             }
 
-            SearchSongEvent?.Invoke(this, new SongSearchEventArgs(searchString.ToString()));
+            SearchSongEvent?.Invoke(this, new SongSearchEventArgs(searchString.ToString(), false));
         }
 
         /// <summary>
