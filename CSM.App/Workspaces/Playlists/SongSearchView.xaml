@@ -19,14 +19,19 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <telerik:RadWatermarkTextBox WatermarkContent="{x:Static p:Resources.SongSearch_Search_Watermark}" Text="{Binding Query}" />
+            <telerik:RadWatermarkTextBox WatermarkContent="{x:Static p:Resources.SongSearch_Search_Watermark}" Text="{Binding Query, UpdateSourceTrigger=PropertyChanged}" KeyUp="RadWatermarkTextBox_KeyUp" />
             <!-- Search Button -->
             <telerik:RadButton Grid.Column="1" Command="{Binding SearchCommand}" ToolTip="{x:Static p:Resources.SongSearch_Search_ToolTip}">
                 <telerik:RadGlyph Glyph="&#xe13e;" />
             </telerik:RadButton>
+            <!-- Show me more -->
+            <telerik:RadButton Grid.Column="2" Command="{Binding ShowMeMoreCommand}" Margin="3,0" ToolTip="{x:Static p:Resources.SongSearch_Search_ShowMeMore_ToolTip}">
+                <telerik:RadGlyph Glyph="&#xe13f;" />
+            </telerik:RadButton>
             <!-- Clear Button -->
-            <telerik:RadButton Grid.Column="2" Command="{Binding ResetSearchParametersCommand}" Background="DarkRed" Margin="3,0" ToolTip="{x:Static p:Resources.SongSearch_Search_ClearFilter}" >
+            <telerik:RadButton Grid.Column="3" Command="{Binding ResetSearchParametersCommand}" Background="DarkRed" Margin="3,0" ToolTip="{x:Static p:Resources.SongSearch_Search_ClearFilter}" >
                 <telerik:RadGlyph Glyph="&#xe12a;" />
             </telerik:RadButton>
         </Grid>
@@ -66,18 +71,36 @@
                     <telerik:RadToggleSwitchButton TrackWidth="35" TrackHeight="20" Margin="0,1" Grid.Column="1" Grid.Row="2" IsChecked="{Binding Noodle}" CheckedContent="{x:Static p:Resources.SongSearch_Search_Requirements_Noodle}" UncheckedContent="{x:Static p:Resources.SongSearch_Search_Requirements_Noodle}" />
                     <telerik:RadToggleSwitchButton TrackWidth="35" TrackHeight="20" Margin="0,1" Grid.Column="1" Grid.Row="3" IsChecked="{Binding MappingExtensions}" CheckedContent="{x:Static p:Resources.SongSearch_Search_Requirements_ME}" UncheckedContent="{x:Static p:Resources.SongSearch_Search_Requirements_ME}" />
                     <telerik:RadToggleSwitchButton TrackWidth="35" TrackHeight="20" Margin="0,1" Grid.Column="1" Grid.Row="4" IsChecked="{Binding Cinema}" CheckedContent="{x:Static p:Resources.SongSearch_Search_Requirements_Cinema}" UncheckedContent="{x:Static p:Resources.SongSearch_Search_Requirements_Cinema}" />
+                    <!-- NPS -->
+                    <Grid Grid.Column="1" Grid.Row="5" Margin="0,0,10,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="60" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="NPS" Margin="0,0,6,0" VerticalAlignment="Center" />
+                        <telerik:RadSlider Grid.Column="1"  HandlesVisibility="Visible" LargeChange="2" SmallChange="0.1" Minimum="0" Maximum="16" IsSelectionRangeEnabled="True" SelectionStart="{Binding NPSSelectionStart, Mode=TwoWay}" SelectionEnd="{Binding NPSSelectionEnd, Mode=TwoWay}" />
+                        <TextBlock Grid.Column="2" Text="{Binding NPSText}" Margin="6,0,0,0" VerticalAlignment="Center" />
+                    </Grid>
 
                     <!-- Relevance -->
                     <TextBlock Grid.Column="2" Text="{x:Static p:Resources.SongSearch_Search_Relevance}" FontWeight="DemiBold" />
-                    <telerik:RadWrapPanel Grid.Column="2" Grid.Row="1" Grid.RowSpan="6" >
-                        <telerik:RadRadioButton Command="{Binding RelevanceCommand}" CommandParameter="latest" Margin="0,1" Grid.Row="1" Content="{x:Static p:Resources.SongSearch_Search_Relevance_Latest}" />
+                    <telerik:RadWrapPanel Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" >
+                        <telerik:RadRadioButton Command="{Binding RelevanceCommand}" CommandParameter="Latest" Margin="0,1" Grid.Row="1" Content="{x:Static p:Resources.SongSearch_Search_Relevance_Latest}" />
                         <telerik:RadRadioButton Command="{Binding RelevanceCommand}" CommandParameter="" Margin="0,1" Grid.Column="2" Grid.Row="2" IsChecked="{Binding RelevanceNone, Mode=TwoWay}" Content="{x:Static p:Resources.SongSearch_Search_Relevance_Relevance}" />
-                        <telerik:RadRadioButton Command="{Binding RelevanceCommand}" CommandParameter="rating" Margin="0,1" Grid.Column="2" Grid.Row="3" Content="{x:Static p:Resources.SongSearch_Search_Relevance_Rating}" />
-                        <telerik:RadRadioButton Command="{Binding RelevanceCommand}" CommandParameter="curated" Margin="0,1" Grid.Column="2" Grid.Row="4" Content="{x:Static p:Resources.SongSearch_Search_Relevance_Curated}" />
+                        <telerik:RadRadioButton Command="{Binding RelevanceCommand}" CommandParameter="Rating" Margin="0,1" Grid.Column="2" Grid.Row="3" Content="{x:Static p:Resources.SongSearch_Search_Relevance_Rating}" />
+                        <telerik:RadRadioButton Command="{Binding RelevanceCommand}" CommandParameter="Curated" Margin="0,1" Grid.Column="2" Grid.Row="4" Content="{x:Static p:Resources.SongSearch_Search_Relevance_Curated}" />
                     </telerik:RadWrapPanel>
+
+                    <!-- Date -->
+                    <StackPanel Grid.Column="2" Grid.Row="3" Orientation="Horizontal">
+                        <TextBlock Text="Date Range" FontWeight="DemiBold" />
+                        <TextBlock Text="{Binding DateRange}" Margin="6,0" />
+                    </StackPanel>
+                    <telerik:RadSlider Grid.Column="2" Grid.Row="4" HandlesVisibility="Visible" LargeChange="10" SmallChange="1" Minimum="{Binding DateMinimum}" Maximum="{Binding DateMaximum}" IsSelectionRangeEnabled="True" SelectionStart="{Binding DateSelectionStart, Mode=TwoWay}" SelectionEnd="{Binding DateSelectionEnd, Mode=TwoWay}" />
                 </Grid>
                 <!-- Tags -->
-                <Grid Grid.Row="1">
+                <Grid Grid.Row="1" Margin="0,6,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />

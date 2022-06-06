@@ -12,13 +12,21 @@ namespace CSM.UiLogic.Workspaces.Playlists
         /// </summary>
         public string SearchString { get; }
 
+        public int PageIndex { get; }
+
+        /// <summary>
+        /// Gets whether the searchstring is a bsr key.
+        /// </summary>
+        public bool IsKey { get; }
+
         /// <summary>
         /// Initializes a new <see cref="SongSearchEventArgs"/>.
         /// </summary>
-        /// <param name="searchString">The query used for the search.</param>
-        public SongSearchEventArgs(string searchString)
+        public SongSearchEventArgs(string searchString, int pageIndex, bool isKey)
         {
             SearchString = searchString;
+            PageIndex = pageIndex;
+            IsKey = isKey;
         }
     }
 }

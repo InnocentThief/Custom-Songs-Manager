@@ -1,6 +1,7 @@
 ﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
+using System.Globalization;
 using System.Text;
 
 namespace CSM.UiLogic.Workspaces.Playlists
@@ -15,6 +16,13 @@ namespace CSM.UiLogic.Workspaces.Playlists
         private string relevance;
         private string mapStyle;
         private string songStyle;
+        private int currentPageIndex;
+
+        private int dateSelectionStart;
+        private int dateSelectionEnd;
+
+        private double npsSelectionStart;
+        private double npsSelectionEnd;
 
         #endregion
 
@@ -110,7 +118,104 @@ namespace CSM.UiLogic.Workspaces.Playlists
         /// </summary>
         public RelayCommand ResetSearchParametersCommand { get; }
 
+        /// <summary>
+        /// Command used to load the next page of the search result.
+        /// </summary>
+        public RelayCommand ShowMeMoreCommand { get; }
+
+        /// <summary>
+        /// Gets or sets whether the enhanced search is visible.
+        /// </summary>
         public bool SearchExpanded { get; set; }
+
+        /// <summary>
+        /// Gets the text for the selected date range.
+        /// </summary>
+        public string DateRange => $"{DateTime.FromOADate((double)dateSelectionStart).Date.ToString("d")} - {DateTime.FromOADate((double)dateSelectionEnd).Date.ToString("d")}";
+
+        /// <summary>
+        /// Gets the minimum date.
+        /// </summary>
+        public int DateMinimum => (int)new DateTime(2018, 5, 8).ToOADate();
+
+        /// <summary>
+        /// Gets the maximum date.
+        /// </summary>
+        public int DateMaximum => (int)DateTime.Today.ToOADate();
+
+        /// <summary>
+        /// Gets or sets the selected start date.
+        /// </summary>
+        public int DateSelectionStart
+        {
+            get => dateSelectionStart;
+            set
+            {
+                if (value == dateSelectionStart) return;
+                dateSelectionStart = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(DateRange));
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the selected end date.
+        /// </summary>
+        public int DateSelectionEnd
+        {
+            get => dateSelectionEnd;
+            set
+            {
+                if (value == dateSelectionEnd) return;
+                dateSelectionEnd = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(DateRange));
+            }
+        }
+
+        /// <summary>
+        /// Gets the NPS text.
+        /// </summary>
+        public string NPSText
+        {
+            get
+            {
+                var from = Math.Round(npsSelectionStart, 1).ToString();
+                var to = Math.Round(npsSelectionEnd, 1).ToString();
+                if (to == "16") to = "∞";
+                return $"{from}-{to}";
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the selected nps start.
+        /// </summary>
+        public double NPSSelectionStart
+        {
+            get => npsSelectionStart;
+            set
+            {
+                if (value == npsSelectionStart) return;
+                npsSelectionStart = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(NPSText));
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the selected nps end.
+        /// </summary>
+        public double NPSSelectionEnd
+        {
+            get => npsSelectionEnd;
+            set
+            {
+                if (value == npsSelectionEnd) return;
+                npsSelectionEnd = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(NPSText));
+            }
+        }
 
         #endregion
 
@@ -127,44 +232,41 @@ namespace CSM.UiLogic.Workspaces.Playlists
             RelevanceCommand = new RelayCommand<string>(RelevanceClick);
             MapStyleCommand = new RelayCommand<string>(MapStyleClick);
             SongStyleCommand = new RelayCommand<string>(SongStyleClick);
-            SearchCommand = new RelayCommand(Search);
+            SearchCommand = new RelayCommand(StartSearch);
             ResetSearchParametersCommand = new RelayCommand(ResetSearchParameters);
+            ShowMeMoreCommand = new RelayCommand(ShowMeMore);
 
             RelevanceNone = true;
             MapStyleNone = true;
             SongStyleNone = true;
+
+            DateSelectionStart = DateMinimum;
+            DateSelectionEnd = DateMaximum;
+
+            NPSSelectionStart = 0;
+            NPSSelectionEnd = 16;
         }
 
         /// <summary>
-        /// Sets the visibility of the enhanced search parameters.
+        /// Starts the song search
         /// </summary>
-        /// <param name="visible">Indicator of the visibility.</param>
-        public void SetSearchParametersVisibility(bool visible)
-        {
-            SearchExpanded = visible;
-            OnPropertyChanged(nameof(SearchExpanded));
-        }
-
-        #region Helper methods
-
-        private void RelevanceClick(string name)
-        {
-            relevance = name;
-        }
-
-        private void MapStyleClick(string name)
-        {
-            mapStyle = name;
-        }
-
-        private void SongStyleClick(string name)
-        {
-            songStyle = name;
-        }
-
-        private void Search()
+        /// <param name="pageIndex">The current page index.</param>
+        public void Search(int pageIndex)
         {
             var searchString = new StringBuilder();
+
+            // BSR Search
+            if (!string.IsNullOrWhiteSpace(Query))
+            {
+                int.TryParse(Query, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out int result);
+                if (result > 0)
+                {
+                    SearchSongEvent?.Invoke(this, new SongSearchEventArgs(Query, pageIndex, true));
+                    return;
+                }
+            }
+
+            // Enhanced Search
             if (!string.IsNullOrWhiteSpace(Query)) searchString.Append($"q={Query}");
             if (Chroma)
             {
@@ -211,30 +313,30 @@ namespace CSM.UiLogic.Workspaces.Playlists
                 if (searchString.Length == 0) searchString.Append("fullSpread=true");
                 else searchString.Append("&fullSpread=true");
             }
-            if (false)
+            if (npsSelectionStart!= 0)
             {
-                if (searchString.Length == 0) searchString.Append($"maxNps={0}");
-                else searchString.Append($"&maxNps={0}");
+                if (searchString.Length == 0) searchString.Append($"minNps={Math.Round(npsSelectionStart,1)}");
+                else searchString.Append($"&minNps={Math.Round(npsSelectionStart, 1)}");
             }
-            if (false)
+            if (npsSelectionEnd!= 16)
             {
-                if (searchString.Length == 0) searchString.Append($"minNps={0}");
-                else searchString.Append($"&minNps={0}");
+                if (searchString.Length == 0) searchString.Append($"maxNps={Math.Round(npsSelectionEnd, 1)}");
+                else searchString.Append($"&maxNps={Math.Round(npsSelectionEnd, 1)}");
             }
             if (!string.IsNullOrWhiteSpace(relevance))
             {
                 if (searchString.Length == 0) searchString.Append($"order={relevance}");
                 else searchString.Append($"&order={relevance}");
             }
-            if (false)
+            if (dateSelectionStart != DateMinimum)
             {
-                if (searchString.Length == 0) searchString.Append($"from={0}");
-                else searchString.Append($"&from={0}");
+                if (searchString.Length == 0) searchString.Append($"from={DateTime.FromOADate(dateSelectionStart).Date.ToString("yyyy-MM-dd")}");
+                else searchString.Append($"&from={DateTime.FromOADate(dateSelectionStart).Date.ToString("yyyy-MM-dd")}");
             }
-            if (false)
+            if (dateSelectionEnd != DateMaximum)
             {
-                if (searchString.Length == 0) searchString.Append($"to={0}");
-                else searchString.Append($"&to={0}");
+                if (searchString.Length == 0) searchString.Append($"to={DateTime.FromOADate(dateSelectionEnd).Date.ToString("yyyy-MM-dd")}");
+                else searchString.Append($"&to={DateTime.FromOADate(dateSelectionEnd).Date.ToString("yyyy-MM-dd")}");
             }
             if (!string.IsNullOrWhiteSpace(mapStyle) && !string.IsNullOrWhiteSpace(songStyle))
             {
@@ -252,7 +354,34 @@ namespace CSM.UiLogic.Workspaces.Playlists
                 else searchString.Append($"&tags={songStyle}");
             }
 
-            SearchSongEvent?.Invoke(this, new SongSearchEventArgs(searchString.ToString()));
+            SearchSongEvent?.Invoke(this, new SongSearchEventArgs(searchString.ToString(), currentPageIndex, false));
+        }
+
+        /// <summary>
+        /// Sets the visibility of the enhanced search parameters.
+        /// </summary>
+        /// <param name="visible">Indicator of the visibility.</param>
+        public void SetSearchParametersVisibility(bool visible)
+        {
+            SearchExpanded = visible;
+            OnPropertyChanged(nameof(SearchExpanded));
+        }
+
+        #region Helper methods
+
+        private void RelevanceClick(string name)
+        {
+            relevance = name;
+        }
+
+        private void MapStyleClick(string name)
+        {
+            mapStyle = name;
+        }
+
+        private void SongStyleClick(string name)
+        {
+            songStyle = name;
         }
 
         private void ResetSearchParameters()
@@ -283,6 +412,22 @@ namespace CSM.UiLogic.Workspaces.Playlists
             OnPropertyChanged(nameof(MapStyleNone));
             SongStyleNone = true;
             OnPropertyChanged(nameof(SongStyleNone));
+            DateSelectionStart = DateMinimum;
+            DateSelectionEnd = DateMaximum;
+            NPSSelectionStart = 0;
+            NPSSelectionEnd = 16;
+        }
+
+        private void StartSearch()
+        {
+            currentPageIndex = 0;
+            Search(currentPageIndex);
+        }
+
+        private void ShowMeMore()
+        {
+            currentPageIndex++;
+            Search(currentPageIndex);
         }
 
         #endregion

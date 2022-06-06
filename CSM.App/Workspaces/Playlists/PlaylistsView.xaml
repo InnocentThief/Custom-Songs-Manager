@@ -69,6 +69,8 @@
             <GridSplitter Grid.Column="1" Grid.Row="1" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" HorizontalAlignment="Stretch" />
             <!-- Playlist -->
             <ContentControl Grid.Column="2" Content="{Binding SelectedPlaylist}" ContentTemplateSelector="{StaticResource PlaylistDataTemplateSelector}" />
+            <!-- Vertical splitter -->
+            <GridSplitter Grid.Column="3" Grid.Row="1" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" HorizontalAlignment="Stretch" />
             <!-- Available Custom Levels -->
             <local:AvailableCustomLevelsView Grid.Column="4" DataContext="{Binding CustomLevels}" />
         </Grid>
