@@ -1,10 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\CSM.UiLogic",
-    "\\CSM.UiLogic\\Workspaces",
-    "\\CSM.UiLogic\\Workspaces\\Settings"
+    ""
   ],
-  "SelectedNode": "\\CSM.UiLogic\\Workspaces\\Settings\\BeatSaberSettingsViewModel.cs",
+  "SelectedNode": "\\Custom Songs Manager.sln",
   "PreviewInSolutionExplorer": false
 }
