@@ -267,8 +267,20 @@
     <Compile Include="Workspaces\Tools\ToolsView.xaml.cs">
       <DependentUpon>ToolsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Workspaces\TwitchIntegration\ScoreSaberView.xaml.cs">
+      <DependentUpon>ScoreSaberView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Workspaces\TwitchIntegration\TwitchChannelsView.xaml.cs">
+      <DependentUpon>TwitchChannelsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Workspaces\TwitchIntegration\TwitchIntegrationView.xaml.cs">
       <DependentUpon>TwitchIntegrationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Workspaces\TwitchIntegration\TwitchSongHistoryView.xaml.cs">
+      <DependentUpon>TwitchSongHistoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Workspaces\TwitchIntegration\TwitchView.xaml.cs">
+      <DependentUpon>TwitchView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Workspaces\WorkspaceContentTemplateSelector.cs" />
     <Page Include="MainWindow.xaml">
@@ -391,7 +403,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Workspaces\TwitchIntegration\ScoreSaberView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Workspaces\TwitchIntegration\TwitchChannelsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Workspaces\TwitchIntegration\TwitchIntegrationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Workspaces\TwitchIntegration\TwitchSongHistoryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Workspaces\TwitchIntegration\TwitchView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
