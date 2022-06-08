@@ -33,7 +33,11 @@ namespace CSM.UiLogic.Workspaces.Playlists
         /// </summary>
         public string Hash
         {
-            get => playlistSong.Hash.ToLower();
+            get
+            {
+                if (playlistSong.Hash == null) return string.Empty;
+                return playlistSong.Hash.ToLower();
+            }
         }
 
         /// <summary>
