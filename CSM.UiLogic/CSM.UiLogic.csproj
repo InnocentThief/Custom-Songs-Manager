@@ -150,6 +150,9 @@
     <Compile Include="Workspaces\Tools\CleanupCustomLevels\StepStartViewModel.cs" />
     <Compile Include="Workspaces\Tools\CleanupCustomLevels\StepVersionsViewModel.cs" />
     <Compile Include="Workspaces\TwitchIntegrationViewModel.cs" />
+    <Compile Include="Workspaces\TwitchIntegration\ScoreSaberIntegration\ScoreSaberViewModel.cs" />
+    <Compile Include="Workspaces\TwitchIntegration\TwitchChannelViewModel.cs" />
+    <Compile Include="Workspaces\TwitchIntegration\TwitchViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CSM.DataAccess\CSM.DataAccess.csproj">
@@ -165,9 +168,7 @@
       <Name>CSM.Services</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Workspaces\TwitchIntegration\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
@@ -175,6 +176,7 @@
     <None Include="Workspaces\Playlists\Playlists.cd" />
     <None Include="Workspaces\Settings\Settings.cd" />
     <None Include="Workspaces\Tools\Tools.cd" />
+    <None Include="Workspaces\TwitchIntegration\Twitch.cd" />
     <None Include="Workspaces\Workspaces.cd" />
   </ItemGroup>
   <ItemGroup>

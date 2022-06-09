@@ -1,6 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\CSM.UiLogic",
+    "\\CSM.UiLogic\\Workspaces"
   ],
   "SelectedNode": "\\Custom Songs Manager.sln",
   "PreviewInSolutionExplorer": false

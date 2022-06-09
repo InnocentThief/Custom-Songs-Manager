@@ -20,6 +20,6 @@
         <!-- Vertical splitter -->
         <GridSplitter Grid.Column="1" Grid.Row="1" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" HorizontalAlignment="Stretch" />
         <!-- Twitch -->
-        <local:TwitchView Grid.Column="2" />
+        <local:TwitchView Grid.Column="2" DataContext="{Binding Twitch}" />
     </Grid>
 </UserControl>
