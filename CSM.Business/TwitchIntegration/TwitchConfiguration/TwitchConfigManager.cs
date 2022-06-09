@@ -73,6 +73,7 @@ namespace CSM.Business.TwitchIntegration.TwitchConfiguration
         {
             return new TwitchConfig()
             {
+                UserName = String.Empty,
                 AccessToken = string.Empty,
                 RefreshToken = string.Empty,
                 Channels = new List<TwitchChannel>()

@@ -1,4 +1,5 @@
-﻿using CSM.Framework;
+﻿using CSM.Business.TwitchIntegration;
+using CSM.Framework;
 using CSM.UiLogic.Workspaces.TwitchIntegration;
 using CSM.UiLogic.Workspaces.TwitchIntegration.ScoreSaberIntegration;
 
@@ -28,9 +29,10 @@ namespace CSM.UiLogic.Workspaces
         /// <summary>
         /// Used to load the workspace data.
         /// </summary>
-        public override void LoadData()
+        public override async void LoadData()
         {
-
+            await TwitchConnectionManager.Instance.GetAccessTokenAsync();
+            //TwitchChannelManager.Instance.AddChannel(new System.Guid(), "InnocentThief");
         }
 
         /// <summary>
