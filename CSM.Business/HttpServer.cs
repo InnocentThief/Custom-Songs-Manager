@@ -1,9 +1,13 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace CSM.Business
 {
@@ -16,7 +20,7 @@ namespace CSM.Business
         public void Start()
         {
             listener = new HttpListener();
-            listener.Prefixes.Add("http://localhost:7681/");
+            listener.Prefixes.Add("http://localhost:8080/");
             listener.Start();
             Receive();
         }
@@ -38,8 +42,38 @@ namespace CSM.Business
                 var context = listener.EndGetContext(result);
                 var request = context.Request;
 
-                // do something with the request
-                Console.WriteLine($"{request.Url}");
+                if (request.HttpMethod == "GET")
+                {
+                    var responseString = "Custom Songs Manager";
+
+                    var assembly = Assembly.GetExecutingAssembly();
+                    var resourceName = "CSM.Business.TwitchIntegration.TwitchSucceeded.html";
+
+                    using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        responseString = reader.ReadToEnd();
+                    }
+                    byte[] buffer = Encoding.UTF8.GetBytes(responseString);
+                    var response = context.Response;
+                    response.ContentType = "text/html";
+                    response.ContentLength64 = buffer.Length;
+                    response.StatusCode = 200;
+                    response.OutputStream.Write(buffer, 0, buffer.Length);
+                    response.OutputStream.Close();
+                }
+                else if (request.HttpMethod == "POST")
+                {
+                    using (StreamReader streamReader = new StreamReader(context.Request.InputStream))
+                    {
+                        var blubber = streamReader.ReadToEnd();
+                    }
+                }
+
+
+
+
+
 
                 Receive();
             }

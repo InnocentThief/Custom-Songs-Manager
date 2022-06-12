@@ -1,4 +1,5 @@
 ﻿using CSM.App.Workspaces.TwitchIntegration;
+using CSM.Business;
 using CSM.UiLogic;
 using CSM.UiLogic.Workspaces;
 using System.Windows;
@@ -12,6 +13,9 @@ namespace CSM.App
     /// </summary>
     public partial class MainWindow : RadWindow
     {
+        private HttpServer httpServer;
+        private TwitchAuthenticationView twitchauthentication;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -20,13 +24,18 @@ namespace CSM.App
 
             IconTemplate = this.Resources["WindowIconTemplate"] as DataTemplate;
 
+            //httpServer = new HttpServer();
+            //httpServer.Start();
 
-            var twitchauthentication = new TwitchAuthenticationView();
-            twitchauthentication.Closing += Twitchauthentication_Closing;
-            twitchauthentication.Initialize();
-            twitchauthentication.ShowDialog();
-            
-            
+
+            //twitchauthentication = new TwitchAuthenticationView();
+            //twitchauthentication.Closing += Twitchauthentication_Closing;
+            //twitchauthentication.Initialize();
+            //twitchauthentication.ShowDialog();
+
+
+
+
         }
 
         private void Twitchauthentication_Closing(object sender, System.ComponentModel.CancelEventArgs e)
