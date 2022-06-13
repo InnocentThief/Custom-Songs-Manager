@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Custom Songs Manager - Fetch access token</title>
+
+    <style>
+        body {
+            background: #242424;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+        }
+    </style>
+
+    <script>
+        let data = window.location.href;
+        console.log(data);
+        fetch('', {
+            method: 'POST',
+            headers: { 'Conent-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+            .then(function (data) {
+                console.log('Request succeeded with JSON response', data);
+            })
+            .catch(function (error) {
+                console.log('Request failed', error);
+            });
+        console.log(data);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

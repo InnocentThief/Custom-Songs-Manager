@@ -22,17 +22,17 @@
             <!-- Commands -->
             <telerik:RadToolBar Grid.Column="1" OverflowButtonVisibility="Collapsed" GripVisibility="Collapsed" Background="Transparent" BorderThickness="0" >
                 <!--<TextBlock Text="{Binding PlaylistPath}" TextTrimming="CharacterEllipsis" Width="150" ToolTip="{Binding PlaylistPath}"/>-->
-                <telerik:RadButton Command="{Binding OpenInFileExplorerCommand}" ToolTip="Add a new channel">
+                <telerik:RadButton Command="{Binding AddChannelCommand}" ToolTip="Add a new channel">
                     <telerik:RadGlyph Glyph="&#xe11e;" />
                 </telerik:RadButton>
-                <telerik:RadButton Command="{Binding RefreshCommand}" ToolTip="Delete the selected channel">
+                <telerik:RadButton Command="{Binding RemoveChannelCommand}" ToolTip="Delete the selected channel">
                     <telerik:RadGlyph Glyph="&#xe121;" />
                 </telerik:RadButton>
             </telerik:RadToolBar>
         </Grid>
         <!-- Channel list -->
         <Border Grid.Row="1" BorderBrush="DimGray" BorderThickness="1,0,1,1">
-            <telerik:RadListBox ItemsSource="{Binding Channels}" SelectedItem="{Binding SelectedChannel}" Margin="3" Background="Transparent" BorderThickness="0">
+            <telerik:RadListBox ItemsSource="{Binding Channels}" SelectedItem="{Binding SelectedChannel, Mode=TwoWay}" SelectionMode="Single" Margin="3" Background="Transparent" BorderThickness="0">
                 <telerik:RadListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -45,8 +45,8 @@
                                 <ColumnDefinition Width="3" />
                                 <ColumnDefinition Width="30" />
                             </Grid.ColumnDefinitions>
-                            <!-- Channel Name -->
-                            <TextBox Text="{Binding ChannelName}" VerticalContentAlignment="Center" />
+                            <!-- Channel Name -->   
+                            <TextBox Text="{Binding ChannelName, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" />
 
                             <telerik:RadGlyph Grid.Column="2" Glyph="&#xe110;" HorizontalAlignment="Center" />
 

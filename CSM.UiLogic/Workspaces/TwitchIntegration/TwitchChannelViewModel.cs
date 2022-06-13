@@ -1,4 +1,6 @@
-﻿using Microsoft.Toolkit.Mvvm.Input;
+﻿using CSM.Business.TwitchIntegration;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +12,22 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
     /// <summary>
     /// Represents one configured twitch channel.
     /// </summary>
-    public class TwitchChannelViewModel
+    public class TwitchChannelViewModel : ObservableObject
     {
+        private string channelName;
 
         public Guid Key { get; }
 
-        public string ChannelName { get; set; }
+        public string ChannelName
+        {
+            get => channelName;
+            set
+            {
+                if (value == channelName) return;
+                channelName = value;
+                OnPropertyChanged();
+            }
+        }
 
         public bool CanEditName
         {
@@ -26,7 +38,9 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
             }
         }
 
-        public RelayCommand ConnectionCommand { get; }
+        public RelayCommand ConnectCommand { get; }
+
+
 
         public string CommandText
         {
@@ -38,12 +52,14 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
             }
         }
 
-        public TwitchChannelViewModel()
+        public TwitchChannelViewModel(Guid key)
         {
-            ConnectionCommand = new RelayCommand(ChangeConnection);
+            ConnectCommand = new RelayCommand(ChangeConnectionState);
+            //TwitchChannelManager.Instance.AddChannel(Key, "InnocentThief");
+
         }
 
-        private void ChangeConnection()
+        private void ChangeConnectionState()
         {
 
         }

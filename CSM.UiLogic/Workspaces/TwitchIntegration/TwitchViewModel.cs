@@ -1,4 +1,5 @@
-﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+﻿using CSM.Business.TwitchIntegration;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,10 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
 {
     public class TwitchViewModel : ObservableObject
     {
+        //private TwitchConnectionManager twitchConnectionManager;
         private TwitchChannelViewModel selectedChannel;
+
+        #region Public Properties
 
         public RelayCommand AddChannelCommand { get; }
 
@@ -26,29 +30,41 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
             {
                 if (value == selectedChannel) return;
                 selectedChannel = value;
-
+                OnPropertyChanged();
+                RemoveChannelCommand.NotifyCanExecuteChanged();
             }
         }
+
+        #endregion
 
         public TwitchViewModel()
         {
             Channels = new ObservableCollection<TwitchChannelViewModel>();
 
             AddChannelCommand = new RelayCommand(AddChannel);
-            RemoveChannelCommand = new RelayCommand(RemoveChannel);
+            RemoveChannelCommand = new RelayCommand(RemoveChannel, CanRemoveChannel);
 
-            Channels.Add(new TwitchChannelViewModel() { ChannelName = "InnocentThief" });
-            Channels.Add(new TwitchChannelViewModel() { ChannelName = "GoodOldNervy" });
+            //var twitchConnectionManager = TwitchConnectionManager.Instance;
         }
+
+        #region Helper methods
 
         private void AddChannel()
         {
-
+            var newChannel = new TwitchChannelViewModel(Guid.NewGuid());
+            Channels.Add(newChannel);
         }
 
         private void RemoveChannel()
         {
-
+            Channels.Remove(selectedChannel);
         }
+
+        private bool CanRemoveChannel()
+        {
+            return selectedChannel != null;
+        }
+
+        #endregion
     }
 }

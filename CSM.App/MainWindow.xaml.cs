@@ -13,35 +13,12 @@ namespace CSM.App
     /// </summary>
     public partial class MainWindow : RadWindow
     {
-        private HttpServer httpServer;
-        private TwitchAuthenticationView twitchauthentication;
-
         public MainWindow()
         {
             InitializeComponent();
-            //Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("de-CH");
             DataContext = new MainWindowViewModel();
 
             IconTemplate = this.Resources["WindowIconTemplate"] as DataTemplate;
-
-            //httpServer = new HttpServer();
-            //httpServer.Start();
-
-
-            //twitchauthentication = new TwitchAuthenticationView();
-            //twitchauthentication.Closing += Twitchauthentication_Closing;
-            //twitchauthentication.Initialize();
-            //twitchauthentication.ShowDialog();
-
-
-
-
-        }
-
-        private void Twitchauthentication_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            TwitchAuthenticationView view = sender as TwitchAuthenticationView;
-            var blubber = view.GetUrl();
         }
 
         private void RadNavigationView_SelectionChanged(object sender, SelectionChangedEventArgs e)

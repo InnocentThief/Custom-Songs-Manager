@@ -2,6 +2,7 @@
 using CSM.Framework;
 using CSM.UiLogic.Workspaces.TwitchIntegration;
 using CSM.UiLogic.Workspaces.TwitchIntegration.ScoreSaberIntegration;
+using System.Threading.Tasks;
 
 namespace CSM.UiLogic.Workspaces
 {
@@ -22,7 +23,7 @@ namespace CSM.UiLogic.Workspaces
 
         public TwitchIntegrationViewModel()
         {
-            ScoreSaber = new ScoreSaberViewModel();
+            //ScoreSaber = new ScoreSaberViewModel();
             Twitch = new TwitchViewModel();
         }
 
@@ -31,8 +32,15 @@ namespace CSM.UiLogic.Workspaces
         /// </summary>
         public override async void LoadData()
         {
-            await TwitchConnectionManager.Instance.GetAccessTokenAsync();
-            //TwitchChannelManager.Instance.AddChannel(new System.Guid(), "InnocentThief");
+            
+
+
+            //await TwitchConnectionManager.Instance.GetAccessTokenAsync();
+
+            //var guid = System.Guid.NewGuid();
+            //TwitchChannelManager.Instance.AddChannel(guid, "InnocentThief");
+            //System.Threading.Thread.Sleep(10000);
+            //TwitchChannelManager.Instance.RemoveChannel(guid);
         }
 
         /// <summary>

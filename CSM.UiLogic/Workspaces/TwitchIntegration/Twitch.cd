@@ -7,14 +7,14 @@
       <FileName>Workspaces\TwitchIntegrationViewModel.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Twitch" />
       <Property Name="ScoreSaber" />
+      <Property Name="Twitch" />
     </ShowAsAssociation>
   </Class>
   <Class Name="CSM.UiLogic.Workspaces.TwitchIntegration.TwitchViewModel">
-    <Position X="7" Y="5.5" Width="1.75" />
+    <Position X="7" Y="5.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <HashCode>AAAQAgACAAAAAAAAAAEAAAAAAAAAAAAAAAAAgBAAEIA=</HashCode>
       <FileName>Workspaces\TwitchIntegration\TwitchViewModel.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -24,12 +24,12 @@
   <Class Name="CSM.UiLogic.Workspaces.TwitchIntegration.TwitchChannelViewModel">
     <Position X="10.5" Y="5.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAECAAAAAAAAAAQAAAAAAAAAEgAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Workspaces\TwitchIntegration\TwitchChannelViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CSM.UiLogic.Workspaces.TwitchIntegration.ScoreSaberIntegration.ScoreSaberViewModel">
-    <Position X="7" Y="7.75" Width="1.75" />
+    <Position X="7" Y="9" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Workspaces\TwitchIntegration\ScoreSaberIntegration\ScoreSaberViewModel.cs</FileName>
