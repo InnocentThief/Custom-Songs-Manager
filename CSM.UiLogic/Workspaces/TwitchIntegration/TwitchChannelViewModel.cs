@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TwitchLib.Client.Events;
 
 namespace CSM.UiLogic.Workspaces.TwitchIntegration
 {
@@ -15,8 +16,6 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
     public class TwitchChannelViewModel : ObservableObject
     {
         private string channelName;
-
-        public Guid Key { get; }
 
         public string ChannelName
         {
@@ -29,39 +28,43 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
             }
         }
 
-        public bool CanEditName
+        public bool CanEditName => !TwitchChannelManager.Instance.CheckChannelIsJoined(ChannelName);
+
+        public RelayCommand JoinLeaveChannelCommand { get; }
+
+        public bool Joined => TwitchChannelManager.Instance.CheckChannelIsJoined(ChannelName);
+
+        public TwitchChannelViewModel()
         {
-            get
-            {
-                // TODO: return !TwitchChannelConnectionManager.ChannelConnected
-                return true;
-            }
-        }
-
-        public RelayCommand ConnectCommand { get; }
-
-
-
-        public string CommandText
-        {
-            get
-            {
-                // TODO: Check connection state on TwitchChannelConnectionManager
-                if (true) return "Disconnect";
-                return "Connect";
-            }
-        }
-
-        public TwitchChannelViewModel(Guid key)
-        {
-            ConnectCommand = new RelayCommand(ChangeConnectionState);
+            JoinLeaveChannelCommand = new RelayCommand(JoinLeaveChannel);
+            TwitchChannelManager.OnJoinedChannel += this.TwitchChannelManager_OnJoinedChannel;
+            TwitchChannelManager.OnLeftChannel += TwitchChannelManager_OnLeftChannel;
             //TwitchChannelManager.Instance.AddChannel(Key, "InnocentThief");
 
         }
 
-        private void ChangeConnectionState()
+        private void TwitchChannelManager_OnLeftChannel(object sender, OnLeftChannelArgs e)
         {
+            OnPropertyChanged(nameof(CanEditName));
+            OnPropertyChanged(nameof(Joined));
+        }
 
+        private void TwitchChannelManager_OnJoinedChannel(object sender, OnJoinedChannelArgs e)
+        {
+            OnPropertyChanged(nameof(CanEditName));
+            OnPropertyChanged(nameof(Joined));
+        }
+
+        private void JoinLeaveChannel()
+        {
+            if (Joined)
+            {
+                TwitchChannelManager.Instance.LeaveChannel(ChannelName);
+            }
+            else
+            {
+                TwitchChannelManager.Instance.JoinChannel(ChannelName);
+            }
         }
     }
 }

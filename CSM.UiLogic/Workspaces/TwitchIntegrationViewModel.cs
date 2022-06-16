@@ -12,6 +12,7 @@ namespace CSM.UiLogic.Workspaces
     internal class TwitchIntegrationViewModel : BaseWorkspaceViewModel
     {
 
+
         public ScoreSaberViewModel ScoreSaber { get; }
 
         public TwitchViewModel Twitch { get; }
@@ -30,9 +31,11 @@ namespace CSM.UiLogic.Workspaces
         /// <summary>
         /// Used to load the workspace data.
         /// </summary>
-        public override async void LoadData()
+        public override void LoadData()
         {
-            
+
+
+            Twitch.Initialize();
 
 
             //await TwitchConnectionManager.Instance.GetAccessTokenAsync();

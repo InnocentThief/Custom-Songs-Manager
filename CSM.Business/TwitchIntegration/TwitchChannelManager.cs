@@ -1,9 +1,6 @@
 ﻿using CSM.Business.TwitchIntegration.TwitchConfiguration;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using TwitchLib.Api;
 using TwitchLib.Client;
 using TwitchLib.Client.Events;
 using TwitchLib.Client.Models;
@@ -15,72 +12,42 @@ namespace CSM.Business.TwitchIntegration
     public class TwitchChannelManager
     {
         private TwitchClient twitchClient;
-        //private TwitchAPI twitchAPI;
-        //private List<TwitchChannel> connectedChannels;
-        //private ConnectionCredentials connectionCredentials;
-
 
         public bool IsConnected => twitchClient != null && twitchClient.IsConnected;
 
+        public static event EventHandler<OnJoinedChannelArgs> OnJoinedChannel;
 
+        public static event EventHandler<OnLeftChannelArgs> OnLeftChannel;
 
-        public event EventHandler<OnJoinedChannelArgs> OnJoinedChannel;
-
-        public event EventHandler<OnChatCommandReceivedArgs> OnChatCommandReceived;
-
-        //public async Task InitializeAsync()
-        //{
-
-        //}
+        public static event EventHandler<string> OnBsrKeyReceived;
 
         /// <summary>
         /// Adds a channel with the given id and name to the connected channels list.
         /// </summary>
         /// <param name="channelId">Unique identifier of the channel.</param>
         /// <param name="channelName">Name of the channel.</param>
-        public void AddChannel(string channelName)
+        public void JoinChannel(string channelName)
         {
             if (!twitchClient.JoinedChannels.Any(c => c.Channel == channelName))
             {
                 twitchClient.JoinChannel(channelName);
             }
-
-            //if (!connectedChannels.Any(c => c.ChannelId == channelId))
-            //{
-            //    var channel = new TwitchChannel(channelId, name);
-            //    if (connectionCredentials == null) connectionCredentials = new ConnectionCredentials("InnocentThief", TwitchConfigManager.Instance.Config.AccessToken);
-            //    channel.Initialize(connectionCredentials);
-            //    channel.OnChatCommandReceived += Channel_OnChatCommandReceived;
-            //}
         }
 
         /// <summary>
         /// Removes the channel with the given id from the list of connected channels.
         /// </summary>
         /// <param name="channelName">The name of the channel to remove.</param>
-        public void RemoveChannel(string channelName)
+        public void LeaveChannel(string channelName)
         {
             var channel = twitchClient.JoinedChannels.FirstOrDefault(c => c.Channel == channelName);
             if (channel != null)
             {
                 twitchClient.LeaveChannel(channel);
             }
-
-            //if (twitchClient.JoinedChannels.Any(c => c.Channel == channelName))
-            //{
-            //    twitchClient.LeaveChannel()
-            //}
-
-            //var connectedChannel = connectedChannels.SingleOrDefault(c => c.ChannelId == channelId);
-            //if (connectedChannel != null)
-            //{
-            //    //connectedChannel.OnChatCommandReceived -= Channel_OnChatCommandReceived;
-            //    //connectedChannel.CleanUp();
-            //    //connectedChannels.Remove(connectedChannel);
-            //}
         }
 
-        public bool CheckChannelIsConnected(string channelName)
+        public bool CheckChannelIsJoined(string channelName)
         {
             return twitchClient.JoinedChannels.Any(c => c.Channel == channelName);
         }
@@ -102,8 +69,10 @@ namespace CSM.Business.TwitchIntegration
             twitchClient.Initialize(connectionCredentials);
             twitchClient.OnLog += TwitchClient_OnLog;
             twitchClient.OnJoinedChannel += TwitchClient_OnJoinedChannel;
+            twitchClient.OnLeftChannel += TwitchClient_OnLeftChannel;
             twitchClient.OnChatCommandReceived += TwitchClient_OnChatCommandReceived;
             twitchClient.OnMessageReceived += TwitchClient_OnMessageReceived;
+            twitchClient.OnConnectionError += TwitchClient_OnConnectionError;
             twitchClient.OnConnected += TwitchClient_OnConnected;
 
             twitchClient.Connect();
@@ -129,19 +98,35 @@ namespace CSM.Business.TwitchIntegration
             twitchClient.SendMessage(e.Channel, $"Custom Songs Manager connected to {e.Channel}");
         }
 
+        private void TwitchClient_OnLeftChannel(object sender, OnLeftChannelArgs e)
+        {
+            Console.WriteLine($"Custom Songs Manager left {e.Channel}");
+            OnLeftChannel?.Invoke(this, e);
+
+        }
+
         private void TwitchClient_OnChatCommandReceived(object sender, OnChatCommandReceivedArgs e)
         {
-            OnChatCommandReceived?.Invoke(sender, e);
+            Console.WriteLine($"Received command {e.Command} with parameter {e.Command.ArgumentsAsList[0]}");
+            OnBsrKeyReceived?.Invoke(sender, e.Command.ArgumentsAsList[0]);
         }
 
         private void TwitchClient_OnMessageReceived(object sender, OnMessageReceivedArgs e)
         {
-            throw new NotImplementedException();
+            if (!e.ChatMessage.Message.StartsWith("!"))
+            {
+                Console.WriteLine($"Received message {e.ChatMessage.Message}");
+            }
         }
 
         private void TwitchClient_OnConnected(object sender, OnConnectedArgs e)
         {
             Console.WriteLine($"Custom Songs Manager connected to Twitch");
+        }
+
+        private void TwitchClient_OnConnectionError(object sender, OnConnectionErrorArgs e)
+        {
+            Console.WriteLine($"Error connection to Twitch: {e.Error}");
         }
 
         #endregion

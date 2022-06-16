@@ -1,4 +1,5 @@
 ﻿using CSM.Business.TwitchIntegration.TwitchConfiguration;
+using CSM.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,7 +17,30 @@ namespace CSM.Business.TwitchIntegration
         private string redirect_uri = "http://localhost:8080/";
         private string client_id = "mf66rq31qva9bv7dit1jygdjs39loa";
         private readonly List<string> scopes = new List<string> { "chat:read", "chat:edit" };
+        private TwitchService twitchService;
 
+        private TwitchConnectionManager()
+        {
+            twitchService = new TwitchService();
+        }
+
+        public async Task<bool> ValidateAsync()
+        {
+            var validationResponse = await twitchService.ValidateAsync(TwitchConfigManager.Instance.Config.AccessToken);
+            if (validationResponse != null)
+            {
+                TwitchConfigManager.Instance.Config.Login = validationResponse.Login;
+                TwitchConfigManager.Instance.Config.UserId = validationResponse.UserId;
+                return true;
+            }
+            else
+            {
+                TwitchConfigManager.Instance.Config.AccessToken = string.Empty;
+                TwitchConfigManager.Instance.Config.Login = string.Empty;
+                TwitchConfigManager.Instance.Config.UserId = string.Empty;
+                return false;
+            }
+        }
 
         public async Task GetAccessTokenAsync()
         {
@@ -27,10 +51,7 @@ namespace CSM.Business.TwitchIntegration
                 var authURL = $"https://id.twitch.tv/oauth2/authorize?response_type=token&client_id={client_id}&redirect_uri={redirect_uri}&scope={string.Join("+", scopes)}";
                 System.Diagnostics.Process.Start(authURL);
             }
-            else
-            {
-
-            }
+            await Task.CompletedTask;
         }
 
         #region Helper methods
@@ -122,7 +143,10 @@ namespace CSM.Business.TwitchIntegration
         {
             get
             {
-                if (instance == null) instance = new TwitchConnectionManager();
+                if (instance == null)
+                {
+                    instance = new TwitchConnectionManager();
+                }
                 return instance;
             }
         }

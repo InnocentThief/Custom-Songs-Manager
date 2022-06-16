@@ -18,7 +18,7 @@
         </Grid>
         <!-- Song list -->
         <Border Grid.Row="1" BorderBrush="DimGray" BorderThickness="1,0,1,1">
-            <telerik:RadGridView />
+            <telerik:RadGridView ItemsSource="{Binding ReceivedBeatMaps}" />
         </Border>
     </Grid>
 </UserControl>

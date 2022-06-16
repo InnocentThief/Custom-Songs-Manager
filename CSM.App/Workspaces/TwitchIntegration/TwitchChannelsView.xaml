@@ -3,9 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:CSM.App.Workspaces.TwitchIntegration" xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:local="clr-namespace:CSM.App.Workspaces.TwitchIntegration" xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" xmlns:converter="clr-namespace:CSM.App.Converter"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <converter:ChannelJoinedToColorConverter x:Key="ChannelJoinedToColorConverter" />
+    </UserControl.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
@@ -21,7 +26,7 @@
             <TextBlock Text="Twitch Channels" Foreground="White" VerticalAlignment="Center" Margin="8,0" FontWeight="DemiBold" />
             <!-- Commands -->
             <telerik:RadToolBar Grid.Column="1" OverflowButtonVisibility="Collapsed" GripVisibility="Collapsed" Background="Transparent" BorderThickness="0" >
-                <!--<TextBlock Text="{Binding PlaylistPath}" TextTrimming="CharacterEllipsis" Width="150" ToolTip="{Binding PlaylistPath}"/>-->
+                <TextBlock Text="{Binding AuthenticatedAs}" TextTrimming="CharacterEllipsis" Width="200" TextAlignment="Right" ToolTip="{Binding AuthenticatedAs}"/>
                 <telerik:RadButton Command="{Binding AddChannelCommand}" ToolTip="Add a new channel">
                     <telerik:RadGlyph Glyph="&#xe11e;" />
                 </telerik:RadButton>
@@ -45,18 +50,19 @@
                                 <ColumnDefinition Width="3" />
                                 <ColumnDefinition Width="30" />
                             </Grid.ColumnDefinitions>
-                            <!-- Channel Name -->   
+                            <!-- Channel Name -->
                             <TextBox Text="{Binding ChannelName, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" />
-
-                            <telerik:RadGlyph Grid.Column="2" Glyph="&#xe110;" HorizontalAlignment="Center" />
-
-                            <telerik:RadButton Grid.Column="4" Command="{Binding ConnectionCommand}">
+                            <!-- Joined -->
+                            <telerik:RadGlyph Grid.Column="2" Glyph="&#xe149;" HorizontalAlignment="Center" Foreground="{Binding Joined, Converter={StaticResource ChannelJoinedToColorConverter}}" />
+                            <!-- Join / Leave channel -->
+                            <telerik:RadToggleButton Grid.Column="4" Command="{Binding JoinLeaveChannelCommand}">
                                 <Grid>
                                     <telerik:RadGlyph Glyph="&#xe13d;"/>
                                     <telerik:RadGlyph Glyph="&#xe510;"/>
                                 </Grid>
-                            </telerik:RadButton>
-                            <telerik:RadButton Grid.Column="6" Command="{Binding ConnectionCommand}">
+                            </telerik:RadToggleButton>
+                            <!-- Active channel -->
+                            <telerik:RadButton Grid.Column="6" Command="{Binding SetActiveChannelCommand}">
                                 <telerik:RadGlyph Glyph="&#xea00;"/>
                             </telerik:RadButton>
                         </Grid>

@@ -1,4 +1,6 @@
 ﻿using CSM.Business.TwitchIntegration;
+using CSM.Business.TwitchIntegration.TwitchConfiguration;
+using CSM.Services;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
@@ -12,10 +14,25 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
 {
     public class TwitchViewModel : ObservableObject
     {
-        //private TwitchConnectionManager twitchConnectionManager;
         private TwitchChannelViewModel selectedChannel;
+        private BeatMapService beatMapService;
 
         #region Public Properties
+
+        public string AuthenticatedAs
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(TwitchConfigManager.Instance.Config.Login))
+                {
+                    return "Twitch: not logged in";
+                }
+                else
+                {
+                    return $"Twitch: logged in as {TwitchConfigManager.Instance.Config.Login}";
+                }
+            }
+        }
 
         public RelayCommand AddChannelCommand { get; }
 
@@ -35,23 +52,45 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
             }
         }
 
+        public ObservableCollection<string> ReceivedBeatMaps { get; }
+
         #endregion
 
         public TwitchViewModel()
         {
             Channels = new ObservableCollection<TwitchChannelViewModel>();
+            ReceivedBeatMaps = new ObservableCollection<string>();
+
+            beatMapService = new BeatMapService("maps/id");
 
             AddChannelCommand = new RelayCommand(AddChannel);
             RemoveChannelCommand = new RelayCommand(RemoveChannel, CanRemoveChannel);
+            TwitchChannelManager.OnBsrKeyReceived += TwitchChannelManager_OnBsrKeyReceived; ;
+        }
 
-            //var twitchConnectionManager = TwitchConnectionManager.Instance;
+        private async void TwitchChannelManager_OnBsrKeyReceived(object sender, string e)
+        {
+            var beatmap = await beatMapService.GetBeatMapDataAsync(e);
+            if (beatmap == null) return;
+            ReceivedBeatMaps.Add(beatmap.Name);
+        }
+
+        public async void Initialize()
+        {
+            var valid = await TwitchConnectionManager.Instance.ValidateAsync();
+            if (!valid)
+            {
+                await TwitchConnectionManager.Instance.GetAccessTokenAsync();
+                await TwitchConnectionManager.Instance.ValidateAsync();
+            }
+            OnPropertyChanged(nameof(AuthenticatedAs));
         }
 
         #region Helper methods
 
         private void AddChannel()
         {
-            var newChannel = new TwitchChannelViewModel(Guid.NewGuid());
+            var newChannel = new TwitchChannelViewModel();
             Channels.Add(newChannel);
         }
 

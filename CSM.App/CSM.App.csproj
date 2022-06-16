@@ -193,6 +193,7 @@
     <Compile Include="..\VersionInfo.cs">
       <Link>VersionInfo.cs</Link>
     </Compile>
+    <Compile Include="Converter\ChannelJoinedToColorConverter.cs" />
     <Compile Include="Converter\DifficultyToColorConverter.cs" />
     <Compile Include="Wizards\EditWizardWindow.xaml.cs">
       <DependentUpon>EditWizardWindow.xaml</DependentUpon>

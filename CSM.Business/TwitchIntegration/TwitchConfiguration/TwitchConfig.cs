@@ -14,6 +14,10 @@ namespace CSM.Business.TwitchIntegration.TwitchConfiguration
 
         public string RefreshToken { get; set; }
 
+        public string Login { get; set; }
+
+        public string UserId { get; set; }
+
         public List<TwitchChannel> Channels { get; set; }
     }
 }
