@@ -19,7 +19,7 @@ namespace CSM.Business.TwitchIntegration
 
         public static event EventHandler<OnLeftChannelArgs> OnLeftChannel;
 
-        public static event EventHandler<string> OnBsrKeyReceived;
+        public static event EventHandler<SongRequestEventArgs> OnBsrKeyReceived;
 
         /// <summary>
         /// Adds a channel with the given id and name to the connected channels list.
@@ -56,7 +56,6 @@ namespace CSM.Business.TwitchIntegration
 
         private void Setup()
         {
-            // TODO: Validate token
             var connectionCredentials = new ConnectionCredentials("InnocentThief", TwitchConfigManager.Instance.Config.AccessToken);
 
             var clientOptions = new ClientOptions
@@ -76,15 +75,7 @@ namespace CSM.Business.TwitchIntegration
             twitchClient.OnConnected += TwitchClient_OnConnected;
 
             twitchClient.Connect();
-
-            //twitchAPI = new TwitchAPI();
-            //twitchAPI.Settings.ClientId = "mf66rq31qva9bv7dit1jygdjs39loa";
-            //twitchAPI.Settings.AccessToken = TwitchConfigManager.Instance.Config.AccessToken;
-
-            //connectedChannels = new List<TwitchChannel>();
         }
-
-
 
         private void TwitchClient_OnLog(object sender, OnLogArgs e)
         {
@@ -108,7 +99,12 @@ namespace CSM.Business.TwitchIntegration
         private void TwitchClient_OnChatCommandReceived(object sender, OnChatCommandReceivedArgs e)
         {
             Console.WriteLine($"Received command {e.Command} with parameter {e.Command.ArgumentsAsList[0]}");
-            OnBsrKeyReceived?.Invoke(sender, e.Command.ArgumentsAsList[0]);
+            var eventArgs = new SongRequestEventArgs
+            {
+                ChannelName = e.Command.ChatMessage.Channel,
+                Key = e.Command.ArgumentsAsList[0]
+            };
+            OnBsrKeyReceived?.Invoke(sender, eventArgs);
         }
 
         private void TwitchClient_OnMessageReceived(object sender, OnMessageReceivedArgs e)

@@ -8,5 +8,6 @@ namespace CSM.Business.TwitchIntegration.TwitchConfiguration
 {
     public class TwitchChannel
     {
+        public string Name { get; set; }
     }
 }

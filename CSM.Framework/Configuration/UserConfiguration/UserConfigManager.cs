@@ -52,7 +52,8 @@ namespace CSM.Framework.Configuration.UserConfiguration
         {
             if (userConfig != null)
             {
-                var config = JsonSerializer.Serialize(userConfig);
+                var options = new JsonSerializerOptions { WriteIndented = true };
+                var config = JsonSerializer.Serialize(userConfig, options);
                 File.WriteAllText(userConfigPath, config);
             }
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 
 namespace CSM.Business.TwitchIntegration.TwitchConfiguration
@@ -37,6 +38,25 @@ namespace CSM.Business.TwitchIntegration.TwitchConfiguration
             LoadOrCreateTwitchConfig();
         }
 
+        public void AddChannel(string name)
+        {
+            if (!Config.Channels.Any(c => c.Name == name))
+            {
+                Config.Channels.Add(new TwitchChannel { Name = name });
+                SaveTwitchConfig();
+            }
+        }
+
+        public void RemoveChannel(string name)
+        {
+            var existingChannel = Config.Channels.SingleOrDefault(c => c.Name == name);
+            if (existingChannel != null)
+            {
+                Config.Channels.Remove(existingChannel);
+                SaveTwitchConfig();
+            }
+        }
+
         /// <summary>
         /// Saves the Twitch config to the file.
         /// </summary>
@@ -44,7 +64,8 @@ namespace CSM.Business.TwitchIntegration.TwitchConfiguration
         {
             if (twitchConfig != null)
             {
-                var config = JsonSerializer.Serialize(twitchConfig);
+                var options = new JsonSerializerOptions { WriteIndented = true };
+                var config = JsonSerializer.Serialize(twitchConfig, options);
                 File.WriteAllText(twitchConfigPath, config);
             }
         }

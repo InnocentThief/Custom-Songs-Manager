@@ -76,6 +76,7 @@
     </Compile>
     <Compile Include="Entities\Offline\LocalPlayer.cs" />
     <Compile Include="Entities\Offline\PlayerData.cs" />
+    <Compile Include="Entities\Offline\ReceivedBeatmap.cs" />
     <Compile Include="Entities\Online\BeatMaps.cs" />
     <Compile Include="Entities\Online\TwitchValidationResponse.cs" />
     <Compile Include="Entities\Online\User.cs" />
