@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSM.UiLogic.Workspaces.TwitchIntegration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,15 @@ namespace CSM.App.Workspaces.TwitchIntegration
         public TwitchSongHistoryView()
         {
             InitializeComponent();
+        }
+
+        private async void RadGridView_SelectionChanged(object sender, Telerik.Windows.Controls.SelectionChangeEventArgs e)
+        {
+            var viewModel = DataContext as TwitchViewModel;
+            if (viewModel?.SelectedBeatmap != null)
+            {
+                await viewModel.GetBeatSaverBeatMapDataAsync(viewModel.SelectedBeatmap.Key);
+            }
         }
     }
 }

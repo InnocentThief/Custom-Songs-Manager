@@ -16,7 +16,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <!-- Tree with available playlists -->
-        <playlists:PlaylistTreeView Grid.RowSpan="5" />
+        <playlists:PlaylistTreeView Grid.RowSpan="5" DataContext="{Binding Playlists}" />
         <!-- Vertical splitter -->
         <GridSplitter Grid.Column="1" Grid.Row="1" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" HorizontalAlignment="Stretch" />
         <!-- Twitch -->

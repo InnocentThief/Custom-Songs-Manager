@@ -2,23 +2,27 @@
 using CSM.Business.TwitchIntegration.TwitchConfiguration;
 using CSM.DataAccess.Entities.Offline;
 using CSM.Services;
+using CSM.UiLogic.Workspaces.Playlists;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CSM.UiLogic.Workspaces.TwitchIntegration
 {
     public class TwitchViewModel : ObservableObject
     {
+        #region Private fields
+
         private TwitchChannelViewModel selectedChannel;
         private BeatMapService beatMapService;
-        private ReceivedBeatmap selectedBeatmap;
+        private ReceivedBeatmapViewModel selectedBeatmap;
         private bool initialized;
+        private PlaylistSelectionState playlistSelectionState;
+        private PlaylistSongDetailViewModel playlistSongDetail;
+
+        #endregion
 
         #region Public Properties
 
@@ -55,9 +59,9 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
             }
         }
 
-        public ObservableCollection<ReceivedBeatmap> ReceivedBeatmaps { get; }
+        public ObservableCollection<ReceivedBeatmapViewModel> ReceivedBeatmaps { get; }
 
-        public ReceivedBeatmap SelectedBeatmap
+        public ReceivedBeatmapViewModel SelectedBeatmap
         {
             get => selectedBeatmap;
             set
@@ -65,42 +69,65 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
                 if (value == selectedBeatmap) return;
                 selectedBeatmap = value;
                 OnPropertyChanged();
-                RemoveReceivedBeatmapCommand.NotifyCanExecuteChanged();
+                ClearReceivedBeatmapsCommand.NotifyCanExecuteChanged();
+                if (selectedBeatmap != null)
+                {
+                    SongChangedEvent?.Invoke(this, new PlaylistSongChangedEventArgs { LeftHash = selectedBeatmap.Hash });
+                }
+                else
+                {
+                    SongChangedEvent?.Invoke(this, new PlaylistSongChangedEventArgs { LeftHash = String.Empty });
+                }
             }
         }
 
-        public RelayCommand RemoveReceivedBeatmapCommand { get; }
+        public RelayCommand ClearReceivedBeatmapsCommand { get; }
+
+        /// <summary>
+        /// Gets or sets the viewmodel for the detail area.
+        /// </summary>
+        public PlaylistSongDetailViewModel PlaylistSongDetail
+        {
+            get => playlistSongDetail;
+            set
+            {
+                if (value == playlistSongDetail) return;
+                playlistSongDetail = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(HasPlaylistSongDetail));
+            }
+        }
+
+        /// <summary>
+        /// Gets whether a playlist song detail is available.
+        /// </summary>
+        public bool HasPlaylistSongDetail
+        {
+            get => playlistSongDetail != null;
+        }
 
         #endregion
 
-        public TwitchViewModel()
+        /// <summary>
+        /// Occurs when a selected song changes.
+        /// </summary>
+        public event EventHandler<PlaylistSongChangedEventArgs> SongChangedEvent;
+
+        public TwitchViewModel(PlaylistSelectionState playlistSelectionState)
         {
+            this.playlistSelectionState = playlistSelectionState;
+            playlistSelectionState.PlaylistSelectionChangedEvent += PlaylistSelectionState_PlaylistSelectionChangedEvent; ;
+
             Channels = new ObservableCollection<TwitchChannelViewModel>();
-            ReceivedBeatmaps = new ObservableCollection<ReceivedBeatmap>();
+            ReceivedBeatmaps = new ObservableCollection<ReceivedBeatmapViewModel>();
 
             beatMapService = new BeatMapService("maps/id");
 
             AddChannelCommand = new RelayCommand(AddChannel);
             RemoveChannelCommand = new RelayCommand(RemoveChannel, CanRemoveChannel);
-            RemoveReceivedBeatmapCommand = new RelayCommand(RemoveReceivedBeatmap, CanRemoveReceivedBeatmap);
+            ClearReceivedBeatmapsCommand = new RelayCommand(ClearReceivedBeatmaps);
 
             TwitchChannelManager.OnBsrKeyReceived += TwitchChannelManager_OnBsrKeyReceived; ;
-        }
-
-        private async void TwitchChannelManager_OnBsrKeyReceived(object sender, SongRequestEventArgs e)
-        {
-            var beatmap = await beatMapService.GetBeatMapDataAsync(e.Key);
-            if (beatmap == null) return;
-            var receivedBeatmap = new ReceivedBeatmap()
-            {
-                ChannelName = e.ChannelName,
-                ReceivedAt = DateTime.Now,
-                Key = beatmap.Id,
-                SongName = beatmap.Metadata.SongName,
-                LevelAuthorName = beatmap.Metadata.LevelAuthorName,
-                SongAuthorName = beatmap.Metadata.SongAuthorName
-            };
-            ReceivedBeatmaps.Add(receivedBeatmap);
         }
 
         public async void Initialize()
@@ -125,7 +152,38 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
             initialized = true;
         }
 
+        /// <summary>
+        /// Gets the BeatSaver data for the given key.
+        /// </summary>
+        /// <param name="key">BSR key of the beatmap.</param>
+        /// <returns>An awaitable task that yields no result.</returns>
+        public async Task GetBeatSaverBeatMapDataAsync(string key)
+        {
+            var beatmap = await beatMapService.GetBeatMapDataAsync(key);
+            PlaylistSongDetail = beatmap == null ? null : new PlaylistSongDetailViewModel(beatmap);
+        }
+
         #region Helper methods
+
+        private async void TwitchChannelManager_OnBsrKeyReceived(object sender, SongRequestEventArgs e)
+        {
+            var beatmap = await beatMapService.GetBeatMapDataAsync(e.Key);
+            if (beatmap == null) return;
+            var receivedBeatmap = new ReceivedBeatmap()
+            {
+                ChannelName = e.ChannelName,
+                ReceivedAt = DateTime.Now,
+                Key = beatmap.Id,
+                Hash = beatmap.LatestVersion.Hash,
+                SongName = beatmap.Metadata.SongName,
+                LevelAuthorName = beatmap.Metadata.LevelAuthorName,
+                SongAuthorName = beatmap.Metadata.SongAuthorName
+            };
+            var receivedBeatmapViewModel = new ReceivedBeatmapViewModel(receivedBeatmap);
+            receivedBeatmapViewModel.SetCanAddToPlaylist(playlistSelectionState.PlaylistSelected);
+            receivedBeatmapViewModel.AddSongToPlaylistEvent += ReceivedBeatmapViewModel_AddSongToPlaylistEvent;
+            ReceivedBeatmaps.Add(receivedBeatmapViewModel);
+        }
 
         private void AddChannel()
         {
@@ -152,14 +210,27 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
             //RemoveChannelCommand.NotifyCanExecuteChanged();
         }
 
-        private void RemoveReceivedBeatmap()
+        private void ClearReceivedBeatmaps()
         {
-
+            foreach (var receivedBeatmap in ReceivedBeatmaps)
+            {
+                receivedBeatmap.AddSongToPlaylistEvent -= ReceivedBeatmapViewModel_AddSongToPlaylistEvent;
+            }
+            ReceivedBeatmaps.Clear();
+            PlaylistSongDetail = null;
         }
 
-        public bool CanRemoveReceivedBeatmap()
+        private void PlaylistSelectionState_PlaylistSelectionChangedEvent(object sender, EventArgs e)
         {
-            return selectedBeatmap != null;
+            foreach (var receivedBeatmap in ReceivedBeatmaps)
+            {
+                receivedBeatmap.SetCanAddToPlaylist(playlistSelectionState.PlaylistSelected);
+            }
+        }
+
+        private void ReceivedBeatmapViewModel_AddSongToPlaylistEvent(object sender, AddSongToPlaylistEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

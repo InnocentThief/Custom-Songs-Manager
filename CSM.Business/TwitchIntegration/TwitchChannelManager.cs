@@ -98,6 +98,7 @@ namespace CSM.Business.TwitchIntegration
 
         private void TwitchClient_OnChatCommandReceived(object sender, OnChatCommandReceivedArgs e)
         {
+            if (!e.Command.ArgumentsAsList.Any()) return;
             Console.WriteLine($"Received command {e.Command} with parameter {e.Command.ArgumentsAsList[0]}");
             var eventArgs = new SongRequestEventArgs
             {

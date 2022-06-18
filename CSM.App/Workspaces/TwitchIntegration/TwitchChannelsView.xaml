@@ -8,6 +8,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
         <converter:ChannelJoinedToColorConverter x:Key="ChannelJoinedToColorConverter" />
     </UserControl.Resources>
     
@@ -55,16 +56,16 @@
                             <!-- Joined -->
                             <telerik:RadGlyph Grid.Column="2" Glyph="&#xe149;" HorizontalAlignment="Center" Foreground="{Binding Joined, Converter={StaticResource ChannelJoinedToColorConverter}}" />
                             <!-- Join / Leave channel -->
-                            <telerik:RadToggleButton Grid.Column="4" Command="{Binding JoinLeaveChannelCommand}">
+                            <telerik:RadButton Grid.Column="4" Command="{Binding JoinLeaveChannelCommand}" Background="Transparent" BorderThickness="0">
                                 <Grid>
                                     <telerik:RadGlyph Glyph="&#xe13d;"/>
-                                    <telerik:RadGlyph Glyph="&#xe510;"/>
+                                    <telerik:RadGlyph Glyph="&#xe510;" Visibility="{Binding Joined, Converter={StaticResource BoolToVisConverter}}"/>
                                 </Grid>
-                            </telerik:RadToggleButton>
-                            <!-- Active channel -->
-                            <telerik:RadButton Grid.Column="6" Command="{Binding SetActiveChannelCommand}">
-                                <telerik:RadGlyph Glyph="&#xea00;"/>
                             </telerik:RadButton>
+                            <!-- Active channel -->
+                            <telerik:RadToggleButton Grid.Column="6" Command="{Binding SetActiveChannelCommand}" Background="Transparent" BorderThickness="0">
+                                <telerik:RadGlyph Glyph="&#xea00;"/>
+                            </telerik:RadToggleButton>
                         </Grid>
                     </DataTemplate>
                 </telerik:RadListBox.ItemTemplate>

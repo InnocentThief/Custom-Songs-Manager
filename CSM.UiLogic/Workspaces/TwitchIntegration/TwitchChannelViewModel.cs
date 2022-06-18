@@ -3,10 +3,6 @@ using CSM.Business.TwitchIntegration.TwitchConfiguration;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TwitchLib.Client.Events;
 
 namespace CSM.UiLogic.Workspaces.TwitchIntegration
@@ -16,17 +12,17 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
     /// </summary>
     public class TwitchChannelViewModel : ObservableObject
     {
-        private string channelName;
+        private string name;
 
         #region Public Properties
 
         public string Name
         {
-            get => channelName;
+            get => name;
             set
             {
-                if (value == channelName) return;
-                channelName = value;
+                if (value == name) return;
+                name = value;
                 OnPropertyChanged();
             }
         }

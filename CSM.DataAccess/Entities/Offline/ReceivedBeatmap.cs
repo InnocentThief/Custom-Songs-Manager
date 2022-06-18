@@ -10,6 +10,8 @@ namespace CSM.DataAccess.Entities.Offline
 
         public string Key { get; set; }
 
+        public string Hash { get; set; }
+
         public string SongName { get; set; }
 
         public string LevelAuthorName { get; set; }

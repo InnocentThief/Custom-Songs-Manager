@@ -220,6 +220,7 @@
     <Compile Include="Workspaces\Tools\CleanupCustomLevels\StepStartViewModel.cs" />
     <Compile Include="Workspaces\Tools\CleanupCustomLevels\StepVersionsViewModel.cs" />
     <Compile Include="Workspaces\TwitchIntegrationViewModel.cs" />
+    <Compile Include="Workspaces\TwitchIntegration\ReceivedBeatmapViewModel.cs" />
     <Compile Include="Workspaces\TwitchIntegration\ScoreSaberIntegration\ScoreSaberViewModel.cs" />
     <Compile Include="Workspaces\TwitchIntegration\TwitchChannelViewModel.cs" />
     <Compile Include="Workspaces\TwitchIntegration\TwitchViewModel.cs" />

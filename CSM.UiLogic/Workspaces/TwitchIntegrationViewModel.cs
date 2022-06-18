@@ -11,7 +11,7 @@ namespace CSM.UiLogic.Workspaces
     /// </summary>
     internal class TwitchIntegrationViewModel : BaseWorkspaceViewModel
     {
-
+        public PlaylistsViewModel Playlists { get; set; }
 
         public ScoreSaberViewModel ScoreSaber { get; }
 
@@ -24,16 +24,21 @@ namespace CSM.UiLogic.Workspaces
 
         public TwitchIntegrationViewModel()
         {
+            Playlists = new PlaylistsViewModel();
+            Twitch = new TwitchViewModel(Playlists.PlaylistSelectionState);
+            Twitch.SongChangedEvent += Twitch_SongChangedEvent;
             //ScoreSaber = new ScoreSaberViewModel();
-            Twitch = new TwitchViewModel();
+
         }
+
+
 
         /// <summary>
         /// Used to load the workspace data.
         /// </summary>
         public override void LoadData()
         {
-
+            Playlists.LoadData();
 
             Twitch.Initialize();
 
@@ -52,6 +57,11 @@ namespace CSM.UiLogic.Workspaces
         public override void UnloadData()
         {
 
+        }
+
+        private void Twitch_SongChangedEvent(object sender, Playlists.PlaylistSongChangedEventArgs e)
+        {
+            Playlists.SongChangedEvent(sender, e);
         }
     }
 }

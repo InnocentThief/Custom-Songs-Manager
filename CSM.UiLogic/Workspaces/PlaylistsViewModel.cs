@@ -35,11 +35,13 @@ namespace CSM.UiLogic.Workspaces
         private bool isLoading;
         private int loadProgress;
         private int playlistCount;
-        private readonly PlaylistSelectionState playlistSelectionState;
+
 
         #endregion
 
         #region Public Properties
+
+        public PlaylistSelectionState PlaylistSelectionState { get; }
 
         /// <summary>
         /// Contains all available playlists.
@@ -63,7 +65,7 @@ namespace CSM.UiLogic.Workspaces
                     playlist.CheckContainsLeftSong(String.Empty);
                     playlist.CheckContainsRightSong(String.Empty);
                 }
-                playlistSelectionState.PlaylistSelectionChanged(selectedPlaylist != null && selectedPlaylist.GetType() != typeof(PlaylistFolderViewModel));
+                PlaylistSelectionState.PlaylistSelectionChanged(selectedPlaylist != null && selectedPlaylist.GetType() != typeof(PlaylistFolderViewModel));
             }
         }
 
@@ -155,8 +157,8 @@ namespace CSM.UiLogic.Workspaces
             DeletePlaylistCommand = new RelayCommand(DeletePlaylist, CanDeletePlaylist);
             OpenInFileExplorerCommand = new RelayCommand(OpenInFileExplorer);
             UserConfigManager.UserConfigChanged += UserConfigManager_UserConfigChanged;
-            playlistSelectionState = new PlaylistSelectionState();
-            CustomLevels = new PlaylistCustomLevelsViewModel(playlistSelectionState);
+            PlaylistSelectionState = new PlaylistSelectionState();
+            CustomLevels = new PlaylistCustomLevelsViewModel(PlaylistSelectionState);
             CustomLevels.AddSongToPlaylistEvent += CustomLevels_AddSongToPlaylistEvent;
             CustomLevels.SongChangedEvent += SongChangedEvent;
         }
@@ -191,6 +193,15 @@ namespace CSM.UiLogic.Workspaces
             if (bgWorker != null && bgWorker.IsBusy) bgWorker.CancelAsync();
             Playlists.Clear();
             PlaylistPath = null;
+        }
+
+        public void SongChangedEvent(object sender, PlaylistSongChangedEventArgs e)
+        {
+            foreach (var playlist in Playlists)
+            {
+                if (!string.IsNullOrWhiteSpace(e.LeftHash)) playlist.CheckContainsLeftSong(e.LeftHash);
+                if (!string.IsNullOrWhiteSpace(e.RightHash)) playlist.CheckContainsRightSong(e.RightHash);
+            }
         }
 
         #region Helper methods
@@ -274,15 +285,6 @@ namespace CSM.UiLogic.Workspaces
                 LoggerProvider.Logger.Error<CustomLevelsViewModel>($"Unable to load playlists: {ex}");
             }
 
-        }
-
-        private void SongChangedEvent(object sender, PlaylistSongChangedEventArgs e)
-        {
-            foreach (var playlist in Playlists)
-            {
-                if (!string.IsNullOrWhiteSpace(e.LeftHash)) playlist.CheckContainsLeftSong(e.LeftHash);
-                if (!string.IsNullOrWhiteSpace(e.RightHash)) playlist.CheckContainsRightSong(e.RightHash);
-            }
         }
 
         private void GetDirectoriesRecursive(PlaylistFolderViewModel folder)
