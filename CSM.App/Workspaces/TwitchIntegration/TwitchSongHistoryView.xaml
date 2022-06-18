@@ -24,7 +24,7 @@
             <!-- Commands -->
             <telerik:RadToolBar Grid.Column="1" OverflowButtonVisibility="Collapsed" GripVisibility="Collapsed" Background="Transparent" BorderThickness="0" >
                 <telerik:RadButton Command="{Binding ClearReceivedBeatmapsCommand}" ToolTip="Delete all received songs">
-                    <telerik:RadGlyph Glyph="&#xe10c;" />
+                    <telerik:RadGlyph Glyph="&#xe10c;" Foreground="DarkRed" />
                 </telerik:RadButton>
             </telerik:RadToolBar>
         </Grid>

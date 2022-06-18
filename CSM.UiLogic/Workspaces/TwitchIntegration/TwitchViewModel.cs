@@ -7,6 +7,7 @@ using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace CSM.UiLogic.Workspaces.TwitchIntegration
@@ -81,6 +82,11 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
             }
         }
 
+        /// <summary>
+        /// Occurs on adding a song to a playlist.
+        /// </summary>
+        public event EventHandler<AddSongToPlaylistEventArgs> AddSongToPlaylistEvent;
+
         public RelayCommand ClearReceivedBeatmapsCommand { get; }
 
         /// <summary>
@@ -125,7 +131,7 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
 
             AddChannelCommand = new RelayCommand(AddChannel);
             RemoveChannelCommand = new RelayCommand(RemoveChannel, CanRemoveChannel);
-            ClearReceivedBeatmapsCommand = new RelayCommand(ClearReceivedBeatmaps);
+            ClearReceivedBeatmapsCommand = new RelayCommand(ClearReceivedBeatmaps, CanClearReceivedBeatmaps);
 
             TwitchChannelManager.OnBsrKeyReceived += TwitchChannelManager_OnBsrKeyReceived; ;
         }
@@ -183,6 +189,7 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
             receivedBeatmapViewModel.SetCanAddToPlaylist(playlistSelectionState.PlaylistSelected);
             receivedBeatmapViewModel.AddSongToPlaylistEvent += ReceivedBeatmapViewModel_AddSongToPlaylistEvent;
             ReceivedBeatmaps.Add(receivedBeatmapViewModel);
+            //ClearReceivedBeatmapsCommand.NotifyCanExecuteChanged();
         }
 
         private void AddChannel()
@@ -220,6 +227,11 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
             PlaylistSongDetail = null;
         }
 
+        private bool CanClearReceivedBeatmaps()
+        {
+            return ReceivedBeatmaps.Any();
+        }
+
         private void PlaylistSelectionState_PlaylistSelectionChangedEvent(object sender, EventArgs e)
         {
             foreach (var receivedBeatmap in ReceivedBeatmaps)
@@ -230,7 +242,7 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
 
         private void ReceivedBeatmapViewModel_AddSongToPlaylistEvent(object sender, AddSongToPlaylistEventArgs e)
         {
-            throw new NotImplementedException();
+            AddSongToPlaylistEvent?.Invoke(this, e);
         }
 
         #endregion

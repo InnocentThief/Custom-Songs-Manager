@@ -1,8 +1,7 @@
-﻿using CSM.Business.TwitchIntegration;
-using CSM.Framework;
+﻿using CSM.Framework;
+using CSM.UiLogic.Workspaces.Playlists;
 using CSM.UiLogic.Workspaces.TwitchIntegration;
 using CSM.UiLogic.Workspaces.TwitchIntegration.ScoreSaberIntegration;
-using System.Threading.Tasks;
 
 namespace CSM.UiLogic.Workspaces
 {
@@ -26,10 +25,13 @@ namespace CSM.UiLogic.Workspaces
         {
             Playlists = new PlaylistsViewModel();
             Twitch = new TwitchViewModel(Playlists.PlaylistSelectionState);
+            Twitch.AddSongToPlaylistEvent += Twitch_AddSongToPlaylistEvent;
             Twitch.SongChangedEvent += Twitch_SongChangedEvent;
             //ScoreSaber = new ScoreSaberViewModel();
 
         }
+
+
 
 
 
@@ -39,16 +41,7 @@ namespace CSM.UiLogic.Workspaces
         public override void LoadData()
         {
             Playlists.LoadData();
-
             Twitch.Initialize();
-
-
-            //await TwitchConnectionManager.Instance.GetAccessTokenAsync();
-
-            //var guid = System.Guid.NewGuid();
-            //TwitchChannelManager.Instance.AddChannel(guid, "InnocentThief");
-            //System.Threading.Thread.Sleep(10000);
-            //TwitchChannelManager.Instance.RemoveChannel(guid);
         }
 
         /// <summary>
@@ -59,9 +52,18 @@ namespace CSM.UiLogic.Workspaces
 
         }
 
+        #region Helper methods
+
+        private void Twitch_AddSongToPlaylistEvent(object sender, AddSongToPlaylistEventArgs e)
+        {
+            ((PlaylistViewModel)Playlists.SelectedPlaylist).AddPlaylistSong(e);
+        }
+
         private void Twitch_SongChangedEvent(object sender, Playlists.PlaylistSongChangedEventArgs e)
         {
             Playlists.SongChangedEvent(sender, e);
         }
+
+        #endregion
     }
 }

@@ -169,6 +169,7 @@ namespace CSM.UiLogic.Workspaces
         public override void LoadData()
         {
             base.LoadData();
+            Playlists.Clear();
             PlaylistPath = UserConfigManager.Instance.Config.PlaylistPaths.First().Path;
 
             bgWorker = new BackgroundWorker
