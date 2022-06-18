@@ -20,6 +20,8 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
 
         public string ChannelName => receivedBeatmap.ChannelName;
 
+        public DateTime ReceivedAt => receivedBeatmap.ReceivedAt;
+
         public string Key => receivedBeatmap.Key;
 
         public string Hash => receivedBeatmap.Hash;

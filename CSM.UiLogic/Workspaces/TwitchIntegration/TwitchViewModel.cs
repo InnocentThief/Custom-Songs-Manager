@@ -71,7 +71,6 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
                 if (value == selectedBeatmap) return;
                 selectedBeatmap = value;
                 OnPropertyChanged();
-                ClearReceivedBeatmapsCommand.NotifyCanExecuteChanged();
                 if (selectedBeatmap != null)
                 {
                     SongChangedEvent?.Invoke(this, new PlaylistSongChangedEventArgs { LeftHash = selectedBeatmap.Hash });
@@ -132,7 +131,7 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
 
             AddChannelCommand = new RelayCommand(AddChannel);
             RemoveChannelCommand = new RelayCommand(RemoveChannel, CanRemoveChannel);
-            ClearReceivedBeatmapsCommand = new RelayCommand(ClearReceivedBeatmaps, CanClearReceivedBeatmaps);
+            ClearReceivedBeatmapsCommand = new RelayCommand(ClearReceivedBeatmaps);
 
             TwitchChannelManager.OnBsrKeyReceived += TwitchChannelManager_OnBsrKeyReceived; ;
         }
@@ -226,11 +225,6 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
             }
             ReceivedBeatmaps.Clear();
             PlaylistSongDetail = null;
-        }
-
-        private bool CanClearReceivedBeatmaps()
-        {
-            return ReceivedBeatmaps.Any();
         }
 
         private void PlaylistSelectionState_PlaylistSelectionChangedEvent(object sender, EventArgs e)
