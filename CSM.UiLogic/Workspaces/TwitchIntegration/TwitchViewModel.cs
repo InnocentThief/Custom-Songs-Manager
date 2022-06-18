@@ -188,9 +188,12 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
             var receivedBeatmapViewModel = new ReceivedBeatmapViewModel(receivedBeatmap);
             receivedBeatmapViewModel.SetCanAddToPlaylist(playlistSelectionState.PlaylistSelected);
             receivedBeatmapViewModel.AddSongToPlaylistEvent += ReceivedBeatmapViewModel_AddSongToPlaylistEvent;
+            receivedBeatmapViewModel.DeleteSongEvent += ReceivedBeatmapViewModel_DeleteSongEvent;
             ReceivedBeatmaps.Add(receivedBeatmapViewModel);
             //ClearReceivedBeatmapsCommand.NotifyCanExecuteChanged();
         }
+
+
 
         private void AddChannel()
         {
@@ -233,6 +236,14 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
             {
                 receivedBeatmap.SetCanAddToPlaylist(playlistSelectionState.PlaylistSelected);
             }
+        }
+
+        private void ReceivedBeatmapViewModel_DeleteSongEvent(object sender, EventArgs e)
+        {
+            var receivedBeatmap = sender as ReceivedBeatmapViewModel;
+            receivedBeatmap.DeleteSongEvent -= ReceivedBeatmapViewModel_DeleteSongEvent;
+            receivedBeatmap.AddSongToPlaylistEvent -= ReceivedBeatmapViewModel_AddSongToPlaylistEvent;
+            ReceivedBeatmaps.Remove(receivedBeatmap);
         }
 
         private void ReceivedBeatmapViewModel_AddSongToPlaylistEvent(object sender, AddSongToPlaylistEventArgs e)

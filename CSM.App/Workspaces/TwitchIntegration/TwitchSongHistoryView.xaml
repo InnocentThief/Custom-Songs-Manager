@@ -60,6 +60,16 @@
                     <telerik:GridViewDataColumn Header="Artist" Width="*" DataMemberBinding="{Binding SongAuthorName}" />
                     <!-- Level Author Name -->
                     <telerik:GridViewDataColumn Header="Mapper" Width="*" DataMemberBinding="{Binding LevelAuthorName}" />
+                    <!-- Delete button (remove song from playlist) -->
+                    <telerik:GridViewColumn>
+                        <telerik:GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <telerik:RadButton Command="{Binding DeleteSongCommand}" Grid.Column="1" Background="Transparent" BorderThickness="0" Margin="0,0,10,0" ToolTip="Delete Song">
+                                    <telerik:RadGlyph Glyph="&#xe121;" Foreground="Red" />
+                                </telerik:RadButton>
+                            </DataTemplate>
+                        </telerik:GridViewColumn.CellTemplate>
+                    </telerik:GridViewColumn>
                 </telerik:RadGridView.Columns>
             </telerik:RadGridView>
         </Border>

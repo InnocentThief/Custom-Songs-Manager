@@ -18,6 +18,8 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
 
         #endregion
 
+        #region Public Properties
+
         public string ChannelName => receivedBeatmap.ChannelName;
 
         public DateTime ReceivedAt => receivedBeatmap.ReceivedAt;
@@ -36,13 +38,20 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
 
         public RelayCommand AddToPlaylistCommand { get; }
 
+        public RelayCommand DeleteSongCommand { get; }
+
+        #endregion
+
         public event EventHandler<AddSongToPlaylistEventArgs> AddSongToPlaylistEvent;
+
+        public event EventHandler DeleteSongEvent;
 
         public ReceivedBeatmapViewModel(ReceivedBeatmap receivedBeatMap)
         {
             this.receivedBeatmap = receivedBeatMap;
 
             AddToPlaylistCommand = new RelayCommand(AddToPlaylist, CanAddToPlaylist);
+            DeleteSongCommand = new RelayCommand(DeleteSong);
         }
 
         /// <summary>
@@ -73,6 +82,11 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
         private bool CanAddToPlaylist()
         {
             return canAddToPlaylist;
+        }
+
+        private void DeleteSong()
+        {
+            DeleteSongEvent?.Invoke(this, EventArgs.Empty);
         }
 
         #endregion
