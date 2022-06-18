@@ -22,5 +22,9 @@
         <GridSplitter Grid.Column="1" Grid.Row="1" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" HorizontalAlignment="Stretch" />
         <!-- Twitch -->
         <local:TwitchView Grid.Column="2" DataContext="{Binding Twitch}" />
+        <!-- Vertical splitter -->
+        <GridSplitter Grid.Column="3" Grid.Row="1" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" HorizontalAlignment="Stretch" />
+        <!-- ScoreSaber -->
+        <local:ScoreSaberView Grid.Column="4" DataContext="{Binding ScoreSaber}" />
     </Grid>
 </UserControl>
