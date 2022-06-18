@@ -84,6 +84,10 @@
       <Project>{45e28e3b-cf56-4583-99cb-e115eecdf744}</Project>
       <Name>CSM.DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CSM.Framework\CSM.Framework.csproj">
+      <Project>{E4212929-E64D-4154-B381-958DE99A2932}</Project>
+      <Name>CSM.Framework</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -209,6 +209,7 @@
     <Compile Include="Workspaces\Playlists\SongSearchViewModel.cs" />
     <Compile Include="Workspaces\SettingsViewModel.cs" />
     <Compile Include="Workspaces\Settings\BeatSaberSettingsViewModel.cs" />
+    <Compile Include="Workspaces\Settings\BeatSaverSettingsViewModel.cs" />
     <Compile Include="Workspaces\Settings\WorkspaceSettingsViewModel.cs" />
     <Compile Include="Workspaces\Settings\WorkspaceViewModel.cs" />
     <Compile Include="Workspaces\ToolsViewModel.cs" />

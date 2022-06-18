@@ -13,6 +13,11 @@ namespace CSM.Framework.Configuration.UserConfiguration
         public string BeatSaberInstallPath { get; set; }
 
         /// <summary>
+        /// Gets or sets the BeatSaver.com API endpoint.
+        /// </summary>
+        public string BeatSaverAPIEndpoint { get; set; }
+
+        /// <summary>
         /// Gets or sets the Beat Saber custom levels paths.
         /// </summary>
         /// <remarks>Used as list for future expansion to multiple custom level paths.</remarks>

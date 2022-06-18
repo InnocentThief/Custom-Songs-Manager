@@ -79,6 +79,7 @@ namespace CSM.Framework.Configuration.UserConfiguration
             {
                 var config = File.ReadAllText(userConfigPath);
                 userConfig = JsonSerializer.Deserialize<UserConfig>(config);
+                CheckForMissingSettingValues();
             }
             else
             {
@@ -92,6 +93,7 @@ namespace CSM.Framework.Configuration.UserConfiguration
             return new UserConfig()
             {
                 BeatSaberInstallPath = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Beat Saber",
+                BeatSaverAPIEndpoint = "https://api.beatsaver.com/",
                 CustomLevelPaths = new List<CustomLevelPath>
                 {
                     new CustomLevelPath()
@@ -111,8 +113,18 @@ namespace CSM.Framework.Configuration.UserConfiguration
                     }
                 },
                 DefaultWorkspace = WorkspaceType.CustomLevels,
-                CustomLevelsSongDetailPosition = SongDetailPosition.Right
+                CustomLevelsSongDetailPosition = SongDetailPosition.Right,
+                RemoveReceivedSongAfterAddingToPlaylist = false,
             };
+        }
+
+        private void CheckForMissingSettingValues()
+        {
+            if (string.IsNullOrWhiteSpace(Config.BeatSaverAPIEndpoint))
+            {
+                Config.BeatSaverAPIEndpoint = "https://api.beatsaver.com/";
+            }
+            SaveUserConfig();
         }
 
         #endregion

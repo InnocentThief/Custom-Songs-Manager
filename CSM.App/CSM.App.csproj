@@ -252,6 +252,9 @@
     <Compile Include="Workspaces\Settings\BeatSaberSettingsView.xaml.cs">
       <DependentUpon>BeatSaberSettingsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Workspaces\Settings\BeatSaverSettingsView.xaml.cs">
+      <DependentUpon>BeatSaverSettingsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Workspaces\Settings\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
@@ -378,6 +381,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Workspaces\Settings\BeatSaberSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Workspaces\Settings\BeatSaverSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
