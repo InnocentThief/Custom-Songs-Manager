@@ -56,7 +56,7 @@
                             <!-- Joined -->
                             <telerik:RadGlyph Grid.Column="2" Glyph="&#xe149;" HorizontalAlignment="Center" Foreground="{Binding Joined, Converter={StaticResource ChannelJoinedToColorConverter}}" />
                             <!-- Join / Leave channel -->
-                            <telerik:RadButton Grid.Column="4" Command="{Binding JoinLeaveChannelCommand}" Background="Transparent" BorderThickness="0">
+                            <telerik:RadButton Grid.Column="4" Command="{Binding JoinLeaveChannelCommand}" Background="Transparent" BorderThickness="0" ToolTip="{Binding JoinLeaveChannelToolTip}" >
                                 <Grid>
                                     <telerik:RadGlyph Glyph="&#xe13d;"/>
                                     <telerik:RadGlyph Glyph="&#xe510;" Visibility="{Binding Joined, Converter={StaticResource BoolToVisConverter}}"/>

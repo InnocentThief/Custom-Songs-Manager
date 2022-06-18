@@ -15,7 +15,7 @@
   <Class Name="CSM.UiLogic.Workspaces.TwitchIntegration.TwitchViewModel">
     <Position X="8" Y="6.25" Width="3.75" />
     <TypeIdentifier>
-      <HashCode>EAAggggSABAAIQAIAAEAIAAAAAEAIBAAAIAAgBIEEIg=</HashCode>
+      <HashCode>EAAggggSABAAIQAIAAEAIAAAAAEAIBAAAIAQgBIEEIg=</HashCode>
       <FileName>Workspaces\TwitchIntegration\TwitchViewModel.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -26,7 +26,7 @@
   <Class Name="CSM.UiLogic.Workspaces.TwitchIntegration.TwitchChannelViewModel">
     <Position X="13.25" Y="3.25" Width="3" />
     <TypeIdentifier>
-      <HashCode>AEACAAAAAAAAAAAAABAAAAQAAAAEAAQAAAACAAAAIAI=</HashCode>
+      <HashCode>AEACAAAAAAAAAAAAABAAAAQAAAAEAAQACAACAAAAIAI=</HashCode>
       <FileName>Workspaces\TwitchIntegration\TwitchChannelViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -51,12 +51,9 @@
   <Class Name="CSM.UiLogic.Workspaces.TwitchIntegration.ReceivedBeatmapViewModel">
     <Position X="13.5" Y="9.25" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>BQAAAAAAAAIEAAQABAAAAAAAAhAABEAEAAAAgAoAAAA=</HashCode>
+      <HashCode>BAAAAAECAAIUAAQABAAAAAAAAhAgBEAFAAAAgAoAAAA=</HashCode>
       <FileName>Workspaces\TwitchIntegration\ReceivedBeatmapViewModel.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Field Name="receivedBeatmap" />
-    </ShowAsAssociation>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

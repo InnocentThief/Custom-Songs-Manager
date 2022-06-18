@@ -155,6 +155,15 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
                 Channels.Add(twitchChannelViewModel);
             }
 
+            foreach (var receivedBeatmap in ReceivedBeatmapsManager.Instance.ReceivedBeatmaps.Beatmaps)
+            {
+                var receivedBeatmapViewModel = new ReceivedBeatmapViewModel(receivedBeatmap);
+                receivedBeatmapViewModel.SetCanAddToPlaylist(playlistSelectionState.PlaylistSelected);
+                receivedBeatmapViewModel.AddSongToPlaylistEvent += ReceivedBeatmapViewModel_AddSongToPlaylistEvent;
+                receivedBeatmapViewModel.DeleteSongEvent += ReceivedBeatmapViewModel_DeleteSongEvent;
+                ReceivedBeatmaps.Add(receivedBeatmapViewModel);
+            }
+
             initialized = true;
         }
 
@@ -190,6 +199,7 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
             receivedBeatmapViewModel.AddSongToPlaylistEvent += ReceivedBeatmapViewModel_AddSongToPlaylistEvent;
             receivedBeatmapViewModel.DeleteSongEvent += ReceivedBeatmapViewModel_DeleteSongEvent;
             ReceivedBeatmaps.Add(receivedBeatmapViewModel);
+            ReceivedBeatmapsManager.Instance.AddBeatmap(receivedBeatmap);
             //ClearReceivedBeatmapsCommand.NotifyCanExecuteChanged();
         }
 
@@ -222,6 +232,8 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
 
         private void ClearReceivedBeatmaps()
         {
+            ReceivedBeatmapsManager.Instance.RemoveBeatmaps(ReceivedBeatmaps.Select(rbm => rbm.ReceivedBeatmap).ToList());
+
             foreach (var receivedBeatmap in ReceivedBeatmaps)
             {
                 receivedBeatmap.AddSongToPlaylistEvent -= ReceivedBeatmapViewModel_AddSongToPlaylistEvent;
@@ -243,6 +255,7 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
             var receivedBeatmap = sender as ReceivedBeatmapViewModel;
             receivedBeatmap.DeleteSongEvent -= ReceivedBeatmapViewModel_DeleteSongEvent;
             receivedBeatmap.AddSongToPlaylistEvent -= ReceivedBeatmapViewModel_AddSongToPlaylistEvent;
+            ReceivedBeatmapsManager.Instance.RemoveBeatmaps(new System.Collections.Generic.List<ReceivedBeatmap> { receivedBeatmap.ReceivedBeatmap });
             ReceivedBeatmaps.Remove(receivedBeatmap);
         }
 

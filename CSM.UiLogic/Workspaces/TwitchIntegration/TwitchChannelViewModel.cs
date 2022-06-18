@@ -31,6 +31,15 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
 
         public RelayCommand JoinLeaveChannelCommand { get; }
 
+        public string JoinLeaveChannelToolTip
+        {
+            get
+            {
+                if (Joined) return "Leave channel";
+                return "Join channel";
+            }
+        }
+
         public bool Joined => TwitchChannelManager.Instance.CheckChannelIsJoined(Name);
 
         #endregion
@@ -50,6 +59,7 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
             {
                 OnPropertyChanged(nameof(CanEditName));
                 OnPropertyChanged(nameof(Joined));
+                OnPropertyChanged(nameof(JoinLeaveChannelToolTip));
                 ChangedConnectionState?.Invoke(this, EventArgs.Empty);
             }
         }
@@ -60,6 +70,7 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
             {
                 OnPropertyChanged(nameof(CanEditName));
                 OnPropertyChanged(nameof(Joined));
+                OnPropertyChanged(nameof(JoinLeaveChannelToolTip));
                 TwitchConfigManager.Instance.AddChannel(Name);
                 ChangedConnectionState?.Invoke(this, EventArgs.Empty);
             }

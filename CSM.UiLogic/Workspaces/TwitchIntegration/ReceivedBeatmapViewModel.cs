@@ -11,30 +11,27 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
 {
     public class ReceivedBeatmapViewModel
     {
-        #region Private fields
-
-        private ReceivedBeatmap receivedBeatmap;
         private bool canAddToPlaylist;
-
-        #endregion
 
         #region Public Properties
 
-        public string ChannelName => receivedBeatmap.ChannelName;
+        public ReceivedBeatmap ReceivedBeatmap { get; }
 
-        public DateTime ReceivedAt => receivedBeatmap.ReceivedAt;
+        public string ChannelName => ReceivedBeatmap.ChannelName;
 
-        public string Key => receivedBeatmap.Key;
+        public DateTime ReceivedAt => ReceivedBeatmap.ReceivedAt;
 
-        public string Hash => receivedBeatmap.Hash;
+        public string Key => ReceivedBeatmap.Key;
 
-        public string LevelId => $"custom_level_{receivedBeatmap.Hash}";
+        public string Hash => ReceivedBeatmap.Hash;
 
-        public string SongName => receivedBeatmap.SongName;
+        public string LevelId => $"custom_level_{ReceivedBeatmap.Hash}";
 
-        public string LevelAuthorName => receivedBeatmap.LevelAuthorName;
+        public string SongName => ReceivedBeatmap.SongName;
 
-        public string SongAuthorName => receivedBeatmap.SongAuthorName;
+        public string LevelAuthorName => ReceivedBeatmap.LevelAuthorName;
+
+        public string SongAuthorName => ReceivedBeatmap.SongAuthorName;
 
         public RelayCommand AddToPlaylistCommand { get; }
 
@@ -48,7 +45,7 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
 
         public ReceivedBeatmapViewModel(ReceivedBeatmap receivedBeatMap)
         {
-            this.receivedBeatmap = receivedBeatMap;
+            ReceivedBeatmap = receivedBeatMap;
 
             AddToPlaylistCommand = new RelayCommand(AddToPlaylist, CanAddToPlaylist);
             DeleteSongCommand = new RelayCommand(DeleteSong);
