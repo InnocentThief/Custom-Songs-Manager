@@ -3,6 +3,7 @@ using CSM.UiLogic.Workspaces.Playlists;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,15 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
         public DateTime ReceivedAt => ReceivedBeatmap.ReceivedAt;
 
         public string Key => ReceivedBeatmap.Key;
+
+        public int BsrKeyHex
+        {
+            get
+            {
+                int.TryParse(Key, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out int result);
+                return result;
+            }
+        }
 
         public string Hash => ReceivedBeatmap.Hash;
 
