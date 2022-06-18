@@ -6,6 +6,9 @@ using System.Text.Json;
 
 namespace CSM.Business.TwitchIntegration.TwitchConfiguration
 {
+    /// <summary>
+    /// Handles the Twitch configuration.
+    /// </summary>
     public class TwitchConfigManager
     {
         #region Private fields
@@ -38,6 +41,10 @@ namespace CSM.Business.TwitchIntegration.TwitchConfiguration
             LoadOrCreateTwitchConfig();
         }
 
+        /// <summary>
+        /// Adds a channel to the configuration.
+        /// </summary>
+        /// <param name="name">The name of the channel to add.</param>
         public void AddChannel(string name)
         {
             if (!Config.Channels.Any(c => c.Name == name))
@@ -47,6 +54,10 @@ namespace CSM.Business.TwitchIntegration.TwitchConfiguration
             }
         }
 
+        /// <summary>
+        /// Removes a channel from the configuration.
+        /// </summary>
+        /// <param name="name">The name of the channel to remove.</param>
         public void RemoveChannel(string name)
         {
             var existingChannel = Config.Channels.SingleOrDefault(c => c.Name == name);

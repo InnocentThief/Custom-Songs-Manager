@@ -16,6 +16,9 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
 
         #region Public Properties
 
+        /// <summary>
+        /// Gets or sets the name of the channel.
+        /// </summary>
         public string Name
         {
             get => name;
@@ -27,10 +30,19 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
             }
         }
 
+        /// <summary>
+        /// Gets whether the channel name can be edited.
+        /// </summary>
         public bool CanEditName => !TwitchChannelManager.Instance.CheckChannelIsJoined(Name);
 
+        /// <summary>
+        /// Command used to join or leave the channel.
+        /// </summary>
         public RelayCommand JoinLeaveChannelCommand { get; }
 
+        /// <summary>
+        /// ToolTip text for <see cref="JoinLeaveChannelCommand"/>.
+        /// </summary>
         public string JoinLeaveChannelToolTip
         {
             get
@@ -40,18 +52,29 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
             }
         }
 
+        /// <summary>
+        /// Gets whether the channel is joined.
+        /// </summary>
         public bool Joined => TwitchChannelManager.Instance.CheckChannelIsJoined(Name);
 
         #endregion
 
+        /// <summary>
+        /// Occurs on connection change.
+        /// </summary>
         public event EventHandler ChangedConnectionState;
 
+        /// <summary>
+        /// Initializes a new <see cref="TwitchChannelViewModel"/>.
+        /// </summary>
         public TwitchChannelViewModel()
         {
             JoinLeaveChannelCommand = new RelayCommand(JoinLeaveChannel);
             TwitchChannelManager.OnJoinedChannel += this.TwitchChannelManager_OnJoinedChannel;
             TwitchChannelManager.OnLeftChannel += TwitchChannelManager_OnLeftChannel;
         }
+
+        #region Helper methods
 
         private void TwitchChannelManager_OnLeftChannel(object sender, OnLeftChannelArgs e)
         {
@@ -87,5 +110,7 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
                 TwitchChannelManager.Instance.JoinChannel(Name);
             }
         }
+
+        #endregion
     }
 }

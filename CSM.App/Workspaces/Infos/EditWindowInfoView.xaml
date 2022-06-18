@@ -18,10 +18,12 @@
         <!-- Contributors -->
         <Grid Grid.Column="1" Margin="10">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="150" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -48,6 +50,12 @@
             <!-- Testing -->
             <TextBlock Grid.Row="4" Text="{x:Static p:Resources.About_Testing}" Margin="0,3" FontWeight="DemiBold" />
             <TextBlock Grid.Column="1" Grid.Row="4" Text="DonOfCrumb, Pedder, meryyll, rechtzanwalt, Sebi" TextWrapping="Wrap" Margin="0,3" />
+            <!-- JS/CSS Help -->
+            <TextBlock Grid.Row="5" Text="Help with JS and CSS stuff" Margin="0,3" FontWeight="DemiBold" />
+            <TextBlock Grid.Column="1" Grid.Row="5" Text="BF_Moritz" TextWrapping="Wrap" Margin="0,3" />
+            <!-- Twitch Integration -->
+            <TextBlock Grid.Row="6" Text="TwitchLib" Margin="0,20" FontWeight="DemiBold" />
+            <TextBlock Grid.Column="1" Grid.Row="6" Text="https://github.com/TwitchLib/TwitchLib" TextWrapping="Wrap" Margin="0,20" />
         </Grid>
     </Grid>
 </UserControl>

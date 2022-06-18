@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace CSM.UiLogic.Workspaces.TwitchIntegration
 {
+    /// <summary>
+    /// ViewModel for Twitch related stuff.
+    /// </summary>
     public class TwitchViewModel : ObservableObject
     {
         #region Private fields
@@ -28,6 +31,9 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
 
         #region Public Properties
 
+        /// <summary>
+        /// Gets the user currently authenticated with Twitch.
+        /// </summary>
         public string AuthenticatedAs
         {
             get
@@ -43,12 +49,24 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
             }
         }
 
+        /// <summary>
+        /// Command used to add a new channel.
+        /// </summary>
         public RelayCommand AddChannelCommand { get; }
 
+        /// <summary>
+        /// Command used to remove a channel.
+        /// </summary>
         public RelayCommand RemoveChannelCommand { get; }
 
+        /// <summary>
+        /// Contains the configured channels.
+        /// </summary>
         public ObservableCollection<TwitchChannelViewModel> Channels { get; }
 
+        /// <summary>
+        /// Gets or sets the selected channel.
+        /// </summary>
         public TwitchChannelViewModel SelectedChannel
         {
             get => selectedChannel;
@@ -61,8 +79,14 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
             }
         }
 
+        /// <summary>
+        /// Contains the received beatmaps.
+        /// </summary>
         public ObservableCollection<ReceivedBeatmapViewModel> ReceivedBeatmaps { get; }
 
+        /// <summary>
+        /// Gets or sets the selected beatmap.
+        /// </summary>
         public ReceivedBeatmapViewModel SelectedBeatmap
         {
             get => selectedBeatmap;
@@ -119,6 +143,10 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
         /// </summary>
         public event EventHandler<PlaylistSongChangedEventArgs> SongChangedEvent;
 
+        /// <summary>
+        /// Initializes a new <see cref="TwitchViewModel"/>.
+        /// </summary>
+        /// <param name="playlistSelectionState">Contains the playlist state.</param>
         public TwitchViewModel(PlaylistSelectionState playlistSelectionState)
         {
             this.playlistSelectionState = playlistSelectionState;
@@ -136,6 +164,9 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
             TwitchChannelManager.OnBsrKeyReceived += TwitchChannelManager_OnBsrKeyReceived; ;
         }
 
+        /// <summary>
+        /// Initializes the data for Twitch view. 
+        /// </summary>
         public async void Initialize()
         {
             var valid = await TwitchConnectionManager.Instance.ValidateAsync();
@@ -148,6 +179,7 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
 
             if (initialized) return;
 
+            // Get configured channels
             foreach (var channel in TwitchConfigManager.Instance.Config.Channels)
             {
                 var twitchChannelViewModel = new TwitchChannelViewModel { Name = channel.Name };
@@ -155,6 +187,7 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
                 Channels.Add(twitchChannelViewModel);
             }
 
+            // Get the saved beatmaps
             foreach (var receivedBeatmap in ReceivedBeatmapsManager.Instance.ReceivedBeatmaps.Beatmaps)
             {
                 var receivedBeatmapViewModel = new ReceivedBeatmapViewModel(receivedBeatmap);
@@ -200,10 +233,7 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
             receivedBeatmapViewModel.DeleteSongEvent += ReceivedBeatmapViewModel_DeleteSongEvent;
             ReceivedBeatmaps.Add(receivedBeatmapViewModel);
             ReceivedBeatmapsManager.Instance.AddBeatmap(receivedBeatmap);
-            //ClearReceivedBeatmapsCommand.NotifyCanExecuteChanged();
         }
-
-
 
         private void AddChannel()
         {

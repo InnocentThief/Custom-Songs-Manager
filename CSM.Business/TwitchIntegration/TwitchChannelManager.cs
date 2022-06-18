@@ -9,16 +9,31 @@ using TwitchLib.Communication.Models;
 
 namespace CSM.Business.TwitchIntegration
 {
+    /// <summary>
+    /// Handles Twitch channels.
+    /// </summary>
     public class TwitchChannelManager
     {
         private TwitchClient twitchClient;
 
+        /// <summary>
+        /// Gets whether the Twitch client is connected.
+        /// </summary>
         public bool IsConnected => twitchClient != null && twitchClient.IsConnected;
 
+        /// <summary>
+        /// Occurs on Twitch channel joined.
+        /// </summary>
         public static event EventHandler<OnJoinedChannelArgs> OnJoinedChannel;
 
+        /// <summary>
+        /// Occurs on Twitch channel left.
+        /// </summary>
         public static event EventHandler<OnLeftChannelArgs> OnLeftChannel;
 
+        /// <summary>
+        /// Occurs on BSR Key received.
+        /// </summary>
         public static event EventHandler<SongRequestEventArgs> OnBsrKeyReceived;
 
         /// <summary>
@@ -47,6 +62,11 @@ namespace CSM.Business.TwitchIntegration
             }
         }
 
+        /// <summary>
+        /// Checks whether the channel with the given name is currently joined.
+        /// </summary>
+        /// <param name="channelName">The name of the channel to check.</param>
+        /// <returns>True if the channel is joined; otherwise false.</returns>
         public bool CheckChannelIsJoined(string channelName)
         {
             return twitchClient.JoinedChannels.Any(c => c.Channel == channelName);

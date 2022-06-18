@@ -10,20 +10,33 @@ using System.Threading.Tasks;
 
 namespace CSM.Business.TwitchIntegration
 {
+    /// <summary>
+    /// Handles the Twitch connection.
+    /// </summary>
     public class TwitchConnectionManager
     {
-        //private HttpServer httpServer;
+        #region Private Fields
+
         private HttpListener listener;
         private string redirect_uri = "http://localhost:8080/";
         private string client_id = "mf66rq31qva9bv7dit1jygdjs39loa";
         private readonly List<string> scopes = new List<string> { "chat:read", "chat:edit" };
         private TwitchService twitchService;
 
+        #endregion
+
+        /// <summary>
+        /// Initializes a new <see cref="TwitchConnectionManager"/>.
+        /// </summary>
         private TwitchConnectionManager()
         {
             twitchService = new TwitchService();
         }
 
+        /// <summary>
+        /// Validates the currently stored access token.
+        /// </summary>
+        /// <returns>An awaitable task that yields no result.</returns>
         public async Task<bool> ValidateAsync()
         {
             var validationResponse = await twitchService.ValidateAsync(TwitchConfigManager.Instance.Config.AccessToken);
@@ -42,6 +55,10 @@ namespace CSM.Business.TwitchIntegration
             }
         }
 
+        /// <summary>
+        /// Gets a new access token.
+        /// </summary>
+        /// <returns>An awaitable task that yields no result.</returns>
         public async Task GetAccessTokenAsync()
         {
 

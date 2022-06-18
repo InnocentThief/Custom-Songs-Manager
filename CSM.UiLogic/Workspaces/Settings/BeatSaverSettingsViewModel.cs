@@ -3,10 +3,16 @@ using Microsoft.Toolkit.Mvvm.ComponentModel;
 
 namespace CSM.UiLogic.Workspaces.Settings
 {
+    /// <summary>
+    /// Contains the settings related to BeatSaver.com
+    /// </summary>
     public class BeatSaverSettingsViewModel : ObservableObject
     {
         private string beatSaverAPIEndpoint;
 
+        /// <summary>
+        /// Gets or sets the API endpoint for BeatSaver.com
+        /// </summary>
         public string BeatSaverAPIEndpoint
         {
             get => beatSaverAPIEndpoint;
@@ -20,6 +26,9 @@ namespace CSM.UiLogic.Workspaces.Settings
             }
         }
 
+        /// <summary>
+        /// Initializes a new <see cref="BeatSaverAPIEndpoint"/>.
+        /// </summary>
         public BeatSaverSettingsViewModel()
         {
             beatSaverAPIEndpoint = UserConfigManager.Instance.Config.BeatSaverAPIEndpoint;

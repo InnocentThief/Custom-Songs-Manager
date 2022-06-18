@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CSM.Business.TwitchIntegration.TwitchConfiguration
+﻿namespace CSM.Business.TwitchIntegration.TwitchConfiguration
 {
+    /// <summary>
+    /// Represents a Twitch channel.
+    /// </summary>
     public class TwitchChannel
     {
+        /// <summary>
+        /// Gets or sets the name of the channel.
+        /// </summary>
         public string Name { get; set; }
     }
 }

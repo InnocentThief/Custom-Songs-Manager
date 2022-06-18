@@ -8,8 +8,8 @@
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Playlists" />
-      <Property Name="ScoreSaber" />
       <Property Name="Twitch" />
+      <Property Name="ScoreSaber" />
     </ShowAsAssociation>
   </Class>
   <Class Name="CSM.UiLogic.Workspaces.TwitchIntegration.TwitchViewModel">
@@ -51,9 +51,12 @@
   <Class Name="CSM.UiLogic.Workspaces.TwitchIntegration.ReceivedBeatmapViewModel">
     <Position X="13.5" Y="9.25" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>BAAAAAECAAIUAAQABAAAAAAAAhAgBEAFAAAAgAoAAAA=</HashCode>
+      <HashCode>BAAAAAECAAIUAAQABAAAAAAABhAgBEAFAAAAgAoAAAA=</HashCode>
       <FileName>Workspaces\TwitchIntegration\ReceivedBeatmapViewModel.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ReceivedBeatmap" />
+    </ShowAsAssociation>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

@@ -7,6 +7,9 @@ using System.Text.Json;
 
 namespace CSM.Business.TwitchIntegration
 {
+    /// <summary>
+    /// Handles received beatmaps.
+    /// </summary>
     public class ReceivedBeatmapsManager
     {
         #region Private Fields
@@ -16,13 +19,23 @@ namespace CSM.Business.TwitchIntegration
 
         #endregion
 
+        /// <summary>
+        /// Contains the received beatmaps.
+        /// </summary>
         public ReceivedBeatmaps ReceivedBeatmaps;
 
+        /// <summary>
+        /// Initializes a new <see cref="ReceivedBeatmapsManager"/>.
+        /// </summary>
         private ReceivedBeatmapsManager()
         {
             LoadOrCreateReceivedBeatmaps();
         }
 
+        /// <summary>
+        /// Adds a beatmap to the configuration.
+        /// </summary>
+        /// <param name="receivedBeatmap">The beatmap to add.</param>
         public void AddBeatmap(ReceivedBeatmap receivedBeatmap)
         {
             if (!ReceivedBeatmaps.Beatmaps.Any(bm => bm.Key == receivedBeatmap.Key))
@@ -32,6 +45,10 @@ namespace CSM.Business.TwitchIntegration
             }
         }
 
+        /// <summary>
+        /// Removes a beatmap from the configuration.
+        /// </summary>
+        /// <param name="beatmapsToRemove">The beatmap to remove.</param>
         public void RemoveBeatmaps(List<ReceivedBeatmap> beatmapsToRemove)
         {
             foreach (var beatmapToRemove in beatmapsToRemove)
@@ -75,7 +92,7 @@ namespace CSM.Business.TwitchIntegration
 
         private void Save()
         {
-            if (ReceivedBeatmaps!= null)
+            if (ReceivedBeatmaps != null)
             {
                 var options = new JsonSerializerOptions { WriteIndented = true };
                 var config = JsonSerializer.Serialize(ReceivedBeatmaps, options);
