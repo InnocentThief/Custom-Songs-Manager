@@ -19,6 +19,11 @@ namespace CSM.Framework.Configuration.UserConfiguration
         public List<CustomLevelPath> CustomLevelPaths { get; set; }
 
         /// <summary>
+        /// Gets or sets whether a received song should be removed from the list after adding to a playlist.
+        /// </summary>
+        public bool RemoveReceivedSongAfterAddingToPlaylist { get; set; }
+
+        /// <summary>
         /// Gets or sets the Beat Saber playlist paths.
         /// </summary>
         /// <remarks>Used as list for future expansion to multiple playlist paths.</remarks>

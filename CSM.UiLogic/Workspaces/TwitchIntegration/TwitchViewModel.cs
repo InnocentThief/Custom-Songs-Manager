@@ -1,6 +1,7 @@
 ﻿using CSM.Business.TwitchIntegration;
 using CSM.Business.TwitchIntegration.TwitchConfiguration;
 using CSM.DataAccess.Entities.Offline;
+using CSM.Framework.Configuration.UserConfiguration;
 using CSM.Services;
 using CSM.UiLogic.Workspaces.Playlists;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
@@ -243,6 +244,15 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
         private void ReceivedBeatmapViewModel_AddSongToPlaylistEvent(object sender, AddSongToPlaylistEventArgs e)
         {
             AddSongToPlaylistEvent?.Invoke(this, e);
+            if (UserConfigManager.Instance.Config.RemoveReceivedSongAfterAddingToPlaylist)
+            {
+                var songToRemove = ReceivedBeatmaps.SingleOrDefault(rbm => rbm.Key == e.BsrKey);
+                if (songToRemove != null)
+                {
+                    songToRemove.AddSongToPlaylistEvent -= ReceivedBeatmapViewModel_AddSongToPlaylistEvent;
+                    ReceivedBeatmaps.Remove(songToRemove);
+                }
+            }
         }
 
         #endregion
