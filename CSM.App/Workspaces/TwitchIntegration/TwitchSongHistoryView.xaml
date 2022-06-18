@@ -4,6 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:p="clr-namespace:CSM.App.Properties"
              xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -20,10 +21,10 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <!-- Title -->
-            <TextBlock Text="Song History" Foreground="White" VerticalAlignment="Center" Margin="8,0" FontWeight="DemiBold" />
+            <TextBlock Text="{x:Static p:Resources.Workspace_TwitchIntegration_SongHistory_Header}" Foreground="White" VerticalAlignment="Center" Margin="8,0" FontWeight="DemiBold" />
             <!-- Commands -->
             <telerik:RadToolBar Grid.Column="1" OverflowButtonVisibility="Collapsed" GripVisibility="Collapsed" Background="Transparent" BorderThickness="0" >
-                <telerik:RadButton Command="{Binding ClearReceivedBeatmapsCommand}" ToolTip="Delete all received songs">
+                <telerik:RadButton Command="{Binding ClearReceivedBeatmapsCommand}" ToolTip="{x:Static p:Resources.Workspace_TwitchIntegration_SongHistory_DeleteAllSongs}">
                     <telerik:RadGlyph Glyph="&#xe10c;" />
                 </telerik:RadButton>
             </telerik:RadToolBar>
@@ -36,18 +37,18 @@
                     <telerik:GridViewColumn Width="SizeToCells">
                         <telerik:GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <telerik:RadButton Command="{Binding AddToPlaylistCommand}" Grid.Column="1" Background="Transparent" BorderThickness="0" ToolTip="AddToPlaylist">
+                                <telerik:RadButton Command="{Binding AddToPlaylistCommand}" Grid.Column="1" Background="Transparent" BorderThickness="0" ToolTip="{x:Static p:Resources.Workspace_TwitchIntegration_SongHistory_AddToPlaylist}">
                                     <telerik:RadGlyph Glyph="&#xe11e;" Foreground="Green" />
                                 </telerik:RadButton>
                             </DataTemplate>
                         </telerik:GridViewColumn.CellTemplate>
                     </telerik:GridViewColumn>
                     <!-- Channel -->
-                    <telerik:GridViewDataColumn Header="Channel" Width="*" DataMemberBinding="{Binding ChannelName}" />
+                    <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_TwitchIntegration_SongHistory_ColumnHeader_Channel}" Width="*" DataMemberBinding="{Binding ChannelName}" />
                     <!-- Received At -->
-                    <telerik:GridViewDataColumn Header="Received At" Width="SizeToCells" DataMemberBinding="{Binding ReceivedAt, StringFormat='g', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
+                    <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_TwitchIntegration_SongHistory_ColumnHeader_ReceivedAt}" Width="SizeToCells" DataMemberBinding="{Binding ReceivedAt, StringFormat='g', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
                     <!-- BSR -->
-                    <telerik:GridViewDataColumn Header="BSR" Width="Auto" DataMemberBinding="{Binding BsrKeyHex}" IsFilterable="False">
+                    <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_TwitchIntegration_SongHistory_ColumnHeader_BSR}" Width="Auto" DataMemberBinding="{Binding BsrKeyHex}" IsFilterable="False">
                         <telerik:GridViewDataColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Key}" />
@@ -55,16 +56,16 @@
                         </telerik:GridViewDataColumn.CellTemplate>
                     </telerik:GridViewDataColumn>
                     <!-- Song Name -->
-                    <telerik:GridViewDataColumn Header="Title" Width="*" DataMemberBinding="{Binding SongName}" />
+                    <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_TwitchIntegration_SongHistory_ColumnHeader_SongName}" Width="*" DataMemberBinding="{Binding SongName}" />
                     <!-- Song Author Name -->
-                    <telerik:GridViewDataColumn Header="Artist" Width="*" DataMemberBinding="{Binding SongAuthorName}" />
+                    <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_TwitchIntegration_SongHistory_ColumnHeader_SongAuthorName}" Width="*" DataMemberBinding="{Binding SongAuthorName}" />
                     <!-- Level Author Name -->
-                    <telerik:GridViewDataColumn Header="Mapper" Width="*" DataMemberBinding="{Binding LevelAuthorName}" />
+                    <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_TwitchIntegration_SongHistory_ColumnHeader_LevelAuthorName}" Width="*" DataMemberBinding="{Binding LevelAuthorName}" />
                     <!-- Delete button (remove song from playlist) -->
                     <telerik:GridViewColumn>
                         <telerik:GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <telerik:RadButton Command="{Binding DeleteSongCommand}" Grid.Column="1" Background="Transparent" BorderThickness="0" Margin="0,0,10,0" ToolTip="Delete Song">
+                                <telerik:RadButton Command="{Binding DeleteSongCommand}" Grid.Column="1" Background="Transparent" BorderThickness="0" Margin="0,0,10,0" ToolTip="{x:Static p:Resources.Workspace_TwitchIntegration_SongHistory_ColumnHeader_DeleteSong}">
                                     <telerik:RadGlyph Glyph="&#xe121;" Foreground="Red" />
                                 </telerik:RadButton>
                             </DataTemplate>

@@ -18,7 +18,7 @@ namespace CSM.Business.TwitchIntegration
         #region Private Fields
 
         private HttpListener listener;
-        private string redirect_uri = "http://localhost:8080/";
+        private string redirect_uri = "http://localhost:57789/";
         private string client_id = "mf66rq31qva9bv7dit1jygdjs39loa";
         private readonly List<string> scopes = new List<string> { "chat:read", "chat:edit" };
         private TwitchService twitchService;

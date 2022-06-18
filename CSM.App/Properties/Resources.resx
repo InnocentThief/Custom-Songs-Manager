@@ -132,6 +132,9 @@
   <data name="CustomLevels_Detail_NoData" xml:space="preserve">
     <value>No custom level selected</value>
   </data>
+  <data name="MainWindow_About" xml:space="preserve">
+    <value>Info</value>
+  </data>
   <data name="MainWindow_Settings" xml:space="preserve">
     <value>Settings</value>
   </data>
@@ -542,5 +545,44 @@
   </data>
   <data name="Workspace_Playlist_SavePlaylistWithSongOrder" xml:space="preserve">
     <value>Save playlist with the current song order</value>
+  </data>
+  <data name="Workspace_TwitchIntegration_Channels_AddChannel" xml:space="preserve">
+    <value>Add a new channel</value>
+  </data>
+  <data name="Workspace_TwitchIntegration_Channels_DeleteChannel" xml:space="preserve">
+    <value>Delete the selected channel</value>
+  </data>
+  <data name="Workspace_TwitchIntegration_Channels_Header" xml:space="preserve">
+    <value>Twitch Channels</value>
+  </data>
+  <data name="Workspace_TwitchIntegration_SongHistory_AddToPlaylist" xml:space="preserve">
+    <value>Add to selected playlist</value>
+  </data>
+  <data name="Workspace_TwitchIntegration_SongHistory_ColumnHeader_BSR" xml:space="preserve">
+    <value>BSR</value>
+  </data>
+  <data name="Workspace_TwitchIntegration_SongHistory_ColumnHeader_Channel" xml:space="preserve">
+    <value>Channel</value>
+  </data>
+  <data name="Workspace_TwitchIntegration_SongHistory_ColumnHeader_DeleteSong" xml:space="preserve">
+    <value>Delete Song</value>
+  </data>
+  <data name="Workspace_TwitchIntegration_SongHistory_ColumnHeader_LevelAuthorName" xml:space="preserve">
+    <value>Mapper</value>
+  </data>
+  <data name="Workspace_TwitchIntegration_SongHistory_ColumnHeader_ReceivedAt" xml:space="preserve">
+    <value>Received At</value>
+  </data>
+  <data name="Workspace_TwitchIntegration_SongHistory_ColumnHeader_SongAuthorName" xml:space="preserve">
+    <value>Artist</value>
+  </data>
+  <data name="Workspace_TwitchIntegration_SongHistory_ColumnHeader_SongName" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="Workspace_TwitchIntegration_SongHistory_DeleteAllSongs" xml:space="preserve">
+    <value>Delete all received songs</value>
+  </data>
+  <data name="Workspace_TwitchIntegration_SongHistory_Header" xml:space="preserve">
+    <value>Song History</value>
   </data>
 </root>

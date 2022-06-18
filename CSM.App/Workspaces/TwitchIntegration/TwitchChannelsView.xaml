@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:converter="clr-namespace:CSM.App.Converter"
+             xmlns:p="clr-namespace:CSM.App.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -25,14 +26,14 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <!-- Title -->
-            <TextBlock Text="Twitch Channels" Foreground="White" VerticalAlignment="Center" Margin="8,0" FontWeight="DemiBold" />
+            <TextBlock Text="{x:Static p:Resources.Workspace_TwitchIntegration_Channels_Header}" Foreground="White" VerticalAlignment="Center" Margin="8,0" FontWeight="DemiBold" />
             <!-- Commands -->
             <telerik:RadToolBar Grid.Column="1" OverflowButtonVisibility="Collapsed" GripVisibility="Collapsed" Background="Transparent" BorderThickness="0" >
                 <TextBlock Text="{Binding AuthenticatedAs}" TextTrimming="CharacterEllipsis" Width="200" TextAlignment="Right" ToolTip="{Binding AuthenticatedAs}"/>
-                <telerik:RadButton Command="{Binding AddChannelCommand}" ToolTip="Add a new channel">
+                <telerik:RadButton Command="{Binding AddChannelCommand}" ToolTip="{x:Static p:Resources.Workspace_TwitchIntegration_Channels_AddChannel}">
                     <telerik:RadGlyph Glyph="&#xe11e;" />
                 </telerik:RadButton>
-                <telerik:RadButton Command="{Binding RemoveChannelCommand}" ToolTip="Delete the selected channel">
+                <telerik:RadButton Command="{Binding RemoveChannelCommand}" ToolTip="{x:Static p:Resources.Workspace_TwitchIntegration_Channels_DeleteChannel}">
                     <telerik:RadGlyph Glyph="&#xe121;" />
                 </telerik:RadButton>
             </telerik:RadToolBar>

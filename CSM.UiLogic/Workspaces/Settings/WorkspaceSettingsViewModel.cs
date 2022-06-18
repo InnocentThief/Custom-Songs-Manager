@@ -113,7 +113,11 @@ namespace CSM.UiLogic.Workspaces.Settings
             Workspaces = new List<WorkspaceViewModel>();
             foreach (var workspaceType in Enum.GetValues(typeof(WorkspaceType)))
             {
-                Workspaces.Add(new WorkspaceViewModel(workspaceType.ToString().ToWorkspaceType(), (WorkspaceType)workspaceType));
+                //TODO: Remove Tools exclution when Tools-Workspace is implemented
+                if ((WorkspaceType)workspaceType != WorkspaceType.Tools)
+                {
+                    Workspaces.Add(new WorkspaceViewModel(workspaceType.ToString().ToWorkspaceType(), (WorkspaceType)workspaceType));
+                }
             }
             SelectedWorkspace = Workspaces.SingleOrDefault(w => w.Type == UserConfigManager.Instance.Config.DefaultWorkspace);
             songDetailPositionRight = UserConfigManager.Instance.Config.CustomLevelsSongDetailPosition == SongDetailPosition.Right;

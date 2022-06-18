@@ -1,4 +1,5 @@
 ﻿using CSM.UiLogic.Workspaces;
+using CSM.UiLogic.Workspaces.CustomLevels;
 using System.Windows.Controls;
 
 namespace CSM.App.Workspaces.CustomLevels
@@ -15,6 +16,7 @@ namespace CSM.App.Workspaces.CustomLevels
 
         private async void RadGridView_SelectionChanged(object sender, Telerik.Windows.Controls.SelectionChangeEventArgs e)
         {
+            if (e.AddedItems.Count == 0) return;
             var viewModel = DataContext as CustomLevelsViewModel;
             if (viewModel?.SelectedCustomLevel != null)
             {

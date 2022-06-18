@@ -90,7 +90,7 @@
         <!-- Footer -->
         <telerik:RadNavigationView.PaneFooter>
             <StackPanel>
-                <telerik:RadNavigationViewItem Content="{x:Static p:Resources.MainWindow_Settings}" 
+                <telerik:RadNavigationViewItem Content="{x:Static p:Resources.MainWindow_About}" 
                                                Command="{Binding InfoCommand}"
                                                IconTemplate="{x:Null}">
                     <telerik:RadNavigationViewItem.Icon>
