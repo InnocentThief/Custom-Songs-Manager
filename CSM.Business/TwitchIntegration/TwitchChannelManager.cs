@@ -15,6 +15,7 @@ namespace CSM.Business.TwitchIntegration
     public class TwitchChannelManager
     {
         private TwitchClient twitchClient;
+        const string beatsaverUri = "https://beatsaver.com/maps/";
 
         /// <summary>
         /// Gets whether the Twitch client is connected.
@@ -106,7 +107,7 @@ namespace CSM.Business.TwitchIntegration
         {
             Console.WriteLine($"Custom Songs Manager connected to {e.Channel}");
             OnJoinedChannel?.Invoke(this, e);
-            twitchClient.SendMessage(e.Channel, $"Custom Songs Manager connected to {e.Channel}");
+            //twitchClient.SendMessage(e.Channel, $"Custom Songs Manager connected to {e.Channel}");
         }
 
         private void TwitchClient_OnLeftChannel(object sender, OnLeftChannelArgs e)
@@ -118,6 +119,7 @@ namespace CSM.Business.TwitchIntegration
 
         private void TwitchClient_OnChatCommandReceived(object sender, OnChatCommandReceivedArgs e)
         {
+            if (e.Command.ChatMessage.Message.StartsWith("! ")) return;
             if (!e.Command.ArgumentsAsList.Any()) return;
             Console.WriteLine($"Received command {e.Command} with parameter {e.Command.ArgumentsAsList[0]}");
             var eventArgs = new SongRequestEventArgs
@@ -130,9 +132,18 @@ namespace CSM.Business.TwitchIntegration
 
         private void TwitchClient_OnMessageReceived(object sender, OnMessageReceivedArgs e)
         {
-            if (!e.ChatMessage.Message.StartsWith("!"))
+            if (e.ChatMessage.Message.Contains(beatsaverUri)) // probably a response to a !link request
             {
+                var startIndex = e.ChatMessage.Message.IndexOf(beatsaverUri);
+                var bsr = e.ChatMessage.Message.Substring(startIndex+beatsaverUri.Length, e.ChatMessage.Message.Length - startIndex -beatsaverUri.Length);
                 Console.WriteLine($"Received message {e.ChatMessage.Message}");
+                Console.WriteLine($"Extracted BSR key {bsr}");
+                var eventArgs = new SongRequestEventArgs
+                {
+                    ChannelName = e.ChatMessage.Channel,
+                    Key = bsr
+                };
+                OnBsrKeyReceived?.Invoke(sender, eventArgs);
             }
         }
 

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -26,6 +28,7 @@ namespace CSM.Services
         internal GenericServiceClient(string apiBaseAddress)
         {
             this.apiBaseAddress = apiBaseAddress ?? throw new ArgumentNullException(nameof(apiBaseAddress));
+            client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("Custom Songs Manager", Assembly.GetExecutingAssembly().GetName().Version.ToString()));
         }
 
         /// <summary>
