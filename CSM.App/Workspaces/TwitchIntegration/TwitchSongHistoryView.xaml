@@ -24,6 +24,19 @@
             <TextBlock Text="{x:Static p:Resources.Workspace_TwitchIntegration_SongHistory_Header}" Foreground="White" VerticalAlignment="Center" Margin="8,0" FontWeight="DemiBold" />
             <!-- Commands -->
             <telerik:RadToolBar Grid.Column="1" OverflowButtonVisibility="Collapsed" GripVisibility="Collapsed" Background="Transparent" BorderThickness="0" >
+                <Grid VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Auto-Add to" VerticalAlignment="Center" />
+                    <telerik:RadComboBox Grid.Column="1" Margin="10,0,0,0" Width="250" />
+                    <telerik:RadButton Grid.Column="2" Margin="3,0,0,0" Background="Transparent" BorderThickness="0" ToolTip="Stop auto-add" >
+                        <telerik:RadGlyph Glyph="&#xe20e;" />
+                    </telerik:RadButton>
+                </Grid>
+                <telerik:RadToolBarSeparator />
                 <telerik:RadButton Command="{Binding ClearReceivedBeatmapsCommand}" ToolTip="{x:Static p:Resources.Workspace_TwitchIntegration_SongHistory_DeleteAllSongs}">
                     <telerik:RadGlyph Glyph="&#xe10c;" />
                 </telerik:RadButton>
