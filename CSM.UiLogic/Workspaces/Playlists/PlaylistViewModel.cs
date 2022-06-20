@@ -246,6 +246,9 @@ namespace CSM.UiLogic.Workspaces.Playlists
         /// <param name="e">EventArgs containing the song informations.</param>
         public void AddPlaylistSong(AddSongToPlaylistEventArgs e)
         {
+            var existingSong = playlist.Songs.SingleOrDefault(s => s.Hash == e.Hash);
+            if (existingSong != null) return;
+
             var playlistSong = new PlaylistSong
             {
                 Hash = e.Hash,
