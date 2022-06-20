@@ -16,13 +16,14 @@ namespace CSM.App
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainWindowViewModel();
+            //DataContext = new MainWindowViewModel();
 
             IconTemplate = this.Resources["WindowIconTemplate"] as DataTemplate;
         }
 
         private void RadNavigationView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (e.RemovedItems.Count == 0) return;
             // Unload removed workspace
             if (e.RemovedItems.Count > 0)
             {

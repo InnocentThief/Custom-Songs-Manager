@@ -173,10 +173,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="TwitchIntegration\TwitchSucceeded.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="TwitchIntegration\TwitchFailed.html" />
     <EmbeddedResource Include="TwitchIntegration\TwitchGetAccessToken.html" />
   </ItemGroup>
   <ItemGroup>

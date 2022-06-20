@@ -177,6 +177,12 @@
   <data name="Settings_BeatSaber_Title" xml:space="preserve">
     <value>Beat Saber</value>
   </data>
+  <data name="Settings_BeatSaver_Endpoint" xml:space="preserve">
+    <value>API Endpoint</value>
+  </data>
+  <data name="Settings_BeatSaver_Endpoint_ToolTip" xml:space="preserve">
+    <value>Restart needed if changed. Clear to set to default.</value>
+  </data>
   <data name="Settings_Close" xml:space="preserve">
     <value>Closes Settings</value>
   </data>
@@ -191,6 +197,9 @@
   </data>
   <data name="Settings_Workspace_CustomLevels" xml:space="preserve">
     <value>Custom Levels</value>
+  </data>
+  <data name="Settings_Workspace_RemoveSongAfterAddingToPlaylist" xml:space="preserve">
+    <value>Remove song after adding to playlist</value>
   </data>
   <data name="Settings_Workspace_SongDetailPosition" xml:space="preserve">
     <value>Song Detail Position</value>

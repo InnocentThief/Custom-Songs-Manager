@@ -61,7 +61,6 @@ namespace CSM.Business.TwitchIntegration
         /// <returns>An awaitable task that yields no result.</returns>
         public async Task GetAccessTokenAsync()
         {
-
             if (string.IsNullOrWhiteSpace(TwitchConfigManager.Instance.Config.AccessToken))
             {
                 StartListener();
@@ -109,7 +108,6 @@ namespace CSM.Business.TwitchIntegration
                         var content = streamReader.ReadToEnd();
                         if (content.Contains("error"))
                         {
-                            CreateResponse(context, "CSM.Business.TwitchIntegration.TwitchFailed.html");
                             TwitchConfigManager.Instance.Config.AccessToken = string.Empty;
                         }
                         else
@@ -119,11 +117,9 @@ namespace CSM.Business.TwitchIntegration
                             var accessToken = accessTokenWithoutHeader.Substring(0, accessTokenWithoutHeader.IndexOf("&"));
                             TwitchConfigManager.Instance.Config.AccessToken = accessToken;
                             TwitchConfigManager.Instance.SaveTwitchConfig();
-                            CreateResponse(context, "CSM.Business.TwitchIntegration.TwitchSucceeded.html");
-
-                        }
-                        //StopListener();
-                        //return;
+                                                    }
+                        StopListener();
+                        return;
                     }
                 }
 

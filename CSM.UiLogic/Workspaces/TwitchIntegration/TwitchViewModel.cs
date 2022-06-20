@@ -52,7 +52,7 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
         /// <summary>
         /// Command used to add a new channel.
         /// </summary>
-        public RelayCommand AddChannelCommand { get; }
+        public AsyncRelayCommand AddChannelCommand { get; }
 
         /// <summary>
         /// Command used to remove a channel.
@@ -157,11 +157,11 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
 
             beatMapService = new BeatMapService("maps/id");
 
-            AddChannelCommand = new RelayCommand(AddChannel);
+            AddChannelCommand = new AsyncRelayCommand(AddChannelAsync);
             RemoveChannelCommand = new RelayCommand(RemoveChannel, CanRemoveChannel);
             ClearReceivedBeatmapsCommand = new RelayCommand(ClearReceivedBeatmaps);
 
-            TwitchChannelManager.OnBsrKeyReceived += TwitchChannelManager_OnBsrKeyReceived; ;
+            TwitchChannelManager.OnBsrKeyReceived += TwitchChannelManager_OnBsrKeyReceived;
         }
 
         /// <summary>
@@ -235,11 +235,13 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
             ReceivedBeatmapsManager.Instance.AddBeatmap(receivedBeatmap);
         }
 
-        private void AddChannel()
+        private async Task AddChannelAsync()
         {
+            await TwitchConnectionManager.Instance.ValidateAsync();
             var newChannel = new TwitchChannelViewModel();
             newChannel.ChangedConnectionState += TwitchChannelViewModel_ChangedConnectionState;
             Channels.Add(newChannel);
+            OnPropertyChanged(nameof(AuthenticatedAs));
         }
 
         private void RemoveChannel()

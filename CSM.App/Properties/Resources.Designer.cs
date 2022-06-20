@@ -241,6 +241,24 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to API Endpoint.
+        /// </summary>
+        public static string Settings_BeatSaver_Endpoint {
+            get {
+                return ResourceManager.GetString("Settings_BeatSaver_Endpoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restart needed if changed. Clear to set to default..
+        /// </summary>
+        public static string Settings_BeatSaver_Endpoint_ToolTip {
+            get {
+                return ResourceManager.GetString("Settings_BeatSaver_Endpoint_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Closes Settings.
         /// </summary>
         public static string Settings_Close {
@@ -264,6 +282,15 @@ namespace CSM.App.Properties {
         public static string Settings_Workspace_CustomLevels {
             get {
                 return ResourceManager.GetString("Settings_Workspace_CustomLevels", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove song after adding to playlist.
+        /// </summary>
+        public static string Settings_Workspace_RemoveSongAfterAddingToPlaylist {
+            get {
+                return ResourceManager.GetString("Settings_Workspace_RemoveSongAfterAddingToPlaylist", resourceCulture);
             }
         }
         

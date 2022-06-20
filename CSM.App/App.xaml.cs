@@ -1,5 +1,6 @@
 ﻿using CSM.App.Wizards;
 using CSM.Framework.Logging;
+using CSM.UiLogic;
 using CSM.UiLogic.Wizards;
 using System;
 using System.Windows;
@@ -61,6 +62,8 @@ namespace CSM.App
             SetStyle();
 
             MainWindow window = new MainWindow();
+            var viewModel = new MainWindowViewModel();
+            window.DataContext = viewModel;
             window.Show();
         }
 
