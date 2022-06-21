@@ -39,7 +39,7 @@ namespace CSM.UiLogic.Workspaces
         /// </summary>
         public TwitchIntegrationViewModel()
         {
-            Playlists = new PlaylistsViewModel();
+            Playlists = new PlaylistsViewModel(false);
             Twitch = new TwitchViewModel(Playlists.PlaylistSelectionState);
             Twitch.AddSongToPlaylistEvent += Twitch_AddSongToPlaylistEvent;
             Twitch.SongChangedEvent += Twitch_SongChangedEvent;

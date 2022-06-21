@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\CSM.Services"
   ],
-  "SelectedNode": "\\Custom Songs Manager.sln",
+  "SelectedNode": "\\CSM.Services\\GenericServiceClient.cs",
   "PreviewInSolutionExplorer": false
 }

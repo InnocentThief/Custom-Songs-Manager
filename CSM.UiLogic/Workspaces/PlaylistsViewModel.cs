@@ -35,7 +35,7 @@ namespace CSM.UiLogic.Workspaces
         private bool isLoading;
         private int loadProgress;
         private int playlistCount;
-
+        bool includeCustomLevels;
 
         #endregion
 
@@ -65,7 +65,7 @@ namespace CSM.UiLogic.Workspaces
                     playlist.CheckContainsLeftSong(String.Empty);
                     playlist.CheckContainsRightSong(String.Empty);
                 }
-                PlaylistSelectionState.PlaylistSelectionChanged(selectedPlaylist != null && selectedPlaylist.GetType() != typeof(PlaylistFolderViewModel));
+                PlaylistSelectionState.PlaylistSelectionChanged(selectedPlaylist != null && selectedPlaylist.GetType() != typeof(PlaylistFolderViewModel), selectedPlaylist as PlaylistViewModel);
             }
         }
 
@@ -144,11 +144,14 @@ namespace CSM.UiLogic.Workspaces
 
         #endregion
 
+        public event EventHandler<PlaylistViewModel> PlaylistSelectionChanged;
+
         /// <summary>
         /// Initializes a new <see cref="PlaylistViewModel"/>.
         /// </summary>
-        public PlaylistsViewModel()
+        public PlaylistsViewModel(bool includeCustomLevels)
         {
+            this.includeCustomLevels = includeCustomLevels;
             PlaylistPath = UserConfigManager.Instance.Config.PlaylistPaths.First().Path;
             Playlists = new ObservableCollection<BasePlaylistViewModel>();
             RefreshCommand = new RelayCommand(Refresh);
@@ -182,7 +185,7 @@ namespace CSM.UiLogic.Workspaces
             bgWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
             bgWorker.RunWorkerAsync();
 
-            CustomLevels.LoadData();
+           if (includeCustomLevels) CustomLevels.LoadData();
         }
 
         /// <summary>

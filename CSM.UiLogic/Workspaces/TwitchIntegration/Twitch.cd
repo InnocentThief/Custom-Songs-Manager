@@ -13,9 +13,9 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="CSM.UiLogic.Workspaces.TwitchIntegration.TwitchViewModel">
-    <Position X="8" Y="6.25" Width="3.75" />
+    <Position X="8.25" Y="8.25" Width="3.75" />
     <TypeIdentifier>
-      <HashCode>EAAggggSABAAIQAIAAEAIAAAAAEAIBAAAIAQgBIEEIg=</HashCode>
+      <HashCode>EAAggggSABAAIQAIACAAIAAAAAEAIBAAAIAQgBIEEIg=</HashCode>
       <FileName>Workspaces\TwitchIntegration\TwitchViewModel.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -44,9 +44,15 @@
   <Class Name="CSM.UiLogic.Workspaces.PlaylistsViewModel">
     <Position X="4" Y="2" Width="3" />
     <TypeIdentifier>
-      <HashCode>BgCwAzAACgFQIggBgCKAQCQAgAIEAAIAAAAAAAAAACI=</HashCode>
+      <HashCode>BgCwAzAACgFQIghBgCKAQCQAgAIEAAIAAAAAAAAAACI=</HashCode>
       <FileName>Workspaces\PlaylistsViewModel.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="SelectedPlaylist" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Playlists" />
+    </ShowAsCollectionAssociation>
   </Class>
   <Class Name="CSM.UiLogic.Workspaces.TwitchIntegration.ReceivedBeatmapViewModel">
     <Position X="13.5" Y="9.25" Width="2.25" />
@@ -57,6 +63,27 @@
     <ShowAsAssociation>
       <Property Name="ReceivedBeatmap" />
     </ShowAsAssociation>
+  </Class>
+  <Class Name="CSM.UiLogic.Workspaces.Playlists.BasePlaylistViewModel">
+    <Position X="9" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAgEAAAAgAAAAAQAAAAAEQAAEQEAAAABABAAAAAAAA=</HashCode>
+      <FileName>Workspaces\Playlists\BasePlaylistViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSM.UiLogic.Workspaces.Playlists.PlaylistViewModel" Collapsed="true">
+    <Position X="7.75" Y="7" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>QQAAkIAyQgQAYgBAAAAEIQRBAABQIBCDAAAAAAANEIA=</HashCode>
+      <FileName>Workspaces\Playlists\PlaylistViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSM.UiLogic.Workspaces.Playlists.PlaylistFolderViewModel" Collapsed="true">
+    <Position X="10.5" Y="7" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAQEAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Workspaces\Playlists\PlaylistFolderViewModel.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

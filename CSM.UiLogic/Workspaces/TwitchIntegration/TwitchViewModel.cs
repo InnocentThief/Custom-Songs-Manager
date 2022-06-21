@@ -7,8 +7,11 @@ using CSM.UiLogic.Workspaces.Playlists;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace CSM.UiLogic.Workspaces.TwitchIntegration
@@ -26,6 +29,9 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
         private bool initialized;
         private PlaylistSelectionState playlistSelectionState;
         private PlaylistSongDetailViewModel playlistSongDetail;
+        private List<AddSongToPlaylistEventArgs> autoAddSongs;
+        private string autoAddText;
+        private string autoAddFilePath;
 
         #endregion
 
@@ -136,6 +142,27 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
             get => playlistSongDetail != null;
         }
 
+        /// <summary>
+        /// Command used to start the auto-add function.
+        /// </summary>
+        public RelayCommand StartAutoAddCommand { get; }
+
+        /// <summary>
+        /// Command used to stop the auto-add function.
+        /// </summary>
+        public RelayCommand StopAutoAddCommand { get; }
+
+        public string AutoAddText
+        {
+            get => autoAddText;
+            set
+            {
+                if (autoAddText == value) return;
+                autoAddText = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         /// <summary>
@@ -160,6 +187,9 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
             AddChannelCommand = new AsyncRelayCommand(AddChannelAsync);
             RemoveChannelCommand = new RelayCommand(RemoveChannel, CanRemoveChannel);
             ClearReceivedBeatmapsCommand = new RelayCommand(ClearReceivedBeatmaps);
+
+            StartAutoAddCommand = new RelayCommand(StartAutoAdd, CanStartAutoAdd);
+            StopAutoAddCommand = new RelayCommand(StopAutoAdd, CanStopAutoAdd);
 
             TwitchChannelManager.OnBsrKeyReceived += TwitchChannelManager_OnBsrKeyReceived;
         }
@@ -217,22 +247,38 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
         {
             var beatmap = await beatMapService.GetBeatMapDataAsync(e.Key);
             if (beatmap == null) return;
-            var receivedBeatmap = new ReceivedBeatmap()
+
+            if (autoAddSongs == null)
             {
-                ChannelName = e.ChannelName,
-                ReceivedAt = DateTime.Now,
-                Key = beatmap.Id,
-                Hash = beatmap.LatestVersion.Hash,
-                SongName = beatmap.Metadata.SongName,
-                LevelAuthorName = beatmap.Metadata.LevelAuthorName,
-                SongAuthorName = beatmap.Metadata.SongAuthorName
-            };
-            var receivedBeatmapViewModel = new ReceivedBeatmapViewModel(receivedBeatmap);
-            receivedBeatmapViewModel.SetCanAddToPlaylist(playlistSelectionState.PlaylistSelected);
-            receivedBeatmapViewModel.AddSongToPlaylistEvent += ReceivedBeatmapViewModel_AddSongToPlaylistEvent;
-            receivedBeatmapViewModel.DeleteSongEvent += ReceivedBeatmapViewModel_DeleteSongEvent;
-            ReceivedBeatmaps.Add(receivedBeatmapViewModel);
-            ReceivedBeatmapsManager.Instance.AddBeatmap(receivedBeatmap);
+                var receivedBeatmap = new ReceivedBeatmap()
+                {
+                    ChannelName = e.ChannelName,
+                    ReceivedAt = DateTime.Now,
+                    Key = beatmap.Id,
+                    Hash = beatmap.LatestVersion.Hash,
+                    SongName = beatmap.Metadata.SongName,
+                    LevelAuthorName = beatmap.Metadata.LevelAuthorName,
+                    SongAuthorName = beatmap.Metadata.SongAuthorName
+                };
+                var receivedBeatmapViewModel = new ReceivedBeatmapViewModel(receivedBeatmap);
+                receivedBeatmapViewModel.SetCanAddToPlaylist(playlistSelectionState.PlaylistSelected);
+                receivedBeatmapViewModel.AddSongToPlaylistEvent += ReceivedBeatmapViewModel_AddSongToPlaylistEvent;
+                receivedBeatmapViewModel.DeleteSongEvent += ReceivedBeatmapViewModel_DeleteSongEvent;
+                ReceivedBeatmaps.Add(receivedBeatmapViewModel);
+                ReceivedBeatmapsManager.Instance.AddBeatmap(receivedBeatmap);
+            }
+            else
+            {
+                var addSongEventArgs = new AddSongToPlaylistEventArgs
+                {
+                    BsrKey = beatmap.Id,
+                    Hash = beatmap.LatestVersion.Hash,
+                    LevelAuthorName = beatmap.Metadata.LevelAuthorName,
+                    LevelId = $"custom_level_{beatmap.LatestVersion.Hash}",
+                    SongName = beatmap.Metadata.SongName
+                };
+                autoAddSongs.Add(addSongEventArgs);
+            }
         }
 
         private async Task AddChannelAsync()
@@ -280,6 +326,8 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
             {
                 receivedBeatmap.SetCanAddToPlaylist(playlistSelectionState.PlaylistSelected);
             }
+            StartAutoAddCommand.NotifyCanExecuteChanged();
+            StopAutoAddCommand.NotifyCanExecuteChanged();
         }
 
         private void ReceivedBeatmapViewModel_DeleteSongEvent(object sender, EventArgs e)
@@ -304,6 +352,52 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
                 }
             }
         }
+
+        #region AutoAdd
+
+        private void StartAutoAdd()
+        {
+            autoAddSongs = new List<AddSongToPlaylistEventArgs>();
+            AutoAddText = $"Auto-adding to: {playlistSelectionState.PlaylistViewModel.Name}";
+            autoAddFilePath = playlistSelectionState.PlaylistViewModel.FilePath;
+            StartAutoAddCommand.NotifyCanExecuteChanged();
+            StopAutoAddCommand.NotifyCanExecuteChanged();
+        }
+
+        private bool CanStartAutoAdd()
+        {
+            return playlistSelectionState.PlaylistViewModel != null && autoAddSongs == null;
+        }
+
+        private void StopAutoAdd()
+        {
+            AutoAddText = "Auto-adding not active";
+
+            var infoContent = File.ReadAllText(autoAddFilePath);
+            Playlist playlist = JsonSerializer.Deserialize<Playlist>(infoContent);
+            playlist.Path = autoAddFilePath;
+            var playlistViewModel = new PlaylistViewModel(playlist);
+
+            foreach (var autoAddSong in autoAddSongs)
+            {
+                playlistViewModel.AddPlaylistSong(autoAddSong);
+            }
+
+            autoAddSongs.Clear();
+            autoAddSongs = null;
+
+            autoAddFilePath = String.Empty;
+
+            StartAutoAddCommand.NotifyCanExecuteChanged();
+            StopAutoAddCommand.NotifyCanExecuteChanged();
+        }
+
+        private bool CanStopAutoAdd()
+        {
+            return autoAddSongs != null;
+        }
+
+        #endregion
 
         #endregion
     }
