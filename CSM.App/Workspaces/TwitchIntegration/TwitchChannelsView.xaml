@@ -54,7 +54,7 @@
                                 <ColumnDefinition Width="30" />
                             </Grid.ColumnDefinitions>
                             <!-- Channel Name -->
-                            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" IsEnabled="{Binding CanEditName}" />
+                            <telerik:RadWatermarkTextBox WatermarkContent="Channel Name" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" IsEnabled="{Binding CanEditName}" />
                             <!-- Joined -->
                             <telerik:RadGlyph Grid.Column="2" Glyph="&#xe149;" HorizontalAlignment="Center" Foreground="{Binding Joined, Converter={StaticResource ChannelJoinedToColorConverter}}" />
                             <!-- Join / Leave channel -->
