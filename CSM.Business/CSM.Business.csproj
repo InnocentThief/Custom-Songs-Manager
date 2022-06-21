@@ -180,6 +180,10 @@
       <Project>{45E28E3B-CF56-4583-99CB-E115EECDF744}</Project>
       <Name>CSM.DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CSM.Framework\CSM.Framework.csproj">
+      <Project>{E4212929-E64D-4154-B381-958DE99A2932}</Project>
+      <Name>CSM.Framework</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CSM.Services\CSM.Services.csproj">
       <Project>{093E1723-517F-4539-AE61-642EF773ACB0}</Project>
       <Name>CSM.Services</Name>

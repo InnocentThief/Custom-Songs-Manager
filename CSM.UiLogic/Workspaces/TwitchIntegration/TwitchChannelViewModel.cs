@@ -1,5 +1,6 @@
 ﻿using CSM.Business.TwitchIntegration;
 using CSM.Business.TwitchIntegration.TwitchConfiguration;
+using CSM.Framework.Logging;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
@@ -103,10 +104,12 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
         {
             if (Joined)
             {
+                LoggerProvider.Logger.Info<TwitchChannelViewModel>($"Leaving Twitch channel {Name}");
                 TwitchChannelManager.Instance.LeaveChannel(Name);
             }
             else
             {
+                LoggerProvider.Logger.Info<TwitchChannelViewModel>($"Joining Twitch channel {Name}");
                 TwitchChannelManager.Instance.JoinChannel(Name);
             }
         }

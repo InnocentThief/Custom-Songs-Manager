@@ -1,4 +1,5 @@
 ﻿using CSM.Business.TwitchIntegration.TwitchConfiguration;
+using CSM.Framework.Logging;
 using System;
 using System.Linq;
 using TwitchLib.Client;
@@ -113,6 +114,7 @@ namespace CSM.Business.TwitchIntegration
         private void TwitchClient_OnLeftChannel(object sender, OnLeftChannelArgs e)
         {
             Console.WriteLine($"Custom Songs Manager left {e.Channel}");
+            LoggerProvider.Logger.Info<TwitchChannelManager>($"Custom Songs Manager left {e.Channel}");
             OnLeftChannel?.Invoke(this, e);
 
         }
@@ -135,7 +137,7 @@ namespace CSM.Business.TwitchIntegration
             if (e.ChatMessage.Message.Contains(beatsaverUri)) // probably a response to a !link request
             {
                 var startIndex = e.ChatMessage.Message.IndexOf(beatsaverUri);
-                var bsr = e.ChatMessage.Message.Substring(startIndex+beatsaverUri.Length, e.ChatMessage.Message.Length - startIndex -beatsaverUri.Length);
+                var bsr = e.ChatMessage.Message.Substring(startIndex + beatsaverUri.Length, e.ChatMessage.Message.Length - startIndex - beatsaverUri.Length);
                 Console.WriteLine($"Received message {e.ChatMessage.Message}");
                 Console.WriteLine($"Extracted BSR key {bsr}");
                 var eventArgs = new SongRequestEventArgs
