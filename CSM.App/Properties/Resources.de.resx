@@ -564,6 +564,12 @@
   <data name="Workspace_TwitchIntegration_Channels_Header" xml:space="preserve">
     <value>Twitch Channels</value>
   </data>
+  <data name="Workspace_TwitchIntegration_Channels_Watermark" xml:space="preserve">
+    <value>Channel Name</value>
+  </data>
+  <data name="Workspace_TwitchIntegration_ScoreSaber_Title" xml:space="preserve">
+    <value>ScoreSaber</value>
+  </data>
   <data name="Workspace_TwitchIntegration_SongHistory_AddToPlaylist" xml:space="preserve">
     <value>Add to selected playlist</value>
   </data>
@@ -593,5 +599,14 @@
   </data>
   <data name="Workspace_TwitchIntegration_SongHistory_Header" xml:space="preserve">
     <value>Song History</value>
+  </data>
+  <data name="Workspace_TwitchIntegration_SongHistory_StartAutoAdd" xml:space="preserve">
+    <value>Start auto-adding to selected playlist</value>
+  </data>
+  <data name="Workspace_TwitchIntegration_SongHistory_Start_ToolTip" xml:space="preserve">
+    <value>Start auto-add</value>
+  </data>
+  <data name="Workspace_TwitchIntegration_SongHistory_Stop_ToolTip" xml:space="preserve">
+    <value>Stop auto-add</value>
   </data>
 </root>

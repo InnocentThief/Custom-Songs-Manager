@@ -44,6 +44,7 @@ namespace CSM.Business.TwitchIntegration
             {
                 TwitchConfigManager.Instance.Config.Login = validationResponse.Login;
                 TwitchConfigManager.Instance.Config.UserId = validationResponse.UserId;
+                TwitchConfigManager.Instance.Config.UserName = validationResponse.Login;
                 return true;
             }
             else
@@ -117,7 +118,7 @@ namespace CSM.Business.TwitchIntegration
                             var accessToken = accessTokenWithoutHeader.Substring(0, accessTokenWithoutHeader.IndexOf("&"));
                             TwitchConfigManager.Instance.Config.AccessToken = accessToken;
                             TwitchConfigManager.Instance.SaveTwitchConfig();
-                                                    }
+                        }
                         StopListener();
                         return;
                     }

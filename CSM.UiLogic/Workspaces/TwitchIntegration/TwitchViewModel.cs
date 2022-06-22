@@ -3,6 +3,7 @@ using CSM.Business.TwitchIntegration.TwitchConfiguration;
 using CSM.DataAccess.Entities.Offline;
 using CSM.Framework.Configuration.UserConfiguration;
 using CSM.Services;
+using CSM.UiLogic.Properties;
 using CSM.UiLogic.Workspaces.Playlists;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
@@ -30,7 +31,7 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
         private PlaylistSelectionState playlistSelectionState;
         private PlaylistSongDetailViewModel playlistSongDetail;
         private List<AddSongToPlaylistEventArgs> autoAddSongs;
-        private string autoAddText;
+        private string autoAddText = Resources.TwitchIntegration_AutoAddingNotActive;
         private string autoAddFilePath;
 
         #endregion
@@ -46,11 +47,11 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
             {
                 if (string.IsNullOrWhiteSpace(TwitchConfigManager.Instance.Config.Login))
                 {
-                    return "Twitch: not logged in";
+                    return Resources.TwitchIntegration_NotLoggedIn;
                 }
                 else
                 {
-                    return $"Twitch: logged in as {TwitchConfigManager.Instance.Config.Login}";
+                    return string.Format(Resources.TwitchIntegration_LoggedIn, TwitchConfigManager.Instance.Config.Login);
                 }
             }
         }
@@ -358,7 +359,7 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
         private void StartAutoAdd()
         {
             autoAddSongs = new List<AddSongToPlaylistEventArgs>();
-            AutoAddText = $"Auto-adding to: {playlistSelectionState.PlaylistViewModel.Name}";
+            AutoAddText = string.Format(Resources.TwitchIntegration_AutoAddingTo, playlistSelectionState.PlaylistViewModel.Name);
             autoAddFilePath = playlistSelectionState.PlaylistViewModel.FilePath;
             StartAutoAddCommand.NotifyCanExecuteChanged();
             StopAutoAddCommand.NotifyCanExecuteChanged();
@@ -371,7 +372,7 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
 
         private void StopAutoAdd()
         {
-            AutoAddText = "Auto-adding not active";
+            AutoAddText = Resources.TwitchIntegration_AutoAddingNotActive;
 
             var infoContent = File.ReadAllText(autoAddFilePath);
             Playlist playlist = JsonSerializer.Deserialize<Playlist>(infoContent);

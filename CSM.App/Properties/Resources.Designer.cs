@@ -1366,6 +1366,24 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Channel Name.
+        /// </summary>
+        public static string Workspace_TwitchIntegration_Channels_Watermark {
+            get {
+                return ResourceManager.GetString("Workspace_TwitchIntegration_Channels_Watermark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ScoreSaber.
+        /// </summary>
+        public static string Workspace_TwitchIntegration_ScoreSaber_Title {
+            get {
+                return ResourceManager.GetString("Workspace_TwitchIntegration_ScoreSaber_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add to selected playlist.
         /// </summary>
         public static string Workspace_TwitchIntegration_SongHistory_AddToPlaylist {
@@ -1452,6 +1470,33 @@ namespace CSM.App.Properties {
         public static string Workspace_TwitchIntegration_SongHistory_Header {
             get {
                 return ResourceManager.GetString("Workspace_TwitchIntegration_SongHistory_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start auto-add.
+        /// </summary>
+        public static string Workspace_TwitchIntegration_SongHistory_Start_ToolTip {
+            get {
+                return ResourceManager.GetString("Workspace_TwitchIntegration_SongHistory_Start_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start auto-adding to selected playlist.
+        /// </summary>
+        public static string Workspace_TwitchIntegration_SongHistory_StartAutoAdd {
+            get {
+                return ResourceManager.GetString("Workspace_TwitchIntegration_SongHistory_StartAutoAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop auto-add.
+        /// </summary>
+        public static string Workspace_TwitchIntegration_SongHistory_Stop_ToolTip {
+            get {
+                return ResourceManager.GetString("Workspace_TwitchIntegration_SongHistory_Stop_ToolTip", resourceCulture);
             }
         }
     }

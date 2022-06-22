@@ -78,7 +78,9 @@ namespace CSM.Business.TwitchIntegration
 
         private void Setup()
         {
-            var connectionCredentials = new ConnectionCredentials("InnocentThief", TwitchConfigManager.Instance.Config.AccessToken);
+            if (string.IsNullOrWhiteSpace(TwitchConfigManager.Instance.Config.UserName) || string.IsNullOrWhiteSpace(TwitchConfigManager.Instance.Config.AccessToken)) return;
+
+            var connectionCredentials = new ConnectionCredentials(TwitchConfigManager.Instance.Config.UserName, TwitchConfigManager.Instance.Config.AccessToken);
 
             var clientOptions = new ClientOptions
             {

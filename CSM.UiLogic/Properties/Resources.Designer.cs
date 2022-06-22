@@ -295,6 +295,42 @@ namespace CSM.UiLogic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Auto-adding not active.
+        /// </summary>
+        public static string TwitchIntegration_AutoAddingNotActive {
+            get {
+                return ResourceManager.GetString("TwitchIntegration_AutoAddingNotActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auto-adding to: {0}.
+        /// </summary>
+        public static string TwitchIntegration_AutoAddingTo {
+            get {
+                return ResourceManager.GetString("TwitchIntegration_AutoAddingTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Twitch: logged in as {0}.
+        /// </summary>
+        public static string TwitchIntegration_LoggedIn {
+            get {
+                return ResourceManager.GetString("TwitchIntegration_LoggedIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Twitch: not logged in.
+        /// </summary>
+        public static string TwitchIntegration_NotLoggedIn {
+            get {
+                return ResourceManager.GetString("TwitchIntegration_NotLoggedIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Custom Levels.
         /// </summary>
         public static string Workspace_CustomLevels {

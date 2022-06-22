@@ -31,10 +31,10 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Width="200" Text="{Binding AutoAddText}" VerticalAlignment="Center" TextAlignment="Right" TextTrimming="CharacterEllipsis" ToolTip="{Binding AutoAddText}"/>
-                    <telerik:RadButton Grid.Column="1" Command="{Binding StartAutoAddCommand}" Margin="3,0,0,0" Background="Transparent" BorderThickness="0" ToolTip="Stop auto-add"  >
-                        <telerik:RadGlyph Glyph="&#xe149;" Foreground="DarkRed" ToolTip="Start auto-adding to selected playlist" />
+                    <telerik:RadButton Grid.Column="1" Command="{Binding StartAutoAddCommand}" Margin="3,0,0,0" Background="Transparent" BorderThickness="0" ToolTip="{x:Static p:Resources.Workspace_TwitchIntegration_SongHistory_Start_ToolTip}"  >
+                        <telerik:RadGlyph Glyph="&#xe149;" Foreground="DarkRed" ToolTip="{x:Static p:Resources.Workspace_TwitchIntegration_SongHistory_StartAutoAdd}" />
                     </telerik:RadButton>
-                    <telerik:RadButton Grid.Column="2" Command="{Binding StopAutoAddCommand}" Margin="3,0,0,0" Background="Transparent" BorderThickness="0" ToolTip="Stop auto-add" >
+                    <telerik:RadButton Grid.Column="2" Command="{Binding StopAutoAddCommand}" Margin="3,0,0,0" Background="Transparent" BorderThickness="0" ToolTip="{x:Static p:Resources.Workspace_TwitchIntegration_SongHistory_Stop_ToolTip}" >
                         <telerik:RadGlyph Glyph="&#xe20e;" />
                     </telerik:RadButton>
                 </Grid>

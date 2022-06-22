@@ -102,7 +102,6 @@ namespace CSM.Business.TwitchIntegration
 
         #endregion
 
-
         #region Singleton
 
         private static ReceivedBeatmapsManager instance;
