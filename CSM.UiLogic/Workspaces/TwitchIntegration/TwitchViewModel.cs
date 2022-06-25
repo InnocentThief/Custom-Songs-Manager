@@ -374,6 +374,8 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
         {
             AutoAddText = Resources.TwitchIntegration_AutoAddingNotActive;
 
+            if (!File.Exists(autoAddFilePath)) return;
+
             var infoContent = File.ReadAllText(autoAddFilePath);
             Playlist playlist = JsonSerializer.Deserialize<Playlist>(infoContent);
             playlist.Path = autoAddFilePath;
