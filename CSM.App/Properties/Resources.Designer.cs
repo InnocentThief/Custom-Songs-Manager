@@ -1474,20 +1474,12 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start auto-add.
+        ///   Looks up a localized string similar to Start auto-adding to selected playlist
+        ///Songs will be added to playlist once you stop auto-adding.
         /// </summary>
         public static string Workspace_TwitchIntegration_SongHistory_Start_ToolTip {
             get {
                 return ResourceManager.GetString("Workspace_TwitchIntegration_SongHistory_Start_ToolTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Start auto-adding to selected playlist.
-        /// </summary>
-        public static string Workspace_TwitchIntegration_SongHistory_StartAutoAdd {
-            get {
-                return ResourceManager.GetString("Workspace_TwitchIntegration_SongHistory_StartAutoAdd", resourceCulture);
             }
         }
         

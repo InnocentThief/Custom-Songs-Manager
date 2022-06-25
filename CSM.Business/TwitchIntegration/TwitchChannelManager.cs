@@ -71,7 +71,7 @@ namespace CSM.Business.TwitchIntegration
         /// <returns>True if the channel is joined; otherwise false.</returns>
         public bool CheckChannelIsJoined(string channelName)
         {
-            return twitchClient.JoinedChannels.Any(c => c.Channel == channelName);
+            return twitchClient!= null && twitchClient.JoinedChannels.Any(c => c.Channel == channelName);
         }
 
         #region Helper methods

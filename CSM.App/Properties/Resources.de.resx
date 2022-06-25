@@ -600,11 +600,9 @@
   <data name="Workspace_TwitchIntegration_SongHistory_Header" xml:space="preserve">
     <value>Song History</value>
   </data>
-  <data name="Workspace_TwitchIntegration_SongHistory_StartAutoAdd" xml:space="preserve">
-    <value>Start auto-adding to selected playlist</value>
-  </data>
   <data name="Workspace_TwitchIntegration_SongHistory_Start_ToolTip" xml:space="preserve">
-    <value>Start auto-add</value>
+    <value>Start auto-adding to selected playlist
+Songs will be added to playlist once you stop auto-adding</value>
   </data>
   <data name="Workspace_TwitchIntegration_SongHistory_Stop_ToolTip" xml:space="preserve">
     <value>Stop auto-add</value>
