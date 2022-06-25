@@ -28,7 +28,10 @@ namespace CSM.Services
         internal GenericServiceClient(string apiBaseAddress)
         {
             this.apiBaseAddress = apiBaseAddress ?? throw new ArgumentNullException(nameof(apiBaseAddress));
-            client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("Custom-Songs-Manager", Assembly.GetExecutingAssembly().GetName().Version.ToString()));
+            if (client.DefaultRequestHeaders.UserAgent.Count == 0)
+            {
+                client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("Custom-Songs-Manager", Assembly.GetExecutingAssembly().GetName().Version.ToString()));
+            }
         }
 
         /// <summary>
