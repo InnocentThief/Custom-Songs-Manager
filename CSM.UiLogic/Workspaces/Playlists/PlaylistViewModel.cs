@@ -275,7 +275,19 @@ namespace CSM.UiLogic.Workspaces.Playlists
         public async Task GetBeatSaverBeatMapDataAsync(string hash)
         {
             var beatmap = await beatMapService.GetBeatMapDataAsync(hash);
-            PlaylistSongDetail = beatmap == null ? null : new PlaylistSongDetailViewModel(beatmap);
+            if (beatmap == null)
+            {
+                PlaylistSongDetail = null;
+            }
+            else
+            {
+                PlaylistSongDetail = new PlaylistSongDetailViewModel(beatmap);
+                if (SelectedPlaylistSong != null || !string.IsNullOrWhiteSpace(SelectedPlaylistSong.BsrKey))
+                {
+                    SelectedPlaylistSong.BsrKey = beatmap.Id;
+                    SaveToFile();
+                }
+            }
         }
 
         /// <summary>

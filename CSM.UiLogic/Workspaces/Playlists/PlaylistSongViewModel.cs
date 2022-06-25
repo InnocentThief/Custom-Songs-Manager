@@ -43,7 +43,17 @@ namespace CSM.UiLogic.Workspaces.Playlists
         /// <summary>
         /// Gets the bsr key of the song.
         /// </summary>
-        public string BsrKey => playlistSong.Key;
+        public string BsrKey
+        {
+            get => playlistSong.Key;
+            set
+            {
+                if (playlistSong.Key == value) return;
+                playlistSong.Key = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(BsrKeyHex));
+            }
+        }
 
         public int BsrKeyHex
         {
