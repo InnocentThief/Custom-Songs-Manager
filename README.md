@@ -11,7 +11,11 @@
 - Lists the selected difficulties of the songs
 - Lets you change name, author, description and image of a playlist
 - Lets you add and remove songs (incl. the difficulty) from custom levels, Beat Saber favorites, and song search (BeatSaver.com)
-## Twitch integration
+## Twitch Integration
+- Configure your favorite streamers channel and start "recording" !bsr and !link requests
+- Requested songs will be listed and you can add them to your own playlist
+- Auto-add to selected playlist
+## ScoreSaber Integration
 - work in progress
 ## Tools
 - work in progress
@@ -30,3 +34,5 @@
 ## Playlists
 ![image](https://user-images.githubusercontent.com/65510170/171869191-bc9ec386-203e-408d-8733-a8bff173e0e4.png)
 ![image](https://user-images.githubusercontent.com/65510170/171869447-81987f35-d673-4fa4-9f9d-81fc57531087.png)
+## Twitch Integration
+![image](https://user-images.githubusercontent.com/65510170/175772925-4046bdaf-c12e-42fa-b01f-b98b00ae3e93.png)
