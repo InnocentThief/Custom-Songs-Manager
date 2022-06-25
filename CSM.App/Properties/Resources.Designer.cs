@@ -106,6 +106,15 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Info.
+        /// </summary>
+        public static string MainWindow_About {
+            get {
+                return ResourceManager.GetString("MainWindow_About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         public static string MainWindow_Settings {
@@ -232,6 +241,24 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to API Endpoint.
+        /// </summary>
+        public static string Settings_BeatSaver_Endpoint {
+            get {
+                return ResourceManager.GetString("Settings_BeatSaver_Endpoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restart needed if changed. Clear to set to default..
+        /// </summary>
+        public static string Settings_BeatSaver_Endpoint_ToolTip {
+            get {
+                return ResourceManager.GetString("Settings_BeatSaver_Endpoint_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Closes Settings.
         /// </summary>
         public static string Settings_Close {
@@ -255,6 +282,15 @@ namespace CSM.App.Properties {
         public static string Settings_Workspace_CustomLevels {
             get {
                 return ResourceManager.GetString("Settings_Workspace_CustomLevels", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove song after adding to playlist.
+        /// </summary>
+        public static string Settings_Workspace_RemoveSongAfterAddingToPlaylist {
+            get {
+                return ResourceManager.GetString("Settings_Workspace_RemoveSongAfterAddingToPlaylist", resourceCulture);
             }
         }
         
@@ -1299,6 +1335,160 @@ namespace CSM.App.Properties {
         public static string Workspace_Playlists_Title {
             get {
                 return ResourceManager.GetString("Workspace_Playlists_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a new channel.
+        /// </summary>
+        public static string Workspace_TwitchIntegration_Channels_AddChannel {
+            get {
+                return ResourceManager.GetString("Workspace_TwitchIntegration_Channels_AddChannel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete the selected channel.
+        /// </summary>
+        public static string Workspace_TwitchIntegration_Channels_DeleteChannel {
+            get {
+                return ResourceManager.GetString("Workspace_TwitchIntegration_Channels_DeleteChannel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Twitch Channels.
+        /// </summary>
+        public static string Workspace_TwitchIntegration_Channels_Header {
+            get {
+                return ResourceManager.GetString("Workspace_TwitchIntegration_Channels_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Channel Name.
+        /// </summary>
+        public static string Workspace_TwitchIntegration_Channels_Watermark {
+            get {
+                return ResourceManager.GetString("Workspace_TwitchIntegration_Channels_Watermark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ScoreSaber.
+        /// </summary>
+        public static string Workspace_TwitchIntegration_ScoreSaber_Title {
+            get {
+                return ResourceManager.GetString("Workspace_TwitchIntegration_ScoreSaber_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add to selected playlist.
+        /// </summary>
+        public static string Workspace_TwitchIntegration_SongHistory_AddToPlaylist {
+            get {
+                return ResourceManager.GetString("Workspace_TwitchIntegration_SongHistory_AddToPlaylist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BSR.
+        /// </summary>
+        public static string Workspace_TwitchIntegration_SongHistory_ColumnHeader_BSR {
+            get {
+                return ResourceManager.GetString("Workspace_TwitchIntegration_SongHistory_ColumnHeader_BSR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Channel.
+        /// </summary>
+        public static string Workspace_TwitchIntegration_SongHistory_ColumnHeader_Channel {
+            get {
+                return ResourceManager.GetString("Workspace_TwitchIntegration_SongHistory_ColumnHeader_Channel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete Song.
+        /// </summary>
+        public static string Workspace_TwitchIntegration_SongHistory_ColumnHeader_DeleteSong {
+            get {
+                return ResourceManager.GetString("Workspace_TwitchIntegration_SongHistory_ColumnHeader_DeleteSong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mapper.
+        /// </summary>
+        public static string Workspace_TwitchIntegration_SongHistory_ColumnHeader_LevelAuthorName {
+            get {
+                return ResourceManager.GetString("Workspace_TwitchIntegration_SongHistory_ColumnHeader_LevelAuthorName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Received At.
+        /// </summary>
+        public static string Workspace_TwitchIntegration_SongHistory_ColumnHeader_ReceivedAt {
+            get {
+                return ResourceManager.GetString("Workspace_TwitchIntegration_SongHistory_ColumnHeader_ReceivedAt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Artist.
+        /// </summary>
+        public static string Workspace_TwitchIntegration_SongHistory_ColumnHeader_SongAuthorName {
+            get {
+                return ResourceManager.GetString("Workspace_TwitchIntegration_SongHistory_ColumnHeader_SongAuthorName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title.
+        /// </summary>
+        public static string Workspace_TwitchIntegration_SongHistory_ColumnHeader_SongName {
+            get {
+                return ResourceManager.GetString("Workspace_TwitchIntegration_SongHistory_ColumnHeader_SongName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete all received songs.
+        /// </summary>
+        public static string Workspace_TwitchIntegration_SongHistory_DeleteAllSongs {
+            get {
+                return ResourceManager.GetString("Workspace_TwitchIntegration_SongHistory_DeleteAllSongs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Song History.
+        /// </summary>
+        public static string Workspace_TwitchIntegration_SongHistory_Header {
+            get {
+                return ResourceManager.GetString("Workspace_TwitchIntegration_SongHistory_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start auto-adding to selected playlist
+        ///Songs will be added to playlist once you stop auto-adding.
+        /// </summary>
+        public static string Workspace_TwitchIntegration_SongHistory_Start_ToolTip {
+            get {
+                return ResourceManager.GetString("Workspace_TwitchIntegration_SongHistory_Start_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop auto-add.
+        /// </summary>
+        public static string Workspace_TwitchIntegration_SongHistory_Stop_ToolTip {
+            get {
+                return ResourceManager.GetString("Workspace_TwitchIntegration_SongHistory_Stop_ToolTip", resourceCulture);
             }
         }
     }

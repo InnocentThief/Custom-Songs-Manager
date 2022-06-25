@@ -100,16 +100,6 @@ namespace CSM.UiLogic.Workspaces
         }
 
         /// <summary>
-        /// Gets whether the Song Detail area on the bottom is visible.
-        /// </summary>
-        public bool ShowBottomDetail => UserConfigManager.Instance.Config.CustomLevelsSongDetailPosition == SongDetailPosition.Bottom;
-
-        /// <summary>
-        /// Gets whether the Song Detail area on the right is visible.
-        /// </summary>
-        public bool ShowRightDetail => UserConfigManager.Instance.Config.CustomLevelsSongDetailPosition == SongDetailPosition.Right;
-
-        /// <summary>
         /// Command used to refresh the workspace data.
         /// </summary>
         public RelayCommand RefreshCommand { get; }
@@ -236,11 +226,6 @@ namespace CSM.UiLogic.Workspaces
             {
                 CustomLevelPath = UserConfigManager.Instance.Config.CustomLevelPaths.First().Path;
                 if (IsActive) Refresh();
-            }
-            if (e.CustomLevelDetailPositionChanged)
-            {
-                OnPropertyChanged(nameof(ShowBottomDetail));
-                OnPropertyChanged(nameof(ShowRightDetail));
             }
         }
 

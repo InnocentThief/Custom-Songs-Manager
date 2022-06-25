@@ -414,44 +414,52 @@ namespace CSM.UiLogic.Workspaces.Playlists
 
         private async void SongSearch_SearchSongEvent(object sender, SongSearchEventArgs e)
         {
-            if (e.PageIndex == 0)
+            try
             {
-                foreach (var searchedSong in SearchedSongs)
+                if (e.PageIndex == 0)
                 {
-                    searchedSong.AddSongToPlaylistEvent -= CustomLevelOrFavorite_AddSongToPlaylistEvent;
+                    foreach (var searchedSong in SearchedSongs)
+                    {
+                        searchedSong.AddSongToPlaylistEvent -= CustomLevelOrFavorite_AddSongToPlaylistEvent;
+                    }
+                    SearchedSongs.Clear();
                 }
-                SearchedSongs.Clear();
-            }    
 
-            if (e.IsKey)
-            {
-                var searchService = new BeatMapService("maps/id");
-                var beatmap = await searchService.GetBeatMapDataAsync(e.SearchString);
-
-                if (beatmap == null) return;
-
-                var searchedSong = new SearchedSongViewModel(beatmap);
-                searchedSong.AddSongToPlaylistEvent += CustomLevelOrFavorite_AddSongToPlaylistEvent;
-                searchedSong.SetCanAddToPlaylist(playlistSelectionState.PlaylistSelected);
-                SearchedSongs.Add(searchedSong);
-            }
-            else
-            {
-                var searchService = new BeatMapService($"search/text/{e.PageIndex}");
-                var beatmaps = await searchService.SearchSongsAsync(e.SearchString);
-
-                if (beatmaps.Docs == null) return;
-
-                foreach (var beatmap in beatmaps.Docs)
+                if (e.IsKey)
                 {
+                    var searchService = new BeatMapService("maps/id");
+                    var beatmap = await searchService.GetBeatMapDataAsync(e.SearchString);
+
+                    if (beatmap == null) return;
+
                     var searchedSong = new SearchedSongViewModel(beatmap);
                     searchedSong.AddSongToPlaylistEvent += CustomLevelOrFavorite_AddSongToPlaylistEvent;
                     searchedSong.SetCanAddToPlaylist(playlistSelectionState.PlaylistSelected);
                     SearchedSongs.Add(searchedSong);
                 }
+                else
+                {
+                    var searchService = new BeatMapService($"search/text/{e.PageIndex}");
+                    var beatmaps = await searchService.SearchSongsAsync(e.SearchString);
+
+                    if (beatmaps== null || beatmaps.Docs == null) return;
+
+                    foreach (var beatmap in beatmaps.Docs)
+                    {
+                        var searchedSong = new SearchedSongViewModel(beatmap);
+                        searchedSong.AddSongToPlaylistEvent += CustomLevelOrFavorite_AddSongToPlaylistEvent;
+                        searchedSong.SetCanAddToPlaylist(playlistSelectionState.PlaylistSelected);
+                        SearchedSongs.Add(searchedSong);
+                    }
+                }
+
+                SongSearch.SetSearchParametersVisibility(!SearchedSongs.Any());
+            }
+            catch (Exception ex)
+            {
+                LoggerProvider.Logger.Error<CustomLevelsViewModel>($"Unable to handle song search event: {ex}");
             }
 
-            SongSearch.SetSearchParametersVisibility(!SearchedSongs.Any());
         }
 
         #endregion

@@ -12,6 +12,8 @@ namespace CSM.UiLogic.Workspaces.Playlists
         /// </summary>
         public bool PlaylistSelected { get; set; }
 
+        public PlaylistViewModel PlaylistViewModel { get; set; }
+
         /// <summary>
         /// Occurs when the selection state changes.
         /// </summary>
@@ -21,9 +23,10 @@ namespace CSM.UiLogic.Workspaces.Playlists
         /// Sets a new state.
         /// </summary>
         /// <param name="selected">The selection state.</param>
-        public void PlaylistSelectionChanged(bool selected)
+        public void PlaylistSelectionChanged(bool selected, PlaylistViewModel playlistViewModel)
         {
             PlaylistSelected = selected;
+            PlaylistViewModel = playlistViewModel;
             PlaylistSelectionChangedEvent?.Invoke(this, EventArgs.Empty);
         }
     }

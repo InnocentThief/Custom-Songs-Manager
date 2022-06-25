@@ -1,4 +1,6 @@
-﻿using CSM.UiLogic;
+﻿using CSM.App.Workspaces.TwitchIntegration;
+using CSM.Business;
+using CSM.UiLogic;
 using CSM.UiLogic.Workspaces;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,14 +16,14 @@ namespace CSM.App
         public MainWindow()
         {
             InitializeComponent();
-            //Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("de-CH");
-            DataContext = new MainWindowViewModel();
+            //DataContext = new MainWindowViewModel();
 
             IconTemplate = this.Resources["WindowIconTemplate"] as DataTemplate;
         }
 
         private void RadNavigationView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (e.RemovedItems.Count == 0) return;
             // Unload removed workspace
             if (e.RemovedItems.Count > 0)
             {

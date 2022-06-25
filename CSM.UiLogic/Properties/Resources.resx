@@ -198,6 +198,18 @@
   <data name="Settings_Title" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="TwitchIntegration_AutoAddingNotActive" xml:space="preserve">
+    <value>Auto-adding not active</value>
+  </data>
+  <data name="TwitchIntegration_AutoAddingTo" xml:space="preserve">
+    <value>Auto-adding to: {0}</value>
+  </data>
+  <data name="TwitchIntegration_LoggedIn" xml:space="preserve">
+    <value>Twitch: logged in as {0}</value>
+  </data>
+  <data name="TwitchIntegration_NotLoggedIn" xml:space="preserve">
+    <value>Twitch: not logged in</value>
+  </data>
   <data name="Workspace_CustomLevels" xml:space="preserve">
     <value>Custom Levels</value>
   </data>

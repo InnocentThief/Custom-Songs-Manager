@@ -17,7 +17,6 @@ namespace CSM.UiLogic
     {
         #region Private fields
 
-        private ObservableCollection<BaseWorkspaceViewModel> workspaces;
         private BaseWorkspaceViewModel selectedWorkspace;
 
         #endregion
@@ -27,24 +26,7 @@ namespace CSM.UiLogic
         /// <summary>
         /// Gets a list of available workspaces.
         /// </summary>
-        public ObservableCollection<BaseWorkspaceViewModel> Workspaces
-        {
-            get
-            {
-                if (workspaces == null)
-                {
-                    workspaces = new ObservableCollection<BaseWorkspaceViewModel>()
-                    {
-                        new CustomLevelsViewModel() { Title = Resources.Workspace_CustomLevels, IconGlyph = "&#xe023;" },
-                        new PlaylistsViewModel() { Title = Resources.Workspace_Playlists, IconGlyph = "&#xe029;" }
-                        //new TwitchIntegrationViewModel() { Title = Resources.Workspace_Twitch, IconGlyph = "&#xe800;" },
-                        //new ToolsViewModel() { Title = Resources.Workspace_Tools, IconGlyph = "&#xe13c;" }
-                    };
-                    SelectedWorkspace = workspaces.Single(w => w.WorkspaceType == UserConfigManager.Instance.Config.DefaultWorkspace);
-                }
-                return workspaces;
-            }
-        }
+        public ObservableCollection<BaseWorkspaceViewModel> Workspaces { get; }
 
         /// <summary>
         /// Gets or sets the selected workspace.
@@ -53,10 +35,6 @@ namespace CSM.UiLogic
         {
             get
             {
-                if (selectedWorkspace == null)
-                {
-                    selectedWorkspace = workspaces.FirstOrDefault();
-                }
                 return selectedWorkspace;
             }
             set
@@ -84,9 +62,17 @@ namespace CSM.UiLogic
         /// </summary>
         public MainWindowViewModel()
         {
-            //Settings = new SettingsViewModel();
             SettingsCommand = new RelayCommand(ShowSettings);
             InfoCommand = new RelayCommand(ShowInfo);
+
+            Workspaces = new ObservableCollection<BaseWorkspaceViewModel>()
+                    {
+                        new CustomLevelsViewModel() { Title = Resources.Workspace_CustomLevels, IconGlyph = "&#xe023;" },
+                        new PlaylistsViewModel(true) { Title = Resources.Workspace_Playlists, IconGlyph = "&#xe029;" },
+                        new TwitchIntegrationViewModel() { Title = Resources.Workspace_Twitch, IconGlyph = "&#xe800;" },
+                        //new ToolsViewModel() { Title = Resources.Workspace_Tools, IconGlyph = "&#xe13c;" }
+                    };
+            SelectedWorkspace = Workspaces.Single(w => w.WorkspaceType == UserConfigManager.Instance.Config.DefaultWorkspace);
         }
 
         /// <summary>

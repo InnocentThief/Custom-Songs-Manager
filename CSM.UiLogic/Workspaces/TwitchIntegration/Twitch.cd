@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CSM.UiLogic.Workspaces.TwitchIntegrationViewModel">
+    <Position X="0.5" Y="6" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAQAAAAAQAAAAAgAAAAAAAAAAAAIQAAEAAAAAAAQ=</HashCode>
+      <FileName>Workspaces\TwitchIntegrationViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Playlists" />
+      <Property Name="Twitch" />
+      <Property Name="ScoreSaber" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CSM.UiLogic.Workspaces.TwitchIntegration.TwitchViewModel">
+    <Position X="8.25" Y="8.25" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>EAAggggSABAAIQAIACAAIAAAAAEAIBAAAIAQgBIEEIg=</HashCode>
+      <FileName>Workspaces\TwitchIntegration\TwitchViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Channels" />
+      <Property Name="ReceivedBeatmaps" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CSM.UiLogic.Workspaces.TwitchIntegration.TwitchChannelViewModel">
+    <Position X="13.25" Y="3.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AEACAAAAAAAAAAAAABAAAAQAAAAEAAQACAACAAAAIAI=</HashCode>
+      <FileName>Workspaces\TwitchIntegration\TwitchChannelViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSM.UiLogic.Workspaces.TwitchIntegration.ScoreSaberIntegration.ScoreSaberViewModel">
+    <Position X="4" Y="13.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Workspaces\TwitchIntegration\ScoreSaberIntegration\ScoreSaberViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSM.DataAccess.Entities.Offline.ReceivedBeatmap">
+    <Position X="17.25" Y="9.75" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="CSM.UiLogic.Workspaces.PlaylistsViewModel">
+    <Position X="4" Y="2" Width="3" />
+    <TypeIdentifier>
+      <HashCode>BgCwAzAACgFQIghBgCKAQCQAgAIEAAIAAAAAAAAAACI=</HashCode>
+      <FileName>Workspaces\PlaylistsViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="SelectedPlaylist" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Playlists" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CSM.UiLogic.Workspaces.TwitchIntegration.ReceivedBeatmapViewModel">
+    <Position X="13.5" Y="9.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAECAAIUAAQABAAAAAAABhAgBEAFAAAAgAoAAAA=</HashCode>
+      <FileName>Workspaces\TwitchIntegration\ReceivedBeatmapViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ReceivedBeatmap" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CSM.UiLogic.Workspaces.Playlists.BasePlaylistViewModel">
+    <Position X="9" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAgEAAAAgAAAAAQAAAAAEQAAEQEAAAABABAAAAAAAA=</HashCode>
+      <FileName>Workspaces\Playlists\BasePlaylistViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSM.UiLogic.Workspaces.Playlists.PlaylistViewModel" Collapsed="true">
+    <Position X="7.75" Y="7" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>QQAAkIAyQgQAYgBAAAAEIQRBAABQIBCDAAAAAAANEIA=</HashCode>
+      <FileName>Workspaces\Playlists\PlaylistViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSM.UiLogic.Workspaces.Playlists.PlaylistFolderViewModel" Collapsed="true">
+    <Position X="10.5" Y="7" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAQEAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Workspaces\Playlists\PlaylistFolderViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

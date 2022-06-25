@@ -10,28 +10,28 @@
   <Class Name="CSM.UiLogic.Workspaces.CustomLevelsViewModel" Collapsed="true">
     <Position X="0.5" Y="3.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>BBAAAxEESgBQAAggkACAIBAAwQAAIAMACAEAAAAEAAI=</HashCode>
+      <HashCode>BBAAAxEESgBQAAggkACAYBAAwQAEIAMACAEAAAAEAAI=</HashCode>
       <FileName>Workspaces\CustomLevelsViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CSM.UiLogic.Workspaces.PlaylistsViewModel" Collapsed="true">
     <Position X="3" Y="3.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>BAAQAxAACgBQIggBgCKAAAQAAAAEAAIAAAEAAAAAAAI=</HashCode>
+      <HashCode>BgCwAzAACgFQIggBgCKAQCQAgAIEAAIAAAAAAAAAACI=</HashCode>
       <FileName>Workspaces\PlaylistsViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CSM.UiLogic.Workspaces.ToolsViewModel" Collapsed="true">
     <Position X="5.25" Y="3.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAQAAAAAQAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAQAAAAAQAAAAAAAAAAAAgAAAAAIAAAAAAAAAAAA=</HashCode>
       <FileName>Workspaces\ToolsViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CSM.UiLogic.Workspaces.TwitchIntegrationViewModel" Collapsed="true">
     <Position X="7.5" Y="3.75" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAQAAAAAQAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAQAQAAAAAQAAAAAgAAAAAAAAAAAAIQAAEAAAAAAAQ=</HashCode>
       <FileName>Workspaces\TwitchIntegrationViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>

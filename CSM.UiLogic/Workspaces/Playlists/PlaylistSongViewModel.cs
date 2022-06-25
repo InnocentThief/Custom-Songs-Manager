@@ -33,13 +33,27 @@ namespace CSM.UiLogic.Workspaces.Playlists
         /// </summary>
         public string Hash
         {
-            get => playlistSong.Hash.ToLower();
+            get
+            {
+                if (playlistSong.Hash == null) return string.Empty;
+                return playlistSong.Hash.ToLower();
+            }
         }
 
         /// <summary>
         /// Gets the bsr key of the song.
         /// </summary>
-        public string BsrKey => playlistSong.Key;
+        public string BsrKey
+        {
+            get => playlistSong.Key;
+            set
+            {
+                if (playlistSong.Key == value) return;
+                playlistSong.Key = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(BsrKeyHex));
+            }
+        }
 
         public int BsrKeyHex
         {

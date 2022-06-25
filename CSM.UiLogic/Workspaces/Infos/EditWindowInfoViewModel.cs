@@ -13,12 +13,12 @@ namespace CSM.UiLogic.Workspaces.Infos
         /// <summary>
         /// Gets the height of the window.
         /// </summary>
-        public override int Height => 200;
+        public override int Height => 250;
 
         /// <summary>
         /// Gets the width of the window.
         /// </summary>
-        public override int Width => 600;
+        public override int Width => 700;
 
         /// <summary>
         /// Title of the edit wizard (shown in the title bar of the dialog).

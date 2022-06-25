@@ -19,6 +19,11 @@ namespace CSM.UiLogic.Workspaces
         public BeatSaberSettingsViewModel BeatSaberSettings { get; }
 
         /// <summary>
+        /// Gets the BeatSaver.com settings.
+        /// </summary>
+        public BeatSaverSettingsViewModel BeatSaverSettings { get; }
+
+        /// <summary>
         /// Gets the workspace settings.
         /// </summary>
         public WorkspaceSettingsViewModel WorkspaceSettings { get; }
@@ -57,9 +62,10 @@ namespace CSM.UiLogic.Workspaces
         /// <summary>
         /// Initializes a new <see cref="SettingsViewModel"/>.
         /// </summary>
-        public SettingsViewModel(): base(string.Empty, string.Empty)
+        public SettingsViewModel() : base(string.Empty, string.Empty)
         {
             BeatSaberSettings = new BeatSaberSettingsViewModel();
+            BeatSaverSettings = new BeatSaverSettingsViewModel();
             WorkspaceSettings = new WorkspaceSettingsViewModel();
         }
     }

@@ -18,6 +18,7 @@ namespace CSM.UiLogic.Workspaces.Settings
         private WorkspaceViewModel workspaceViewModel;
         private bool songDetailPositionRight;
         private bool songDetailPositionBottom;
+        private bool removeReceivedSongAfterAddingToPlaylist;
 
         #endregion
 
@@ -66,6 +67,22 @@ namespace CSM.UiLogic.Workspaces.Settings
         }
 
         /// <summary>
+        /// Gets or sets whether the received song should be deleted after adding it to a playlist.
+        /// </summary>
+        public bool RemoveReceivedSongAfterAddingToPlaylist
+        {
+            get => removeReceivedSongAfterAddingToPlaylist;
+            set
+            {
+                if (removeReceivedSongAfterAddingToPlaylist == value) return;
+                removeReceivedSongAfterAddingToPlaylist = value;
+                UserConfigManager.Instance.Config.RemoveReceivedSongAfterAddingToPlaylist = value;
+                UserConfigManager.Instance.SaveUserConfig();
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
         /// Gets or sets whether the song detail position on the custom level workspace is set to bottom.
         /// </summary>
         public bool SongDetailPositionBottom
@@ -96,11 +113,16 @@ namespace CSM.UiLogic.Workspaces.Settings
             Workspaces = new List<WorkspaceViewModel>();
             foreach (var workspaceType in Enum.GetValues(typeof(WorkspaceType)))
             {
-                Workspaces.Add(new WorkspaceViewModel(workspaceType.ToString().ToWorkspaceType(), (WorkspaceType)workspaceType));
+                //TODO: Remove Tools exclution when Tools-Workspace is implemented
+                if ((WorkspaceType)workspaceType != WorkspaceType.Tools)
+                {
+                    Workspaces.Add(new WorkspaceViewModel(workspaceType.ToString().ToWorkspaceType(), (WorkspaceType)workspaceType));
+                }
             }
             SelectedWorkspace = Workspaces.SingleOrDefault(w => w.Type == UserConfigManager.Instance.Config.DefaultWorkspace);
             songDetailPositionRight = UserConfigManager.Instance.Config.CustomLevelsSongDetailPosition == SongDetailPosition.Right;
             songDetailPositionBottom = UserConfigManager.Instance.Config.CustomLevelsSongDetailPosition == SongDetailPosition.Bottom;
+            removeReceivedSongAfterAddingToPlaylist = UserConfigManager.Instance.Config.RemoveReceivedSongAfterAddingToPlaylist;
         }
     }
 }

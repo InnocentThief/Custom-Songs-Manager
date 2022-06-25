@@ -20,10 +20,12 @@
         <Border Grid.Row="1" BorderBrush="DimGray" BorderThickness="1, 0, 1, 1">
             <Grid Margin="8">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="200" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -39,6 +41,11 @@
                     <telerik:RadRadioButton GroupName="SongDetailPosition" Content="{x:Static p:Resources.Settings_Workspace_SongDetailPosition_Right}" IsChecked="{Binding SongDetailPositionRight}" VerticalAlignment="Center" />
                     <telerik:RadRadioButton GroupName="SongDetailPosition" Content="{x:Static p:Resources.Settings_Workspace_SongDetailPosition_Bottom}" IsChecked="{Binding SongDetailPositionBottom}" />
                 </StackPanel>
+                <!-- Workspace: Twitch Integration -->
+                <TextBlock Grid.Row="3" Text="Twitch Integration" FontWeight="ExtraBlack" Margin="0,10,0,3" />
+                <!-- Remove received song after adding to playlist -->
+                <TextBlock Grid.Row="4" Text="{x:Static p:Resources.Settings_Workspace_RemoveSongAfterAddingToPlaylist}" VerticalAlignment="Center" />
+                <telerik:RadToggleSwitchButton Grid.Column="1" Grid.Row="4" TrackWidth="35" TrackHeight="20" IsChecked="{Binding RemoveReceivedSongAfterAddingToPlaylist}" />
             </Grid>
         </Border>
     </Grid>

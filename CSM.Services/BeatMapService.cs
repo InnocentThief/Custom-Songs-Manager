@@ -1,4 +1,5 @@
 ﻿using CSM.DataAccess.Entities.Online;
+using CSM.Framework.Configuration.UserConfiguration;
 using System.Threading.Tasks;
 
 namespace CSM.Services
@@ -16,7 +17,7 @@ namespace CSM.Services
         /// <param name="api">The base api.</param>
         public BeatMapService(string api)
         {
-            client = new GenericServiceClient($"https://api.beatsaver.com/{api}");
+            client = new GenericServiceClient($"{UserConfigManager.Instance.Config.BeatSaverAPIEndpoint}{api}");
         }
 
         /// <summary>
