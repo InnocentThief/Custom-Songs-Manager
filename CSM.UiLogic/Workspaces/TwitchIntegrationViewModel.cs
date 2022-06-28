@@ -43,7 +43,7 @@ namespace CSM.UiLogic.Workspaces
             Twitch = new TwitchViewModel(Playlists.PlaylistSelectionState);
             Twitch.AddSongToPlaylistEvent += Twitch_AddSongToPlaylistEvent;
             Twitch.SongChangedEvent += Twitch_SongChangedEvent;
-            //ScoreSaber = new ScoreSaberViewModel();
+            ScoreSaber = new ScoreSaberViewModel();
 
         }
 

@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="CSM.App.Workspaces.TwitchIntegration.ScoreSaberProfileView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CSM.App.Workspaces.TwitchIntegration"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <DataTemplate x:Key="PlayerDataTemplate">
+            <Grid Width="80">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+                <StackPanel>
+                    <Image Source="{Binding ProfilePicture}" Width="60" />
+                    <TextBlock Text="{Binding Name}" Margin="0,6,0,0" />
+                </StackPanel>
+                <Separator Grid.Row="1" />
+                <TextBlock Grid.Row="2" Text="41" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0" />
+                <Separator Grid.Row="3" />
+                <TextBlock Grid.Row="4" Text="#6044" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0" />
+                <Separator Grid.Row="5" />
+                <TextBlock Grid.Row="6" Text="5742.13 pp" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0" />
+                <Separator Grid.Row="7" />
+                <TextBlock Grid.Row="8" Text="2045" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0" />
+                <Separator Grid.Row="9" />
+                <TextBlock Grid.Row="10" Text="1051" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0" />
+                <Separator Grid.Row="11" />
+                <TextBlock Grid.Row="12" Text="89.70%" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0" />
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="30" />
+            </Grid.RowDefinitions>
+            <Separator Grid.Row="1" />
+            <TextBlock Grid.Row="2" Text="Global Rank" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="6,0" />
+            <Separator Grid.Row="3" />
+            <TextBlock Grid.Row="4" Text="Regional Rank" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="6,0" />
+            <Separator Grid.Row="5" />
+            <TextBlock Grid.Row="6" Text="Performance Points" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="6,0" />
+            <Separator Grid.Row="7" />
+            <TextBlock Grid.Row="8" Text="Total Play Count" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="6,0" />
+            <Separator Grid.Row="9" />
+            <TextBlock Grid.Row="10" Text="Ranked Play Count" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="6,0" />
+            <Separator Grid.Row="11" />
+            <TextBlock Grid.Row="12" Text="Avg. Ranked Accuracy" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="6,0" />
+        </Grid>
+        <ItemsControl Grid.Column="1" ItemsSource="{Binding Players}" ItemTemplate="{StaticResource PlayerDataTemplate}" >
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+    </Grid>
+</UserControl>

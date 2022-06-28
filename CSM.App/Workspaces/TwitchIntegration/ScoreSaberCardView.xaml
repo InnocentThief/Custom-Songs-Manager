@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="CSM.App.Workspaces.TwitchIntegration.ScoreSaberCardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CSM.App.Workspaces.TwitchIntegration" xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             mc:Ignorable="d" 
+             d:DesignHeight="80" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <DataTemplate x:Key="PlayerCardDataTemplate">
+            <Border Background="Green" Padding="6" CornerRadius="5" >
+                <Grid Width="200">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.RowSpan="3" Source="{Binding ProfilePicture}" Height="50" />
+                    <Grid Grid.Column="1" Margin="6,0,6,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="1" Text="{Binding Name}" FontWeight="Bold" FontSize="14" TextTrimming="CharacterEllipsis" />
+                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Rank}" FontWeight="DemiBold" />
+                        <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding PP}" FontWeight="DemiBold" />
+                    </Grid>
+                    <telerik:RadButton Grid.Column="2" Background="{x:Null}" BorderThickness="0" VerticalAlignment="Top" >
+                        <telerik:RadGlyph Glyph="&#xe103;" />
+                    </telerik:RadButton>
+                    <telerik:RadButton Grid.Column="2" Background="{x:Null}" BorderThickness="0" VerticalAlignment="Bottom">
+                        <telerik:RadGlyph Glyph="&#xe123;" />
+                    </telerik:RadButton>
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="6" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <telerik:RadButton Background="{x:Null}" BorderThickness="0" Width="40">
+            <telerik:RadGlyph Glyph="&#xe120;" />
+        </telerik:RadButton>
+        <ItemsControl Grid.Column="2" ItemsSource="{Binding Players}" ItemTemplate="{StaticResource PlayerCardDataTemplate}" >
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <Setter Property="FrameworkElement.Margin" Value="0,3,6,3"/>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+        </ItemsControl>
+    </Grid>
+</UserControl>

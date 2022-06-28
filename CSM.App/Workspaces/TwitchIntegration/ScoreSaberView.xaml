@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:p="clr-namespace:CSM.App.Properties"
+             xmlns:p="clr-namespace:CSM.App.Properties" xmlns:twitchintegration="clr-namespace:CSM.App.Workspaces.TwitchIntegration" xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -32,7 +32,31 @@
         </Grid>
         <!-- Channel list -->
         <Border Grid.Row="1" BorderBrush="DimGray" BorderThickness="1,0,1,1">
-            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <twitchintegration:ScoreSaberCardView Margin="6" />
+                <telerik:RadTabControl Grid.Row="1" >
+                    <telerik:RadTabItem Header="Profile">
+                        <twitchintegration:ScoreSaberProfileView />
+                    </telerik:RadTabItem>
+                    <telerik:RadTabItem Header="Scores">
+                        <twitchintegration:ScoreSaberSongView />
+                    </telerik:RadTabItem>
+                    <telerik:RadTabItem Header="Rank">
+                        <twitchintegration:ScoreSaberRankView />
+                    </telerik:RadTabItem>
+                    <telerik:RadTabItem Header="PP">
+                        <twitchintegration:ScoreSaberPPView />
+                    </telerik:RadTabItem>
+                    <telerik:RadTabItem Header="Accuracy">
+                        <twitchintegration:ScoreSaberAccuracyView />
+                    </telerik:RadTabItem>
+                </telerik:RadTabControl>
+                    
+            </Grid>
         </Border>
 
     </Grid>
