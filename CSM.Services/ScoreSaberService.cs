@@ -1,4 +1,5 @@
 ﻿using CSM.DataAccess.Entities.Online.ScoreSaber;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CSM.Services
@@ -38,6 +39,6 @@ namespace CSM.Services
             return await client.GetAsync<PlayerCollection>($"/players?{query}");
         }
 
-        
+
     }
 }

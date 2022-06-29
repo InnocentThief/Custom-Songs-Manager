@@ -37,7 +37,7 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <twitchintegration:ScoreSaberCardView Margin="6" />
+                <twitchintegration:ScoreSaberCardView Margin="6" MinHeight="80" />
                 <telerik:RadTabControl Grid.Row="1" >
                     <telerik:RadTabItem Header="Profile">
                         <twitchintegration:ScoreSaberProfileView />

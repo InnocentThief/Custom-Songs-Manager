@@ -80,9 +80,13 @@
     <Compile Include="Entities\Offline\ReceivedBeatmaps.cs" />
     <Compile Include="Entities\Online\BeatMaps.cs" />
     <Compile Include="Entities\Online\ScoreSaber\Badge.cs" />
+    <Compile Include="Entities\Online\ScoreSaber\Difficulty.cs" />
+    <Compile Include="Entities\Online\ScoreSaber\LeaderboardInfo.cs" />
     <Compile Include="Entities\Online\ScoreSaber\Metadata.cs" />
     <Compile Include="Entities\Online\ScoreSaber\Player.cs" />
     <Compile Include="Entities\Online\ScoreSaber\PlayerCollection.cs" />
+    <Compile Include="Entities\Online\ScoreSaber\PlayerScore.cs" />
+    <Compile Include="Entities\Online\ScoreSaber\Score.cs" />
     <Compile Include="Entities\Online\ScoreSaber\ScoreStats.cs" />
     <Compile Include="Entities\Online\TwitchValidationResponse.cs" />
     <Compile Include="Entities\Online\User.cs" />

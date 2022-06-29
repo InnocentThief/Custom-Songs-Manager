@@ -1,7 +1,13 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\CSM.App",
+    "\\CSM.App\\Workspaces",
+    "\\CSM.App\\Workspaces\\TwitchIntegration",
+    "\\CSM.Business",
+    "\\CSM.Business\\Properties",
+    "\\CSM.Services"
   ],
-  "SelectedNode": "\\Custom Songs Manager.sln",
+  "SelectedNode": "\\CSM.Services\\ScoreSaberService.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -9,30 +9,30 @@
 
     <UserControl.Resources>
         <DataTemplate x:Key="PlayerDataTemplate">
-            <Grid Width="80">
+            <Grid Width="100">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="100" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="30" />
+                    <RowDefinition Height="40" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="30" />
+                    <RowDefinition Height="40" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="30" />
+                    <RowDefinition Height="40" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="30" />
+                    <RowDefinition Height="40" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="30" />
+                    <RowDefinition Height="40" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="30" />
+                    <RowDefinition Height="40" />
                 </Grid.RowDefinitions>
                 <StackPanel>
-                    <Image Source="{Binding ProfilePicture}" Width="60" />
-                    <TextBlock Text="{Binding Name}" Margin="0,6,0,0" />
+                    <Image Source="{Binding ProfilePicture}" Width="70" />
+                    <TextBlock Text="{Binding Name}" Margin="0,6,0,0" FontWeight="DemiBold" TextTrimming="CharacterEllipsis" HorizontalAlignment="Center" />
                 </StackPanel>
                 <Separator Grid.Row="1" />
-                <TextBlock Grid.Row="2" Text="41" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0" />
+                <TextBlock Grid.Row="2" Text="#6044" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0" />
                 <Separator Grid.Row="3" />
-                <TextBlock Grid.Row="4" Text="#6044" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0" />
+                <TextBlock Grid.Row="4" Text="41" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0" />
                 <Separator Grid.Row="5" />
                 <TextBlock Grid.Row="6" Text="5742.13 pp" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0" />
                 <Separator Grid.Row="7" />
@@ -54,17 +54,17 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="100" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="30" />
+                <RowDefinition Height="40" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="30" />
+                <RowDefinition Height="40" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="30" />
+                <RowDefinition Height="40" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="30" />
+                <RowDefinition Height="40" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="30" />
+                <RowDefinition Height="40" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="30" />
+                <RowDefinition Height="40" />
             </Grid.RowDefinitions>
             <Separator Grid.Row="1" />
             <TextBlock Grid.Row="2" Text="Global Rank" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="6,0" />

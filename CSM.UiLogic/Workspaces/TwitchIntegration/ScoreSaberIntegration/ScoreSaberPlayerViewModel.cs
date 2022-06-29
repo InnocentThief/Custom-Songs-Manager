@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSM.DataAccess.Entities.Online.ScoreSaber;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,7 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration.ScoreSaberIntegration
 
         public string PP { get; }
 
-        public ScoreSaberPlayerViewModel()
+        public ScoreSaberPlayerViewModel(Player player)
         {
             Name = "InnocentThief";
             ProfilePicture = "https://cdn.scoresaber.com/avatars/76561198319524592.jpg";
