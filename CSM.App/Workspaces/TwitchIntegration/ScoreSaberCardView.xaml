@@ -44,7 +44,7 @@
             <ColumnDefinition Width="6" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <telerik:RadButton Background="{x:Null}" BorderThickness="0" Width="40">
+        <telerik:RadButton Background="{x:Null}" BorderThickness="0" Command="{Binding AddPlayerCommand}" Width="40">
             <telerik:RadGlyph Glyph="&#xe120;" />
         </telerik:RadButton>
         <ItemsControl Grid.Column="2" ItemsSource="{Binding Players}" ItemTemplate="{StaticResource PlayerCardDataTemplate}" >

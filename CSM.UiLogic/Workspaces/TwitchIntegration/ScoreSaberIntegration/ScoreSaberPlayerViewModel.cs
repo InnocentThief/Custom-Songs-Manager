@@ -9,6 +9,8 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration.ScoreSaberIntegration
 {
     public class ScoreSaberPlayerViewModel
     {
+        public string Id { get; set; }
+
         public string Name { get; }
 
         public string ProfilePicture { get; }

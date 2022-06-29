@@ -6,6 +6,9 @@
              xmlns:p="clr-namespace:CSM.App.Properties" xmlns:twitchintegration="clr-namespace:CSM.App.Workspaces.TwitchIntegration" xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    
+
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
@@ -30,33 +33,41 @@
                 </telerik:RadButton>
             </telerik:RadToolBar>-->
         </Grid>
-        <!-- Channel list -->
+
         <Border Grid.Row="1" BorderBrush="DimGray" BorderThickness="1,0,1,1">
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <twitchintegration:ScoreSaberCardView Margin="6" MinHeight="80" />
-                <telerik:RadTabControl Grid.Row="1" >
-                    <telerik:RadTabItem Header="Profile">
-                        <twitchintegration:ScoreSaberProfileView />
-                    </telerik:RadTabItem>
-                    <telerik:RadTabItem Header="Scores">
-                        <twitchintegration:ScoreSaberSongView />
-                    </telerik:RadTabItem>
-                    <telerik:RadTabItem Header="Rank">
-                        <twitchintegration:ScoreSaberRankView />
-                    </telerik:RadTabItem>
-                    <telerik:RadTabItem Header="PP">
-                        <twitchintegration:ScoreSaberPPView />
-                    </telerik:RadTabItem>
-                    <telerik:RadTabItem Header="Accuracy">
-                        <twitchintegration:ScoreSaberAccuracyView />
-                    </telerik:RadTabItem>
-                </telerik:RadTabControl>
-                    
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <twitchintegration:ScoreSaberCardView Margin="6" MinHeight="80" />
+
+
+                    <!-- Tabs -->
+                    <telerik:RadTabControl Grid.Row="1" >
+                        <telerik:RadTabItem Header="Profile">
+                            <twitchintegration:ScoreSaberProfileView />
+                        </telerik:RadTabItem>
+                        <telerik:RadTabItem Header="Scores">
+                            <twitchintegration:ScoreSaberSongView />
+                        </telerik:RadTabItem>
+                        <telerik:RadTabItem Header="Rank">
+                            <twitchintegration:ScoreSaberRankView />
+                        </telerik:RadTabItem>
+                        <telerik:RadTabItem Header="PP">
+                            <twitchintegration:ScoreSaberPPView />
+                        </telerik:RadTabItem>
+                        <telerik:RadTabItem Header="Accuracy">
+                            <twitchintegration:ScoreSaberAccuracyView />
+                        </telerik:RadTabItem>
+                    </telerik:RadTabControl>
+
+                </Grid>
+                <!-- Player Search -->
+                <twitchintegration:ScoreSaberPlayerSearchView />
             </Grid>
+
         </Border>
 
     </Grid>
