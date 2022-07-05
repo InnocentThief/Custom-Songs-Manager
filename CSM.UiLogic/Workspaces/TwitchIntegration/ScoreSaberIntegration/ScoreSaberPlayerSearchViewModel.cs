@@ -1,12 +1,23 @@
-﻿using Microsoft.Toolkit.Mvvm.Input;
+﻿using CSM.Framework.Extensions;
+using CSM.Services;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CSM.UiLogic.Workspaces.TwitchIntegration.ScoreSaberIntegration
 {
-    public class ScoreSaberPlayerSearchViewModel
+    public class ScoreSaberPlayerSearchViewModel : ObservableObject
     {
+        #region Private fields
+
         private ScoreSaberPlayerViewModel selectedPlayer;
+        private string searchTextPlayer;
+        private ScoreSaberService scoreSaberService;
+
+        #endregion
 
         public ObservableCollection<ScoreSaberPlayerViewModel> Players { get; }
 
@@ -21,6 +32,20 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration.ScoreSaberIntegration
             }
         }
 
+        public string SearchTextPlayer
+        {
+            get => searchTextPlayer;
+            set
+            {
+                if (value == searchTextPlayer) return;
+                searchTextPlayer = value;
+                OnPropertyChanged();
+                SearchCommand.NotifyCanExecuteChanged();
+            }
+        }
+
+        public AsyncRelayCommand SearchCommand { get; }
+
         public RelayCommand AddPlayerCommand { get; }
 
         public RelayCommand CancelCommand { get; }
@@ -32,8 +57,28 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration.ScoreSaberIntegration
         public ScoreSaberPlayerSearchViewModel()
         {
             Players = new ObservableCollection<ScoreSaberPlayerViewModel>();
+            SearchCommand = new AsyncRelayCommand(SearchAsync, CanSearch);
             AddPlayerCommand = new RelayCommand(AddPlayer, CanAddPlayer);
             CancelCommand = new RelayCommand(Cancel);
+
+            scoreSaberService = new ScoreSaberService();
+        }
+
+        public void Clear()
+        {
+            Players.Clear();
+            SearchTextPlayer = String.Empty;
+        }
+
+        public async Task SearchAsync()
+        {
+            Players.Clear();
+            var query = $"search={searchTextPlayer}";
+            var players = await scoreSaberService.GetPlayersAsync(query);
+            if (players != null)
+            {
+                Players.AddRange(players.Players.Select(p => new ScoreSaberPlayerViewModel(p)));
+            }
         }
 
         private void AddPlayer()
@@ -49,6 +94,11 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration.ScoreSaberIntegration
         private void Cancel()
         {
             OnCancel?.Invoke(this, EventArgs.Empty);
+        }
+
+        private bool CanSearch()
+        {
+            return !string.IsNullOrWhiteSpace(searchTextPlayer);
         }
     }
 }

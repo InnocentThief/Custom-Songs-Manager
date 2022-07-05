@@ -3,14 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:CSM.App.Workspaces.TwitchIntegration" xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:local="clr-namespace:CSM.App.Workspaces.TwitchIntegration" xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" xmlns:converter="clr-namespace:CSM.App.Converter"
              mc:Ignorable="d" 
              d:DesignHeight="80" d:DesignWidth="800">
 
     <UserControl.Resources>
+
+
+        <converter:PlayerIndexToColorConverter x:Key="PlayerIndexToColorConverter" />
+
         <DataTemplate x:Key="PlayerCardDataTemplate">
-            <Border Background="Green" Padding="6" CornerRadius="5" >
-                <Grid Width="200">
+            <Grid>
+                <Border Background="{Binding Index, Converter={StaticResource PlayerIndexToColorConverter}}" Padding="6" CornerRadius="5" Opacity="0.5" />
+                <Grid Width="200" Margin="6">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
@@ -30,11 +35,11 @@
                     <telerik:RadButton Grid.Column="2" Background="{x:Null}" BorderThickness="0" VerticalAlignment="Top" >
                         <telerik:RadGlyph Glyph="&#xe103;" />
                     </telerik:RadButton>
-                    <telerik:RadButton Grid.Column="2" Background="{x:Null}" BorderThickness="0" VerticalAlignment="Bottom">
+                    <telerik:RadButton Grid.Column="2" Command="{Binding RemoveCommand}" Background="{x:Null}" BorderThickness="0" VerticalAlignment="Bottom">
                         <telerik:RadGlyph Glyph="&#xe123;" />
                     </telerik:RadButton>
                 </Grid>
-            </Border>
+            </Grid>
         </DataTemplate>
     </UserControl.Resources>
 

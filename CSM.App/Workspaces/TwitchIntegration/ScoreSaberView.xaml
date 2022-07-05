@@ -6,9 +6,11 @@
              xmlns:p="clr-namespace:CSM.App.Properties" xmlns:twitchintegration="clr-namespace:CSM.App.Workspaces.TwitchIntegration" xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    
 
-    
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
+    </UserControl.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
@@ -65,7 +67,7 @@
 
                 </Grid>
                 <!-- Player Search -->
-                <twitchintegration:ScoreSaberPlayerSearchView />
+                <twitchintegration:ScoreSaberPlayerSearchView Visibility="{Binding PlayerSearchVisible, Converter={StaticResource BoolToVisConverter}}" />
             </Grid>
 
         </Border>

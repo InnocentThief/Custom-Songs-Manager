@@ -1,30 +1,71 @@
 ﻿using CSM.DataAccess.Entities.Online.ScoreSaber;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Input;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CSM.UiLogic.Workspaces.TwitchIntegration.ScoreSaberIntegration
 {
-    public class ScoreSaberPlayerViewModel
+    public class ScoreSaberPlayerViewModel : ObservableObject
     {
-        public string Id { get; set; }
+        #region Private fields
 
-        public string Name { get; }
+        private Player player;
+        private int index;
 
-        public string ProfilePicture { get; }
+        #endregion
 
-        public string Rank { get; }
+        #region Public Properties
 
-        public string PP { get; }
+        public string Id => player.Id;
+
+        public string Name => player.Name;
+
+        public string Country => player.Country;
+
+        public string ProfilePicture => player.ProfilePicture;
+
+        public string Rank => $"#{player.Rank}";
+
+        public string CountryRank => $"#{player.CountryRank}";
+
+        public string PP => $"{player.PP} pp";
+
+        public int TotalPlayCount => player.ScoreStats.TotalPlayCount;
+
+        public int TotalRankedPlayCount => player.ScoreStats.RankedPlayCount;
+
+        public string AverageRankedAccuracy => $"{Math.Round(player.ScoreStats.AverageRankedAccuracy, 2)}%";
+
+        public int Index
+        {
+            get => index;
+            set
+            {
+                if (value == index) return;
+                index = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public RelayCommand RemoveCommand { get; }
+
+        #endregion
+
+        public event EventHandler OnRemove;
 
         public ScoreSaberPlayerViewModel(Player player)
         {
-            Name = "InnocentThief";
-            ProfilePicture = "https://cdn.scoresaber.com/avatars/76561198319524592.jpg";
-            Rank = "#6044";
-            PP = "5742.13 pp";
+            this.player = player;
+            RemoveCommand = new RelayCommand(Remove);
         }
+
+        #region Helper methods
+
+        private void Remove()
+        {
+            OnRemove?.Invoke(this, EventArgs.Empty);
+        }
+
+        #endregion
     }
 }

@@ -171,6 +171,8 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
         /// </summary>
         public event EventHandler<PlaylistSongChangedEventArgs> SongChangedEvent;
 
+        public event EventHandler<ScoreSaberAddPlayerEventArgs> OnScoreSaberAddPlayer;
+
         /// <summary>
         /// Initializes a new <see cref="TwitchViewModel"/>.
         /// </summary>
@@ -214,6 +216,7 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
             foreach (var channel in TwitchConfigManager.Instance.Config.Channels)
             {
                 var twitchChannelViewModel = new TwitchChannelViewModel { Name = channel.Name };
+                twitchChannelViewModel.OnScoreSaberAddPlayer += Channel_OnScoreSaberAddPlayer;
                 twitchChannelViewModel.ChangedConnectionState += TwitchChannelViewModel_ChangedConnectionState;
                 Channels.Add(twitchChannelViewModel);
             }
@@ -286,15 +289,22 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
         {
             await TwitchConnectionManager.Instance.ValidateAsync();
             var newChannel = new TwitchChannelViewModel();
+            newChannel.OnScoreSaberAddPlayer += Channel_OnScoreSaberAddPlayer;
             newChannel.ChangedConnectionState += TwitchChannelViewModel_ChangedConnectionState;
             Channels.Add(newChannel);
             OnPropertyChanged(nameof(AuthenticatedAs));
+        }
+
+        private void Channel_OnScoreSaberAddPlayer(object sender, ScoreSaberAddPlayerEventArgs e)
+        {
+            OnScoreSaberAddPlayer?.Invoke(sender, e);
         }
 
         private void RemoveChannel()
         {
             TwitchConfigManager.Instance.RemoveChannel(selectedChannel.Name);
             selectedChannel.ChangedConnectionState -= TwitchChannelViewModel_ChangedConnectionState;
+            selectedChannel.OnScoreSaberAddPlayer -= Channel_OnScoreSaberAddPlayer;
             Channels.Remove(selectedChannel);
         }
 

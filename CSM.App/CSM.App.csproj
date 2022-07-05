@@ -40,6 +40,9 @@
     <ApplicationIcon>Images\CSM.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FamFamFam.Flags.Wpf, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FamFamFam.Flags.Wpf.1.2.1\lib\net35\FamFamFam.Flags.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=2.0.14.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.14\lib\net45\log4net.dll</HintPath>
     </Reference>
@@ -186,6 +189,7 @@
     </Compile>
     <Compile Include="Converter\ChannelJoinedToColorConverter.cs" />
     <Compile Include="Converter\DifficultyToColorConverter.cs" />
+    <Compile Include="Converter\PlayerIndexToColorConverter.cs" />
     <Compile Include="Wizards\EditWizardWindow.xaml.cs">
       <DependentUpon>EditWizardWindow.xaml</DependentUpon>
     </Compile>

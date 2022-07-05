@@ -30,17 +30,17 @@
                     <TextBlock Text="{Binding Name}" Margin="0,6,0,0" FontWeight="DemiBold" TextTrimming="CharacterEllipsis" HorizontalAlignment="Center" />
                 </StackPanel>
                 <Separator Grid.Row="1" />
-                <TextBlock Grid.Row="2" Text="#6044" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0" />
+                <TextBlock Grid.Row="2" Text="{Binding Rank}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0" />
                 <Separator Grid.Row="3" />
-                <TextBlock Grid.Row="4" Text="41" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0" />
+                <TextBlock Grid.Row="4" Text="{Binding CountryRank}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0" />
                 <Separator Grid.Row="5" />
-                <TextBlock Grid.Row="6" Text="5742.13 pp" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0" />
+                <TextBlock Grid.Row="6" Text="{Binding PP}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0" />
                 <Separator Grid.Row="7" />
-                <TextBlock Grid.Row="8" Text="2045" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0" />
+                <TextBlock Grid.Row="8" Text="{Binding TotalPlayCount}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0" />
                 <Separator Grid.Row="9" />
-                <TextBlock Grid.Row="10" Text="1051" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0" />
+                <TextBlock Grid.Row="10" Text="{Binding TotalRankedPlayCount}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0" />
                 <Separator Grid.Row="11" />
-                <TextBlock Grid.Row="12" Text="89.70%" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0" />
+                <TextBlock Grid.Row="12" Text="{Binding AverageRankedAccuracy}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0" />
             </Grid>
         </DataTemplate>
     </UserControl.Resources>

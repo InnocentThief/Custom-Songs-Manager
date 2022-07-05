@@ -53,6 +53,8 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
             }
         }
 
+        public RelayCommand ScoreSaberCommand { get; }
+
         /// <summary>
         /// Gets whether the channel is joined.
         /// </summary>
@@ -65,12 +67,15 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
         /// </summary>
         public event EventHandler ChangedConnectionState;
 
+        public event EventHandler<ScoreSaberAddPlayerEventArgs> OnScoreSaberAddPlayer;
+
         /// <summary>
         /// Initializes a new <see cref="TwitchChannelViewModel"/>.
         /// </summary>
         public TwitchChannelViewModel()
         {
             JoinLeaveChannelCommand = new RelayCommand(JoinLeaveChannel);
+            ScoreSaberCommand = new RelayCommand(ShowInScoreSaber);
             TwitchChannelManager.OnJoinedChannel += this.TwitchChannelManager_OnJoinedChannel;
             TwitchChannelManager.OnLeftChannel += TwitchChannelManager_OnLeftChannel;
         }
@@ -112,6 +117,11 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration
                 LoggerProvider.Logger.Info<TwitchChannelViewModel>($"Joining Twitch channel {Name}");
                 TwitchChannelManager.Instance.JoinChannel(Name);
             }
+        }
+
+        private void ShowInScoreSaber()
+        {
+            OnScoreSaberAddPlayer?.Invoke(this, new ScoreSaberAddPlayerEventArgs { Playername = Name });
         }
 
         #endregion

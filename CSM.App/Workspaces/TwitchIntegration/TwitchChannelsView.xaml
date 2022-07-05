@@ -65,9 +65,9 @@
                                 </Grid>
                             </telerik:RadButton>
                             <!-- Active channel -->
-                            <telerik:RadToggleButton Grid.Column="6" Command="{Binding SetActiveChannelCommand}" Background="Transparent" BorderThickness="0">
+                            <telerik:RadButton Grid.Column="6" Command="{Binding ScoreSaberCommand}" Background="Transparent" BorderThickness="0">
                                 <telerik:RadGlyph Glyph="&#xea00;"/>
-                            </telerik:RadToggleButton>
+                            </telerik:RadButton>
                         </Grid>
                     </DataTemplate>
                 </telerik:RadListBox.ItemTemplate>
