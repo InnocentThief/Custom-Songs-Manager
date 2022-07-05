@@ -25,4 +25,44 @@ namespace CSM.App.Converter
             throw new NotImplementedException();
         }
     }
+
+    public class DifficultyToGradientStartColorConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            string difficulty = value.ToString();
+
+            if (difficulty == DifficultyTypes.Easy) return Color.FromArgb(50, 0, 128, 85);
+            if (difficulty == DifficultyTypes.Normal) return Color.FromArgb(50, 18, 104, 161);
+            if (difficulty == DifficultyTypes.Hard) return Color.FromArgb(50, 189, 85, 0);
+            if (difficulty == DifficultyTypes.Expert) return Color.FromArgb(50, 181, 42, 28);
+            if (difficulty == DifficultyTypes.ExpertPlus) return Color.FromArgb(50, 69, 64, 136);
+            return Colors.White;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class DifficultyToGradientStopColorConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            string difficulty = value.ToString();
+
+            if (difficulty == DifficultyTypes.Easy) return Color.FromArgb(150, 0, 128, 85);
+            if (difficulty == DifficultyTypes.Normal) return Color.FromArgb(150, 18, 104, 161);
+            if (difficulty == DifficultyTypes.Hard) return Color.FromArgb(150, 189, 85, 0);
+            if (difficulty == DifficultyTypes.Expert) return Color.FromArgb(150, 181, 42, 28);
+            if (difficulty == DifficultyTypes.ExpertPlus) return Color.FromArgb(150, 69, 64, 136);
+            return Colors.White;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
