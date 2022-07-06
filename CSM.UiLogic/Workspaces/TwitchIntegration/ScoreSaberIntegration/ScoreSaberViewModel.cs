@@ -18,6 +18,60 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration.ScoreSaberIntegration
         private ScoreSaberService scoreSaberService;
         private bool playerSearchVisible;
 
+        public ScoreSaberPlayerViewModel Player1
+        {
+            get
+            {
+                if (Players.Count > 0) return Players[0];
+                return null;
+            }
+        }
+
+        public ScoreSaberPlayerViewModel Player2
+        {
+            get
+            {
+                if (Players.Count > 1) return Players[1];
+                return null;
+            }
+        }
+
+        public ScoreSaberPlayerViewModel Player3
+        {
+            get
+            {
+                if (Players.Count > 2) return Players[2];
+                return null;
+            }
+        }
+
+        public ScoreSaberPlayerViewModel Player4
+        {
+            get
+            {
+                if (Players.Count > 3) return Players[3];
+                return null;
+            }
+        }
+
+        public ScoreSaberPlayerViewModel Player5
+        {
+            get
+            {
+                if (Players.Count > 4) return Players[4];
+                return null;
+            }
+        }
+
+        public ScoreSaberPlayerViewModel Player6
+        {
+            get
+            {
+                if (Players.Count > 5) return Players[5];
+                return null;
+            }
+        }
+
         public ObservableCollection<ScoreSaberPlayerViewModel> Players { get; }
 
         public RelayCommand AddPlayerCommand { get; }
@@ -57,7 +111,7 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration.ScoreSaberIntegration
                 {
                     if (!Players.Any(p => p.Id == players.Players.First().Id))
                     {
-                        AddPlayer(players.Players.First());
+                        await AddPlayerAsync(players.Players.First());
                     }
                 }
                 else
@@ -65,6 +119,7 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration.ScoreSaberIntegration
                     ShowSearch();
                     PlayerSearch.SearchTextPlayer = playername;
                 }
+                ChangePlayers();
             }
         }
 
@@ -80,11 +135,12 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration.ScoreSaberIntegration
             if (!Players.Any(p => p.Id == e.Id))
             {
                 var player = await scoreSaberService.GetFullPlayerInfoAsync(e.Id);
-                AddPlayer(player);
+                await AddPlayerAsync(player);
+                ChangePlayers();
             }
         }
 
-        private void AddPlayer(Player player)
+        private async Task AddPlayerAsync(Player player)
         {
             var playerViewModel = new ScoreSaberPlayerViewModel(player)
             {
@@ -93,6 +149,8 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration.ScoreSaberIntegration
             playerViewModel.OnRemove += PlayerViewModel_OnRemove;
             Players.Add(playerViewModel);
             AddPlayerCommand.NotifyCanExecuteChanged();
+            await playerViewModel.LoadDataAsync();
+            ChangePlayers();
         }
 
         private void PlayerViewModel_OnRemove(object sender, EventArgs e)
@@ -105,6 +163,7 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration.ScoreSaberIntegration
                 player.Index = index;
                 index++;
             }
+            ChangePlayers();
         }
 
         private void PlayerSearch_OnCancel(object sender, EventArgs e)
@@ -115,6 +174,16 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration.ScoreSaberIntegration
         private bool CanAddPlayer()
         {
             return Players.Count < 6;
+        }
+
+        private void ChangePlayers()
+        {
+            OnPropertyChanged(nameof(Player1));
+            OnPropertyChanged(nameof(Player2));
+            OnPropertyChanged(nameof(Player3));
+            OnPropertyChanged(nameof(Player4));
+            OnPropertyChanged(nameof(Player5));
+            OnPropertyChanged(nameof(Player6));
         }
     }
 }

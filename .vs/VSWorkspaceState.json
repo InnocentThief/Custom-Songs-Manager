@@ -3,11 +3,11 @@
     "",
     "\\CSM.App",
     "\\CSM.App\\Workspaces",
+    "\\CSM.App\\Workspaces\\Playlists",
     "\\CSM.App\\Workspaces\\TwitchIntegration",
-    "\\CSM.Business",
-    "\\CSM.Business\\Properties",
-    "\\CSM.Services"
+    "\\CSM.UiLogic\\Workspaces",
+    "\\CSM.UiLogic\\Workspaces\\Playlists"
   ],
-  "SelectedNode": "\\Custom Songs Manager.sln",
+  "SelectedNode": "\\CSM.App\\Workspaces\\TwitchIntegration\\ScoreSaberCardView.xaml",
   "PreviewInSolutionExplorer": false
 }
