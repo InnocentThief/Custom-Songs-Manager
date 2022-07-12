@@ -210,6 +210,9 @@
     <Compile Include="Workspaces\Playlists\SearchedSongViewModel.cs" />
     <Compile Include="Workspaces\Playlists\SongSearchEventArgs.cs" />
     <Compile Include="Workspaces\Playlists\SongSearchViewModel.cs" />
+    <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberMultiplePlayersCompareViewModel.cs" />
+    <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberPlayerBaseViewModel.cs" />
+    <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberSinglePlayerAnalysisViewModel.cs" />
     <Compile Include="Workspaces\SettingsViewModel.cs" />
     <Compile Include="Workspaces\Settings\BeatSaberSettingsViewModel.cs" />
     <Compile Include="Workspaces\Settings\BeatSaverSettingsViewModel.cs" />
@@ -226,11 +229,12 @@
     <Compile Include="Workspaces\TwitchIntegrationViewModel.cs" />
     <Compile Include="Workspaces\TwitchIntegration\ReceivedBeatmapViewModel.cs" />
     <Compile Include="Workspaces\TwitchIntegration\ScoreSaberAddPlayerEventArgs.cs" />
-    <Compile Include="Workspaces\TwitchIntegration\ScoreSaberIntegration\PlayerSearchOnPlayerSelectedEventArgs.cs" />
-    <Compile Include="Workspaces\TwitchIntegration\ScoreSaberIntegration\RankDataPoint.cs" />
-    <Compile Include="Workspaces\TwitchIntegration\ScoreSaberIntegration\ScoreSaberPlayerSearchViewModel.cs" />
-    <Compile Include="Workspaces\TwitchIntegration\ScoreSaberIntegration\ScoreSaberPlayerViewModel.cs" />
-    <Compile Include="Workspaces\TwitchIntegration\ScoreSaberIntegration\ScoreSaberViewModel.cs" />
+    <Compile Include="Workspaces\ScoreSaberIntegration\PlayerSearchOnPlayerSelectedEventArgs.cs" />
+    <Compile Include="Workspaces\ScoreSaberIntegration\RankDataPoint.cs" />
+    <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberPlayerSearchViewModel.cs" />
+    <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberPlayerViewModel.cs" />
+    <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberSongViewModel.cs" />
+    <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberViewModel.cs" />
     <Compile Include="Workspaces\TwitchIntegration\TwitchChannelViewModel.cs" />
     <Compile Include="Workspaces\TwitchIntegration\TwitchViewModel.cs" />
   </ItemGroup>
@@ -258,6 +262,7 @@
     <None Include="packages.config" />
     <None Include="Workspaces\CustomLevels\CustomLevels.cd" />
     <None Include="Workspaces\Playlists\Playlists.cd" />
+    <None Include="Workspaces\ScoreSaberIntegration\ScoreSaberIntegration.cd" />
     <None Include="Workspaces\Settings\Settings.cd" />
     <None Include="Workspaces\Tools\Tools.cd" />
     <None Include="Workspaces\TwitchIntegration\Twitch.cd" />

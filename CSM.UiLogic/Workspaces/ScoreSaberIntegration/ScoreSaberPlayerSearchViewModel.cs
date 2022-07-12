@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CSM.UiLogic.Workspaces.TwitchIntegration.ScoreSaberIntegration
+namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
 {
     public class ScoreSaberPlayerSearchViewModel : ObservableObject
     {

@@ -5,10 +5,10 @@ namespace CSM.DataAccess.Entities.Online.ScoreSaber
     public class ScoreStats
     {
         [JsonPropertyName("totalScore")]
-        public decimal TotalScore { get; set; }
+        public int TotalScore { get; set; }
 
         [JsonPropertyName("totalRankedScore")]
-        public decimal TotalRankedScore { get; set; }
+        public int TotalRankedScore { get; set; }
 
         [JsonPropertyName("averageRankedAccuracy")]
         public decimal AverageRankedAccuracy { get; set; }

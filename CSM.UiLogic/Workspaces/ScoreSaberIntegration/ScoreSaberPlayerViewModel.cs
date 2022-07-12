@@ -6,7 +6,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
-namespace CSM.UiLogic.Workspaces.TwitchIntegration.ScoreSaberIntegration
+namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
 {
     public class ScoreSaberPlayerViewModel : ObservableObject
     {
@@ -37,6 +37,12 @@ namespace CSM.UiLogic.Workspaces.TwitchIntegration.ScoreSaberIntegration
         public int TotalPlayCount => player.ScoreStats.TotalPlayCount;
 
         public int TotalRankedPlayCount => player.ScoreStats.RankedPlayCount;
+
+        public int TotalScore => player.ScoreStats.TotalScore;
+
+        public int TotalRankedScore => player.ScoreStats.TotalRankedScore;
+
+        public int ReplaysWatched => player.ScoreStats.ReplaysWatched;
 
         public string AverageRankedAccuracy => $"{Math.Round(player.ScoreStats.AverageRankedAccuracy, 2)}%";
 

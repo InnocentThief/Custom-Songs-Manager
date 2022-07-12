@@ -3,7 +3,7 @@
   <Class Name="CSM.UiLogic.Workspaces.TwitchIntegrationViewModel">
     <Position X="0.5" Y="6" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAQAQAAAAAQAAAAAgAAAAAAAAAAAAIQAAEAAAAAAAQ=</HashCode>
+      <HashCode>AAAQAQAAAAAQAAAAAgAAAAAAAAAAAAISAAEAAAAAAAQ=</HashCode>
       <FileName>Workspaces\TwitchIntegrationViewModel.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -15,7 +15,7 @@
   <Class Name="CSM.UiLogic.Workspaces.TwitchIntegration.TwitchViewModel">
     <Position X="8.25" Y="8.25" Width="3.75" />
     <TypeIdentifier>
-      <HashCode>EAAggkgSEBAIIREKAAAAIAICAAEAIhAAAYAQgBIEEIg=</HashCode>
+      <HashCode>EAAggkgSEBAIIREKAgAAIAICAAEAIhAAAYAQgBIEEIg=</HashCode>
       <FileName>Workspaces\TwitchIntegration\TwitchViewModel.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -26,22 +26,9 @@
   <Class Name="CSM.UiLogic.Workspaces.TwitchIntegration.TwitchChannelViewModel">
     <Position X="13.5" Y="15.25" Width="3" />
     <TypeIdentifier>
-      <HashCode>AEACAAAAAAAAAAAAABAAAAQIAAAEIAQACAACAAAAIAI=</HashCode>
+      <HashCode>AEACAAAAAAAAAAAAAhAAAAQIAAAEIAQACAACAAAAIAI=</HashCode>
       <FileName>Workspaces\TwitchIntegration\TwitchChannelViewModel.cs</FileName>
     </TypeIdentifier>
-  </Class>
-  <Class Name="CSM.UiLogic.Workspaces.TwitchIntegration.ScoreSaberIntegration.ScoreSaberViewModel">
-    <Position X="3.75" Y="18" Width="2.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAEIAAgiAAAAEAAAABACAAAgAAAAAEgAAAAAAAA=</HashCode>
-      <FileName>Workspaces\TwitchIntegration\ScoreSaberIntegration\ScoreSaberViewModel.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="PlayerSearch" />
-    </ShowAsAssociation>
-    <ShowAsCollectionAssociation>
-      <Property Name="Players" />
-    </ShowAsCollectionAssociation>
   </Class>
   <Class Name="CSM.DataAccess.Entities.Offline.ReceivedBeatmap">
     <Position X="17.25" Y="9.75" Width="1.75" />
@@ -91,13 +78,6 @@
       <FileName>Workspaces\Playlists\PlaylistFolderViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CSM.UiLogic.Workspaces.TwitchIntegration.ScoreSaberIntegration.ScoreSaberPlayerViewModel">
-    <Position X="8.25" Y="18" Width="2.25" />
-    <TypeIdentifier>
-      <HashCode>AAADAAAAAAAABAAAAAEAJgwAAEIAAAABBAEAAAABAEA=</HashCode>
-      <FileName>Workspaces\TwitchIntegration\ScoreSaberIntegration\ScoreSaberPlayerViewModel.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="CSM.UiLogic.Workspaces.TwitchIntegration.ScoreSaberIntegration.ScoreSaberPlayerSearchViewModel">
     <Position X="3.75" Y="23.5" Width="2.75" />
     <TypeIdentifier>
@@ -110,6 +90,13 @@
     <ShowAsCollectionAssociation>
       <Property Name="Players" />
     </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CSM.UiLogic.Workspaces.ScoreSaberIntegration.ScoreSaberViewModel" Collapsed="true">
+    <Position X="0.75" Y="3.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAIAAAAACAAACAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Workspaces\ScoreSaberIntegration\ScoreSaberViewModel.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

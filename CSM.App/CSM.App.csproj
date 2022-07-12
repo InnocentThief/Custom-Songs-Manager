@@ -279,28 +279,34 @@
     <Compile Include="Workspaces\Tools\ToolsView.xaml.cs">
       <DependentUpon>ToolsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Workspaces\TwitchIntegration\ScoreSaberAccuracyView.xaml.cs">
+    <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberAccuracyView.xaml.cs">
       <DependentUpon>ScoreSaberAccuracyView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Workspaces\TwitchIntegration\ScoreSaberCardView.xaml.cs">
+    <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberCardView.xaml.cs">
       <DependentUpon>ScoreSaberCardView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Workspaces\TwitchIntegration\ScoreSaberPlayerSearchView.xaml.cs">
+    <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberMultiplePlayersCompareView.xaml.cs">
+      <DependentUpon>ScoreSaberMultiplePlayersCompareView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberPlayerSearchView.xaml.cs">
       <DependentUpon>ScoreSaberPlayerSearchView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Workspaces\TwitchIntegration\ScoreSaberPPView.xaml.cs">
+    <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberPPView.xaml.cs">
       <DependentUpon>ScoreSaberPPView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Workspaces\TwitchIntegration\ScoreSaberProfileView.xaml.cs">
+    <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberProfileView.xaml.cs">
       <DependentUpon>ScoreSaberProfileView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Workspaces\TwitchIntegration\ScoreSaberRankView.xaml.cs">
+    <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberRankView.xaml.cs">
       <DependentUpon>ScoreSaberRankView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Workspaces\TwitchIntegration\ScoreSaberSongView.xaml.cs">
+    <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberSinglePlayerAnalysisView.xaml.cs">
+      <DependentUpon>ScoreSaberSinglePlayerAnalysisView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberSongView.xaml.cs">
       <DependentUpon>ScoreSaberSongView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Workspaces\TwitchIntegration\ScoreSaberView.xaml.cs">
+    <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberView.xaml.cs">
       <DependentUpon>ScoreSaberView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Workspaces\TwitchIntegration\TwitchChannelsView.xaml.cs">
@@ -440,35 +446,43 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Workspaces\TwitchIntegration\ScoreSaberAccuracyView.xaml">
+    <Page Include="Workspaces\ScoreSaberIntegration\ScoreSaberAccuracyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Workspaces\TwitchIntegration\ScoreSaberCardView.xaml">
+    <Page Include="Workspaces\ScoreSaberIntegration\ScoreSaberCardView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Workspaces\TwitchIntegration\ScoreSaberPlayerSearchView.xaml">
+    <Page Include="Workspaces\ScoreSaberIntegration\ScoreSaberMultiplePlayersCompareView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Workspaces\TwitchIntegration\ScoreSaberPPView.xaml">
+    <Page Include="Workspaces\ScoreSaberIntegration\ScoreSaberPlayerSearchView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Workspaces\TwitchIntegration\ScoreSaberProfileView.xaml">
+    <Page Include="Workspaces\ScoreSaberIntegration\ScoreSaberPPView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Workspaces\TwitchIntegration\ScoreSaberRankView.xaml">
+    <Page Include="Workspaces\ScoreSaberIntegration\ScoreSaberProfileView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Workspaces\TwitchIntegration\ScoreSaberSongView.xaml">
+    <Page Include="Workspaces\ScoreSaberIntegration\ScoreSaberRankView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Workspaces\TwitchIntegration\ScoreSaberView.xaml">
+    <Page Include="Workspaces\ScoreSaberIntegration\ScoreSaberSinglePlayerAnalysisView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Workspaces\ScoreSaberIntegration\ScoreSaberSongView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Workspaces\ScoreSaberIntegration\ScoreSaberView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

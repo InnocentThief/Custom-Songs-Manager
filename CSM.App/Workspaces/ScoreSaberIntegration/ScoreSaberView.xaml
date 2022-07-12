@@ -1,9 +1,10 @@
-﻿<UserControl x:Class="CSM.App.Workspaces.TwitchIntegration.ScoreSaberView"
+﻿<UserControl x:Class="CSM.App.Workspaces.ScoreSaberIntegration.ScoreSaberView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:p="clr-namespace:CSM.App.Properties" xmlns:twitchintegration="clr-namespace:CSM.App.Workspaces.TwitchIntegration" xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+              xmlns:p="clr-namespace:CSM.App.Properties"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" xmlns:local="clr-namespace:CSM.App.Workspaces.ScoreSaberIntegration"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -37,17 +38,29 @@
         </Grid>
 
         <Border Grid.Row="1" BorderBrush="DimGray" BorderThickness="1,0,1,1">
-            <Grid>
-                <Grid>
+            <!--<Grid>-->
+            <!--<Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <twitchintegration:ScoreSaberCardView Margin="6" MinHeight="80" />
+                    </Grid.RowDefinitions>-->
+            <telerik:RadTabControl SelectedIndex="{Binding TabIndex}">
+                <telerik:RadTabItem Header="Single Player Analysis">
+                    <local:ScoreSaberSinglePlayerAnalysisView DataContext="{Binding ScoreSaberSingle}" />
+                </telerik:RadTabItem>
+                <telerik:RadTabItem Header="Multiple Players Compare">
+                    <local:ScoreSaberMultiplePlayersCompareView DataContext="{Binding ScoreSaberMultiple}" />
+                </telerik:RadTabItem>
+            </telerik:RadTabControl>
 
 
-                    <!-- Tabs -->
-                    <telerik:RadTabControl Grid.Row="1" >
+
+            <!--<twitchintegration:ScoreSaberCardView Grid.Row="1" Margin="6" MinHeight="80" />-->
+
+
+            <!-- Tabs -->
+            <!--<telerik:RadTabControl Grid.Row="2" >
                         <telerik:RadTabItem Header="Profile">
                             <twitchintegration:ScoreSaberProfileView />
                         </telerik:RadTabItem>
@@ -60,15 +73,15 @@
                         <telerik:RadTabItem Header="PP">
                             <twitchintegration:ScoreSaberPPView />
                         </telerik:RadTabItem>
-                        <telerik:RadTabItem Header="Accuracy">
+                        <telerik:RadTabItem Header="Accuracy Compare">
                             <twitchintegration:ScoreSaberAccuracyView />
                         </telerik:RadTabItem>
-                    </telerik:RadTabControl>
+                    </telerik:RadTabControl>-->
 
-                </Grid>
-                <!-- Player Search -->
-                <twitchintegration:ScoreSaberPlayerSearchView Visibility="{Binding PlayerSearchVisible, Converter={StaticResource BoolToVisConverter}}" />
-            </Grid>
+            <!--</Grid>-->
+            <!-- Player Search -->
+
+            <!--</Grid>-->
 
         </Border>
 

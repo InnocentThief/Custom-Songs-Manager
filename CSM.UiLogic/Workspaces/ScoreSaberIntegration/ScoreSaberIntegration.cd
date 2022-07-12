@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CSM.UiLogic.Workspaces.ScoreSaberIntegration.ScoreSaberViewModel">
+    <Position X="1.75" Y="1.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAACAAASAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Workspaces\ScoreSaberIntegration\ScoreSaberViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ScoreSaberMultiple" />
+      <Property Name="ScoreSaberSingle" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CSM.UiLogic.Workspaces.ScoreSaberIntegration.ScoreSaberSinglePlayerAnalysisViewModel">
+    <Position X="13.75" Y="5.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Workspaces\ScoreSaberIntegration\ScoreSaberSinglePlayerAnalysisViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSM.UiLogic.Workspaces.ScoreSaberIntegration.ScoreSaberMultiplePlayersCompareViewModel">
+    <Position X="1.25" Y="6" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAABMIAAggAAAA4BwAAAAAAAQgAAAAAEgAAAAAAAA=</HashCode>
+      <FileName>Workspaces\ScoreSaberIntegration\ScoreSaberMultiplePlayersCompareViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Player1" />
+      <Property Name="Player2" />
+      <Property Name="Player3" />
+      <Property Name="Player4" />
+      <Property Name="Player5" />
+      <Property Name="Player6" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Players" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CSM.UiLogic.Workspaces.ScoreSaberIntegration.ScoreSaberPlayerViewModel">
+    <Position X="6.25" Y="6" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAIAAAABAAAgAEAJgwAgEIAAABBBAEEAAABAEQ=</HashCode>
+      <FileName>Workspaces\ScoreSaberIntegration\ScoreSaberPlayerViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSM.UiLogic.Workspaces.ScoreSaberIntegration.ScoreSaberPlayerBaseViewModel">
+    <Position X="7" Y="0.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAiAAAAEAAAABACAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Workspaces\ScoreSaberIntegration\ScoreSaberPlayerBaseViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

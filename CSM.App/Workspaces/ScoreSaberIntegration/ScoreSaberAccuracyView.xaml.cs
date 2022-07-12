@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CSM.App.Workspaces.TwitchIntegration
+namespace CSM.App.Workspaces.ScoreSaberIntegration
 {
     /// <summary>
-    /// Interaction logic for ScoreSaberSongView.xaml
+    /// Interaction logic for ScoreSaberAccuracyView.xaml
     /// </summary>
-    public partial class ScoreSaberSongView : UserControl
+    public partial class ScoreSaberAccuracyView : UserControl
     {
-        public ScoreSaberSongView()
+        public ScoreSaberAccuracyView()
         {
             InitializeComponent();
         }

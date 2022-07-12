@@ -4,6 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:playlists="clr-namespace:CSM.App.Workspaces.Playlists"
+             xmlns:scoresaberintegration="clr-namespace:CSM.App.Workspaces.ScoreSaberIntegration"
              xmlns:local="clr-namespace:CSM.App.Workspaces.TwitchIntegration"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -25,6 +26,6 @@
         <!-- Vertical splitter -->
         <GridSplitter Grid.Column="3" Grid.Row="1" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" HorizontalAlignment="Stretch" />
         <!-- ScoreSaber -->
-        <local:ScoreSaberView Grid.Column="4" DataContext="{Binding ScoreSaber}" />
+        <scoresaberintegration:ScoreSaberView Grid.Column="4" DataContext="{Binding ScoreSaber}" />
     </Grid>
 </UserControl>

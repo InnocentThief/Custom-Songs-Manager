@@ -1,7 +1,7 @@
 ﻿using CSM.Framework;
 using CSM.UiLogic.Workspaces.Playlists;
 using CSM.UiLogic.Workspaces.TwitchIntegration;
-using CSM.UiLogic.Workspaces.TwitchIntegration.ScoreSaberIntegration;
+using CSM.UiLogic.Workspaces.ScoreSaberIntegration;
 
 namespace CSM.UiLogic.Workspaces
 {

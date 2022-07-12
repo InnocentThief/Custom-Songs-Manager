@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CSM.UiLogic.Workspaces.TwitchIntegration.ScoreSaberIntegration
+namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
 {
     public class RankDataPoint
     {

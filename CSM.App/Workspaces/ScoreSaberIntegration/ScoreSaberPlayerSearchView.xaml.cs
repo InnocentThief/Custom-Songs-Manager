@@ -1,4 +1,4 @@
-﻿using CSM.UiLogic.Workspaces.TwitchIntegration.ScoreSaberIntegration;
+﻿using CSM.UiLogic.Workspaces.ScoreSaberIntegration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CSM.App.Workspaces.TwitchIntegration
+namespace CSM.App.Workspaces.ScoreSaberIntegration
 {
     /// <summary>
     /// Interaction logic for ScoreSaberPlayerSearchView.xaml
@@ -29,7 +29,7 @@ namespace CSM.App.Workspaces.TwitchIntegration
         private async void RadWatermarkTextBox_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key != Key.Enter) return;
-            var viewModel = DataContext as ScoreSaberViewModel;
+            var viewModel = DataContext as ScoreSaberPlayerBaseViewModel;
             await viewModel.PlayerSearch.SearchAsync();
         }
     }
