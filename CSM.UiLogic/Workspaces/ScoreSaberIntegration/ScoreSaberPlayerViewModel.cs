@@ -1,9 +1,11 @@
 ﻿using CSM.DataAccess.Entities.Online.ScoreSaber;
+using CSM.Framework.Extensions;
 using CSM.Services;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
@@ -14,7 +16,7 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
 
         private Player player;
         private int index;
-        private ScoreSaberService scoreSaberService;
+        private readonly ScoreSaberService scoreSaberService;
 
         #endregion
 
@@ -46,6 +48,8 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
 
         public string AverageRankedAccuracy => $"{Math.Round(player.ScoreStats.AverageRankedAccuracy, 2)}%";
 
+        public ObservableCollection<ScoreSaberPlayerScoreViewModel> Scores { get; }
+
         public int Index
         {
             get => index;
@@ -58,8 +62,6 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
         }
 
         public ObservableCollection<RankDataPoint> RankHistory { get; }
-
-
 
         public RelayCommand RemoveCommand { get; }
 
@@ -76,6 +78,8 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
             RefreshCommand = new AsyncRelayCommand(RefreshAsync);
             RankHistory = new ObservableCollection<RankDataPoint>();
             scoreSaberService = new ScoreSaberService();
+
+            Scores = new ObservableCollection<ScoreSaberPlayerScoreViewModel>();
         }
 
         public async Task LoadDataAsync()
@@ -99,7 +103,8 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
 
         private async Task LoadSongsAsync()
         {
-
+            var scores = await scoreSaberService.GetPlayerScoresAsync(player.Id);
+            Scores.AddRange(scores.Select(s => new ScoreSaberPlayerScoreViewModel(s)));
         }
 
         private void GenerateHistory()

@@ -5,7 +5,7 @@ namespace CSM.DataAccess.Entities.Online.ScoreSaber
     public class Difficulty
     {
         [JsonPropertyName("leaderboardId")]
-        public int LeaderboardId { get; set; }
+        public long LeaderboardId { get; set; }
 
         [JsonPropertyName("difficulty")]
         public int Diff { get; set; }

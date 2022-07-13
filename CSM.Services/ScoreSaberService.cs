@@ -39,6 +39,23 @@ namespace CSM.Services
             return await client.GetAsync<PlayerCollection>($"/players?{query}");
         }
 
+        /// <summary>
+        /// Gets a list of player scores for the given player id.
+        /// </summary>
+        /// <param name="playerId"></param>
+        /// <returns></returns>
+        public async Task<List<PlayerScore>> GetPlayerScoresAsync(string playerId)
+        {
+            var scores = new List<PlayerScore>();
+            var playerScoreCollection = await client.GetAsync<PlayerScoreCollection>($"/player/{playerId}/scores?limit=100");
+            scores.AddRange(playerScoreCollection.PlayerScores);
 
+            for (int i = 2; i <= playerScoreCollection.Metadata.Total / 100 + 1; i++)
+            {
+                playerScoreCollection = await client.GetAsync<PlayerScoreCollection>($"/player/{playerId}/scores?limit=100&page={i}");
+                scores.AddRange(playerScoreCollection.PlayerScores);
+            }
+            return scores;
+        }
     }
 }

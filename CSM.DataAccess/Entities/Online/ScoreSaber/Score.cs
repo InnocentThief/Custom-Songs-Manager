@@ -5,13 +5,13 @@ namespace CSM.DataAccess.Entities.Online.ScoreSaber
     public class Score
     {
         [JsonPropertyName("id")]
-        public string Id { get; set; }
+        public long Id { get; set; }
 
         [JsonPropertyName("rank")]
         public int Rank { get; set; }
 
         [JsonPropertyName("baseScore")]
-        public int BaseScore { get; set; }
+        public decimal BaseScore { get; set; }
 
         [JsonPropertyName("modifiedScore")]
         public int ModifiedScore { get; set; }

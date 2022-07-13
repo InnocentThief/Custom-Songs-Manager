@@ -86,6 +86,7 @@
     <Compile Include="Entities\Online\ScoreSaber\Player.cs" />
     <Compile Include="Entities\Online\ScoreSaber\PlayerCollection.cs" />
     <Compile Include="Entities\Online\ScoreSaber\PlayerScore.cs" />
+    <Compile Include="Entities\Online\ScoreSaber\PlayerScoreCollection.cs" />
     <Compile Include="Entities\Online\ScoreSaber\Score.cs" />
     <Compile Include="Entities\Online\ScoreSaber\ScoreStats.cs" />
     <Compile Include="Entities\Online\TwitchValidationResponse.cs" />

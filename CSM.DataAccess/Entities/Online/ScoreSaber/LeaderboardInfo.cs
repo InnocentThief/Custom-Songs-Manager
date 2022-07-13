@@ -7,7 +7,7 @@ namespace CSM.DataAccess.Entities.Online.ScoreSaber
     public class LeaderboardInfo
     {
         [JsonPropertyName("id")]
-        public string Id { get; set; }
+        public long Id { get; set; }
 
         [JsonPropertyName("songHash")]
         public string SongHash { get; set; }
@@ -28,19 +28,19 @@ namespace CSM.DataAccess.Entities.Online.ScoreSaber
         public Difficulty Difficulty { get; set; }
 
         [JsonPropertyName("maxScore")]
-        public int MaxScore { get; set; }
+        public decimal MaxScore { get; set; }
 
         [JsonPropertyName("createdDate")]
         public DateTime CreatedDate { get; set; }
 
         [JsonPropertyName("rankedDate")]
-        public DateTime RankedDate { get; set; }
+        public DateTime? RankedDate { get; set; }
 
         [JsonPropertyName("qualifiedDate")]
-        public DateTime QualifiedDate { get; set; }
+        public DateTime? QualifiedDate { get; set; }
 
         [JsonPropertyName("lovedDate")]
-        public DateTime LovedDate { get; set; }
+        public DateTime? LovedDate { get; set; }
 
         [JsonPropertyName("ranked")]
         public bool Ranked { get; set; }

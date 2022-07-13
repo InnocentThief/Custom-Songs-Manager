@@ -26,6 +26,7 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
             {
                 var player = await ScoreSaberService.GetFullPlayerInfoAsync(players.Players.First().Id);
                 Player = new ScoreSaberPlayerViewModel(player);
+                await Player.LoadDataAsync();
             }
             else
             {
@@ -44,6 +45,7 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
             PlayerSearchVisible = false;
             var player = await ScoreSaberService.GetFullPlayerInfoAsync(e.Id);
             Player = new ScoreSaberPlayerViewModel(player);
+            await Player.LoadDataAsync();
         }
     }
 }
