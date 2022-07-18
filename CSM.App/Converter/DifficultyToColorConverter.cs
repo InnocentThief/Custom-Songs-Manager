@@ -26,6 +26,26 @@ namespace CSM.App.Converter
         }
     }
 
+    public class DifficultyNumberToColorConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            int difficulty = (int)value;
+
+            if (difficulty == 1) return new SolidColorBrush(Color.FromArgb(255, 0, 128, 85));
+            if (difficulty == 3) return new SolidColorBrush(Color.FromArgb(255, 18, 104, 161));
+            if (difficulty == 5) return new SolidColorBrush(Color.FromArgb(255, 189, 85, 0));
+            if (difficulty == 7) return new SolidColorBrush(Color.FromArgb(255, 181, 42, 28));
+            if (difficulty == 9) return new SolidColorBrush(Color.FromArgb(255, 69, 64, 136));
+            return new SolidColorBrush(Colors.White);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public class DifficultyToGradientStartColorConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

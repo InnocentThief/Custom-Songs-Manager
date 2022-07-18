@@ -234,7 +234,6 @@
     <Compile Include="Workspaces\ScoreSaberIntegration\RankDataPoint.cs" />
     <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberPlayerSearchViewModel.cs" />
     <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberPlayerViewModel.cs" />
-    <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberSongViewModel.cs" />
     <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberViewModel.cs" />
     <Compile Include="Workspaces\TwitchIntegration\TwitchChannelViewModel.cs" />
     <Compile Include="Workspaces\TwitchIntegration\TwitchViewModel.cs" />

@@ -6,20 +6,19 @@
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:local="clr-namespace:CSM.App.Workspaces.ScoreSaberIntegration"
              xmlns:Flags="clr-namespace:FamFamFam.Flags.Wpf;assembly=FamFamFam.Flags.Wpf"
-             xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
+             xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib" xmlns:converter="clr-namespace:CSM.App.Converter"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
         <Flags:CountryIdToFlagImageSourceConverter x:Key="CountryIdToFlagImageSourceConverter" />
+        <converter:DifficultyNumberToColorConverter x:Key="DifficultyNumberToColorConverter" />
 
         <DataTemplate x:Key="NoSinglePlayerDataTemplate">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <TextBlock Text="No player select. Add a player from a existing Twitch channel or search for another one." TextAlignment="Center" TextWrapping="Wrap" Margin="20,0" />
-
             </StackPanel>
-
         </DataTemplate>
 
         <DataTemplate x:Key="SinglePlayerDataTemplate">
@@ -155,8 +154,8 @@
                                             <Run Text="{Binding LevelAuthorName, Mode=OneWay}" Foreground="#FF018574" />
                                                 </TextBlock>
                                             </Grid>
-                                            <Border Grid.Column="2" Background="Red" VerticalAlignment="Center" CornerRadius="5">
-                                                <TextBlock Text="Stars" Margin="3" />
+                                            <Border Grid.Column="2" Background="{Binding Difficulty, Converter={StaticResource DifficultyNumberToColorConverter}}" VerticalAlignment="Center" CornerRadius="5">
+                                                <TextBlock Text="{Binding Stars}" Margin="6,3" />
                                             </Border>
                                         </Grid>
                                     </DataTemplate>

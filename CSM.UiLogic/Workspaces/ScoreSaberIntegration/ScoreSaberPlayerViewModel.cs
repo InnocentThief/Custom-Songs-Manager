@@ -41,9 +41,9 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
 
         public int TotalRankedPlayCount => player.ScoreStats.RankedPlayCount;
 
-        public int TotalScore => player.ScoreStats.TotalScore;
+        public decimal TotalScore => player.ScoreStats.TotalScore;
 
-        public int TotalRankedScore => player.ScoreStats.TotalRankedScore;
+        public decimal TotalRankedScore => player.ScoreStats.TotalRankedScore;
 
         public int ReplaysWatched => player.ScoreStats.ReplaysWatched;
 

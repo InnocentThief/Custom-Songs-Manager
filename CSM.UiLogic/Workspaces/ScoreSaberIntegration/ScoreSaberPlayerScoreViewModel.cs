@@ -36,6 +36,8 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
             }
         }
 
+        public int Difficulty => playerScore.Leaderboard.Difficulty.Diff;
+
         public string CoverImage => playerScore.Leaderboard.CoverImage;
 
         public string SongColumnText => $"{playerScore.Leaderboard.SongName} {playerScore.Leaderboard.SongAuthorName} {playerScore.Leaderboard.LevelAuthorName}";
@@ -63,13 +65,15 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
 
         public bool FullCombo => playerScore.Score.FullCombo;
 
-        public decimal PP => Math.Round( playerScore.Score.PP,2);
+        public decimal PP => Math.Round(playerScore.Score.PP, 2);
 
         public decimal WeightPP => Math.Round(playerScore.Score.Weight * playerScore.Score.PP, 2);
 
         public int MissedNotes => playerScore.Score.MissedNotes;
 
         public int BadCuts => playerScore.Score.BadCuts;
+
+        public string Stars => $"{playerScore.Leaderboard.Stars}*";
 
         public ScoreSaberPlayerScoreViewModel(PlayerScore playerScore)
         {
