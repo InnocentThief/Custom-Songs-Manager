@@ -17,6 +17,7 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
         private Player player;
         private int index;
         private readonly ScoreSaberService scoreSaberService;
+        private bool isLoading;
 
         #endregion
 
@@ -61,6 +62,17 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
             }
         }
 
+        public bool IsLoading
+        {
+            get => isLoading;
+            set
+            {
+                if (value == isLoading) return;
+                isLoading = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ObservableCollection<RankDataPoint> RankHistory { get; }
 
         public RelayCommand RemoveCommand { get; }
@@ -70,6 +82,8 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
         #endregion
 
         public event EventHandler OnRemove;
+
+        public event EventHandler OnAddPlayer;
 
         public ScoreSaberPlayerViewModel(Player player)
         {
@@ -103,8 +117,10 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
 
         private async Task LoadSongsAsync()
         {
+            IsLoading = true;
             var scores = await scoreSaberService.GetPlayerScoresAsync(player.Id);
             Scores.AddRange(scores.Select(s => new ScoreSaberPlayerScoreViewModel(s)));
+            IsLoading = false;
         }
 
         private void GenerateHistory()

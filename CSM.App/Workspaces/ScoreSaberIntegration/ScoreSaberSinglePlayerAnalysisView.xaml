@@ -13,186 +13,215 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
         <Flags:CountryIdToFlagImageSourceConverter x:Key="CountryIdToFlagImageSourceConverter" />
-    </UserControl.Resources>
-    <Grid>
 
-        <Grid DataContext="{Binding Player}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+        <DataTemplate x:Key="NoSinglePlayerDataTemplate">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="No player select. Add a player from a existing Twitch channel or search for another one." TextAlignment="Center" TextWrapping="Wrap" Margin="20,0" />
 
-            <!-- Header with player name -->
-            <Grid Margin="6" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+            </StackPanel>
+
+        </DataTemplate>
+
+        <DataTemplate x:Key="SinglePlayerDataTemplate">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Image Grid.RowSpan="3" Source="{Binding ProfilePicture}" Width="80" Margin="0,0,10,0" />
-                <Grid Grid.Column="1">
+
+                <!-- Header with player name -->
+                <Grid Margin="6" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="{Binding Name}" FontWeight="DemiBold" FontSize="20" />
-                    <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,-6">
-                        <TextBlock Text="{Binding PP}" VerticalAlignment="Center" Margin="10,0,0,0" />
-                        <telerik:RadGlyph Glyph="&#xe700;" Margin="20,0,0,0" VerticalAlignment="Center" />
-                        <TextBlock Text="{Binding Rank}" Margin="3,0,0,0" VerticalAlignment="Center" />
-                        <Image Source="{Binding Country, Converter={StaticResource CountryIdToFlagImageSourceConverter}}" RenderOptions.BitmapScalingMode="HighQuality" Margin="20,0,0,0" VerticalAlignment="Center" />
-                        <TextBlock Text="{Binding CountryRank}" Margin="3,0,0,0" VerticalAlignment="Center" />
-                    </StackPanel>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Image Grid.RowSpan="3" Source="{Binding ProfilePicture}" Width="80" Margin="0,0,10,0" />
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Name}" FontWeight="DemiBold" FontSize="20" />
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,-6">
+                            <TextBlock Text="{Binding PP}" VerticalAlignment="Center" Margin="10,0,0,0" />
+                            <telerik:RadGlyph Glyph="&#xe700;" Margin="20,0,0,0" VerticalAlignment="Center" />
+                            <TextBlock Text="{Binding Rank}" Margin="3,0,0,0" VerticalAlignment="Center" />
+                            <Image Source="{Binding Country, Converter={StaticResource CountryIdToFlagImageSourceConverter}}" RenderOptions.BitmapScalingMode="HighQuality" Margin="20,0,0,0" VerticalAlignment="Center" />
+                            <TextBlock Text="{Binding CountryRank}" Margin="3,0,0,0" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Grid>
+                    <WrapPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" Margin="0,10,0,0">
+                        <Border Background="#FF018574" CornerRadius="5" Padding="6,3" Margin="0,0,3,3">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Ranked Play Count" />
+                                <Border Background="White" Width="1" Margin="6,0" />
+                                <TextBlock Text="{Binding TotalRankedPlayCount}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Background="#FF018574" CornerRadius="5" Padding="6,3" Margin="0,0,3,3">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Total Ranked Score" />
+                                <Border Background="White" Width="1" Margin="6,0" />
+                                <TextBlock Text="{Binding TotalRankedScore}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Background="#FF018574" CornerRadius="5" Padding="6,3" Margin="0,0,3,3">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Average Ranked Accuracy" />
+                                <Border Background="White" Width="1" Margin="6,0" />
+                                <TextBlock Text="{Binding AverageRankedAccuracy}" />
+                            </StackPanel>
+                        </Border>
+                    </WrapPanel>
+                    <WrapPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,0">
+                        <Border Background="DimGray" CornerRadius="5" Padding="6,3" Margin="0,0,3,3">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Total Play Count" />
+                                <Border Background="White" Width="1" Margin="6,0" />
+                                <TextBlock Text="{Binding TotalPlayCount}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Background="DimGray" CornerRadius="5" Padding="6,3" Margin="0,0,3,3">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Total Score" />
+                                <Border Background="White" Width="1" Margin="6,0" />
+                                <TextBlock Text="{Binding TotalScore}" />
+                            </StackPanel>
+                        </Border>
+                        <Border Background="DimGray" CornerRadius="5" Padding="6,3" Margin="0,0,3,3">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Replays Watched By Other" />
+                                <Border Background="White" Width="1" Margin="6,0" />
+                                <TextBlock Text="{Binding ReplaysWatched}" />
+                            </StackPanel>
+                        </Border>
+                    </WrapPanel>
                 </Grid>
-                <WrapPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" Margin="0,10,0,0">
-                    <Border Background="#FF018574" CornerRadius="5" Padding="6,3" Margin="0,0,3,3">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Ranked Play Count" />
-                            <Border Background="White" Width="1" Margin="6,0" />
-                            <TextBlock Text="{Binding TotalRankedPlayCount}" />
-                        </StackPanel>
-                    </Border>
-                    <Border Background="#FF018574" CornerRadius="5" Padding="6,3" Margin="0,0,3,3">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Total Ranked Score" />
-                            <Border Background="White" Width="1" Margin="6,0" />
-                            <TextBlock Text="{Binding TotalRankedScore}" />
-                        </StackPanel>
-                    </Border>
-                    <Border Background="#FF018574" CornerRadius="5" Padding="6,3" Margin="0,0,3,3">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Average Ranked Accuracy" />
-                            <Border Background="White" Width="1" Margin="6,0" />
-                            <TextBlock Text="{Binding AverageRankedAccuracy}" />
-                        </StackPanel>
-                    </Border>
-                </WrapPanel>
-                <WrapPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,0">
-                    <Border Background="DimGray" CornerRadius="5" Padding="6,3" Margin="0,0,3,3">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Total Play Count" />
-                            <Border Background="White" Width="1" Margin="6,0" />
-                            <TextBlock Text="{Binding TotalPlayCount}" />
-                        </StackPanel>
-                    </Border>
-                    <Border Background="DimGray" CornerRadius="5" Padding="6,3" Margin="0,0,3,3">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Total Score" />
-                            <Border Background="White" Width="1" Margin="6,0" />
-                            <TextBlock Text="{Binding TotalScore}" />
-                        </StackPanel>
-                    </Border>
-                    <Border Background="DimGray" CornerRadius="5" Padding="6,3" Margin="0,0,3,3">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Replays Watched By Other" />
-                            <Border Background="White" Width="1" Margin="6,0" />
-                            <TextBlock Text="{Binding ReplaysWatched}" />
-                        </StackPanel>
-                    </Border>
-                </WrapPanel>
-            </Grid>
 
-            <!-- Song list -->
-            <telerik:RadGridView Grid.Row="1" ItemsSource="{Binding Scores}" AutoGenerateColumns="False" IsFilteringAllowed="True" FilteringMode="FilterRow" RowIndicatorVisibility="Collapsed" FrozenColumnsSplitterVisibility="Collapsed" BorderThickness="0" AlternationCount="2" >
-                <telerik:RadGridView.Columns>
-                    <telerik:GridViewDataColumn Header="Rank" DataMemberBinding="{Binding Rank}">
-                        <telerik:GridViewDataColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <telerik:RadGlyph Glyph="&#xe700;" />
-                                        <TextBlock  Margin="3,0,0,0">
+                <!-- Song list -->
+                <telerik:RadBusyIndicator Grid.Row="1" IsIndeterminate="True" BusyContent="Loading Song List" IsBusy="{Binding IsLoading}">
+                    <telerik:RadGridView ItemsSource="{Binding Scores}" AutoGenerateColumns="False" IsFilteringAllowed="True" FilteringMode="FilterRow" RowIndicatorVisibility="Collapsed" FrozenColumnsSplitterVisibility="Collapsed" BorderThickness="0" AlternationCount="2" >
+                        <telerik:RadGridView.Columns>
+                            <telerik:GridViewDataColumn Header="Rank" DataMemberBinding="{Binding Rank}">
+                                <telerik:GridViewDataColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <telerik:RadGlyph Glyph="&#xe700;" />
+                                                <TextBlock  Margin="3,0,0,0">
                                             <Run Text="#" />
                                             <Run Text="{Binding Rank, Mode=OneWay}" />
-                                        </TextBlock>
-                                    </StackPanel>
-                                    <TextBlock Text="{Binding TimeSetText}" ToolTip="{Binding TimeSet, StringFormat='g', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </telerik:GridViewDataColumn.CellTemplate>
-                    </telerik:GridViewDataColumn>
-                    <telerik:GridViewDataColumn Header="Song" DataMemberBinding="{Binding SongColumnText}" Width="*" >
-                        <telerik:GridViewDataColumn.CellTemplate>
-                            <DataTemplate>
-                                <Grid Margin="0,6,0,6">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="30" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <Image Source="{Binding CoverImage}" />
-                                    <Grid Grid.Column="1" Margin="6,0,0,0">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="Auto" />
-                                        </Grid.RowDefinitions>
-                                        <!-- SongName by SongAuthorName -->
-                                        <TextBlock VerticalAlignment="Bottom">
+                                                </TextBlock>
+                                            </StackPanel>
+                                            <TextBlock Text="{Binding TimeSetText}" ToolTip="{Binding TimeSet, StringFormat='g', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </telerik:GridViewDataColumn.CellTemplate>
+                            </telerik:GridViewDataColumn>
+                            <telerik:GridViewDataColumn Header="Song" DataMemberBinding="{Binding SongColumnText}" Width="*" >
+                                <telerik:GridViewDataColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="0,6,0,6">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="30" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <Image Source="{Binding CoverImage}" />
+                                            <Grid Grid.Column="1" Margin="6,0,0,0">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <!-- SongName by SongAuthorName -->
+                                                <TextBlock VerticalAlignment="Bottom">
                                             <Run Text="{Binding SongName, Mode=OneWay}" FontSize="14" FontWeight="Bold" />
                                             <Run Text="by" Foreground="DimGray" />
                                             <Run Text="{Binding SongAuthorName, Mode=OneWay}" Foreground="#FF018574" />
-                                        </TextBlock>
-                                        <!-- LevelAuthorName -->
-                                        <TextBlock Grid.Row="1">
+                                                </TextBlock>
+                                                <!-- LevelAuthorName -->
+                                                <TextBlock Grid.Row="1">
                                             <Run Text="Mapped by" Foreground="DimGray" />
                                             <Run Text="{Binding LevelAuthorName, Mode=OneWay}" Foreground="#FF018574" />
-                                        </TextBlock>
-                                    </Grid>
-                                    <Border Grid.Column="2" Background="Red" VerticalAlignment="Center" CornerRadius="5">
-                                        <TextBlock Text="Stars" Margin="3" />
-                                    </Border>
-                                </Grid>
-                            </DataTemplate>
-                        </telerik:GridViewDataColumn.CellTemplate>
-                    </telerik:GridViewDataColumn>
-                    <telerik:GridViewDataColumn Header="ACC" DataMemberBinding="{Binding Accuracy}">
-                        <telerik:GridViewDataColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock>
+                                                </TextBlock>
+                                            </Grid>
+                                            <Border Grid.Column="2" Background="Red" VerticalAlignment="Center" CornerRadius="5">
+                                                <TextBlock Text="Stars" Margin="3" />
+                                            </Border>
+                                        </Grid>
+                                    </DataTemplate>
+                                </telerik:GridViewDataColumn.CellTemplate>
+                            </telerik:GridViewDataColumn>
+                            <telerik:GridViewDataColumn Header="ACC" DataMemberBinding="{Binding Accuracy}">
+                                <telerik:GridViewDataColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock>
                                     <Run Text="{Binding Accuracy, Mode=OneWay}" />
                                     <Run Text="%" />
-                                </TextBlock>
-                            </DataTemplate>
-                        </telerik:GridViewDataColumn.CellTemplate>
-                    </telerik:GridViewDataColumn>
-                    <telerik:GridViewDataColumn Header="FC" DataMemberBinding="{Binding FullCombo}">
-                        <telerik:GridViewDataColumn.CellTemplate>
-                            <DataTemplate>
-                                <telerik:RadGlyph Glyph="&#xe118;" Foreground="#FF018574" Visibility="{Binding FullCombo, Converter={StaticResource BoolToVisConverter}}" />
-                            </DataTemplate>
-                        </telerik:GridViewDataColumn.CellTemplate>
-                    </telerik:GridViewDataColumn>
-                    <telerik:GridViewDataColumn Header="PP" DataMemberBinding="{Binding PP}">
-                        <telerik:GridViewDataColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel HorizontalAlignment="Center">
-                                    <TextBlock HorizontalAlignment="Center">
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </telerik:GridViewDataColumn.CellTemplate>
+                            </telerik:GridViewDataColumn>
+                            <telerik:GridViewDataColumn Header="FC" DataMemberBinding="{Binding FullCombo}">
+                                <telerik:GridViewDataColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <telerik:RadGlyph Glyph="&#xe118;" Foreground="#FF018574" Visibility="{Binding FullCombo, Converter={StaticResource BoolToVisConverter}}" />
+                                    </DataTemplate>
+                                </telerik:GridViewDataColumn.CellTemplate>
+                            </telerik:GridViewDataColumn>
+                            <telerik:GridViewDataColumn Header="PP" DataMemberBinding="{Binding PP}">
+                                <telerik:GridViewDataColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel HorizontalAlignment="Center">
+                                            <TextBlock HorizontalAlignment="Center">
                                         <Run Text="{Binding PP, Mode=OneWay}" />
-                                    </TextBlock>
-                                    <TextBlock HorizontalAlignment="Center">
+                                            </TextBlock>
+                                            <TextBlock HorizontalAlignment="Center">
                                         <Run Text="[" FontSize="9" />
                                         <Run Text="{Binding WeightPP, Mode=OneWay}" FontSize="9" />
                                         <Run Text="]" FontSize="9" />
-                                    </TextBlock>
-                                </StackPanel>
-                            </DataTemplate>
-                        </telerik:GridViewDataColumn.CellTemplate>
-                    </telerik:GridViewDataColumn>
-                    <telerik:GridViewDataColumn Header="Misses" DataMemberBinding="{Binding MissedNotes}" />
-                    <telerik:GridViewDataColumn Header="BC" DataMemberBinding="{Binding BadCuts}" />
-                </telerik:RadGridView.Columns>
-            </telerik:RadGridView>
-        </Grid>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </telerik:GridViewDataColumn.CellTemplate>
+                            </telerik:GridViewDataColumn>
+                            <telerik:GridViewDataColumn Header="Misses" DataMemberBinding="{Binding MissedNotes}" />
+                            <telerik:GridViewDataColumn Header="BC" DataMemberBinding="{Binding BadCuts}" />
+                        </telerik:RadGridView.Columns>
+                    </telerik:RadGridView>
+                </telerik:RadBusyIndicator>
+            </Grid>
+        </DataTemplate>
+
+        <local:SinglePlayerDataTemplateSelector x:Key="SinglePlayerDataTemplateSelector"
+                                                NoSinglePlayerDataTemplate="{StaticResource NoSinglePlayerDataTemplate}"
+                                                SinglePlayerDataTemplate="{StaticResource SinglePlayerDataTemplate}" />
+
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Margin="10,6">
+            <TextBlock Text="Add or change player" VerticalAlignment="Center" />
+            <telerik:RadButton Command="{Binding AddPlayerCommand}" Margin="10,0" Width="30" HorizontalAlignment="Center">
+                <telerik:RadGlyph Glyph="&#xe120;" />
+            </telerik:RadButton>
+        </StackPanel>
+
+        <ContentControl Grid.Row="1" Content="{Binding Player}" ContentTemplateSelector="{StaticResource SinglePlayerDataTemplateSelector}" />
         <!-- PlayerSearch -->
-        <local:ScoreSaberPlayerSearchView Visibility="{Binding PlayerSearchVisible, Converter={StaticResource BoolToVisConverter}}" />
+        <local:ScoreSaberPlayerSearchView Grid.RowSpan="2" Visibility="{Binding PlayerSearchVisible, Converter={StaticResource BoolToVisConverter}}" />
     </Grid>
 </UserControl>

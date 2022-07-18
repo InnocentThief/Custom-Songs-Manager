@@ -248,6 +248,7 @@
     <Compile Include="Workspaces\Playlists\SongSearchView.xaml.cs">
       <DependentUpon>SongSearchView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Workspaces\ScoreSaberIntegration\SinglePlayerDataTemplateSelector.cs" />
     <Compile Include="Workspaces\Settings\BeatSaberSettingsView.xaml.cs">
       <DependentUpon>BeatSaberSettingsView.xaml</DependentUpon>
     </Compile>

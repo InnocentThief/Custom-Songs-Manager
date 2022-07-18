@@ -15,8 +15,11 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
                 if (value == scoreSaberPlayer) return;
                 scoreSaberPlayer = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(SearchButtonVisible));
             }
         }
+
+        public bool SearchButtonVisible => Player == null;
 
         public override async Task AddPlayerFromTwitchAsync(string playername)
         {
