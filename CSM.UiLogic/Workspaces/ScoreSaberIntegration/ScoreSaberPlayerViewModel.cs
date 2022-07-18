@@ -83,8 +83,6 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
 
         public event EventHandler OnRemove;
 
-        public event EventHandler OnAddPlayer;
-
         public ScoreSaberPlayerViewModel(Player player)
         {
             this.player = player;

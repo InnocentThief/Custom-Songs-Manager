@@ -144,8 +144,6 @@ namespace CSM.UiLogic.Workspaces
 
         #endregion
 
-        public event EventHandler<PlaylistViewModel> PlaylistSelectionChanged;
-
         /// <summary>
         /// Initializes a new <see cref="PlaylistViewModel"/>.
         /// </summary>

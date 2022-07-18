@@ -10,6 +10,10 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using Telerik.Windows.Controls;
+using CSMImageConverter = CSM.Framework.Converter.ImageConverter;
+using AppCurrent = System.Windows.Application;
+using CSM.Framework.Configuration.UserConfiguration;
 
 namespace CSM.UiLogic.Workspaces.Playlists
 {
@@ -118,7 +122,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
             get
             {
                 if (string.IsNullOrWhiteSpace(playlist.Image)) return null;
-                return ImageConverter.BitmapFromBase64(playlist.Image.Split(',').Last());
+                return CSMImageConverter.BitmapFromBase64(playlist.Image.Split(',').Last());
             }
         }
 
@@ -212,6 +216,11 @@ namespace CSM.UiLogic.Workspaces.Playlists
         /// </summary>
         public RelayCommand SavePlaylistCommand { get; }
 
+        /// <summary>
+        /// Command used to choose a new cover image.
+        /// </summary>
+        public RelayCommand ChooseCoverImageCommand { get; }
+
         #endregion
 
         /// <summary>
@@ -226,6 +235,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
             SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);
             SavePlaylistCommand = new RelayCommand(SavePlaylist);
+            ChooseCoverImageCommand = new RelayCommand(ChooseCoverImage);
 
             InEditMode = false;
 
@@ -400,6 +410,25 @@ namespace CSM.UiLogic.Workspaces.Playlists
                     break;
             }
             SaveToFile();
+        }
+
+        private void ChooseCoverImage()
+        {
+            var playlistPath = Path.Combine(UserConfigManager.Instance.Config.PlaylistPaths.First().Path, "CoverImages");
+            if (!Directory.Exists(playlistPath)) playlistPath = "C:\\";
+
+            RadOpenFileDialog openFileDialog = new RadOpenFileDialog();
+            openFileDialog.Owner = AppCurrent.Current.MainWindow;
+            openFileDialog.RestoreDirectory = true;
+            openFileDialog.InitialDirectory = playlistPath;
+            openFileDialog.Filter = "|Image Files|*.jpg;*.png";
+            openFileDialog.ShowDialog();
+            if (openFileDialog.DialogResult == true)
+            {
+                playlist.Image = CSMImageConverter.StringFromBitmap(openFileDialog.FileName);
+                SaveToFile();
+                OnPropertyChanged(nameof(CoverImage));
+            }
         }
 
         #endregion

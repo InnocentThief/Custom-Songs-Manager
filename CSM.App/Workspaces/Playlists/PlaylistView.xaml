@@ -50,7 +50,9 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <!-- Cover Image -->
-                    <Image Source="{Binding CoverImage}" Height="50" Width="50" />
+                    <telerik:RadButton Command="{Binding ChooseCoverImageCommand}" Padding="0" Background="Transparent" BorderThickness="0" Height="50" Width="50" ToolTip="Click to change cover image">
+                        <Image Source="{Binding CoverImage}" />
+                    </telerik:RadButton>
                     <Grid Grid.Column="1" Margin="6,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="80" />
