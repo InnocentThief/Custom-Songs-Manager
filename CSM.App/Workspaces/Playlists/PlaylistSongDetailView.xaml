@@ -6,6 +6,7 @@
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:p="clr-namespace:CSM.App.Properties"
              xmlns:local="clr-namespace:CSM.App.Workspaces.Playlists"
+             xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="800">
 
@@ -45,55 +46,131 @@
                 <!-- Data -->
                 <Grid Visibility="{Binding HasPlaylistSongDetail, Converter={StaticResource BoolToVisConverter}}">
                     <Grid DataContext="{Binding PlaylistSongDetail}" Margin="6">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="315" />
-                        </Grid.ColumnDefinitions>
-                        <!-- Cover image -->
-                        <Image Source="{Binding CoverUrl}" />
-                        <!-- Title / Artist / Mapper -->
-                        <Grid Grid.Column="1" Margin="6,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="70"/>
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
+                        <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            <!-- SongName -->
-                            <TextBlock Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_SongName}" FontWeight="DemiBold" Margin="0,1" />
-                            <TextBlock Grid.Column="1" Text="{Binding SongName}" TextWrapping="Wrap" Margin="0,1" />
-                            <!-- SongSubName -->
-                            <TextBlock Grid.Row="1" Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_SongSubName}" FontWeight="DemiBold" Margin="0,1" />
-                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding SongSubName}" TextWrapping="Wrap" Margin="0,1" />
-                            <!-- SongAuthorName -->
-                            <TextBlock Grid.Row="2" Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_Artist}" FontWeight="DemiBold" Margin="0,1" />
-                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding SongAuthorName}" TextWrapping="Wrap" Margin="0,1" />
-                            <!-- LevelAuthorName -->
-                            <TextBlock Grid.Row="3" Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_Mapper}" FontWeight="DemiBold" Margin="0,1" />
-                            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding LevelAuthorName}" TextWrapping="Wrap" Margin="0,1" />
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <!-- Cover image -->
+                                <Image Source="{Binding CoverUrl}" />
+                                <!-- Title / Artist / Mapper -->
+                                <Grid Grid.Column="1" Margin="6,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="70"/>
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <!-- SongName -->
+                                    <TextBlock Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_SongName}" FontWeight="DemiBold" Margin="0,1" />
+                                    <TextBlock Grid.Column="1" Text="{Binding SongName}" TextTrimming="CharacterEllipsis" ToolTip="{Binding SongName}" Margin="0,1" />
+                                    <!-- SongSubName -->
+                                    <TextBlock Grid.Row="1" Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_SongSubName}" FontWeight="DemiBold" Margin="0,1" />
+                                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding SongSubName}" TextTrimming="CharacterEllipsis" ToolTip="{Binding SongSubName}" Margin="0,1" />
+                                    <!-- SongAuthorName -->
+                                    <TextBlock Grid.Row="2" Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_Artist}" FontWeight="DemiBold" Margin="0,1" />
+                                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding SongAuthorName}" TextTrimming="CharacterEllipsis" ToolTip="{Binding SongAuthorName}" Margin="0,1" />
+                                    <!-- LevelAuthorName -->
+                                    <TextBlock Grid.Row="3" Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_Mapper}" FontWeight="DemiBold" Margin="0,1" />
+                                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding LevelAuthorName}" TextTrimming="CharacterEllipsis" ToolTip="{Binding LevelAuthorName}" Margin="0,1" />
+                                </Grid>
+                                <!-- Level informations 1 -->
+                                <Grid Grid.Column="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <!-- Uploaded -->
+                                    <TextBlock Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_Uploaded}" FontWeight="DemiBold" Margin="0,1" />
+                                    <TextBlock Grid.Column="1" Text="{Binding Uploaded, StringFormat='g', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" Margin="0,1" />
+                                    <!-- Notes per minute -->
+                                    <TextBlock Grid.Row="1" Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_BeatsPerMinute}" FontWeight="DemiBold" Margin="0,1" />
+                                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Bpm}" Margin="0,1" />
+                                    <!-- Duration -->
+                                    <TextBlock Grid.Row="2" Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_Duration}" FontWeight="DemiBold" Margin="0,1" />
+                                    <StackPanel Grid.Row="2" Grid.Column="1" Margin="0,1" Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Duration}" />
+                                        <TextBlock Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_Seconds}" Margin="3,0" />
+                                    </StackPanel>
+                                    <!-- Upvotes -->
+                                    <TextBlock Grid.Row="3" Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_Upvotes}" FontWeight="DemiBold" Margin="0,1" />
+                                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Upvotes}" Margin="0,1" />
+                                    <!-- Downvotes -->
+                                    <TextBlock Grid.Row="4" Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_Downvotes}" FontWeight="DemiBold" Margin="0,1" />
+                                    <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Downvotes}" Margin="0,1" />
+                                </Grid>
+                                <!-- Level informations 2 -->
+                                <Grid Grid.Column="3">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <!-- Score -->
+                                    <TextBlock Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_Score}" FontWeight="DemiBold" Margin="0,1" />
+                                    <TextBlock Grid.Column="1" Text="{Binding Score}" Margin="0,1" />
+                                    <!-- Ranked -->
+                                    <TextBlock Grid.Row="1" Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_Ranked}" FontWeight="DemiBold" Margin="0,1" />
+                                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Ranked}" Margin="0,1" />
+                                    <!-- Qualified -->
+                                    <TextBlock Grid.Row="2" Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_Qualified}" FontWeight="DemiBold" Margin="0,1" />
+                                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Qualified}" Margin="0,1" />
+                                    <!-- Tags -->
+                                    <TextBlock Grid.Row="3" Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_Tags}" FontWeight="DemiBold" Margin="0,1" />
+                                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Tags}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Tags}" Margin="0,1" />
+                                    <!-- Description -->
+                                    <TextBlock Grid.Row="4" Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_Description}" FontWeight="DemiBold" Margin="0,1" />
+                                    <telerik:RadToggleButton x:Name="DescriptionToggle" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{Binding IsOpen, ElementName=DescriptionPopup, Mode=TwoWay}" Background="Transparent" BorderThickness="0" Visibility="{Binding HasDescription, Converter={StaticResource BoolToVisConverter}}" >
+                                        <telerik:RadGlyph Glyph="&#xe401;" />
+                                    </telerik:RadToggleButton>
+                                    <Popup x:Name="DescriptionPopup" PlacementTarget="{Binding ElementName=DescriptionToggle}" StaysOpen="False" Placement="Left" MaxWidth="400">
+                                        <TextBlock Text="{Binding Description}" Margin="10" TextWrapping="Wrap" />
+                                    </Popup>
+                                    <TextBlock Grid.Row="10" Grid.Column="1" Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_NoDescription}" Margin="0,1"  Visibility="{Binding HasDescription, Converter={StaticResource InvBoolToVisConverter}}" />
+                                </Grid>
+                            </Grid>
+                            <!-- Difficulty information -->
+                            <ItemsControl Grid.Row="1" ItemsSource="{Binding Difficulties}" BorderThickness="0" HorizontalAlignment="Left" Margin="0,6,0,0">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <local:PlaylistSongDetailDifficultyView />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
                         </Grid>
-                        <!-- Difficulty information -->
-                        <ItemsControl Grid.Column="2" ItemsSource="{Binding Difficulties}" BorderThickness="0" HorizontalAlignment="Left" Margin="0,0,6,0">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <WrapPanel />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <local:PlaylistSongDetailDifficultyView />
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
                     </Grid>
                 </Grid>
-                
-                <!--  -->
+
+                <!-- No Song Selected View -->
                 <Grid Visibility="{Binding HasPlaylistSongDetail, Converter={StaticResource InvBoolToVisConverter}}">
                     <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
                         <Grid.RowDefinitions>

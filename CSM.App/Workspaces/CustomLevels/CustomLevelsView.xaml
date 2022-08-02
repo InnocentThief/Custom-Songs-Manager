@@ -38,7 +38,7 @@
                 <!-- List with custom levels -->
                 <local:CustomLevelListView />
                 <!-- Horizontal splitter -->
-                <GridSplitter Grid.Row="1" ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" VerticalAlignment="Stretch" />
+                <GridSplitter Grid.Row="1" ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" HorizontalAlignment="Stretch" />
                 <!-- Detail area (Horizontal) -->
                 <local:CustomLevelDetailBottomView Grid.Row="2" />
             </Grid>
