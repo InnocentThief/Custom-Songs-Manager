@@ -24,5 +24,8 @@ namespace CSM.DataAccess.Entities.Offline
 
         [JsonIgnore]
         public bool MappingExtensions { get; set; }
+
+        [JsonPropertyName("stars")]
+        public decimal Stars { get; set; }
     }
 }

@@ -34,6 +34,38 @@ namespace CSM.UiLogic.Workspaces.Playlists
 
         public string Hash => beatMap.LatestVersion.Hash;
 
+        public DateTime Uploaded => beatMap.Uploaded;
+
+        public decimal Bpm => Math.Round(beatMap.Metadata.Bpm, 0);
+
+        public decimal Duration => beatMap.Metadata.Duration;
+
+        public int Upvotes => beatMap.Stats.Upvotes;
+
+        public int Downvotes => beatMap.Stats.Downvotes;
+
+        public string Qualified => beatMap.Qualified ? Resources.Yes : Resources.No;
+
+        public string Tags
+        {
+            get
+            {
+                if (beatMap == null) return string.Empty;
+                if (beatMap.Tags == null) return string.Empty;
+                return String.Join(", ", beatMap.Tags);
+            }
+        }
+
+        /// <summary>
+        /// Gets the description of the beatmap.
+        /// </summary>
+        public string Description => beatMap.Description;
+
+        /// <summary>
+        /// Gets whether a description is available.
+        /// </summary>
+        public bool HasDescription => !string.IsNullOrWhiteSpace(beatMap.Description);
+
         /// <summary>
         /// Contains the <see cref="CustomLevelDifficultyViewModel"/> grouped by characteristc.
         /// </summary>
@@ -43,6 +75,11 @@ namespace CSM.UiLogic.Workspaces.Playlists
         /// Gets the command used to copy the bsr key.
         /// </summary>
         public RelayCommand CopyBsrKeyCommand { get; }
+
+        /// <summary>
+        /// Gets the command used to show the song preview in the default webbrowser.
+        /// </summary>
+        public RelayCommand ShowPreviewCommand { get; }
 
         #endregion
 
@@ -54,6 +91,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
         {
             this.beatMap = beatMap;
             CopyBsrKeyCommand = new RelayCommand(CopyBsrKey);
+            ShowPreviewCommand = new RelayCommand(ShowPreview);
 
             var playlistSongDifficulties = beatMap.LatestVersion.Difficulties.Select(d => new PlaylistSongDifficulty
             {
@@ -62,7 +100,8 @@ namespace CSM.UiLogic.Workspaces.Playlists
                 NPS = Math.Round(d.Nps, 1).ToString(),
                 Chroma = d.Chroma,
                 Noodle = d.Noodle,
-                MappingExtensions = d.MappingExtension
+                MappingExtensions = d.MappingExtension,
+                Stars = d.Stars,
             });
             Difficulties = new List<PlaylistSongDifficultyViewModel>(playlistSongDifficulties.Select(d => new PlaylistSongDifficultyViewModel(d, false)));
         }
@@ -72,6 +111,11 @@ namespace CSM.UiLogic.Workspaces.Playlists
         private void CopyBsrKey()
         {
             Clipboard.SetText($"!bsr {beatMap.Id}");
+        }
+
+        private void ShowPreview()
+        {
+            System.Diagnostics.Process.Start($"https://skystudioapps.com/bs-viewer/?id={beatMap.Id}");
         }
 
         #endregion

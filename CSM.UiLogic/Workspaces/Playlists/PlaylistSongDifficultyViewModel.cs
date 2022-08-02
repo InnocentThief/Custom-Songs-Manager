@@ -51,6 +51,18 @@ namespace CSM.UiLogic.Workspaces.Playlists
         }
 
         /// <summary>
+        /// Gets the start rating of a difficulty.
+        /// </summary>
+        /// <remarks>The difficulty string if not ranked; otherwise the ranking.</remarks>
+        public string Stars
+        {
+            get
+            {
+                return playlistSongDifficulty.Stars > 0 ? $"{playlistSongDifficulty.Stars}*" : String.Empty;
+            }
+        }
+
+        /// <summary>
         /// Gets or sets whether the current difficulty is part of the song in the playlist.
         /// </summary>
         public bool IsSelectedDifficulty

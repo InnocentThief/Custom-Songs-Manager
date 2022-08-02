@@ -45,14 +45,14 @@
   <Class Name="CSM.UiLogic.Workspaces.Playlists.PlaylistSongDifficultyViewModel">
     <Position X="15.5" Y="4.5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAQAACAAAAASAAoAAAACAAAAAIAAAAAA=</HashCode>
+      <HashCode>AEAAAAAAAAAAAQAACAAAAASAAoAAAACAAAAAIAAAAAA=</HashCode>
       <FileName>Workspaces\Playlists\PlaylistSongDifficultyViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CSM.UiLogic.Workspaces.PlaylistsViewModel">
     <Position X="0.5" Y="0.5" Width="3" />
     <TypeIdentifier>
-      <HashCode>BgCwAzAACgFQIggBgCKAQCQAgAIEAAIAAAAAAAAAACI=</HashCode>
+      <HashCode>BgGwAzAACgFQIghBgCKAQCQAgAIEAAIAAAAAAAAAACI=</HashCode>
       <FileName>Workspaces\PlaylistsViewModel.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -73,23 +73,25 @@
       <Property Name="SelectedCustomLevel" />
       <Property Name="SelectedFavorite" />
       <Property Name="PlaylistSongDetail" />
+      <Property Name="SongSearch" />
     </ShowAsAssociation>
     <ShowAsCollectionAssociation>
       <Property Name="CustomLevels" />
       <Property Name="Favorites" />
+      <Property Name="SearchedSongs" />
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="CSM.UiLogic.Workspaces.CustomLevels.CustomLevelViewModel">
     <Position X="7" Y="14" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>BAAAAAAAACAEAAIABAEBAAAAJAAJBMAEAAAAgAooAAA=</HashCode>
+      <HashCode>BAAAAAAAACQEAAIABAEBAAAAJAAJBMAEAAAAgAooAAA=</HashCode>
       <FileName>Workspaces\CustomLevels\CustomLevelViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CSM.UiLogic.Workspaces.Playlists.PlaylistSongDetailViewModel">
     <Position X="11.25" Y="9.75" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAIAEAAAAIIAAAgABAEAABAAAAAAAAAkAAgAgAAAAAA=</HashCode>
+      <HashCode>AAIAEAAAQIImAAgADAEAABCAAAEAAEAkAAgAgAAAAQA=</HashCode>
       <FileName>Workspaces\Playlists\PlaylistSongDetailViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -98,6 +100,20 @@
     <TypeIdentifier>
       <HashCode>BAAAAAAAAAAEAAQABAAAABAAAAAABEAEAAAAgAoAAAA=</HashCode>
       <FileName>Workspaces\Playlists\FavoriteViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSM.UiLogic.Workspaces.Playlists.SongSearchViewModel">
+    <Position X="12.75" Y="18" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>BACgCAAGgIkAgICgATggIHESAAICCBiAIAgAASUgQII=</HashCode>
+      <FileName>Workspaces\Playlists\SongSearchViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSM.UiLogic.Workspaces.Playlists.SearchedSongViewModel">
+    <Position X="10" Y="21.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAEAAQABAAAAACAAAEABEAEAAAAgAoAABA=</HashCode>
+      <FileName>Workspaces\Playlists\SearchedSongViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
