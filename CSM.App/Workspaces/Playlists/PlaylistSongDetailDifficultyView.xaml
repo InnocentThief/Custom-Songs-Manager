@@ -42,7 +42,7 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="{Binding DifficultyDetail}" Margin="3,0" TextTrimming="CharacterEllipsis" ToolTip="{Binding DifficultyDetail}" />
-                <TextBlock Grid.Column="1" Text="{Binding Stars}" Foreground="{Binding Name, Converter={StaticResource DiffToColor}}" Margin="0,0,3,0" />
+                <TextBlock Grid.Column="1" Text="{Binding Stars}" FontWeight="DemiBold" Foreground="{Binding Name, Converter={StaticResource DiffToColor}}" Margin="0,0,3,0" />
             </Grid>
            
         </Border>

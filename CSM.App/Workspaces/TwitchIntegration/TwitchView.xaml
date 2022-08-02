@@ -17,10 +17,10 @@
         </Grid.RowDefinitions>
         <!-- Channel List -->
         <local:TwitchChannelsView Grid.Column="2" />
-        <!-- Horizonatal splitter between Twitch channels and song history -->
-        <!--<GridSplitter Grid.Column="1" Grid.Row="1" ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" VerticalAlignment="Stretch" />-->
         <!-- Song History -->
         <local:TwitchSongHistoryView Grid.Column="2" Grid.Row="2" />
+        <!-- Horizonatal splitter between song history and song detail -->
+        <GridSplitter Grid.Column="1" Grid.Row="3" ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" HorizontalAlignment="Stretch" />
         <!-- Song detail -->
         <playlists:PlaylistSongDetailView Grid.Column="2" Grid.Row="4"/>
     </Grid>

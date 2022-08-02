@@ -3,11 +3,8 @@
     "",
     "\\CSM.App",
     "\\CSM.App\\Workspaces",
-    "\\CSM.App\\Workspaces\\Playlists",
-    "\\CSM.App\\Workspaces\\TwitchIntegration",
-    "\\CSM.UiLogic\\Workspaces",
-    "\\CSM.UiLogic\\Workspaces\\Playlists"
+    "\\CSM.App\\Workspaces\\CustomLevels"
   ],
-  "SelectedNode": "\\CSM.App\\Workspaces\\TwitchIntegration\\ScoreSaberCardView.xaml",
+  "SelectedNode": "\\CSM.App\\Workspaces\\CustomLevels\\CustomLevelDetailBottomView.xaml",
   "PreviewInSolutionExplorer": false
 }
