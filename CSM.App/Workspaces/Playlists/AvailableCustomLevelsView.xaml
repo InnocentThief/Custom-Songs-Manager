@@ -38,7 +38,7 @@
             </Grid>
             <!-- Content -->
             <Border Grid.Row="1" BorderBrush="DimGray" BorderThickness="1,0,1,1">
-                <telerik:RadTabControl SelectionChanged="RadTabControl_SelectionChanged" SelectedIndex="{Binding SelectedTabIndex}">
+                <telerik:RadTabControl SelectionChanged="RadTabControl_SelectionChanged" SelectedIndex="{Binding SelectedTabIndex}" BorderThickness="0">
                     <telerik:RadTabItem x:Name="CustomLevels" Header="Custom Levels">
                         <telerik:RadGridView ItemsSource="{Binding CustomLevels}" SelectedItem="{Binding SelectedCustomLevel}" FilteringMode="FilterRow" AutoGenerateColumns="False" RowIndicatorVisibility="Collapsed" FrozenColumnsSplitterVisibility="Collapsed" BorderThickness="0" AlternationCount="2" SelectionChanged="RadGridView_SelectionChanged" FilterOperatorsLoading="RadGridView_FilterOperatorsLoading"   >
                             <telerik:RadGridView.Columns>
