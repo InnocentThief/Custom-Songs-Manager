@@ -18,7 +18,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="150" />
+            <RowDefinition Height="3" />
+            <RowDefinition Height="210" />
         </Grid.RowDefinitions>
         <!-- Header -->
         <Grid Background="#FF018574">
@@ -154,7 +155,9 @@
                 </telerik:RadGridView>
             </Grid>
         </Border>
+        <!-- Horizontal splitter -->
+        <GridSplitter Grid.Row="2" ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" Background="Transparent" HorizontalAlignment="Stretch" />
         <!-- Song detail -->
-        <local:PlaylistSongDetailView Grid.Row="2" Margin="0,6,0,0" />
+        <local:PlaylistSongDetailView Grid.Row="3" Margin="0,6,0,0" />
     </Grid>
 </UserControl>

@@ -13,7 +13,7 @@
             <RowDefinition Height="6" />
             <RowDefinition Height="*" />
             <RowDefinition Height="6" />
-            <RowDefinition Height="150" />
+            <RowDefinition Height="210" />
         </Grid.RowDefinitions>
         <!-- Channel List -->
         <local:TwitchChannelsView Grid.Column="2" />

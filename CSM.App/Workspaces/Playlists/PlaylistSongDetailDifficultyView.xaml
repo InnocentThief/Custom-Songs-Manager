@@ -36,7 +36,15 @@
                     <GradientStop Color="{Binding Name, Converter={StaticResource DiffToGradientStartColor}}" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding DifficultyDetail}" Margin="3,0" TextTrimming="CharacterEllipsis" ToolTip="{Binding DifficultyDetail}" />
+                <TextBlock Grid.Column="1" Text="{Binding Stars}" Foreground="{Binding Name, Converter={StaticResource DiffToColor}}" Margin="0,0,3,0" />
+            </Grid>
+           
         </Border>
-        <TextBlock Grid.Column="1" Text="{Binding DifficultyDetail}" Margin="3,0" VerticalAlignment="Center" />
     </Grid>
 </UserControl>

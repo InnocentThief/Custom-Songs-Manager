@@ -20,5 +20,8 @@ namespace CSM.DataAccess.Entities.Online
 
         [JsonPropertyName("coverURL")]
         public string CoverUrl { get; set; }
+
+        [JsonPropertyName("previewURL")]
+        public string PreviewUrl { get; set; }
     }
 }
