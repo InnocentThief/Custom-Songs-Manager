@@ -75,6 +75,11 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
         /// </summary>
         public RelayCommand CopyBsrKeyCommand { get; }
 
+        /// <summary>
+        /// Gets the command used to show the song preview in the default webbrowser.
+        /// </summary>
+        public RelayCommand ShowPreviewCommand { get; }
+
         #endregion
 
         /// <summary>
@@ -87,6 +92,7 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
             var characteristics = beatMap.LatestVersion.Difficulties.GroupBy(d => d.Characteristic);
             Characteristics = new List<CustomLevelCharactersisticViewModel>(characteristics.Select(c => new CustomLevelCharactersisticViewModel(c)));
             CopyBsrKeyCommand = new RelayCommand(CopyBsrKey);
+            ShowPreviewCommand = new RelayCommand(ShowPreview);
         }
 
         #region Helper methods
@@ -94,6 +100,11 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
         private void CopyBsrKey()
         {
             Clipboard.SetText($"!bsr {Id}");
+        }
+
+        private void ShowPreview()
+        {
+            System.Diagnostics.Process.Start($"https://skystudioapps.com/bs-viewer/?id={Id}");
         }
 
         #endregion

@@ -22,7 +22,7 @@
         </Grid.RowDefinitions>
         <!-- Header -->
         <Border Background="#FF018574" >
-            <Grid DataContext="{Binding PlaylistSongDetail}">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
@@ -30,14 +30,22 @@
                 <!-- Title -->
                 <TextBlock Text="{x:Static p:Resources.Workspace_CustomLevels_Detail_Title}" Foreground="White" VerticalAlignment="Center" Margin="8,0" FontWeight="DemiBold" />
                 <!-- Commands -->
-                <telerik:RadToolBar Grid.Column="1" OverflowButtonVisibility="Collapsed" GripVisibility="Collapsed" Background="Transparent" BorderThickness="0" >
-                    <telerik:RadButton Command="{Binding CopyBsrKeyCommand}" ToolTip="{x:Static p:Resources.Workspace_CustomLevels_Detail_Command_CopyBsrKey_Tooltip}">
-                        <StackPanel Orientation="Horizontal">
-                            <telerik:RadGlyph Glyph="&#xe111;" />
-                            <TextBlock Text="!bsr" Margin="3,0,0,0" />
-                        </StackPanel>
-                    </telerik:RadButton>
-                </telerik:RadToolBar>
+                <Grid Grid.Column="1" Visibility="{Binding HasPlaylistSongDetail, Converter={StaticResource BoolToVisConverter}}">
+                    <telerik:RadToolBar DataContext="{Binding PlaylistSongDetail}" OverflowButtonVisibility="Collapsed" GripVisibility="Collapsed" Background="Transparent" BorderThickness="0" >
+                        <telerik:RadButton Command="{Binding ShowPreviewCommand}" ToolTip="Preview song">
+                            <StackPanel Orientation="Horizontal">
+                                <telerik:RadGlyph Glyph="&#xe200;" />
+                            </StackPanel>
+                        </telerik:RadButton>
+                        <telerik:RadButton Command="{Binding CopyBsrKeyCommand}" ToolTip="{x:Static p:Resources.Workspace_CustomLevels_Detail_Command_CopyBsrKey_Tooltip}">
+                            <StackPanel Orientation="Horizontal">
+                                <telerik:RadGlyph Glyph="&#xe111;" />
+                                <TextBlock Text="!bsr" Margin="3,0,0,0" />
+                            </StackPanel>
+                        </telerik:RadButton>
+                    </telerik:RadToolBar>
+                </Grid>
+
             </Grid>
         </Border>
         <!-- Content -->

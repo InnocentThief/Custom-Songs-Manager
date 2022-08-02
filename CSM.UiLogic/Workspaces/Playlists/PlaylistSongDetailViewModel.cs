@@ -76,6 +76,11 @@ namespace CSM.UiLogic.Workspaces.Playlists
         /// </summary>
         public RelayCommand CopyBsrKeyCommand { get; }
 
+        /// <summary>
+        /// Gets the command used to show the song preview in the default webbrowser.
+        /// </summary>
+        public RelayCommand ShowPreviewCommand { get; }
+
         #endregion
 
         /// <summary>
@@ -86,6 +91,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
         {
             this.beatMap = beatMap;
             CopyBsrKeyCommand = new RelayCommand(CopyBsrKey);
+            ShowPreviewCommand = new RelayCommand(ShowPreview);
 
             var playlistSongDifficulties = beatMap.LatestVersion.Difficulties.Select(d => new PlaylistSongDifficulty
             {
@@ -105,6 +111,11 @@ namespace CSM.UiLogic.Workspaces.Playlists
         private void CopyBsrKey()
         {
             Clipboard.SetText($"!bsr {beatMap.Id}");
+        }
+
+        private void ShowPreview()
+        {
+            System.Diagnostics.Process.Start($"https://skystudioapps.com/bs-viewer/?id={beatMap.Id}");
         }
 
         #endregion
