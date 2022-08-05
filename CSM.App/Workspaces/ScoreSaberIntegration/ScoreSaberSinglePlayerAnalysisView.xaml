@@ -155,7 +155,7 @@
                                             <Run Text="{Binding LevelAuthorName, Mode=OneWay}" Foreground="#FF018574" />
                                                 </TextBlock>
                                             </Grid>
-                                            <Border Grid.Column="2" Background="{Binding Difficulty, Converter={StaticResource DifficultyNumberToColorConverter}}" VerticalAlignment="Center" CornerRadius="5">
+                                            <Border Grid.Column="2" Background="{Binding Difficulty, Converter={StaticResource DifficultyNumberToColorConverter}}" VerticalAlignment="Center" CornerRadius="5" Margin="6,0,0,0">
                                                 <TextBlock Text="{Binding Stars}" Margin="6,3" />
                                             </Border>
                                         </Grid>
