@@ -92,6 +92,7 @@
     <Compile Include="Extensions\CSMTypeExtensions.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Logging\LoggerProvider.cs" />
+    <Compile Include="ScoreSaberAnalysisMode.cs" />
     <Compile Include="SongDetailPosition.cs" />
     <Compile Include="WorkspaceType.cs" />
     <Compile Include="Extensions\BeatMapExtensions.cs" />

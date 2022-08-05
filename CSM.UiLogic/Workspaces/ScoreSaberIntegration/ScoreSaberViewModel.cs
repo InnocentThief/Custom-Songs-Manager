@@ -1,11 +1,12 @@
-﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+﻿using CSM.Framework.Configuration.UserConfiguration;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System.Threading.Tasks;
 
 namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
 {
     public class ScoreSaberViewModel : ObservableObject
     {
-        private int tabIndex ;
+        private int tabIndex;
 
         public ScoreSaberPlayerBaseViewModel ScoreSaberSingle { get; }
 
@@ -27,8 +28,7 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
             ScoreSaberSingle = new ScoreSaberSinglePlayerAnalysisViewModel();
             ScoreSaberMultiple = new ScoreSaberMultiplePlayersCompareViewModel();
 
-            tabIndex = 1;
-            // TODO: Set TabIndex to UserConfig.ScoreSaber.InitialTabIndex
+            tabIndex = (int)UserConfigManager.Instance.Config.ScoreSaberAnalysisMode;
         }
 
         public async Task AddPlayerFromTwitchAsync(string playername)

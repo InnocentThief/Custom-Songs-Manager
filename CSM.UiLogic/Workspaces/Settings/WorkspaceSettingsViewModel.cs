@@ -19,6 +19,8 @@ namespace CSM.UiLogic.Workspaces.Settings
         private bool songDetailPositionRight;
         private bool songDetailPositionBottom;
         private bool removeReceivedSongAfterAddingToPlaylist;
+        private bool scoreSaberAnalysisModeSingle;
+        private bool scoreSaberAnalysisModeCompare;
 
         #endregion
 
@@ -103,6 +105,46 @@ namespace CSM.UiLogic.Workspaces.Settings
             }
         }
 
+        /// <summary>
+        /// Gets or sets whether the ScoreSaber workspace starts with single player analysis.
+        /// </summary>
+        public bool ScoreSaberAnalysisModeSingle
+        {
+            get => scoreSaberAnalysisModeSingle;
+            set
+            {
+                if (scoreSaberAnalysisModeSingle == value) return;
+                scoreSaberAnalysisModeSingle = value;
+                if (value)
+                {
+                    UserConfigManager.Instance.Config.ScoreSaberAnalysisMode = ScoreSaberAnalysisMode.Single;
+                    UserConfigManager.Instance.SaveUserConfig();
+                    scoreSaberAnalysisModeCompare = false;
+                }
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets whether the ScoreSaber workspace starts with player compare.
+        /// </summary>
+        public bool ScoreSaberAnalysisModeCompare
+        {
+            get => scoreSaberAnalysisModeCompare;
+            set
+            {
+                if (scoreSaberAnalysisModeCompare == value) return;
+                scoreSaberAnalysisModeCompare = value;
+                if (value)
+                {
+                    UserConfigManager.Instance.Config.ScoreSaberAnalysisMode = ScoreSaberAnalysisMode.Compare;
+                    UserConfigManager.Instance.SaveUserConfig();
+                    ScoreSaberAnalysisModeSingle = false;
+                }
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         /// <summary>
@@ -122,6 +164,8 @@ namespace CSM.UiLogic.Workspaces.Settings
             SelectedWorkspace = Workspaces.SingleOrDefault(w => w.Type == UserConfigManager.Instance.Config.DefaultWorkspace);
             songDetailPositionRight = UserConfigManager.Instance.Config.CustomLevelsSongDetailPosition == SongDetailPosition.Right;
             songDetailPositionBottom = UserConfigManager.Instance.Config.CustomLevelsSongDetailPosition == SongDetailPosition.Bottom;
+            scoreSaberAnalysisModeSingle = UserConfigManager.Instance.Config.ScoreSaberAnalysisMode == ScoreSaberAnalysisMode.Single;
+            scoreSaberAnalysisModeCompare = UserConfigManager.Instance.Config.ScoreSaberAnalysisMode == ScoreSaberAnalysisMode.Compare;
             removeReceivedSongAfterAddingToPlaylist = UserConfigManager.Instance.Config.RemoveReceivedSongAfterAddingToPlaylist;
         }
     }
