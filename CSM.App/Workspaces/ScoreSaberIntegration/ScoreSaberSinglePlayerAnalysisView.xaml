@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:local="clr-namespace:CSM.App.Workspaces.ScoreSaberIntegration"
+             xmlns:p="clr-namespace:CSM.App.Properties"
              xmlns:Flags="clr-namespace:FamFamFam.Flags.Wpf;assembly=FamFamFam.Flags.Wpf"
              xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib" xmlns:converter="clr-namespace:CSM.App.Converter"
              mc:Ignorable="d" 
@@ -194,14 +195,17 @@
                                     </DataTemplate>
                                 </telerik:GridViewDataColumn.CellTemplate>
                             </telerik:GridViewDataColumn>
-                            <!--<telerik:GridViewDataColumn Header="Misses" DataMemberBinding="{Binding MissedNotes}" />
-                            <telerik:GridViewDataColumn Header="BadCuts" DataMemberBinding="{Binding BadCuts}" />-->
                             <telerik:GridViewDataColumn Header="">
                                 <telerik:GridViewDataColumn.CellTemplate>
                                     <DataTemplate>
-                                        <telerik:RadButton Command="{Binding ShowAdditionalInfosCommand}" Background="Transparent" BorderThickness="0">
-                                            <telerik:RadGlyph Glyph="&#xe401;" ToolTip="Show additional informations" />
-                                        </telerik:RadButton>
+                                        <StackPanel Orientation="Horizontal">
+                                            <telerik:RadButton Command="{Binding ShowAdditionalInfosCommand}" Background="Transparent" BorderThickness="0">
+                                                <telerik:RadGlyph Glyph="&#xe401;" ToolTip="Show additional informations" />
+                                            </telerik:RadButton>
+                                            <telerik:RadButton Command="{Binding CopyBsrKeyCommand}" ToolTip="{x:Static p:Resources.Workspace_CustomLevels_Detail_Command_CopyBsrKey_Tooltip}" Background="Transparent" BorderThickness="0">
+                                                <telerik:RadGlyph Glyph="&#xe111;" />
+                                            </telerik:RadButton>
+                                        </StackPanel>
                                     </DataTemplate>
                                 </telerik:GridViewDataColumn.CellTemplate>
                             </telerik:GridViewDataColumn>

@@ -1,4 +1,5 @@
 ﻿using CSM.DataAccess.Entities.Online.ScoreSaber;
+using CSM.Services;
 using CSM.UiLogic.Wizards;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
@@ -7,6 +8,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
 {
@@ -71,7 +73,7 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
 
         public int MaxCombo => playerScore.Score.MaxCombo;
 
-        public string Modifiers => string.IsNullOrWhiteSpace(playerScore.Score.Modifiers)? "No Modifiers": playerScore.Score.Modifiers;
+        public string Modifiers => string.IsNullOrWhiteSpace(playerScore.Score.Modifiers) ? "No Modifiers" : playerScore.Score.Modifiers;
 
         public decimal PP => Math.Round(playerScore.Score.PP, 2);
 
@@ -87,6 +89,8 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
 
         public RelayCommand ShowAdditionalInfosCommand { get; }
 
+        public RelayCommand CopyBsrKeyCommand { get; }
+
         public override string Title => SongName;
 
         public override int Height => 250;
@@ -101,11 +105,22 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
         {
             this.playerScore = playerScore;
             ShowAdditionalInfosCommand = new RelayCommand(ShowAdditionalInfos);
+            CopyBsrKeyCommand = new RelayCommand(CopyBsrKey);
         }
 
         private void ShowAdditionalInfos()
         {
             EditWindowController.Instance().ShowEditWindow(this);
+        }
+
+        private void CopyBsrKey()
+        {
+            var beatmapService = new BeatMapService("maps/hash");
+            var beatmap = beatmapService.GetBeatMapDataAsync(playerScore.Leaderboard.SongHash);
+            if (beatmap != null)
+            {
+                Clipboard.SetText($"!bsr {beatmap.Id}");
+            }
         }
     }
 }
