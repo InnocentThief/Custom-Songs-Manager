@@ -1,4 +1,6 @@
 ﻿using CSM.DataAccess.Entities.Online.ScoreSaber;
+using CSM.UiLogic.Wizards;
+using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
 {
-    public class ScoreSaberPlayerScoreViewModel
+    public class ScoreSaberPlayerScoreViewModel : EditWindowBaseViewModel
     {
         private PlayerScore playerScore;
 
@@ -48,6 +50,8 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
 
         public string LevelAuthorName => playerScore.Leaderboard.LevelAuthorName;
 
+        public string Score => playerScore.Score.BaseScore.ToString();
+
         public decimal Accuracy
         {
             get
@@ -65,9 +69,15 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
 
         public bool FullCombo => playerScore.Score.FullCombo;
 
+        public int MaxCombo => playerScore.Score.MaxCombo;
+
+        public string Modifiers => string.IsNullOrWhiteSpace(playerScore.Score.Modifiers)? "No Modifiers": playerScore.Score.Modifiers;
+
         public decimal PP => Math.Round(playerScore.Score.PP, 2);
 
         public decimal WeightPP => Math.Round(playerScore.Score.Weight * playerScore.Score.PP, 2);
+
+        public string PPWeightPP => $"{PP} [{WeightPP}]";
 
         public int MissedNotes => playerScore.Score.MissedNotes;
 
@@ -75,9 +85,27 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
 
         public string Stars => $"{playerScore.Leaderboard.Stars}*";
 
-        public ScoreSaberPlayerScoreViewModel(PlayerScore playerScore)
+        public RelayCommand ShowAdditionalInfosCommand { get; }
+
+        public override string Title => SongName;
+
+        public override int Height => 250;
+
+        public override int Width => 600;
+
+        /// <summary>
+        /// Initializes a new <see cref="ScoreSaberPlayerScoreViewModel"/>.
+        /// </summary>
+        /// <param name="playerScore">The player score fetched from ScoreSaber.</param>
+        public ScoreSaberPlayerScoreViewModel(PlayerScore playerScore) : base(String.Empty, "Close")
         {
             this.playerScore = playerScore;
+            ShowAdditionalInfosCommand = new RelayCommand(ShowAdditionalInfos);
+        }
+
+        private void ShowAdditionalInfos()
+        {
+            EditWindowController.Instance().ShowEditWindow(this);
         }
     }
 }

@@ -7,11 +7,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <UserControl.Resources>
+    <!--<UserControl.Resources>
         <DataTemplate x:Key="SongDataTemplate">
             <TextBlock Text="{Binding SongName}" />
         </DataTemplate>
-    </UserControl.Resources>
+    </UserControl.Resources>-->
 
     <Grid>
         <!--<Grid.RowDefinitions>

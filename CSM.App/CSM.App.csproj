@@ -251,6 +251,9 @@
     <Compile Include="Workspaces\Playlists\SongSearchView.xaml.cs">
       <DependentUpon>SongSearchView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberPlayerScoreView.xaml.cs">
+      <DependentUpon>ScoreSaberPlayerScoreView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Workspaces\ScoreSaberIntegration\SinglePlayerDataTemplateSelector.cs" />
     <Compile Include="Workspaces\Settings\BeatSaberSettingsView.xaml.cs">
       <DependentUpon>BeatSaberSettingsView.xaml</DependentUpon>
@@ -407,6 +410,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Workspaces\Playlists\SongSearchView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Workspaces\ScoreSaberIntegration\ScoreSaberPlayerScoreView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

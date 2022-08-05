@@ -10,6 +10,7 @@
                      xmlns:commonViewModel="clr-namespace:CSM.UiLogic.Workspaces.Common;assembly=CSM.UiLogic"
                      xmlns:infosViewModel="clr-namespace:CSM.UiLogic.Workspaces.Infos;assembly=CSM.UiLogic"
                      xmlns:settingsViewModel="clr-namespace:CSM.UiLogic.Workspaces;assembly=CSM.UiLogic"
+                     xmlns:scoreSaber="clr-namespace:CSM.UiLogic.Workspaces.ScoreSaberIntegration;assembly=CSM.UiLogic" xmlns:scoresaberintegration="clr-namespace:CSM.App.Workspaces.ScoreSaberIntegration"
                      mc:Ignorable="d"
                      Header="{Binding Title}"
                      Height="{Binding Height}" 
@@ -33,6 +34,9 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type settingsViewModel:SettingsViewModel}">
             <settings:SettingsView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type scoreSaber:ScoreSaberPlayerScoreViewModel}">
+            <scoresaberintegration:ScoreSaberPlayerScoreView />
         </DataTemplate>
     </telerik:RadWindow.Resources>
 
