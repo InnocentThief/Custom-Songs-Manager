@@ -113,10 +113,10 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
             EditWindowController.Instance().ShowEditWindow(this);
         }
 
-        private void CopyBsrKey()
+        private async void CopyBsrKey()
         {
             var beatmapService = new BeatMapService("maps/hash");
-            var beatmap = beatmapService.GetBeatMapDataAsync(playerScore.Leaderboard.SongHash);
+            var beatmap = await beatmapService.GetBeatMapDataAsync(playerScore.Leaderboard.SongHash);
             if (beatmap != null)
             {
                 Clipboard.SetText($"!bsr {beatmap.Id}");

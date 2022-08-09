@@ -45,7 +45,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>-->
-            <telerik:RadTabControl SelectedIndex="{Binding TabIndex}">
+            <telerik:RadTabControl SelectedIndex="{Binding TabIndex}" BorderThickness="0">
                 <telerik:RadTabItem Header="Single Player Analysis">
                     <local:ScoreSaberSinglePlayerAnalysisView DataContext="{Binding ScoreSaberSingle}" />
                 </telerik:RadTabItem>
