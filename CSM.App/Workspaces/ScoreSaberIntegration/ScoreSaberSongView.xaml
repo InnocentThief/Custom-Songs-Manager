@@ -7,13 +7,59 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <!--<UserControl.Resources>
-        <DataTemplate x:Key="SongDataTemplate">
-            <TextBlock Text="{Binding SongName}" />
+    <UserControl.Resources>
+
+        <DataTemplate x:Key="blubberTemplate">
+            <Image Source="https://cdn.scoresaber.com/avatars/76561198319524592.jpg" Height="30" />
         </DataTemplate>
-    </UserControl.Resources>-->
+        
+        <Style x:Key="PlayerHeaderStyle" TargetType="telerik:GridViewHeaderCell">
+            <Setter Property="Background" Value="Green" />
+            <!--<Setter Property="ContentTemplate" Value="{StaticResource blubberTemplate}" />-->
+        </Style>
+    </UserControl.Resources>
 
     <Grid>
+        <telerik:RadGridView ItemsSource="{Binding Songs}" AutoGenerateColumns="False" IsFilteringAllowed="True" FilteringMode="FilterRow" RowIndicatorVisibility="Collapsed" FrozenColumnsSplitterVisibility="Collapsed" BorderThickness="0" AlternationCount="2" ShowGroupPanel="False">
+            <telerik:RadGridView.Columns>
+                <telerik:GridViewDataColumn Header="Song" DataMemberBinding="{Binding SongColumnText}">
+                    <telerik:GridViewDataColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Image Source="{Binding CoverImage}" />
+                                <Grid Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Text="{Binding SongName}" />
+                                    <TextBlock Grid.Row="1" Text="{Binding LevelAuthorName}" />
+                                </Grid>
+                                <Border Grid.Column="2" Background="Cornsilk">
+                                    <TextBlock Text="stars" />
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="" DataMemberBinding="{Binding Player1ACC}" IsFilterable="False" HeaderCellStyle="{StaticResource PlayerHeaderStyle}">
+                    
+                    <telerik:GridViewDataColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border>
+                                <TextBlock Text="{Binding Player1ACC}" />
+                            </Border>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellTemplate>
+                </telerik:GridViewDataColumn>
+            </telerik:RadGridView.Columns>
+        </telerik:RadGridView>
+
         <!--<Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />

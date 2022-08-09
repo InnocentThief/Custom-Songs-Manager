@@ -221,6 +221,7 @@
     <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberPlayerBaseViewModel.cs" />
     <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberPlayerScoreViewModel.cs" />
     <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberSinglePlayerAnalysisViewModel.cs" />
+    <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberSongViewModel.cs" />
     <Compile Include="Workspaces\SettingsViewModel.cs" />
     <Compile Include="Workspaces\Settings\BeatSaberSettingsViewModel.cs" />
     <Compile Include="Workspaces\Settings\BeatSaverSettingsViewModel.cs" />

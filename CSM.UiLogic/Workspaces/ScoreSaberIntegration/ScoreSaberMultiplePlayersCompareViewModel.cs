@@ -1,4 +1,5 @@
 ﻿using CSM.DataAccess.Entities.Online.ScoreSaber;
+using CSM.Framework.Extensions;
 using CSM.Services;
 using System;
 using System.Collections.ObjectModel;
@@ -9,8 +10,6 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
 {
     public class ScoreSaberMultiplePlayersCompareViewModel : ScoreSaberPlayerBaseViewModel
     {
-        
-
         #region Public Properties
 
         public ScoreSaberPlayerViewModel Player1
@@ -69,12 +68,14 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
 
         public ObservableCollection<ScoreSaberPlayerViewModel> Players { get; }
 
+        public ObservableCollection<ScoreSaberSongViewModel> Songs { get; }
+
         #endregion
 
         public ScoreSaberMultiplePlayersCompareViewModel()
         {
             Players = new ObservableCollection<ScoreSaberPlayerViewModel>();
-            
+            Songs = new ObservableCollection<ScoreSaberSongViewModel>();
         }
 
         #region Helper methods
@@ -103,6 +104,7 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
             AddPlayerCommand.NotifyCanExecuteChanged();
             await playerViewModel.LoadDataAsync();
             ChangePlayers();
+            AddSongsForPlayer(playerViewModel);
         }
 
         private void ChangePlayers()
@@ -151,5 +153,22 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
         }
 
         #endregion
+
+        private void AddSongsForPlayer(ScoreSaberPlayerViewModel scoreSaberPlayerViewModel)
+        {
+            return;
+            // Update extisting song view models
+            var existingHashes = Songs.Select(s => s.SongHash).ToList();
+            var existingSongs = scoreSaberPlayerViewModel.Scores.Where(s => existingHashes.Contains(s.PlayerScore.Leaderboard.SongHash));
+            foreach (var existingSong in existingSongs)
+            {
+                var song = Songs.Single(s => s.SongHash == existingSong.PlayerScore.Leaderboard.SongHash);
+                song.AddPlayer(scoreSaberPlayerViewModel.Index, 4711);
+            }
+
+            // Add all others
+            var newSongs = scoreSaberPlayerViewModel.Scores.Where(s => !existingHashes.Contains(s.PlayerScore.Leaderboard.SongHash));
+            Songs.AddRange(newSongs.Select(s => new ScoreSaberSongViewModel(s.PlayerScore.Leaderboard)));
+        }
     }
 }

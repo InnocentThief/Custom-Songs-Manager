@@ -14,17 +14,17 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
 {
     public class ScoreSaberPlayerScoreViewModel : EditWindowBaseViewModel
     {
-        private PlayerScore playerScore;
+        public PlayerScore PlayerScore { get; }
 
-        public int Rank => playerScore.Score.Rank;
+        public int Rank => PlayerScore.Score.Rank;
 
-        public DateTime TimeSet => DateTime.Parse(playerScore.Score.TimeSet, CultureInfo.InvariantCulture);
+        public DateTime TimeSet => DateTime.Parse(PlayerScore.Score.TimeSet, CultureInfo.InvariantCulture);
 
         public string TimeSetText
         {
             get
             {
-                var timeSpan = DateTime.Now - DateTime.Parse(playerScore.Score.TimeSet, CultureInfo.InvariantCulture);
+                var timeSpan = DateTime.Now - DateTime.Parse(PlayerScore.Score.TimeSet, CultureInfo.InvariantCulture);
                 if (timeSpan.Days > 365)
                 {
                     return $"{timeSpan.Days / 365}y ago";
@@ -40,27 +40,27 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
             }
         }
 
-        public int Difficulty => playerScore.Leaderboard.Difficulty.Diff;
+        public int Difficulty => PlayerScore.Leaderboard.Difficulty.Diff;
 
-        public string CoverImage => playerScore.Leaderboard.CoverImage;
+        public string CoverImage => PlayerScore.Leaderboard.CoverImage;
 
-        public string SongColumnText => $"{playerScore.Leaderboard.SongName} {playerScore.Leaderboard.SongAuthorName} {playerScore.Leaderboard.LevelAuthorName}";
+        public string SongColumnText => $"{PlayerScore.Leaderboard.SongName} {PlayerScore.Leaderboard.SongAuthorName} {PlayerScore.Leaderboard.LevelAuthorName}";
 
-        public string SongName => playerScore.Leaderboard.SongName;
+        public string SongName => PlayerScore.Leaderboard.SongName;
 
-        public string SongAuthorName => playerScore.Leaderboard.SongAuthorName;
+        public string SongAuthorName => PlayerScore.Leaderboard.SongAuthorName;
 
-        public string LevelAuthorName => playerScore.Leaderboard.LevelAuthorName;
+        public string LevelAuthorName => PlayerScore.Leaderboard.LevelAuthorName;
 
-        public string Score => playerScore.Score.BaseScore.ToString();
+        public string Score => PlayerScore.Score.BaseScore.ToString();
 
         public decimal Accuracy
         {
             get
             {
-                if (playerScore.Leaderboard.MaxScore > 0)
+                if (PlayerScore.Leaderboard.MaxScore > 0)
                 {
-                    return Math.Round(playerScore.Score.BaseScore / playerScore.Leaderboard.MaxScore * 100, 2);
+                    return Math.Round(PlayerScore.Score.BaseScore / PlayerScore.Leaderboard.MaxScore * 100, 2);
                 }
                 else
                 {
@@ -69,23 +69,23 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
             }
         }
 
-        public bool FullCombo => playerScore.Score.FullCombo;
+        public bool FullCombo => PlayerScore.Score.FullCombo;
 
-        public int MaxCombo => playerScore.Score.MaxCombo;
+        public int MaxCombo => PlayerScore.Score.MaxCombo;
 
-        public string Modifiers => string.IsNullOrWhiteSpace(playerScore.Score.Modifiers) ? "No Modifiers" : playerScore.Score.Modifiers;
+        public string Modifiers => string.IsNullOrWhiteSpace(PlayerScore.Score.Modifiers) ? "No Modifiers" : PlayerScore.Score.Modifiers;
 
-        public decimal PP => Math.Round(playerScore.Score.PP, 2);
+        public decimal PP => Math.Round(PlayerScore.Score.PP, 2);
 
-        public decimal WeightPP => Math.Round(playerScore.Score.Weight * playerScore.Score.PP, 2);
+        public decimal WeightPP => Math.Round(PlayerScore.Score.Weight * PlayerScore.Score.PP, 2);
 
         public string PPWeightPP => $"{PP} [{WeightPP}]";
 
-        public int MissedNotes => playerScore.Score.MissedNotes;
+        public int MissedNotes => PlayerScore.Score.MissedNotes;
 
-        public int BadCuts => playerScore.Score.BadCuts;
+        public int BadCuts => PlayerScore.Score.BadCuts;
 
-        public string Stars => $"{playerScore.Leaderboard.Stars}*";
+        public string Stars => $"{PlayerScore.Leaderboard.Stars}*";
 
         public RelayCommand ShowAdditionalInfosCommand { get; }
 
@@ -103,7 +103,7 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
         /// <param name="playerScore">The player score fetched from ScoreSaber.</param>
         public ScoreSaberPlayerScoreViewModel(PlayerScore playerScore) : base(String.Empty, "Close")
         {
-            this.playerScore = playerScore;
+            PlayerScore = playerScore;
             ShowAdditionalInfosCommand = new RelayCommand(ShowAdditionalInfos);
             CopyBsrKeyCommand = new RelayCommand(CopyBsrKey);
         }
@@ -116,7 +116,7 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
         private async void CopyBsrKey()
         {
             var beatmapService = new BeatMapService("maps/hash");
-            var beatmap = await beatmapService.GetBeatMapDataAsync(playerScore.Leaderboard.SongHash);
+            var beatmap = await beatmapService.GetBeatMapDataAsync(PlayerScore.Leaderboard.SongHash);
             if (beatmap != null)
             {
                 Clipboard.SetText($"!bsr {beatmap.Id}");
