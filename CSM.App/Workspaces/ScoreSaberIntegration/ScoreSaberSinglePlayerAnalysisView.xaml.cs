@@ -24,5 +24,26 @@ namespace CSM.App.Workspaces.ScoreSaberIntegration
         {
             InitializeComponent();
         }
+
+        private void RadGridView_FilterOperatorsLoading(object sender, Telerik.Windows.Controls.GridView.FilterOperatorsLoadingEventArgs e)
+        {
+            switch (e.Column.Header)
+            {
+                case "Rank":
+                    e.DefaultOperator1 = Telerik.Windows.Data.FilterOperator.IsEqualTo;
+                    break;
+                case "Song":
+                    e.DefaultOperator1 = Telerik.Windows.Data.FilterOperator.Contains;
+                    break;
+                case "ACC":
+                    e.DefaultOperator1 = Telerik.Windows.Data.FilterOperator.IsLessThanOrEqualTo;
+                    break;
+                case "PP":
+                    e.DefaultOperator1 = Telerik.Windows.Data.FilterOperator.IsLessThanOrEqualTo;
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

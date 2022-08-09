@@ -25,26 +25,9 @@
             </Grid.ColumnDefinitions>
             <!-- Title -->
             <TextBlock Text="{x:Static p:Resources.Workspace_TwitchIntegration_ScoreSaber_Title}" Foreground="White" VerticalAlignment="Center" Margin="8,0" FontWeight="DemiBold" />
-            <!-- Commands -->
-            <!--<telerik:RadToolBar Grid.Column="1" OverflowButtonVisibility="Collapsed" GripVisibility="Collapsed" Background="Transparent" BorderThickness="0" >
-                <TextBlock Text="{Binding AuthenticatedAs}" TextTrimming="CharacterEllipsis" Width="200" TextAlignment="Right" ToolTip="{Binding AuthenticatedAs}"/>
-                <telerik:RadButton Command="{Binding AddChannelCommand}" ToolTip="{x:Static p:Resources.Workspace_TwitchIntegration_Channels_AddChannel}">
-                    <telerik:RadGlyph Glyph="&#xe11e;" />
-                </telerik:RadButton>
-                <telerik:RadButton Command="{Binding RemoveChannelCommand}" ToolTip="{x:Static p:Resources.Workspace_TwitchIntegration_Channels_DeleteChannel}">
-                    <telerik:RadGlyph Glyph="&#xe121;" />
-                </telerik:RadButton>
-            </telerik:RadToolBar>-->
         </Grid>
 
         <Border Grid.Row="1" BorderBrush="DimGray" BorderThickness="1,0,1,1">
-            <!--<Grid>-->
-            <!--<Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>-->
             <telerik:RadTabControl SelectedIndex="{Binding TabIndex}" BorderThickness="0">
                 <telerik:RadTabItem Header="Single Player Analysis">
                     <local:ScoreSaberSinglePlayerAnalysisView DataContext="{Binding ScoreSaberSingle}" />
@@ -53,37 +36,6 @@
                     <local:ScoreSaberMultiplePlayersCompareView DataContext="{Binding ScoreSaberMultiple}" />
                 </telerik:RadTabItem>
             </telerik:RadTabControl>
-
-
-
-            <!--<twitchintegration:ScoreSaberCardView Grid.Row="1" Margin="6" MinHeight="80" />-->
-
-
-            <!-- Tabs -->
-            <!--<telerik:RadTabControl Grid.Row="2" >
-                        <telerik:RadTabItem Header="Profile">
-                            <twitchintegration:ScoreSaberProfileView />
-                        </telerik:RadTabItem>
-                        <telerik:RadTabItem Header="Scores">
-                            <twitchintegration:ScoreSaberSongView />
-                        </telerik:RadTabItem>
-                        <telerik:RadTabItem Header="Rank">
-                            <twitchintegration:ScoreSaberRankView />
-                        </telerik:RadTabItem>
-                        <telerik:RadTabItem Header="PP">
-                            <twitchintegration:ScoreSaberPPView />
-                        </telerik:RadTabItem>
-                        <telerik:RadTabItem Header="Accuracy Compare">
-                            <twitchintegration:ScoreSaberAccuracyView />
-                        </telerik:RadTabItem>
-                    </telerik:RadTabControl>-->
-
-            <!--</Grid>-->
-            <!-- Player Search -->
-
-            <!--</Grid>-->
-
         </Border>
-
     </Grid>
 </UserControl>
