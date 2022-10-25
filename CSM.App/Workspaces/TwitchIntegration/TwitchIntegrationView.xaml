@@ -26,6 +26,6 @@
         <!-- Vertical splitter -->
         <GridSplitter Grid.Column="3" Grid.Row="1" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" HorizontalAlignment="Stretch" />
         <!-- ScoreSaber -->
-        <scoresaberintegration:ScoreSaberView Grid.Column="4" DataContext="{Binding ScoreSaber}" />
+        <!--<scoresaberintegration:ScoreSaberView Grid.Column="4" DataContext="{Binding ScoreSaber}" />-->
     </Grid>
 </UserControl>

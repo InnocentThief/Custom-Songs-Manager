@@ -217,6 +217,7 @@
     <Compile Include="Workspaces\Playlists\SearchedSongViewModel.cs" />
     <Compile Include="Workspaces\Playlists\SongSearchEventArgs.cs" />
     <Compile Include="Workspaces\Playlists\SongSearchViewModel.cs" />
+    <Compile Include="Workspaces\ScoreSaberIntegrationViewModel.cs" />
     <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberMultiplePlayersCompareViewModel.cs" />
     <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberPlayerBaseViewModel.cs" />
     <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberPlayerScoreViewModel.cs" />

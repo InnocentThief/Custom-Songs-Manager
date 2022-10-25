@@ -349,6 +349,15 @@ namespace CSM.UiLogic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ScoreSaber.
+        /// </summary>
+        public static string Workspace_ScoreSaber {
+            get {
+                return ResourceManager.GetString("Workspace_ScoreSaber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tools.
         /// </summary>
         public static string Workspace_Tools {

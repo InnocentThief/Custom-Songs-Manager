@@ -1,5 +1,6 @@
 ﻿using CSM.DataAccess.Entities.Online.ScoreSaber;
 using CSM.Services;
+using CSM.UiLogic.Properties;
 using CSM.UiLogic.Wizards;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
@@ -119,7 +120,20 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
             var beatmap = await beatmapService.GetBeatMapDataAsync(PlayerScore.Leaderboard.SongHash);
             if (beatmap != null)
             {
-                Clipboard.SetText($"!bsr {beatmap.Id}");
+                try
+                {
+                    Clipboard.SetText($"!bsr {beatmap.Id}");
+                }
+                catch (Exception)
+                {
+                    //var messageBoxViewModel = new MessageBoxViewModel(Resources.OK, MessageBoxButtonColor.Default, String.Empty, MessageBoxButtonColor.Default)
+                    //{
+                    //    Title = Resources.SongDetail_CopyBSR_Error_Title,
+                    //    Message = Resources.SongDetail_CopyBSR_Error_Message,
+                    //    MessageBoxType = DataAccess.Entities.Types.MessageBoxTypes.Information
+                    //};
+                    //MessageBoxController.Instance().ShowMessageBox(messageBoxViewModel);
+                }
             }
         }
     }

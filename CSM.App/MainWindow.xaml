@@ -11,7 +11,7 @@
                    xmlns:settings="clr-namespace:CSM.App.Workspaces.Settings"
                    xmlns:tools="clr-namespace:CSM.App.Workspaces.Tools"
                    xmlns:twitchintegration="clr-namespace:CSM.App.Workspaces.TwitchIntegration"
-                   xmlns:navigation="clr-namespace:Telerik.Windows.Controls.Navigation;assembly=Telerik.Windows.Controls.Navigation"
+                   xmlns:navigation="clr-namespace:Telerik.Windows.Controls.Navigation;assembly=Telerik.Windows.Controls.Navigation" xmlns:scoresaberintegration="clr-namespace:CSM.App.Workspaces.ScoreSaberIntegration"
                    mc:Ignorable="d"
                    Header="Custom Songs Manager" Height="800" Width="1200"
                    navigation:RadWindowInteropHelper.Title="Custom Songs Manager" 
@@ -42,6 +42,10 @@
             <twitchintegration:TwitchIntegrationView />
         </DataTemplate>
 
+        <DataTemplate x:Key="ScoreSaberIntegrationDataTemplate">
+            <scoresaberintegration:ScoreSaberView />
+        </DataTemplate>
+
         <DataTemplate x:Key="ToolsDataTemplate">
             <tools:ToolsView />
         </DataTemplate>
@@ -50,6 +54,7 @@
                                                      CustomLevels="{StaticResource CustomLevelsDataTemplate}"
                                                      Playlists="{StaticResource PlaylistsDataTemplate}"
                                                      TwitchIntegration="{StaticResource TwitchIntegrationDataTemplate}"
+                                                     ScoreSaberIntegration="{StaticResource ScoreSaberIntegrationDataTemplate}"
                                                      Tools="{StaticResource ToolsDataTemplate}"/>
 
 

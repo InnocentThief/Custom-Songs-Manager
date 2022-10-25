@@ -216,6 +216,9 @@
   <data name="Workspace_Playlists" xml:space="preserve">
     <value>Playlists</value>
   </data>
+  <data name="Workspace_ScoreSaber" xml:space="preserve">
+    <value>ScoreSaber</value>
+  </data>
   <data name="Workspace_Tools" xml:space="preserve">
     <value>Tools</value>
   </data>
