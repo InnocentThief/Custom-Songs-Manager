@@ -295,6 +295,24 @@ namespace CSM.UiLogic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Looks like Clipboard is busy at the moment. Try it again later.
+        /// </summary>
+        public static string SongDetail_CopyBSR_Error_Message {
+            get {
+                return ResourceManager.GetString("SongDetail_CopyBSR_Error_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to copy BSR key.
+        /// </summary>
+        public static string SongDetail_CopyBSR_Error_Title {
+            get {
+                return ResourceManager.GetString("SongDetail_CopyBSR_Error_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Auto-adding not active.
         /// </summary>
         public static string TwitchIntegration_AutoAddingNotActive {

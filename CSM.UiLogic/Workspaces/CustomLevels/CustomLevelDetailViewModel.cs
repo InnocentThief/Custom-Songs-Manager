@@ -1,5 +1,6 @@
 ﻿using CSM.DataAccess.Entities.Online;
 using CSM.UiLogic.Properties;
+using CSM.UiLogic.Wizards;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
@@ -99,7 +100,20 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
 
         private void CopyBsrKey()
         {
-            Clipboard.SetText($"!bsr {Id}");
+            try
+            {
+                Clipboard.SetText($"!bsr {Id}");
+            }
+            catch (Exception)
+            {
+                var messageBoxViewModel = new MessageBoxViewModel(Resources.OK, MessageBoxButtonColor.Default, String.Empty, MessageBoxButtonColor.Default)
+                {
+                    Title = Resources.SongDetail_CopyBSR_Error_Title,
+                    Message = Resources.SongDetail_CopyBSR_Error_Message,
+                    MessageBoxType = DataAccess.Entities.Types.MessageBoxTypes.Information
+                };
+                MessageBoxController.Instance().ShowMessageBox(messageBoxViewModel);
+            }
         }
 
         private void ShowPreview()

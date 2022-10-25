@@ -198,6 +198,12 @@
   <data name="Settings_Title" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="SongDetail_CopyBSR_Error_Message" xml:space="preserve">
+    <value>Looks like Clipboard is busy at the moment. Try it again later</value>
+  </data>
+  <data name="SongDetail_CopyBSR_Error_Title" xml:space="preserve">
+    <value>Unable to copy BSR key</value>
+  </data>
   <data name="TwitchIntegration_AutoAddingNotActive" xml:space="preserve">
     <value>Auto-adding not active</value>
   </data>
