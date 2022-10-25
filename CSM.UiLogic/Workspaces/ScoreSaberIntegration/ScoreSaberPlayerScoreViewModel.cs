@@ -126,13 +126,13 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
                 }
                 catch (Exception)
                 {
-                    //var messageBoxViewModel = new MessageBoxViewModel(Resources.OK, MessageBoxButtonColor.Default, String.Empty, MessageBoxButtonColor.Default)
-                    //{
-                    //    Title = Resources.SongDetail_CopyBSR_Error_Title,
-                    //    Message = Resources.SongDetail_CopyBSR_Error_Message,
-                    //    MessageBoxType = DataAccess.Entities.Types.MessageBoxTypes.Information
-                    //};
-                    //MessageBoxController.Instance().ShowMessageBox(messageBoxViewModel);
+                    var messageBoxViewModel = new MessageBoxViewModel(Resources.OK, MessageBoxButtonColor.Default, String.Empty, MessageBoxButtonColor.Default)
+                    {
+                        Title = Resources.SongDetail_CopyBSR_Error_Title,
+                        Message = Resources.SongDetail_CopyBSR_Error_Message,
+                        MessageBoxType = DataAccess.Entities.Types.MessageBoxTypes.Information
+                    };
+                    MessageBoxController.Instance().ShowMessageBox(messageBoxViewModel);
                 }
             }
         }
