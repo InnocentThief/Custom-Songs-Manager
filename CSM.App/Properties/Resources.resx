@@ -527,6 +527,9 @@
   <data name="Workspace_CustomLevels_OpenPathInFileExplorer" xml:space="preserve">
     <value>Open path in file explorer</value>
   </data>
+  <data name="Workspace_CustomLevels_SaveToPlaylist" xml:space="preserve">
+    <value>Creates a playlist containing all custom songs</value>
+  </data>
   <data name="Workspace_CustomLevels_Title" xml:space="preserve">
     <value>Custom Levels</value>
     <comment>Title for the list area on the custom levels workspace</comment>

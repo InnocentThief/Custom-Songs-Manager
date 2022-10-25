@@ -1,6 +1,7 @@
 ﻿using CSM.DataAccess.Entities.Offline;
 using CSM.Framework;
 using CSM.Framework.Configuration.UserConfiguration;
+using CSM.Framework.Converter;
 using CSM.Framework.Extensions;
 using CSM.Framework.Logging;
 using CSM.Services;
@@ -15,10 +16,12 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Input;
 
 namespace CSM.UiLogic.Workspaces
 {
@@ -115,6 +118,11 @@ namespace CSM.UiLogic.Workspaces
         public RelayCommand OpenInFileExplorerCommand { get; }
 
         /// <summary>
+        /// Command used to save all custom levels into a playlist.
+        /// </summary>
+        public RelayCommand SaveCustomLevelsToPlaylistCommand { get; }
+
+        /// <summary>
         /// Gets or sets whether the data is loading.
         /// </summary>
         public bool IsLoading
@@ -174,6 +182,7 @@ namespace CSM.UiLogic.Workspaces
             RefreshCommand = new RelayCommand(Refresh);
             DeleteCustomLevelCommand = new RelayCommand(DeleteCustomLevel, CanDeleteCustomLevel);
             OpenInFileExplorerCommand = new RelayCommand(OpenInFileExplorer);
+            SaveCustomLevelsToPlaylistCommand = new RelayCommand(SaveToPlaylist);
             UserConfigManager.UserConfigChanged += UserConfigManager_UserConfigChanged;
         }
 
@@ -343,6 +352,37 @@ namespace CSM.UiLogic.Workspaces
         private void OpenInFileExplorer()
         {
             Process.Start(UserConfigManager.Instance.Config.CustomLevelPaths.First().Path);
+        }
+
+        private void SaveToPlaylist()
+        {
+            var defaultImageLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Images\\CSM_Logo_400px.png");
+
+            var playlist = new Playlist
+            {
+                Path = String.Empty,
+                PlaylistAuthor = String.Empty,
+                PlaylistDescription = String.Empty,
+                PlaylistTitle = "2022-10-25-SavedCustemLevelsReferences",
+                Songs = new List<PlaylistSong>(),
+                Image = $"base64,{ImageConverter.StringFromBitmap(defaultImageLocation)}"
+            };
+
+            foreach (var customLevel in itemsObservable)
+            {
+                playlist.Songs.Add(new PlaylistSong
+                {
+                    Key = customLevel.BsrKey,
+                    LevelAuthorName = customLevel.LevelAuthorName,
+                    SongName = customLevel.SongName,
+                }); ;
+            }
+
+            // Save to file
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            var content = JsonSerializer.Serialize(playlist, options);
+            File.WriteAllText("c:\\temp\\2022-10-25-SavedCustemLevelsReferences.json", content);
+
         }
 
         #endregion

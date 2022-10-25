@@ -1258,6 +1258,15 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Creates a playlist containing all custom songs.
+        /// </summary>
+        public static string Workspace_CustomLevels_SaveToPlaylist {
+            get {
+                return ResourceManager.GetString("Workspace_CustomLevels_SaveToPlaylist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Custom Levels.
         /// </summary>
         public static string Workspace_CustomLevels_Title {
