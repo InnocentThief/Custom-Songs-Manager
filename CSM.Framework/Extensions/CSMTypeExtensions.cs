@@ -22,6 +22,8 @@ namespace CSM.Framework.Extensions
                     return Resources.Extension_Playlists;
                 case WorkspaceType.TwitchIntegration:
                     return Resources.Extension_Twitch;
+                case WorkspaceType.ScoreSaberIntegration:
+                    return Resources.Extension_ScoreSaber;
                 case WorkspaceType.Tools:
                     return Resources.Extension_Tools;
                 default:
@@ -44,6 +46,8 @@ namespace CSM.Framework.Extensions
                     return Resources.Extension_Playlists;
                 case "TwitchIntegration":
                     return Resources.Extension_Twitch;
+                case "ScoreSaberIntegration":
+                    return Resources.Extension_ScoreSaber;
                 case "Tools":
                     return Resources.Extension_Tools;
                 default:
