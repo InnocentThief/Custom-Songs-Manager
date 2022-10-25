@@ -13,9 +13,9 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300" />
             <ColumnDefinition Width="6" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="6" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
         <!-- Tree with available playlists -->
         <playlists:PlaylistTreeView Grid.RowSpan="5" DataContext="{Binding Playlists}" />
@@ -26,6 +26,6 @@
         <!-- Vertical splitter -->
         <GridSplitter Grid.Column="3" Grid.Row="1" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="Transparent" HorizontalAlignment="Stretch" />
         <!-- ScoreSaber -->
-        <!--<scoresaberintegration:ScoreSaberView Grid.Column="4" DataContext="{Binding ScoreSaber}" />-->
+        <local:ScoreSaberPlayerDetailView Grid.Column="4" DataContext="{Binding ScoreSaber.ScoreSaberSingle}" />
     </Grid>
 </UserControl>

@@ -53,7 +53,10 @@ namespace CSM.Services
             for (int i = 2; i <= playerScoreCollection.Metadata.Total / 100 + 1; i++)
             {
                 playerScoreCollection = await client.GetAsync<PlayerScoreCollection>($"/player/{playerId}/scores?limit=100&page={i}");
-                scores.AddRange(playerScoreCollection.PlayerScores);
+                if (playerScoreCollection != null)
+                {
+                    scores.AddRange(playerScoreCollection.PlayerScores);
+                }
             }
             return scores;
         }

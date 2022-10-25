@@ -316,6 +316,9 @@
     <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberView.xaml.cs">
       <DependentUpon>ScoreSaberView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Workspaces\TwitchIntegration\ScoreSaberPlayerDetailView.xaml.cs">
+      <DependentUpon>ScoreSaberPlayerDetailView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Workspaces\TwitchIntegration\TwitchChannelsView.xaml.cs">
       <DependentUpon>TwitchChannelsView.xaml</DependentUpon>
     </Compile>
@@ -494,6 +497,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Workspaces\ScoreSaberIntegration\ScoreSaberView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Workspaces\TwitchIntegration\ScoreSaberPlayerDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

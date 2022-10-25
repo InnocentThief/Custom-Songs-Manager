@@ -3,8 +3,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-              xmlns:p="clr-namespace:CSM.App.Properties"
-             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" xmlns:local="clr-namespace:CSM.App.Workspaces.ScoreSaberIntegration"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:p="clr-namespace:CSM.App.Properties"
+             xmlns:local="clr-namespace:CSM.App.Workspaces.ScoreSaberIntegration"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 

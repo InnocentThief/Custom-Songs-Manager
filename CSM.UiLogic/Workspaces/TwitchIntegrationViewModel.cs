@@ -45,6 +45,7 @@ namespace CSM.UiLogic.Workspaces
             Twitch.SongChangedEvent += Twitch_SongChangedEvent;
             Twitch.OnScoreSaberAddPlayer += Twitch_OnScoreSaberAddPlayer;
             ScoreSaber = new ScoreSaberViewModel();
+            ScoreSaber.TabIndex = 0;
         }
 
         /// <summary>
