@@ -292,9 +292,11 @@ namespace CSM.UiLogic.Workspaces.Playlists
             else
             {
                 PlaylistSongDetail = new PlaylistSongDetailViewModel(beatmap);
-                if (SelectedPlaylistSong != null || !string.IsNullOrWhiteSpace(SelectedPlaylistSong.BsrKey))
+                if (SelectedPlaylistSong != null && (string.IsNullOrWhiteSpace(SelectedPlaylistSong.BsrKey) || string.IsNullOrWhiteSpace(SelectedPlaylistSong.SongName) || string.IsNullOrWhiteSpace(SelectedPlaylistSong.LevelAuthorName)))
                 {
                     SelectedPlaylistSong.BsrKey = beatmap.Id;
+                    SelectedPlaylistSong.SongName = beatmap.Metadata.SongName;
+                    SelectedPlaylistSong.LevelAuthorName = beatmap.Metadata.SongAuthorName;
                     SaveToFile();
                 }
             }
