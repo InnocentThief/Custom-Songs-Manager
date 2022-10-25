@@ -1,9 +1,11 @@
 ﻿using CSM.DataAccess.Entities.Offline;
 using CSM.DataAccess.Entities.Online;
 using CSM.UiLogic.Properties;
+using CSM.UiLogic.Wizards;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Windows;
 
@@ -110,7 +112,20 @@ namespace CSM.UiLogic.Workspaces.Playlists
 
         private void CopyBsrKey()
         {
-            Clipboard.SetText($"!bsr {beatMap.Id}");
+            try
+            {
+                Clipboard.SetText($"!bsr {beatMap.Id}");
+            }
+            catch (Exception)
+            {
+                var messageBoxViewModel = new MessageBoxViewModel(Resources.OK, MessageBoxButtonColor.Default, String.Empty, MessageBoxButtonColor.Default)
+                {
+                    Title = Resources.SongDetail_CopyBSR_Error_Title,
+                    Message = Resources.SongDetail_CopyBSR_Error_Message,
+                    MessageBoxType = DataAccess.Entities.Types.MessageBoxTypes.Information
+                };
+                MessageBoxController.Instance().ShowMessageBox(messageBoxViewModel);
+            }
         }
 
         private void ShowPreview()
