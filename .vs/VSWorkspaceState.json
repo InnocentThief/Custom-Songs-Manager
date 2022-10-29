@@ -3,8 +3,11 @@
     "",
     "\\CSM.App",
     "\\CSM.App\\Workspaces",
-    "\\CSM.App\\Workspaces\\CustomLevels"
+    "\\CSM.App\\Workspaces\\CustomLevels",
+    "\\CSM.UiLogic",
+    "\\CSM.UiLogic\\Workspaces",
+    "\\CSM.UiLogic\\Workspaces\\Playlists"
   ],
-  "SelectedNode": "\\CSM.App\\Workspaces\\CustomLevels\\CustomLevelDetailBottomView.xaml",
+  "SelectedNode": "\\CSM.UiLogic\\Workspaces\\Playlists\\PlaylistSongDetailViewModel.cs",
   "PreviewInSolutionExplorer": false
 }

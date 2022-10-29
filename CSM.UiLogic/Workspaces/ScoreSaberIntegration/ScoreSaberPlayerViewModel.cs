@@ -5,8 +5,11 @@ using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Data;
+using Telerik.Windows.Controls.TreeView;
 
 namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
 {
@@ -14,6 +17,8 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
     {
         #region Private fields
 
+        private readonly ListCollectionView itemsCollection;
+        private readonly ObservableCollection<ScoreSaberPlayerScoreViewModel> itemsObservable;
         private Player player;
         private int index;
         private readonly ScoreSaberService scoreSaberService;
@@ -49,7 +54,9 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
 
         public string AverageRankedAccuracy => $"{Math.Round(player.ScoreStats.AverageRankedAccuracy, 2)}%";
 
-        public ObservableCollection<ScoreSaberPlayerScoreViewModel> Scores { get; }
+        public ListCollectionView Scores => itemsCollection;
+
+        //public ObservableCollection<ScoreSaberPlayerScoreViewModel> Scores { get; }
 
         public int Index
         {
@@ -90,8 +97,10 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
             RefreshCommand = new AsyncRelayCommand(RefreshAsync);
             RankHistory = new ObservableCollection<RankDataPoint>();
             scoreSaberService = new ScoreSaberService();
+            itemsObservable = new ObservableCollection<ScoreSaberPlayerScoreViewModel>();
+            itemsCollection = DefaultSort();
 
-            Scores = new ObservableCollection<ScoreSaberPlayerScoreViewModel>();
+            //Scores = new ObservableCollection<ScoreSaberPlayerScoreViewModel>();
         }
 
         public async Task LoadDataAsync()
@@ -117,7 +126,7 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
         {
             IsLoading = true;
             var scores = await scoreSaberService.GetPlayerScoresAsync(player.Id);
-            Scores.AddRange(scores.Select(s => new ScoreSaberPlayerScoreViewModel(s)));
+            itemsObservable.AddRange(scores.Select(s => new ScoreSaberPlayerScoreViewModel(s)));
             IsLoading = false;
         }
 
@@ -141,6 +150,13 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
                 Day = "today",
                 Rank = player.Rank
             });
+        }
+
+        private ListCollectionView DefaultSort()
+        {
+            var collection = new ListCollectionView(itemsObservable);
+            collection.SortDescriptions.Add(new SortDescription("TimeSet", ListSortDirection.Descending));
+            return collection;
         }
 
         #endregion

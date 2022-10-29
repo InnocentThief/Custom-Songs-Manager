@@ -27,10 +27,13 @@ namespace CSM.App.Workspaces.ScoreSaberIntegration
 
         private void RadGridView_FilterOperatorsLoading(object sender, Telerik.Windows.Controls.GridView.FilterOperatorsLoadingEventArgs e)
         {
-            switch (e.Column.Header)
+            switch (e.Column.Name)
             {
                 case "Rank":
                     e.DefaultOperator1 = Telerik.Windows.Data.FilterOperator.IsEqualTo;
+                    break;
+                case "TimeSet":
+                    e.DefaultOperator1 = Telerik.Windows.Data.FilterOperator.IsGreaterThanOrEqualTo;
                     break;
                 case "Song":
                     e.DefaultOperator1 = Telerik.Windows.Data.FilterOperator.Contains;
@@ -40,6 +43,15 @@ namespace CSM.App.Workspaces.ScoreSaberIntegration
                     break;
                 case "PP":
                     e.DefaultOperator1 = Telerik.Windows.Data.FilterOperator.IsLessThanOrEqualTo;
+                    break;
+                case "FC":
+                    e.DefaultOperator1 = Telerik.Windows.Data.FilterOperator.IsEqualTo;
+                    break;
+                case "BadCuts":
+                    e.DefaultOperator1 = Telerik.Windows.Data.FilterOperator.IsEqualTo;
+                    break;
+                case "MissedNotes":
+                    e.DefaultOperator1 = Telerik.Windows.Data.FilterOperator.IsEqualTo;
                     break;
                 default:
                     break;

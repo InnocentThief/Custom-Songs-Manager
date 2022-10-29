@@ -19,7 +19,7 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
 
         public int Rank => PlayerScore.Score.Rank;
 
-        public DateTime TimeSet => DateTime.Parse(PlayerScore.Score.TimeSet, CultureInfo.InvariantCulture);
+        public DateTime TimeSet => DateTime.Parse(PlayerScore.Score.TimeSet, CultureInfo.CurrentCulture);
 
         public string TimeSetText
         {

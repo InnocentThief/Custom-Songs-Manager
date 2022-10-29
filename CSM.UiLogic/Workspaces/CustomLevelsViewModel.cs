@@ -19,9 +19,10 @@ using System.Linq;
 using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Data;
-using System.Windows.Input;
+using Telerik.Windows.Controls;
+using AppCurrent = System.Windows.Application;
+using ImageConverter = CSM.Framework.Converter.ImageConverter;
 
 namespace CSM.UiLogic.Workspaces
 {
@@ -361,9 +362,9 @@ namespace CSM.UiLogic.Workspaces
             var playlist = new Playlist
             {
                 Path = String.Empty,
-                PlaylistAuthor = String.Empty,
-                PlaylistDescription = String.Empty,
-                PlaylistTitle = "2022-10-25-SavedCustemLevelsReferences",
+                PlaylistAuthor = "Custom Songs Manager",
+                PlaylistDescription = "Contains all custom songs at the backup date",
+                PlaylistTitle = $"{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}-{DateTime.Now.Hour}-{DateTime.Now.Minute}-{DateTime.Now.Second}-SavedCustomLevelReferences",
                 Songs = new List<PlaylistSong>(),
                 Image = $"base64,{ImageConverter.StringFromBitmap(defaultImageLocation)}"
             };
@@ -379,10 +380,23 @@ namespace CSM.UiLogic.Workspaces
             }
 
             // Save to file
-            var options = new JsonSerializerOptions { WriteIndented = true };
-            var content = JsonSerializer.Serialize(playlist, options);
-            File.WriteAllText("c:\\temp\\2022-10-25-SavedCustemLevelsReferences.json", content);
+            var playlistPath = UserConfigManager.Instance.Config.PlaylistPaths.First().Path;
+            if (!Directory.Exists(playlistPath)) playlistPath = "C:\\";
 
+            RadSaveFileDialog saveFileDialog = new RadSaveFileDialog
+            {
+                Owner = AppCurrent.Current.MainWindow,
+                InitialDirectory = playlistPath,
+                FileName = $"{playlist.PlaylistTitle}.json"
+            };
+            saveFileDialog.ShowDialog();
+            if (saveFileDialog.DialogResult==true)
+            {
+                playlistPath = saveFileDialog.FileName;
+                var options = new JsonSerializerOptions { WriteIndented = true };
+                var content = JsonSerializer.Serialize(playlist, options);
+                File.WriteAllText(playlistPath, content);
+            }
         }
 
         #endregion

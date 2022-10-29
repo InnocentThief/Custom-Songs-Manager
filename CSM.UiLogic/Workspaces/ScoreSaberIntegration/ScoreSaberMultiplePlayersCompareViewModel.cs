@@ -158,17 +158,17 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
         {
             return;
             // Update extisting song view models
-            var existingHashes = Songs.Select(s => s.SongHash).ToList();
-            var existingSongs = scoreSaberPlayerViewModel.Scores.Where(s => existingHashes.Contains(s.PlayerScore.Leaderboard.SongHash));
-            foreach (var existingSong in existingSongs)
-            {
-                var song = Songs.Single(s => s.SongHash == existingSong.PlayerScore.Leaderboard.SongHash);
-                song.AddPlayer(scoreSaberPlayerViewModel.Index, 4711);
-            }
+            //var existingHashes = Songs.Select(s => s.SongHash).ToList();
+            //var existingSongs = scoreSaberPlayerViewModel.Scores.Where(s => existingHashes.Contains(s.PlayerScore.Leaderboard.SongHash));
+            //foreach (var existingSong in existingSongs)
+            //{
+            //    var song = Songs.Single(s => s.SongHash == existingSong.PlayerScore.Leaderboard.SongHash);
+            //    song.AddPlayer(scoreSaberPlayerViewModel.Index, 4711);
+            //}
 
             // Add all others
-            var newSongs = scoreSaberPlayerViewModel.Scores.Where(s => !existingHashes.Contains(s.PlayerScore.Leaderboard.SongHash));
-            Songs.AddRange(newSongs.Select(s => new ScoreSaberSongViewModel(s.PlayerScore.Leaderboard)));
+            //var newSongs = scoreSaberPlayerViewModel.Scores.Where(s => !existingHashes.Contains(s.PlayerScore.Leaderboard.SongHash));
+            //Songs.AddRange(newSongs.Select(s => new ScoreSaberSongViewModel(s.PlayerScore.Leaderboard)));
         }
     }
 }
