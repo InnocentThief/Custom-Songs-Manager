@@ -979,7 +979,7 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download Date.
+        ///   Looks up a localized string similar to DL Date.
         /// </summary>
         public static string Workspace_CustomLevels_ColumnHeader_ChangeDate {
             get {

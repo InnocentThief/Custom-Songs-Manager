@@ -129,7 +129,13 @@
                                     </DataTemplate>
                                 </telerik:GridViewDataColumn.CellTemplate>
                             </telerik:GridViewDataColumn>
-                            <telerik:GridViewDataColumn x:Name="TimeSet" Header="Date" DataMemberBinding="{Binding TimeSet}" />
+                            <telerik:GridViewDataColumn x:Name="TimeSet" Header="Date" Width="SizeToCells" DataMemberBinding="{Binding TimeSet}">
+                                <telerik:GridViewDataColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding TimeSet, StringFormat='d', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
+                                    </DataTemplate>
+                                </telerik:GridViewDataColumn.CellTemplate>
+                            </telerik:GridViewDataColumn>
                             <telerik:GridViewDataColumn x:Name="Song" Header="Song" DataMemberBinding="{Binding SongColumnText}" Width="*" >
                                 <telerik:GridViewDataColumn.CellTemplate>
                                     <DataTemplate>

@@ -426,7 +426,7 @@
     <comment>Header text for BSR column</comment>
   </data>
   <data name="Workspace_CustomLevels_ColumnHeader_ChangeDate" xml:space="preserve">
-    <value>Download Date</value>
+    <value>DL Date</value>
     <comment>Header text for Download Date column</comment>
   </data>
   <data name="Workspace_CustomLevels_ColumnHeader_E" xml:space="preserve">

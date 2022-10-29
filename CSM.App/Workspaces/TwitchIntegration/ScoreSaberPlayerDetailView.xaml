@@ -125,7 +125,7 @@
                 <telerik:RadBusyIndicator Grid.Row="1" IsIndeterminate="True" BusyContent="Loading Song List" IsBusy="{Binding IsLoading}">
                     <telerik:RadGridView ItemsSource="{Binding Scores}" AutoGenerateColumns="False" IsFilteringAllowed="True" FilteringMode="FilterRow" RowIndicatorVisibility="Collapsed" FrozenColumnsSplitterVisibility="Collapsed" BorderThickness="0" AlternationCount="2" FilterOperatorsLoading="RadGridView_FilterOperatorsLoading" >
                         <telerik:RadGridView.Columns>
-                            <telerik:GridViewDataColumn Header="Rank" DataMemberBinding="{Binding Rank}">
+                            <telerik:GridViewDataColumn x:Name="Rank" Header="Rank" DataMemberBinding="{Binding Rank}">
                                 <telerik:GridViewDataColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel>
@@ -141,7 +141,14 @@
                                     </DataTemplate>
                                 </telerik:GridViewDataColumn.CellTemplate>
                             </telerik:GridViewDataColumn>
-                            <telerik:GridViewDataColumn Header="Song" DataMemberBinding="{Binding SongColumnText}" Width="*" >
+                            <telerik:GridViewDataColumn x:Name="TimeSet" Header="Date" Width="SizeToCells" DataMemberBinding="{Binding TimeSet}">
+                                <telerik:GridViewDataColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding TimeSet, StringFormat='d', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
+                                    </DataTemplate>
+                                </telerik:GridViewDataColumn.CellTemplate>
+                            </telerik:GridViewDataColumn>
+                            <telerik:GridViewDataColumn x:Name="Song" Header="Song" DataMemberBinding="{Binding SongColumnText}" Width="*" >
                                 <telerik:GridViewDataColumn.CellTemplate>
                                     <DataTemplate>
                                         <Grid Margin="0,6,0,6">
@@ -175,7 +182,7 @@
                                     </DataTemplate>
                                 </telerik:GridViewDataColumn.CellTemplate>
                             </telerik:GridViewDataColumn>
-                            <telerik:GridViewDataColumn Header="ACC" DataMemberBinding="{Binding Accuracy}">
+                            <telerik:GridViewDataColumn x:Name="ACC" Header="ACC" DataMemberBinding="{Binding Accuracy}">
                                 <telerik:GridViewDataColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock>
@@ -185,14 +192,7 @@
                                     </DataTemplate>
                                 </telerik:GridViewDataColumn.CellTemplate>
                             </telerik:GridViewDataColumn>
-                            <!--<telerik:GridViewDataColumn Header="FC" DataMemberBinding="{Binding FullCombo}">
-                                <telerik:GridViewDataColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <telerik:RadGlyph Glyph="&#xe118;" Foreground="#FF018574" Visibility="{Binding FullCombo, Converter={StaticResource BoolToVisConverter}}" />
-                                    </DataTemplate>
-                                </telerik:GridViewDataColumn.CellTemplate>
-                            </telerik:GridViewDataColumn>-->
-                            <telerik:GridViewDataColumn Header="PP" DataMemberBinding="{Binding PP}">
+                            <telerik:GridViewDataColumn x:Name="PP" Header="PP" DataMemberBinding="{Binding PP}">
                                 <telerik:GridViewDataColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel HorizontalAlignment="Center">
