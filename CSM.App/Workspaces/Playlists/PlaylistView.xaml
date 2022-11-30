@@ -31,6 +31,10 @@
             <TextBlock Text="{x:Static p:Resources.Playlist_Title}" Foreground="White" VerticalAlignment="Center" Margin="8,0" FontWeight="DemiBold" />
             <!-- Save playlist with current song order -->
             <telerik:RadToolBar Grid.Column="1" OverflowButtonVisibility="Collapsed" GripVisibility="Collapsed" Background="Transparent" BorderThickness="0" >
+                <telerik:RadButton Command="{Binding FetchPlaylistDataCommand}" ToolTip="{x:Static p:Resources.Workspace_Playlist_FetchPlaylistData}">
+                    <telerik:RadGlyph Glyph="&#xe68F;" />
+                </telerik:RadButton>
+                <telerik:RadToolBarSeparator />
                 <telerik:RadButton Command="{Binding SavePlaylistCommand}" ToolTip="{x:Static p:Resources.Workspace_Playlist_SavePlaylistWithSongOrder}">
                     <telerik:RadGlyph Glyph="&#xe109;" />
                 </telerik:RadButton>

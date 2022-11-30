@@ -29,9 +29,9 @@
             <!-- Commands -->
             <telerik:RadToolBar Grid.Column="1" OverflowButtonVisibility="Collapsed" GripVisibility="Collapsed" Background="Transparent" BorderThickness="0" >
                 <TextBlock Text="{Binding CustomLevelPath}" TextTrimming="CharacterEllipsis" Width="300" ToolTip="{Binding CustomLevelPath}"/>
-                <telerik:RadButton Command="{Binding SaveCustomLevelsToPlaylistCommand}" ToolTip="{x:Static p:Resources.Workspace_CustomLevels_SaveToPlaylist}">
+                <!--<telerik:RadButton Command="{Binding SaveCustomLevelsToPlaylistCommand}" ToolTip="{x:Static p:Resources.Workspace_CustomLevels_SaveToPlaylist}">
                     <telerik:RadGlyph Glyph="&#xe029;" />
-                </telerik:RadButton>
+                </telerik:RadButton>-->
                 <telerik:RadButton Command="{Binding OpenInFileExplorerCommand}" ToolTip="{x:Static p:Resources.Workspace_CustomLevels_OpenPathInFileExplorer}">
                     <telerik:RadGlyph Glyph="&#xe134;" />
                 </telerik:RadButton>

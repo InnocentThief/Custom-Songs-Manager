@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" xmlns:local="clr-namespace:CSM.App.Workspaces.ScoreSaberIntegration"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" xmlns:local="clr-namespace:CSM.App.Workspaces.ScoreSaberIntegration" xmlns:common="clr-namespace:CSM.App.Workspaces.Common"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -30,5 +30,6 @@
             </telerik:RadTabItem>
         </telerik:RadTabControl>
         <local:ScoreSaberPlayerSearchView Grid.RowSpan="2" Visibility="{Binding PlayerSearchVisible, Converter={StaticResource BoolToVisConverter}}" />
+        <common:WorkInProgress Grid.RowSpan="2" />
     </Grid>
 </UserControl>

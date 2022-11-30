@@ -66,14 +66,14 @@
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Ranked Play Count" />
                                 <Border Background="White" Width="1" Margin="6,0" />
-                                <TextBlock Text="{Binding TotalRankedPlayCount}" />
+                                <TextBlock Text="{Binding TotalRankedPlayCount, StringFormat={}{0:N0}, ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
                             </StackPanel>
                         </Border>
                         <Border Background="#FF018574" CornerRadius="5" Padding="6,3" Margin="0,0,3,3">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Total Ranked Score" />
                                 <Border Background="White" Width="1" Margin="6,0" />
-                                <TextBlock Text="{Binding TotalRankedScore}" />
+                                <TextBlock Text="{Binding TotalRankedScore, StringFormat={}{0:N0}, ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
                             </StackPanel>
                         </Border>
                         <Border Background="#FF018574" CornerRadius="5" Padding="6,3" Margin="0,0,3,3">
@@ -89,21 +89,21 @@
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Total Play Count" />
                                 <Border Background="White" Width="1" Margin="6,0" />
-                                <TextBlock Text="{Binding TotalPlayCount}" />
+                                <TextBlock Text="{Binding TotalPlayCount, StringFormat={}{0:N0}, ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
                             </StackPanel>
                         </Border>
                         <Border Background="DimGray" CornerRadius="5" Padding="6,3" Margin="0,0,3,3">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Total Score" />
                                 <Border Background="White" Width="1" Margin="6,0" />
-                                <TextBlock Text="{Binding TotalScore}" />
+                                <TextBlock Text="{Binding TotalScore, StringFormat={}{0:N0}, ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
                             </StackPanel>
                         </Border>
                         <Border Background="DimGray" CornerRadius="5" Padding="6,3" Margin="0,0,3,3">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Replays Watched By Other" />
                                 <Border Background="White" Width="1" Margin="6,0" />
-                                <TextBlock Text="{Binding ReplaysWatched}" />
+                                <TextBlock Text="{Binding ReplaysWatched, StringFormat={}{0:N0}, ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
                             </StackPanel>
                         </Border>
                     </WrapPanel>
@@ -117,14 +117,14 @@
                                 <telerik:GridViewDataColumn.CellTemplate>
                                     <DataTemplate>
                                         <!--<StackPanel>-->
-                                            <StackPanel Orientation="Horizontal">
-                                                <telerik:RadGlyph Glyph="&#xe700;" />
-                                                <TextBlock  Margin="3,0,0,0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <telerik:RadGlyph Glyph="&#xe700;" />
+                                            <TextBlock  Margin="3,0,0,0">
                                             <Run Text="#" />
                                             <Run Text="{Binding Rank, Mode=OneWay}" />
-                                                </TextBlock>
-                                            </StackPanel>
-                                            <!--<TextBlock Text="{Binding TimeSetText}" ToolTip="{Binding TimeSet, StringFormat='g', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />-->
+                                            </TextBlock>
+                                        </StackPanel>
+                                        <!--<TextBlock Text="{Binding TimeSetText}" ToolTip="{Binding TimeSet, StringFormat='g', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />-->
                                         <!--</StackPanel>-->
                                     </DataTemplate>
                                 </telerik:GridViewDataColumn.CellTemplate>

@@ -14,6 +14,8 @@ using Telerik.Windows.Controls;
 using CSMImageConverter = CSM.Framework.Converter.ImageConverter;
 using AppCurrent = System.Windows.Application;
 using CSM.Framework.Configuration.UserConfiguration;
+using System.Security.Policy;
+using CSM.Framework.Logging;
 
 namespace CSM.UiLogic.Workspaces.Playlists
 {
@@ -36,7 +38,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
         private readonly BeatMapService beatMapService;
 
         private string sortColumnName;
-        private Telerik.Windows.Controls.SortingState sortingState;
+        private SortingState sortingState;
 
         #endregion
 
@@ -217,6 +219,11 @@ namespace CSM.UiLogic.Workspaces.Playlists
         public RelayCommand SavePlaylistCommand { get; }
 
         /// <summary>
+        /// Command used to fetch all song data for the current playlist.
+        /// </summary>
+        public AsyncRelayCommand FetchPlaylistDataCommand { get; }
+
+        /// <summary>
         /// Command used to choose a new cover image.
         /// </summary>
         public RelayCommand ChooseCoverImageCommand { get; }
@@ -235,6 +242,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
             SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);
             SavePlaylistCommand = new RelayCommand(SavePlaylist);
+            FetchPlaylistDataCommand = new AsyncRelayCommand(FetchPlaylistDataAsync, CanFetchPlaylistData);
             ChooseCoverImageCommand = new RelayCommand(ChooseCoverImage);
 
             InEditMode = false;
@@ -282,7 +290,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
         /// </summary>
         /// <param name="hash">The hash of the beat map.</param>
         /// <returns>An awaitable task that yields no result.</returns>
-        public async Task GetBeatSaverBeatMapDataAsync(string hash)
+        public async Task SetBeatSaverBeatMapDataAsync(string hash)
         {
             var beatmap = await beatMapService.GetBeatMapDataAsync(hash);
             if (beatmap == null)
@@ -309,12 +317,14 @@ namespace CSM.UiLogic.Workspaces.Playlists
         /// <returns>True if the playlist contains the song; otherwise false.</returns>
         public override bool CheckContainsLeftSong(string leftHash)
         {
+            if (string.IsNullOrWhiteSpace(leftHash)) return false;
             ContainsLeftSong = Songs.Any(s => s.Hash == leftHash);
             return ContainsLeftSong;
         }
 
         public override bool CheckContainsRightSong(string rightHash)
         {
+            if (string.IsNullOrWhiteSpace(rightHash)) return false;
             ContainsRightSong = Songs.Any(s => s.Hash == rightHash);
             return ContainsRightSong;
         }
@@ -412,6 +422,43 @@ namespace CSM.UiLogic.Workspaces.Playlists
                     break;
             }
             SaveToFile();
+        }
+
+        private async Task FetchPlaylistDataAsync()
+        {
+            try
+            {
+                int totalPages = Songs.Count / 50 + 1;
+                for (int i = 0; i < totalPages; i++)
+                {
+                    var songHashes = Songs.Skip(i * 50).Take(50).Select(s => s.Hash);
+                    var hashString = string.Join(",", songHashes);
+                    var beatmaps = await beatMapService.GetBeatMapDatasAsync(hashString);
+                    foreach (var keyValuePair in beatmaps)
+                    {
+                        if (keyValuePair.Value != null)
+                        {
+                            var existingSongs = Songs.Where(s => s.Hash == keyValuePair.Key);
+                            foreach (var existingSong in existingSongs)
+                            {
+                                existingSong.BsrKey = keyValuePair.Value.Id;
+                                existingSong.SongName = keyValuePair.Value.Metadata.SongName;
+                                existingSong.LevelAuthorName = keyValuePair.Value.Metadata.LevelAuthorName;
+                            }
+                        }
+                    }
+                    SaveToFile();
+                }
+            }
+            catch (System.Exception ex)
+            {
+                LoggerProvider.Logger.Error<PlaylistViewModel>($"Error while fetching song data for playlist '{PlaylistTitle}'. {ex.Message}");
+            }
+        }
+
+        private bool CanFetchPlaylistData()
+        {
+            return true;
         }
 
         private void ChooseCoverImage()

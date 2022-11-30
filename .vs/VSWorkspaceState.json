@@ -1,9 +1,6 @@
 {
   "ExpandedNodes": [
     "",
-    "\\CSM.App",
-    "\\CSM.App\\Workspaces",
-    "\\CSM.App\\Workspaces\\CustomLevels",
     "\\CSM.UiLogic",
     "\\CSM.UiLogic\\Workspaces",
     "\\CSM.UiLogic\\Workspaces\\Playlists"

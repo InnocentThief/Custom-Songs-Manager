@@ -1294,6 +1294,15 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fetch playlist data from beatsaver.com.
+        /// </summary>
+        public static string Workspace_Playlist_FetchPlaylistData {
+            get {
+                return ResourceManager.GetString("Workspace_Playlist_FetchPlaylistData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remove song from playlist.
         /// </summary>
         public static string Workspace_Playlist_RemoveSongFromPlaylist_ToolTip {

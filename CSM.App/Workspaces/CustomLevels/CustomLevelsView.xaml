@@ -13,7 +13,7 @@
         <telerik:StringToGlyphConverter x:Key="StringToGlyphConverter" />
 
         <DataTemplate x:Key="RightDataTemplate">
-            <Grid Margin="8" Visibility="{Binding ShowRightDetail, Converter={StaticResource BoolToVisConverter}}">
+            <Grid Margin="8">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="5*" />
                     <ColumnDefinition Width="6" />
@@ -29,7 +29,7 @@
         </DataTemplate>
 
         <DataTemplate x:Key="BottomDataTemplate">
-            <Grid Margin="8" Visibility="{Binding ShowBottomDetail, Converter={StaticResource BoolToVisConverter}}">
+            <Grid Margin="8">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="3*" />
                     <RowDefinition Height="6" />

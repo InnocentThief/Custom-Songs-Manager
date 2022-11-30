@@ -1,5 +1,7 @@
 ﻿using CSM.DataAccess.Entities.Online;
 using CSM.Framework.Configuration.UserConfiguration;
+using CSM.Framework.Logging;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CSM.Services
@@ -28,6 +30,17 @@ namespace CSM.Services
         public async Task<BeatMap> GetBeatMapDataAsync(string key)
         {
             return await client.GetAsync<BeatMap>($"/{key}");
+        }
+
+        /// <summary>
+        /// Gets all beat map data for the given hashes.
+        /// </summary>
+        /// <param name="hashes">String containing all hashes for the songs to get.</param>
+        /// <returns>A collection of <see cref="BeatMap"/>.</returns>
+        /// <remarks>Max. 50 hashes per call. Comma separated.</remarks>
+        public async Task<Dictionary<string, BeatMap>> GetBeatMapDatasAsync(string hashes)
+        {
+            return await client.GetAsync<Dictionary<string, BeatMap>>($"/{hashes}");
         }
 
         /// <summary>

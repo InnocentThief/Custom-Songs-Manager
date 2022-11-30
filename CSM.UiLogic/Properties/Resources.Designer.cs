@@ -232,7 +232,7 @@ namespace CSM.UiLogic.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to NA (Try to use Tools to fix this issue).
+        ///   Looks up a localized string similar to NA (Try the &quot;Fetch data&quot; Button in the tool bar).
         /// </summary>
         public static string Playlists_SongName_NA {
             get {

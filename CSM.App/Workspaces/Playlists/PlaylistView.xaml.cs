@@ -18,7 +18,7 @@ namespace CSM.App.Workspaces.Playlists
             var viewModel = DataContext as PlaylistViewModel;
             if (viewModel?.SelectedPlaylistSong != null)
             {
-                await viewModel.GetBeatSaverBeatMapDataAsync(viewModel.SelectedPlaylistSong.Hash);
+                await viewModel.SetBeatSaverBeatMapDataAsync(viewModel.SelectedPlaylistSong.Hash);
             }
         }
 

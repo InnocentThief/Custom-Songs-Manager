@@ -103,7 +103,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
         public ObservableCollection<PlaylistSongDifficultyViewModel> Difficulties { get; }
 
         /// <summary>
-        /// Gets the the difficulties this playlist song contains as string.
+        /// Gets the difficulties this playlist song contains as string.
         /// </summary>
         public string Difficulty
         {

@@ -552,6 +552,9 @@
   <data name="Workspace_Playlist_ColumnHeader_Difficultiy" xml:space="preserve">
     <value>Difficulty</value>
   </data>
+  <data name="Workspace_Playlist_FetchPlaylistData" xml:space="preserve">
+    <value>Fetch playlist data from beatsaver.com</value>
+  </data>
   <data name="Workspace_Playlist_RemoveSongFromPlaylist_ToolTip" xml:space="preserve">
     <value>Remove song from playlist</value>
   </data>

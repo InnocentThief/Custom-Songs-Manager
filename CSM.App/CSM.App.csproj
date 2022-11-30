@@ -206,6 +206,9 @@
     <Compile Include="Workspaces\Common\NewFileOrFolderNameView.xaml.cs">
       <DependentUpon>NewFileOrFolderNameView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Workspaces\Common\WorkInProgress.xaml.cs">
+      <DependentUpon>WorkInProgress.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Workspaces\CustomLevels\CustomLevelDetailView.xaml.cs">
       <DependentUpon>CustomLevelDetailView.xaml</DependentUpon>
     </Compile>
@@ -357,6 +360,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Workspaces\Common\NewFileOrFolderNameView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Workspaces\Common\WorkInProgress.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
