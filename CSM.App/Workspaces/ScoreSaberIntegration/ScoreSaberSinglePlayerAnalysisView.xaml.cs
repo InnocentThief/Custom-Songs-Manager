@@ -53,6 +53,9 @@ namespace CSM.App.Workspaces.ScoreSaberIntegration
                 case "MissedNotes":
                     e.DefaultOperator1 = Telerik.Windows.Data.FilterOperator.IsEqualTo;
                     break;
+                case "Modifiers":
+                    e.DefaultOperator1 = Telerik.Windows.Data.FilterOperator.Contains;
+                    break;
                 default:
                     break;
             }

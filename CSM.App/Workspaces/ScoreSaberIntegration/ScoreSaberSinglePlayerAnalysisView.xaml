@@ -205,6 +205,7 @@
                             </telerik:GridViewDataColumn>
                             <telerik:GridViewDataColumn x:Name="BadCuts" Header="Bad Cuts" DataMemberBinding="{Binding BadCuts}" />
                             <telerik:GridViewDataColumn x:Name="MissedNotes" Header="Missed Notes" DataMemberBinding="{Binding MissedNotes}" />
+                            <telerik:GridViewDataColumn x:Name="Modifiers" Header="Modifiers" DataMemberBinding="{Binding Modifiers}" />
                             <telerik:GridViewDataColumn Header="">
                                 <telerik:GridViewDataColumn.CellTemplate>
                                     <DataTemplate>
