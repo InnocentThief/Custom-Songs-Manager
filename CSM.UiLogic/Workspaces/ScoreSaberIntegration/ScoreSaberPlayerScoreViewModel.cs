@@ -45,13 +45,15 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
 
         public string CoverImage => PlayerScore.Leaderboard.CoverImage;
 
-        public string SongColumnText => $"{PlayerScore.Leaderboard.SongName} {PlayerScore.Leaderboard.SongAuthorName} {PlayerScore.Leaderboard.LevelAuthorName}";
+        public string SongColumnText => $"{PlayerScore.Leaderboard.SongName} {PlayerScore.Leaderboard.SongAuthorName} {PlayerScore.Leaderboard.LevelAuthorName} {CreatedDate}";
 
         public string SongName => PlayerScore.Leaderboard.SongName;
 
         public string SongAuthorName => PlayerScore.Leaderboard.SongAuthorName;
 
         public string LevelAuthorName => PlayerScore.Leaderboard.LevelAuthorName;
+
+        public DateTime CreatedDate => PlayerScore.Leaderboard.CreatedDate;
 
         public string Score => PlayerScore.Score.BaseScore.ToString();
 
@@ -86,7 +88,14 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
 
         public int BadCuts => PlayerScore.Score.BadCuts;
 
-        public string Stars => $"{PlayerScore.Leaderboard.Stars}*";
+        public string Stars
+        {
+            get
+            {
+                if (PlayerScore.Leaderboard.Stars == 0) return string.Empty;
+                return $"{PlayerScore.Leaderboard.Stars}*";
+            }
+        }
 
         public RelayCommand ShowAdditionalInfosCommand { get; }
 

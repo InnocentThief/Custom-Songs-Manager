@@ -58,12 +58,11 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <TextBlock Text="{Binding Name}" FontWeight="DemiBold" FontSize="20" />
-                        <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,-6">
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="3,0,0,-6">
+                            <telerik:RadButton Command="{Binding CopyUsernameCommand}" Background="Transparent" BorderThickness="0" ToolTip="{x:Static p:Resources.ScoreSaber_CopyUsername_ToolTip}">
+                                <telerik:RadGlyph Glyph="&#xe65D;" />
+                            </telerik:RadButton>
                             <TextBlock Text="{Binding PP}" VerticalAlignment="Center" Margin="10,0,0,0" />
-                            <!--<telerik:RadGlyph Glyph="&#xe700;" Margin="20,0,0,0" VerticalAlignment="Center" />
-                            <TextBlock Text="{Binding Rank}" Margin="3,0,0,0" VerticalAlignment="Center" />
-                            <Image Source="{Binding Country, Converter={StaticResource CountryIdToFlagImageSourceConverter}}" RenderOptions.BitmapScalingMode="HighQuality" Margin="20,0,0,0" VerticalAlignment="Center" />
-                            <TextBlock Text="{Binding CountryRank}" Margin="3,0,0,0" VerticalAlignment="Center" />-->
                         </StackPanel>
                         <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,-6">
                             <!--<TextBlock Text="{Binding PP}" VerticalAlignment="Center" Margin="10,0,0,0" />-->
@@ -165,17 +164,19 @@
                                                 </Grid.RowDefinitions>
                                                 <!-- SongName by SongAuthorName -->
                                                 <TextBlock VerticalAlignment="Bottom">
-                                            <Run Text="{Binding SongName, Mode=OneWay}" FontSize="14" FontWeight="Bold" />
-                                            <Run Text="by" Foreground="DimGray" />
-                                            <Run Text="{Binding SongAuthorName, Mode=OneWay}" Foreground="#FF018574" />
+                                                    <Run Text="{Binding SongName, Mode=OneWay}" FontSize="14" FontWeight="Bold" />
+                                                    <Run Text="by" Foreground="DimGray" />
+                                                    <Run Text="{Binding SongAuthorName, Mode=OneWay}" Foreground="#FF018574" />
                                                 </TextBlock>
                                                 <!-- LevelAuthorName -->
                                                 <TextBlock Grid.Row="1">
-                                            <Run Text="Mapped by" Foreground="DimGray" />
-                                            <Run Text="{Binding LevelAuthorName, Mode=OneWay}" Foreground="#FF018574" />
+                                                    <Run Text="Mapped by" Foreground="DimGray" />
+                                                    <Run Text="{Binding LevelAuthorName, Mode=OneWay}" Foreground="#FF018574" />
+                                                    <Run Text="Created" Foreground="DimGray" />
+                                                    <Run Text="{Binding CreatedDate, Mode=OneWay, StringFormat='d', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" Foreground="#FF018574" />
                                                 </TextBlock>
                                             </Grid>
-                                            <Border Grid.Column="2" Background="{Binding Difficulty, Converter={StaticResource DifficultyNumberToColorConverter}}" VerticalAlignment="Center" CornerRadius="5" Margin="6,0,0,0">
+                                            <Border Grid.Column="2" Background="{Binding Difficulty, Converter={StaticResource DifficultyNumberToColorConverter}}" VerticalAlignment="Center" CornerRadius="5" Margin="6,0,0,0" MinWidth="20">
                                                 <TextBlock Text="{Binding Stars}" Margin="6,3" />
                                             </Border>
                                         </Grid>

@@ -183,6 +183,12 @@
   <data name="Playlist_WrongFolderName_Content" xml:space="preserve">
     <value>The name for the new folder is not valid</value>
   </data>
+  <data name="ScoreSaber_CopyUsername_Error_Message" xml:space="preserve">
+    <value>Looks like Clipboard is busy at the moment. Try it again later</value>
+  </data>
+  <data name="ScoreSaber_CopyUsername_Error_Title" xml:space="preserve">
+    <value>Unable to copy username</value>
+  </data>
   <data name="Settings_BeatSaber_FileDialog" xml:space="preserve">
     <value>Unable to open file dialog</value>
   </data>

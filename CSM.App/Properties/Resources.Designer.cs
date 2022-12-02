@@ -205,6 +205,15 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy username.
+        /// </summary>
+        public static string ScoreSaber_CopyUsername_ToolTip {
+            get {
+                return ResourceManager.GetString("ScoreSaber_CopyUsername_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Custom Levels Path.
         /// </summary>
         public static string Settings_BeatSaber_CustomLevelsPath {

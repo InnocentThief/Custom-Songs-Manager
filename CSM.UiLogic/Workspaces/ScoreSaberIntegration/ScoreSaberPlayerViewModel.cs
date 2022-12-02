@@ -1,13 +1,17 @@
 ﻿using CSM.DataAccess.Entities.Online.ScoreSaber;
 using CSM.Framework.Extensions;
 using CSM.Services;
+using CSM.UiLogic.Properties;
+using CSM.UiLogic.Wizards;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using Telerik.Windows.Controls.TreeView;
 
@@ -56,7 +60,7 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
 
         public ListCollectionView Scores => itemsCollection;
 
-        //public ObservableCollection<ScoreSaberPlayerScoreViewModel> Scores { get; }
+        public RelayCommand CopyUsernameCommand { get; }
 
         public int Index
         {
@@ -95,6 +99,7 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
             this.player = player;
             RemoveCommand = new RelayCommand(Remove);
             RefreshCommand = new AsyncRelayCommand(RefreshAsync);
+            CopyUsernameCommand = new RelayCommand(CopyUsername);
             RankHistory = new ObservableCollection<RankDataPoint>();
             scoreSaberService = new ScoreSaberService();
             itemsObservable = new ObservableCollection<ScoreSaberPlayerScoreViewModel>();
@@ -120,6 +125,24 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
         {
             player = await scoreSaberService.GetFullPlayerInfoAsync(player.Id);
             await LoadDataAsync();
+        }
+
+        public void CopyUsername()
+        {
+            try
+            {
+                Clipboard.SetText(Name);
+            }
+            catch (Exception)
+            {
+                var messageBoxViewModel = new MessageBoxViewModel(Resources.OK, MessageBoxButtonColor.Default, String.Empty, MessageBoxButtonColor.Default)
+                {
+                    Title = Resources.ScoreSaber_CopyUsername_Error_Title,
+                    Message = Resources.ScoreSaber_CopyUsername_Error_Message,
+                    MessageBoxType = DataAccess.Entities.Types.MessageBoxTypes.Information
+                };
+                MessageBoxController.Instance().ShowMessageBox(messageBoxViewModel);
+            }
         }
 
         private async Task LoadSongsAsync()

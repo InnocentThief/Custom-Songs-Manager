@@ -250,6 +250,24 @@ namespace CSM.UiLogic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Looks like Clipboard is busy at the moment. Try it again later.
+        /// </summary>
+        public static string ScoreSaber_CopyUsername_Error_Message {
+            get {
+                return ResourceManager.GetString("ScoreSaber_CopyUsername_Error_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to copy username.
+        /// </summary>
+        public static string ScoreSaber_CopyUsername_Error_Title {
+            get {
+                return ResourceManager.GetString("ScoreSaber_CopyUsername_Error_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unable to open file dialog.
         /// </summary>
         public static string Settings_BeatSaber_FileDialog {
