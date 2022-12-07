@@ -35,4 +35,7 @@
 ![image](https://user-images.githubusercontent.com/65510170/171869191-bc9ec386-203e-408d-8733-a8bff173e0e4.png)
 ![image](https://user-images.githubusercontent.com/65510170/171869447-81987f35-d673-4fa4-9f9d-81fc57531087.png)
 ## Twitch Integration
-![image](https://user-images.githubusercontent.com/65510170/175772925-4046bdaf-c12e-42fa-b01f-b98b00ae3e93.png)
+![image](https://user-images.githubusercontent.com/65510170/206298315-f60be4ba-7474-4f13-a365-53fb79fadc57.png)
+## ScoreSaber Integration
+![image](https://user-images.githubusercontent.com/65510170/206298451-22eff979-e536-49f8-b2c1-9454d0c8723c.png)
+
