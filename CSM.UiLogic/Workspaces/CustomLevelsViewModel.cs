@@ -365,6 +365,7 @@ namespace CSM.UiLogic.Workspaces
                 PlaylistAuthor = "Custom Songs Manager",
                 PlaylistDescription = "Contains all custom songs at the backup date",
                 PlaylistTitle = $"{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}-{DateTime.Now.Hour}-{DateTime.Now.Minute}-{DateTime.Now.Second}-SavedCustomLevelReferences",
+                CustomData = null,
                 Songs = new List<PlaylistSong>(),
                 Image = $"base64,{ImageConverter.StringFromBitmap(defaultImageLocation)}"
             };

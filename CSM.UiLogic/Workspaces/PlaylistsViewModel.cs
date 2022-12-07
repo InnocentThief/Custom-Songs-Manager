@@ -458,6 +458,7 @@ namespace CSM.UiLogic.Workspaces
                         PlaylistAuthor = String.Empty,
                         PlaylistDescription = String.Empty,
                         PlaylistTitle = fileViewModel.FileOrFolderName,
+                        CustomData = null,
                         Songs = new List<PlaylistSong>(),
                         Image = $"base64,{ImageConverter.StringFromBitmap(defaultImageLocation)}"
                     };

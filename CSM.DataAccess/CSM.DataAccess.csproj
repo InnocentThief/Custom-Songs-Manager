@@ -74,6 +74,7 @@
     <Compile Include="..\VersionInfo.cs">
       <Link>VersionInfo.cs</Link>
     </Compile>
+    <Compile Include="Entities\Offline\CustomData.cs" />
     <Compile Include="Entities\Offline\LocalPlayer.cs" />
     <Compile Include="Entities\Offline\PlayerData.cs" />
     <Compile Include="Entities\Offline\ReceivedBeatmap.cs" />

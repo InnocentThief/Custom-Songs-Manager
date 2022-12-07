@@ -185,6 +185,14 @@ namespace CSM.UiLogic.Workspaces.Playlists
         }
 
         /// <summary>
+        /// Gets whether the playlist is a hitbloq playlist.
+        /// </summary>
+        public bool IsHitbloqPlaylist
+        {
+            get => playlist.CustomData != null;
+        }
+
+        /// <summary>
         /// Gets or sets whether the playlist information is in edit mode.
         /// </summary>
         public bool InEditMode

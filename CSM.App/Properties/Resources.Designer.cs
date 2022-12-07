@@ -1312,6 +1312,15 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hitbloq playlist: Changes will be lost once you sync in Beat Saber.
+        /// </summary>
+        public static string Workspace_Playlist_Hitbloq {
+            get {
+                return ResourceManager.GetString("Workspace_Playlist_Hitbloq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remove song from playlist.
         /// </summary>
         public static string Workspace_Playlist_RemoveSongFromPlaylist_ToolTip {

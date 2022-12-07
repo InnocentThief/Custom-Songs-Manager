@@ -17,6 +17,9 @@ namespace CSM.DataAccess.Entities.Offline
         [JsonPropertyName("playlistDescription")]
         public string PlaylistDescription { get; set; }
 
+        [JsonPropertyName("customData")]
+        public CustomData CustomData { get; set; }
+
         [JsonPropertyName("songs")]
         public List<PlaylistSong> Songs { get; set; }
 
