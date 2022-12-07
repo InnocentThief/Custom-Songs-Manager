@@ -23,7 +23,7 @@ namespace CSM.App
 
         private void RadNavigationView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.RemovedItems.Count == 0) return;
+            //if (e.RemovedItems.Count == 0) return;
             // Unload removed workspace
             if (e.RemovedItems.Count > 0)
             {

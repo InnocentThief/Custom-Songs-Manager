@@ -1,0 +1,119 @@
+﻿<UserControl x:Class="CSM.App.Workspaces.ScoreSaberIntegration.ScoreSaberPlayerScoreView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CSM.App.Workspaces.ScoreSaberIntegration" xmlns:converter="clr-namespace:CSM.App.Converter" xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
+        <converter:DifficultyNumberToColorConverter x:Key="DifficultyNumberToColorConverter" />
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <!-- SongName / Author / Artist / Stars -->
+        <Grid Margin="20,0,20,3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="36" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Border Grid.ColumnSpan="3" Background="WhiteSmoke" Opacity="0.1" CornerRadius="5" />
+            <Image Source="{Binding CoverImage}" Margin="6,0,0,0" />
+            <Grid Grid.Column="1" Margin="6,0,6,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!-- SongName by SongAuthorName -->
+                <TextBlock VerticalAlignment="Bottom" TextTrimming="CharacterEllipsis" ToolTip="{Binding SongName}">
+                                            <Run Text="{Binding SongName, Mode=OneWay}" FontSize="14" FontWeight="Bold" />
+                                            <Run Text="by" Foreground="DimGray" />
+                                            <Run Text="{Binding SongAuthorName, Mode=OneWay}" Foreground="#FF018574" />
+                </TextBlock>
+                <!-- LevelAuthorName -->
+                <TextBlock Grid.Row="1">
+                                            <Run Text="Mapped by" Foreground="DimGray" />
+                                            <Run Text="{Binding LevelAuthorName, Mode=OneWay}" Foreground="#FF018574" />
+                </TextBlock>
+            </Grid>
+            <Border Grid.Column="2" Background="{Binding Difficulty, Converter={StaticResource DifficultyNumberToColorConverter}}" VerticalAlignment="Center" CornerRadius="5" Margin="0,0,6,0">
+                <TextBlock Text="{Binding Stars}" Margin="6,3" />
+            </Border>
+        </Grid>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Grid Margin="3">
+                <Border Background="WhiteSmoke" Opacity="0.1" CornerRadius="5" />
+                <StackPanel Margin="6,3">
+                    <TextBlock Text="Score" FontWeight="Bold" HorizontalAlignment="Center" />
+                    <TextBlock Text="{Binding Score}" HorizontalAlignment="Center" />
+                </StackPanel>
+            </Grid>
+            <Grid Margin="3">
+                <Border Background="WhiteSmoke" Opacity="0.1" CornerRadius="5" />
+                <StackPanel Margin="6,3">
+                    <TextBlock Text="Accuracy" FontWeight="Bold" HorizontalAlignment="Center" />
+                    <TextBlock HorizontalAlignment="Center">
+                                    <Run Text="{Binding Accuracy, Mode=OneWay}" />
+                                    <Run Text="%" />
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+            <Grid Margin="3">
+                <Border Background="WhiteSmoke" Opacity="0.1" CornerRadius="5" />
+                <StackPanel Margin="6,3">
+                    <TextBlock Text="Performance Points" FontWeight="Bold" HorizontalAlignment="Center" />
+                    <TextBlock Text="{Binding PPWeightPP}" HorizontalAlignment="Center" />
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Grid Margin="3">
+                <Border Background="WhiteSmoke" Opacity="0.1" CornerRadius="5" />
+                <StackPanel Margin="6,3">
+                    <TextBlock Text="Full Combo" FontWeight="Bold" HorizontalAlignment="Center" />
+                    <telerik:RadGlyph Glyph="&#xe118;" Foreground="#FF018574" Visibility="{Binding FullCombo, Converter={StaticResource BoolToVisConverter}}" />
+                </StackPanel>
+            </Grid>
+            <Grid Margin="3">
+                <Border Background="WhiteSmoke" Opacity="0.1" CornerRadius="5" />
+                <StackPanel Margin="6,3">
+                    <TextBlock Text="Max Combo" FontWeight="Bold" HorizontalAlignment="Center" />
+                    <TextBlock Text="{Binding MaxCombo}" HorizontalAlignment="Center" />
+                </StackPanel>
+            </Grid>
+            <Grid Margin="3">
+                <Border Background="WhiteSmoke" Opacity="0.1" CornerRadius="5" />
+                <StackPanel Margin="6,3">
+                    <TextBlock Text="Bad Cuts" FontWeight="Bold" HorizontalAlignment="Center" />
+                    <TextBlock Text="{Binding BadCuts}" HorizontalAlignment="Center" />
+                </StackPanel>
+            </Grid>
+            <Grid Margin="3">
+                <Border Background="WhiteSmoke" Opacity="0.1" CornerRadius="5" />
+                <StackPanel Margin="6,3">
+                    <TextBlock Text="Missed Notes" FontWeight="Bold" HorizontalAlignment="Center" />
+                    <TextBlock Text="{Binding MissedNotes}" HorizontalAlignment="Center" />
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Grid Margin="3">
+                <Border Background="WhiteSmoke" Opacity="0.1" CornerRadius="5" />
+                <StackPanel Margin="6,3">
+                    <TextBlock Text="Modifiers" FontWeight="Bold" HorizontalAlignment="Center" />
+                    <TextBlock Text="{Binding Modifiers}" HorizontalAlignment="Center" />
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>

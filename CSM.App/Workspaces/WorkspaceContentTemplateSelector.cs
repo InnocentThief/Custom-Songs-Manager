@@ -1,4 +1,5 @@
-﻿using CSM.Framework;
+﻿using CSM.App.Workspaces.ScoreSaberIntegration;
+using CSM.Framework;
 using CSM.UiLogic.Workspaces;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,6 +27,11 @@ namespace CSM.App.Workspaces
         public DataTemplate TwitchIntegration { get; set; }
 
         /// <summary>
+        /// Gets or sets the ScoreSaber integration workspace data template.
+        /// </summary>
+        public DataTemplate ScoreSaberIntegration { get; set; }
+
+        /// <summary>
         /// Gets or sets the tools workspace data template.
         /// </summary>
         public DataTemplate Tools { get; set; }
@@ -45,6 +51,8 @@ namespace CSM.App.Workspaces
                     return Playlists;
                 case WorkspaceType.TwitchIntegration:
                     return TwitchIntegration;
+                case WorkspaceType.ScoreSaberIntegration:
+                    return ScoreSaberIntegration;
                 case WorkspaceType.Tools:
                     return Tools;
                 default:

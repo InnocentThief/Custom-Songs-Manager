@@ -70,6 +70,7 @@ namespace CSM.UiLogic
                         new CustomLevelsViewModel() { Title = Resources.Workspace_CustomLevels, IconGlyph = "&#xe023;" },
                         new PlaylistsViewModel(true) { Title = Resources.Workspace_Playlists, IconGlyph = "&#xe029;" },
                         new TwitchIntegrationViewModel() { Title = Resources.Workspace_Twitch, IconGlyph = "&#xe800;" },
+                        new ScoreSaberIntegrationViewModel(){Title = Resources.Workspace_ScoreSaber, IconGlyph="&#xea00;" }
                         //new ToolsViewModel() { Title = Resources.Workspace_Tools, IconGlyph = "&#xe13c;" }
                     };
             SelectedWorkspace = Workspaces.Single(w => w.WorkspaceType == UserConfigManager.Instance.Config.DefaultWorkspace);

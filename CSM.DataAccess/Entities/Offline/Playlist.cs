@@ -17,11 +17,14 @@ namespace CSM.DataAccess.Entities.Offline
         [JsonPropertyName("playlistDescription")]
         public string PlaylistDescription { get; set; }
 
-        [JsonPropertyName("image")]
-        public string Image { get; set; }
+        [JsonPropertyName("customData")]
+        public CustomData CustomData { get; set; }
 
         [JsonPropertyName("songs")]
         public List<PlaylistSong> Songs { get; set; }
+
+        [JsonPropertyName("image")]
+        public string Image { get; set; }
 
         [JsonIgnore]
         public string Path { get; set; }

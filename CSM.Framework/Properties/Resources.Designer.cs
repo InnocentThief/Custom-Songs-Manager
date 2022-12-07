@@ -97,6 +97,15 @@ namespace CSM.Framework.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ScoreSaber.
+        /// </summary>
+        public static string Extension_ScoreSaber {
+            get {
+                return ResourceManager.GetString("Extension_ScoreSaber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tools.
         /// </summary>
         public static string Extension_Tools {

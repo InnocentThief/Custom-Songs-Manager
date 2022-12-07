@@ -1,7 +1,7 @@
 ﻿using CSM.Framework;
 using CSM.UiLogic.Workspaces.Playlists;
 using CSM.UiLogic.Workspaces.TwitchIntegration;
-using CSM.UiLogic.Workspaces.TwitchIntegration.ScoreSaberIntegration;
+using CSM.UiLogic.Workspaces.ScoreSaberIntegration;
 
 namespace CSM.UiLogic.Workspaces
 {
@@ -43,8 +43,9 @@ namespace CSM.UiLogic.Workspaces
             Twitch = new TwitchViewModel(Playlists.PlaylistSelectionState);
             Twitch.AddSongToPlaylistEvent += Twitch_AddSongToPlaylistEvent;
             Twitch.SongChangedEvent += Twitch_SongChangedEvent;
-            //ScoreSaber = new ScoreSaberViewModel();
-
+            Twitch.OnScoreSaberAddPlayer += Twitch_OnScoreSaberAddPlayer;
+            ScoreSaber = new ScoreSaberViewModel();
+            ScoreSaber.TabIndex = 0;
         }
 
         /// <summary>
@@ -74,6 +75,11 @@ namespace CSM.UiLogic.Workspaces
         private void Twitch_SongChangedEvent(object sender, Playlists.PlaylistSongChangedEventArgs e)
         {
             Playlists.SongChangedEvent(sender, e);
+        }
+
+        private async void Twitch_OnScoreSaberAddPlayer(object sender, ScoreSaberAddPlayerEventArgs e)
+        {
+            await ScoreSaber.AddPlayerFromTwitchAsync(e.Playername);
         }
 
         #endregion

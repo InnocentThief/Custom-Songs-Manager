@@ -14,6 +14,7 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -23,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,6 +33,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -106,8 +109,8 @@
     <Reference Include="System.Text.Encodings.Web, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Text.Encodings.Web.6.0.0\lib\net461\System.Text.Encodings.Web.dll</HintPath>
     </Reference>
-    <Reference Include="System.Text.Json, Version=6.0.0.4, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Json.6.0.4\lib\net461\System.Text.Json.dll</HintPath>
+    <Reference Include="System.Text.Json, Version=6.0.0.5, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.6.0.5\lib\net461\System.Text.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
@@ -122,6 +125,13 @@
     <Reference Include="System.Xml" />
     <Reference Include="Telerik.Windows.Controls">
       <HintPath>..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R2 2022\Binaries\WPF45\Telerik.Windows.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.FileDialogs">
+      <HintPath>..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R2 2022\Binaries\WPF45\Telerik.Windows.Controls.FileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Navigation, Version=2022.2.621.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R2 2022\Binaries\WPF45\Telerik.Windows.Controls.Navigation.dll</HintPath>
     </Reference>
     <Reference Include="TwitchLib.Api, Version=3.5.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\TwitchLib.Api.3.5.2\lib\netstandard2.0\TwitchLib.Api.dll</HintPath>
@@ -207,6 +217,12 @@
     <Compile Include="Workspaces\Playlists\SearchedSongViewModel.cs" />
     <Compile Include="Workspaces\Playlists\SongSearchEventArgs.cs" />
     <Compile Include="Workspaces\Playlists\SongSearchViewModel.cs" />
+    <Compile Include="Workspaces\ScoreSaberIntegrationViewModel.cs" />
+    <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberMultiplePlayersCompareViewModel.cs" />
+    <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberPlayerBaseViewModel.cs" />
+    <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberPlayerScoreViewModel.cs" />
+    <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberSinglePlayerAnalysisViewModel.cs" />
+    <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberSongViewModel.cs" />
     <Compile Include="Workspaces\SettingsViewModel.cs" />
     <Compile Include="Workspaces\Settings\BeatSaberSettingsViewModel.cs" />
     <Compile Include="Workspaces\Settings\BeatSaverSettingsViewModel.cs" />
@@ -222,7 +238,12 @@
     <Compile Include="Workspaces\Tools\CleanupCustomLevels\StepVersionsViewModel.cs" />
     <Compile Include="Workspaces\TwitchIntegrationViewModel.cs" />
     <Compile Include="Workspaces\TwitchIntegration\ReceivedBeatmapViewModel.cs" />
-    <Compile Include="Workspaces\TwitchIntegration\ScoreSaberIntegration\ScoreSaberViewModel.cs" />
+    <Compile Include="Workspaces\TwitchIntegration\ScoreSaberAddPlayerEventArgs.cs" />
+    <Compile Include="Workspaces\ScoreSaberIntegration\PlayerSearchOnPlayerSelectedEventArgs.cs" />
+    <Compile Include="Workspaces\ScoreSaberIntegration\RankDataPoint.cs" />
+    <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberPlayerSearchViewModel.cs" />
+    <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberPlayerViewModel.cs" />
+    <Compile Include="Workspaces\ScoreSaberIntegration\ScoreSaberViewModel.cs" />
     <Compile Include="Workspaces\TwitchIntegration\TwitchChannelViewModel.cs" />
     <Compile Include="Workspaces\TwitchIntegration\TwitchViewModel.cs" />
   </ItemGroup>
@@ -250,6 +271,7 @@
     <None Include="packages.config" />
     <None Include="Workspaces\CustomLevels\CustomLevels.cd" />
     <None Include="Workspaces\Playlists\Playlists.cd" />
+    <None Include="Workspaces\ScoreSaberIntegration\ScoreSaberIntegration.cd" />
     <None Include="Workspaces\Settings\Settings.cd" />
     <None Include="Workspaces\Tools\Tools.cd" />
     <None Include="Workspaces\TwitchIntegration\Twitch.cd" />
@@ -268,13 +290,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\System.Text.Json.6.0.4\build\System.Text.Json.targets" Condition="Exists('..\packages\System.Text.Json.6.0.4\build\System.Text.Json.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\System.Text.Json.6.0.4\build\System.Text.Json.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Text.Json.6.0.4\build\System.Text.Json.targets'))" />
     <Error Condition="!Exists('..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.1\build\Microsoft.Extensions.Logging.Abstractions.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.1\build\Microsoft.Extensions.Logging.Abstractions.targets'))" />
+    <Error Condition="!Exists('..\packages\System.Text.Json.6.0.5\build\System.Text.Json.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Text.Json.6.0.5\build\System.Text.Json.targets'))" />
   </Target>
   <Import Project="..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.1\build\Microsoft.Extensions.Logging.Abstractions.targets" Condition="Exists('..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.1\build\Microsoft.Extensions.Logging.Abstractions.targets')" />
+  <Import Project="..\packages\System.Text.Json.6.0.5\build\System.Text.Json.targets" Condition="Exists('..\packages\System.Text.Json.6.0.5\build\System.Text.Json.targets')" />
 </Project>

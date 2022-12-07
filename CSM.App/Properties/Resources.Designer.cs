@@ -205,6 +205,15 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy username.
+        /// </summary>
+        public static string ScoreSaber_CopyUsername_ToolTip {
+            get {
+                return ResourceManager.GetString("ScoreSaber_CopyUsername_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Custom Levels Path.
         /// </summary>
         public static string Settings_BeatSaber_CustomLevelsPath {
@@ -979,7 +988,7 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download Date.
+        ///   Looks up a localized string similar to DL Date.
         /// </summary>
         public static string Workspace_CustomLevels_ColumnHeader_ChangeDate {
             get {
@@ -1258,6 +1267,15 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Creates a playlist containing all custom songs.
+        /// </summary>
+        public static string Workspace_CustomLevels_SaveToPlaylist {
+            get {
+                return ResourceManager.GetString("Workspace_CustomLevels_SaveToPlaylist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Custom Levels.
         /// </summary>
         public static string Workspace_CustomLevels_Title {
@@ -1281,6 +1299,24 @@ namespace CSM.App.Properties {
         public static string Workspace_Playlist_ColumnHeader_Difficultiy {
             get {
                 return ResourceManager.GetString("Workspace_Playlist_ColumnHeader_Difficultiy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fetch playlist data from beatsaver.com.
+        /// </summary>
+        public static string Workspace_Playlist_FetchPlaylistData {
+            get {
+                return ResourceManager.GetString("Workspace_Playlist_FetchPlaylistData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hitbloq playlist: Changes will be lost once you sync in Beat Saber.
+        /// </summary>
+        public static string Workspace_Playlist_Hitbloq {
+            get {
+                return ResourceManager.GetString("Workspace_Playlist_Hitbloq", resourceCulture);
             }
         }
         

@@ -114,6 +114,7 @@ namespace CSM.Framework.Configuration.UserConfiguration
                 },
                 DefaultWorkspace = WorkspaceType.CustomLevels,
                 CustomLevelsSongDetailPosition = SongDetailPosition.Right,
+                ScoreSaberAnalysisMode = ScoreSaberAnalysisMode.Single,
                 RemoveReceivedSongAfterAddingToPlaylist = false,
             };
         }

@@ -43,5 +43,10 @@ namespace CSM.Framework.Configuration.UserConfiguration
         /// Gets or sets song detail position on the custom level workspace.
         /// </summary>
         public SongDetailPosition CustomLevelsSongDetailPosition { get; set; }
+
+        /// <summary>
+        /// Gets or sets the ScoreSaber analysis mode.
+        /// </summary>
+        public ScoreSaberAnalysisMode ScoreSaberAnalysisMode { get; set; }
     }
 }

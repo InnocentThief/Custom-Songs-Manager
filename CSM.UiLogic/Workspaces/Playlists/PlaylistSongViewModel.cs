@@ -75,6 +75,12 @@ namespace CSM.UiLogic.Workspaces.Playlists
                 if (!string.IsNullOrWhiteSpace(playlistSong.SongName)) return playlistSong.SongName;
                 return Resources.Playlists_SongName_NA;
             }
+            set
+            {
+                if (playlistSong.SongName == value) return;
+                playlistSong.SongName = value;
+                OnPropertyChanged();
+            }
         }
 
         /// <summary>
@@ -83,6 +89,12 @@ namespace CSM.UiLogic.Workspaces.Playlists
         public string LevelAuthorName
         {
             get => playlistSong.LevelAuthorName;
+            set
+            {
+                if (playlistSong.LevelAuthorName == value) return;
+                playlistSong.LevelAuthorName = value;
+                OnPropertyChanged();
+            }
         }
 
         /// <summary>
@@ -91,7 +103,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
         public ObservableCollection<PlaylistSongDifficultyViewModel> Difficulties { get; }
 
         /// <summary>
-        /// Gets the the difficulties this playlist song contains as string.
+        /// Gets the difficulties this playlist song contains as string.
         /// </summary>
         public string Difficulty
         {

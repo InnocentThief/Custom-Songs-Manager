@@ -1,6 +1,7 @@
 ﻿using CSM.DataAccess.Entities.Offline;
 using CSM.Framework;
 using CSM.Framework.Configuration.UserConfiguration;
+using CSM.Framework.Converter;
 using CSM.Framework.Extensions;
 using CSM.Framework.Logging;
 using CSM.Services;
@@ -15,10 +16,13 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Data;
+using Telerik.Windows.Controls;
+using AppCurrent = System.Windows.Application;
+using ImageConverter = CSM.Framework.Converter.ImageConverter;
 
 namespace CSM.UiLogic.Workspaces
 {
@@ -115,6 +119,11 @@ namespace CSM.UiLogic.Workspaces
         public RelayCommand OpenInFileExplorerCommand { get; }
 
         /// <summary>
+        /// Command used to save all custom levels into a playlist.
+        /// </summary>
+        public RelayCommand SaveCustomLevelsToPlaylistCommand { get; }
+
+        /// <summary>
         /// Gets or sets whether the data is loading.
         /// </summary>
         public bool IsLoading
@@ -174,6 +183,7 @@ namespace CSM.UiLogic.Workspaces
             RefreshCommand = new RelayCommand(Refresh);
             DeleteCustomLevelCommand = new RelayCommand(DeleteCustomLevel, CanDeleteCustomLevel);
             OpenInFileExplorerCommand = new RelayCommand(OpenInFileExplorer);
+            SaveCustomLevelsToPlaylistCommand = new RelayCommand(SaveToPlaylist);
             UserConfigManager.UserConfigChanged += UserConfigManager_UserConfigChanged;
         }
 
@@ -343,6 +353,51 @@ namespace CSM.UiLogic.Workspaces
         private void OpenInFileExplorer()
         {
             Process.Start(UserConfigManager.Instance.Config.CustomLevelPaths.First().Path);
+        }
+
+        private void SaveToPlaylist()
+        {
+            var defaultImageLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Images\\CSM_Logo_400px.png");
+
+            var playlist = new Playlist
+            {
+                Path = String.Empty,
+                PlaylistAuthor = "Custom Songs Manager",
+                PlaylistDescription = "Contains all custom songs at the backup date",
+                PlaylistTitle = $"{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}-{DateTime.Now.Hour}-{DateTime.Now.Minute}-{DateTime.Now.Second}-SavedCustomLevelReferences",
+                CustomData = null,
+                Songs = new List<PlaylistSong>(),
+                Image = $"base64,{ImageConverter.StringFromBitmap(defaultImageLocation)}"
+            };
+
+            foreach (var customLevel in itemsObservable)
+            {
+                playlist.Songs.Add(new PlaylistSong
+                {
+                    Key = customLevel.BsrKey,
+                    LevelAuthorName = customLevel.LevelAuthorName,
+                    SongName = customLevel.SongName,
+                }); ;
+            }
+
+            // Save to file
+            var playlistPath = UserConfigManager.Instance.Config.PlaylistPaths.First().Path;
+            if (!Directory.Exists(playlistPath)) playlistPath = "C:\\";
+
+            RadSaveFileDialog saveFileDialog = new RadSaveFileDialog
+            {
+                Owner = AppCurrent.Current.MainWindow,
+                InitialDirectory = playlistPath,
+                FileName = $"{playlist.PlaylistTitle}.json"
+            };
+            saveFileDialog.ShowDialog();
+            if (saveFileDialog.DialogResult==true)
+            {
+                playlistPath = saveFileDialog.FileName;
+                var options = new JsonSerializerOptions { WriteIndented = true };
+                var content = JsonSerializer.Serialize(playlist, options);
+                File.WriteAllText(playlistPath, content);
+            }
         }
 
         #endregion

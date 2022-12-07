@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="CSM.App.Workspaces.ScoreSaberIntegration.ScoreSaberPlayerSearchView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CSM.App.Workspaces.TwitchIntegration" xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" xmlns:Flags="clr-namespace:FamFamFam.Flags.Wpf;assembly=FamFamFam.Flags.Wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
+        <Flags:CountryIdToFlagImageSourceConverter x:Key="CountryIdToFlagImageSourceConverter" />
+    </UserControl.Resources>
+    
+    <Grid Grid.Row="1" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="400" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Border Grid.ColumnSpan="3" Grid.RowSpan="2" Background="Black" Opacity="0.8" />
+
+        <Grid Grid.Column="1" Grid.Row="1" Margin="0,50" DataContext="{Binding PlayerSearch}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Border Grid.ColumnSpan="2" Grid.RowSpan="3" Background="White" Opacity="0.2" />
+            <telerik:RadWatermarkTextBox Text="{Binding SearchTextPlayer, UpdateSourceTrigger=PropertyChanged}" WatermarkContent="Player Name" Margin="10,10,0,6" KeyUp="RadWatermarkTextBox_KeyUp" />
+            <telerik:RadButton Grid.Column="1" Command="{Binding SearchCommand}" Margin="0,10,10,6">
+                <telerik:RadGlyph Glyph="&#xe13e;" />
+            </telerik:RadButton>
+            <telerik:RadListBox Grid.ColumnSpan="2" Grid.Row="1" Margin="6" ItemsSource="{Binding Players}" SelectedItem="{Binding SelectedPlayer, Mode=TwoWay}" Background="Transparent" BorderThickness="0">
+                <telerik:RadListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Image Source="{Binding ProfilePicture}" Width="25" />
+                            <Image Grid.Column="1" Margin="6,0,0,0" Source="{Binding Country, Converter={StaticResource CountryIdToFlagImageSourceConverter}}" RenderOptions.BitmapScalingMode="HighQuality" />
+                            <TextBlock Grid.Column="2" Text="{Binding Name}" Margin="6,0" VerticalAlignment="Center" />
+                            <Border Grid.Column="3" BorderBrush="Gray" BorderThickness="1" CornerRadius="5">
+                                <TextBlock Text="{Binding Rank}" VerticalAlignment="Center" Margin="6,0" />
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </telerik:RadListBox.ItemTemplate>
+            </telerik:RadListBox>
+            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10" HorizontalAlignment="Center" >
+                <telerik:RadButton Content="Add Player" Command="{Binding AddPlayerCommand}" />
+                <telerik:RadButton Content="Cancel" Command="{Binding CancelCommand}" Margin="10,0,0,0" />
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</UserControl>

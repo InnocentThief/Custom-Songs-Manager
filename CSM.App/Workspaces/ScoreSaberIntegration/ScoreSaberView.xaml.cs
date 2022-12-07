@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace CSM.App.Workspaces.TwitchIntegration
+namespace CSM.App.Workspaces.ScoreSaberIntegration
 {
     /// <summary>
     /// Interaction logic for ScoreSaberView.xaml

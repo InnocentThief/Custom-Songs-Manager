@@ -144,8 +144,6 @@ namespace CSM.UiLogic.Workspaces
 
         #endregion
 
-        public event EventHandler<PlaylistViewModel> PlaylistSelectionChanged;
-
         /// <summary>
         /// Initializes a new <see cref="PlaylistViewModel"/>.
         /// </summary>
@@ -460,6 +458,7 @@ namespace CSM.UiLogic.Workspaces
                         PlaylistAuthor = String.Empty,
                         PlaylistDescription = String.Empty,
                         PlaylistTitle = fileViewModel.FileOrFolderName,
+                        CustomData = null,
                         Songs = new List<PlaylistSong>(),
                         Image = $"base64,{ImageConverter.StringFromBitmap(defaultImageLocation)}"
                     };

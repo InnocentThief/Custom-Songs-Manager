@@ -29,6 +29,9 @@
             <!-- Commands -->
             <telerik:RadToolBar Grid.Column="1" OverflowButtonVisibility="Collapsed" GripVisibility="Collapsed" Background="Transparent" BorderThickness="0" >
                 <TextBlock Text="{Binding CustomLevelPath}" TextTrimming="CharacterEllipsis" Width="300" ToolTip="{Binding CustomLevelPath}"/>
+                <!--<telerik:RadButton Command="{Binding SaveCustomLevelsToPlaylistCommand}" ToolTip="{x:Static p:Resources.Workspace_CustomLevels_SaveToPlaylist}">
+                    <telerik:RadGlyph Glyph="&#xe029;" />
+                </telerik:RadButton>-->
                 <telerik:RadButton Command="{Binding OpenInFileExplorerCommand}" ToolTip="{x:Static p:Resources.Workspace_CustomLevels_OpenPathInFileExplorer}">
                     <telerik:RadGlyph Glyph="&#xe134;" />
                 </telerik:RadButton>
@@ -96,7 +99,7 @@
                                 </DataTemplate>
                             </telerik:GridViewDataColumn.CellTemplate>
                         </telerik:GridViewDataColumn>
-                        <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_ChangeDate}" Width="SizeToCells" DataMemberBinding="{Binding ChangeDate, StringFormat='g', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
+                        <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_ChangeDate}" Width="SizeToCells" DataMemberBinding="{Binding ChangeDate, StringFormat='d', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
                     </telerik:RadGridView.Columns>
                 </telerik:RadGridView>
                 <!-- Entry counter -->

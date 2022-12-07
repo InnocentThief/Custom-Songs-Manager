@@ -59,7 +59,7 @@
                                 <!-- Level Author Name -->
                                 <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_Mapper}" Width="*" DataMemberBinding="{Binding LevelAuthorName}" />
                                 <!-- Change Date -->
-                                <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_ChangeDate}" Width="SizeToCells" DataMemberBinding="{Binding ChangeDate, StringFormat='g', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
+                                <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_ChangeDate}" Width="SizeToCells" DataMemberBinding="{Binding ChangeDate, StringFormat='d', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
                             </telerik:RadGridView.Columns>
                         </telerik:RadGridView>
                     </telerik:RadTabItem>

@@ -232,7 +232,7 @@ namespace CSM.UiLogic.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to NA (Try to use Tools to fix this issue).
+        ///   Looks up a localized string similar to NA (Try the &quot;Fetch data&quot; Button in the tool bar).
         /// </summary>
         public static string Playlists_SongName_NA {
             get {
@@ -246,6 +246,24 @@ namespace CSM.UiLogic.Properties {
         public static string Playlists_WrongFolderName_Caption {
             get {
                 return ResourceManager.GetString("Playlists_WrongFolderName_Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Looks like Clipboard is busy at the moment. Try it again later.
+        /// </summary>
+        public static string ScoreSaber_CopyUsername_Error_Message {
+            get {
+                return ResourceManager.GetString("ScoreSaber_CopyUsername_Error_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to copy username.
+        /// </summary>
+        public static string ScoreSaber_CopyUsername_Error_Title {
+            get {
+                return ResourceManager.GetString("ScoreSaber_CopyUsername_Error_Title", resourceCulture);
             }
         }
         
@@ -363,6 +381,15 @@ namespace CSM.UiLogic.Properties {
         public static string Workspace_Playlists {
             get {
                 return ResourceManager.GetString("Workspace_Playlists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ScoreSaber.
+        /// </summary>
+        public static string Workspace_ScoreSaber {
+            get {
+                return ResourceManager.GetString("Workspace_ScoreSaber", resourceCulture);
             }
         }
         

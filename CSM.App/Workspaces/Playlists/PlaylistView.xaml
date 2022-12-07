@@ -31,6 +31,10 @@
             <TextBlock Text="{x:Static p:Resources.Playlist_Title}" Foreground="White" VerticalAlignment="Center" Margin="8,0" FontWeight="DemiBold" />
             <!-- Save playlist with current song order -->
             <telerik:RadToolBar Grid.Column="1" OverflowButtonVisibility="Collapsed" GripVisibility="Collapsed" Background="Transparent" BorderThickness="0" >
+                <telerik:RadButton Command="{Binding FetchPlaylistDataCommand}" ToolTip="{x:Static p:Resources.Workspace_Playlist_FetchPlaylistData}">
+                    <telerik:RadGlyph Glyph="&#xe68F;" />
+                </telerik:RadButton>
+                <telerik:RadToolBarSeparator />
                 <telerik:RadButton Command="{Binding SavePlaylistCommand}" ToolTip="{x:Static p:Resources.Workspace_Playlist_SavePlaylistWithSongOrder}">
                     <telerik:RadGlyph Glyph="&#xe109;" />
                 </telerik:RadButton>
@@ -40,6 +44,7 @@
         <Border Grid.Row="1" BorderBrush="DimGray" BorderThickness="1,0,1,1">
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
@@ -51,7 +56,9 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <!-- Cover Image -->
-                    <Image Source="{Binding CoverImage}" Height="50" Width="50" />
+                    <telerik:RadButton Command="{Binding ChooseCoverImageCommand}" Padding="0" Background="Transparent" BorderThickness="0" Height="50" Width="50" ToolTip="Click to change cover image">
+                        <Image Source="{Binding CoverImage}" />
+                    </telerik:RadButton>
                     <Grid Grid.Column="1" Margin="6,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="80" />
@@ -93,8 +100,13 @@
                         </telerik:RadButton>
                     </Grid>
                 </Grid>
+                <!-- Hitbloq information -->
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,6" Visibility="{Binding IsHitbloqPlaylist, Converter={StaticResource BoolToVisConverter}}">
+                    <telerik:RadGlyph Glyph="&#xe401;" Foreground="CornflowerBlue" />
+                    <TextBlock Text="{x:Static p:Resources.Workspace_Playlist_Hitbloq}" FontWeight="DemiBold" Foreground="CornflowerBlue" Margin="6,0" />
+                </StackPanel>
                 <!-- Content -->
-                <telerik:RadGridView Grid.Row="1" ItemsSource="{Binding Songs}" SelectedItem="{Binding SelectedPlaylistSong}" AutoGenerateColumns="False" IsFilteringAllowed="True" FilteringMode="FilterRow" RowIndicatorVisibility="Collapsed" FrozenColumnsSplitterVisibility="Collapsed" BorderThickness="0" AlternationCount="2" ShowGroupPanel="False" SelectionChanged="RadGridView_SelectionChanged" FilterOperatorsLoading="RadGridView_FilterOperatorsLoading" Sorted="RadGridView_Sorted"  >
+                <telerik:RadGridView Grid.Row="2" ItemsSource="{Binding Songs}" SelectedItem="{Binding SelectedPlaylistSong}" AutoGenerateColumns="False" IsFilteringAllowed="True" FilteringMode="FilterRow" RowIndicatorVisibility="Collapsed" FrozenColumnsSplitterVisibility="Collapsed" BorderThickness="0" AlternationCount="2" ShowGroupPanel="False" SelectionChanged="RadGridView_SelectionChanged" FilterOperatorsLoading="RadGridView_FilterOperatorsLoading" Sorted="RadGridView_Sorted"  >
                     <telerik:RadGridView.Columns>
                         <!-- Key -->
                         <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_BSR}" Width="Auto" DataMemberBinding="{Binding BsrKeyHex}" IsFilterable="False">

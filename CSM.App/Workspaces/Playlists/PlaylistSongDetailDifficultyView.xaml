@@ -9,6 +9,8 @@
 
     <UserControl.Resources>
         <converter:DifficultyToColorConverter x:Key="DiffToColor" />
+        <converter:DifficultyToGradientStartColorConverter x:Key="DiffToGradientStartColor" />
+        <converter:DifficultyToGradientStopColorConverter x:Key="DiffToGradientStopColor" />
     </UserControl.Resources>
 
     <Grid Margin="0,0,3,3" Width="150">
@@ -19,14 +21,28 @@
         <Border Background="{Binding Name, Converter={StaticResource DiffToColor}}">
             <ContentControl Content="{Binding}" ContentTemplateSelector="{StaticResource CharacteristicDataTemplateSelector}" />
         </Border>
-        <Border Grid.Column="1" BorderThickness="1" BorderBrush="{Binding Name, Converter={StaticResource DiffToColor}}">
+        <Border Grid.Column="1" BorderThickness="1" BorderBrush="{Binding Name, Converter={StaticResource DiffToColor}}" >
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <LinearGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                            <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                            <RotateTransform Angle="90" CenterX="0.5" CenterY="0.5"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </LinearGradientBrush.RelativeTransform>
+                    <GradientStop Color="{Binding Name, Converter={StaticResource DiffToGradientStopColor}}"/>
+                    <GradientStop Color="{Binding Name, Converter={StaticResource DiffToGradientStartColor}}" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="{Binding DifficultyDetail}" Margin="3,0" TextTrimming="CharacterEllipsis" ToolTip="{Binding DifficultyDetail}" />
-                <TextBlock Grid.Column="1" Text="{Binding Stars}" Foreground="{Binding Name, Converter={StaticResource DiffToColor}}" Margin="0,0,3,0" />
+                <TextBlock Grid.Column="1" Text="{Binding Stars}" FontWeight="DemiBold" Foreground="{Binding Name, Converter={StaticResource DiffToColor}}" Margin="0,0,3,0" />
             </Grid>
            
         </Border>
