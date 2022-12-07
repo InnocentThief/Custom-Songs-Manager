@@ -11,12 +11,14 @@
 - Lists the selected difficulties of the songs
 - Lets you change name, author, description and image of a playlist
 - Lets you add and remove songs (incl. the difficulty) from custom levels, Beat Saber favorites, and song search (BeatSaver.com)
+- Refresh song data for a selected playlist
+- Hitbloq playlist support
 ## Twitch Integration
 - Configure your favorite streamers channel and start "recording" !bsr and !link requests
 - Requested songs will be listed and you can add them to your own playlist
 - Auto-add to selected playlist
 ## ScoreSaber Integration
-- work in progress
+- Single player analysis
 ## Tools
 - work in progress
 
