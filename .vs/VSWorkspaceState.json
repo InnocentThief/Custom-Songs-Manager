@@ -2,9 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\CSM.UiLogic",
-    "\\CSM.UiLogic\\Workspaces",
-    "\\CSM.UiLogic\\Workspaces\\Playlists"
+    "\\CSM.UiLogic\\Workspaces"
   ],
-  "SelectedNode": "\\CSM.UiLogic\\Workspaces\\Playlists\\PlaylistSongDetailViewModel.cs",
+  "SelectedNode": "\\CSM.UiLogic\\Workspaces\\CustomLevelsViewModel.cs",
   "PreviewInSolutionExplorer": false
 }

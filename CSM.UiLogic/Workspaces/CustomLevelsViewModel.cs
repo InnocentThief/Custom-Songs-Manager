@@ -268,13 +268,23 @@ namespace CSM.UiLogic.Workspaces
                 {
                     if (bgWorker.CancellationPending) return;
                     var info = Path.Combine(folderEntry, "Info.dat");
+                    var directory = new DirectoryInfo(folderEntry);
                     if (File.Exists(info))
                     {
                         var infoContent = File.ReadAllText(info);
-                        CustomLevel customLevel = JsonSerializer.Deserialize<CustomLevel>(infoContent);
+                        CustomLevel customLevel = null;
+                        try
+                        {
+                            customLevel = JsonSerializer.Deserialize<CustomLevel>(infoContent);
+                        }
+                        catch (Exception ex)
+                        {
+                            LoggerProvider.Logger.Info<CustomLevelsViewModel>($"Unable to load info.dat for {directory.FullName}. {ex.Message}");
+                            continue;
+                        }
+
                         if (customLevel != null)
                         {
-                            var directory = new DirectoryInfo(folderEntry);
                             try
                             {
                                 customLevel.BsrKey = directory.Name.Substring(0, directory.Name.IndexOf(" "));
@@ -391,7 +401,7 @@ namespace CSM.UiLogic.Workspaces
                 FileName = $"{playlist.PlaylistTitle}.json"
             };
             saveFileDialog.ShowDialog();
-            if (saveFileDialog.DialogResult==true)
+            if (saveFileDialog.DialogResult == true)
             {
                 playlistPath = saveFileDialog.FileName;
                 var options = new JsonSerializerOptions { WriteIndented = true };
