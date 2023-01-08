@@ -104,6 +104,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
                 Noodle = d.Noodle,
                 MappingExtensions = d.MappingExtension,
                 Stars = d.Stars,
+                Label = d.Label
             });
             Difficulties = new List<PlaylistSongDifficultyViewModel>(playlistSongDifficulties.Select(d => new PlaylistSongDifficultyViewModel(d, false)));
         }

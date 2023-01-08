@@ -1,5 +1,6 @@
 ﻿using CSM.DataAccess.Entities.Online;
 using System.Collections.Generic;
+using System.Diagnostics.SymbolStore;
 
 namespace CSM.UiLogic.Workspaces.CustomLevels
 {
@@ -37,6 +38,25 @@ namespace CSM.UiLogic.Workspaces.CustomLevels
             get
             {
                 return difficulty.Stars > 0 ? $"{difficulty.Stars}*" : Difficulty;
+            }
+        }
+
+        public string Label
+        {
+            get
+            {
+                return difficulty.Label;
+            }
+        }
+
+        public string DisplayText
+        {
+            get
+            {
+                if (difficulty.Stars > 0 && !string.IsNullOrEmpty(difficulty.Label)) return $"{difficulty.Stars}* {Label}";
+                if (difficulty.Stars > 0) return $"{difficulty.Stars}* {Difficulty}";
+                if (!string.IsNullOrEmpty(difficulty.Label)) return difficulty.Label;
+                return Difficulty;
             }
         }
 

@@ -62,6 +62,25 @@ namespace CSM.UiLogic.Workspaces.Playlists
             }
         }
 
+        public string Label
+        {
+            get
+            {
+                return playlistSongDifficulty.Label;
+            }
+        }
+
+        public string DisplayText
+        {
+            get
+            {
+                if (playlistSongDifficulty.Stars > 0 && !string.IsNullOrEmpty(playlistSongDifficulty.Label)) return $"{playlistSongDifficulty.Stars}* {playlistSongDifficulty.Label}";
+                if (playlistSongDifficulty.Stars > 0) return $"{playlistSongDifficulty.Stars}* {Name}";
+                if (!string.IsNullOrWhiteSpace(playlistSongDifficulty.Label)) return playlistSongDifficulty.Label;
+                return Name;
+            }
+        }
+
         /// <summary>
         /// Gets or sets whether the current difficulty is part of the song in the playlist.
         /// </summary>

@@ -17,8 +17,8 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Border Background="{Binding Difficulty, Converter={StaticResource DiffToColor}}">
-            <TextBlock Text="{Binding Stars}" Foreground="Black" HorizontalAlignment="Center" Margin="3,2" FontWeight="DemiBold" />
+        <Border Background="{Binding Difficulty, Converter={StaticResource DiffToColor}}" x:Name="DiffBorder">
+            <TextBlock Text="{Binding DisplayText}" Foreground="Black" Margin="6,2" FontWeight="DemiBold" HorizontalAlignment="Center" MaxWidth="{Binding ElementName=DiffBorder}" ToolTip="{Binding DisplayText}" TextTrimming="CharacterEllipsis"/>
         </Border>
         <Border Grid.Row="1" BorderThickness="1" BorderBrush="{Binding Difficulty, Converter={StaticResource DiffToColor}}">
             <Grid Margin="3">

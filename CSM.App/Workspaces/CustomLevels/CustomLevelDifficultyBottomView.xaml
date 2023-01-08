@@ -14,11 +14,11 @@
 
     <Grid Margin="0,0,0,4" Width="400">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="80" />
+            <ColumnDefinition Width="120" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Border Background="{Binding Difficulty, Converter={StaticResource DiffToColor}}">
-            <TextBlock Text="{Binding Stars}" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3,2" FontWeight="DemiBold" />
+            <TextBlock Text="{Binding DisplayText}" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3,2" FontWeight="DemiBold" TextTrimming="CharacterEllipsis" ToolTip="{Binding DisplayText}"/>
         </Border>
         <Border Grid.Column="1" BorderThickness="1" BorderBrush="{Binding Difficulty, Converter={StaticResource DiffToColor}}">
             <Grid Margin="3">

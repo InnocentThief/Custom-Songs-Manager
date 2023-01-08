@@ -27,5 +27,8 @@ namespace CSM.DataAccess.Entities.Offline
 
         [JsonPropertyName("stars")]
         public decimal Stars { get; set; }
+
+        [JsonPropertyName("label")]
+        public string Label { get; set; }
     }
 }

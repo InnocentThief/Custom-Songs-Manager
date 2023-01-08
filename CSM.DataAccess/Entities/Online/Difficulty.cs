@@ -33,5 +33,8 @@ namespace CSM.DataAccess.Entities.Online
 
         [JsonPropertyName("stars")]
         public decimal Stars { get; set; }
+
+        [JsonPropertyName("label")]
+        public string Label { get; set; }
     }
 }
