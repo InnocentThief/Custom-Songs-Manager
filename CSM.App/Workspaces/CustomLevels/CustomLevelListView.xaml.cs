@@ -26,7 +26,25 @@ namespace CSM.App.Workspaces.CustomLevels
 
         private void RadGridView_FilterOperatorsLoading(object sender, Telerik.Windows.Controls.GridView.FilterOperatorsLoadingEventArgs e)
         {
-            e.DefaultOperator1 = Telerik.Windows.Data.FilterOperator.Contains;
+            if (e.Column.UniqueName == "BsrKey")
+            {
+                e.AvailableOperators.Remove(Telerik.Windows.Data.FilterOperator.IsLessThan);
+                e.AvailableOperators.Remove(Telerik.Windows.Data.FilterOperator.IsLessThanOrEqualTo);
+                e.AvailableOperators.Remove(Telerik.Windows.Data.FilterOperator.IsNotEqualTo);
+                e.AvailableOperators.Remove(Telerik.Windows.Data.FilterOperator.IsGreaterThanOrEqualTo);
+                e.AvailableOperators.Remove(Telerik.Windows.Data.FilterOperator.IsGreaterThan);
+                e.AvailableOperators.Remove(Telerik.Windows.Data.FilterOperator.StartsWith);
+                e.AvailableOperators.Remove(Telerik.Windows.Data.FilterOperator.EndsWith);
+                e.AvailableOperators.Remove(Telerik.Windows.Data.FilterOperator.Contains);
+                e.AvailableOperators.Remove(Telerik.Windows.Data.FilterOperator.DoesNotContain);
+                e.AvailableOperators.Remove(Telerik.Windows.Data.FilterOperator.IsContainedIn);
+                e.AvailableOperators.Remove(Telerik.Windows.Data.FilterOperator.IsNotContainedIn);
+                e.DefaultOperator1 = Telerik.Windows.Data.FilterOperator.IsEqualTo;
+            }
+            else
+            {
+                e.DefaultOperator1 = Telerik.Windows.Data.FilterOperator.Contains;
+            }
         }
     }
 }

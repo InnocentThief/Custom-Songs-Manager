@@ -54,7 +54,7 @@
                 <!-- ListView -->
                 <telerik:RadGridView ItemsSource="{Binding CustomLevels}" SelectedItem="{Binding SelectedCustomLevel}" SelectionMode="Single" FilteringMode="FilterRow" AutoGenerateColumns="False" RowIndicatorVisibility="Collapsed" FrozenColumnsSplitterVisibility="Collapsed" BorderThickness="0" AlternationCount="2" SelectionChanged="RadGridView_SelectionChanged" FilterOperatorsLoading="RadGridView_FilterOperatorsLoading"   >
                     <telerik:RadGridView.Columns>
-                        <telerik:GridViewDataColumn Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_BSR}" Width="SizeToCells" DataMemberBinding="{Binding BsrKeyHex}" IsFilterable="False">
+                        <telerik:GridViewDataColumn UniqueName="BsrKey" Header="{x:Static p:Resources.Workspace_CustomLevels_ColumnHeader_BSR}" Width="120" DataMemberBinding="{Binding BsrKeyHex}" IsFilterable="true" FilterMemberPath="BsrKey">
                             <telerik:GridViewDataColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding BsrKey}" />
