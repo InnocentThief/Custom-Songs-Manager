@@ -24,6 +24,8 @@ namespace CSM.UiLogic.Workspaces.Playlists
         private double npsSelectionStart;
         private double npsSelectionEnd;
 
+        private string query;
+
         #endregion
 
         #region Public Properties
@@ -31,7 +33,16 @@ namespace CSM.UiLogic.Workspaces.Playlists
         /// <summary>
         /// Gets or sets the query for the search.
         /// </summary>
-        public string Query { get; set; }
+        public string Query
+        {
+            get => query;
+            set
+            {
+                if (value == query) return;
+                query = value.ToLower().Replace("!bsr ", "");
+                OnPropertyChanged();
+            }
+        }
 
         /// <summary>
         /// Gets or sets whether to include automapper songs.
@@ -313,12 +324,12 @@ namespace CSM.UiLogic.Workspaces.Playlists
                 if (searchString.Length == 0) searchString.Append("fullSpread=true");
                 else searchString.Append("&fullSpread=true");
             }
-            if (npsSelectionStart!= 0)
+            if (npsSelectionStart != 0)
             {
-                if (searchString.Length == 0) searchString.Append($"minNps={Math.Round(npsSelectionStart,1)}");
+                if (searchString.Length == 0) searchString.Append($"minNps={Math.Round(npsSelectionStart, 1)}");
                 else searchString.Append($"&minNps={Math.Round(npsSelectionStart, 1)}");
             }
-            if (npsSelectionEnd!= 16)
+            if (npsSelectionEnd != 16)
             {
                 if (searchString.Length == 0) searchString.Append($"maxNps={Math.Round(npsSelectionEnd, 1)}");
                 else searchString.Append($"&maxNps={Math.Round(npsSelectionEnd, 1)}");
