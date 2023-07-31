@@ -26,6 +26,11 @@
             </Grid.ColumnDefinitions>
             <!-- Title -->
             <TextBlock Text="{x:Static p:Resources.Workspace_TwitchIntegration_ScoreSaber_Title}" Foreground="White" VerticalAlignment="Center" Margin="8,0" FontWeight="DemiBold" />
+            <telerik:RadToolBar Grid.Column="1" OverflowButtonVisibility="Collapsed" GripVisibility="Collapsed" Background="Transparent" BorderThickness="0" >
+                <telerik:RadButton Command="{Binding ScoreSaberSingle.CreatePlaylistCommand}" ToolTip="{x:Static p:Resources.Workspace_ScoreSaber_CreatePlaylistCommand}">
+                    <telerik:RadGlyph Glyph="&#xe907;" />
+                </telerik:RadButton>
+            </telerik:RadToolBar>
         </Grid>
 
         <Border Grid.Row="1" BorderBrush="DimGray" BorderThickness="1,0,1,1">

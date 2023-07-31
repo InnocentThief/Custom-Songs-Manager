@@ -16,5 +16,20 @@ namespace CSM.UiLogic.Workspaces
         {
             ScoreSaber = new ScoreSaberViewModel();
         }
+
+        public override void UnloadData()
+        {
+            base.UnloadData();
+            if (ScoreSaber != null)
+            {
+                if (ScoreSaber.ScoreSaberSingle is ScoreSaberSinglePlayerAnalysisViewModel scoreSaber)
+                {
+                    if (scoreSaber.Player != null)
+                    {
+                        scoreSaber.Player.ShowedScores.Clear();
+                    }
+                }
+            }
+        }
     }
 }

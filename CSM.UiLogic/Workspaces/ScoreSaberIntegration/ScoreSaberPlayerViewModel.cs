@@ -6,6 +6,8 @@ using CSM.UiLogic.Wizards;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -60,6 +62,8 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
 
         public ListCollectionView Scores => itemsCollection;
 
+        public List<ScoreSaberPlayerScoreViewModel> ShowedScores { get; }
+
         public RelayCommand CopyUsernameCommand { get; }
 
         public int Index
@@ -106,6 +110,7 @@ namespace CSM.UiLogic.Workspaces.ScoreSaberIntegration
             itemsCollection = DefaultSort();
 
             //Scores = new ObservableCollection<ScoreSaberPlayerScoreViewModel>();
+            ShowedScores = new List<ScoreSaberPlayerScoreViewModel>();
         }
 
         public async Task LoadDataAsync()

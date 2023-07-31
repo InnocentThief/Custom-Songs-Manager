@@ -1366,6 +1366,15 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create playlist from current view.
+        /// </summary>
+        public static string Workspace_ScoreSaber_CreatePlaylistCommand {
+            get {
+                return ResourceManager.GetString("Workspace_ScoreSaber_CreatePlaylistCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add a new channel.
         /// </summary>
         public static string Workspace_TwitchIntegration_Channels_AddChannel {

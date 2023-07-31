@@ -564,6 +564,9 @@
   <data name="Workspace_Playlist_SavePlaylistWithSongOrder" xml:space="preserve">
     <value>Save playlist with the current song order</value>
   </data>
+  <data name="Workspace_ScoreSaber_CreatePlaylistCommand" xml:space="preserve">
+    <value>Playlist der aktuellen Ansicht erstellen</value>
+  </data>
   <data name="Workspace_TwitchIntegration_Channels_AddChannel" xml:space="preserve">
     <value>Add a new channel</value>
   </data>

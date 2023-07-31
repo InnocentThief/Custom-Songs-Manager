@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSM.UiLogic.Workspaces.ScoreSaberIntegration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Telerik.Windows.Controls;
 
 namespace CSM.App.Workspaces.ScoreSaberIntegration
 {
@@ -58,6 +60,24 @@ namespace CSM.App.Workspaces.ScoreSaberIntegration
                     break;
                 default:
                     break;
+            }
+        }
+
+        private void RadGridView_Filtered(object sender, Telerik.Windows.Controls.GridView.GridViewFilteredEventArgs e)
+        {
+            if (sender is RadGridView gridView)
+            {
+                if (DataContext is ScoreSaberSinglePlayerAnalysisViewModel viewModel)
+                {
+                    viewModel.Player.ShowedScores.Clear();
+                    foreach (var item in gridView.Items)
+                    {
+                        if (item is ScoreSaberPlayerScoreViewModel scoreSaberPlayerScore)
+                        {
+                            viewModel.Player.ShowedScores.Add(scoreSaberPlayerScore);
+                        }
+                    }
+                }
             }
         }
     }

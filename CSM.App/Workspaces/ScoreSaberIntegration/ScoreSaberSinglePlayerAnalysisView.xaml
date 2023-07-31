@@ -111,7 +111,7 @@
 
                 <!-- Song list -->
                 <telerik:RadBusyIndicator Grid.Row="1" IsIndeterminate="True" BusyContent="Loading Song List" IsBusy="{Binding IsLoading}">
-                    <telerik:RadGridView ItemsSource="{Binding Scores}" AutoGenerateColumns="False" IsFilteringAllowed="True" FilteringMode="FilterRow" RowIndicatorVisibility="Collapsed" FrozenColumnsSplitterVisibility="Collapsed" BorderThickness="0" AlternationCount="2" FilterOperatorsLoading="RadGridView_FilterOperatorsLoading" >
+                    <telerik:RadGridView ItemsSource="{Binding Scores}" AutoGenerateColumns="False" IsFilteringAllowed="True" FilteringMode="FilterRow" RowIndicatorVisibility="Collapsed" FrozenColumnsSplitterVisibility="Collapsed" BorderThickness="0" AlternationCount="2" FilterOperatorsLoading="RadGridView_FilterOperatorsLoading" Filtered="RadGridView_Filtered" >
                         <telerik:RadGridView.Columns>
                             <telerik:GridViewDataColumn x:Name="Rank" Header="Rank" DataMemberBinding="{Binding Rank}">
                                 <telerik:GridViewDataColumn.CellTemplate>
