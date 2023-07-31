@@ -187,7 +187,7 @@ namespace CSM.UiLogic.Workspaces.Playlists
         /// </summary>
         public bool HasSyncUrl
         {
-            get => playlist.CustomData != null;
+            get => playlist.CustomData != null && playlist.CustomData.SyncURL != null;
         }
 
         public string SyncInfo
@@ -196,15 +196,15 @@ namespace CSM.UiLogic.Workspaces.Playlists
             {
                 if (playlist.CustomData == null) return string.Empty;
 
-                if (playlist.CustomData.SyncURL.Contains("hitbloq"))
+                if (playlist.CustomData.SyncURL != null && playlist.CustomData.SyncURL.Contains("hitbloq"))
                 {
                     return Resources.Workspace_Playlist_Hitbloq;
                 }
-                else if (playlist.CustomData.SyncURL.Contains("accsaber"))
+                else if (playlist.CustomData.SyncURL != null && playlist.CustomData.SyncURL.Contains("accsaber"))
                 {
                     return Resources.Workspace_Playlist_AccSaber;
                 }
-                else if (playlist.CustomData.SyncURL.Contains("beatleader"))
+                else if (playlist.CustomData.SyncURL != null && playlist.CustomData.SyncURL.Contains("beatleader"))
                 {
                     return Resources.Workspace_Playlist_BeatLeader;
                 }

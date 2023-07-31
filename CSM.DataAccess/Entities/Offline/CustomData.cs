@@ -9,5 +9,8 @@ namespace CSM.DataAccess.Entities.Offline
     {
         [JsonPropertyName("syncURL")]
         public string SyncURL { get; set; }
+
+        [JsonPropertyName("AllowDuplicates")]
+        public bool AllowDuplicates { get; set; }
     }
 }
