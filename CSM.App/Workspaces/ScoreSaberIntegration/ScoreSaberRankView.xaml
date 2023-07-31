@@ -21,12 +21,12 @@
                 <telerik:LinearAxis IsInverse="True" />
             </telerik:RadCartesianChart.VerticalAxis>
             <telerik:RadCartesianChart.Series>
-                <telerik:LineSeries ItemsSource="{Binding Player1.RankHistory}" CategoryBinding="Day" ValueBinding="Rank" Stroke="{Binding Player1.Index, Converter={StaticResource PlayerIndexToColorConverter}}" />
+                <!--<telerik:LineSeries ItemsSource="{Binding Player1.RankHistory}" CategoryBinding="Day" ValueBinding="Rank" Stroke="{Binding Player1.Index, Converter={StaticResource PlayerIndexToColorConverter}}" />
                 <telerik:LineSeries ItemsSource="{Binding Player2.RankHistory}" CategoryBinding="Day" ValueBinding="Rank" Stroke="{Binding Player2.Index, Converter={StaticResource PlayerIndexToColorConverter}}" />
                 <telerik:LineSeries ItemsSource="{Binding Player3.RankHistory}" CategoryBinding="Day" ValueBinding="Rank" Stroke="{Binding Player3.Index, Converter={StaticResource PlayerIndexToColorConverter}}" />
                 <telerik:LineSeries ItemsSource="{Binding Player4.RankHistory}" CategoryBinding="Day" ValueBinding="Rank" Stroke="{Binding Player4.Index, Converter={StaticResource PlayerIndexToColorConverter}}" />
                 <telerik:LineSeries ItemsSource="{Binding Player5.RankHistory}" CategoryBinding="Day" ValueBinding="Rank" Stroke="{Binding Player5.Index, Converter={StaticResource PlayerIndexToColorConverter}}" />
-                <telerik:LineSeries ItemsSource="{Binding Player6.RankHistory}" CategoryBinding="Day" ValueBinding="Rank" Stroke="{Binding Player6.Index, Converter={StaticResource PlayerIndexToColorConverter}}" />
+                <telerik:LineSeries ItemsSource="{Binding Player6.RankHistory}" CategoryBinding="Day" ValueBinding="Rank" Stroke="{Binding Player6.Index, Converter={StaticResource PlayerIndexToColorConverter}}" />-->
             </telerik:RadCartesianChart.Series>
             <telerik:RadCartesianChart.Grid>
                 <telerik:CartesianChartGrid MajorXLineInterval="3" MajorLinesVisibility="XY" />
