@@ -376,6 +376,33 @@ namespace CSM.UiLogic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AccSaber playlist: Changes will be lost once you sync in Beat Saber.
+        /// </summary>
+        public static string Workspace_Playlist_AccSaber {
+            get {
+                return ResourceManager.GetString("Workspace_Playlist_AccSaber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BeatLeader playlist: Changes will be lost once you sync in Beat Saber.
+        /// </summary>
+        public static string Workspace_Playlist_BeatLeader {
+            get {
+                return ResourceManager.GetString("Workspace_Playlist_BeatLeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hitbloq playlist: Changes will be lost once you sync in Beat Saber.
+        /// </summary>
+        public static string Workspace_Playlist_Hitbloq {
+            get {
+                return ResourceManager.GetString("Workspace_Playlist_Hitbloq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Playlists.
         /// </summary>
         public static string Workspace_Playlists {

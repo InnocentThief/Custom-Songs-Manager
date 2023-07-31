@@ -228,6 +228,15 @@
   <data name="Workspace_Playlists" xml:space="preserve">
     <value>Playlists</value>
   </data>
+  <data name="Workspace_Playlist_AccSaber" xml:space="preserve">
+    <value>AccSaber playlist: Changes will be lost once you sync in Beat Saber</value>
+  </data>
+  <data name="Workspace_Playlist_BeatLeader" xml:space="preserve">
+    <value>BeatLeader playlist: Changes will be lost once you sync in Beat Saber</value>
+  </data>
+  <data name="Workspace_Playlist_Hitbloq" xml:space="preserve">
+    <value>Hitbloq playlist: Changes will be lost once you sync in Beat Saber</value>
+  </data>
   <data name="Workspace_ScoreSaber" xml:space="preserve">
     <value>ScoreSaber</value>
   </data>

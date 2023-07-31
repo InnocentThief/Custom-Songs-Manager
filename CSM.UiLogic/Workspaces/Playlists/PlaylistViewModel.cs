@@ -1,7 +1,8 @@
 ﻿using CSM.DataAccess.Entities.Offline;
-using CSM.Framework.Converter;
-using CSM.Framework.Extensions;
+using CSM.Framework.Configuration.UserConfiguration;
+using CSM.Framework.Logging;
 using CSM.Services;
+using CSM.UiLogic.Properties;
 using Microsoft.Toolkit.Mvvm.Input;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,11 +12,8 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using Telerik.Windows.Controls;
-using CSMImageConverter = CSM.Framework.Converter.ImageConverter;
 using AppCurrent = System.Windows.Application;
-using CSM.Framework.Configuration.UserConfiguration;
-using System.Security.Policy;
-using CSM.Framework.Logging;
+using CSMImageConverter = CSM.Framework.Converter.ImageConverter;
 
 namespace CSM.UiLogic.Workspaces.Playlists
 {
@@ -185,11 +183,33 @@ namespace CSM.UiLogic.Workspaces.Playlists
         }
 
         /// <summary>
-        /// Gets whether the playlist is a hitbloq playlist.
+        /// Gets whether the playlist has a sync url (eg. hitbloq).
         /// </summary>
-        public bool IsHitbloqPlaylist
+        public bool HasSyncUrl
         {
             get => playlist.CustomData != null;
+        }
+
+        public string SyncInfo
+        {
+            get
+            {
+                if (playlist.CustomData == null) return string.Empty;
+
+                if (playlist.CustomData.SyncURL.Contains("hitbloq"))
+                {
+                    return Resources.Workspace_Playlist_Hitbloq;
+                }
+                else if (playlist.CustomData.SyncURL.Contains("accsaber"))
+                {
+                    return Resources.Workspace_Playlist_AccSaber;
+                }
+                else if (playlist.CustomData.SyncURL.Contains("beatleader"))
+                {
+                    return Resources.Workspace_Playlist_BeatLeader;
+                }
+                else return string.Empty;
+            }
         }
 
         /// <summary>
