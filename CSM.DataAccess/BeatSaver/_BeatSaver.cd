@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CSM.DataAccess.BeatSaver.MapDetail">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABACAAAAQKAgCEAACCCAAAQAABAAAkEAAERAAUAEAAA=</HashCode>
+      <FileName>BeatSaver\MapDetail.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Curator" />
+      <Property Name="DeclaredAi" />
+      <Property Name="Metadata" />
+      <Property Name="Stats" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Collaborators" />
+      <Property Name="Tags" />
+      <Property Name="Versions" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CSM.DataAccess.BeatSaver.UserDetail">
+    <Position X="11" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAIAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BeatSaver\UserDetail.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSM.DataAccess.BeatSaver.MapDetailMetadata">
+    <Position X="4.5" Y="2.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAABAEAAAAAAAAAAAAEAAAAgAAAAQA=</HashCode>
+      <FileName>BeatSaver\MapDetailMetadata.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSM.DataAccess.BeatSaver.MapStats">
+    <Position X="4.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAEAAAwAAAAAAACAAAEAAEAAAAEAAAAAAAA=</HashCode>
+      <FileName>BeatSaver\MapStats.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Sentiment" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CSM.DataAccess.BeatSaver.MapVersion">
+    <Position X="11" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAgIAAIAAAQAACACAAAAAAAAAABACAAABAAAIgA=</HashCode>
+      <FileName>BeatSaver\MapVersion.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="State" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Diffs" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CSM.DataAccess.BeatSaver.MapDifficulty">
+    <Position X="4.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AkEoAAACkAEAASABCAAAAAAAQkAAAEAAAAABAAAAEAA=</HashCode>
+      <FileName>BeatSaver\MapDifficulty.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Difficulty" />
+      <Property Name="Environment" />
+      <Property Name="Characteristic" />
+    </ShowAsAssociation>
+  </Class>
+  <Enum Name="CSM.DataAccess.BeatSaver.DeclaredAi">
+    <Position X="11" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQEAAAA=</HashCode>
+      <FileName>BeatSaver\DeclaredAi.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CSM.DataAccess.BeatSaver.Sentiment">
+    <Position X="1.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAgAAAIAAAAAAAAAAAICAAAIA=</HashCode>
+      <FileName>BeatSaver\Sentiment.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CSM.DataAccess.BeatSaver.Tag">
+    <Position X="13.5" Y="2.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAogwCBBJAAEQCAAAkGIBIwVAAqAAAAAgIsAKcYABMA=</HashCode>
+      <FileName>BeatSaver\Tag.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CSM.DataAccess.BeatSaver.Difficulty">
+    <Position X="7" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAABAAAAAAAIAAAAAAAAAAAoAAA=</HashCode>
+      <FileName>BeatSaver\Difficulty.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CSM.DataAccess.BeatSaver.Environment">
+    <Position X="16.25" Y="4.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AYAGUAICQADNAIJQhAQBACAAIAEIIADAAmQAAoQASWA=</HashCode>
+      <FileName>BeatSaver\Environment.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CSM.DataAccess.BeatSaver.State">
+    <Position X="8.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAACAACAAAAAEAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>BeatSaver\State.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CSM.DataAccess.Common.Characteristic">
+    <Position X="1.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAQABAAAgAAAAAAACAAAIAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Common\Characteristic.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

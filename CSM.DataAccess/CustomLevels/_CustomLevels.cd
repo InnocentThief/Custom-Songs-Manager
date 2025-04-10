@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CSM.DataAccess.CustomLevels.InfoV2">
+    <Position X="5.75" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAgBAEAAAAAAAAAAAAAAAAAgAAIAAI=</HashCode>
+      <FileName>CustomLevels\InfoV2.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="DifficultyBeatmapSets" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CSM.DataAccess.CustomLevels.DifficultyBeatmapSet">
+    <Position X="1.75" Y="3.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>CustomLevels\DifficultyBeatmapSet.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="DifficultyBeatmaps" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CSM.DataAccess.CustomLevels.DifficultyBeatmapV2">
+    <Position X="1.75" Y="5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomLevels\DifficultyBeatmapV2.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSM.DataAccess.CustomLevels.InfoV4">
+    <Position X="9.25" Y="3.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAEAAAgAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>CustomLevels\InfoV4.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Song" />
+      <Property Name="Audio" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="DifficultyBeatmaps" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CSM.DataAccess.CustomLevels.Song">
+    <Position X="12" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAgAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomLevels\Song.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSM.DataAccess.CustomLevels.DifficultyBeatmapV4">
+    <Position X="12" Y="5.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomLevels\DifficultyBeatmapV4.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Characteristic" />
+      <Property Name="Difficulty" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CSM.DataAccess.CustomLevels.Audio">
+    <Position X="12" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>CustomLevels\Audio.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="CSM.DataAccess.Common.Characteristic">
+    <Position X="15.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAQABAAAgAAAAAAACAAAIAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Common\Characteristic.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CSM.DataAccess.CustomLevels.Difficulty">
+    <Position X="15.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAABAAAAAAAIAAAAAAAAAAAoAAA=</HashCode>
+      <FileName>CustomLevels\Difficulty.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

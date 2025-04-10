@@ -1,11 +1,12 @@
-﻿using System.Text.Json.Serialization;
+﻿using CSM.DataAccess.Common;
+using System.Text.Json.Serialization;
 
 namespace CSM.DataAccess.Playlists
 {
   internal  class Difficulty
     {
         [JsonPropertyName("characteristic")]
-        public string Characteristic { get; set; } = string.Empty;
+        public Characteristic Characteristic { get; set; }
 
         [JsonPropertyName("name")]
         public string Name { get; set; } = string.Empty;
