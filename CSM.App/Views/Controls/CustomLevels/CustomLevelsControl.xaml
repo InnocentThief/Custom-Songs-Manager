@@ -1,0 +1,107 @@
+﻿<UserControl x:Class="CSM.App.Views.Controls.CustomLevels.CustomLevelsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:behaviours="clr-namespace:CSM.App.Behaviours"
+             xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <!-- Header -->
+        <Grid Background="#FF018574">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <!-- Title -->
+            <TextBlock Text="Custom Levels" Style="{StaticResource HeaderTitleStyle}" />
+            <!-- Commands -->
+            <telerik:RadToolBar Grid.Column="1" Style="{StaticResource HeaderToolBarStyle}" >
+                <TextBlock Text="{Binding CustomLevelPath}" TextTrimming="CharacterEllipsis" Width="300" ToolTip="{Binding CustomLevelPath}"/>
+                <telerik:RadButton Command="{Binding OpenInFileExplorerCommand}" ToolTip="Open in File Explorer">
+                    <telerik:RadGlyph Glyph="&#xe134;" />
+                </telerik:RadButton>
+                <telerik:RadButton Command="{Binding RefreshCommand}" ToolTip="Refresh">
+                    <telerik:RadGlyph Glyph="&#xe103;" />
+                </telerik:RadButton>
+                <telerik:RadToolBarSeparator />
+                <telerik:RadButton Command="{Binding DeleteCustomLevelCommand}" ToolTip="Delete selected custom level">
+                    <telerik:RadGlyph Glyph="&#xe10c;" />
+                </telerik:RadButton>
+            </telerik:RadToolBar>
+        </Grid>
+        <!-- Content -->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <!-- ListView -->
+            <telerik:RadGridView 
+                behaviours:GridViewHeaderContextMenuBehaviour.IsEnabled="True"
+                Margin="3,3,3,0" 
+                ItemsSource="{Binding CustomLevels}" 
+                SelectedItem="{Binding SelectedCustomLevel}" 
+                SelectionChanged="RadGridView_SelectionChanged" 
+                FilterOperatorsLoading="RadGridView_FilterOperatorsLoading" 
+                Style="{StaticResource RadGridViewStyle}">
+                <telerik:RadGridView.Columns>
+                    <telerik:GridViewDataColumn UniqueName="BsrKey" Header="BSR" Width="120" DataMemberBinding="{Binding BsrKeyHex}" IsFilterable="true" FilterMemberPath="BsrKey">
+                        <telerik:GridViewDataColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding BsrKey}" />
+                            </DataTemplate>
+                        </telerik:GridViewDataColumn.CellTemplate>
+                    </telerik:GridViewDataColumn>
+                    <telerik:GridViewDataColumn Header="Title" Width="*" DataMemberBinding="{Binding SongName}" />
+                    <telerik:GridViewDataColumn Header="Artist" Width="*" DataMemberBinding="{Binding SongAuthorName}" />
+                    <telerik:GridViewDataColumn Header="Mapper" Width="*" DataMemberBinding="{Binding LevelAuthorName}" />
+                    <telerik:GridViewDataColumn Header="E" Width="SizeToCells" DataMemberBinding="{Binding Easy}" IsFilterable="False">
+                        <telerik:GridViewDataColumn.CellTemplate>
+                            <DataTemplate>
+                                <telerik:RadGlyph Glyph="&#xe118;" Foreground="#FF018574" Visibility="{Binding Easy, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            </DataTemplate>
+                        </telerik:GridViewDataColumn.CellTemplate>
+                    </telerik:GridViewDataColumn>
+                    <telerik:GridViewDataColumn Header="N" Width="SizeToCells" DataMemberBinding="{Binding Normal}" IsFilterable="False">
+                        <telerik:GridViewDataColumn.CellTemplate>
+                            <DataTemplate>
+                                <telerik:RadGlyph Glyph="&#xe118;" Foreground="#FF018574" Visibility="{Binding Normal, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            </DataTemplate>
+                        </telerik:GridViewDataColumn.CellTemplate>
+                    </telerik:GridViewDataColumn>
+                    <telerik:GridViewDataColumn Header="H" Width="SizeToCells" DataMemberBinding="{Binding Hard}" IsFilterable="False">
+                        <telerik:GridViewDataColumn.CellTemplate>
+                            <DataTemplate>
+                                <telerik:RadGlyph Glyph="&#xe118;" Foreground="#FF018574" Visibility="{Binding Hard, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            </DataTemplate>
+                        </telerik:GridViewDataColumn.CellTemplate>
+                    </telerik:GridViewDataColumn>
+                    <telerik:GridViewDataColumn Header="Ex" Width="SizeToCells" DataMemberBinding="{Binding Expert}" IsFilterable="False">
+                        <telerik:GridViewDataColumn.CellTemplate>
+                            <DataTemplate>
+                                <telerik:RadGlyph Glyph="&#xe118;" Foreground="#FF018574" Visibility="{Binding Expert, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            </DataTemplate>
+                        </telerik:GridViewDataColumn.CellTemplate>
+                    </telerik:GridViewDataColumn>
+                    <telerik:GridViewDataColumn Header="Ex+" Width="Auto" DataMemberBinding="{Binding ExpertPlus}" IsFilterable="False">
+                        <telerik:GridViewDataColumn.CellTemplate>
+                            <DataTemplate>
+                                <telerik:RadGlyph Glyph="&#xe118;" Foreground="#FF018574" Visibility="{Binding ExpertPlus, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            </DataTemplate>
+                        </telerik:GridViewDataColumn.CellTemplate>
+                    </telerik:GridViewDataColumn>
+                    <telerik:GridViewDataColumn Header="Download Date" Width="SizeToCells" DataMemberBinding="{Binding ChangeDate, StringFormat='d', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
+                </telerik:RadGridView.Columns>
+            </telerik:RadGridView>
+            <!-- Entry counter -->
+            <TextBlock Grid.Row="1" Text="{Binding CustomLevelCount}" Margin="6" Foreground="White" />
+        </Grid>
+    </Grid>
+</UserControl>

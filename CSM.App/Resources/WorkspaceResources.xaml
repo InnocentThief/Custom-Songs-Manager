@@ -1,0 +1,29 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation">
+
+    <Style x:Key="WorkspaceAreaStyle" TargetType="Border">
+        <Setter Property="Margin" Value="3,0,6,6" />
+        <Setter Property="Background" Value="{telerik:Windows11Resource ResourceKey=PrimarySolidBackgroundBrush}" />
+        <Setter Property="BorderBrush" Value="{telerik:Windows11Resource ResourceKey=PrimarySolidBorderBrush}" />
+        <Setter Property="BorderThickness" Value="2" />
+        <!--<Setter Property="CornerRadius" Value="8" />-->
+    </Style>
+
+    <Style x:Key="WorkspaceHorizontalGridSplitterStyle" TargetType="{x:Type GridSplitter}">
+        <Setter Property="Background" Value="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" />
+        <Setter Property="Height" Value="3" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="ResizeBehavior" Value="PreviousAndNext" />
+        <Setter Property="ResizeDirection" Value="Rows" />
+    </Style>
+
+    <Style x:Key="WorkspaceVerticalGridSplitterStyle" TargetType="{x:Type GridSplitter}">
+        <Setter Property="Background" Value="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" />
+        <Setter Property="Width" Value="3" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="ResizeBehavior" Value="PreviousAndNext" />
+        <Setter Property="ResizeDirection" Value="Columns" />
+    </Style>
+
+</ResourceDictionary>

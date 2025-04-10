@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+                    xmlns:workspacesViewModels="clr-namespace:CSM.UiLogic.ViewModels.Workspaces;assembly=CSM.UiLogic"
+                    xmlns:workspaces="clr-namespace:CSM.App.Views.Workspaces">
+
+    <DataTemplate DataType="{x:Type workspacesViewModels:CustomLevelsWorkspaceViewModel}">
+        <workspaces:CustomLevelsWorkspace />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type workspacesViewModels:PlaylistsWorkspaceViewModel}">
+        <workspaces:PlaylistsWorkspace />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type workspacesViewModels:TwitchWorkspaceViewModel}">
+        <workspaces:TwitchWorkspace />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type workspacesViewModels:ScoreSaberWorkspaceViewModel}">
+        <workspaces:ScoreSaberWorkspace />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type workspacesViewModels:BeatLeaderWorkspaceViewModel}">
+        <workspaces:BeatLeaderWorkspace />
+    </DataTemplate>
+
+</ResourceDictionary>

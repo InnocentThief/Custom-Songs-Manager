@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CSM.DataAccess.Playlists.Playlist">
+    <Position X="2.5" Y="2" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAgAAAAEAQAAAAAQABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Playlists\Playlist.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CustomData" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Songs" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CSM.DataAccess.Playlists.Song">
+    <Position X="5.75" Y="4.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAIAAAwAAAAAAAAAABAAAAAEAAAAgAAAAAA=</HashCode>
+      <FileName>Playlists\Song.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CustomData" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Difficulties" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CSM.DataAccess.Playlists.Difficulty">
+    <Position X="9.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAEAAAAAAACAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Playlists\Difficulty.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSM.DataAccess.Playlists.PlaylistCustomData">
+    <Position X="5.75" Y="2" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAASAACAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Playlists\PlaylistCustomData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSM.DataAccess.Playlists.SongCustomData">
+    <Position X="9.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Playlists\SongCustomData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

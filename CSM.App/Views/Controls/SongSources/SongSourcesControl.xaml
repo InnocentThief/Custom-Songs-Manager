@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="CSM.App.Views.Controls.SongSources.SongSourcesControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:local="clr-namespace:CSM.App.Views.Controls.SongSources"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <DataTemplate x:Key="CustomLevelsDataTemplate">
+            <local:SongSourcesCustomLevelsControl />
+        </DataTemplate>
+
+        <DataTemplate x:Key="PlaylistsDataTemplate">
+            <local:SongSourcesPlaylistsControl />
+        </DataTemplate>
+
+        <DataTemplate x:Key="FavouritesDataTemplate">
+            <local:SongSourcesBeatSaberFavouritesControl />
+        </DataTemplate>
+
+        <DataTemplate x:Key="SearchDataTemplate">
+            <local:SongSourcesSongSearchControl />
+        </DataTemplate>
+
+        <DataTemplate x:Key="SongSuggestDataTemplate">
+            <local:SongSourcesSongSuggestControl />
+        </DataTemplate>
+
+        <local:SongSourceDataTemplateSelector x:Key="SongSourceDataTemplateSelector"
+                                              CustomLevelsDataTemplate="{StaticResource CustomLevelsDataTemplate}"
+                                              PlaylistsDataTemplate="{StaticResource PlaylistsDataTemplate}"
+                                              FavouritesDataTemplate="{StaticResource FavouritesDataTemplate}"
+                                              SearchDataTemplate="{StaticResource SearchDataTemplate}"
+                                              SongSuggestDataTemplate="{StaticResource SongSuggestDataTemplate}"/>
+
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <!-- Content -->
+        <ContentControl Content="{Binding SongSource}" ContentTemplateSelector="{StaticResource SongSourceDataTemplateSelector}" />
+
+        <!-- Navigation -->
+        <Grid Grid.Column="1" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}">
+            <StackPanel VerticalAlignment="Center" Margin="5,0,0,0">
+                <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsCustomLevelsSelected}" Padding="8" ToolTip="Custom Levels">
+                    <telerik:RadGlyph Glyph="&#xe023;" />
+                </telerik:RadRadioButton>
+                <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsPlaylistsSelected}" Padding="8" ToolTip="Playlists">
+                    <telerik:RadGlyph Glyph="&#xe029;" />
+                </telerik:RadRadioButton>
+                <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsFavouritesSelected}" Padding="8" ToolTip="Beat Saber Favourites">
+                    <telerik:RadGlyph Glyph="&#xe301;" />
+                </telerik:RadRadioButton>
+                <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsSearchSelected}" Padding="8" ToolTip="Search">
+                    <telerik:RadGlyph Glyph="&#xe13e;" />
+                </telerik:RadRadioButton>
+                <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsSongSuggestSelected}" Padding="8" ToolTip="Song Suggest">
+                    <telerik:RadGlyph Glyph="&#xe05f;" />
+                </telerik:RadRadioButton>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>
