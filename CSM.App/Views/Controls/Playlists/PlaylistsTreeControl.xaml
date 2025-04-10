@@ -74,6 +74,7 @@
             <!-- Content -->
             <telerik:RadTreeView 
                 Grid.Row="1"
+                IsVirtualizing="True"
                 ItemContainerStyle="{StaticResource ItemContainerStyle}"
                 ItemsIndent="10"
                 ItemTemplateSelector="{StaticResource PlaylistsTreeDataTemplateSelector}"

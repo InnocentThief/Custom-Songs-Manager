@@ -14,6 +14,7 @@ namespace CSM.App.Views.Controls.CustomLevels
 
         private async void RadGridView_SelectionChanged(object sender, Telerik.Windows.Controls.SelectionChangeEventArgs e)
         {
+            await Task.CompletedTask;
             //if (e.AddedItems.Count == 0) return;
             //var viewModel = DataContext as CustomLevelsViewModel;
             //if (viewModel?.SelectedCustomLevel != null)
