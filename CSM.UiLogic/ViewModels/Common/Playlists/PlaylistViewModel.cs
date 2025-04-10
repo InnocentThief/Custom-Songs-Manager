@@ -6,9 +6,9 @@ using System.Windows.Media;
 namespace CSM.UiLogic.ViewModels.Common.Playlists
 {
     internal sealed class PlaylistViewModel(
-        IServiceLocator serviceLocator, 
+        IServiceLocator serviceLocator,
         Playlist playlist,
-        string path) 
+        string path)
         : BasePlaylistViewModel(serviceLocator, playlist.PlaylistTitle, path)
     {
         private readonly Playlist playlist = playlist;

@@ -1,96 +1,95 @@
-﻿using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace CSM.DataAccess.BeatSaver
 {
     [JsonConverter(typeof(JsonStringEnumConverter))]
     internal enum Tag
     {
-        [EnumMember(Value = "tech")]
+        [JsonStringEnumMemberName("tech")]
         Tech,
-        [EnumMember(Value = "dance-style")]
+        [JsonStringEnumMemberName("dance-style")]
         DanceStyle,
-        [EnumMember(Value = "speed")]
+        [JsonStringEnumMemberName("speed")]
         Speed,
-        [EnumMember(Value = "balanced")]
+        [JsonStringEnumMemberName("balanced")]
         Balanced,
-        [EnumMember(Value = "challenge")]
+        [JsonStringEnumMemberName("challenge")]
         Challenge,
-        [EnumMember(Value = "accuracy")]
+        [JsonStringEnumMemberName("accuracy")]
         Accuracy,
-        [EnumMember(Value = "fitness")]
+        [JsonStringEnumMemberName("fitness")]
         Fitness,
-        [EnumMember(Value = "swing")]
+        [JsonStringEnumMemberName("swing")]
         Swing,
-        [EnumMember(Value = "nightcore")]
+        [JsonStringEnumMemberName("nightcore")]
         Nightcore,
-        [EnumMember(Value = "folk-acoustic")]
+        [JsonStringEnumMemberName("folk-acoustic")]
         FolkAccoustic,
-        [EnumMember(Value = "kids-family")]
+        [JsonStringEnumMemberName("kids-family")]
         KidsFamily,
-        [EnumMember(Value = "ambient")]
+        [JsonStringEnumMemberName("ambient")]
         Ambient,
-        [EnumMember(Value = "funk-disco")]
+        [JsonStringEnumMemberName("funk-disco")]
         FunkDisco,
-        [EnumMember(Value = "jazz")]
+        [JsonStringEnumMemberName("jazz")]
         Jazz,
-        [EnumMember(Value = "classical-orchestral")]
+        [JsonStringEnumMemberName("classical-orchestral")]
         ClassicalOrchestral,
-        [EnumMember(Value = "soul")]
+        [JsonStringEnumMemberName("soul")]
         Soul,
-        [EnumMember(Value = "speedcore")]
+        [JsonStringEnumMemberName("speedcore")]
         Speedcore,
-        [EnumMember(Value = "punk")]
+        [JsonStringEnumMemberName("punk")]
         Punk,
-        [EnumMember(Value = "rb")]
+        [JsonStringEnumMemberName("rb")]
         Rb,
-        [EnumMember(Value = "holiday")]
+        [JsonStringEnumMemberName("holiday")]
         Holiday,
-        [EnumMember(Value = "vocaloid")]
+        [JsonStringEnumMemberName("vocaloid")]
         Vocaloid,
-        [EnumMember(Value = "j-rock")]
+        [JsonStringEnumMemberName("j-rock")]
         JRock,
-        [EnumMember(Value = "trance")]
+        [JsonStringEnumMemberName("trance")]
         Trance,
-        [EnumMember(Value = "drum-and-bass")]
+        [JsonStringEnumMemberName("drum-and-bass")]
         DrumAndBass,
-        [EnumMember(Value = "comedy-meme")]
+        [JsonStringEnumMemberName("comedy-meme")]
         ComedyMeme,
-        [EnumMember(Value = "instrumental")]
+        [JsonStringEnumMemberName("instrumental")]
         Instrumental,
-        [EnumMember(Value = "hardcore")]
+        [JsonStringEnumMemberName("hardcore")]
         Hardcore,
-        [EnumMember(Value = "k-pop")]
+        [JsonStringEnumMemberName("k-pop")]
         KPop,
-        [EnumMember(Value = "indie")]
+        [JsonStringEnumMemberName("indie")]
         Indie,
-        [EnumMember(Value = "techno")]
+        [JsonStringEnumMemberName("techno")]
         Techno,
-        [EnumMember(Value = "house")]
+        [JsonStringEnumMemberName("house")]
         House,
-        [EnumMember(Value = "video-game-soundtrack")]
+        [JsonStringEnumMemberName("video-game-soundtrack")]
         VideoGameSoundtrack,
-        [EnumMember(Value = "tv-movie-soundtrack")]
+        [JsonStringEnumMemberName("tv-movie-soundtrack")]
         TvMovieSoundtrack,
-        [EnumMember(Value = "alternative")]
+        [JsonStringEnumMemberName("alternative")]
         Alternative,
-        [EnumMember(Value = "dubstep")]
+        [JsonStringEnumMemberName("dubstep")]
         Dubstep,
-        [EnumMember(Value = "metal")]
+        [JsonStringEnumMemberName("metal")]
         Metal,
-        [EnumMember(Value = "anime")]
+        [JsonStringEnumMemberName("anime")]
         Anime,
-        [EnumMember(Value = "hip-hop-rap")]
+        [JsonStringEnumMemberName("hip-hop-rap")]
         HipHopRap,
-        [EnumMember(Value = "j-pop")]
+        [JsonStringEnumMemberName("j-pop")]
         JPop,
-        [EnumMember(Value = "dance")]
+        [JsonStringEnumMemberName("dance")]
         Dance,
-        [EnumMember(Value = "rock")]
+        [JsonStringEnumMemberName("rock")]
         Rock,
-        [EnumMember(Value = "pop")]
+        [JsonStringEnumMemberName("pop")]
         Pop,
-        [EnumMember(Value = "electronic")]
+        [JsonStringEnumMemberName("electronic")]
         Electronic,
     }
 }

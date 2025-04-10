@@ -2,7 +2,7 @@
 
 namespace CSM.DataAccess.Playlists
 {
-   internal class Song
+    internal class Song
     {
         [JsonPropertyName("key")]
         public string? Key { get; set; }

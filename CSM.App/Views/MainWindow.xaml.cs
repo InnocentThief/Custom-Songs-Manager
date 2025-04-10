@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-namespace CSM.App.Views
+﻿namespace CSM.App.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

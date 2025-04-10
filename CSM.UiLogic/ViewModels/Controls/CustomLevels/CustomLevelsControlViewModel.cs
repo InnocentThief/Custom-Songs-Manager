@@ -49,7 +49,7 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
                     continue;
 
                 var content = await File.ReadAllTextAsync(infoFile);
-                
+
                 try
                 {
                     var bsrKey = directoryInfo.Name[..directoryInfo.Name.IndexOf(' ')];
@@ -57,7 +57,7 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
 
                     if (content.Contains("_version"))
                     {
-                       var customLevel = JsonSerializer.Deserialize<InfoV2>(content);
+                        var customLevel = JsonSerializer.Deserialize<InfoV2>(content);
                         if (customLevel == null)
                             continue;
                         retval.Add(new CustomLevelV2ViewModel(ServiceLocator, customLevel, directory, bsrKey, lastWriteTime));

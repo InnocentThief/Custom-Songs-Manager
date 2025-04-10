@@ -3,7 +3,7 @@ using System.Windows.Media.Imaging;
 
 namespace CSM.UiLogic.Converter
 {
-   internal static class ImageConverter
+    internal static class ImageConverter
     {
         public static BitmapSource BitmapFromBase64(string b64string)
         {

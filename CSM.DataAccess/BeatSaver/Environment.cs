@@ -1,98 +1,97 @@
-﻿using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace CSM.DataAccess.BeatSaver
 {
     [JsonConverter(typeof(JsonStringEnumConverter))]
     internal enum Environment
     {
-        [EnumMember(Value = "DefaultEnvironment")]
+        [JsonStringEnumMemberName("DefaultEnvironment")]
         DefaultEnvironment,
-        [EnumMember(Value = "TriangleEnvironment")]
+        [JsonStringEnumMemberName("TriangleEnvironment")]
         TriangleEnvironment,
-        [EnumMember(Value = "NiceEnvironment")]
+        [JsonStringEnumMemberName("NiceEnvironment")]
         NiceEnvironment,
-        [EnumMember(Value = "BigMirrorEnvironment")]
+        [JsonStringEnumMemberName("BigMirrorEnvironment")]
         BigMirrorEnvironment,
-        [EnumMember(Value = "KDAEnvironment")]
+        [JsonStringEnumMemberName("KDAEnvironment")]
         KDAEnvironment,
-        [EnumMember(Value = "MonstercatEnvironment")]
+        [JsonStringEnumMemberName("MonstercatEnvironment")]
         MonstercatEnvironment,
-        [EnumMember(Value = "CrabRaveEnvironment")]
+        [JsonStringEnumMemberName("CrabRaveEnvironment")]
         CrabRaveEnvironment,
-        [EnumMember(Value = "DragonsEnvironment")]
+        [JsonStringEnumMemberName("DragonsEnvironment")]
         DragonsEnvironment,
-        [EnumMember(Value = "OriginsEnvironment")]
+        [JsonStringEnumMemberName("OriginsEnvironment")]
         OriginsEnvironment,
-        [EnumMember(Value = "PanicEnvironment")]
+        [JsonStringEnumMemberName("PanicEnvironment")]
         PanicEnvironment,
-        [EnumMember(Value = "RocketEnvironment")]
+        [JsonStringEnumMemberName("RocketEnvironment")]
         RocketEnvironment,
-        [EnumMember(Value = "GreenDayEnvironment")]
+        [JsonStringEnumMemberName("GreenDayEnvironment")]
         GreenDayEnvironment,
-        [EnumMember(Value = "GreenDayGrenadeEnvironment")]
+        [JsonStringEnumMemberName("GreenDayGrenadeEnvironment")]
         GreenDayGrenadeEnvironment,
-        [EnumMember(Value = "TimbalandEnvironment")]
+        [JsonStringEnumMemberName("TimbalandEnvironment")]
         TimbalandEnvironment,
-        [EnumMember(Value = "FitBeatEnvironment")]
+        [JsonStringEnumMemberName("FitBeatEnvironment")]
         FitBeatEnvironment,
-        [EnumMember(Value = "LinkinParkEnvironment")]
+        [JsonStringEnumMemberName("LinkinParkEnvironment")]
         LinkinParkEnvironment,
-        [EnumMember(Value = "BTSEnvironment")]
+        [JsonStringEnumMemberName("BTSEnvironment")]
         BTSEnvironment,
-        [EnumMember(Value = "KaleidoscopeEnvironment")]
+        [JsonStringEnumMemberName("KaleidoscopeEnvironment")]
         KaleidoscopeEnvironment,
-        [EnumMember(Value = "InterscopeEnvironment")]
+        [JsonStringEnumMemberName("InterscopeEnvironment")]
         InterscopeEnvironment,
-        [EnumMember(Value = "SkrillexEnvironment")]
+        [JsonStringEnumMemberName("SkrillexEnvironment")]
         SkrillexEnvironment,
-        [EnumMember(Value = "BillieEnvironment")]
+        [JsonStringEnumMemberName("BillieEnvironment")]
         BillieEnvironment,
-        [EnumMember(Value = "HalloweenEnvironment")]
+        [JsonStringEnumMemberName("HalloweenEnvironment")]
         HalloweenEnvironment,
-        [EnumMember(Value = "GagaEnvironment")]
+        [JsonStringEnumMemberName("GagaEnvironment")]
         GagaEnvironment,
-        [EnumMember(Value = "GlassDesertEnvironment")]
+        [JsonStringEnumMemberName("GlassDesertEnvironment")]
         GlassDesertEnvironment,
-        [EnumMember(Value = "MultiplayerEnvironment")]
+        [JsonStringEnumMemberName("MultiplayerEnvironment")]
         MultiplayerEnvironment,
-        [EnumMember(Value = "WeaveEnvironment")]
+        [JsonStringEnumMemberName("WeaveEnvironment")]
         WeaveEnvironment,
-        [EnumMember(Value = "PyroEnvironment")]
+        [JsonStringEnumMemberName("PyroEnvironment")]
         PyroEnvironment,
-        [EnumMember(Value = "EDMEnvironment")]
+        [JsonStringEnumMemberName("EDMEnvironment")]
         EDMEnvironment,
-        [EnumMember(Value = "TheSecondEnvironment")]
+        [JsonStringEnumMemberName("TheSecondEnvironment")]
         TheSecondEnvironment,
-        [EnumMember(Value = "LizzoEnvironment")]
+        [JsonStringEnumMemberName("LizzoEnvironment")]
         LizzoEnvironment,
-        [EnumMember(Value = "TheWeekndEnvironment")]
+        [JsonStringEnumMemberName("TheWeekndEnvironment")]
         TheWeekndEnvironment,
-        [EnumMember(Value = "RockMixtapeEnvironment")]
+        [JsonStringEnumMemberName("RockMixtapeEnvironment")]
         RockMixtapeEnvironment,
-        [EnumMember(Value = "Dragons2Environment")]
+        [JsonStringEnumMemberName("Dragons2Environment")]
         Dragons2Environment,
-        [EnumMember(Value = "Panic2Environment")]
+        [JsonStringEnumMemberName("Panic2Environment")]
         Panic2Environment,
-        [EnumMember(Value = "QueenEnvironment")]
+        [JsonStringEnumMemberName("QueenEnvironment")]
         QueenEnvironment,
-        [EnumMember(Value = "LinkinPark2Environment")]
+        [JsonStringEnumMemberName("LinkinPark2Environment")]
         LinkinPark2Environment,
-        [EnumMember(Value = "TheRollingStonesEnvironment")]
+        [JsonStringEnumMemberName("TheRollingStonesEnvironment")]
         TheRollingStonesEnvironment,
-        [EnumMember(Value = "LatticeEnvironment")]
+        [JsonStringEnumMemberName("LatticeEnvironment")]
         LatticeEnvironment,
-        [EnumMember(Value = "DaftPunkEnvironment")]
+        [JsonStringEnumMemberName("DaftPunkEnvironment")]
         DaftPunkEnvironment,
-        [EnumMember(Value = "HipHopEnvironment")]
+        [JsonStringEnumMemberName("HipHopEnvironment")]
         HipHopEnvironment,
-        [EnumMember(Value = "ColliderEnvironment")]
+        [JsonStringEnumMemberName("ColliderEnvironment")]
         ColliderEnvironment,
-        [EnumMember(Value = "BritneyEnvironment")]
+        [JsonStringEnumMemberName("BritneyEnvironment")]
         BritneyEnvironment,
-        [EnumMember(Value = "Monstercat2Environment")]
+        [JsonStringEnumMemberName("Monstercat2Environment")]
         Monstercat2Environment,
-        [EnumMember(Value = "MetallicaEnvironment")]
+        [JsonStringEnumMemberName("MetallicaEnvironment")]
         MetallicaEnvironment
     }
 }

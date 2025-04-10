@@ -1,5 +1,4 @@
-﻿using CSM.Framework;
-using CSM.Framework.Types;
+﻿using CSM.Framework.Types;
 using CSM.UiLogic.ViewModels.Workspaces;
 
 namespace CSM.UiLogic.ViewModels.Navigation

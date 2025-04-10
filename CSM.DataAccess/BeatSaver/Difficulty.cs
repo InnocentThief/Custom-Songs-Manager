@@ -1,20 +1,19 @@
-﻿using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace CSM.DataAccess.BeatSaver
 {
     [JsonConverter(typeof(JsonStringEnumConverter))]
     internal enum Difficulty
     {
-        [EnumMember(Value = "Easy")]
+        [JsonStringEnumMemberName("Easy")]
         Easy = 1,
-        [EnumMember(Value = "Normal")]
+        [JsonStringEnumMemberName("Normal")]
         Normal = 3,
-        [EnumMember(Value = "Hard")]
+        [JsonStringEnumMemberName("Hard")]
         Hard = 5,
-        [EnumMember(Value = "Expert")]
+        [JsonStringEnumMemberName("Expert")]
         Expert = 7,
-        [EnumMember(Value = "ExpertPlus")]
+        [JsonStringEnumMemberName("ExpertPlus")]
         ExpertPlus = 9,
     }
 }

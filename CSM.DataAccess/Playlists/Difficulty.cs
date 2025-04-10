@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace CSM.DataAccess.Playlists
 {
-  internal  class Difficulty
+    internal class Difficulty
     {
         [JsonPropertyName("characteristic")]
         public Characteristic Characteristic { get; set; }

@@ -4,7 +4,7 @@ using System.Windows.Controls;
 
 namespace CSM.App.Views.Controls.Playlists
 {
-   internal class PlaylistsTreeDataTemplateSelector: DataTemplateSelector
+    internal class PlaylistsTreeDataTemplateSelector : DataTemplateSelector
     {
         public HierarchicalDataTemplate FolderTemplate { get; set; } = null!;
         public DataTemplate PlaylistTemplate { get; set; } = null!;

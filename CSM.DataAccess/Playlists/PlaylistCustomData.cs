@@ -2,7 +2,7 @@
 
 namespace CSM.DataAccess.Playlists
 {
-   internal class PlaylistCustomData
+    internal class PlaylistCustomData
     {
         [JsonPropertyName("syncURL")]
         public string SyncURL { get; set; } = string.Empty;

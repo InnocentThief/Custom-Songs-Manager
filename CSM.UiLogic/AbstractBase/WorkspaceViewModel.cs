@@ -1,5 +1,4 @@
-﻿using CSM.Framework;
-using CSM.Framework.ServiceLocation;
+﻿using CSM.Framework.ServiceLocation;
 
 namespace CSM.UiLogic.AbstractBase
 {

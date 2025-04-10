@@ -2,8 +2,8 @@
 
 namespace CSM.UiLogic.Commands
 {
-   internal interface IRelayCommand: ICommand
+    internal interface IRelayCommand : ICommand
     {
-       void RaiseCanExecuteChanged();
+        void RaiseCanExecuteChanged();
     }
 }

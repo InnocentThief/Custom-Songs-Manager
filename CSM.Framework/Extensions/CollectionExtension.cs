@@ -1,6 +1,6 @@
 ﻿namespace CSM.Framework.Extensions
 {
-   internal static class CollectionExtension
+    internal static class CollectionExtension
     {
         public static ICollection<TSource>? AddRange<TSource>(this ICollection<TSource>? collection, IEnumerable<TSource> elements)
         {

@@ -2,7 +2,7 @@
 
 namespace CSM.DataAccess.CustomLevels
 {
-    internal class InfoV2: InfoBase
+    internal class InfoV2 : InfoBase
     {
         [JsonPropertyName("_version")]
         public string Version { get; set; } = string.Empty;

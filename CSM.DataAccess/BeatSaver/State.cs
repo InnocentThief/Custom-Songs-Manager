@@ -1,20 +1,19 @@
-﻿using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace CSM.DataAccess.BeatSaver
 {
     [JsonConverter(typeof(JsonStringEnumConverter))]
     internal enum State
     {
-        [EnumMember(Value = "Uploaded")]
+        [JsonStringEnumMemberName("Uploaded")]
         Uploaded,
-        [EnumMember(Value = "Testplay")]
+        [JsonStringEnumMemberName("Testplay")]
         Testplay,
-        [EnumMember(Value = "Published")]
+        [JsonStringEnumMemberName("Published")]
         Published,
-        [EnumMember(Value = "Feedback")]
+        [JsonStringEnumMemberName("Feedback")]
         Feedback,
-        [EnumMember(Value = "Scheduled")]
+        [JsonStringEnumMemberName("Scheduled")]
         Scheduled,
     }
 }

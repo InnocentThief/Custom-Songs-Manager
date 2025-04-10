@@ -9,13 +9,13 @@ namespace CSM.UiLogic.ViewModels.Workspaces
     {
         public override string Title => "Custom Songs Manager - Playlists";
 
-        public PlaylistTreeControlViewModel PlaylistsTree { get; } 
+        public PlaylistTreeControlViewModel PlaylistsTree { get; }
 
         public SongSourcesControlViewModel SongSources { get; }
 
         public PlaylistsWorkspaceViewModel(IServiceLocator serviceLocator) : base(serviceLocator)
         {
-           PlaylistsTree = new PlaylistTreeControlViewModel(ServiceLocator);
+            PlaylistsTree = new PlaylistTreeControlViewModel(ServiceLocator);
             SongSources = new SongSourcesControlViewModel(ServiceLocator);
         }
 
@@ -46,7 +46,7 @@ namespace CSM.UiLogic.ViewModels.Workspaces
         //    foreach (var directory in directories)
         //    {
         //        var playlistFolder = new PlaylistFolderViewModel(ServiceLocator, directory);
-                
+
 
 
         //        var subDirectories = await Task.WhenAll(loadSubDirectoriesTasks);
@@ -60,7 +60,7 @@ namespace CSM.UiLogic.ViewModels.Workspaces
         //            Playlists.Add(playlistFolder);
         //        }
         //    }
-             
+
         //    Playlists.AddRange(subDirectories);
 
         //    var files = Directory.GetFiles(path);
@@ -72,7 +72,7 @@ namespace CSM.UiLogic.ViewModels.Workspaces
         //    return playlists;
         //}
 
-        
+
 
         #endregion
     }

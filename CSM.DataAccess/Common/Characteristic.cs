@@ -1,26 +1,25 @@
-﻿using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace CSM.DataAccess.Common
 {
     [JsonConverter(typeof(JsonStringEnumConverter))]
     internal enum Characteristic
     {
-        [EnumMember(Value = "Standard")]
+        [JsonStringEnumMemberName("Standard")]
         Standard,
-        [EnumMember(Value = "OneSaber")]
+        [JsonStringEnumMemberName("OneSaber")]
         OneSaber,
-        [EnumMember(Value = "NoArrows")]
+        [JsonStringEnumMemberName("NoArrows")]
         NoArrows,
-        [EnumMember(Value = "90Degree")]
+        [JsonStringEnumMemberName("90Degree")]
         Degree90,
-        [EnumMember(Value = "360Degree")]
+        [JsonStringEnumMemberName("360Degree")]
         Degree360,
-        [EnumMember(Value = "Lightshow")]
+        [JsonStringEnumMemberName("Lightshow")]
         Lightshow,
-        [EnumMember(Value = "Lawless")]
+        [JsonStringEnumMemberName("Lawless")]
         Lawless,
-        [EnumMember(Value = "Legacy")]
+        [JsonStringEnumMemberName("Legacy")]
         Legacy
     }
 }

@@ -1,18 +1,17 @@
-﻿using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace CSM.DataAccess.BeatSaver
 {
     [JsonConverter(typeof(JsonStringEnumConverter))]
     internal enum DeclaredAi
     {
-        [EnumMember(Value = "Admin")]
+        [JsonStringEnumMemberName("Admin")]
         Admin,
-        [EnumMember(Value = "Uploader")]
+        [JsonStringEnumMemberName("Uploader")]
         Uploader,
-        [EnumMember(Value = "SageScore")]
+        [JsonStringEnumMemberName("SageScore")]
         SageScore,
-        [EnumMember(Value = "None")]
+        [JsonStringEnumMemberName("None")]
         None
     }
 }

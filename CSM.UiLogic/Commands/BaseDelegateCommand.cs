@@ -1,6 +1,6 @@
 ﻿namespace CSM.UiLogic.Commands
 {
-   internal abstract class BaseDelegateCommand : IRelayCommand
+    internal abstract class BaseDelegateCommand : IRelayCommand
     {
         private readonly Func<object?, Task> executeMethod;
         private readonly Predicate<object?> canExecuteMethod;
