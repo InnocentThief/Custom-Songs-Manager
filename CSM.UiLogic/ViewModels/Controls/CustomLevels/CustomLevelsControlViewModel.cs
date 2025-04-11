@@ -16,6 +16,8 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
 
         public ObservableCollection<ICustomLevelViewModel> CustomLevels { get; } = [];
 
+        public string CustomLevelCount => $"{CustomLevels.Count} custom levels loaded";
+
         public async Task LoadAsync(bool refresh)
         {
             if (CustomLevels.Count > 0 && !refresh)
@@ -29,6 +31,7 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
             if (!Path.Exists(path))
                 return;
             CustomLevels.AddRange(await LoadCustomLevelsAsync(path));
+            OnPropertyChanged(nameof(CustomLevelCount));
 
             LoadingInProgress = false;
         }
@@ -71,7 +74,7 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
                         retval.Add(new CustomLevelV4ViewModel(ServiceLocator, customLevel, directory, bsrKey, lastWriteTime));
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     // todo Log error
                     continue;

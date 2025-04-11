@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace CSM.DataAccess.BeatSaver
+namespace CSM.DataAccess.Common
 {
     [JsonConverter(typeof(JsonStringEnumConverter))]
     internal enum Difficulty

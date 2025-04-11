@@ -21,7 +21,7 @@
                     <RowDefinition Height="3" />
                     <RowDefinition Height="200" MinHeight="50" />
                 </Grid.RowDefinitions>
-                <customlevels:CustomLevelsControl />
+                <customlevels:CustomLevelsControl DataContext="{Binding CustomLevelsControl}" />
                 <GridSplitter Grid.Row="1" Style="{StaticResource WorkspaceHorizontalGridSplitterStyle}" VerticalAlignment="Center" />
                 <Grid Grid.Row="2">
                     

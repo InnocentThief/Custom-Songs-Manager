@@ -17,7 +17,7 @@ namespace CSM.DataAccess.CustomLevels
         public string SongAuthorName { get; set; } = string.Empty;
 
         [JsonPropertyName("_beatsPerMinute")]
-        public int BeatsPerMinute { get; set; }
+        public double BeatsPerMinute { get; set; }
 
         [JsonPropertyName("_coverImageFilename")]
         public string CoverImageFilename { get; set; } = string.Empty;

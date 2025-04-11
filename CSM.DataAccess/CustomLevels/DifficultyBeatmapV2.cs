@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using CSM.DataAccess.Common;
+using System.Text.Json.Serialization;
 
 namespace CSM.DataAccess.CustomLevels
 {

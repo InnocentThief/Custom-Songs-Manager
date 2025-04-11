@@ -8,16 +8,16 @@ namespace CSM.UiLogic.ViewModels.Workspaces
     {
         public override string Title => "Custom Songs Manager - Custom Levels";
 
-        public CustomLevelsControlViewModel CustomLevels { get; }
+        public CustomLevelsControlViewModel CustomLevelsControl { get; }
 
         public CustomLevelsWorkspaceViewModel(IServiceLocator serviceLocator) : base(serviceLocator)
         {
-            CustomLevels = new CustomLevelsControlViewModel(ServiceLocator);
+            CustomLevelsControl = new CustomLevelsControlViewModel(ServiceLocator);
         }
 
         public override async Task ActivateAsync(bool refresh)
         {
-            await CustomLevels.LoadAsync(refresh);
+            await CustomLevelsControl.LoadAsync(refresh);
         }
     }
 }

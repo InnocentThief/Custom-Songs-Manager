@@ -8,6 +8,6 @@ namespace CSM.DataAccess.CustomLevels
         public int Duration { get; set; }
 
         [JsonPropertyName("bpm")]
-        public int Bpm { get; set; }
+        public double Bpm { get; set; }
     }
 }

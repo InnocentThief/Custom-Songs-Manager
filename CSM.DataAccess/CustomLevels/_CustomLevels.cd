@@ -73,11 +73,11 @@
       <FileName>Common\Characteristic.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="CSM.DataAccess.CustomLevels.Difficulty">
+  <Enum Name="CSM.DataAccess.Common.Difficulty">
     <Position X="15.25" Y="6" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACAAAAAAAAABAAAAAAAIAAAAAAAAAAAoAAA=</HashCode>
-      <FileName>CustomLevels\Difficulty.cs</FileName>
+      <FileName>Common\Difficulty.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />
