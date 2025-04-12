@@ -3,6 +3,7 @@ using CSM.App.Views;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.Services;
 using CSM.UiLogic.ViewModels;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -82,8 +83,13 @@ namespace CSM.App
             ServiceLocator = new ServiceLocator();
             userInteraction = new UserInteraction(ServiceLocator);
             IHost host = Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration(config =>
+                {
+                    config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                })
                 .ConfigureServices((ctx, services) =>
                 {
+                   
                     services
                     //.AddLogging(logging =>
                     //{
