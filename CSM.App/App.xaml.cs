@@ -83,10 +83,10 @@ namespace CSM.App
             ServiceLocator = new ServiceLocator();
             userInteraction = new UserInteraction(ServiceLocator);
             IHost host = Host.CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration(config =>
-                {
-                    config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-                })
+                //.ConfigureAppConfiguration(config =>
+                //{
+                //    config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                //})
                 .ConfigureServices((ctx, services) =>
                 {
                    
