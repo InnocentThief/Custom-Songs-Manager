@@ -31,7 +31,16 @@ namespace CSM.Business.Core
                 var config = File.ReadAllText(userConfigPath);
                 if (config != null)
                 {
-                    userConfig = JsonSerializer.Deserialize<UserConfig>(config);
+                    try
+                    {
+                        userConfig = JsonSerializer.Deserialize<UserConfig>(config);
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
+
                     CheckForMissingSettingValues();
                 }
                 else
@@ -62,29 +71,43 @@ namespace CSM.Business.Core
         {
             return new UserConfig()
             {
+                DefaultWorkspace = NavigationType.CustomLevels,
                 BeatSaberInstallPath = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Beat Saber",
                 BeatSaverAPIEndpoint = "https://api.beatsaver.com/",
-                CustomLevelPaths =
-                [
-                    new CustomLevelPath()
+                CustomLevelsConfig = new CustomLevelsConfig()
+                {
+                    Available = true,
+                    CustomLevelPath = new CustomLevelPath()
                     {
                         Default = true,
                         Path = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Beat Saber\\Beat Saber_Data\\CustomLevels",
                         Name = "Default Custom Levels Path"
-                    }
-                ],
-                PlaylistPaths =
-                [
-                    new PlaylistPath()
+                    },
+                    SongDetailPosition = SongDetailPosition.Right,
+                },
+                PlaylistsConfig = new PlaylistsConfig()
+                {
+                    Available = true,
+                    PlaylistPath = new PlaylistPath()
                     {
                         Default = true,
                         Path = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Beat Saber\\Playlists",
                         Name = "Default Playlists Path"
-                    }
-                ],
-                DefaultWorkspace = NavigationType.CustomLevels,
-                CustomLevelsSongDetailPosition = SongDetailPosition.Right,
-                RemoveReceivedSongAfterAddingToPlaylist = false,
+                    },
+                },
+                TwitchConfig = new TwitchConfig()
+                {
+                    Available = true,
+                    RemoveReceivedSongAfterAddingToPlaylist = false,
+                },
+                ScoreSaberConfig = new ScoreSaberConfig()
+                {
+                    Available = true,
+                },
+                BeatLeaderConfig = new BeatLeaderConfig()
+                {
+                    Available = true,
+                }
             };
         }
 

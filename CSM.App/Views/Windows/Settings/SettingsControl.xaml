@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="CSM.App.Views.Windows.Settings.SettingsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CSM.App.Views.Windows.Settings"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" 
+             mc:Ignorable="d" 
+             d:DesignHeight="450" Width="600">
+    <Grid>
+        <telerik:RadTabControl Align="Justify" Background="Transparent" BorderThickness="0" Height="200" HeaderBackground="Transparent">
+            <telerik:RadTabItem Header="General">
+                <local:GeneralSettingsControl DataContext="{Binding GeneralSettings}" />
+            </telerik:RadTabItem>
+            <telerik:RadTabItem Header="Custom Levels">
+                <local:CustomLevelsSettingsControl DataContext="{Binding CustomLevelsSettings}" />
+            </telerik:RadTabItem>
+            <telerik:RadTabItem Header="Playlists">
+                <local:PlaylistsSettingsControl DataContext="{Binding PlaylistsSettings}" />
+            </telerik:RadTabItem>
+            <telerik:RadTabItem Header="Twitch">
+                <local:TwitchSettingsControl DataContext="{Binding TwitchSettings}" />
+            </telerik:RadTabItem>
+            <telerik:RadTabItem Header="ScoreSaber">
+                <local:ScoreSaberSettingsControl DataContext="{Binding ScoreSaberSettings}" />
+            </telerik:RadTabItem>
+            <telerik:RadTabItem Header="BeatLeader">
+                <local:BeatLeaderSettingsControl DataContext="{Binding BeatLeaderSettings}" />
+            </telerik:RadTabItem>
+        </telerik:RadTabControl>
+    </Grid>
+</UserControl>

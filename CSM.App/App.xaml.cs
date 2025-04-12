@@ -1,8 +1,13 @@
-﻿using CSM.App.Views;
+﻿using CSM.App.Services;
+using CSM.App.Views;
 using CSM.Framework.ServiceLocation;
+using CSM.UiLogic.Services;
 using CSM.UiLogic.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using RestoreWindowPlace;
+using System.IO;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Threading;
@@ -19,14 +24,22 @@ namespace CSM.App
 
         private IHost? host;
         private MainWindowViewModel? mainWindowViewModel;
+        private IUserInteraction? userInteraction;
 
         #endregion
+
+        public WindowPlace WindowPlace { get; }
 
         internal IServiceLocator? ServiceLocator { get; private set; }
 
         public App()
         {
             SetStyle();
+
+            WindowPlace = new WindowPlace(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Custom Songs Manager", "placement.config"))
+            {
+                IsSavingSnappedPositionEnabled = true
+            };
 
             Current.DispatcherUnhandledException += CurrentDispatcherUnhandledException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomainUnhandledException;
@@ -56,15 +69,28 @@ namespace CSM.App
             }
         }
 
+        protected override void OnExit(ExitEventArgs e)
+        {
+            base.OnExit(e);
+            WindowPlace.Save();
+        }
+
         #region Helper methods
 
         private IHost SetupHost(string[] args)
         {
             ServiceLocator = new ServiceLocator();
+            userInteraction = new UserInteraction(ServiceLocator);
             IHost host = Host.CreateDefaultBuilder(args)
                 .ConfigureServices((ctx, services) =>
                 {
                     services
+                    //.AddLogging(logging =>
+                    //{
+                    //    logging.ClearProviders();
+                    //    logging.AddFile(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Custom Songs Manager", "csm.log"));
+                    //})
+                    .AddSingleton(userInteraction)
                     .ConfigureServices(ctx.Configuration, ServiceLocator);
                 })
                 .Build();

@@ -1,5 +1,6 @@
 ﻿using CSM.Business.Interfaces;
 using CSM.DataAccess.Playlists;
+using CSM.DataAccess.UserConfiguration;
 using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
@@ -66,7 +67,7 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
             LoadingInProgress = true;
 
             Playlists.Clear();
-            var path = userConfigDomain?.Config?.PlaylistPaths.First().Path;
+            var path = userConfigDomain?.Config?.PlaylistsConfig.PlaylistPath.Path;
             if (string.IsNullOrEmpty(path))
                 return;
             if (!Path.Exists(path))
@@ -108,7 +109,7 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
         private void AddFolder()
         {
             var selectedFolderViewModel = selectedPlaylist as PlaylistFolderViewModel;
-            var currentFolder = selectedFolderViewModel?.Path ?? userConfigDomain.Config?.PlaylistPaths.First().Path;
+            var currentFolder = selectedFolderViewModel?.Path ?? userConfigDomain.Config?.PlaylistsConfig.PlaylistPath.Path;
 
 
         }

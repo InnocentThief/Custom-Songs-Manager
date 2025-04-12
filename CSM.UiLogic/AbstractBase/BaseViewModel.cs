@@ -1,5 +1,6 @@
 ﻿using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.Commands;
+using CSM.UiLogic.Services;
 
 namespace CSM.UiLogic.AbstractBase
 {
@@ -23,10 +24,13 @@ namespace CSM.UiLogic.AbstractBase
 
         protected IServiceLocator ServiceLocator { get; }
 
+        protected IUserInteraction UserInteraction { get; }
+
         protected BaseViewModel(IServiceLocator serviceLocator)
         {
             ServiceLocator = serviceLocator;
             CommandFactory = ServiceLocator.GetService<ICommandFactory>();
+            UserInteraction = ServiceLocator.GetService<IUserInteraction>();
         }
     }
 }

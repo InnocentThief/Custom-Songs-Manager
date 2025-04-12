@@ -1,4 +1,6 @@
-﻿namespace CSM.App.Views
+﻿using System.Windows;
+
+namespace CSM.App.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -13,6 +15,7 @@
         public MainWindow()
         {
             InitializeComponent();
+            ((App)Application.Current).WindowPlace.Register(this);
         }
     }
 }

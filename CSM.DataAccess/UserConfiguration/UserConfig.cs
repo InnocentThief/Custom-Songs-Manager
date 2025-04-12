@@ -2,14 +2,15 @@
 
 namespace CSM.DataAccess.UserConfiguration
 {
-    public class UserConfig
+    internal class UserConfig
     {
         public string BeatSaberInstallPath { get; set; } = string.Empty;
         public string BeatSaverAPIEndpoint { get; set; } = string.Empty;
-        public List<CustomLevelPath> CustomLevelPaths { get; set; } = [];
-        public bool RemoveReceivedSongAfterAddingToPlaylist { get; set; }
-        public List<PlaylistPath> PlaylistPaths { get; set; } = [];
         public NavigationType DefaultWorkspace { get; set; }
-        public SongDetailPosition CustomLevelsSongDetailPosition { get; set; }
+        public CustomLevelsConfig CustomLevelsConfig { get; set; } = new();
+        public PlaylistsConfig PlaylistsConfig { get; set; } = new();
+        public TwitchConfig TwitchConfig { get; set; } = new();
+        public ScoreSaberConfig ScoreSaberConfig { get; set; } = new();
+        public BeatLeaderConfig BeatLeaderConfig { get; set; } = new();
     }
 }

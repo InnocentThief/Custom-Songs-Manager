@@ -9,7 +9,7 @@
         Title="MainWindow"
                          ResizeMode="CanResizeWithGrip"
                          Icon="/CSM.ico"
-                         Height="450" Width="800" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}">
+                          Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}">
 
     <Grid>
         <Grid.ColumnDefinitions>

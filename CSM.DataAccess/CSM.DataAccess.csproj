@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <internalsVisibleTo Include="CSM.UiLogic" />
+    <internalsVisibleTo Include="CSM.Business" />
   </ItemGroup>
 
 </Project>

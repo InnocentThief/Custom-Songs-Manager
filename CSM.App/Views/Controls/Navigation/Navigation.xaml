@@ -23,7 +23,7 @@
         <telerik:RadButton Focusable="False" Padding="8">
             <telerik:RadGlyph Glyph="&#xe401;" />
         </telerik:RadButton>
-        <telerik:RadButton Focusable="False" Padding="8">
+        <telerik:RadButton Focusable="False" Padding="8" Command="{Binding ShowSettingsCommand}">
             <telerik:RadGlyph Glyph="&#xe13a;" />
         </telerik:RadButton>
     </StackPanel>

@@ -1,4 +1,5 @@
-﻿using CSM.Business;
+﻿using CSM.App.Views.Windows;
+using CSM.Business;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic;
 using Microsoft.Extensions.Configuration;
@@ -13,7 +14,8 @@ namespace CSM.App
             return services
                 .AddBusiness()
                 .AddUiLogic()
-                .AddSingleton(serviceLocator);
+                .AddSingleton(serviceLocator)
+                .AddTransient<EditWindow>();
         }
 
         #region Helper methods

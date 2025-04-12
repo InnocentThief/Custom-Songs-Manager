@@ -25,7 +25,7 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
 
             LoadingInProgress = true;
 
-            var path = userConfigDomain?.Config?.CustomLevelPaths.First().Path;
+            var path = userConfigDomain?.Config?.CustomLevelsConfig.CustomLevelPath.Path;
             if (string.IsNullOrEmpty(path))
                 return;
             if (!Path.Exists(path))

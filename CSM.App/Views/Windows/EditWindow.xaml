@@ -1,0 +1,40 @@
+﻿<telerik:RadWindow   x:Class="CSM.App.Views.Windows.EditWindow"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" 
+                     xmlns:settingsViewModel="clr-namespace:CSM.UiLogic.ViewModels.Controls.Settings;assembly=CSM.UiLogic"
+                     xmlns:settingsView="clr-namespace:CSM.App.Views.Windows.Settings"
+                     mc:Ignorable="d"
+                     Header="{Binding Title}"
+                     WindowStartupLocation="CenterOwner">
+
+    <telerik:RadWindow.Resources>
+        <DataTemplate DataType="{x:Type settingsViewModel:SettingsControlViewModel}">
+            <settingsView:SettingsControl />
+        </DataTemplate>
+    </telerik:RadWindow.Resources>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+       
+        <!-- Content -->
+        <ContentControl 
+            x:Name="contentControl"
+            Content="{Binding}" />
+
+        <!-- Footer -->
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right">
+            <telerik:RadButton Command="{Binding CancelCommand}" Background="{Binding CancelCommandColor}">
+                <telerik:Label Content="{Binding CancelCommandText}" Margin="6" />
+            </telerik:RadButton>
+            <telerik:RadButton Command="{Binding ContinueCommand}" Background="{Binding ContinueCommandColor}">
+                <telerik:Label Content="{Binding ContinueCommandText}" Margin="6" />
+            </telerik:RadButton>
+        </StackPanel>
+    </Grid>
+</telerik:RadWindow>

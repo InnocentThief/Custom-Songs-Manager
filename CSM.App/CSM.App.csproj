@@ -17,22 +17,24 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.3" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.3" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.3" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.4" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.4" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.4" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.4" />
+    <PackageReference Include="RestoreWindowPlace" Version="3.1.0" />
+    <PackageReference Include="Telerik.Windows.Controls.FileDialogs.for.Wpf.Xaml" Version="2025.1.211" />
     <PackageReference Include="Telerik.Windows.Controls.GridView.for.Wpf.Xaml" Version="2025.1.211" />
     <PackageReference Include="Telerik.Windows.Controls.RibbonView.for.Wpf.Xaml" Version="2025.1.211" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CSM.Framework\CSM.Framework.csproj" />
+    <ProjectReference Include="..\CSM.Services\CSM.Services.csproj" />
     <ProjectReference Include="..\CSM.UiLogic\CSM.UiLogic.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Converter\" />
-    <Folder Include="Views\Windows\Settings\" />
     <Folder Include="Views\Workspaces\BeatLeader\" />
     <Folder Include="Views\Workspaces\ScoreSaber\" />
     <Folder Include="Views\Workspaces\Twitch\" />
