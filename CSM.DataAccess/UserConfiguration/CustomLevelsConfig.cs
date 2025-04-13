@@ -1,6 +1,4 @@
-﻿using CSM.Framework.Types;
-
-namespace CSM.DataAccess.UserConfiguration
+﻿namespace CSM.DataAccess.UserConfiguration
 {
     internal class CustomLevelsConfig
     {

@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CSM.DataAccess.UserConfiguration.UserConfig">
+    <Position X="7" Y="1.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAgAAAAAABIAAAAAAAAQAQAgAAAQAAAAAA=</HashCode>
+      <FileName>UserConfiguration\UserConfig.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CustomLevelsConfig" />
+      <Property Name="BeatLeaderConfig" />
+      <Property Name="PlaylistsConfig" />
+      <Property Name="ScoreSaberConfig" />
+      <Property Name="TwitchConfig" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CSM.DataAccess.UserConfiguration.CustomLevelsConfig">
+    <Position X="11" Y="1.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAABAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>UserConfiguration\CustomLevelsConfig.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="SongDetailPosition" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CSM.DataAccess.UserConfiguration.BeatLeaderConfig">
+    <Position X="2.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UserConfiguration\BeatLeaderConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSM.DataAccess.UserConfiguration.PlaylistsConfig">
+    <Position X="11" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAIAAABAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UserConfiguration\PlaylistsConfig.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="SourceAvailability" />
+      <Property Name="DefaultSource" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CSM.DataAccess.UserConfiguration.ScoreSaberConfig">
+    <Position X="2.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UserConfiguration\ScoreSaberConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSM.DataAccess.UserConfiguration.TwitchConfig">
+    <Position X="5.75" Y="5.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UserConfiguration\TwitchConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="CSM.DataAccess.UserConfiguration.PlaylistsSourceAvailability">
+    <Position X="14.5" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAgAAAAAAAAAAAgAAAAAAAAAIAAAEAAQA=</HashCode>
+      <FileName>UserConfiguration\PlaylistsSourceAvailability.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CSM.DataAccess.UserConfiguration.SongDetailPosition">
+    <Position X="14.5" Y="1.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>UserConfiguration\SongDetailPosition.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

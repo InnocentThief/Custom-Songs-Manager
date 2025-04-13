@@ -10,5 +10,7 @@ namespace CSM.DataAccess.CustomLevels
 
         [JsonPropertyName("difficulty")]
         public Difficulty Difficulty { get; set; }
+
+        public BeatmapAuthor? BeatmapAuthors { get; set; }
     }
 }

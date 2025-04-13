@@ -2,6 +2,7 @@
 using CSM.DataAccess.UserConfiguration;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
+using CSM.UiLogic.ViewModels.Controls.CustomLevels;
 
 namespace CSM.UiLogic.ViewModels.Controls.SongSources
 {
@@ -9,7 +10,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
     {
         #region Private fields
 
-        private SongSource songSource = SongSource.CustomLevels;
+        private ISongSourceViewModel? selectedSource;
 
         private readonly UserConfig? userConfig;
 
@@ -19,14 +20,16 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         public bool AnySourcesAvailable => CustomLevelsAvailable || PlaylistsAvailable || FavouritesAvailable || SearchAvailable || SongSuggestAvailable;
 
-        public SongSource SongSource
+        public List<ISongSourceViewModel> Sources { get; set; } = [];
+
+        public ISongSourceViewModel? SelectedSource
         {
-            get => songSource;
+            get => selectedSource;
             set
             {
-                if (value == songSource)
+                if (value == selectedSource)
                     return;
-                songSource = value;
+                selectedSource = value;
                 OnPropertyChanged();
             }
         }
@@ -35,12 +38,12 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         public bool IsCustomLevelsSelected
         {
-            get => SongSource == SongSource.CustomLevels;
+            get => selectedSource is CustomLevelsControlViewModel;
             set
             {
                 if (value)
                 {
-                    SongSource = SongSource.CustomLevels;
+                    SelectedSource = Sources.SingleOrDefault(s => s is CustomLevelsControlViewModel);
                     OnPropertyChanged();
                 }
             }
@@ -48,29 +51,29 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         public bool PlaylistsAvailable => userConfig?.PlaylistsConfig.SourceAvailability.HasFlag(PlaylistsSourceAvailability.Playlists) ?? false;
 
-        public bool IsPlaylistsSelected
-        {
-            get => SongSource == SongSource.Playlists;
-            set
-            {
-                if (value)
-                {
-                    SongSource = SongSource.Playlists;
-                    OnPropertyChanged();
-                }
-            }
-        }
+        //public bool IsPlaylistsSelected
+        //{
+        //    get => songSource == SongSource.Playlists;
+        //    set
+        //    {
+        //        if (value)
+        //        {
+        //            songSource = SongSource.Playlists;
+        //            OnPropertyChanged();
+        //        }
+        //    }
+        //}
 
         public bool FavouritesAvailable => userConfig?.PlaylistsConfig.SourceAvailability.HasFlag(PlaylistsSourceAvailability.BeatSaberFavourites) ?? false;
 
         public bool IsFavouritesSelected
         {
-            get => SongSource == SongSource.Favourites;
+            get => selectedSource is BeatSaberFavouritesSourceViewModel;
             set
             {
                 if (value)
                 {
-                    SongSource = SongSource.Favourites;
+                    SelectedSource = Sources.SingleOrDefault(s => s is BeatSaberFavouritesSourceViewModel);
                     OnPropertyChanged();
                 }
             }
@@ -80,12 +83,12 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         public bool IsSearchSelected
         {
-            get => SongSource == SongSource.Search;
+            get => selectedSource is SongSearchSourceViewModel;
             set
             {
                 if (value)
                 {
-                    SongSource = SongSource.Search;
+                    SelectedSource = Sources.SingleOrDefault(s => s is SongSearchSourceViewModel);
                     OnPropertyChanged();
                 }
             }
@@ -95,12 +98,12 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         public bool IsSongSuggestSelected
         {
-            get => SongSource == SongSource.SongSuggest;
+            get => selectedSource is SongSuggestSourceViewModel;
             set
             {
                 if (value)
                 {
-                    SongSource = SongSource.SongSuggest;
+                    SelectedSource = Sources.SingleOrDefault(s => s is SongSuggestSourceViewModel);
                     OnPropertyChanged();
                 }
             }
@@ -111,10 +114,72 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
         public SongSourcesControlViewModel(IServiceLocator serviceLocator) : base(serviceLocator)
         {
             userConfig = serviceLocator.GetService<IUserConfigDomain>().Config;
+            if (CustomLevelsAvailable)
+            {
+                Sources.Add(new CustomLevelsControlViewModel(serviceLocator));
+            }
+            if (PlaylistsAvailable)
+            {
+                // do something nice
+            }
+            if (FavouritesAvailable)
+            {
+                Sources.Add(new BeatSaberFavouritesSourceViewModel(serviceLocator));
+            }
+            if (SearchAvailable)
+            {
+                Sources.Add(new SongSearchSourceViewModel(serviceLocator));
+            }
+            if (SongSuggestAvailable)
+            {
+                Sources.Add(new SongSuggestSourceViewModel(serviceLocator));
+            }
+
+            switch (userConfig?.PlaylistsConfig.DefaultSource)
+            {
+                case PlaylistsSourceAvailability.CustomLevels:
+                    IsCustomLevelsSelected = true;
+                    break;
+                case PlaylistsSourceAvailability.Playlists:
+                    // set IsPlaylistsSelected = true ;
+                    break;
+                case PlaylistsSourceAvailability.BeatSaberFavourites:
+                    IsFavouritesSelected = true;
+                    break;
+                case PlaylistsSourceAvailability.SongSearch:
+                    IsSongSuggestSelected = true;
+                    break;
+                case PlaylistsSourceAvailability.SongSuggest:
+                    IsSongSuggestSelected = true;
+                    break;
+                default:
+                    break;
+            }
+
         }
 
-        public async Task LoadAsync(bool refresh)
+        public async Task LoadAsync()
         {
+            if (selectedSource is CustomLevelsControlViewModel customLevelsControlViewModel)
+            {
+                await customLevelsControlViewModel.LoadAsync(false);
+            }
+            // playlists
+
+            if (selectedSource is BeatSaberFavouritesSourceViewModel favouritesSourceViewModel)
+            {
+                await favouritesSourceViewModel.LoadAsync();
+            }
+
+            if (selectedSource is SongSearchSourceViewModel songSearchSourceViewModel)
+            {
+                // nothing to load
+            }
+
+            if (selectedSource is SongSuggestSourceViewModel songSuggestSourceViewModel)
+            {
+                // nothing to load
+            }
 
         }
     }

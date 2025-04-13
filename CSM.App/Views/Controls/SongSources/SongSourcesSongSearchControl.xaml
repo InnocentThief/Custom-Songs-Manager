@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CSM.App.Views.Controls.SongSources"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -14,6 +15,165 @@
         <!-- Header -->
         <Grid Background="#FF018574">
             <TextBlock Text="Song Search" Style="{StaticResource HeaderTitleStyle}" />
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <!-- SearchBox -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <telerik:RadWatermarkTextBox WatermarkContent="Search" Text="{Binding Query, UpdateSourceTrigger=PropertyChanged}" />
+                <!-- Search Button -->
+                <telerik:RadButton Grid.Column="1" Command="{Binding SearchCommand}" ToolTip="Search">
+                    <telerik:RadGlyph Glyph="&#xe13e;" />
+                </telerik:RadButton>
+                <!-- Show me more -->
+                <telerik:RadButton Grid.Column="2" Command="{Binding ShowMeMoreCommand}" ToolTip="Show more">
+                    <telerik:RadGlyph Glyph="&#xe13f;" />
+                </telerik:RadButton>
+                <!-- Clear Button -->
+                <telerik:RadButton Grid.Column="3" Command="{Binding ResetSearchParametersCommand}" Background="DarkRed" ToolTip="Clear filter" >
+                    <telerik:RadGlyph Glyph="&#xe12a;" />
+                </telerik:RadButton>
+            </Grid>
+            <telerik:RadExpander Grid.Row="1" Margin="0,6" Header="Enhanced search" IsExpanded="{Binding SearchExpanded, Mode=TwoWay}" Background="Transparent" BorderThickness="0" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <!-- General, Requirements, Relevance -->
+                    <Grid Margin="0,6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <!-- Genreral --><!--
+                        <TextBlock Text="General" FontWeight="DemiBold" Margin="0,0,0,6" />
+                        <telerik:RadToggleSwitchButton TrackWidth="35" TrackHeight="20" Margin="0,1" Grid.Row="1" IsChecked="{Binding Ai}" CheckedContent="AI" UncheckedContent="AI" />
+                        <telerik:RadToggleSwitchButton TrackWidth="35" TrackHeight="20" Margin="0,1" Grid.Row="2" IsChecked="{Binding Ranked}" CheckedContent="Ranked (ScoreSaber)" UncheckedContent="Ranked (ScoreSaber)" />
+                        <telerik:RadToggleSwitchButton TrackWidth="35" TrackHeight="20" Margin="0,1" Grid.Row="3" IsChecked="{Binding Ranked}" CheckedContent="Ranked (BeatLeader)" UncheckedContent="Ranked (BeatLeader)" />
+                        <telerik:RadToggleSwitchButton TrackWidth="35" TrackHeight="20" Margin="0,1" Grid.Row="4" IsChecked="{Binding Curated}" CheckedContent="Curated" UncheckedContent="Curated" />
+                        <telerik:RadToggleSwitchButton TrackWidth="35" TrackHeight="20" Margin="0,1" Grid.Row="5" IsChecked="{Binding VerifiedMapper}" CheckedContent="Verified" UncheckedContent="Verified" />
+                        <telerik:RadToggleSwitchButton TrackWidth="35" TrackHeight="20" Margin="0,1" Grid.Row="6" IsChecked="{Binding FullSpread}" CheckedContent="Full spread}" UncheckedContent="Full spread" />
+
+                        --><!-- Requirements --><!--
+                        <TextBlock Grid.Column="1" Text="Requirements" FontWeight="DemiBold" />
+                        <telerik:RadToggleSwitchButton TrackWidth="35" TrackHeight="20" Margin="0,1" Grid.Column="1" Grid.Row="1" IsChecked="{Binding Chroma}" CheckedContent="Chroma" UncheckedContent="Chroma" />
+                        <telerik:RadToggleSwitchButton TrackWidth="35" TrackHeight="20" Margin="0,1" Grid.Column="1" Grid.Row="2" IsChecked="{Binding Noodle}" CheckedContent="Noddle" UncheckedContent="Noddle" />
+                        <telerik:RadToggleSwitchButton TrackWidth="35" TrackHeight="20" Margin="0,1" Grid.Column="1" Grid.Row="3" IsChecked="{Binding MappingExtensions}" CheckedContent="Mapping extension" UncheckedContent="Mapping extensions" />
+                        <telerik:RadToggleSwitchButton TrackWidth="35" TrackHeight="20" Margin="0,1" Grid.Column="1" Grid.Row="4" IsChecked="{Binding Cinema}" CheckedContent="Cinema" UncheckedContent="Cinema" />
+                        --><!-- NPS --><!--
+                        <Grid Grid.Column="1" Grid.Row="5" Margin="0,0,10,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="60" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="NPS" Margin="0,0,6,0" VerticalAlignment="Center" />
+                            <telerik:RadSlider Grid.Column="1"  HandlesVisibility="Visible" LargeChange="2" SmallChange="0.1" Minimum="0" Maximum="16" IsSelectionRangeEnabled="True" SelectionStart="{Binding NPSSelectionStart, Mode=TwoWay}" SelectionEnd="{Binding NPSSelectionEnd, Mode=TwoWay}" />
+                            <TextBlock Grid.Column="2" Text="{Binding NPSText}" Margin="6,0,0,0" VerticalAlignment="Center" />
+                        </Grid>
+
+                        --><!-- Relevance --><!--
+                        <TextBlock Grid.Column="2" Text="Relevance" FontWeight="DemiBold" />
+                        <telerik:RadWrapPanel Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" >
+                            <telerik:RadRadioButton Command="{Binding RelevanceCommand}" CommandParameter="Latest" Margin="0,1" Grid.Row="1" Content="Latest" />
+                            <telerik:RadRadioButton Command="{Binding RelevanceCommand}" CommandParameter="" Margin="0,1" Grid.Column="2" Grid.Row="2" IsChecked="{Binding RelevanceNone, Mode=TwoWay}" Content="Relevance" />
+                            <telerik:RadRadioButton Command="{Binding RelevanceCommand}" CommandParameter="Rating" Margin="0,1" Grid.Column="2" Grid.Row="3" Content="Rating" />
+                            <telerik:RadRadioButton Command="{Binding RelevanceCommand}" CommandParameter="Curated" Margin="0,1" Grid.Column="2" Grid.Row="4" Content="Curated" />
+                        </telerik:RadWrapPanel>
+
+                        --><!-- Date --><!--
+                        <StackPanel Grid.Column="2" Grid.Row="3" Orientation="Horizontal">
+                            <TextBlock Text="Date Range" FontWeight="DemiBold" />
+                            <TextBlock Text="{Binding DateRange}" Margin="6,0" />
+                        </StackPanel>
+                        <telerik:RadSlider Grid.Column="2" Grid.Row="4" HandlesVisibility="Visible" LargeChange="10" SmallChange="1" Minimum="{Binding DateMinimum}" Maximum="{Binding DateMaximum}" IsSelectionRangeEnabled="True" SelectionStart="{Binding DateSelectionStart, Mode=TwoWay}" SelectionEnd="{Binding DateSelectionEnd, Mode=TwoWay}" />-->
+                    </Grid>
+                    <!-- Tags -->
+                    <!--<Grid Grid.Row="1" Margin="0,6,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        --><!-- Tags (Map-Style) --><!--
+                        <TextBlock Text="Map style" FontWeight="DemiBold" VerticalAlignment="Center" />
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="10,0">
+                            <telerik:RadRadioButton Command="{Binding MapStyleCommand}" CommandParameter="" Margin="0,0,3,0" GroupName="MapStyle" IsChecked="{Binding MapStyleNone, Mode=TwoWay}" Content="None" />
+                            <telerik:RadRadioButton Command="{Binding MapStyleCommand}" CommandParameter="accuracy" Margin="0,0,3,0" GroupName="MapStyle" Content="Accuracy" />
+                            <telerik:RadRadioButton Command="{Binding MapStyleCommand}" CommandParameter="balanced" Margin="0,0,3,0" GroupName="MapStyle" Content="Balanced" />
+                            <telerik:RadRadioButton Command="{Binding MapStyleCommand}" CommandParameter="challenge" Margin="0,0,3,0" GroupName="MapStyle" Content="Challenge" />
+                            <telerik:RadRadioButton Command="{Binding MapStyleCommand}" CommandParameter="dance-style" Margin="0,0,3,0" GroupName="MapStyle" Content="Dance" />
+                            <telerik:RadRadioButton Command="{Binding MapStyleCommand}" CommandParameter="fitness" Margin="0,0,3,0" GroupName="MapStyle" Content="Fitness" />
+                            <telerik:RadRadioButton Command="{Binding MapStyleCommand}" CommandParameter="speed" Margin="0,0,3,0" GroupName="MapStyle" Content="Speed" />
+                            <telerik:RadRadioButton Command="{Binding MapStyleCommand}" CommandParameter="tech" Margin="0,0,3,0" GroupName="MapStyle" Content="Tech" />
+                        </StackPanel>
+                        --><!-- Tags (Song-Style) --><!--
+                        <TextBlock Grid.Row="1" Text="Song style" FontWeight="DemiBold" VerticalAlignment="Top" Margin="0,10" />
+                        <telerik:RadWrapPanel Grid.Column="1" Grid.Row="1" Margin="10,3" Orientation="Horizontal">
+                            --><!--<telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="" Margin="0,3,3,0" GroupName="SongStyle" IsChecked="{Binding SongStyleNone}" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_None}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="alternative" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_Alternative}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="ambient" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_Ambient}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="anime" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_Anime}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="classical-orchestral" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyleClassicalOrchestral}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="comedy-meme" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_ComedyMeme}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="dance" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_Dance}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="drum-and-bass" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_DrumAndBass}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="dubstep" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_Dubstep}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="electronic" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_Electronic}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="folk-acoustic" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_FoldAcoustic}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="funk-disco" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_FunkDisco}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="hardcore" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_Hardcore}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="hip-hop-rap" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyleHipHopRap}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="holiday" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_Holiday}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="house" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_House}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="indie" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_Indie}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="instrumental" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_Instrumental}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="j-pop" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_JPop}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="j-rock" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_JRock}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="jazz" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_Jazz}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="k-pop" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_KPop}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="kids-family" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyleKidsFamily}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="metal" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_Metal}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="nightcore" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_Nightcore}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="pop" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_Pop}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="punk" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_Punk}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="rb" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_RB}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="rock" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_Rock}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="soul" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_Soul}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="speedcore" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_Speedcore}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="swing" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_Swing}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="tv-movie-soundtrack" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_TVFilm}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="techno" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_Techno}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="trance" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_Trance}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="video-game-soundtrack" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_VideoGame}" />
+                            <telerik:RadRadioButton Command="{Binding SongStyleCommand}" CommandParameter="vocaloid" Margin="0,3,3,0" GroupName="SongStyle" Content="{x:Static p:Resources.SongSearch_Search_Tags_SongStyle_Vocaloid}" />--><!--
+                        </telerik:RadWrapPanel>
+                    </Grid>-->
+                </Grid>
+            </telerik:RadExpander>
         </Grid>
     </Grid>
 </UserControl>

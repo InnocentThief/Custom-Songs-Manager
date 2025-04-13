@@ -3,7 +3,7 @@
   <Class Name="CSM.DataAccess.CustomLevels.InfoV2">
     <Position X="5.75" Y="3.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>IAAAAAAAAAAAAAAgBAEAAAAAAAAAAAAAAAAAgAAIAAI=</HashCode>
+      <HashCode>IAAAAAAAAAAAAAAgBAEAAAAAAAAAAAAEAAAAgAAIAAI=</HashCode>
       <FileName>CustomLevels\InfoV2.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -26,6 +26,9 @@
       <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CustomLevels\DifficultyBeatmapV2.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Difficulty" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="CSM.DataAccess.CustomLevels.InfoV4">
     <Position X="9.25" Y="3.25" Width="1.75" />
@@ -51,12 +54,13 @@
   <Class Name="CSM.DataAccess.CustomLevels.DifficultyBeatmapV4">
     <Position X="12" Y="5.25" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAQAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAQAACAAAAAAAAAAAAAAAAAAAAAAAAAE=</HashCode>
       <FileName>CustomLevels\DifficultyBeatmapV4.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Characteristic" />
       <Property Name="Difficulty" />
+      <Property Name="BeatmapAuthors" />
     </ShowAsAssociation>
   </Class>
   <Class Name="CSM.DataAccess.CustomLevels.Audio">
@@ -64,6 +68,13 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
       <FileName>CustomLevels\Audio.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSM.DataAccess.CustomLevels.BeatmapAuthor">
+    <Position X="12" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CustomLevels\BeatmapAuthor.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Enum Name="CSM.DataAccess.Common.Characteristic">
@@ -74,7 +85,7 @@
     </TypeIdentifier>
   </Enum>
   <Enum Name="CSM.DataAccess.Common.Difficulty">
-    <Position X="15.25" Y="6" Width="1.5" />
+    <Position X="6" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACAAAAAAAAABAAAAAAAIAAAAAAAAAAAoAAA=</HashCode>
       <FileName>Common\Difficulty.cs</FileName>

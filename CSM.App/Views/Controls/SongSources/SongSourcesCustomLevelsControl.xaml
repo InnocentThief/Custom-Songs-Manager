@@ -3,17 +3,57 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:local="clr-namespace:CSM.App.Views.Controls.SongSources"
+             xmlns:behaviours="clr-namespace:CSM.App.Behaviours"
+             xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <!-- Header -->
-        <Grid Background="#FF018574">
-            <TextBlock Text="Custom Levels" Style="{StaticResource HeaderTitleStyle}" />
+
+
+    <telerik:RadBusyIndicator IsBusy="{Binding LoadingInProgress}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <!-- Header -->
+            <Grid Background="#FF018574">
+                <TextBlock Text="Custom Levels" Style="{StaticResource HeaderTitleStyle}" />
+            </Grid>
+            <!-- Content -->
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <!-- ListView -->
+                <telerik:RadGridView 
+                    behaviours:GridViewHeaderContextMenuBehaviour.IsEnabled="True"
+                    Margin="3,3,3,3" 
+                    ItemsSource="{Binding CustomLevels}" 
+                    SelectedItem="{Binding SelectedCustomLevel}" 
+                    Style="{StaticResource RadGridViewStyle}">
+                    <telerik:RadGridView.Columns>
+                        <!-- Add button (will add song to selected playlist) -->
+                        <telerik:GridViewColumn Width="SizeToCells">
+                            <telerik:GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <telerik:RadButton Command="{Binding AddToPlaylistCommand}" Grid.Column="1" Background="Transparent" BorderThickness="0" ToolTip="Add to selected playlist">
+                                        <telerik:RadGlyph Glyph="&#xe11e;" Foreground="Green" />
+                                    </telerik:RadButton>
+                                </DataTemplate>
+                            </telerik:GridViewColumn.CellTemplate>
+                        </telerik:GridViewColumn>
+                        <telerik:GridViewDataColumn Header="Title" Width="*" DataMemberBinding="{Binding SongTitle}" />
+                        <telerik:GridViewDataColumn Header="Mapper" Width="*" DataMemberBinding="{Binding LevelAuthor}" />
+                        <telerik:GridViewDataColumn Header="Artist" Width="*" DataMemberBinding="{Binding SongAuthor}" />
+                        <telerik:GridViewDataColumn Header="Last write date" Width="Auto" DataMemberBinding="{Binding LastWriteTime, StringFormat='d', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
+                    </telerik:RadGridView.Columns>
+                </telerik:RadGridView>
+                <!-- Entry counter -->
+                <telerik:Label Grid.Row="1" Content="{Binding CustomLevelCount}" Margin="6" />
+            </Grid>
         </Grid>
-    </Grid>
+    </telerik:RadBusyIndicator>
 </UserControl>

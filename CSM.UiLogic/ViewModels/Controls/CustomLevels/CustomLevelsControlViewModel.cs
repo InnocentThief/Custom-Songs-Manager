@@ -3,20 +3,57 @@ using CSM.DataAccess.CustomLevels;
 using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
+using CSM.UiLogic.Commands;
 using CSM.UiLogic.ViewModels.Common.CustomLevels;
+using CSM.UiLogic.ViewModels.Controls.SongSources;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
 
 namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
 {
-    internal class CustomLevelsControlViewModel(IServiceLocator serviceLocator) : BaseViewModel(serviceLocator)
+    internal class CustomLevelsControlViewModel(IServiceLocator serviceLocator) : BaseViewModel(serviceLocator), ISongSourceViewModel
     {
+        #region Private fields
+
+        private IRelayCommand? openInFileExplorerCommand;
+        private IRelayCommand? refreshCommand;
+        private ICustomLevelViewModel? selectedCustomLevel;
+        private IRelayCommand? deleteCustomLevelCommand;
+
         private readonly IUserConfigDomain userConfigDomain = serviceLocator.GetService<IUserConfigDomain>();
+
+        #endregion
+
+        #region Properties
 
         public ObservableCollection<ICustomLevelViewModel> CustomLevels { get; } = [];
 
+        public ICustomLevelViewModel? SelectedCustomLevel
+        {
+            get => selectedCustomLevel;
+            set
+            {
+                if (value == selectedCustomLevel)
+                    return;
+                selectedCustomLevel = value;
+                OnPropertyChanged();
+                UpdateCommands();
+            }
+        }
+
         public string CustomLevelCount => $"{CustomLevels.Count} custom levels loaded";
+
+        public string CustomLevelPath => userConfigDomain.Config?.CustomLevelsConfig.CustomLevelPath.Path ?? "";
+
+        public IRelayCommand OpenInFileExplorerCommand => openInFileExplorerCommand ??= CommandFactory.Create(OpenInFileExplorer, CanOpenInFileExplorer);
+
+        public IRelayCommand RefreshCommand => refreshCommand ??= CommandFactory.CreateFromAsync(RefreshAsync, CanRefresh);
+
+        public IRelayCommand DeleteCustomLevelCommand => deleteCustomLevelCommand ??= CommandFactory.Create(Delete, CanDelete);
+
+        #endregion
 
         public async Task LoadAsync(bool refresh)
         {
@@ -25,6 +62,7 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
 
             LoadingInProgress = true;
 
+            CustomLevels.Clear();
             var path = userConfigDomain?.Config?.CustomLevelsConfig.CustomLevelPath.Path;
             if (string.IsNullOrEmpty(path))
                 return;
@@ -82,6 +120,65 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
             }
 
             return retval;
+        }
+
+        private void OpenInFileExplorer()
+        {
+            string path = userConfigDomain.Config?.CustomLevelsConfig.CustomLevelPath.Path ?? "";
+            if (string.IsNullOrWhiteSpace(path))
+                return;
+
+            if (selectedCustomLevel != null)
+                path = selectedCustomLevel.Path;
+
+            var psi = new ProcessStartInfo
+            {
+                FileName = "explorer.exe",
+                Arguments = $"/select,\"{path}\"",
+                UseShellExecute = true
+            };
+            Process.Start(psi);
+        }
+
+        private bool CanOpenInFileExplorer()
+        {
+            var directory = userConfigDomain.Config?.CustomLevelsConfig.CustomLevelPath.Path;
+            return !string.IsNullOrWhiteSpace(directory);
+        }
+
+        private async Task RefreshAsync()
+        {
+            await LoadAsync(true);
+        }
+
+        private bool CanRefresh()
+        {
+            return true;
+        }
+
+        private void Delete()
+        {
+            if (selectedCustomLevel is ICustomLevelViewModel customLevelViewModel)
+            {
+                if (!Directory.Exists(customLevelViewModel.Path))
+                    return;
+
+                Directory.Delete(customLevelViewModel.Path, true);
+                CustomLevels.Remove(customLevelViewModel);
+
+                SelectedCustomLevel = null;
+            }
+        }
+
+        private bool CanDelete()
+        {
+            return selectedCustomLevel != null;
+        }
+
+        private void UpdateCommands()
+        {
+            OpenInFileExplorerCommand.RaiseCanExecuteChanged();
+            DeleteCustomLevelCommand.RaiseCanExecuteChanged();
         }
 
         #endregion

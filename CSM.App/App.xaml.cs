@@ -89,7 +89,7 @@ namespace CSM.App
                 //})
                 .ConfigureServices((ctx, services) =>
                 {
-                   
+
                     services
                     //.AddLogging(logging =>
                     //{

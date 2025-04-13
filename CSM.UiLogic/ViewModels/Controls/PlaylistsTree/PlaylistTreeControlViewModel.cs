@@ -1,6 +1,5 @@
 ﻿using CSM.Business.Interfaces;
 using CSM.DataAccess.Playlists;
-using CSM.DataAccess.UserConfiguration;
 using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
@@ -225,7 +224,6 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
         {
             DeletePlaylistCommand.RaiseCanExecuteChanged();
             OpenInFileExplorerCommand.RaiseCanExecuteChanged();
-
         }
 
         #endregion

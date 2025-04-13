@@ -16,6 +16,9 @@ namespace CSM.DataAccess.CustomLevels
         [JsonPropertyName("_songAuthorName")]
         public string SongAuthorName { get; set; } = string.Empty;
 
+        [JsonPropertyName("_levelAuthorName")]
+        public string LevelAuthorName { get; set; } = string.Empty;
+
         [JsonPropertyName("_beatsPerMinute")]
         public double BeatsPerMinute { get; set; }
 

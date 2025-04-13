@@ -94,6 +94,8 @@ namespace CSM.Business.Core
                         Path = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Beat Saber\\Playlists",
                         Name = "Default Playlists Path"
                     },
+                    SourceAvailability = PlaylistsSourceAvailability.CustomLevels | PlaylistsSourceAvailability.Playlists | PlaylistsSourceAvailability.BeatSaberFavourites | PlaylistsSourceAvailability.SongSearch | PlaylistsSourceAvailability.SongSuggest,
+                    DefaultSource = PlaylistsSourceAvailability.CustomLevels,
                 },
                 TwitchConfig = new TwitchConfig()
                 {

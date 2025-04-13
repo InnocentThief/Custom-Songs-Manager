@@ -1,4 +1,4 @@
-﻿namespace CSM.Framework.Types
+﻿namespace CSM.DataAccess.UserConfiguration
 {
     public enum SongDetailPosition
     {

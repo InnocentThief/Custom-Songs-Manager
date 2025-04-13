@@ -47,24 +47,24 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <!-- Content -->
-                <ContentControl Content="{Binding SongSource}" ContentTemplateSelector="{StaticResource SongSourceDataTemplateSelector}" />
+                <ContentControl Content="{Binding SelectedSource}" ContentTemplateSelector="{StaticResource SongSourceDataTemplateSelector}" />
 
                 <!-- Navigation -->
                 <Grid Grid.Column="1" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}">
                     <StackPanel VerticalAlignment="Center" Margin="5,0,0,0">
-                        <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsCustomLevelsSelected}" Padding="8" ToolTip="Custom Levels" Visibility="{Binding CustomLevelsAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsCustomLevelsSelected}" Padding="8" ToolTip="Custom Levels" Visibility="{Binding CustomLevelsAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" Click="CustomLevels_Click">
                             <telerik:RadGlyph Glyph="&#xe023;" />
                         </telerik:RadRadioButton>
-                        <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsPlaylistsSelected}" Padding="8" ToolTip="Playlists" Visibility="{Binding PlaylistsAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsPlaylistsSelected}" Padding="8" ToolTip="Playlists" Visibility="{Binding PlaylistsAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" Click="Playlists_Click">
                             <telerik:RadGlyph Glyph="&#xe029;" />
                         </telerik:RadRadioButton>
-                        <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsFavouritesSelected}" Padding="8" ToolTip="Beat Saber Favourites" Visibility="{Binding FavouritesAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsFavouritesSelected}" Padding="8" ToolTip="Beat Saber Favourites" Visibility="{Binding FavouritesAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" Click="Favourites_Click">
                             <telerik:RadGlyph Glyph="&#xe301;" />
                         </telerik:RadRadioButton>
-                        <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsSearchSelected}" Padding="8" ToolTip="Search" Visibility="{Binding SearchAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsSearchSelected}" Padding="8" ToolTip="Search" Visibility="{Binding SearchAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" Click="SongSearch_Click">
                             <telerik:RadGlyph Glyph="&#xe13e;" />
                         </telerik:RadRadioButton>
-                        <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsSongSuggestSelected}" Padding="8" ToolTip="Song Suggest" Visibility="{Binding SongSuggestAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsSongSuggestSelected}" Padding="8" ToolTip="Song Suggest" Visibility="{Binding SongSuggestAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" Click="SongSuggest_Click">
                             <telerik:RadGlyph Glyph="&#xe05f;" />
                         </telerik:RadRadioButton>
                     </StackPanel>

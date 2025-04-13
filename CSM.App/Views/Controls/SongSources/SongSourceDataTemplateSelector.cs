@@ -1,4 +1,5 @@
-﻿using CSM.UiLogic.ViewModels.Controls.SongSources;
+﻿using CSM.UiLogic.ViewModels.Controls.CustomLevels;
+using CSM.UiLogic.ViewModels.Controls.SongSources;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -14,16 +15,16 @@ namespace CSM.App.Views.Controls.SongSources
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             if (item == null) return base.SelectTemplate(item, container);
-            var songSource = (SongSource)item;
-            return songSource switch
-            {
-                SongSource.CustomLevels => CustomLevelsDataTemplate,
-                SongSource.Playlists => PlaylistsDataTemplate,
-                SongSource.Favourites => FavouritesDataTemplate,
-                SongSource.Search => SearchDataTemplate,
-                SongSource.SongSuggest => SongSuggestDataTemplate,
-                _ => base.SelectTemplate(item, container),
-            };
+            if (item is CustomLevelsControlViewModel customLevelsControlViewModel)
+                return CustomLevelsDataTemplate;
+            // todo: do the playlist stuff
+            if (item is BeatSaberFavouritesSourceViewModel beatSaberFavouritesSourceViewModel)
+                return FavouritesDataTemplate;
+            if (item is SongSearchSourceViewModel songSearchSourceViewModel)
+                return SearchDataTemplate;
+            if (item is SongSuggestSourceViewModel songSuggestSourceViewModel)
+                return SongSuggestDataTemplate;
+            return base.SelectTemplate(item, container);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
+using System.Globalization;
 
 namespace CSM.UiLogic.ViewModels.Common.CustomLevels
 {
@@ -11,6 +12,15 @@ namespace CSM.UiLogic.ViewModels.Common.CustomLevels
 
         public string BsrKey { get; } = bsrKey;
 
+        public int BsrKeyHex
+        {
+            get
+            {
+                int.TryParse(BsrKey, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out int result);
+                return result;
+            }
+        }
+
         public DateTime LastWriteTime { get; } = lastwriteTime;
 
         public abstract string Version { get; }
@@ -20,5 +30,19 @@ namespace CSM.UiLogic.ViewModels.Common.CustomLevels
         public abstract string SongSubTitle { get; }
 
         public abstract string SongAuthor { get; }
+
+        public abstract string LevelAuthor { get; }
+
+        public abstract double Bpm { get; }
+
+        public abstract bool HasEasyMap { get; }
+
+        public abstract bool HasNormalMap { get; }
+
+        public abstract bool HasHardMap { get; }
+
+        public abstract bool HasExpertMap { get; }
+
+        public abstract bool HasExpertPlusMap { get; }
     }
 }

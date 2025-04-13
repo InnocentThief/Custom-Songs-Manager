@@ -20,6 +20,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <!-- Availability -->
         <telerik:Label Content="Available" />
@@ -38,7 +39,9 @@
         <telerik:RadToggleSwitchButton Grid.Column="1" Grid.Row="5" CheckedContent="Song Search" UncheckedContent="Song search" ContentPosition="Right" Focusable="False" IsChecked="{Binding SongSearchAvailable}" />
         <!-- Sources: Song suggest -->
         <telerik:RadToggleSwitchButton Grid.Column="1" Grid.Row="6" CheckedContent="Song Suggest" UncheckedContent="Song suggest" ContentPosition="Right" Focusable="False" IsChecked="{Binding SongSuggestAvailable}" />
-
+        <!-- Default source -->
+        <telerik:Label Content="Default song source" Grid.Row="7" />
+        <telerik:RadComboBox Grid.Column="1" Grid.Row="7" />
 
     </Grid>
 </UserControl>

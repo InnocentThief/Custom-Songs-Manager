@@ -21,8 +21,10 @@ namespace CSM.UiLogic.ViewModels.Workspaces
 
         public override async Task ActivateAsync(bool refresh)
         {
-            await PlaylistsTree.LoadAsync(refresh);
-            await SongSources.LoadAsync(refresh);
+            var playlistTreeTask = PlaylistsTree.LoadAsync(refresh);
+            var songSourcesTask = SongSources.LoadAsync();
+
+            await Task.WhenAll(playlistTreeTask, songSourcesTask);
         }
 
         #region Helper methods
