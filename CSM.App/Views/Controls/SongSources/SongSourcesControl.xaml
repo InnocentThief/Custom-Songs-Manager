@@ -47,21 +47,21 @@
         <ContentControl Content="{Binding SongSource}" ContentTemplateSelector="{StaticResource SongSourceDataTemplateSelector}" />
 
         <!-- Navigation -->
-        <Grid Grid.Column="1" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}">
+        <Grid Grid.Column="1" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" Visibility="{Binding AnySourcesAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
             <StackPanel VerticalAlignment="Center" Margin="5,0,0,0">
-                <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsCustomLevelsSelected}" Padding="8" ToolTip="Custom Levels">
+                <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsCustomLevelsSelected}" Padding="8" ToolTip="Custom Levels" Visibility="{Binding CustomLevelsAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <telerik:RadGlyph Glyph="&#xe023;" />
                 </telerik:RadRadioButton>
-                <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsPlaylistsSelected}" Padding="8" ToolTip="Playlists">
+                <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsPlaylistsSelected}" Padding="8" ToolTip="Playlists" Visibility="{Binding PlaylistsAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <telerik:RadGlyph Glyph="&#xe029;" />
                 </telerik:RadRadioButton>
-                <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsFavouritesSelected}" Padding="8" ToolTip="Beat Saber Favourites">
+                <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsFavouritesSelected}" Padding="8" ToolTip="Beat Saber Favourites" Visibility="{Binding FavouritesAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <telerik:RadGlyph Glyph="&#xe301;" />
                 </telerik:RadRadioButton>
-                <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsSearchSelected}" Padding="8" ToolTip="Search">
+                <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsSearchSelected}" Padding="8" ToolTip="Search" Visibility="{Binding SearchAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <telerik:RadGlyph Glyph="&#xe13e;" />
                 </telerik:RadRadioButton>
-                <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsSongSuggestSelected}" Padding="8" ToolTip="Song Suggest">
+                <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsSongSuggestSelected}" Padding="8" ToolTip="Song Suggest" Visibility="{Binding SongSuggestAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <telerik:RadGlyph Glyph="&#xe05f;" />
                 </telerik:RadRadioButton>
             </StackPanel>

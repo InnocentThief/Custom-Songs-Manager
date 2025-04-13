@@ -1,11 +1,23 @@
-﻿using CSM.Framework.ServiceLocation;
+﻿using CSM.Business.Interfaces;
+using CSM.DataAccess.UserConfiguration;
+using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
 
 namespace CSM.UiLogic.ViewModels.Controls.SongSources
 {
     internal class SongSourcesControlViewModel : BaseViewModel
     {
+        #region Private fields
+
         private SongSource songSource = SongSource.CustomLevels;
+
+        private readonly UserConfig? userConfig;
+
+        #endregion
+
+        #region Properties
+
+        public bool AnySourcesAvailable => CustomLevelsAvailable || PlaylistsAvailable || FavouritesAvailable || SearchAvailable || SongSuggestAvailable;
 
         public SongSource SongSource
         {
@@ -18,6 +30,8 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
                 OnPropertyChanged();
             }
         }
+
+        public bool CustomLevelsAvailable => userConfig?.PlaylistsConfig.SourceAvailability.HasFlag(PlaylistsSourceAvailability.CustomLevels) ?? false;
 
         public bool IsCustomLevelsSelected
         {
@@ -32,6 +46,8 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             }
         }
 
+        public bool PlaylistsAvailable => userConfig?.PlaylistsConfig.SourceAvailability.HasFlag(PlaylistsSourceAvailability.Playlists) ?? false;
+
         public bool IsPlaylistsSelected
         {
             get => SongSource == SongSource.Playlists;
@@ -44,6 +60,8 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
                 }
             }
         }
+
+        public bool FavouritesAvailable => userConfig?.PlaylistsConfig.SourceAvailability.HasFlag(PlaylistsSourceAvailability.BeatSaberFavourites) ?? false;
 
         public bool IsFavouritesSelected
         {
@@ -58,6 +76,8 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             }
         }
 
+        public bool SearchAvailable => userConfig?.PlaylistsConfig.SourceAvailability.HasFlag(PlaylistsSourceAvailability.SongSearch) ?? false;
+
         public bool IsSearchSelected
         {
             get => SongSource == SongSource.Search;
@@ -70,6 +90,8 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
                 }
             }
         }
+
+        public bool SongSuggestAvailable => userConfig?.PlaylistsConfig.SourceAvailability.HasFlag(PlaylistsSourceAvailability.SongSuggest) ?? false;
 
         public bool IsSongSuggestSelected
         {
@@ -84,9 +106,11 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             }
         }
 
+        #endregion
+
         public SongSourcesControlViewModel(IServiceLocator serviceLocator) : base(serviceLocator)
         {
-
+            userConfig = serviceLocator.GetService<IUserConfigDomain>().Config;
         }
 
         public async Task LoadAsync(bool refresh)

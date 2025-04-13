@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" Width="600">
     <Grid>
-        <telerik:RadTabControl Align="Justify" Background="Transparent" BorderThickness="0" Height="200" HeaderBackground="Transparent">
+        <telerik:RadTabControl Align="Justify" Background="Transparent" BorderThickness="0" Height="300" HeaderBackground="Transparent">
             <telerik:RadTabItem Header="General">
                 <local:GeneralSettingsControl DataContext="{Binding GeneralSettings}" />
             </telerik:RadTabItem>
