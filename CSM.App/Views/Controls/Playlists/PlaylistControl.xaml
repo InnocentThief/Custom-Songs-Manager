@@ -27,8 +27,8 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <telerik:RadGlyph Glyph="&#xe116;" FontSize="30" />
-                    <TextBlock Grid.Row="1" Text="No playlist selected" HorizontalAlignment="Center" Margin="0,10,0,3" />
-                    <TextBlock Grid.Row="2" Text="Select a playlist to view its content" />
+                    <TextBlock Grid.Row="1" Text="No playlist or folder selected" TextAlignment="Center" HorizontalAlignment="Center" Margin="0,10,0,3" TextWrapping="Wrap" FontWeight="DemiBold" />
+                    <TextBlock Grid.Row="2" Text="Select a playlist or folder" TextAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" />
                 </Grid>
             </Grid>
         </DataTemplate>
@@ -51,8 +51,8 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <telerik:RadGlyph Glyph="&#xe900;" FontSize="30" />
-                    <TextBlock Grid.Row="1" Text="You selected a playlist folder" HorizontalAlignment="Center" Margin="0,10,0,3" />
-                    <TextBlock Grid.Row="2" Text="Select a playlist to view its content" HorizontalAlignment="Center" />
+                    <TextBlock Grid.Row="1" Text="You selected a playlist folder" TextAlignment="Center" HorizontalAlignment="Center" Margin="0,10,0,3" TextWrapping="Wrap" FontWeight="DemiBold" />
+                    <TextBlock Grid.Row="2" Text="Select a playlist to view its content" TextAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" />
                 </Grid>
             </Grid>
         </DataTemplate>

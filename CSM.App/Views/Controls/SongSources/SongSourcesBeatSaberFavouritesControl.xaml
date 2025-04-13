@@ -7,6 +7,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="Beat Saber Favourites" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <!-- Header -->
+        <Grid Background="#FF018574">
+            <TextBlock Text="Beat Saber Favourites" Style="{StaticResource HeaderTitleStyle}" />
+        </Grid>
     </Grid>
 </UserControl>

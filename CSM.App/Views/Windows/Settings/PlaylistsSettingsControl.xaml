@@ -29,15 +29,15 @@
         <telerik:RadFilePathPicker Grid.Column="1" Grid.Row="1" DialogType="OpenFolder" FilePath="{Binding PlaylistsPath}" Text="{Binding PlaylistsPath}" FilePathChanged="RadFilePathPicker_FilePathChanged" />
         <!-- Sources: Custom levels -->
         <telerik:Label Content="Song sources" Grid.Row="2" />
-        <telerik:RadToggleSwitchButton Grid.Column="1" Grid.Row="2" CheckedContent="Custom levels" UncheckedContent="Custom levels" ContentPosition="Right" Focusable="False" IsChecked="{Binding CustomLevelsSourceAvailable}" />
+        <telerik:RadToggleSwitchButton Grid.Column="1" Grid.Row="2" CheckedContent="Custom Levels" UncheckedContent="Custom levels" ContentPosition="Right" Focusable="False" IsChecked="{Binding CustomLevelsSourceAvailable}" />
         <!-- Sources: Playlists -->
         <telerik:RadToggleSwitchButton Grid.Column="1" Grid.Row="3" CheckedContent="Playlists" UncheckedContent="Playlists" ContentPosition="Right" Focusable="False" IsChecked="{Binding PlaylistsSourceAvailable}" />
         <!-- Sources: Favourites -->
-        <telerik:RadToggleSwitchButton Grid.Column="1" Grid.Row="4" CheckedContent="Beat Saber favourites" UncheckedContent="Beat Saber favourites" ContentPosition="Right" Focusable="False" IsChecked="{Binding FavouritesAvailable}" />
+        <telerik:RadToggleSwitchButton Grid.Column="1" Grid.Row="4" CheckedContent="Beat Saber Favourites" UncheckedContent="Beat Saber favourites" ContentPosition="Right" Focusable="False" IsChecked="{Binding FavouritesAvailable}" />
         <!-- Sources: Song search -->
-        <telerik:RadToggleSwitchButton Grid.Column="1" Grid.Row="5" CheckedContent="Song search" UncheckedContent="Song search" ContentPosition="Right" Focusable="False" IsChecked="{Binding SongSearchAvailable}" />
+        <telerik:RadToggleSwitchButton Grid.Column="1" Grid.Row="5" CheckedContent="Song Search" UncheckedContent="Song search" ContentPosition="Right" Focusable="False" IsChecked="{Binding SongSearchAvailable}" />
         <!-- Sources: Song suggest -->
-        <telerik:RadToggleSwitchButton Grid.Column="1" Grid.Row="6" CheckedContent="Song suggest" UncheckedContent="Song suggest" ContentPosition="Right" Focusable="False" IsChecked="{Binding SongSuggestAvailable}" />
+        <telerik:RadToggleSwitchButton Grid.Column="1" Grid.Row="6" CheckedContent="Song Suggest" UncheckedContent="Song suggest" ContentPosition="Right" Focusable="False" IsChecked="{Binding SongSuggestAvailable}" />
 
 
     </Grid>

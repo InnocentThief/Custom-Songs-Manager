@@ -38,33 +38,61 @@
 
     </UserControl.Resources>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-        <!-- Content -->
-        <ContentControl Content="{Binding SongSource}" ContentTemplateSelector="{StaticResource SongSourceDataTemplateSelector}" />
+    <telerik:RadBusyIndicator IsBusy="{Binding LoadingInProgress}">
+        <Grid>
 
-        <!-- Navigation -->
-        <Grid Grid.Column="1" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" Visibility="{Binding AnySourcesAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <StackPanel VerticalAlignment="Center" Margin="5,0,0,0">
-                <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsCustomLevelsSelected}" Padding="8" ToolTip="Custom Levels" Visibility="{Binding CustomLevelsAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
-                    <telerik:RadGlyph Glyph="&#xe023;" />
-                </telerik:RadRadioButton>
-                <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsPlaylistsSelected}" Padding="8" ToolTip="Playlists" Visibility="{Binding PlaylistsAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
-                    <telerik:RadGlyph Glyph="&#xe029;" />
-                </telerik:RadRadioButton>
-                <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsFavouritesSelected}" Padding="8" ToolTip="Beat Saber Favourites" Visibility="{Binding FavouritesAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
-                    <telerik:RadGlyph Glyph="&#xe301;" />
-                </telerik:RadRadioButton>
-                <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsSearchSelected}" Padding="8" ToolTip="Search" Visibility="{Binding SearchAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
-                    <telerik:RadGlyph Glyph="&#xe13e;" />
-                </telerik:RadRadioButton>
-                <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsSongSuggestSelected}" Padding="8" ToolTip="Song Suggest" Visibility="{Binding SongSuggestAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
-                    <telerik:RadGlyph Glyph="&#xe05f;" />
-                </telerik:RadRadioButton>
-            </StackPanel>
+            <Grid Visibility="{Binding AnySourcesAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <!-- Content -->
+                <ContentControl Content="{Binding SongSource}" ContentTemplateSelector="{StaticResource SongSourceDataTemplateSelector}" />
+
+                <!-- Navigation -->
+                <Grid Grid.Column="1" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}">
+                    <StackPanel VerticalAlignment="Center" Margin="5,0,0,0">
+                        <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsCustomLevelsSelected}" Padding="8" ToolTip="Custom Levels" Visibility="{Binding CustomLevelsAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <telerik:RadGlyph Glyph="&#xe023;" />
+                        </telerik:RadRadioButton>
+                        <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsPlaylistsSelected}" Padding="8" ToolTip="Playlists" Visibility="{Binding PlaylistsAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <telerik:RadGlyph Glyph="&#xe029;" />
+                        </telerik:RadRadioButton>
+                        <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsFavouritesSelected}" Padding="8" ToolTip="Beat Saber Favourites" Visibility="{Binding FavouritesAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <telerik:RadGlyph Glyph="&#xe301;" />
+                        </telerik:RadRadioButton>
+                        <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsSearchSelected}" Padding="8" ToolTip="Search" Visibility="{Binding SearchAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <telerik:RadGlyph Glyph="&#xe13e;" />
+                        </telerik:RadRadioButton>
+                        <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsSongSuggestSelected}" Padding="8" ToolTip="Song Suggest" Visibility="{Binding SongSuggestAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <telerik:RadGlyph Glyph="&#xe05f;" />
+                        </telerik:RadRadioButton>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+
+
+            <Grid Visibility="{Binding AnySourcesAvailable, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <!--Header-->
+                <Grid Background="#FF018574">
+                    <TextBlock Text="Song sources" Style="{StaticResource HeaderTitleStyle}" />
+                </Grid>
+                <!--Content-->
+                <Grid Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <telerik:RadGlyph Glyph="&#xe116;" FontSize="30" />
+                    <TextBlock Grid.Row="1" Text="No song sources configured" TextAlignment="Center" HorizontalAlignment="Center" Margin="0,10,0,3" TextWrapping="Wrap" FontWeight="DemiBold" />
+                    <TextBlock Grid.Row="2" Text="Configure song sources in playlist settings" TextAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" />
+                </Grid>
+            </Grid>
         </Grid>
-    </Grid>
+    </telerik:RadBusyIndicator>
 </UserControl>
