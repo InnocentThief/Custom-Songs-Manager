@@ -27,7 +27,28 @@
         <Setter Property="FrozenColumnsSplitterVisibility" Value="Collapsed" />
         <Setter Property="RowIndicatorVisibility" Value="Collapsed" />
         <Setter Property="SelectionMode" Value="Single" />
+    </Style>
 
+    <Style x:Key="WorkspaceGroupBoxStyle" TargetType="{x:Type GroupBox}">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type GroupBox}">
+                    <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid Margin="3">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Border BorderBrush="{telerik:Windows11Resource ResourceKey=PrimaryBorderBrush}" BorderThickness="0,0,0,2">
+                                <telerik:Label Content="{TemplateBinding Header}" FontWeight="DemiBold" />
+                            </Border>
+                            <ContentPresenter Grid.Row="1" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
 </ResourceDictionary>

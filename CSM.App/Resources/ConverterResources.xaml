@@ -4,5 +4,6 @@
 
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     <telerik:InvertedBooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter" />
+    <telerik:InvertedBooleanConverter x:Key="InvertedBooleanConverter" />
 
 </ResourceDictionary>

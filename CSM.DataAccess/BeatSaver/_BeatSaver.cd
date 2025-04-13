@@ -62,9 +62,9 @@
       <FileName>BeatSaver\MapDifficulty.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Difficulty" />
-      <Property Name="Environment" />
       <Property Name="Characteristic" />
+      <Property Name="Environment" />
+      <Property Name="Difficulty" />
     </ShowAsAssociation>
   </Class>
   <Enum Name="CSM.DataAccess.BeatSaver.DeclaredAi">
@@ -88,13 +88,6 @@
       <FileName>BeatSaver\Tag.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="CSM.DataAccess.BeatSaver.Difficulty">
-    <Position X="7" Y="10" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAACAAAAAAAAABAAAAAAAIAAAAAAAAAAAoAAA=</HashCode>
-      <FileName>BeatSaver\Difficulty.cs</FileName>
-    </TypeIdentifier>
-  </Enum>
   <Enum Name="CSM.DataAccess.BeatSaver.Environment">
     <Position X="16.25" Y="4.25" Width="2.25" />
     <TypeIdentifier>
@@ -114,6 +107,13 @@
     <TypeIdentifier>
       <HashCode>AAAIAAAQABAAAgAAAAAAACAAAIAAAAAAAgAAAAAAAAA=</HashCode>
       <FileName>Common\Characteristic.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CSM.DataAccess.Common.Difficulty">
+    <Position X="7" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAABAAAAAAAIAAAAAAAAAAAoAAA=</HashCode>
+      <FileName>Common\Difficulty.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />
