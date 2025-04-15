@@ -19,4 +19,10 @@
     <InternalsVisibleTo Include="CSM.UiLogic" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="SongSuggestCore">
+      <HintPath>..\Libraries\SongSuggest\SongSuggestCore.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

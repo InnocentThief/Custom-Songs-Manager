@@ -17,7 +17,8 @@ namespace CSM.Business
         private static IServiceCollection AddDomains(this IServiceCollection services)
         {
             return services
-                    .AddSingleton<IUserConfigDomain, UserConfigDomain>();
+                    .AddSingleton<IUserConfigDomain, UserConfigDomain>()
+                    .AddSingleton<ISongSuggestDomain, SongSuggestDomain>();
         }
 
         #endregion
