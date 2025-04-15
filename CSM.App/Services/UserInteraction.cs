@@ -1,5 +1,4 @@
-﻿using CSM.App.Views;
-using CSM.App.Views.Windows;
+﻿using CSM.App.Views.Windows;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.Services;

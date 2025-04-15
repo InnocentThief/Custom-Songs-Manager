@@ -64,10 +64,11 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
 
             CustomLevels.Clear();
             var path = userConfigDomain?.Config?.CustomLevelsConfig.CustomLevelPath.Path;
-            if (string.IsNullOrEmpty(path))
+            if (string.IsNullOrEmpty(path) || !Path.Exists(path))
+            {
+                LoadingInProgress = false;
                 return;
-            if (!Path.Exists(path))
-                return;
+            }
             CustomLevels.AddRange(await LoadCustomLevelsAsync(path));
             OnPropertyChanged(nameof(CustomLevelCount));
 

@@ -1,5 +1,4 @@
-﻿using CSM.Business.Core;
-using CSM.Business.Interfaces;
+﻿using CSM.Business.Interfaces;
 using CSM.Framework.ServiceLocation;
 using CSM.Framework.Types;
 using CSM.UiLogic.AbstractBase;

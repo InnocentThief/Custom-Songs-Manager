@@ -67,10 +67,11 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
 
             Playlists.Clear();
             var path = userConfigDomain?.Config?.PlaylistsConfig.PlaylistPath.Path;
-            if (string.IsNullOrEmpty(path))
+            if (string.IsNullOrEmpty(path) || !Path.Exists(path))
+            {
+                LoadingInProgress = false;
                 return;
-            if (!Path.Exists(path))
-                return;
+            }
             Playlists.AddRange(await LoadDirectoryStructureAsync(path));
 
             LoadingInProgress = false;

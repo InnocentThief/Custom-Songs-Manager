@@ -2,7 +2,7 @@
 {
     internal enum SearchParamRelevance
     {
-        Undefined= 0,
+        Undefined = 0,
         Latest = 1,
         Relevance = 2,
         Rating = 3,
