@@ -254,145 +254,40 @@
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
-                                    <WrapPanel Orientation="Horizontal">
-                                        <telerik:RadRadioButton GroupName="TagBlue" Focusable="False" Background="#1B3E54">
-                                            <telerik:RadGlyph Glyph="&#xe117;" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagBlue" Focusable="False" Background="#1B3E54">
-                                            <telerik:Label Content="Accuracy" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagBlue" Focusable="False" Background="#1B3E54">
-                                            <telerik:Label Content="Balanced" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagBlue" Focusable="False" Background="#1B3E54">
-                                            <telerik:Label Content="Challenge" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagBlue" Focusable="False" Background="#1B3E54">
-                                            <telerik:Label Content="Dance" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagBlue" Focusable="False" Background="#1B3E54">
-                                            <telerik:Label Content="Fitness" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagBlue" Focusable="False" Background="#1B3E54">
-                                            <telerik:Label Content="Speed" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagBlue" Focusable="False" Background="#1B3E54">
-                                            <telerik:Label Content="Tech" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                    </WrapPanel>
-                                    <WrapPanel Grid.Row="1" Orientation="Horizontal">
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:RadGlyph Glyph="&#xe117;" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="Alternative" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="Ambient" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="Anime" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="Classical &amp; Orchestral" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="Comedy &amp; Meme" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="Dance" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="Drum and Bass" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="Dubstep" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="Electronic" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="Folk &amp; Acoustic" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="Funk &amp; Disco" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="Hardcore" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="Hip Hop &amp; Rap" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="Holiday" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="House" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="Indie" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="Instrumental" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="J-Pop" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="J-Rock" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="Jazz" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="K-Pop" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="Kids &amp; Family" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="Metal" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="Nightcore" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="Pop" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="Punk" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="R&amp;B" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="Rock" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="Soul" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="Speedcore" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="Swing" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="TV &amp; Film" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="Techno" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="Trance" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="Video Game" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736">
-                                            <telerik:Label Content="Vocaloid" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                    </WrapPanel>
+                                    <ItemsControl ItemsSource="{Binding MapStyles}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel Orientation="Horizontal" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <telerik:RadRadioButton GroupName="TagBlue" Focusable="False" Background="#1B3E54" IsChecked="{Binding IsSelected}">
+                                                    <Grid>
+                                                        <telerik:Label Content="{Binding Name}" Margin="6" Visibility="{Binding None, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
+                                                        <telerik:RadGlyph Glyph="&#xe117;" Margin="6" Visibility="{Binding None, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                                    </Grid>
+                                                </telerik:RadRadioButton>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                    <ItemsControl Grid.Row="1" ItemsSource="{Binding SongStyles}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel Orientation="Horizontal" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736" IsChecked="{Binding IsSelected}">
+                                                    <Grid>
+                                                        <telerik:Label Content="{Binding Name}" Margin="6" Visibility="{Binding None, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
+                                                        <telerik:RadGlyph Glyph="&#xe117;" Margin="6" Visibility="{Binding None, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                                    </Grid>
+                                                </telerik:RadRadioButton>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
                                 </Grid>
                             </GroupBox>
                             <GroupBox Grid.Row="4" Header="Environments" Style="{StaticResource WorkspaceGroupBoxStyle}" Margin="0,10,0,0">
@@ -401,145 +296,42 @@
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
-                                    <WrapPanel Orientation="Horizontal">
-                                        <telerik:RadRadioButton GroupName="EnvironmentLegacy" Focusable="False" Background="#54523A">
-                                            <telerik:RadGlyph Glyph="&#xe117;" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentLegacy" Focusable="False" Background="#54523A">
-                                            <telerik:Label Content="All" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentLegacy" Focusable="False" Background="#54523A">
-                                            <telerik:Label Content="Default" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentLegacy" Focusable="False" Background="#54523A">
-                                            <telerik:Label Content="Triangle" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentLegacy" Focusable="False" Background="#54523A">
-                                            <telerik:Label Content="Nice" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentLegacy" Focusable="False" Background="#54523A">
-                                            <telerik:Label Content="Big Mirror" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentLegacy" Focusable="False" Background="#54523A">
-                                            <telerik:Label Content="KDA" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentLegacy" Focusable="False" Background="#54523A">
-                                            <telerik:Label Content="Monstercat" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentLegacy" Focusable="False" Background="#54523A">
-                                            <telerik:Label Content="Crab Rave" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentLegacy" Focusable="False" Background="#54523A">
-                                            <telerik:Label Content="Dragons" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentLegacy" Focusable="False" Background="#54523A">
-                                            <telerik:Label Content="Origins" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentLegacy" Focusable="False" Background="#54523A">
-                                            <telerik:Label Content="Panic" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentLegacy" Focusable="False" Background="#54523A">
-                                            <telerik:Label Content="Rocket" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentLegacy" Focusable="False" Background="#54523A">
-                                            <telerik:Label Content="Green Day" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentLegacy" Focusable="False" Background="#54523A">
-                                            <telerik:Label Content="Green Day Grenade" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentLegacy" Focusable="False" Background="#54523A">
-                                            <telerik:Label Content="Timbaland" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentLegacy" Focusable="False" Background="#54523A">
-                                            <telerik:Label Content="Fitbeat" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentLegacy" Focusable="False" Background="#54523A">
-                                            <telerik:Label Content="Linkin Park" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentLegacy" Focusable="False" Background="#54523A">
-                                            <telerik:Label Content="BTS" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentLegacy" Focusable="False" Background="#54523A">
-                                            <telerik:Label Content="Kaleidoscope" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentLegacy" Focusable="False" Background="#54523A">
-                                            <telerik:Label Content="Interscope" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentLegacy" Focusable="False" Background="#54523A">
-                                            <telerik:Label Content="Skrillex" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentLegacy" Focusable="False" Background="#54523A">
-                                            <telerik:Label Content="Billie" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentLegacy" Focusable="False" Background="#54523A">
-                                            <telerik:Label Content="Halloween" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                    </WrapPanel>
-                                    <WrapPanel Grid.Row="1" Orientation="Horizontal">
-                                        <telerik:RadRadioButton GroupName="EnvironmentNew" Focusable="False" Background="#43305A">
-                                            <telerik:RadGlyph Glyph="&#xe117;" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentNew" Focusable="False" Background="#43305A">
-                                            <telerik:Label Content="All" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentNew" Focusable="False" Background="#43305A">
-                                            <telerik:Label Content="Weave" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentNew" Focusable="False" Background="#43305A">
-                                            <telerik:Label Content="Pyro" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentNew" Focusable="False" Background="#43305A">
-                                            <telerik:Label Content="EDM" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentNew" Focusable="False" Background="#43305A">
-                                            <telerik:Label Content="The Second" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentNew" Focusable="False" Background="#43305A">
-                                            <telerik:Label Content="Lizzo" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentNew" Focusable="False" Background="#43305A">
-                                            <telerik:Label Content="The Weeknd" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentNew" Focusable="False" Background="#43305A">
-                                            <telerik:Label Content="Rock Mixtape" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentNew" Focusable="False" Background="#43305A">
-                                            <telerik:Label Content="Dragons 2" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentNew" Focusable="False" Background="#43305A">
-                                            <telerik:Label Content="Panic 2" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentNew" Focusable="False" Background="#43305A">
-                                            <telerik:Label Content="Queen" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentNew" Focusable="False" Background="#43305A">
-                                            <telerik:Label Content="Linkin Park 2" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentNew" Focusable="False" Background="#43305A">
-                                            <telerik:Label Content="The Rolling Stones" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentNew" Focusable="False" Background="#43305A">
-                                            <telerik:Label Content="Lattice" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentNew" Focusable="False" Background="#43305A">
-                                            <telerik:Label Content="Daft Punk" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentNew" Focusable="False" Background="#43305A">
-                                            <telerik:Label Content="HipHop" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentNew" Focusable="False" Background="#43305A">
-                                            <telerik:Label Content="Collider" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentNew" Focusable="False" Background="#43305A">
-                                            <telerik:Label Content="Britney" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentNew" Focusable="False" Background="#43305A">
-                                            <telerik:Label Content="Monstercat 2" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                        <telerik:RadRadioButton GroupName="EnvironmentNew" Focusable="False" Background="#43305A">
-                                            <telerik:Label Content="Metallica" Margin="6" />
-                                        </telerik:RadRadioButton>
-                                    </WrapPanel>
+                                    <ItemsControl ItemsSource="{Binding LegacyEnvironments}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel Orientation="Horizontal" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <telerik:RadRadioButton GroupName="EnvironmentLegacy" Focusable="False" Background="#54523A" IsChecked="{Binding IsSelected}">
+                                                    <Grid>
+                                                        <telerik:Label Content="{Binding Name}" Margin="6" Visibility="{Binding None, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
+                                                        <telerik:RadGlyph Glyph="&#xe117;" Margin="6" Visibility="{Binding None, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                                        <telerik:Label Content="{Binding Name}" Margin="6" Visibility="{Binding All, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                                    </Grid>
+                                                </telerik:RadRadioButton>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                    <ItemsControl Grid.Row="1" ItemsSource="{Binding NewEnvironments}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel Orientation="Horizontal" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <telerik:RadRadioButton GroupName="EnvironmentNew" Focusable="False" Background="#43305A" IsChecked="{Binding IsSelected}">
+                                                    <Grid>
+                                                        <telerik:Label Content="{Binding Name}" Margin="6" Visibility="{Binding None, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
+                                                        <telerik:RadGlyph Glyph="&#xe117;" Margin="6" Visibility="{Binding None, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                                        <telerik:Label Content="{Binding Name}" Margin="6" Visibility="{Binding All, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                                    </Grid>
+                                                </telerik:RadRadioButton>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
                                 </Grid>
                             </GroupBox>
 

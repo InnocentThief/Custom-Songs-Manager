@@ -5,6 +5,7 @@ namespace CSM.DataAccess.BeatSaver
     [JsonConverter(typeof(JsonStringEnumConverter))]
     internal enum Tag
     {
+        None,
         [JsonStringEnumMemberName("tech")]
         Tech,
         [JsonStringEnumMemberName("dance-style")]

@@ -14,5 +14,17 @@
             }
             return collection;
         }
+
+        public static void ForEach<TSource>(this IEnumerable<TSource>? collection, Action<TSource> action)
+        {
+            if (collection == null || action == null)
+            {
+                return;
+            }
+            foreach (var t in collection)
+            {
+                action(t);
+            }
+        }
     }
 }

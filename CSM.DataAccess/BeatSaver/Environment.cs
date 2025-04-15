@@ -5,6 +5,8 @@ namespace CSM.DataAccess.BeatSaver
     [JsonConverter(typeof(JsonStringEnumConverter))]
     internal enum Environment
     {
+        None,
+        All,
         [JsonStringEnumMemberName("DefaultEnvironment")]
         DefaultEnvironment,
         [JsonStringEnumMemberName("TriangleEnvironment")]
