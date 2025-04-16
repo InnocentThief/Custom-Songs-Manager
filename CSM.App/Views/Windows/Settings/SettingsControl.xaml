@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:CSM.App.Views.Windows.Settings"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" 
              mc:Ignorable="d" 
-             d:DesignHeight="450" Width="600">
+             d:DesignHeight="450" Width="700">
     <Grid>
         <telerik:RadTabControl Align="Justify" Background="Transparent" BorderThickness="0" Height="300" HeaderBackground="Transparent">
             <telerik:RadTabItem Header="General">
@@ -26,6 +26,9 @@
             </telerik:RadTabItem>
             <telerik:RadTabItem Header="BeatLeader">
                 <local:BeatLeaderSettingsControl DataContext="{Binding BeatLeaderSettings}" />
+            </telerik:RadTabItem>
+            <telerik:RadTabItem Header="Song Suggest">
+                <local:SongSuggestSettingsControl DataContext="{Binding SongSuggestSettings}" />
             </telerik:RadTabItem>
         </telerik:RadTabControl>
     </Grid>

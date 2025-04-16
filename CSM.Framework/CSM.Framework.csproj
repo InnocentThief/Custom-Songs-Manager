@@ -7,13 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <InternalsVisibleTo Include="CSM" />
-    <InternalsVisibleTo Include="CSM.Business" />
-    <InternalsVisibleTo Include="CSM.UiLogic" />
+    <Compile Remove="Logging\**" />
+    <EmbeddedResource Remove="Logging\**" />
+    <None Remove="Logging\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Logging\" />
+    <InternalsVisibleTo Include="CSM" />
+    <InternalsVisibleTo Include="CSM.Business" />
+    <InternalsVisibleTo Include="CSM.UiLogic" />
   </ItemGroup>
 
 </Project>

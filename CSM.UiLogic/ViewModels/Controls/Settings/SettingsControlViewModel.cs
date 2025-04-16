@@ -20,6 +20,8 @@ namespace CSM.UiLogic.ViewModels.Controls.Settings
 
         public BeatLeaderSettingsViewModel BeatLeaderSettings { get; }
 
+        public SongSuggestSettingsViewModel SongSuggestSettings { get; }
+
         public SettingsControlViewModel(IServiceLocator serviceLocator) : base(serviceLocator, "Cancel", EditViewModelCommandColor.Detault, "Save", EditViewModelCommandColor.Detault)
         {
             var userConfigDomain = serviceLocator.GetService<IUserConfigDomain>();
@@ -30,6 +32,7 @@ namespace CSM.UiLogic.ViewModels.Controls.Settings
             TwitchSettings = new TwitchSettingsViewModel(serviceLocator, userConfigDomain.Config!);
             ScoreSaberSettings = new ScoreSaberSettingsViewModel(serviceLocator, userConfigDomain.Config!);
             BeatLeaderSettings = new BeatLeaderSettingsViewModel(serviceLocator, userConfigDomain.Config!);
+            SongSuggestSettings = new SongSuggestSettingsViewModel(serviceLocator, userConfigDomain.Config!);
         }
     }
 }

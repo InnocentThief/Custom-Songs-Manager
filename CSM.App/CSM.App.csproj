@@ -11,6 +11,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Converter\**" />
+    <Compile Remove="Views\Workspaces\BeatLeader\**" />
+    <Compile Remove="Views\Workspaces\ScoreSaber\**" />
+    <Compile Remove="Views\Workspaces\Twitch\**" />
+    <EmbeddedResource Remove="Converter\**" />
+    <EmbeddedResource Remove="Views\Workspaces\BeatLeader\**" />
+    <EmbeddedResource Remove="Views\Workspaces\ScoreSaber\**" />
+    <EmbeddedResource Remove="Views\Workspaces\Twitch\**" />
+    <None Remove="Converter\**" />
+    <None Remove="Views\Workspaces\BeatLeader\**" />
+    <None Remove="Views\Workspaces\ScoreSaber\**" />
+    <None Remove="Views\Workspaces\Twitch\**" />
+    <Page Remove="Converter\**" />
+    <Page Remove="Views\Workspaces\BeatLeader\**" />
+    <Page Remove="Views\Workspaces\ScoreSaber\**" />
+    <Page Remove="Views\Workspaces\Twitch\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="CSM.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -21,6 +40,7 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.4" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.4" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="RestoreWindowPlace" Version="3.1.0" />
     <PackageReference Include="Telerik.Windows.Controls.FileDialogs.for.Wpf.Xaml" Version="2025.1.211" />
     <PackageReference Include="Telerik.Windows.Controls.GridView.for.Wpf.Xaml" Version="2025.1.211" />
@@ -31,13 +51,6 @@
     <ProjectReference Include="..\CSM.Framework\CSM.Framework.csproj" />
     <ProjectReference Include="..\CSM.Services\CSM.Services.csproj" />
     <ProjectReference Include="..\CSM.UiLogic\CSM.UiLogic.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Converter\" />
-    <Folder Include="Views\Workspaces\BeatLeader\" />
-    <Folder Include="Views\Workspaces\ScoreSaber\" />
-    <Folder Include="Views\Workspaces\Twitch\" />
   </ItemGroup>
 
 </Project>

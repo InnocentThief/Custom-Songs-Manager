@@ -1,14 +1,13 @@
-﻿using SongSuggestNS;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CSM.DataAccess.Playlists;
 
 namespace CSM.Business.Interfaces
 {
     internal interface ISongSuggestDomain
     {
         Task InitializeAsync();
+
+        Task GenerateSongSuggestionsAsync(string? playerId = null);
+
+        Task<Playlist?> GetPlaylistAsync();
     }
 }

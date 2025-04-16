@@ -178,7 +178,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
             if (selectedSource is SongSuggestSourceViewModel songSuggestSourceViewModel)
             {
-                // nothing to load
+                await songSuggestSourceViewModel.LoadAsync();
             }
 
         }

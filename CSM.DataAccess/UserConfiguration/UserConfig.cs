@@ -12,5 +12,7 @@ namespace CSM.DataAccess.UserConfiguration
         public TwitchConfig TwitchConfig { get; set; } = new();
         public ScoreSaberConfig ScoreSaberConfig { get; set; } = new();
         public BeatLeaderConfig BeatLeaderConfig { get; set; } = new();
+        public SongSuggestConfig SongSuggestConfig { get; set; } = new();
+
     }
 }

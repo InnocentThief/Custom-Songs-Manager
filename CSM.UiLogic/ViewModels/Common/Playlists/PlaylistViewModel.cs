@@ -1,19 +1,25 @@
 ﻿using CSM.DataAccess.Playlists;
+using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
+using CSM.UiLogic.Commands;
 using CSM.UiLogic.Converter;
+using System.Collections.ObjectModel;
 using System.Windows.Media;
 
 namespace CSM.UiLogic.ViewModels.Common.Playlists
 {
-    internal sealed class PlaylistViewModel(
-        IServiceLocator serviceLocator,
-        Playlist playlist,
-        string path)
-        : BasePlaylistViewModel(serviceLocator, playlist.PlaylistTitle, path)
+    internal sealed class PlaylistViewModel : BasePlaylistViewModel
     {
-        private readonly Playlist playlist = playlist;
+        #region Private fields
+
+        private readonly Playlist playlist;
+        private IRelayCommand? fetchDataCommand;
+        
+        #endregion
 
         #region Properties
+
+        public IRelayCommand? FetchDataCommand => fetchDataCommand ??= CommandFactory.CreateFromAsync(FetchDataAsync, CanFetchData);
 
         public string PlaylistTitle
         {
@@ -55,6 +61,31 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
                 if (string.IsNullOrWhiteSpace(playlist.Image)) return null;
                 return ImageConverter.BitmapFromBase64(playlist.Image.Split(',').Last());
             }
+        }
+
+        public ObservableCollection<PlaylistSongViewModel> Songs { get; } = [];
+
+        #endregion
+
+        public PlaylistViewModel(
+           IServiceLocator serviceLocator,
+           Playlist playlist,
+           string path) : base(serviceLocator, playlist.PlaylistTitle, path)
+        {
+            this.playlist = playlist;
+           Songs.AddRange(playlist.Songs.Select(s => new PlaylistSongViewModel(serviceLocator, s)));
+        }
+
+        public async Task FetchDataAsync()
+        {
+
+        }
+
+        #region Helper methods
+
+        private bool CanFetchData()
+        {
+            return true;
         }
 
         #endregion
