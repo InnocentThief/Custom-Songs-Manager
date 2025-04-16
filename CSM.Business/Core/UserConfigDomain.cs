@@ -1,11 +1,12 @@
 ﻿using CSM.Business.Interfaces;
 using CSM.DataAccess.UserConfiguration;
 using CSM.Framework.Types;
+using Microsoft.Extensions.Logging;
 using System.Text.Json;
 
 namespace CSM.Business.Core
 {
-    internal sealed class UserConfigDomain : IUserConfigDomain
+    internal sealed class UserConfigDomain(ILogger<UserConfigDomain> logger) : IUserConfigDomain
     {
         #region Private fields
 
@@ -35,9 +36,9 @@ namespace CSM.Business.Core
                     {
                         userConfig = JsonSerializer.Deserialize<UserConfig>(config);
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
-
+                        logger.LogError(ex, $"Error deserializing UserConfig from {userConfigPath}");
                         throw;
                     }
 

@@ -3,6 +3,7 @@ using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.Commands;
 using CSM.UiLogic.ViewModels.Common.Playlists;
+using Microsoft.Extensions.Logging;
 
 namespace CSM.UiLogic.ViewModels.Controls.SongSources
 {
@@ -16,6 +17,8 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
         private string? playerId = string.Empty;
         private IRelayCommand? generateCommand, resetAdvancedSettingsCommand, saveAdvancedSettingsCommand;
         private ISongSuggestDomain? songSuggestDomain;
+
+        private readonly ILogger<SongSuggestSourceViewModel> logger = serviceLocator.GetService<ILogger<SongSuggestSourceViewModel>>();
         private readonly IUserConfigDomain userConfigDomain = serviceLocator.GetService<IUserConfigDomain>();
 
         #endregion
@@ -245,6 +248,10 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             {
                 songSuggestDomain = ServiceLocator.GetService<ISongSuggestDomain>();
                 await songSuggestDomain.InitializeAsync();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error initializing song suggestion.");
             }
             finally
             {

@@ -1,12 +1,13 @@
 ﻿using CSM.Business.Interfaces;
 using CSM.DataAccess.Playlists;
+using Microsoft.Extensions.Logging;
 using Settings;
 using SongSuggestNS;
 using System.Text.Json;
 
 namespace CSM.Business.Core
 {
-    internal class SongSuggestDomain(IUserConfigDomain userConfigDomain) : ISongSuggestDomain
+    internal class SongSuggestDomain(IUserConfigDomain userConfigDomain, ILogger<SongSuggestDomain> logger) : ISongSuggestDomain
     {
         #region Private fields
 
@@ -24,7 +25,10 @@ namespace CSM.Business.Core
         public async Task GenerateSongSuggestionsAsync(string? playerId = null)
         {
             if (songSuggest == null)
-                throw new InvalidOperationException("SongSuggest is not initialized.");
+            {
+                logger.LogError("SongSuggest is not initialized. Please call InitializeAsync() first.");
+                return;
+            }
 
             try
             {
@@ -33,7 +37,7 @@ namespace CSM.Business.Core
             }
             catch (Exception ex)
             {
-
+                logger.LogError(ex, "Error generating song suggestions.");
                 throw;
             }
 

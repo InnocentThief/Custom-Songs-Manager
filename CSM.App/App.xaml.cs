@@ -5,6 +5,7 @@ using CSM.UiLogic.Services;
 using CSM.UiLogic.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using RestoreWindowPlace;
 using System.IO;
 using System.Windows;
@@ -81,19 +82,14 @@ namespace CSM.App
             ServiceLocator = new ServiceLocator();
             userInteraction = new UserInteraction(ServiceLocator);
             IHost host = Host.CreateDefaultBuilder(args)
-                //.ConfigureAppConfiguration(config =>
-                //{
-                //    config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-                //})
+                .ConfigureLogging(logBuilder =>
+                {
+                    logBuilder.ClearProviders();
+                    logBuilder.AddLog4Net("log4net.config");
+                })
                 .ConfigureServices((ctx, services) =>
                 {
-
                     services
-                    //.AddLogging(logging =>
-                    //{
-                    //    logging.ClearProviders();
-                    //    logging.AddFile(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Custom Songs Manager", "csm.log"));
-                    //})
                     .AddSingleton(userInteraction)
                     .ConfigureServices(ctx.Configuration, ServiceLocator);
                 })

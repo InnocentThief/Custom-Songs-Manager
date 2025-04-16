@@ -6,6 +6,7 @@ using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.Commands;
 using CSM.UiLogic.ViewModels.Common.CustomLevels;
 using CSM.UiLogic.ViewModels.Controls.SongSources;
+using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
@@ -22,6 +23,7 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
         private ICustomLevelViewModel? selectedCustomLevel;
         private IRelayCommand? deleteCustomLevelCommand;
 
+        private readonly ILogger<CustomLevelsControlViewModel> logger = serviceLocator.GetService<ILogger<CustomLevelsControlViewModel>>();
         private readonly IUserConfigDomain userConfigDomain = serviceLocator.GetService<IUserConfigDomain>();
 
         #endregion
@@ -115,7 +117,7 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
                 }
                 catch (Exception ex)
                 {
-                    // todo Log error
+                    logger.LogError(ex, $"Error loading custom level from {infoFile}");
                     continue;
                 }
             }

@@ -15,6 +15,7 @@
                 <RowDefinition Height="40" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <!-- Header -->
@@ -214,20 +215,22 @@
                                 <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="Add some useful informations" />
                             </Grid>
 
-                            <telerik:RadButton Content="Reset advanced settings" Command="{Binding ResetAdvancedSettingsCommand}" Grid.Row="13" Padding="6" Margin="0,10,0,0" />
-                            <telerik:RadButton Content="Save advanced settings" Command="{Binding SaveAdvancedSettingsCommand}" Grid.Column="1" Grid.Row="13" Padding="6" Margin="0,10,0,0" />
+                            <telerik:RadButton Content="Reset advanced settings" Command="{Binding ResetAdvancedSettingsCommand}" Grid.Row="13" Padding="6" Margin="0,10,0,0" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" />
+                            <telerik:RadButton Content="Save advanced settings" Command="{Binding SaveAdvancedSettingsCommand}" Grid.Column="1" Grid.Row="13" Padding="6" Margin="0,10,0,0" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" />
                         </Grid>
                     </GroupBox>
                 </Grid>
 
             </GroupBox>
-            <telerik:RadButton Content="Suggest Songs" Grid.Row="2" Command="{Binding GenerateCommand}" Padding="6" />
+            <telerik:RadButton Content="Suggest Songs..." Grid.Row="2" Command="{Binding GenerateCommand}" Padding="6" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" />
+
+            <TextBlock Text="Suggested Songs" Grid.Row="3" FontWeight="DemiBold" FontSize="18" Margin="3"  />
 
             <!-- Result -->
             <telerik:RadGridView 
                 behaviours:GridViewHeaderContextMenuBehaviour.IsEnabled="True"
                 DataContext="{Binding Playlist}"
-                Grid.Row="3"
+                Grid.Row="4"
                 Margin="3,3,3,3" 
                 ItemsSource="{Binding Songs}" 
                 SelectedItem="{Binding SelectedCustomLevel}" 

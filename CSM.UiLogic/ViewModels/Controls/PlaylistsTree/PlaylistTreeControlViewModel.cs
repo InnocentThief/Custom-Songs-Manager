@@ -5,6 +5,7 @@ using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.Commands;
 using CSM.UiLogic.ViewModels.Common.Playlists;
+using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
@@ -24,6 +25,7 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
         private IRelayCommand? openInFileExplorerCommand;
         private IRelayCommand? refreshCommand;
 
+        private readonly ILogger<PlaylistTreeControlViewModel> logger = serviceLocator.GetService<ILogger<PlaylistTreeControlViewModel>>();
         private readonly IUserConfigDomain userConfigDomain = serviceLocator.GetService<IUserConfigDomain>();
 
         #endregion
@@ -97,12 +99,21 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
             var allowedExtensions = new[] { ".json", ".bplist" };
             foreach (var file in files.Where(file => allowedExtensions.Contains(Path.GetExtension(file).ToLower())))
             {
-                var content = await File.ReadAllTextAsync(file);
-                var playList = JsonSerializer.Deserialize<Playlist>(content);
-                if (playList == null)
+                try
+                {
+                    var content = await File.ReadAllTextAsync(file);
+                    var playList = JsonSerializer.Deserialize<Playlist>(content);
+                    if (playList == null)
+                        continue;
+                    var playlistViewModel = new PlaylistViewModel(ServiceLocator, playList, file);
+                    retval.Add(playlistViewModel);
+                }
+                catch (Exception ex)
+                {
+                    logger.LogError(ex, $"Error loading playlist from {file}");
                     continue;
-                var playlistViewModel = new PlaylistViewModel(ServiceLocator, playList, file);
-                retval.Add(playlistViewModel);
+                }
+
             }
 
             return retval;
@@ -113,7 +124,7 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
             var selectedFolderViewModel = selectedPlaylist as PlaylistFolderViewModel;
             var currentFolder = selectedFolderViewModel?.Path ?? userConfigDomain.Config?.PlaylistsConfig.PlaylistPath.Path;
 
-
+            // todo: implement folder creation
         }
 
         private bool CanAddFolder()
