@@ -60,19 +60,19 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
             if (CustomLevels.Count > 0 && !refresh)
                 return;
 
-            LoadingInProgress = true;
+            SetLoadingInProgress(true, "Loading custom levels...");
 
             CustomLevels.Clear();
             var path = userConfigDomain?.Config?.CustomLevelsConfig.CustomLevelPath.Path;
             if (string.IsNullOrEmpty(path) || !Path.Exists(path))
             {
-                LoadingInProgress = false;
+                SetLoadingInProgress(false, string.Empty);
                 return;
             }
             CustomLevels.AddRange(await LoadCustomLevelsAsync(path));
             OnPropertyChanged(nameof(CustomLevelCount));
 
-            LoadingInProgress = false;
+            SetLoadingInProgress(false, string.Empty);
         }
 
         #region Helper methods

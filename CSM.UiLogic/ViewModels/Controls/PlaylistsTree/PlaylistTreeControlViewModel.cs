@@ -63,18 +63,18 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
             if (Playlists.Count > 0 && !refresh)
                 return;
 
-            LoadingInProgress = true;
+            SetLoadingInProgress(true, "Loading playlists...");
 
             Playlists.Clear();
             var path = userConfigDomain?.Config?.PlaylistsConfig.PlaylistPath.Path;
             if (string.IsNullOrEmpty(path) || !Path.Exists(path))
             {
-                LoadingInProgress = false;
+                SetLoadingInProgress(false, string.Empty);
                 return;
             }
             Playlists.AddRange(await LoadDirectoryStructureAsync(path));
 
-            LoadingInProgress = false;
+            SetLoadingInProgress(false, string.Empty);
         }
 
         #region Helper methods

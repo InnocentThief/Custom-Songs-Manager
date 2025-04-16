@@ -7,6 +7,7 @@ namespace CSM.UiLogic.AbstractBase
     internal abstract class BaseViewModel : BaseNotifiable
     {
         private bool loadingInProgress;
+        private string loadingInProgressMessage = string.Empty;
 
         public bool LoadingInProgress
         {
@@ -16,6 +17,18 @@ namespace CSM.UiLogic.AbstractBase
                 if (loadingInProgress == value)
                     return;
                 loadingInProgress = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string LoadingInProgressMessage
+        {
+            get => loadingInProgressMessage;
+            set
+            {
+                if (loadingInProgressMessage == value)
+                    return;
+                loadingInProgressMessage = value;
                 OnPropertyChanged();
             }
         }
@@ -31,6 +44,12 @@ namespace CSM.UiLogic.AbstractBase
             ServiceLocator = serviceLocator;
             CommandFactory = ServiceLocator.GetService<ICommandFactory>();
             UserInteraction = ServiceLocator.GetService<IUserInteraction>();
+        }
+
+        protected void SetLoadingInProgress(bool value, string message)
+        {
+            LoadingInProgressMessage = message;
+            LoadingInProgress = value;
         }
     }
 }

@@ -104,14 +104,14 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             }
         }
 
-        public bool IgnoreNonImproveable
+        public bool IgnoreNonImprovable
         {
-            get => userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.IgnoreNonImproveable;
+            get => userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.IgnoreNonImprovable;
             set
             {
-                if (value == userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.IgnoreNonImproveable)
+                if (value == userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.IgnoreNonImprovable)
                     return;
-                userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.IgnoreNonImproveable = value;
+                userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.IgnoreNonImprovable = value;
                 IsDirty = true;
                 OnPropertyChanged();
             }
@@ -195,32 +195,6 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             }
         }
 
-        public double BetterAccCap
-        {
-            get => userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.BetterAccCap;
-            set
-            {
-                if (value == userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.BetterAccCap)
-                    return;
-                userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.BetterAccCap = value;
-                IsDirty = true;
-                OnPropertyChanged();
-            }
-        }
-
-        public double WorseAccCap
-        {
-            get => userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.WorseAccCap;
-            set
-            {
-                if (value == userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.WorseAccCap)
-                    return;
-                userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.WorseAccCap = value;
-                IsDirty = true;
-                OnPropertyChanged();
-            }
-        }
-
         // TODO: Leaderboard
 
         public int OriginSongCount
@@ -236,11 +210,37 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             }
         }
 
+        public double ModifierStyle
+        {
+            get => userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.FilterSettings.ModifierStyle;
+            set
+            {
+                if (value == userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.FilterSettings.ModifierStyle)
+                    return;
+                userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.FilterSettings.ModifierStyle = value;
+                IsDirty = true;
+                OnPropertyChanged();
+            }
+        }
+
+        public double ModifierOverweight
+        {
+            get => userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.FilterSettings.ModifierOverweight;
+            set
+            {
+                if (value == userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.FilterSettings.ModifierOverweight)
+                    return;
+                userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.FilterSettings.ModifierOverweight = value;
+                IsDirty = true;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         public async Task LoadAsync()
         {
-            LoadingInProgress = true;
+            SetLoadingInProgress(true, "Initializing song suggestion...");
             try
             {
                 songSuggestDomain = ServiceLocator.GetService<ISongSuggestDomain>();
@@ -248,7 +248,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             }
             finally
             {
-                LoadingInProgress = false;
+                SetLoadingInProgress(false, string.Empty);
             }
         }
 
@@ -259,7 +259,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             if (songSuggestDomain == null)
                 return;
 
-            LoadingInProgress = true;
+            SetLoadingInProgress(true, "Generating song suggestions...");
             var playerIdToUse = string.IsNullOrWhiteSpace(playerId) ? null : playerId;
             await songSuggestDomain.GenerateSongSuggestionsAsync(playerIdToUse);
             var playlist = await songSuggestDomain.GetPlaylistAsync();
@@ -270,7 +270,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
                 Playlist = playlistViewModel;
                 OnPropertyChanged(nameof(Playlist));
             }
-            LoadingInProgress = false;
+            SetLoadingInProgress(false, string.Empty);
         }
 
         private bool CanGenerate()
@@ -285,16 +285,16 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
             OnPropertyChanged(nameof(IgnorePlayedAll));
             OnPropertyChanged(nameof(IgnorePlayedDays));
-            OnPropertyChanged(nameof(IgnoreNonImproveable));
+            OnPropertyChanged(nameof(IgnoreNonImprovable));
             OnPropertyChanged(nameof(RequiredMatches));
             OnPropertyChanged(nameof(UseLikedSongs));
             OnPropertyChanged(nameof(FillLikedSongs));
             OnPropertyChanged(nameof(UseLocalScores));
             OnPropertyChanged(nameof(ExtraSongs));
             OnPropertyChanged(nameof(PlaylistLength));
-            OnPropertyChanged(nameof(BetterAccCap));
-            OnPropertyChanged(nameof(WorseAccCap));
             OnPropertyChanged(nameof(OriginSongCount));
+            OnPropertyChanged(nameof(ModifierStyle));
+            OnPropertyChanged(nameof(ModifierOverweight));
         }
 
         private bool CanResetAdvancedSettings()

@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     
-    <telerik:RadBusyIndicator IsBusy="{Binding LoadingInProgress}" >
+    <telerik:RadBusyIndicator IsBusy="{Binding LoadingInProgress}" BusyContent="{Binding LoadingInProgressMessage}" >
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="40" />
@@ -72,36 +72,36 @@
                             </Grid.RowDefinitions>
 
                             <!-- IgnorePlayedAll -->
-                            <telerik:Label Content="Ignore played all" />
+                            <telerik:Label Content="Ignore played" />
                             <Grid Grid.Column="1">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <telerik:RadToggleSwitchButton IsChecked="{Binding IgnorePlayedAll}" />
-                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="18" ToolTip="Add some useful informations" />
+                                <telerik:RadToggleSwitchButton Focusable="False" IsChecked="{Binding IgnorePlayedAll}" x:Name="ignorePlayed" />
+                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="If enabled, maps that you already have played will not be suggested. Overwrites 'Ignore played days'" />
                             </Grid>
 
                             <!-- IgnorePlayedDays -->
                             <telerik:Label Content="Ignore played days" Grid.Row="1" />
-                            <Grid Grid.Column="1" Grid.Row="1">
+                            <Grid Grid.Column="1" Grid.Row="1" IsEnabled="{Binding ElementName=ignorePlayed, Path=IsChecked, Converter={StaticResource InvertedBooleanConverter}}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <telerik:RadNumericUpDown IsInteger="True" ShowButtons="False" Value="{Binding IgnorePlayedDays}" NullValue="14" />
-                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="18" ToolTip="Add some useful informations" />
+                                <telerik:RadGlyph Grid.Column="2" Glyph="&#xe401;" FontSize="20" ToolTip="Maps that you already have played will not be suggested for the specified number of days" />
                             </Grid>
 
                             <!-- IgnoreNonImproveable -->
-                            <telerik:Label Content="Ignore non improveable" Grid.Row="2" />
+                            <telerik:Label Content="Ignore non improvable" Grid.Row="2" />
                             <Grid Grid.Column="1" Grid.Row="2">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <telerik:RadToggleSwitchButton IsChecked="{Binding IgnorenonImproveable}" />
-                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="18" ToolTip="Add some useful informations" />
+                                <telerik:RadToggleSwitchButton IsChecked="{Binding IgnoreNonImprovable}" />
+                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="If enabled, maps that you already have a great score on will not be suggested" />
                             </Grid>
 
                             <!-- RequiredMatches -->
@@ -112,7 +112,7 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <telerik:RadNumericUpDown IsInteger="True" ShowButtons="False" Value="{Binding RequiredMatches}" NullValue="90" />
-                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="18" ToolTip="Add some useful informations" />
+                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="Add some useful informations" />
                             </Grid>
 
                             <!-- UseLikedSongs -->
@@ -123,7 +123,7 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <telerik:RadToggleSwitchButton IsChecked="{Binding UseLikedSongs}" />
-                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="18" ToolTip="Add some useful informations" />
+                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="Add some useful informations" />
                             </Grid>
 
                             <!-- FillLikedSongs -->
@@ -134,7 +134,7 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <telerik:RadToggleSwitchButton IsChecked="{Binding FillLikedSongs}" />
-                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="18" ToolTip="Add some useful informations" />
+                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="Add some useful informations" />
                             </Grid>
 
                             <!-- UseLocalScores -->
@@ -145,7 +145,7 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <telerik:RadToggleSwitchButton IsChecked="{Binding UseLocalScores}" />
-                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="18" ToolTip="Add some useful informations" />
+                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="Add some useful informations" />
                             </Grid>
 
                             <!-- ExtraSongs -->
@@ -156,7 +156,7 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <telerik:RadNumericUpDown IsInteger="True" ShowButtons="False" Value="{Binding ExtraSongs}" NullValue="15" />
-                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="18" ToolTip="Add some useful informations" />
+                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="Add some useful informations" />
                             </Grid>
 
                             <!-- PlaylistLength -->
@@ -167,51 +167,51 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <telerik:RadNumericUpDown IsInteger="True" ShowButtons="False" Value="{Binding PlaylistLength}" NullValue="50" />
-                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="18" ToolTip="Add some useful informations" />
+                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="Add some useful informations" />
                             </Grid>
 
-                            <!-- BetterAccCap -->
-                            <telerik:Label Content="Better acc cap" Grid.Row="9" />
+                            <!-- Leaderboard -->
+                            <telerik:Label Content="Leaderboard" Grid.Row="9" />
                             <Grid Grid.Column="1" Grid.Row="9">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <telerik:RadNumericUpDown NumberDecimalDigits="2" ShowButtons="False" Value="{Binding BetterAccCap}" NullValue="1.2" />
-                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="18" ToolTip="Add some useful informations" />
+                                <telerik:RadComboBox />
+                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="Add some useful informations" />
                             </Grid>
 
-                            <!-- WorseAccCap -->
-                            <telerik:Label Content="Worse acc cap" Grid.Row="10" />
+                            <!-- OriginSongCount -->
+                            <telerik:Label Content="Origin song count" Grid.Row="10" />
                             <Grid Grid.Column="1" Grid.Row="10">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <telerik:RadNumericUpDown NumberDecimalDigits="2" ShowButtons="False" Value="{Binding WorseAccCap}" NullValue="0.7" />
-                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="18" ToolTip="Add some useful informations" />
+                                <telerik:RadNumericUpDown IsInteger="True" ShowButtons="False" Value="{Binding OriginSongCount}" NullValue="50" />
+                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="Add some useful informations" />
                             </Grid>
 
-                            <!-- Leaderboard -->
-                            <telerik:Label Content="Leaderboard" Grid.Row="11" />
+                            <!-- ModifierStyle -->
+                            <telerik:Label Content="Modifier style" Grid.Row="11" />
                             <Grid Grid.Column="1" Grid.Row="11">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <telerik:RadComboBox />
-                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="18" ToolTip="Add some useful informations" />
+                                <telerik:RadNumericUpDown IsInteger="True" ShowButtons="False" Value="{Binding ModifierStyle}" NullValue="50" />
+                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="Add some useful informations" />
                             </Grid>
 
                             <!-- OriginSongCount -->
-                            <telerik:Label Content="Origin song count" Grid.Row="12" />
+                            <telerik:Label Content="Modifier overweight" Grid.Row="12" />
                             <Grid Grid.Column="1" Grid.Row="12">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <telerik:RadNumericUpDown IsInteger="True" ShowButtons="False" Value="{Binding OriginSongCount}" NullValue="50" />
-                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="18" ToolTip="Add some useful informations" />
+                                <telerik:RadNumericUpDown IsInteger="True" ShowButtons="False" Value="{Binding ModifierOverweight}" NullValue="50" />
+                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="Add some useful informations" />
                             </Grid>
 
                             <telerik:RadButton Content="Reset advanced settings" Command="{Binding ResetAdvancedSettingsCommand}" Grid.Row="13" Padding="6" Margin="0,10,0,0" />
