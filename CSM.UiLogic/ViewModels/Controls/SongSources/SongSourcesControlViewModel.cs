@@ -51,18 +51,18 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         public bool PlaylistsAvailable => userConfig?.PlaylistsConfig.SourceAvailability.HasFlag(PlaylistsSourceAvailability.Playlists) ?? false;
 
-        //public bool IsPlaylistsSelected
-        //{
-        //    get => songSource == SongSource.Playlists;
-        //    set
-        //    {
-        //        if (value)
-        //        {
-        //            songSource = SongSource.Playlists;
-        //            OnPropertyChanged();
-        //        }
-        //    }
-        //}
+        public bool IsPlaylistsSelected
+        {
+            get => selectedSource is PlaylistsSourceViewModel;
+            set
+            {
+                if (value)
+                {
+                    SelectedSource = Sources.SingleOrDefault(s => s is PlaylistsSourceViewModel);
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public bool FavouritesAvailable => userConfig?.PlaylistsConfig.SourceAvailability.HasFlag(PlaylistsSourceAvailability.BeatSaberFavourites) ?? false;
 
@@ -120,7 +120,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             }
             if (PlaylistsAvailable)
             {
-                // do something nice
+                Sources.Add(new PlaylistsSourceViewModel(serviceLocator));
             }
             if (FavouritesAvailable)
             {
@@ -141,7 +141,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
                     IsCustomLevelsSelected = true;
                     break;
                 case PlaylistsSourceAvailability.Playlists:
-                    // set IsPlaylistsSelected = true ;
+                    IsPlaylistsSelected = true;
                     break;
                 case PlaylistsSourceAvailability.BeatSaberFavourites:
                     IsFavouritesSelected = true;
@@ -164,7 +164,11 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             {
                 await customLevelsControlViewModel.LoadAsync(false);
             }
-            // playlists
+
+            if (selectedSource is PlaylistsSourceViewModel playlistsSourceViewModel)
+            {
+                await playlistsSourceViewModel.LoadAsync();
+            }
 
             if (selectedSource is BeatSaberFavouritesSourceViewModel favouritesSourceViewModel)
             {

@@ -12,7 +12,7 @@ using System.Text.Json;
 
 namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
 {
-    internal class PlaylistTreeControlViewModel(IServiceLocator serviceLocator) : BaseViewModel(serviceLocator)
+    internal class PlaylistTreeControlViewModel(IServiceLocator serviceLocator, bool hasEditHeader = true) : BaseViewModel(serviceLocator)
     {
         #region Private fields
 
@@ -29,6 +29,8 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
         #endregion
 
         #region Properties
+
+        public bool HasEditHeader => hasEditHeader;
 
         public ObservableCollection<BasePlaylistViewModel> Playlists { get; } = [];
 

@@ -17,7 +17,8 @@ namespace CSM.App.Views.Controls.SongSources
             if (item == null) return base.SelectTemplate(item, container);
             if (item is CustomLevelsControlViewModel customLevelsControlViewModel)
                 return CustomLevelsDataTemplate;
-            // todo: do the playlist stuff
+            if (item is PlaylistsSourceViewModel playlistsSourceViewModel)
+                return PlaylistsDataTemplate;
             if (item is BeatSaberFavouritesSourceViewModel beatSaberFavouritesSourceViewModel)
                 return FavouritesDataTemplate;
             if (item is SongSearchSourceViewModel songSearchSourceViewModel)

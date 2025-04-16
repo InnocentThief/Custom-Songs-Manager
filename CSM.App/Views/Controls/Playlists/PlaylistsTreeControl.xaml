@@ -58,15 +58,15 @@
                     <telerik:RadButton Command="{Binding RefreshCommand}" ToolTip="Refresh">
                         <telerik:RadGlyph Glyph="&#xe103;" />
                     </telerik:RadButton>
-                    <telerik:RadToolBarSeparator />
-                    <telerik:RadButton Command="{Binding AddFolderCommand}" ToolTip="Add folder">
+                    <telerik:RadToolBarSeparator Visibility="{Binding HasEditHeader, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <telerik:RadButton Command="{Binding AddFolderCommand}" ToolTip="Add folder" Visibility="{Binding HasEditHeader, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <telerik:RadGlyph Glyph="&#xe902;" />
                     </telerik:RadButton>
-                    <telerik:RadButton Command="{Binding AddPlaylistCommand}" ToolTip="Add playlist">
+                    <telerik:RadButton Command="{Binding AddPlaylistCommand}" ToolTip="Add playlist" Visibility="{Binding HasEditHeader, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <telerik:RadGlyph Glyph="&#xe907;" />
                     </telerik:RadButton>
-                    <telerik:RadToolBarSeparator />
-                    <telerik:RadButton Command="{Binding DeletePlaylistCommand}" ToolTip="Delete selected playlist">
+                    <telerik:RadToolBarSeparator Visibility="{Binding HasEditHeader, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <telerik:RadButton Command="{Binding DeletePlaylistCommand}" ToolTip="Delete selected playlist" Visibility="{Binding HasEditHeader, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <telerik:RadGlyph Glyph="&#xe10c;" />
                     </telerik:RadButton>
                 </telerik:RadToolBar>
