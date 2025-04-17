@@ -9,19 +9,12 @@ namespace CSM.Business
         public static IServiceCollection AddBusiness(this IServiceCollection services)
         {
             return services
-                .AddDomains();
-        }
-
-        #region Helper methods
-
-        private static IServiceCollection AddDomains(this IServiceCollection services)
-        {
-            return services
                     .AddSingleton<ISongCopyDomain, SongCopyDomain>()
-                     .AddSingleton<ISongSuggestDomain, SongSuggestDomain>()
-                    .AddSingleton<IUserConfigDomain, UserConfigDomain>();
+                    .AddSingleton<ISongSuggestDomain, SongSuggestDomain>()
+                    .AddSingleton<IUserConfigDomain, UserConfigDomain>()
+                    .AddSingleton<IBeatLeaderService, BeatLeaderService>()
+                    .AddSingleton<IBeatSaverService, BeatSaverService>()
+                    .AddSingleton<IScoreSaberService, ScoreSaberService>();
         }
-
-        #endregion
     }
 }

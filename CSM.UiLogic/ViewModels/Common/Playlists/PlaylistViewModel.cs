@@ -1,4 +1,5 @@
-﻿using CSM.DataAccess.Playlists;
+﻿using CSM.Business.Interfaces;
+using CSM.DataAccess.Playlists;
 using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.Commands;
@@ -14,7 +15,9 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
 
         private readonly Playlist playlist;
         private IRelayCommand? fetchDataCommand;
-        
+
+        private readonly IBeatSaverService beatSaverService;
+
         #endregion
 
         #region Properties
@@ -73,7 +76,9 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
            string path) : base(serviceLocator, playlist.PlaylistTitle, path)
         {
             this.playlist = playlist;
-           Songs.AddRange(playlist.Songs.Select(s => new PlaylistSongViewModel(serviceLocator, s)));
+            beatSaverService = serviceLocator.GetService<IBeatSaverService>();
+
+            Songs.AddRange(playlist.Songs.Select(s => new PlaylistSongViewModel(serviceLocator, s)));
         }
 
         public async Task FetchDataAsync()

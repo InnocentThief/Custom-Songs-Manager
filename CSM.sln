@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSM.App", "CSM.App\CSM.App.csproj", "{1B54E818-E3BA-45AE-A19A-A5F12C7D81F5}"
 EndProject
@@ -10,8 +10,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSM.DataAccess", "CSM.DataAccess\CSM.DataAccess.csproj", "{61027E6B-0235-4B22-9BE7-79FA9DD95FF4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSM.Framework", "CSM.Framework\CSM.Framework.csproj", "{2B0C6C52-3C77-4BC6-9241-186D7B1E368F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSM.Services", "CSM.Services\CSM.Services.csproj", "{C971DAD5-30A6-4493-9D8F-5EE57CC0AE98}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSM.UiLogic", "CSM.UiLogic\CSM.UiLogic.csproj", "{7B3944B0-6072-4009-8EC3-E13A081CE1BD}"
 EndProject
@@ -37,10 +35,6 @@ Global
 		{2B0C6C52-3C77-4BC6-9241-186D7B1E368F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B0C6C52-3C77-4BC6-9241-186D7B1E368F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B0C6C52-3C77-4BC6-9241-186D7B1E368F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C971DAD5-30A6-4493-9D8F-5EE57CC0AE98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C971DAD5-30A6-4493-9D8F-5EE57CC0AE98}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C971DAD5-30A6-4493-9D8F-5EE57CC0AE98}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C971DAD5-30A6-4493-9D8F-5EE57CC0AE98}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7B3944B0-6072-4009-8EC3-E13A081CE1BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7B3944B0-6072-4009-8EC3-E13A081CE1BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B3944B0-6072-4009-8EC3-E13A081CE1BD}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -50,7 +50,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CSM.Framework\CSM.Framework.csproj" />
-    <ProjectReference Include="..\CSM.Services\CSM.Services.csproj" />
     <ProjectReference Include="..\CSM.UiLogic\CSM.UiLogic.csproj" />
   </ItemGroup>
 
