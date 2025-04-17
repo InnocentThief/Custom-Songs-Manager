@@ -41,7 +41,7 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <!-- Title -->
-            <TextBlock Text="Song detail" Style="{StaticResource HeaderTitleStyle}" />
+            <TextBlock Text="Song Detail" Style="{StaticResource HeaderTitleStyle}" />
             <!-- Commands -->
             <telerik:RadToolBar Grid.Column="1" Style="{StaticResource HeaderToolBarStyle}" >
                 <telerik:RadButton Command="{Binding ShowPreviewCommand}" ToolTip="Preview song">

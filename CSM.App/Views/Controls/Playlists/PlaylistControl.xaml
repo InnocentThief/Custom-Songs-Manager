@@ -125,9 +125,33 @@
                 </Grid>
                 <telerik:RadGridView 
                     Grid.Row="2" 
+                    ItemsSource="{Binding Songs}"
                     Margin="3" 
                     Style="{StaticResource RadGridViewStyle}">
-                    
+                    <telerik:RadGridView.Columns>
+                        <!-- Key -->
+                        <telerik:GridViewDataColumn UniqueName="BsrKey" Header="BSR" Width="Auto" DataMemberBinding="{Binding BsrKeyHex}" IsFilterable="true" FilterMemberPath="BsrKey">
+                            <telerik:GridViewDataColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding BsrKey}" />
+                                </DataTemplate>
+                            </telerik:GridViewDataColumn.CellTemplate>
+                        </telerik:GridViewDataColumn>
+                        <!-- Title of the song -->
+                        <telerik:GridViewDataColumn Header="Title" DataMemberBinding="{Binding SongName}" Width="*" />
+                        <!-- Mapper of the song -->
+                        <telerik:GridViewDataColumn Header="Mapper" DataMemberBinding="{Binding LevelAuthorName}" Width="*" />
+                        <!-- Delete button (remove song from playlist) -->
+                        <telerik:GridViewColumn Width="Auto">
+                            <telerik:GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <telerik:RadButton Command="{Binding DeleteSongCommand}" Grid.Column="1" Background="Transparent" BorderThickness="0" Margin="0,0,10,0" ToolTip="Remove song from playlist" Focusable="False">
+                                        <telerik:RadGlyph Glyph="&#xe121;" Foreground="Red" />
+                                    </telerik:RadButton>
+                                </DataTemplate>
+                            </telerik:GridViewColumn.CellTemplate>
+                        </telerik:GridViewColumn>
+                    </telerik:RadGridView.Columns>
                 </telerik:RadGridView>
                 <GridSplitter Grid.Row="3" Style="{StaticResource WorkspaceHorizontalGridSplitterStyle}" VerticalAlignment="Center" />
                 <local:SongDetailControl Grid.Row="4" />
