@@ -147,7 +147,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
                     IsFavouritesSelected = true;
                     break;
                 case PlaylistsSourceAvailability.SongSearch:
-                    IsSongSuggestSelected = true;
+                    IsSearchSelected = true;
                     break;
                 case PlaylistsSourceAvailability.SongSuggest:
                     IsSongSuggestSelected = true;

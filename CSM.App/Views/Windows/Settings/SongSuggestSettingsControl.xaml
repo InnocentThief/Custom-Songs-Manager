@@ -33,6 +33,6 @@
         <telerik:RadToggleSwitchButton Grid.Column="1" Grid.Row="3" Focusable="False" IsChecked="{Binding UseBeatLeaderLeaderboard}" />
         <!-- Default Leaderboard -->
         <telerik:Label Content="Default Leaderboard" Grid.Row="4" />
-        <telerik:RadComboBox Grid.Column="1" Grid.Row="4" />
+        <telerik:RadComboBox Grid.Column="1" Grid.Row="4" Focusable="False" ItemsSource="{Binding Leaderboards}" SelectedItem="{Binding SelectedLeaderboard}" DisplayMemberPath="DisplayText" />
     </Grid>
 </UserControl>

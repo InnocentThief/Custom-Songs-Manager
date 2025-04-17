@@ -39,11 +39,14 @@ namespace CSM.UiLogic.AbstractBase
 
         protected IUserInteraction UserInteraction { get; }
 
+        protected IUiText UiText { get; }
+
         protected BaseViewModel(IServiceLocator serviceLocator)
         {
             ServiceLocator = serviceLocator;
             CommandFactory = ServiceLocator.GetService<ICommandFactory>();
             UserInteraction = ServiceLocator.GetService<IUserInteraction>();
+            UiText = ServiceLocator.GetService<IUiText>();
         }
 
         protected void SetLoadingInProgress(bool value, string message)

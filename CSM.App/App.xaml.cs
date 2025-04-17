@@ -90,6 +90,7 @@ namespace CSM.App
                 .ConfigureServices((ctx, services) =>
                 {
                     services
+                    .AddSingleton<IUiText, UiText>()
                     .AddSingleton(userInteraction)
                     .ConfigureServices(ctx.Configuration, ServiceLocator);
                 })

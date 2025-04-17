@@ -19,7 +19,7 @@
         </Grid.RowDefinitions>
         <!-- Default Workspace -->
         <telerik:Label Content="Default workspace" />
-        <telerik:RadComboBox Grid.Column="1" />
+        <telerik:RadComboBox Grid.Column="1" Focusable="False" ItemsSource="{Binding Workspaces}" DisplayMemberPath="DisplayText" SelectedItem="{Binding SelectedWorkspace}" />
         <!-- Beat Saber Install Path -->
         <telerik:Label Content="Beat Saber installation path" Grid.Row="1" />
         <telerik:RadFilePathPicker Grid.Column="1" Grid.Row="1" DialogType="OpenFolder" FilePath="{Binding BeatSaberInstallationPath}" Text="{Binding BeatSaberInstallationPath}" FilePathChanged="RadFilePathPicker_FilePathChanged" />

@@ -15,12 +15,16 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <!-- Availability -->
         <telerik:Label Content="Available" />
         <telerik:RadToggleSwitchButton Grid.Column="1"  Focusable="False" IsChecked="{Binding Available}" />
         <!-- Custom Levels Path -->
-        <telerik:Label Content="Custom levels path" VerticalAlignment="Center" Grid.Row="2" />
-        <telerik:RadFilePathPicker Grid.Column="1" Grid.Row="2" DialogType="OpenFolder" FilePath="{Binding CustomLevelsPath}" Text="{Binding CustomLevelsPath}" FilePathChanged="RadFilePathPicker_FilePathChanged" />
+        <telerik:Label Content="Custom levels path" VerticalAlignment="Center" Grid.Row="1" />
+        <telerik:RadFilePathPicker Grid.Column="1" Grid.Row="1" DialogType="OpenFolder" FilePath="{Binding CustomLevelsPath}" Text="{Binding CustomLevelsPath}" FilePathChanged="RadFilePathPicker_FilePathChanged" />
+        <!-- Song Detail Position -->
+        <telerik:Label Content="Song detail position" Grid.Row="2" />
+        <telerik:RadComboBox Grid.Column="1" Grid.Row="2" Focusable="False" ItemsSource="{Binding SongDetailPositions}" SelectedItem="{Binding SelectedSongDetailPosition}" DisplayMemberPath="DisplayText" />
     </Grid>
 </UserControl>

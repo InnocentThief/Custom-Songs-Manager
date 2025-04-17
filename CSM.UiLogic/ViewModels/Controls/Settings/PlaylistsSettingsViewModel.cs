@@ -1,16 +1,27 @@
 ﻿using CSM.DataAccess.UserConfiguration;
+using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
+using CSM.UiLogic.Helper;
+using System.Collections.ObjectModel;
 
 namespace CSM.UiLogic.ViewModels.Controls.Settings
 {
-    internal class PlaylistsSettingsViewModel(IServiceLocator serviceLocator, UserConfig userConfig) : BaseViewModel(serviceLocator)
+    internal class PlaylistsSettingsViewModel : BaseViewModel
     {
-        private bool customLevelsSourceAvailable = userConfig.PlaylistsConfig.SourceAvailability.HasFlag(PlaylistsSourceAvailability.CustomLevels);
-        private bool playlistsAvailable = userConfig.PlaylistsConfig.SourceAvailability.HasFlag(PlaylistsSourceAvailability.Playlists);
-        private bool favouritesAvailable = userConfig.PlaylistsConfig.SourceAvailability.HasFlag(PlaylistsSourceAvailability.BeatSaberFavourites);
-        private bool songSearchAvailable = userConfig.PlaylistsConfig.SourceAvailability.HasFlag(PlaylistsSourceAvailability.SongSearch);
-        private bool songSuggestAvailable = userConfig.PlaylistsConfig.SourceAvailability.HasFlag(PlaylistsSourceAvailability.SongSuggest);
+        #region Private fields
+
+        private bool customLevelsSourceAvailable;
+        private bool playlistsAvailable;
+        private bool favouritesAvailable;
+        private bool songSearchAvailable;
+        private bool songSuggestAvailable;
+
+        private readonly UserConfig userConfig;
+
+        #endregion
+
+        #region Properties
 
         public bool Available
         {
@@ -101,6 +112,37 @@ namespace CSM.UiLogic.ViewModels.Controls.Settings
             }
         }
 
+        public ObservableCollection<EnumWrapper<PlaylistsSourceAvailability>> SongSources { get; } = [];
+
+        public EnumWrapper<PlaylistsSourceAvailability>? SelectedSongSource
+        {
+            get => SongSources.FirstOrDefault(s => s.Value == userConfig.PlaylistsConfig.DefaultSource);
+            set
+            {
+                if (value == null || value == SelectedSongSource)
+                    return;
+                userConfig.PlaylistsConfig.DefaultSource = value.Value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
+        public PlaylistsSettingsViewModel(IServiceLocator serviceLocator, UserConfig userConfig) : base(serviceLocator)
+        {
+            this.userConfig = userConfig;
+
+            customLevelsSourceAvailable = userConfig.PlaylistsConfig.SourceAvailability.HasFlag(PlaylistsSourceAvailability.CustomLevels);
+            playlistsAvailable = userConfig.PlaylistsConfig.SourceAvailability.HasFlag(PlaylistsSourceAvailability.Playlists);
+            favouritesAvailable = userConfig.PlaylistsConfig.SourceAvailability.HasFlag(PlaylistsSourceAvailability.BeatSaberFavourites);
+            songSearchAvailable = userConfig.PlaylistsConfig.SourceAvailability.HasFlag(PlaylistsSourceAvailability.SongSearch);
+            songSuggestAvailable = userConfig.PlaylistsConfig.SourceAvailability.HasFlag(PlaylistsSourceAvailability.SongSuggest);
+
+            SongSources.AddRange(EnumWrapper<PlaylistsSourceAvailability>.GetValues(serviceLocator, PlaylistsSourceAvailability.None));
+        }
+
+        #region Helper methods
+
         private void UpdateSourceAvailability()
         {
             userConfig.PlaylistsConfig.SourceAvailability = PlaylistsSourceAvailability.None;
@@ -110,5 +152,7 @@ namespace CSM.UiLogic.ViewModels.Controls.Settings
             if (songSearchAvailable) userConfig.PlaylistsConfig.SourceAvailability |= PlaylistsSourceAvailability.SongSearch;
             if (songSuggestAvailable) userConfig.PlaylistsConfig.SourceAvailability |= PlaylistsSourceAvailability.SongSuggest;
         }
+
+        #endregion
     }
 }

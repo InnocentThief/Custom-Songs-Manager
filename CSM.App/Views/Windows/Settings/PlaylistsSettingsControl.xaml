@@ -41,7 +41,7 @@
         <telerik:RadToggleSwitchButton Grid.Column="1" Grid.Row="6" CheckedContent="Song Suggest" UncheckedContent="Song suggest" ContentPosition="Right" Focusable="False" IsChecked="{Binding SongSuggestAvailable}" />
         <!-- Default source -->
         <telerik:Label Content="Default song source" Grid.Row="7" />
-        <telerik:RadComboBox Grid.Column="1" Grid.Row="7" />
+        <telerik:RadComboBox Grid.Column="1" Grid.Row="7" Focusable="False" ItemsSource="{Binding SongSources}" SelectedItem="{Binding SelectedSongSource}" DisplayMemberPath="DisplayText" />
 
     </Grid>
 </UserControl>

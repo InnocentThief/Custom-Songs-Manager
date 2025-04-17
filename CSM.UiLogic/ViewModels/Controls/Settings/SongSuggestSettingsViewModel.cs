@@ -1,11 +1,18 @@
 ﻿using CSM.DataAccess.UserConfiguration;
+using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
+using CSM.UiLogic.Helper;
+using System.Collections.ObjectModel;
 
 namespace CSM.UiLogic.ViewModels.Controls.Settings
 {
-    internal class SongSuggestSettingsViewModel(IServiceLocator serviceLocator, UserConfig userConfig) : BaseViewModel(serviceLocator)
+    internal class SongSuggestSettingsViewModel : BaseViewModel
     {
+        private readonly UserConfig userConfig;
+
+        #region Properties
+
         public string ScoreSaberUserId
         {
             get => userConfig.SongSuggestConfig.ScoreSaberUserId;
@@ -22,7 +29,7 @@ namespace CSM.UiLogic.ViewModels.Controls.Settings
             get => userConfig.SongSuggestConfig.BeatLeaderUserId;
             set
             {
-                    if (value == userConfig.SongSuggestConfig.BeatLeaderUserId)
+                if (value == userConfig.SongSuggestConfig.BeatLeaderUserId)
                     return;
                 userConfig.SongSuggestConfig.BeatLeaderUserId = value;
                 OnPropertyChanged();
@@ -49,6 +56,31 @@ namespace CSM.UiLogic.ViewModels.Controls.Settings
                 userConfig.SongSuggestConfig.UseBeatLeaderLeaderboard = value;
                 OnPropertyChanged();
             }
+        }
+
+        public ObservableCollection<EnumWrapper<LeaderboardType>> Leaderboards { get; } = [];
+
+        public EnumWrapper<LeaderboardType>? SelectedLeaderboard
+        {
+            get => Leaderboards.FirstOrDefault(x => x.Value == userConfig.SongSuggestConfig.DefaultLeaderboard);
+            set
+            {
+                if (value == null)
+                    return;
+                if (value.Value == userConfig.SongSuggestConfig.DefaultLeaderboard)
+                    return;
+                userConfig.SongSuggestConfig.DefaultLeaderboard = value.Value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
+        public SongSuggestSettingsViewModel(IServiceLocator serviceLocator, UserConfig userConfig) : base(serviceLocator)
+        {
+            this.userConfig = userConfig;
+
+            Leaderboards.AddRange(EnumWrapper<LeaderboardType>.GetValues(serviceLocator));
         }
     }
 }

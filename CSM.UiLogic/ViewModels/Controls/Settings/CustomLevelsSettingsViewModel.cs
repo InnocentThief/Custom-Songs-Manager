@@ -1,11 +1,18 @@
 ﻿using CSM.DataAccess.UserConfiguration;
+using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
+using CSM.UiLogic.Helper;
+using System.Collections.ObjectModel;
 
 namespace CSM.UiLogic.ViewModels.Controls.Settings
 {
-    internal class CustomLevelsSettingsViewModel(IServiceLocator serviceLocator, UserConfig userConfig) : BaseViewModel(serviceLocator)
+    internal class CustomLevelsSettingsViewModel : BaseViewModel
     {
+        private readonly UserConfig userConfig;
+
+        #region Properties
+
         public bool Available
         {
             get => userConfig.CustomLevelsConfig.Available;
@@ -28,6 +35,29 @@ namespace CSM.UiLogic.ViewModels.Controls.Settings
                 userConfig.CustomLevelsConfig.CustomLevelPath.Path = value;
                 OnPropertyChanged();
             }
+        }
+
+        public ObservableCollection<EnumWrapper<SongDetailPosition>> SongDetailPositions { get; } = [];
+
+        public EnumWrapper<SongDetailPosition> SelectedSongDetailPosition
+        {
+            get => SongDetailPositions.FirstOrDefault(x => x.Value == userConfig.CustomLevelsConfig.SongDetailPosition) ?? SongDetailPositions[0];
+            set
+            {
+                if (value == SelectedSongDetailPosition)
+                    return;
+                userConfig.CustomLevelsConfig.SongDetailPosition = value.Value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
+        public CustomLevelsSettingsViewModel(IServiceLocator serviceLocator, UserConfig userConfig) : base(serviceLocator)
+        {
+            this.userConfig = userConfig;
+
+            SongDetailPositions.AddRange(EnumWrapper<SongDetailPosition>.GetValues(serviceLocator));
         }
     }
 }
