@@ -6,6 +6,7 @@
         <ResourceDictionary Source="ConverterResources.xaml" />
         <ResourceDictionary Source="WorkspaceResources.xaml" />
         <ResourceDictionary Source="WorkspaceTemplates.xaml" />
+        <ResourceDictionary Source="/Views/Common/Characteristics.xaml" />
     </ResourceDictionary.MergedDictionaries>
     
 </ResourceDictionary>

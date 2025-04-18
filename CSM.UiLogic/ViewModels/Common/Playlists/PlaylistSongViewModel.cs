@@ -1,14 +1,21 @@
-﻿using CSM.DataAccess.Playlists;
+﻿using CSM.DataAccess.BeatSaver;
+using CSM.DataAccess.Playlists;
+using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
+using System.Collections.ObjectModel;
 using System.Globalization;
 
 namespace CSM.UiLogic.ViewModels.Common.Playlists
 {
-    internal class PlaylistSongViewModel(IServiceLocator serviceLocator, Song song)
-        : BaseViewModel(serviceLocator)
+    internal class PlaylistSongViewModel : BaseViewModel
     {
-        private Song song = song;
+        #region Private fields
+
+        private readonly Song song;
+        private readonly List<PlaylistSongDifficultyViewModel> difficulties = [];
+
+        #endregion
 
         #region Properties
 
@@ -16,7 +23,7 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
 
         public string BsrKey => song.Key ?? string.Empty;
 
-        public int BsrKeyHey
+        public int BsrKeyHex
         {
             get
             {
@@ -31,8 +38,29 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
 
         public string? LevelAuthorName => song.LevelAuthorName;
 
+        public List<PlaylistSongDifficultyViewModel> Difficulties => [.. difficulties.OrderBy(d => d.Name)];
+
         #endregion
 
+        public PlaylistSongViewModel(IServiceLocator serviceLocator, Song song) : base(serviceLocator)
+        {
+            this.song = song;
+
+            difficulties.AddRange(song.Difficulties?.Select(d => new PlaylistSongDifficultyViewModel(serviceLocator, d)) ?? []);
+            OnPropertyChanged(nameof(Difficulties));
+        }
+
+        public void UpdateData(MapDetail mapDetail)
+        {
+            song.Key = mapDetail.Id;
+            song.SongName = mapDetail.Name;
+            song.LevelAuthorName = mapDetail.Metadata?.LevelAuthorName;
+
+            OnPropertyChanged(nameof(BsrKey));
+            OnPropertyChanged(nameof(BsrKeyHex));
+            OnPropertyChanged(nameof(SongName));
+            OnPropertyChanged(nameof(LevelAuthorName));
+        }
     }
 
 }

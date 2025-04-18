@@ -1,10 +1,15 @@
 ﻿using CSM.Business.Interfaces;
+using CSM.DataAccess.BeatSaver;
 using CSM.DataAccess.Playlists;
 using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.Commands;
 using CSM.UiLogic.Converter;
+using CSM.UiLogic.Helper;
+using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Text.Json;
 using System.Windows.Media;
 
 namespace CSM.UiLogic.ViewModels.Common.Playlists
@@ -16,6 +21,7 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
         private readonly Playlist playlist;
         private IRelayCommand? fetchDataCommand;
 
+        private readonly ILogger logger;
         private readonly IBeatSaverService beatSaverService;
 
         #endregion
@@ -76,6 +82,7 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
            string path) : base(serviceLocator, playlist.PlaylistTitle, path)
         {
             this.playlist = playlist;
+            logger = serviceLocator.GetService<ILogger<PlaylistViewModel>>();
             beatSaverService = serviceLocator.GetService<IBeatSaverService>();
 
             Songs.AddRange(playlist.Songs.Select(s => new PlaylistSongViewModel(serviceLocator, s)));
@@ -83,10 +90,47 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
 
         public async Task FetchDataAsync()
         {
+            SetLoadingInProgress(true, "Fetching and updating song data...");
 
+            try
+            {
+                int totalPages = Songs.Count / 50 + 1;
+                for (int i = 0; i < totalPages; i++)
+                {
+                    var songHashes = Songs.Skip(i * 50).Take(50).Select(s => s.Hash).ToList();
+                    var mapDetails = await beatSaverService.GetMapDetailsAsync(songHashes, BeatSaverKeyType.Hash);
+                    if (mapDetails == null)
+                        continue;
+                    foreach (var mapDetail in mapDetails)
+                    {
+                        if (mapDetail.Value == null)
+                            continue;
+                        var existingSongs = Songs.Where(s => s.Hash == mapDetail.Key);
+                        foreach (var existingSong in existingSongs)
+                        {
+                            existingSong.UpdateData(mapDetail.Value);
+                        }
+                    }
+                }
+                await SaveAsync();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error fetching data for playlist {PlaylistTitle}", PlaylistTitle);
+            }
+            finally
+            {
+                SetLoadingInProgress(false, string.Empty);
+            }
         }
 
         #region Helper methods
+
+        private async Task SaveAsync()
+        {
+            var content = JsonSerializer.Serialize(playlist, JsonSerializerHelper.CreateDefaultSerializerOptions());
+            await File.WriteAllTextAsync(Path, content);
+        }
 
         private bool CanFetchData()
         {

@@ -43,6 +43,8 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             }
         }
 
+        public bool HasResults => Playlist != null && Playlist.Songs.Count > 0;
+
         public bool IsDirty
         {
             get => isDirty;
@@ -272,10 +274,11 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             var playlist = await songSuggestDomain.GetPlaylistAsync();
             if (playlist != null)
             {
-                var playlistViewModel = new PlaylistViewModel(ServiceLocator, playlist, "");
+                var playlistViewModel = new PlaylistViewModel(ServiceLocator, playlist, songSuggestDomain.GetPlaylistPath() ?? string.Empty);
                 await playlistViewModel.FetchDataAsync();
                 Playlist = playlistViewModel;
                 OnPropertyChanged(nameof(Playlist));
+                OnPropertyChanged(nameof(HasResults));
             }
             SetLoadingInProgress(false, string.Empty);
         }

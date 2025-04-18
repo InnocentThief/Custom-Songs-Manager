@@ -11,19 +11,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Converter\**" />
     <Compile Remove="Views\Workspaces\BeatLeader\**" />
     <Compile Remove="Views\Workspaces\ScoreSaber\**" />
     <Compile Remove="Views\Workspaces\Twitch\**" />
-    <EmbeddedResource Remove="Converter\**" />
     <EmbeddedResource Remove="Views\Workspaces\BeatLeader\**" />
     <EmbeddedResource Remove="Views\Workspaces\ScoreSaber\**" />
     <EmbeddedResource Remove="Views\Workspaces\Twitch\**" />
-    <None Remove="Converter\**" />
     <None Remove="Views\Workspaces\BeatLeader\**" />
     <None Remove="Views\Workspaces\ScoreSaber\**" />
     <None Remove="Views\Workspaces\Twitch\**" />
-    <Page Remove="Converter\**" />
     <Page Remove="Views\Workspaces\BeatLeader\**" />
     <Page Remove="Views\Workspaces\ScoreSaber\**" />
     <Page Remove="Views\Workspaces\Twitch\**" />

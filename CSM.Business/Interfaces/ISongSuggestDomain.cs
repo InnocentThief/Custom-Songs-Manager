@@ -9,5 +9,7 @@ namespace CSM.Business.Interfaces
         Task GenerateSongSuggestionsAsync(string? playerId = null);
 
         Task<Playlist?> GetPlaylistAsync();
+
+        string? GetPlaylistPath();
     }
 }

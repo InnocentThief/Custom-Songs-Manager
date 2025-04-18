@@ -57,6 +57,11 @@ namespace CSM.Business.Core
             return JsonSerializer.Deserialize<Playlist>(content);
         }
 
+        public string? GetPlaylistPath()
+        {
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Custom Songs Manager", "SongSuggest", "Playlists", "Song Suggest.bplist");
+        }
+
         #region Helper methods
 
         private void InitializeSongSuggest()

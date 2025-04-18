@@ -9,7 +9,7 @@ namespace CSM.DataAccess.Playlists
         public Characteristic Characteristic { get; set; }
 
         [JsonPropertyName("name")]
-        public string Name { get; set; } = string.Empty;
+        public Common.Difficulty Name { get; set; }
 
         [JsonPropertyName("stars")]
         public int? Stars { get; set; }
