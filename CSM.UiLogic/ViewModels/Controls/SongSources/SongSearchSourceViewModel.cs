@@ -2,7 +2,6 @@
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.ViewModels.Controls.SongSources.SongSearch;
-using CSM.Framework.Extensions;
 
 namespace CSM.UiLogic.ViewModels.Controls.SongSources
 {

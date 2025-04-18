@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CSM.Business.Interfaces
+﻿namespace CSM.Business.Interfaces
 {
     internal interface ISongCopyDomain
     {

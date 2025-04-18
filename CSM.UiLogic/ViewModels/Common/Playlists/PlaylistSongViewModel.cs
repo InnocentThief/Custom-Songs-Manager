@@ -1,9 +1,7 @@
 ﻿using CSM.DataAccess.BeatSaver;
 using CSM.DataAccess.Playlists;
-using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
-using System.Collections.ObjectModel;
 using System.Globalization;
 
 namespace CSM.UiLogic.ViewModels.Common.Playlists
