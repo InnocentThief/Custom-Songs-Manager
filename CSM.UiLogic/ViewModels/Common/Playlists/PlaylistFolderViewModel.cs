@@ -1,4 +1,5 @@
-﻿using CSM.Framework.ServiceLocation;
+﻿using CSM.Business.Core.SongSelection;
+using CSM.Framework.ServiceLocation;
 using System.Collections.ObjectModel;
 
 namespace CSM.UiLogic.ViewModels.Common.Playlists
@@ -9,5 +10,30 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
         : BasePlaylistViewModel(serviceLocator, System.IO.Path.GetFileName(path), path)
     {
         public ObservableCollection<BasePlaylistViewModel> Playlists { get; } = [];
+
+        public override bool CheckContainsSong(string? hash, SongSelectionType songSelectionType)
+        {
+            var retval = false;
+
+            foreach (var playlist in Playlists)
+            {
+                if (playlist.CheckContainsSong(hash, songSelectionType))
+                {
+                    if (songSelectionType == SongSelectionType.Left)
+                        ContainsLeftSong = true;
+                    else
+                        ContainsRightSong = true;
+                    retval =  true;
+                }
+                else
+                {
+                    if (songSelectionType == SongSelectionType.Left)
+                        ContainsLeftSong = false;
+                    else
+                        ContainsRightSong = false;
+                }
+            }
+            return retval;
+        }
     }
 }

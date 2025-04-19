@@ -1,11 +1,19 @@
-﻿using CSM.Framework.ServiceLocation;
+﻿using CSM.Business.Core.SongSelection;
+using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
 
 namespace CSM.UiLogic.ViewModels.Common.Playlists
 {
     internal abstract class BasePlaylistViewModel(IServiceLocator serviceLocator, string name, string path) : BaseViewModel(serviceLocator)
     {
+        #region Private fields
+
         private string name = name;
+        private bool containsLeftSong, containsRightSong;
+
+        #endregion
+
+        #region Properties
 
         public string Name
         {
@@ -19,5 +27,31 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
         }
 
         public string Path { get; } = path;
+
+        public bool ContainsLeftSong
+        {
+            get => containsLeftSong;
+            set
+            {
+                if (value == containsLeftSong) return;
+                containsLeftSong = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool ContainsRightSong
+        {
+            get => containsRightSong;
+            set
+            {
+                if (value == containsRightSong) return;
+                containsRightSong = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
+        public abstract bool CheckContainsSong(string? hash, SongSelectionType songSelectionType);
     }
 }

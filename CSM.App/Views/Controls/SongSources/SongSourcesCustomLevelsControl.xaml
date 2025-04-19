@@ -18,7 +18,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <!-- Header -->
-            <Grid Background="#FF018574">
+            <Grid Background="#88018574">
                 <TextBlock Text="Custom Levels" Style="{StaticResource HeaderTitleStyle}" />
             </Grid>
             <!-- Content -->
@@ -33,14 +33,15 @@
                     Margin="3,3,3,3" 
                     ItemsSource="{Binding CustomLevels}" 
                     SelectedItem="{Binding SelectedCustomLevel}" 
-                    Style="{StaticResource RadGridViewStyle}">
+                    
+                    Style="{StaticResource RadGridViewStyle}" SelectionChanged="RadGridView_SelectionChanged">
                     <telerik:RadGridView.Columns>
                         <!-- Add button (will add song to selected playlist) -->
                         <telerik:GridViewColumn Width="SizeToCells">
                             <telerik:GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <telerik:RadButton Command="{Binding AddToPlaylistCommand}" Grid.Column="1" Background="Transparent" BorderThickness="0" ToolTip="Add to selected playlist">
-                                        <telerik:RadGlyph Glyph="&#xe11e;" Foreground="Green" />
+                                        <telerik:RadGlyph Glyph="&#xe11e;" Foreground="#FF008BC1" />
                                     </telerik:RadButton>
                                 </DataTemplate>
                             </telerik:GridViewColumn.CellTemplate>

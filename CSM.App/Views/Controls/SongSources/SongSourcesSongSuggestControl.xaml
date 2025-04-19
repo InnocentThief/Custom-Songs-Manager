@@ -29,7 +29,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <!-- Header -->
-            <Grid Background="#FF018574">
+            <Grid Background="#88018574">
                 <TextBlock Text="Song Suggest" Style="{StaticResource HeaderTitleStyle}" />
             </Grid>
 
@@ -235,17 +235,12 @@
             </GroupBox>
 
             <!-- Generate Command -->
-            <!--<Grid Grid.Row="2" HorizontalAlignment="Center">-->
-
-
             <telerik:RadButton Grid.Row="2" Command="{Binding GenerateCommand}" Padding="10" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}">
                 <StackPanel Orientation="Horizontal">
                     <telerik:RadGlyph Glyph="&#xe20b;" />
                     <telerik:Label Content="Generate song suggestions..." Margin="6,0" />
                 </StackPanel>
             </telerik:RadButton>
-
-            <!--</Grid>-->
 
             <!-- NoResults -->
             <Grid Grid.Row="3" Visibility="{Binding HasResults, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
@@ -276,17 +271,17 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <!-- Title -->
-                    <TextBlock Text="Suggested Songs" Style="{StaticResource HeaderTitleStyle}" Foreground="#FF018574" />
+                    <TextBlock Text="Suggested Songs" Style="{StaticResource HeaderTitleStyle}" Foreground="#88018574" />
                     <!-- Commands -->
                     <telerik:RadToolBar Grid.Column="1" Style="{StaticResource HeaderToolBarStyle}" >
-                        <telerik:RadButton Command="{Binding AddPlaylistCommand}" ToolTip="Create new playlist with all (default) or selected songs (all filters will apply)" Visibility="{Binding HasEditHeader, Converter={StaticResource BooleanToVisibilityConverter}}">
-                            <telerik:RadGlyph Glyph="&#xe907;" Foreground="#FF018574" />
+                        <telerik:RadButton Command="{Binding AddPlaylistCommand}" ToolTip="Create new playlist with all songs (all filters will apply)" Visibility="{Binding HasEditHeader, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <telerik:RadGlyph Glyph="&#xe907;" Foreground="#88018574" />
                         </telerik:RadButton>
-                        <telerik:RadButton Command="{Binding OverwritePlaylistCommand}" ToolTip="Overwrites the selected playlist with all (default) or selected songs (all filters will apply)" Visibility="{Binding HasEditHeader, Converter={StaticResource BooleanToVisibilityConverter}}">
-                            <telerik:RadGlyph Glyph="&#xe945;" Foreground="#FF018574" />
+                        <telerik:RadButton Command="{Binding OverwritePlaylistCommand}" ToolTip="Overwrite the selected playlist with all songs (all filters will apply)" Visibility="{Binding HasEditHeader, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <telerik:RadGlyph Glyph="&#xe945;" Foreground="#88018574" />
                         </telerik:RadButton>
-                        <telerik:RadButton Command="{Binding MergePlaylistCommand}" ToolTip="Merges all (default) or selected songs into the selected playlist (all filters will apply)" Visibility="{Binding HasEditHeader, Converter={StaticResource BooleanToVisibilityConverter}}">
-                            <telerik:RadGlyph Glyph="&#xe941;" Foreground="#FF018574" />
+                        <telerik:RadButton Command="{Binding MergePlaylistCommand}" ToolTip="Merges all songs into the selected playlist (all filters will apply)" Visibility="{Binding HasEditHeader, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <telerik:RadGlyph Glyph="&#xe941;" Foreground="#88018574" />
                         </telerik:RadButton>
                     </telerik:RadToolBar>
                 </Grid>
@@ -298,8 +293,7 @@
                     Grid.Row="1"
                     Margin="3,3,3,3" 
                     ItemsSource="{Binding Songs}" 
-                    SelectedItem="{Binding SelectedCustomLevel}" 
-                    SelectionMode="Extended"
+                    SelectedItem="{Binding SelectedSong}" 
                     Style="{StaticResource RadGridViewStyle}">
                     <telerik:RadGridView.Columns>
                         <!-- Add button (will add song to selected playlist) -->
@@ -307,7 +301,7 @@
                             <telerik:GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <telerik:RadButton Command="{Binding AddToPlaylistCommand}" Grid.Column="1" Background="Transparent" BorderThickness="0" ToolTip="Add to selected playlist">
-                                        <telerik:RadGlyph Glyph="&#xe11e;" Foreground="Green" />
+                                        <telerik:RadGlyph Glyph="&#xe11e;" Foreground="#FF008BC1" />
                                     </telerik:RadButton>
                                 </DataTemplate>
                             </telerik:GridViewColumn.CellTemplate>
@@ -328,21 +322,6 @@
                         </telerik:GridViewDataColumn>
                     </telerik:RadGridView.Columns>
                 </telerik:RadGridView>
-
-                <!-- Actions -->
-                <!--
-                <WrapPanel Grid.Row="2" Orientation="Horizontal" Margin="0,3,0,0">
-                    <telerik:RadButton Content="Create new playlist (all songs)..." Padding="10" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" ToolTip="Creates a new playlist with all suggested songs and adds it to the selected folder" />
-                    <telerik:RadButton Content="Create new playlist (selected songs)..." Padding="10" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" ToolTip="Creates a new playlist with the selected suggested songs and adds it to the selected folder" />
-                </WrapPanel>
-                <WrapPanel Grid.Row="3" Orientation="Horizontal">
-                    <telerik:RadButton Content="Overwrite selected playlist (all songs)" Padding="10" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" ToolTip="Overwrites the songs of the selected playlist with all suggested songs" />
-                    <telerik:RadButton Content="Overwrite selected playlist (selected songs)" Padding="10" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" ToolTip="Overwrites the songs of the selected playlist with the selected suggested songs" />
-                </WrapPanel>
-                <WrapPanel Grid.Row="4" Orientation="Horizontal">
-                    <telerik:RadButton Content="Merge with selected playlist (all songs)" Padding="10" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" ToolTip="Merges all suggested songs into the selected playlist" />
-                    <telerik:RadButton Content="Merge with selected playlist (selected songs)" Padding="10" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" ToolTip="Merges the selected suggested songs into the selected playlist" />
-                </WrapPanel>-->
             </Grid>
         </Grid>
     </telerik:RadBusyIndicator>

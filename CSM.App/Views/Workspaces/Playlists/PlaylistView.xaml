@@ -14,7 +14,7 @@
             <RowDefinition Height="200" MinHeight="50" />
         </Grid.RowDefinitions>
         <!-- Header -->
-        <Grid Background="#FF018574">
+        <Grid Background="#88018574">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />

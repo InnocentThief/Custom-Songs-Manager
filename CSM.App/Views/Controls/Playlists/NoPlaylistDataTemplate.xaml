@@ -13,7 +13,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <!-- Header -->
-        <Grid Background="#FF018574">
+        <Grid Background="#88018574">
             <TextBlock Text="Playlist" Style="{StaticResource HeaderTitleStyle}" />
         </Grid>
         <!-- Content -->

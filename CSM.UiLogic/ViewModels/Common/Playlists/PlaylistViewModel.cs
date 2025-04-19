@@ -1,4 +1,5 @@
-﻿using CSM.Business.Interfaces;
+﻿using CSM.Business.Core.SongSelection;
+using CSM.Business.Interfaces;
 using CSM.DataAccess.BeatSaver;
 using CSM.DataAccess.Playlists;
 using CSM.Framework.Extensions;
@@ -18,11 +19,14 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
     {
         #region Private fields
 
-        private readonly Playlist playlist;
         private IRelayCommand? fetchDataCommand;
+        private PlaylistSongViewModel? selectedSong;
 
+        private readonly SongSelectionType songSelectionType;
+        private readonly Playlist playlist;
         private readonly ILogger logger;
         private readonly IBeatSaverService beatSaverService;
+        private readonly ISongSelectionDomain songSelectionDomain;
 
         #endregion
 
@@ -74,16 +78,32 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
 
         public ObservableCollection<PlaylistSongViewModel> Songs { get; } = [];
 
+        public PlaylistSongViewModel? SelectedSong
+        {
+            get => selectedSong;
+            set
+            {
+                if (value == selectedSong) return;
+                selectedSong = value;
+                OnPropertyChanged();
+
+                songSelectionDomain.SetSongHash(selectedSong?.Hash ?? null, songSelectionType);
+            }
+        }
+
         #endregion
 
         public PlaylistViewModel(
            IServiceLocator serviceLocator,
            Playlist playlist,
-           string path) : base(serviceLocator, playlist.PlaylistTitle, path)
+           string path,
+           SongSelectionType songSelectionType) : base(serviceLocator, playlist.PlaylistTitle, path)
         {
             this.playlist = playlist;
+            this.songSelectionType = songSelectionType;
             logger = serviceLocator.GetService<ILogger<PlaylistViewModel>>();
             beatSaverService = serviceLocator.GetService<IBeatSaverService>();
+            songSelectionDomain = serviceLocator.GetService<ISongSelectionDomain>();
 
             Songs.AddRange(playlist.Songs.Select(s => new PlaylistSongViewModel(serviceLocator, s)));
         }
@@ -122,6 +142,20 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
             {
                 SetLoadingInProgress(false, string.Empty);
             }
+        }
+
+        public override bool CheckContainsSong(string? hash, SongSelectionType songSelectionType)
+        {
+            var hasSelectedSong = Songs.Any(s => s.Hash == hash);
+            if (songSelectionType == SongSelectionType.Left)
+            {
+                ContainsLeftSong = hasSelectedSong;
+            }
+            else
+            {
+                ContainsRightSong = hasSelectedSong;
+            }
+            return hasSelectedSong;
         }
 
         #region Helper methods

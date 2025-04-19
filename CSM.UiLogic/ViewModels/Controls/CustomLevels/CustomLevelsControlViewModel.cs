@@ -1,4 +1,5 @@
-﻿using CSM.Business.Interfaces;
+﻿using CSM.Business.Core.SongSelection;
+using CSM.Business.Interfaces;
 using CSM.DataAccess.CustomLevels;
 using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
@@ -24,6 +25,8 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
         private IRelayCommand? deleteCustomLevelCommand;
 
         private readonly ILogger<CustomLevelsControlViewModel> logger = serviceLocator.GetService<ILogger<CustomLevelsControlViewModel>>();
+        private readonly IBeatSaverService beatSaverService = serviceLocator.GetService<IBeatSaverService>();
+        private readonly ISongSelectionDomain songSelectionDomain = serviceLocator.GetService<ISongSelectionDomain>();
         private readonly IUserConfigDomain userConfigDomain = serviceLocator.GetService<IUserConfigDomain>();
 
         #endregion
@@ -76,6 +79,24 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
 
             SetLoadingInProgress(false, string.Empty);
         }
+
+        public async Task LoadSelectedCustomLevelDataAsync()
+        {
+            if (SelectedCustomLevel == null)
+                return;
+           
+          var mapDetail =   await beatSaverService.GetMapDetailAsync(SelectedCustomLevel.BsrKey);
+            if (mapDetail == null)
+                return;
+
+            // todo: which hash to use? latest? based on what?
+            var hashes = mapDetail.Versions.OrderBy(v => v.CreatedAt).Select(v => v.Hash).ToList();
+            if (hashes.Count == 0)
+                return;
+
+            songSelectionDomain.SetSongHash(hashes.Last(), SongSelectionType.Right);
+        }
+
 
         #region Helper methods
 

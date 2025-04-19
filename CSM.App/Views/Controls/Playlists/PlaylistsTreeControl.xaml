@@ -14,6 +14,14 @@
             <StackPanel Orientation="Horizontal">
                 <telerik:RadGlyph Glyph="&#xe900;" />
                 <TextBlock Text="{Binding Name}" Margin="6,0" />
+                <Grid Margin="3,0">
+                    <telerik:RadGlyph Glyph="&#xe202;" Foreground="#FFDA000F" Visibility="{Binding ContainsLeftSong, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <telerik:RadGlyph Glyph="&#xe006;" Background="Transparent" Foreground="White" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Center" Visibility="{Binding ContainsLeftSong, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="2.5,0.5" />
+                </Grid>
+                <Grid Margin="3,0">
+                    <telerik:RadGlyph Glyph="&#xe202;" Foreground="#FF008BC1" Visibility="{Binding ContainsRightSong, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <telerik:RadGlyph Glyph="&#xe006;" Background="Transparent" Foreground="White" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Center" Visibility="{Binding ContainsRightSong, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="2.5,0.5" />
+                </Grid>
             </StackPanel>
         </HierarchicalDataTemplate>
 
@@ -21,6 +29,14 @@
             <StackPanel Orientation="Horizontal">
                 <telerik:RadGlyph Glyph="&#xe20a;" />
                 <TextBlock Text="{Binding Name}" Margin="6,0" />
+                <Grid Margin="3,0">
+                    <telerik:RadGlyph Glyph="&#xe202;" Foreground="#FFDA000F" Visibility="{Binding ContainsLeftSong, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <telerik:RadGlyph Glyph="&#xe006;" Background="Transparent" Foreground="White" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Center" Visibility="{Binding ContainsLeftSong, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="2.5,0.5" />
+                </Grid>
+                <Grid Margin="3,0">
+                    <telerik:RadGlyph Glyph="&#xe202;" Foreground="#FF008BC1" Visibility="{Binding ContainsRightSong, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <telerik:RadGlyph Glyph="&#xe006;" Background="Transparent" Foreground="White" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Center" Visibility="{Binding ContainsRightSong, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="2.5,0.5" />
+                </Grid>
             </StackPanel>
         </DataTemplate>
 
@@ -43,7 +59,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <!-- Header -->
-            <Grid Background="#FF018574">
+            <Grid Background="#88018574">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />

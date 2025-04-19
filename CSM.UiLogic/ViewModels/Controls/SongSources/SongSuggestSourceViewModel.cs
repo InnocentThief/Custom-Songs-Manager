@@ -1,4 +1,5 @@
-﻿using CSM.Business.Interfaces;
+﻿using CSM.Business.Core.SongSelection;
+using CSM.Business.Interfaces;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.Commands;
@@ -274,7 +275,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             var playlist = await songSuggestDomain.GetPlaylistAsync();
             if (playlist != null)
             {
-                var playlistViewModel = new PlaylistViewModel(ServiceLocator, playlist, songSuggestDomain.GetPlaylistPath() ?? string.Empty);
+                var playlistViewModel = new PlaylistViewModel(ServiceLocator, playlist, songSuggestDomain.GetPlaylistPath() ?? string.Empty, SongSelectionType.Right);
                 await playlistViewModel.FetchDataAsync();
                 Playlist = playlistViewModel;
                 OnPropertyChanged(nameof(Playlist));

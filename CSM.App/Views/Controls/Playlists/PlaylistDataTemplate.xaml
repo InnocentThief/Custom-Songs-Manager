@@ -16,7 +16,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <!-- Header -->
-        <Grid Background="#FF018574">
+        <Grid Background="#88018574">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
@@ -34,7 +34,7 @@
                 </telerik:RadButton>
             </telerik:RadToolBar>
         </Grid>
-        <!-- Content -->
+        <!-- Playlist infos -->
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -77,6 +77,7 @@
             Grid.Row="2" 
             ItemsSource="{Binding Songs}"
             Margin="3" 
+            SelectedItem="{Binding SelectedSong}"
             Style="{StaticResource RadGridViewStyle}">
             <telerik:RadGridView.Columns>
                 <!-- Key -->

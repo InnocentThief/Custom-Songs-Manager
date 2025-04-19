@@ -185,7 +185,7 @@ namespace CSM.App
             Windows11Palette.LoadPreset(Windows11Palette.ColorVariation.Dark);
             Windows11ThemeSizeHelper.Helper.IsInCompactMode = true;
 
-            Windows11Palette.Palette.AccentColor = (Color)ColorConverter.ConvertFromString("#FF018574");
+            Windows11Palette.Palette.AccentColor = (Color)ColorConverter.ConvertFromString("#88018574");
             //Windows11Palette.Palette.AccentFocusedColor = (Color)ColorConverter.ConvertFromString("#FF0AE8CB");
             Windows11Palette.Palette.AccentMouseOverColor = (Color)ColorConverter.ConvertFromString("#FF00B294");
             Windows11Palette.Palette.AccentPressedColor = (Color)ColorConverter.ConvertFromString("#FF017566");
@@ -211,8 +211,8 @@ namespace CSM.App
             Windows11Palette.Palette.ReadOnlyOpacity = 0.5;
 
 
-            Windows11Palette.Palette.SelectedColor = (Color)ColorConverter.ConvertFromString("#FF018574");
-            Windows11Palette.Palette.AccentSelectedColor = (Color)ColorConverter.ConvertFromString("#FF018574");
+            Windows11Palette.Palette.SelectedColor = (Color)ColorConverter.ConvertFromString("#88018574");
+            Windows11Palette.Palette.AccentSelectedColor = (Color)ColorConverter.ConvertFromString("#88018574");
         }
 
         #endregion

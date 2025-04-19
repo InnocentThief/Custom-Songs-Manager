@@ -1,4 +1,5 @@
-﻿using CSM.Business.Interfaces;
+﻿using CSM.Business.Core.SongSelection;
+using CSM.Business.Interfaces;
 using CSM.DataAccess.Playlists;
 using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
@@ -17,7 +18,7 @@ using System.Windows;
 
 namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
 {
-    internal class PlaylistTreeControlViewModel(IServiceLocator serviceLocator, bool hasEditHeader = true) : BaseViewModel(serviceLocator)
+    internal class PlaylistTreeControlViewModel : BaseViewModel
     {
         #region Private fields
 
@@ -29,8 +30,11 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
         private IRelayCommand? openInFileExplorerCommand;
         private IRelayCommand? refreshCommand;
 
-        private readonly ILogger<PlaylistTreeControlViewModel> logger = serviceLocator.GetService<ILogger<PlaylistTreeControlViewModel>>();
-        private readonly IUserConfigDomain userConfigDomain = serviceLocator.GetService<IUserConfigDomain>();
+        private readonly SongSelectionType songSelectionType;
+        private readonly ILogger<PlaylistTreeControlViewModel> logger;
+        private readonly IUserConfigDomain userConfigDomain;
+        private readonly ISongSelectionDomain songSelectionDomain;
+        private readonly bool hasEditHeader;
 
         #endregion
 
@@ -66,6 +70,17 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
 
         #endregion
 
+        public PlaylistTreeControlViewModel(IServiceLocator serviceLocator, SongSelectionType songSelectionType, bool hasEditHeader = true) : base(serviceLocator)
+        {
+            this.songSelectionType = songSelectionType;
+            logger = serviceLocator.GetService<ILogger<PlaylistTreeControlViewModel>>();
+            userConfigDomain = serviceLocator.GetService<IUserConfigDomain>();
+            songSelectionDomain = serviceLocator.GetService<ISongSelectionDomain>();
+            this.hasEditHeader = hasEditHeader;
+
+            songSelectionDomain.OnSongSelectionChanged += SongSelectionDomain_OnSongSelectionChanged;
+        }
+
         public async Task LoadAsync(bool refresh)
         {
             if (Playlists.Count > 0 && !refresh)
@@ -92,7 +107,7 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
             var retval = new List<BasePlaylistViewModel>();
 
             var directories = Directory.GetDirectories(path);
-            foreach (var directory in directories.Where(d => !d.ToLower().Contains("coverimages")))
+            foreach (var directory in directories.Where(d => !d.Contains("coverimages", StringComparison.CurrentCultureIgnoreCase)))
             {
                 var playlistFolderViewModel = new PlaylistFolderViewModel(ServiceLocator, directory);
                 playlistFolderViewModel.Playlists.AddRange(await LoadDirectoryStructureAsync(directory));
@@ -109,15 +124,14 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
                     var playList = JsonSerializer.Deserialize<Playlist>(content);
                     if (playList == null)
                         continue;
-                    var playlistViewModel = new PlaylistViewModel(ServiceLocator, playList, file);
+                    var playlistViewModel = new PlaylistViewModel(ServiceLocator, playList, file, songSelectionType);
                     retval.Add(playlistViewModel);
                 }
                 catch (Exception ex)
                 {
-                    logger.LogError(ex, $"Error loading playlist from {file}");
+                    logger.LogError(ex, "Error loading playlist from {file}", file);
                     continue;
                 }
-
             }
 
             return retval;
@@ -188,7 +202,7 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
                     var content = JsonSerializer.Serialize(playlist, JsonSerializerHelper.CreateDefaultSerializerOptions());
                     File.WriteAllText(playlistPath, content);
 
-                    var playlistViewModel = new PlaylistViewModel(ServiceLocator, playlist, playlistPath);
+                    var playlistViewModel = new PlaylistViewModel(ServiceLocator, playlist, playlistPath, songSelectionType);
                     if (selectedFolderViewModel != null)
                         selectedFolderViewModel.Playlists.Add(playlistViewModel);
                     else
@@ -200,7 +214,6 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
                     MessageBox.Show($"Unable to create new playlist with name '{editNewPlaylistName.PlaylistName}'", "Unable to create new playlist");
                 }
             }
-
         }
 
         private bool CanAddPlaylist()
@@ -304,6 +317,14 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
         {
             DeletePlaylistCommand.RaiseCanExecuteChanged();
             OpenInFileExplorerCommand.RaiseCanExecuteChanged();
+        }
+
+        private void SongSelectionDomain_OnSongSelectionChanged(object? sender, SongSelectionChangedEventArgs e)
+        {
+            foreach (var playlist in Playlists)
+            {
+                playlist.CheckContainsSong(e.SongHash, e.SongSelectionType);
+            }
         }
 
         #endregion

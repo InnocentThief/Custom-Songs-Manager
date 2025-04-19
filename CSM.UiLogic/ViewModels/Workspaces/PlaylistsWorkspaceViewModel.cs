@@ -1,4 +1,5 @@
-﻿using CSM.Framework.ServiceLocation;
+﻿using CSM.Business.Core.SongSelection;
+using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.ViewModels.Controls.PlaylistsTree;
 using CSM.UiLogic.ViewModels.Controls.SongSources;
@@ -15,7 +16,7 @@ namespace CSM.UiLogic.ViewModels.Workspaces
 
         public PlaylistsWorkspaceViewModel(IServiceLocator serviceLocator) : base(serviceLocator)
         {
-            PlaylistsTree = new PlaylistTreeControlViewModel(ServiceLocator);
+            PlaylistsTree = new PlaylistTreeControlViewModel(ServiceLocator,SongSelectionType.Left);
             SongSources = new SongSourcesControlViewModel(ServiceLocator);
         }
 
