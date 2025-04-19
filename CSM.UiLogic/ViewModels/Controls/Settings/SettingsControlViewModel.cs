@@ -22,7 +22,7 @@ namespace CSM.UiLogic.ViewModels.Controls.Settings
 
         public SongSuggestSettingsViewModel SongSuggestSettings { get; }
 
-        public SettingsControlViewModel(IServiceLocator serviceLocator) : base(serviceLocator, "Cancel", EditViewModelCommandColor.Detault, "Save", EditViewModelCommandColor.Detault)
+        public SettingsControlViewModel(IServiceLocator serviceLocator) : base(serviceLocator, "Cancel", EditViewModelCommandColor.Default, "Save", EditViewModelCommandColor.Default)
         {
             var userConfigDomain = serviceLocator.GetService<IUserConfigDomain>();
 

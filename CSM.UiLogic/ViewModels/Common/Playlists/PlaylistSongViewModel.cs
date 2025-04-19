@@ -38,6 +38,8 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
 
         public List<PlaylistSongDifficultyViewModel> Difficulties => [.. difficulties.OrderBy(d => d.Name)];
 
+        public DateTime? Uploaded { get; private set; }
+
         #endregion
 
         public PlaylistSongViewModel(IServiceLocator serviceLocator, Song song) : base(serviceLocator)
@@ -53,11 +55,13 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
             song.Key = mapDetail.Id;
             song.SongName = mapDetail.Name;
             song.LevelAuthorName = mapDetail.Metadata?.LevelAuthorName;
+            Uploaded = mapDetail.Uploaded;
 
             OnPropertyChanged(nameof(BsrKey));
             OnPropertyChanged(nameof(BsrKeyHex));
             OnPropertyChanged(nameof(SongName));
             OnPropertyChanged(nameof(LevelAuthorName));
+            OnPropertyChanged(nameof(Uploaded));
         }
     }
 

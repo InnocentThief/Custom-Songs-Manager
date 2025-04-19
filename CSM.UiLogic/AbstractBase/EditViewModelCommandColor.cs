@@ -2,7 +2,7 @@
 {
     internal enum EditViewModelCommandColor
     {
-        Detault = 0,
+        Default = 0,
         Attention = 1
     }
 }

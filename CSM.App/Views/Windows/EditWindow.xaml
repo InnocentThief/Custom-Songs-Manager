@@ -3,14 +3,22 @@
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                     xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" 
-                     xmlns:settingsViewModel="clr-namespace:CSM.UiLogic.ViewModels.Controls.Settings;assembly=CSM.UiLogic"
+                     xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+                     xmlns:playlistsView="clr-namespace:CSM.App.Views.Windows.Playlists"
+                     xmlns:playlistsViewModel="clr-namespace:CSM.UiLogic.ViewModels.Controls.PlaylistsTree;assembly=CSM.UiLogic"
                      xmlns:settingsView="clr-namespace:CSM.App.Views.Windows.Settings"
+                     xmlns:settingsViewModel="clr-namespace:CSM.UiLogic.ViewModels.Controls.Settings;assembly=CSM.UiLogic"
                      mc:Ignorable="d"
                      Header="{Binding Title}"
                      WindowStartupLocation="CenterOwner">
 
     <telerik:RadWindow.Resources>
+        <DataTemplate DataType="{x:Type playlistsViewModel:NewPlaylistFolderViewModel}">
+            <playlistsView:NewPlaylistFolderControl />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type playlistsViewModel:NewPlaylistViewModel}">
+            <playlistsView:NewPlaylistControl />
+        </DataTemplate>
         <DataTemplate DataType="{x:Type settingsViewModel:SettingsControlViewModel}">
             <settingsView:SettingsControl />
         </DataTemplate>

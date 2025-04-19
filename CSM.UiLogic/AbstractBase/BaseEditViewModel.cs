@@ -37,7 +37,7 @@ namespace CSM.UiLogic.AbstractBase
             {
                 return cancelCommandColor switch
                 {
-                    EditViewModelCommandColor.Detault => defaultCommandColor,
+                    EditViewModelCommandColor.Default => defaultCommandColor,
                     EditViewModelCommandColor.Attention => attentionCommandColor,
                     _ => defaultCommandColor,
                 };
@@ -54,7 +54,7 @@ namespace CSM.UiLogic.AbstractBase
             {
                 return continueCommandColor switch
                 {
-                    EditViewModelCommandColor.Detault => defaultCommandColor,
+                    EditViewModelCommandColor.Default => defaultCommandColor,
                     EditViewModelCommandColor.Attention => attentionCommandColor,
                     _ => defaultCommandColor,
                 };

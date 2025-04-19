@@ -2,6 +2,8 @@
 using CSM.DataAccess.UserConfiguration;
 using CSM.Framework.Types;
 using Microsoft.Extensions.Logging;
+using System.Reflection;
+using System.Reflection.Metadata.Ecma335;
 using System.Text.Json;
 
 namespace CSM.Business.Core
@@ -38,7 +40,7 @@ namespace CSM.Business.Core
                     }
                     catch (Exception ex)
                     {
-                        logger.LogError(ex, $"Error deserializing UserConfig from {userConfigPath}");
+                        logger.LogError(ex, "Error deserializing UserConfig from {userConfigPath}", userConfigPath);
                         throw;
                     }
 
@@ -110,7 +112,7 @@ namespace CSM.Business.Core
                 BeatLeaderConfig = new BeatLeaderConfig()
                 {
                     Available = true,
-                }
+                },
             };
         }
 

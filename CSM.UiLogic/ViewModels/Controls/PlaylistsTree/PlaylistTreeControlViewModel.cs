@@ -4,12 +4,16 @@ using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.Commands;
+using CSM.UiLogic.Converter;
+using CSM.UiLogic.Helper;
 using CSM.UiLogic.ViewModels.Common.Playlists;
 using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Text.Json;
+using System.Windows;
 
 namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
 {
@@ -123,8 +127,29 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
         {
             var selectedFolderViewModel = selectedPlaylist as PlaylistFolderViewModel;
             var currentFolder = selectedFolderViewModel?.Path ?? userConfigDomain.Config?.PlaylistsConfig.PlaylistPath.Path;
+            if (currentFolder == null)
+                return;
 
-            // todo: implement folder creation
+            var editNewFolderName = new NewPlaylistFolderViewModel(ServiceLocator, "Cancel", EditViewModelCommandColor.Default, "Create folder", EditViewModelCommandColor.Default);
+            UserInteraction.ShowWindow(editNewFolderName);
+            if (editNewFolderName.Continue)
+            {
+                try
+                {
+                    var newDirectoryPath = Path.Combine(currentFolder, editNewFolderName.FolderName);
+                    Directory.CreateDirectory(newDirectoryPath);
+                    var newFolderViewModel = new PlaylistFolderViewModel(ServiceLocator, newDirectoryPath);
+                    if (selectedFolderViewModel != null)
+                        selectedFolderViewModel.Playlists.Add(newFolderViewModel);
+                    else
+                        Playlists.Add(newFolderViewModel);
+                }
+                catch (Exception ex)
+                {
+                    logger.LogError(ex, "Unable to create new folder with name '{folderName}'", editNewFolderName.FolderName);
+                    MessageBox.Show($"Unable to create new folder with name '{editNewFolderName.FolderName}'", "Unable to create new folder");
+                }
+            }
         }
 
         private bool CanAddFolder()
@@ -134,6 +159,47 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
 
         private void AddPlaylist()
         {
+            var assemblyLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            if (assemblyLocation == null)
+                return; 
+
+            var defaultImageLocation = Path.Combine(assemblyLocation, "Images\\CSM_Logo_400px.png");
+            var playlistsPath = userConfigDomain.Config?.PlaylistsConfig.PlaylistPath.Path;
+            var selectedFolderViewModel = selectedPlaylist as PlaylistFolderViewModel;
+            var currentFolder = selectedFolderViewModel?.Path ?? playlistsPath;
+            if (currentFolder == null)
+                return; 
+
+            var editNewPlaylistName = new NewPlaylistViewModel(ServiceLocator, "Cancel", EditViewModelCommandColor.Default, "Create playlist", EditViewModelCommandColor.Default);
+            UserInteraction.ShowWindow(editNewPlaylistName);
+            if (editNewPlaylistName.Continue)
+            {
+                try
+                {
+                    var playlistPath = Path.Combine(currentFolder, editNewPlaylistName.PlaylistName + ".json");
+                    var playlist = new Playlist
+                    {
+                        PlaylistTitle = editNewPlaylistName.PlaylistName,
+                        PlaylistAuthor = string.Empty,
+                        PlaylistDescription = string.Empty,
+                        Image = $"base64,{ImageConverter.StringFromBitmap(defaultImageLocation)}"
+                    };
+
+                    var content = JsonSerializer.Serialize(playlist, JsonSerializerHelper.CreateDefaultSerializerOptions());
+                    File.WriteAllText(playlistPath, content);
+
+                    var playlistViewModel = new PlaylistViewModel(ServiceLocator, playlist, playlistPath);
+                    if (selectedFolderViewModel != null)
+                        selectedFolderViewModel.Playlists.Add(playlistViewModel);
+                    else
+                        Playlists.Add(playlistViewModel);
+                }
+                catch (Exception ex)
+                {
+                    logger.LogError(ex, "Unable to create new playlist with name '{playlistName}'", editNewPlaylistName.PlaylistName);
+                    MessageBox.Show($"Unable to create new playlist with name '{editNewPlaylistName.PlaylistName}'", "Unable to create new playlist");
+                }
+            }
 
         }
 
