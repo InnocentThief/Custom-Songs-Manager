@@ -274,13 +274,13 @@
                     <TextBlock Text="Suggested Songs" Style="{StaticResource HeaderTitleStyle}" Foreground="#88018574" />
                     <!-- Commands -->
                     <telerik:RadToolBar Grid.Column="1" Style="{StaticResource HeaderToolBarStyle}" >
-                        <telerik:RadButton Command="{Binding AddPlaylistCommand}" ToolTip="Create new playlist with all songs (all filters will apply)" Visibility="{Binding HasEditHeader, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <telerik:RadButton Command="{Binding CreatePlaylistCommand}" ToolTip="{Binding CreatePlaylistCommandText}" Visibility="{Binding HasEditHeader, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <telerik:RadGlyph Glyph="&#xe907;" Foreground="#88018574" />
                         </telerik:RadButton>
-                        <telerik:RadButton Command="{Binding OverwritePlaylistCommand}" ToolTip="Overwrite the selected playlist with all songs (all filters will apply)" Visibility="{Binding HasEditHeader, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <telerik:RadButton Command="{Binding OverwritePlaylistCommand}" ToolTip="{Binding OverwritePlaylistCommandText}" Visibility="{Binding HasEditHeader, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <telerik:RadGlyph Glyph="&#xe945;" Foreground="#88018574" />
                         </telerik:RadButton>
-                        <telerik:RadButton Command="{Binding MergePlaylistCommand}" ToolTip="Merges all songs into the selected playlist (all filters will apply)" Visibility="{Binding HasEditHeader, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <telerik:RadButton Command="{Binding MergePlaylistCommand}" ToolTip="{Binding MergePlaylistCommandText}" Visibility="{Binding HasEditHeader, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <telerik:RadGlyph Glyph="&#xe941;" Foreground="#88018574" />
                         </telerik:RadButton>
                     </telerik:RadToolBar>

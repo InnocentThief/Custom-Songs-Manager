@@ -33,6 +33,7 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
         private readonly SongSelectionType songSelectionType;
         private readonly ILogger<PlaylistTreeControlViewModel> logger;
         private readonly IUserConfigDomain userConfigDomain;
+        private readonly ISongCopyDomain songCopyDomain;
         private readonly ISongSelectionDomain songSelectionDomain;
         private readonly bool hasEditHeader;
 
@@ -55,6 +56,7 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
                 OnPropertyChanged();
 
                 UpdateCommands();
+                songCopyDomain.SetSelectedPlaylist(value);
             }
         }
 
@@ -75,9 +77,11 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
             this.songSelectionType = songSelectionType;
             logger = serviceLocator.GetService<ILogger<PlaylistTreeControlViewModel>>();
             userConfigDomain = serviceLocator.GetService<IUserConfigDomain>();
+            songCopyDomain = serviceLocator.GetService<ISongCopyDomain>();
             songSelectionDomain = serviceLocator.GetService<ISongSelectionDomain>();
             this.hasEditHeader = hasEditHeader;
 
+            songCopyDomain.OnCreatePlaylist += SongCopyDomain_OnCreatePlaylist;
             songSelectionDomain.OnSongSelectionChanged += SongSelectionDomain_OnSongSelectionChanged;
         }
 
@@ -175,44 +179,15 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
         {
             var assemblyLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             if (assemblyLocation == null)
-                return; 
+                return;
 
             var defaultImageLocation = Path.Combine(assemblyLocation, "Images\\CSM_Logo_400px.png");
-            var playlistsPath = userConfigDomain.Config?.PlaylistsConfig.PlaylistPath.Path;
-            var selectedFolderViewModel = selectedPlaylist as PlaylistFolderViewModel;
-            var currentFolder = selectedFolderViewModel?.Path ?? playlistsPath;
-            if (currentFolder == null)
-                return; 
 
             var editNewPlaylistName = new NewPlaylistViewModel(ServiceLocator, "Cancel", EditViewModelCommandColor.Default, "Create playlist", EditViewModelCommandColor.Default);
             UserInteraction.ShowWindow(editNewPlaylistName);
             if (editNewPlaylistName.Continue)
             {
-                try
-                {
-                    var playlistPath = Path.Combine(currentFolder, editNewPlaylistName.PlaylistName + ".json");
-                    var playlist = new Playlist
-                    {
-                        PlaylistTitle = editNewPlaylistName.PlaylistName,
-                        PlaylistAuthor = string.Empty,
-                        PlaylistDescription = string.Empty,
-                        Image = $"base64,{ImageConverter.StringFromBitmap(defaultImageLocation)}"
-                    };
-
-                    var content = JsonSerializer.Serialize(playlist, JsonSerializerHelper.CreateDefaultSerializerOptions());
-                    File.WriteAllText(playlistPath, content);
-
-                    var playlistViewModel = new PlaylistViewModel(ServiceLocator, playlist, playlistPath, songSelectionType);
-                    if (selectedFolderViewModel != null)
-                        selectedFolderViewModel.Playlists.Add(playlistViewModel);
-                    else
-                        Playlists.Add(playlistViewModel);
-                }
-                catch (Exception ex)
-                {
-                    logger.LogError(ex, "Unable to create new playlist with name '{playlistName}'", editNewPlaylistName.PlaylistName);
-                    MessageBox.Show($"Unable to create new playlist with name '{editNewPlaylistName.PlaylistName}'", "Unable to create new playlist");
-                }
+                CreatePlaylist(editNewPlaylistName.PlaylistName, [], defaultImageLocation);
             }
         }
 
@@ -319,11 +294,56 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
             OpenInFileExplorerCommand.RaiseCanExecuteChanged();
         }
 
+        private void SongCopyDomain_OnCreatePlaylist(object? sender, Business.Core.SongCopy.CreatePlaylistEventArgs e)
+        {
+            var assemblyLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            if (assemblyLocation == null)
+                return;
+
+            CreatePlaylist(e.PlaylistName, e.Songs, Path.Combine(assemblyLocation, "Images\\CSM_Logo_Song_Suggest_400px.png"));
+        }
+
         private void SongSelectionDomain_OnSongSelectionChanged(object? sender, SongSelectionChangedEventArgs e)
         {
             foreach (var playlist in Playlists)
             {
                 playlist.CheckContainsSong(e.SongHash, e.SongSelectionType);
+            }
+        }
+
+        private void CreatePlaylist(string playlistName, List<Song> songs, string? image)
+        {
+            var playlistsPath = userConfigDomain.Config?.PlaylistsConfig.PlaylistPath.Path;
+            var selectedFolderViewModel = selectedPlaylist as PlaylistFolderViewModel;
+            var currentFolder = selectedFolderViewModel?.Path ?? playlistsPath;
+            if (currentFolder == null)
+                return;
+
+            try
+            {
+                var playlistPath = Path.Combine(currentFolder, playlistName + ".json");
+                var playlist = new Playlist
+                {
+                    PlaylistTitle = playlistName,
+                    PlaylistAuthor = string.Empty,
+                    PlaylistDescription = string.Empty,
+                    Songs = songs,
+                    Image = image != null ? $"base64,{ImageConverter.StringFromBitmap(image)}" : string.Empty,
+                };
+
+                var content = JsonSerializer.Serialize(playlist, JsonSerializerHelper.CreateDefaultSerializerOptions());
+                File.WriteAllText(playlistPath, content);
+
+                var playlistViewModel = new PlaylistViewModel(ServiceLocator, playlist, playlistPath, songSelectionType);
+                if (selectedFolderViewModel != null)
+                    selectedFolderViewModel.Playlists.Add(playlistViewModel);
+                else
+                    Playlists.Add(playlistViewModel);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Unable to create new playlist with name '{playlistName}'", playlistName);
+                MessageBox.Show($"Unable to create new playlist with name '{playlistName}'", "Unable to create new playlist");
             }
         }
 

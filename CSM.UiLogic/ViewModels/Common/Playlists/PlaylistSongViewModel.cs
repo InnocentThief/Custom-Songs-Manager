@@ -17,6 +17,8 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
 
         #region Properties
 
+        public Song Model => song;
+
         public string Hash => song.Hash.ToLower();
 
         public string BsrKey => song.Key ?? string.Empty;
@@ -55,6 +57,7 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
             song.Key = mapDetail.Id;
             song.SongName = mapDetail.Name;
             song.LevelAuthorName = mapDetail.Metadata?.LevelAuthorName;
+            song.LevelId = mapDetail.Id;
             Uploaded = mapDetail.Uploaded;
 
             OnPropertyChanged(nameof(BsrKey));

@@ -1,10 +1,11 @@
 ﻿using CSM.Business.Core.SongSelection;
+using CSM.Business.Interfaces.SongCopy;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
 
 namespace CSM.UiLogic.ViewModels.Common.Playlists
 {
-    internal abstract class BasePlaylistViewModel(IServiceLocator serviceLocator, string name, string path) : BaseViewModel(serviceLocator)
+    internal abstract class BasePlaylistViewModel(IServiceLocator serviceLocator, string name, string path) : BaseViewModel(serviceLocator), IBasePlaylistViewModel
     {
         #region Private fields
 

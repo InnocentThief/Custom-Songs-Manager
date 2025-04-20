@@ -1,4 +1,5 @@
 ﻿using CSM.Business.Core.SongSelection;
+using CSM.Business.Interfaces.SongCopy;
 using CSM.Framework.ServiceLocation;
 using System.Collections.ObjectModel;
 
@@ -7,7 +8,7 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
     internal sealed class PlaylistFolderViewModel(
         IServiceLocator serviceLocator,
         string path)
-        : BasePlaylistViewModel(serviceLocator, System.IO.Path.GetFileName(path), path)
+        : BasePlaylistViewModel(serviceLocator, System.IO.Path.GetFileName(path), path), IPlaylistFolderViewModel
     {
         public ObservableCollection<BasePlaylistViewModel> Playlists { get; } = [];
 

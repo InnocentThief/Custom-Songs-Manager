@@ -1,4 +1,7 @@
-﻿using CSM.Business.Core.SongSelection;
+﻿using System.Globalization;
+using System.Windows;
+using CSM.Business.Core.SongCopy;
+using CSM.Business.Core.SongSelection;
 using CSM.Business.Interfaces;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
@@ -8,7 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CSM.UiLogic.ViewModels.Controls.SongSources
 {
-    internal class SongSuggestSourceViewModel(IServiceLocator serviceLocator) : BaseViewModel(serviceLocator), ISongSourceViewModel
+    internal class SongSuggestSourceViewModel : BaseViewModel, ISongSourceViewModel
     {
         #region Private fields
 
@@ -16,11 +19,13 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
         private bool isDirty;
         private bool useDefaultSettings = true;
         private string? playerId = string.Empty;
-        private IRelayCommand? generateCommand, resetAdvancedSettingsCommand, saveAdvancedSettingsCommand;
+        private IRelayCommand? generateCommand, resetAdvancedSettingsCommand, saveAdvancedSettingsCommand, createPlaylistCommand, overwritePlaylistCommand, mergePlaylistCommand;
+        private string? createPlaylistCommandText, overwritePlaylistCommandText, mergePlaylistCommandText;
         private ISongSuggestDomain? songSuggestDomain;
 
-        private readonly ILogger<SongSuggestSourceViewModel> logger = serviceLocator.GetService<ILogger<SongSuggestSourceViewModel>>();
-        private readonly IUserConfigDomain userConfigDomain = serviceLocator.GetService<IUserConfigDomain>();
+        private readonly ILogger<SongSuggestSourceViewModel> logger;
+        private readonly ISongCopyDomain songCopyDomain;
+        private readonly IUserConfigDomain userConfigDomain;
 
         #endregion
 
@@ -31,6 +36,48 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
         public IRelayCommand ResetAdvancedSettingsCommand => resetAdvancedSettingsCommand ??= CommandFactory.Create(ResetAdvancedSettings, CanResetAdvancedSettings);
 
         public IRelayCommand SaveAdvancedSettingsCommand => saveAdvancedSettingsCommand ??= CommandFactory.Create(SaveAdvancedSettings, CanSaveAdvancedSettings);
+
+        public IRelayCommand CreatePlaylistCommand => createPlaylistCommand ??= CommandFactory.Create(CreatePlaylist, CanCreatePlaylist);
+
+        public IRelayCommand OverwritePlaylistCommand => overwritePlaylistCommand ??= CommandFactory.Create(OverwritePlaylist, CanOverwritePlaylist);
+
+        public IRelayCommand MergePlaylistCommand => mergePlaylistCommand ??= CommandFactory.Create(MergePlaylist, CanMergePlaylist);
+
+        public string? CreatePlaylistCommandText
+        {
+            get => createPlaylistCommandText;
+            set
+            {
+                if (createPlaylistCommandText == value)
+                    return;
+                createPlaylistCommandText = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string? OverwritePlaylistCommandText
+        {
+            get => overwritePlaylistCommandText;
+            set
+            {
+                if (overwritePlaylistCommandText == value)
+                    return;
+                overwritePlaylistCommandText = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string? MergePlaylistCommandText
+        {
+            get => mergePlaylistCommandText;
+            set
+            {
+                if (mergePlaylistCommandText == value)
+                    return;
+                mergePlaylistCommandText = value;
+                OnPropertyChanged();
+            }
+        }
 
         public PlaylistViewModel? Playlist
         {
@@ -244,6 +291,16 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         #endregion
 
+        public SongSuggestSourceViewModel(IServiceLocator serviceLocator) : base(serviceLocator)
+        {
+            logger = serviceLocator.GetService<ILogger<SongSuggestSourceViewModel>>();
+            songCopyDomain = serviceLocator.GetService<ISongCopyDomain>();
+            songCopyDomain.OnPlaylistSelectionChanged += SongCopyDomain_OnPlaylistSelectionChanged;
+            userConfigDomain = serviceLocator.GetService<IUserConfigDomain>();
+
+            createPlaylistCommandText = "Create new playlist in root with all songs (all filter will apply)";
+        }
+
         public async Task LoadAsync()
         {
             SetLoadingInProgress(true, "Initializing song suggestion...");
@@ -322,6 +379,72 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
         private bool CanSaveAdvancedSettings()
         {
             return isDirty;
+        }
+
+        private void CreatePlaylist()
+        {
+            if (Playlist == null || Playlist.Songs.Count == 0)
+            {
+                MessageBox.Show("No songs to copy.", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            var createPlaylistEventArgs = new CreatePlaylistEventArgs
+            {
+                PlaylistName = $"Suggested Songs {DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")}",
+                Songs = [.. Playlist.Songs.Select(x => x.Model)] // todo: only take filtered songs
+            };
+            songCopyDomain.CreatePlaylist(createPlaylistEventArgs);
+        }
+
+        private bool CanCreatePlaylist()
+        {
+            return songCopyDomain.SelectedPlaylist == null || songCopyDomain.SelectedPlaylist is PlaylistFolderViewModel;
+        }
+
+        private void OverwritePlaylist()
+        {
+
+        }
+
+        private bool CanOverwritePlaylist()
+        {
+            return songCopyDomain.SelectedPlaylist != null && songCopyDomain.SelectedPlaylist is PlaylistViewModel;
+        }
+
+        private void MergePlaylist()
+        {
+
+        }
+
+        private bool CanMergePlaylist()
+        {
+            return songCopyDomain.SelectedPlaylist != null && songCopyDomain.SelectedPlaylist is PlaylistViewModel;
+        }
+
+        private void SongCopyDomain_OnPlaylistSelectionChanged(object? sender, Business.Core.SongCopy.PlaylistSelectionChangedEventArgs e)
+        {
+            if (e.Playlist == null)
+            {
+                CreatePlaylistCommandText = "Create new playlist in root with all songs (all filter will apply)";
+                OnPropertyChanged(nameof(CreatePlaylistCommandText));
+            }
+            else if (e.Playlist is PlaylistFolderViewModel playlistFolderViewModel)
+            {
+                CreatePlaylistCommandText = $"Create new playlist in folder '{playlistFolderViewModel.Name}' with all songs (all filter will apply)";
+                OnPropertyChanged(nameof(CreatePlaylistCommandText));
+            }
+            else if (e.Playlist is PlaylistViewModel playlistViewModel)
+            {
+                OverwritePlaylistCommandText = $"Overwrite playlist '{playlistViewModel.PlaylistTitle}' with all songs (all filter will apply)";
+                OnPropertyChanged(nameof(OverwritePlaylistCommandText));
+                MergePlaylistCommandText = $"Merge all songs (all filter will apply) with songs from playlist '{playlistViewModel.PlaylistTitle}'";
+                OnPropertyChanged(nameof(MergePlaylistCommandText));
+            }
+
+            CreatePlaylistCommand.RaiseCanExecuteChanged();
+            OverwritePlaylistCommand.RaiseCanExecuteChanged();
+            MergePlaylistCommand.RaiseCanExecuteChanged();
         }
 
         #endregion

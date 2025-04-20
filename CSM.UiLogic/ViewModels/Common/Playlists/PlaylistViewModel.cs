@@ -1,5 +1,6 @@
 ﻿using CSM.Business.Core.SongSelection;
 using CSM.Business.Interfaces;
+using CSM.Business.Interfaces.SongCopy;
 using CSM.DataAccess.BeatSaver;
 using CSM.DataAccess.Playlists;
 using CSM.Framework.Extensions;
@@ -15,7 +16,7 @@ using System.Windows.Media;
 
 namespace CSM.UiLogic.ViewModels.Common.Playlists
 {
-    internal sealed class PlaylistViewModel : BasePlaylistViewModel
+    internal sealed class PlaylistViewModel : BasePlaylistViewModel, IPlaylistViewModel
     {
         #region Private fields
 
