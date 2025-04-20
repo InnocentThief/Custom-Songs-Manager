@@ -29,6 +29,10 @@
                     <telerik:RadGlyph Glyph="&#xe68F;" />
                 </telerik:RadButton>
                 <telerik:RadToolBarSeparator />
+                <telerik:RadButton Command="{Binding PlaySortOrderAndSavecommand}" ToolTip="Apply current sort order and save playlist">
+                    <telerik:RadGlyph Glyph="&#xe666;" />
+                </telerik:RadButton>
+                <telerik:RadToolBarSeparator />
                 <telerik:RadButton Command="{Binding SavePlaylistCommand}" ToolTip="Save playlist">
                     <telerik:RadGlyph Glyph="&#xe109;" />
                 </telerik:RadButton>
@@ -116,3 +120,5 @@
         <local:SongDetailControl Grid.Row="4" />
     </Grid>
 </UserControl>
+
+
