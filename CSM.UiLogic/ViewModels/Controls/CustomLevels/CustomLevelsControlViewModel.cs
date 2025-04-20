@@ -44,8 +44,14 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
                     return;
                 selectedCustomLevel = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(HasSelectedCustomLevel));
                 UpdateCommands();
             }
+        }
+
+        public bool HasSelectedCustomLevel
+        {
+            get => SelectedCustomLevel != null;
         }
 
         public string CustomLevelCount => $"{CustomLevels.Count} custom levels loaded";
@@ -84,8 +90,8 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
         {
             if (SelectedCustomLevel == null)
                 return;
-           
-          var mapDetail =   await beatSaverService.GetMapDetailAsync(SelectedCustomLevel.BsrKey);
+
+            var mapDetail = await beatSaverService.GetMapDetailAsync(SelectedCustomLevel.BsrKey);
             if (mapDetail == null)
                 return;
 
