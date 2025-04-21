@@ -1,4 +1,6 @@
-﻿namespace CSM.UiLogic.ViewModels.Common.CustomLevels
+﻿using CSM.DataAccess.BeatSaver;
+
+namespace CSM.UiLogic.ViewModels.Common.CustomLevels
 {
     interface ICustomLevelViewModel
     {
@@ -9,5 +11,7 @@
         string SongTitle { get; }
         string SongSubTitle { get; }
         string SongAuthor { get; }
+
+        void UpdateMapDetail(MapDetail mapDetail);
     }
 }

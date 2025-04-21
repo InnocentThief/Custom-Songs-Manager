@@ -33,8 +33,9 @@
                     Margin="3,3,3,3" 
                     ItemsSource="{Binding CustomLevels}" 
                     SelectedItem="{Binding SelectedCustomLevel}" 
-                    
-                    Style="{StaticResource RadGridViewStyle}" SelectionChanged="RadGridView_SelectionChanged">
+                    SelectionChanged="RadGridView_SelectionChanged"
+                    FilterOperatorsLoading="RadGridView_FilterOperatorsLoading" 
+                    Style="{StaticResource RadGridViewStyle}">
                     <telerik:RadGridView.Columns>
                         <!-- Add button (will add song to selected playlist) -->
                         <telerik:GridViewColumn Width="SizeToCells">

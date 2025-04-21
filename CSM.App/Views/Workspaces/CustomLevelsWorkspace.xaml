@@ -19,10 +19,10 @@
                     <customlevels:CustomLevelsControl />
                     <GridSplitter Grid.Column="1" Style="{StaticResource WorkspaceVerticalGridSplitterStyle}" HorizontalAlignment="Center" />
 
-                    <common:SongDetailNoDataControl Grid.Column="2" Visibility="{Binding HasSelectedCustomLevel, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
+                    <common:MapDetailNoDataControl Grid.Column="2" Visibility="{Binding HasSelectedCustomLevel, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
 
                     <Grid Grid.Column="2" Visibility="{Binding HasSelectedCustomLevel, Converter={StaticResource BooleanToVisibilityConverter}}">
-                        <common:SongDetailVerticalControl DataContext="{Binding SelectedCustomLevel}" />
+                    <common:MapDetailVerticalControl DataContext="{Binding SelectedCustomLevel.MapDetailViewModel}" />
                     </Grid>
                 </Grid>
         </DataTemplate>
@@ -37,10 +37,10 @@
                     <customlevels:CustomLevelsControl />
                     <GridSplitter Grid.Row="1" Style="{StaticResource WorkspaceHorizontalGridSplitterStyle}" VerticalAlignment="Center" />
 
-                    <common:SongDetailNoDataControl Grid.Row="2" Visibility="{Binding HasSelectedCustomLevel, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
+                    <common:MapDetailNoDataControl Grid.Row="2" Visibility="{Binding HasSelectedCustomLevel, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
 
                     <Grid Grid.Row="2" Visibility="{Binding HasSelectedCustomLevel, Converter={StaticResource BooleanToVisibilityConverter}}">
-                        <common:SongDetailHorizontalControl DataContext="{Binding SelectedCustomLevel}" />
+                    <common:MapDetailHorizontalControl DataContext="{Binding SelectedCustomLevel.MapDetailViewModel}" />
                     </Grid>
                 </Grid>
         </DataTemplate>

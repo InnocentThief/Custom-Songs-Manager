@@ -5,7 +5,7 @@ namespace CSM.DataAccess.BeatSaver
     internal class MapVersion
     {
         [JsonPropertyName("coverURL")]
-        public string CoverURL { get; set; } = string.Empty;
+        public string CoverUrl { get; set; } = string.Empty;
 
         [JsonPropertyName("createdAt")]
         public DateTime CreatedAt { get; set; }

@@ -103,6 +103,11 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
             if (hashes.Count == 0)
                 return;
 
+            if (SelectedCustomLevel != null)
+            {
+                SelectedCustomLevel.UpdateMapDetail(mapDetail);
+            }
+
             songSelectionDomain.SetSongHash(hashes.Last(), SongSelectionType.Right);
         }
 
