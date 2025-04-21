@@ -1,6 +1,7 @@
 ﻿using CSM.Business.Core.SongSelection;
 using CSM.Business.Interfaces;
 using CSM.DataAccess.CustomLevels;
+using CSM.DataAccess.UserConfiguration;
 using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
@@ -53,6 +54,8 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
         {
             get => SelectedCustomLevel != null;
         }
+
+        public SongDetailPosition SongDetailPosition => userConfigDomain.Config?.CustomLevelsConfig.SongDetailPosition ?? SongDetailPosition.Bottom;
 
         public string CustomLevelCount => $"{CustomLevels.Count} custom levels loaded";
 

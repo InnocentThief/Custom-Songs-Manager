@@ -2,7 +2,7 @@
 {
     public enum SongDetailPosition
     {
-        Right = 0,
-        Bottom = 1
+        Bottom = 0,
+        Right = 1
     }
 }
