@@ -4,7 +4,10 @@
                     xmlns:common="clr-namespace:CSM.App.Views.Common">
 
     <converter:DifficultyToColorConverter x:Key="DiffToColorConverter" />
-    
+    <converter:DifficultyNumberToColorConverter x:Key="DiffNumberToColorConverter" />
+    <converter:DifficultyToGradientStartColorConverter x:Key="DiffToGradientStartColorConverter" />
+    <converter:DifficultyToGradientStopColorConverter x:Key="DiffToGradientStopColorConverter" />
+
     <DataTemplate x:Key="Degree360DataTemplate">
         <Border Background="{Binding Name, Converter={StaticResource DiffToColorConverter}}" CornerRadius="5" Margin="0,0,3,0">
             <Canvas Height="14" Width="14" Margin="6,3">

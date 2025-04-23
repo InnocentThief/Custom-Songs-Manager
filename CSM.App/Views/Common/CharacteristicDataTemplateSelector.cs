@@ -1,4 +1,4 @@
-﻿using CSM.UiLogic.ViewModels.Common.Playlists;
+﻿using CSM.DataAccess.Common;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -17,16 +17,19 @@ namespace CSM.App.Views.Common
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            if (item is not PlaylistSongDifficultyViewModel characteristic)
+            if (item == null)
                 return base.SelectTemplate(item, container);
-            if (characteristic.Characteristic == DataAccess.Common.Characteristic.Degree360) return Degree360DataTemplate;
-            if (characteristic.Characteristic == DataAccess.Common.Characteristic.Degree90) return Degree90DataTemplate;
-            if (characteristic.Characteristic == DataAccess.Common.Characteristic.Standard) return StandardDataTemplate;
-            if (characteristic.Characteristic == DataAccess.Common.Characteristic.NoArrows) return NoArrowsDataTemplate;
-            if (characteristic.Characteristic == DataAccess.Common.Characteristic.OneSaber) return OneSaberDataTemplate;
-            if (characteristic.Characteristic == DataAccess.Common.Characteristic.Lawless) return LawlessDataTemplate;
-            if (characteristic.Characteristic == DataAccess.Common.Characteristic.Lightshow) return LightshowDataTemplate;
-            if (characteristic.Characteristic == DataAccess.Common.Characteristic.Legacy) return LegacyDataTemplate;
+
+            var characteristic = (Characteristic)item;
+
+            if (characteristic == Characteristic.Degree360) return Degree360DataTemplate;
+            if (characteristic == Characteristic.Degree90) return Degree90DataTemplate;
+            if (characteristic == Characteristic.Standard) return StandardDataTemplate;
+            if (characteristic == Characteristic.NoArrows) return NoArrowsDataTemplate;
+            if (characteristic == Characteristic.OneSaber) return OneSaberDataTemplate;
+            if (characteristic == Characteristic.Lawless) return LawlessDataTemplate;
+            if (characteristic == Characteristic.Lightshow) return LightshowDataTemplate;
+            if (characteristic == Characteristic.Legacy) return LegacyDataTemplate;
 
             return base.SelectTemplate(item, container);
         }

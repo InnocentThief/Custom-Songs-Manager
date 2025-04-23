@@ -11,45 +11,45 @@
     <UserControl.Resources>
         <DataTemplate x:Key="SongDetailRightDataTemplate">
             <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="3" />
-                        <ColumnDefinition Width="200" MinWidth="50" />
-                    </Grid.ColumnDefinitions>
-                    <customlevels:CustomLevelsControl />
-                    <GridSplitter Grid.Column="1" Style="{StaticResource WorkspaceVerticalGridSplitterStyle}" HorizontalAlignment="Center" />
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" MinWidth="100" />
+                    <ColumnDefinition Width="3" />
+                    <ColumnDefinition Width="200" MinWidth="50" />
+                </Grid.ColumnDefinitions>
+                <customlevels:CustomLevelsControl />
+                <GridSplitter Grid.Column="1" Style="{StaticResource WorkspaceVerticalGridSplitterStyle}" HorizontalAlignment="Center" />
 
-                    <common:MapDetailNoDataControl Grid.Column="2" Visibility="{Binding HasSelectedCustomLevel, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
+                <common:MapDetailNoDataControl Grid.Column="2" Visibility="{Binding HasSelectedCustomLevel, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
 
-                    <Grid Grid.Column="2" Visibility="{Binding HasSelectedCustomLevel, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid Grid.Column="2" Visibility="{Binding HasSelectedCustomLevel, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <common:MapDetailVerticalControl DataContext="{Binding SelectedCustomLevel.MapDetailViewModel}" />
-                    </Grid>
                 </Grid>
+            </Grid>
         </DataTemplate>
 
         <DataTemplate x:Key="SongDetailBottomDataTemplate">
             <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="3" />
-                        <RowDefinition Height="200" MinHeight="50" />
-                    </Grid.RowDefinitions>
-                    <customlevels:CustomLevelsControl />
-                    <GridSplitter Grid.Row="1" Style="{StaticResource WorkspaceHorizontalGridSplitterStyle}" VerticalAlignment="Center" />
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" MinHeight="100" />
+                    <RowDefinition Height="3" />
+                    <RowDefinition Height="200" MinHeight="50" />
+                </Grid.RowDefinitions>
+                <customlevels:CustomLevelsControl />
+                <GridSplitter Grid.Row="1" Style="{StaticResource WorkspaceHorizontalGridSplitterStyle}" VerticalAlignment="Center" />
 
-                    <common:MapDetailNoDataControl Grid.Row="2" Visibility="{Binding HasSelectedCustomLevel, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
+                <common:MapDetailNoDataControl Grid.Row="2" Visibility="{Binding HasSelectedCustomLevel, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
 
-                    <Grid Grid.Row="2" Visibility="{Binding HasSelectedCustomLevel, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid Grid.Row="2" Visibility="{Binding HasSelectedCustomLevel, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <common:MapDetailHorizontalControl DataContext="{Binding SelectedCustomLevel.MapDetailViewModel}" />
-                    </Grid>
                 </Grid>
+            </Grid>
         </DataTemplate>
 
         <customlevels1:SongDetailPositionContentTemplateSelector x:Key="SongDetailPositionContentTemplateSelector"
                                                                  SongDetailRightDataTemplate="{StaticResource SongDetailRightDataTemplate}"
                                                                  SongDetailBottomDataTemplate="{StaticResource SongDetailBottomDataTemplate}"/>
     </UserControl.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="27" />
