@@ -5,7 +5,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
-             xmlns:local="clr-namespace:CSM.App.Views.Common"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -135,8 +134,8 @@
                         <ColumnDefinition Width="100"/>
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="Upvotes" FontWeight="DemiBold" Margin="0,1" />
-                    <TextBlock Grid.Column="1" Text="{Binding Upvotes}" Margin="0,1" />
+                    <TextBlock Text="Upvotes" FontWeight="DemiBold" />
+                    <TextBlock Grid.Column="1" Text="{Binding Upvotes}" />
                 </Grid>
                 <!-- Downvotes -->
                 <Grid>
@@ -144,8 +143,8 @@
                         <ColumnDefinition Width="100"/>
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="Downvotes" FontWeight="DemiBold" Margin="0,1" />
-                    <TextBlock Grid.Column="1" Text="{Binding Downvotes}" Margin="0,1" />
+                    <TextBlock Text="Downvotes" FontWeight="DemiBold" />
+                    <TextBlock Grid.Column="1" Text="{Binding Downvotes}" />
                 </Grid>
                 <!-- Score -->
                 <Grid>
@@ -153,8 +152,8 @@
                         <ColumnDefinition Width="100"/>
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="Score" FontWeight="DemiBold" Margin="0,1" />
-                    <TextBlock Grid.Column="1" Text="{Binding Score}" Margin="0,1" />
+                    <TextBlock Text="Score" FontWeight="DemiBold" />
+                    <TextBlock Grid.Column="1" Text="{Binding Score}" />
                 </Grid>
                 <!-- Ranked -->
                 <Grid>
@@ -162,8 +161,8 @@
                         <ColumnDefinition Width="100"/>
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="Ranked" FontWeight="DemiBold" Margin="0,1" />
-                    <TextBlock Grid.Column="1" Text="{Binding Ranked}" Margin="0,1" />
+                    <TextBlock Text="Ranked" FontWeight="DemiBold" />
+                    <TextBlock Grid.Column="1" Text="{Binding Ranked}" />
                 </Grid>
                 <!-- Qualified -->
                 <Grid>
@@ -171,8 +170,8 @@
                         <ColumnDefinition Width="100"/>
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="Qualified" FontWeight="DemiBold" Margin="0,1" />
-                    <TextBlock Grid.Column="1" Text="{Binding Qualified}" Margin="0,1" />
+                    <TextBlock Text="Qualified" FontWeight="DemiBold" />
+                    <TextBlock Grid.Column="1" Text="{Binding Qualified}" />
                 </Grid>
                 <!-- Tags -->
                 <Grid>
@@ -180,8 +179,8 @@
                         <ColumnDefinition Width="100"/>
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="Tags" FontWeight="DemiBold" Margin="0,1" />
-                    <TextBlock Grid.Column="1" Text="{Binding Tags}" TextWrapping="Wrap" Margin="0,1" />
+                    <TextBlock Text="Tags" FontWeight="DemiBold" />
+                    <TextBlock Grid.Column="1" Text="{Binding Tags}" TextWrapping="Wrap" />
                 </Grid>
             </WrapPanel>
 
