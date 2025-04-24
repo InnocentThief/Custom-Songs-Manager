@@ -27,9 +27,11 @@ namespace CSM.UiLogic.ViewModels.Common.MapDetails
         {
             get
             {
-                var infos = new List<string>();
-                infos.Add($"NPS: {Math.Round(difficulty.Nps, 2)}");
-                infos.Add($"NJS: {Math.Round(difficulty.Njs, 2)}");
+                var infos = new List<string>
+                {
+                    $"NPS: {Math.Round(difficulty.Nps, 2)}",
+                    $"NJS: {Math.Round(difficulty.Njs, 2)}"
+                };
                 if (difficulty.Chroma)
                     infos.Add("CR");
                 if (difficulty.Me)

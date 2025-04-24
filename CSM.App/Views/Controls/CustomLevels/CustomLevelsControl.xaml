@@ -61,10 +61,10 @@
                                 </DataTemplate>
                             </telerik:GridViewDataColumn.CellTemplate>
                         </telerik:GridViewDataColumn>
-                        <telerik:GridViewDataColumn Header="Title" Width="*" DataMemberBinding="{Binding SongTitle}" />
-                        <telerik:GridViewDataColumn Header="Subtitle" Width="*" DataMemberBinding="{Binding SongSubTitle}" />
-                        <telerik:GridViewDataColumn Header="Mapper" Width="*" DataMemberBinding="{Binding LevelAuthor}" />
-                        <telerik:GridViewDataColumn Header="Artist" Width="*" DataMemberBinding="{Binding SongAuthor}" />
+                        <telerik:GridViewDataColumn Header="Title" Width="*" DataMemberBinding="{Binding SongTitle}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" />
+                        <telerik:GridViewDataColumn Header="Subtitle" Width="*" DataMemberBinding="{Binding SongSubTitle}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" />
+                        <telerik:GridViewDataColumn Header="Mapper" Width="*" DataMemberBinding="{Binding LevelAuthor}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" />
+                        <telerik:GridViewDataColumn Header="Artist" Width="*" DataMemberBinding="{Binding SongAuthor}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" />
                         <telerik:GridViewDataColumn Header="BPM" Width="Auto" DataMemberBinding="{Binding Bpm}" />
                         <telerik:GridViewDataColumn Header="E" Width="SizeToCells" DataMemberBinding="{Binding HasEasyMap}" IsFilterable="False">
                             <telerik:GridViewDataColumn.CellTemplate>
@@ -105,7 +105,9 @@
                     </telerik:RadGridView.Columns>
                 </telerik:RadGridView>
                 <!-- Entry counter -->
-                <telerik:Label Grid.Row="1" Content="{Binding CustomLevelCount}" Margin="6" />
+                <Border Grid.Row="1" Padding="6">
+                    <telerik:Label Content="{Binding CustomLevelCount}"  />
+                </Border>
             </Grid>
         </Grid>
     </telerik:RadBusyIndicator>
