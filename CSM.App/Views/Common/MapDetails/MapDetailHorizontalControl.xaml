@@ -107,13 +107,13 @@
                     <TextBlock Text="Uploaded" FontWeight="DemiBold" />
                     <TextBlock Grid.Column="1" Text="{Binding Uploaded, StringFormat='g', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
                 </Grid>
-                <!-- Notes per minute -->
+                <!-- Beats per minute -->
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="100"/>
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="Beats per minute" FontWeight="DemiBold"  />
+                    <TextBlock Text="Bpm" FontWeight="DemiBold"  />
                     <TextBlock Grid.Column="1" Text="{Binding Bpm}" />
                 </Grid>
                 <!-- Duration -->

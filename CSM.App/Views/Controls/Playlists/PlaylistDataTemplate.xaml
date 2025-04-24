@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CSM.App.Views.Controls.Playlists"
-             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" xmlns:common="clr-namespace:CSM.App.Views.Common"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -82,6 +82,7 @@
             ItemsSource="{Binding Songs}"
             Margin="3" 
             SelectedItem="{Binding SelectedSong}"
+            SelectionChanged="RadGridView_SelectionChanged"
             Style="{StaticResource RadGridViewStyle}">
             <telerik:RadGridView.Columns>
                 <!-- Key -->
@@ -93,9 +94,9 @@
                     </telerik:GridViewDataColumn.CellTemplate>
                 </telerik:GridViewDataColumn>
                 <!-- Title of the song -->
-                <telerik:GridViewDataColumn Header="Title" DataMemberBinding="{Binding SongName}" Width="*" />
+                <telerik:GridViewDataColumn Header="Title" DataMemberBinding="{Binding SongName}" Width="*" TextTrimming="CharacterEllipsis" />
                 <!-- Mapper of the song -->
-                <telerik:GridViewDataColumn Header="Mapper" DataMemberBinding="{Binding LevelAuthorName}" Width="*" />
+                <telerik:GridViewDataColumn Header="Mapper" DataMemberBinding="{Binding LevelAuthorName}" Width="*" TextTrimming="CharacterEllipsis" />
                 <!-- Difficulties -->
                 <telerik:GridViewDataColumn Header="Difficulties" DataMemberBinding="{Binding Difficulties}" Width="Auto">
                     <telerik:GridViewDataColumn.CellTemplate>
@@ -117,7 +118,10 @@
             </telerik:RadGridView.Columns>
         </telerik:RadGridView>
         <GridSplitter Grid.Row="3" Style="{StaticResource WorkspaceHorizontalGridSplitterStyle}" VerticalAlignment="Center" />
-        <local:SongDetailControl Grid.Row="4" />
+
+        <common:MapDetailTailoredControl Grid.Row="4" DataContext="{Binding SelectedSong.MapDetailViewModel}" />
+
+        <common:MapDetailNoDataControl Grid.Row="4" />
     </Grid>
 </UserControl>
 

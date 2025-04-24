@@ -85,8 +85,8 @@
                 <!-- Uploaded -->
                 <TextBlock Grid.Row="5" Text="Uploaded" FontWeight="DemiBold" />
                 <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding Uploaded, StringFormat='g', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
-                <!-- Notes per minute -->
-                <TextBlock Grid.Row="6" Text="Beats per minute" FontWeight="DemiBold"  />
+                <!-- Beats per minute -->
+                <TextBlock Grid.Row="6" Text="Bpm" FontWeight="DemiBold"  />
                 <TextBlock Grid.Column="1" Grid.Row="6" Text="{Binding Bpm}" />
                 <!-- Duration -->
                 <TextBlock Grid.Row="7" Text="Duration" FontWeight="DemiBold" />

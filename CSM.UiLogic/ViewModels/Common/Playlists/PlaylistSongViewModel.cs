@@ -2,6 +2,7 @@
 using CSM.DataAccess.Playlists;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
+using CSM.UiLogic.ViewModels.Common.MapDetails;
 using System.Globalization;
 
 namespace CSM.UiLogic.ViewModels.Common.Playlists
@@ -9,6 +10,8 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
     internal class PlaylistSongViewModel : BaseViewModel
     {
         #region Private fields
+
+        private MapDetailViewModel? mapDetailViewModel;
 
         private readonly Song song;
         private readonly List<PlaylistSongDifficultyViewModel> difficulties = [];
@@ -42,6 +45,18 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
 
         public DateTime? Uploaded { get; private set; }
 
+        public MapDetailViewModel? MapDetailViewModel
+        {
+            get => mapDetailViewModel;
+            set
+            {
+                if (mapDetailViewModel == value)
+                    return;
+                mapDetailViewModel = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         public PlaylistSongViewModel(IServiceLocator serviceLocator, Song song) : base(serviceLocator)
@@ -65,6 +80,11 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
             OnPropertyChanged(nameof(SongName));
             OnPropertyChanged(nameof(LevelAuthorName));
             OnPropertyChanged(nameof(Uploaded));
+        }
+
+        public void UpdateMapDetail(MapDetail mapDetail)
+        {
+            MapDetailViewModel = new MapDetailViewModel(ServiceLocator, mapDetail);
         }
     }
 

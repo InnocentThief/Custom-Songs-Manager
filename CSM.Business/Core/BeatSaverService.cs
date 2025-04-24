@@ -7,9 +7,14 @@ namespace CSM.Business.Core
     {
         private readonly GenericServiceClient client = new(userConfigDomain.Config?.BeatSaverAPIEndpoint ?? "https://api.beatsaver.com/");
 
-        public async Task<MapDetail?> GetMapDetailAsync(string id)
+        public async Task<MapDetail?> GetMapDetailAsync(string key, BeatSaverKeyType keyType)
         {
-            return await client.GetAsync<MapDetail>($"/maps/id/{id}");
+            return keyType switch
+            {
+                BeatSaverKeyType.Id => await client.GetAsync<MapDetail>($"/maps/id/{key}"),
+                BeatSaverKeyType.Hash => await client.GetAsync<MapDetail>($"/maps/hash/{key}"),
+                _ => throw new ArgumentOutOfRangeException(nameof(keyType), keyType, null),
+            };
         }
 
         public async Task<Dictionary<string, MapDetail>?> GetMapDetailsAsync(List<string> keys, BeatSaverKeyType keyType)

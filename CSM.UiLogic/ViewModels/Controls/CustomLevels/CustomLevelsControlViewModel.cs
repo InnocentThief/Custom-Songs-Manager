@@ -94,7 +94,7 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
             if (SelectedCustomLevel == null)
                 return;
 
-            var mapDetail = await beatSaverService.GetMapDetailAsync(SelectedCustomLevel.BsrKey);
+            var mapDetail = await beatSaverService.GetMapDetailAsync(SelectedCustomLevel.BsrKey, DataAccess.BeatSaver.BeatSaverKeyType.Id);
             if (mapDetail == null)
                 return;
 
@@ -103,10 +103,7 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
             if (hashes.Count == 0)
                 return;
 
-            if (SelectedCustomLevel != null)
-            {
-                SelectedCustomLevel.UpdateMapDetail(mapDetail);
-            }
+            SelectedCustomLevel.UpdateMapDetail(mapDetail);
 
             songSelectionDomain.SetSongHash(hashes.Last(), SongSelectionType.Right);
         }

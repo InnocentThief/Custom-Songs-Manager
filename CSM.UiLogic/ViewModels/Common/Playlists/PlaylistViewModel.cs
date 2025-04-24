@@ -159,6 +159,18 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
             return hasSelectedSong;
         }
 
+        public async Task LoadSelectedSongDataAsync()
+        {
+            if (SelectedSong == null)
+                return;
+
+            var mapDetail = await beatSaverService.GetMapDetailAsync(SelectedSong.Hash, BeatSaverKeyType.Hash);
+            if (mapDetail == null)
+                return;
+
+            SelectedSong.UpdateMapDetail(mapDetail);
+        }
+
         #region Helper methods
 
         private async Task SaveAsync()
