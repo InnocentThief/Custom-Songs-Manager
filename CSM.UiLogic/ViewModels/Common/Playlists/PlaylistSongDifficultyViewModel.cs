@@ -10,7 +10,7 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
 
         public Characteristic Characteristic => difficulty.Characteristic;
 
-        public Difficulty Name => difficulty.Name;
+        public Difficulty Difficulty => difficulty.Name;
 
         public PlaylistSongDifficultyViewModel(IServiceLocator serviceLocator, DataAccess.Playlists.Difficulty difficulty) : base(serviceLocator)
         {

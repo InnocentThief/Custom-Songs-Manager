@@ -29,11 +29,11 @@
                     <telerik:RadGlyph Glyph="&#xe68F;" />
                 </telerik:RadButton>
                 <telerik:RadToolBarSeparator />
-                <telerik:RadButton Command="{Binding PlaySortOrderAndSavecommand}" ToolTip="Apply current sort order and save playlist">
+                <telerik:RadButton ToolTip="Apply current sort order and save playlist">
                     <telerik:RadGlyph Glyph="&#xe666;" />
                 </telerik:RadButton>
                 <telerik:RadToolBarSeparator />
-                <telerik:RadButton Command="{Binding SavePlaylistCommand}" ToolTip="Save playlist">
+                <telerik:RadButton ToolTip="Save playlist">
                     <telerik:RadGlyph Glyph="&#xe109;" />
                 </telerik:RadButton>
             </telerik:RadToolBar>
@@ -50,7 +50,7 @@
                     <ColumnDefinition Width="80" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <telerik:RadButton Command="{Binding ChooseCoverImageCommand}" Focusable="False" Padding="0" Background="Transparent" BorderThickness="0"  ToolTip="Click to change cover image">
+                <telerik:RadButton Focusable="False" Padding="0" Background="Transparent" BorderThickness="0"  ToolTip="Click to change cover image">
                     <Image Source="{Binding CoverImage}" />
                 </telerik:RadButton>
                 <Grid Grid.Column="1">
@@ -108,7 +108,7 @@
                 <telerik:GridViewColumn Width="Auto">
                     <telerik:GridViewColumn.CellTemplate>
                         <DataTemplate>
-                            <telerik:RadButton Command="{Binding DeleteSongCommand}" Grid.Column="1" Background="Transparent" BorderThickness="0" Margin="0,0,10,0" ToolTip="Remove song from playlist" Focusable="False">
+                            <telerik:RadButton Grid.Column="1" Background="Transparent" BorderThickness="0" Margin="0,0,10,0" ToolTip="Remove song from playlist" Focusable="False">
                                 <telerik:RadGlyph Glyph="&#xe121;" Foreground="Red" />
                             </telerik:RadButton>
                         </DataTemplate>

@@ -11,12 +11,19 @@
         <!-- todo: Edit ??? -->
 
         <!-- List with difficulties -->
-        <ItemsControl ItemsSource="{Binding Difficulties}" Background="Transparent" BorderThickness="0" ItemTemplateSelector="{StaticResource CharacteristicDataTemplateSelector}">
+        <ItemsControl ItemsSource="{Binding Difficulties}" Background="Transparent" BorderThickness="0">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,0,2,0">
+                        <ContentControl Content="{Binding}" ContentTemplateSelector="{StaticResource CharacteristicDataTemplateSelector}" />
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
         </ItemsControl>
     </StackPanel>
 </UserControl>

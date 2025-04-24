@@ -1,4 +1,6 @@
 ﻿using CSM.DataAccess.Common;
+using CSM.UiLogic.ViewModels.Common.MapDetails;
+using CSM.UiLogic.ViewModels.Common.Playlists;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -17,10 +19,18 @@ namespace CSM.App.Views.Common
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
+            Characteristic characteristic = Characteristic.Standard; 
+
             if (item == null)
                 return base.SelectTemplate(item, container);
 
-            var characteristic = (Characteristic)item;
+            if (item is PlaylistSongDifficultyViewModel playlistSongDifficultyViewModel)
+            {
+                characteristic = playlistSongDifficultyViewModel.Characteristic;
+            } else if (item is MapDifficultyViewModel mapDifficultyViewModel)
+            {
+                characteristic = mapDifficultyViewModel.Characteristic;
+            }
 
             if (characteristic == Characteristic.Degree360) return Degree360DataTemplate;
             if (characteristic == Characteristic.Degree90) return Degree90DataTemplate;

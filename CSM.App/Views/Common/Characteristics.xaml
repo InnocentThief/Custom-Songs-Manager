@@ -9,7 +9,7 @@
     <converter:DifficultyToGradientStopColorConverter x:Key="DiffToGradientStopColorConverter" />
 
     <DataTemplate x:Key="Degree360DataTemplate">
-        <Border Background="{Binding Name, Converter={StaticResource DiffToColorConverter}}" CornerRadius="5" Margin="0,0,3,0">
+        <Border Background="{Binding Difficulty, Converter={StaticResource DiffToColorConverter}}" Margin="0,0,3,0">
             <Canvas Height="14" Width="14" Margin="6,3">
                 <Canvas.RenderTransform>
                     <MatrixTransform Matrix="0.01254435 0 0 0.01475564 -1.0411809 -2.4379264"/>
@@ -34,7 +34,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="Degree90DataTemplate">
-        <Border Background="{Binding Name, Converter={StaticResource DiffToColorConverter}}" CornerRadius="5" Margin="0,0,3,0">
+        <Border Background="{Binding Difficulty, Converter={StaticResource DiffToColorConverter}}" CornerRadius="5" Margin="0,0,3,0">
             <Canvas Height="14" Width="14" Margin="6,3">
                 <Canvas.RenderTransform>
                     <MatrixTransform Matrix="0.02719756 0 0 0.02126099 -7.5511317 -3.5784368"/>
@@ -54,7 +54,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="StandardDataTemplate">
-        <Border Background="{Binding Name, Converter={StaticResource DiffToColorConverter}}" CornerRadius="5" Margin="0,0,3,0">
+        <Border Background="{Binding Difficulty, Converter={StaticResource DiffToColorConverter}}" CornerRadius="5" Padding="2">
             <Canvas Height="14" Width="14" Margin="6,3">
                 <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path249" Fill="#FFFFFFFF" StrokeThickness="0.0124695">
                     <Path.Data>
@@ -66,7 +66,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="NoArrowsDataTemplate">
-        <Border Background="{Binding Name, Converter={StaticResource DiffToColorConverter}}" CornerRadius="5" Margin="0,0,3,0">
+        <Border Background="{Binding Difficulty, Converter={StaticResource DiffToColorConverter}}" CornerRadius="5" Margin="0,0,3,0">
             <Canvas Height="14" Width="14" Margin="6,3">
                 <Canvas.RenderTransform>
                     <MatrixTransform Matrix="0.01590891 0 0 0.01590891 -3.181782 -3.181782"/>
@@ -81,7 +81,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="OneSaberDataTemplate">
-        <Border Background="{Binding Name, Converter={StaticResource DiffToColorConverter}}" CornerRadius="5" Margin="0,0,3,0">
+        <Border Background="{Binding Difficulty, Converter={StaticResource DiffToColorConverter}}" CornerRadius="5" Margin="0,0,3,0">
             <Canvas Height="14" Width="14" Margin="6,3">
                 <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path9" Fill="#FFFFFFFF" StrokeThickness="0.0118206">
                     <Path.Data>
@@ -93,7 +93,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="LawlessDataTemplate">
-        <Border Background="{Binding Name, Converter={StaticResource DiffToColorConverter}}" CornerRadius="5" Margin="0,0,3,0">
+        <Border Background="{Binding Difficulty, Converter={StaticResource DiffToColorConverter}}" CornerRadius="5" Margin="0,0,3,0" Padding="2">
             <Canvas Height="14" Width="14" Margin="6,3">
                 <Canvas.RenderTransform>
                     <MatrixTransform Matrix="0.01166962 0 0 0.01200784 -0.47586389 -1.191473"/>
@@ -113,7 +113,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="LightshowDataTemplate">
-        <Border Background="{Binding Name, Converter={StaticResource DiffToColorConverter}}" CornerRadius="5" Margin="0,0,3,0">
+        <Border Background="{Binding Difficulty, Converter={StaticResource DiffToColorConverter}}" CornerRadius="5" Margin="0,0,3,0">
             <Canvas Height="14" Width="14" Margin="6,3">
                 <Canvas.RenderTransform>
                     <MatrixTransform Matrix="0.01123376 0 0 0.01123431 -0.14880409 -0.37441216"/>
@@ -133,7 +133,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="LegacyDataTemplate">
-        <Border Background="{Binding Name, Converter={StaticResource DiffToColorConverter}}" CornerRadius="5" Margin="0,0,3,0">
+        <Border Background="{Binding Difficulty, Converter={StaticResource DiffToColorConverter}}" CornerRadius="5" Margin="0,0,3,0">
             <TextBlock Text="Legacy" />
             <!--<Canvas Height="14" Width="14" Margin="6,3">
                 <Canvas.RenderTransform>

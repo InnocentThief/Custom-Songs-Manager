@@ -35,15 +35,15 @@
                 </Grid.RowDefinitions>
                 <telerik:RadWatermarkTextBox WatermarkContent="Search" Text="{Binding Query, UpdateSourceTrigger=PropertyChanged}" />
                 <!-- Search Button -->
-                <telerik:RadButton Grid.Column="1" Command="{Binding SearchCommand}" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" ToolTip="Search" Padding="8" Focusable="False">
+                <telerik:RadButton Grid.Column="1" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" ToolTip="Search" Padding="8" Focusable="False">
                     <telerik:RadGlyph Glyph="&#xe13e;" />
                 </telerik:RadButton>
                 <!-- Show me more -->
-                <telerik:RadButton Grid.Column="2" Command="{Binding ShowMeMoreCommand}" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" ToolTip="Show more" Padding="8" Focusable="False">
+                <telerik:RadButton Grid.Column="2" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" ToolTip="Show more" Padding="8" Focusable="False">
                     <telerik:RadGlyph Glyph="&#xe13f;" />
                 </telerik:RadButton>
                 <!-- Clear Button -->
-                <telerik:RadButton Grid.Column="3" Command="{Binding ResetSearchParametersCommand}" Background="DarkRed" ToolTip="Clear filter" Padding="8" Focusable="False">
+                <telerik:RadButton Grid.Column="3" Background="DarkRed" ToolTip="Clear filter" Padding="8" Focusable="False">
                     <telerik:RadGlyph Glyph="&#xe12a;" />
                 </telerik:RadButton>
                 <!-- NPS -->

@@ -8,6 +8,32 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
     internal class SongSearchSourceViewModel : BaseViewModel, ISongSourceViewModel
     {
         private SearchQueryBuilder searchQueryBuilder = new SearchQueryBuilder();
+        private bool searchExpanded;
+        private string query;
+
+        public bool SearchExpanded
+        {
+            get => searchExpanded;
+            set
+            {
+                if (value == searchExpanded)
+                    return;
+                searchExpanded = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Query
+        {
+            get => query;
+            set
+            {
+                if (value == query)
+                    return;
+                query = value;
+                OnPropertyChanged();
+            }
+        }
 
         public List<StyleItem> MapStyles { get; } = [
             new StyleItem(Tag.None, string.Empty, true),

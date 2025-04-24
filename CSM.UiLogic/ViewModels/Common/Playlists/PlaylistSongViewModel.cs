@@ -38,7 +38,7 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
 
         public string? LevelAuthorName => song.LevelAuthorName;
 
-        public List<PlaylistSongDifficultyViewModel> Difficulties => [.. difficulties.OrderBy(d => d.Name)];
+        public List<PlaylistSongDifficultyViewModel> Difficulties => [.. difficulties.OrderBy(d => d.Difficulty)];
 
         public DateTime? Uploaded { get; private set; }
 
