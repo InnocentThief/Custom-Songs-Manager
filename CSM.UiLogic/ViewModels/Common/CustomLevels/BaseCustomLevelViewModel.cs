@@ -67,7 +67,7 @@ namespace CSM.UiLogic.ViewModels.Common.CustomLevels
 
         public void UpdateMapDetail(MapDetail mapDetail)
         {
-            MapDetailViewModel = new MapDetailViewModel(mapDetail);
+            MapDetailViewModel = new MapDetailViewModel(ServiceLocator, mapDetail);
         }
     }
 }

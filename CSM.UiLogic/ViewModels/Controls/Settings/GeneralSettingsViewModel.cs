@@ -50,11 +50,26 @@ namespace CSM.UiLogic.ViewModels.Controls.Settings
             }
         }
 
+        public ObservableCollection<EnumWrapper<LeaderboardType>> VisibleLeaderboardInfos { get; } = [];
+
+        public EnumWrapper<LeaderboardType>? SelectedVisibleLeaderboardInfos
+        {
+            get => VisibleLeaderboardInfos.SingleOrDefault(w => w.Value == userConfig.VisibleLeaderboardInfos);
+            set
+            {
+                if (value == null || value.Value == userConfig.VisibleLeaderboardInfos)
+                    return;
+                userConfig.VisibleLeaderboardInfos = value.Value;
+                OnPropertyChanged();
+            }
+        }
+
         public GeneralSettingsViewModel(IServiceLocator serviceLocator, UserConfig userConfig) : base(serviceLocator)
         {
             this.userConfig = userConfig;
 
             Workspaces.AddRange(EnumWrapper<NavigationType>.GetValues(serviceLocator, n => n.Value));
+            VisibleLeaderboardInfos.AddRange(EnumWrapper<LeaderboardType>.GetValues(serviceLocator));
         }
     }
 }

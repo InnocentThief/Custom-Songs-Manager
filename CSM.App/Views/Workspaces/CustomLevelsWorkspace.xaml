@@ -14,7 +14,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" MinWidth="100" />
                     <ColumnDefinition Width="3" />
-                    <ColumnDefinition Width="200" MinWidth="50" />
+                    <ColumnDefinition Width="220" MinWidth="50" />
                 </Grid.ColumnDefinitions>
                 <customlevels:CustomLevelsControl />
                 <GridSplitter Grid.Column="1" Style="{StaticResource WorkspaceVerticalGridSplitterStyle}" HorizontalAlignment="Center" />
@@ -32,7 +32,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" MinHeight="100" />
                     <RowDefinition Height="3" />
-                    <RowDefinition Height="200" MinHeight="50" />
+                    <RowDefinition Height="220" MinHeight="50" />
                 </Grid.RowDefinitions>
                 <customlevels:CustomLevelsControl />
                 <GridSplitter Grid.Row="1" Style="{StaticResource WorkspaceHorizontalGridSplitterStyle}" VerticalAlignment="Center" />

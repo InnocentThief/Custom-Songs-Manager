@@ -70,6 +70,15 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        public static string enum_LeaderboardType_None {
+            get {
+                return ResourceManager.GetString("enum_LeaderboardType_None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ScoreSaber.
         /// </summary>
         public static string enum_LeaderboardType_ScoreSaber {

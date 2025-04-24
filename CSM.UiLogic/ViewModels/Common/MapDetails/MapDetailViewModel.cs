@@ -1,9 +1,11 @@
 ﻿using CSM.DataAccess.BeatSaver;
-using System.Resources;
+using CSM.Framework.ServiceLocation;
+using CSM.UiLogic.AbstractBase;
+using System.Text;
 
 namespace CSM.UiLogic.ViewModels.Common.MapDetails
 {
-    internal class MapDetailViewModel
+    internal class MapDetailViewModel : BaseViewModel
     {
         private readonly MapDetail mapDetail;
 
@@ -42,9 +44,59 @@ namespace CSM.UiLogic.ViewModels.Common.MapDetails
             }
         }
 
-        public string Ranked => mapDetail.Ranked ? "Yes" : "No"; // todo: yes/no for ss and bl
+        public string Ranked
+        {
+            get
+            {
+                if (mapDetail.Ranked)
+                {
+                    var ranked = new StringBuilder();
+                    if (mapDetail.Versions.Any(v => v.Diffs.Any(d => d.Stars > 0)))
+                        ranked.Append("SS");
 
-        public string Qualified => mapDetail.Qualified ? "Yes" : "No";
+                    if (mapDetail.Versions.Any(v => v.Diffs.Any(d => d.BlStars > 0)))
+                    {
+                        if (ranked.Length == 0)
+                        {
+                            ranked.Append("BL");
+                        }
+                        else
+                        {
+                            ranked.Append(", BL");
+                        }
+                    }
+                    return ranked.ToString();
+                }
+                return "No";
+            }
+        }
+
+        public string Qualified
+        {
+            get
+            {
+                if (mapDetail.Ranked)
+                {
+                    var ranked = new StringBuilder();
+                    if (mapDetail.Versions.Any(v => v.Diffs.Any(d => d.Stars > 0)))
+                        ranked.Append("SS");
+
+                    if (mapDetail.Versions.Any(v => v.Diffs.Any(d => d.BlStars > 0)))
+                    {
+                        if (ranked.Length == 0)
+                        {
+                            ranked.Append("BL");
+                        }
+                        else
+                        {
+                            ranked.Append(", BL");
+                        }
+                    }
+                    return ranked.ToString();
+                }
+                return "No";
+            }
+        }
 
         public string Tags
         {
@@ -64,15 +116,14 @@ namespace CSM.UiLogic.ViewModels.Common.MapDetails
 
         #endregion
 
-        public MapDetailViewModel(MapDetail mapDetail)
+        public MapDetailViewModel(IServiceLocator serviceLocator, MapDetail mapDetail) : base(serviceLocator)
         {
             this.mapDetail = mapDetail;
-
 
             var mapVersions = mapDetail.Versions.OrderByDescending(v => v.CreatedAt).ToList();
             foreach (var mapVersion in mapVersions)
             {
-                Difficulties.AddRange(mapVersion.Diffs.Select(d => new MapDifficultyViewModel(d, mapVersion)));
+                Difficulties.AddRange(mapVersion.Diffs.Select(d => new MapDifficultyViewModel(serviceLocator, d, mapVersion)));
             }
         }
     }

@@ -80,7 +80,7 @@ namespace CSM.UiLogic.ViewModels.Controls.Settings
         {
             this.userConfig = userConfig;
 
-            Leaderboards.AddRange(EnumWrapper<LeaderboardType>.GetValues(serviceLocator));
+            Leaderboards.AddRange(EnumWrapper<LeaderboardType>.GetValues(serviceLocator, LeaderboardType.None));
         }
     }
 }

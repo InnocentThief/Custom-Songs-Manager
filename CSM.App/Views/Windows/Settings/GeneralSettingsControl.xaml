@@ -16,6 +16,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <!-- Default Workspace -->
         <telerik:Label Content="Default workspace" />
@@ -26,5 +27,8 @@
         <!-- BeatSaver API endpoint -->
         <telerik:Label Content="BeatSaver API endpoint" Grid.Row="2" />
         <telerik:RadWatermarkTextBox Text="{Binding BeatSaverAPIEndpoint}" Grid.Column="1" Grid.Row="2" />
+        <!-- Visible leaderboard infos -->
+        <telerik:Label Content="Visible leaderboard info" Grid.Row="3" />
+        <telerik:RadComboBox Grid.Column="1" Grid.Row="3" Focusable="False" ItemsSource="{Binding VisibleLeaderboardInfos}" SelectedItem="{Binding SelectedVisibleLeaderboardInfos}" DisplayMemberPath="DisplayText" />
     </Grid>
 </UserControl>

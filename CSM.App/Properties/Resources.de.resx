@@ -162,4 +162,7 @@
   <data name="enum_SongDetailPosition_Right" xml:space="preserve">
     <value>Rechts</value>
   </data>
+  <data name="enum_LeaderboardType_None" xml:space="preserve">
+    <value>Keine</value>
+  </data>
 </root>

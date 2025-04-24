@@ -2,7 +2,8 @@
 {
     internal enum LeaderboardType
     {
-        ScoreSaber = 0,
-        BeatLeader = 1,
+        None = 0,
+        ScoreSaber = 1,
+        BeatLeader = 2,
     }
 }
