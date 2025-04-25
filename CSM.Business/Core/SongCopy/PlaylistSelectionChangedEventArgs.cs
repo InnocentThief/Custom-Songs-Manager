@@ -4,6 +4,6 @@ namespace CSM.Business.Core.SongCopy
 {
     internal class PlaylistSelectionChangedEventArgs : EventArgs
     {
-            public IBasePlaylistViewModel? Playlist { get; set; }
+        public IBasePlaylistViewModel? Playlist { get; set; }
     }
 }

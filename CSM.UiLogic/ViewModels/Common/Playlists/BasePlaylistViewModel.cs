@@ -6,9 +6,9 @@ using CSM.UiLogic.AbstractBase;
 namespace CSM.UiLogic.ViewModels.Common.Playlists
 {
     internal abstract class BasePlaylistViewModel(
-        IServiceLocator serviceLocator, 
-        string name, 
-        string path) 
+        IServiceLocator serviceLocator,
+        string name,
+        string path)
         : BaseViewModel(serviceLocator), IBasePlaylistViewModel
     {
         #region Private fields

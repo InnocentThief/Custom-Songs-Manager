@@ -1,5 +1,5 @@
-﻿using System.Windows.Controls;
-using CSM.UiLogic.ViewModels.Controls.CustomLevels;
+﻿using CSM.UiLogic.ViewModels.Controls.CustomLevels;
+using System.Windows.Controls;
 
 namespace CSM.App.Views.Controls.CustomLevels
 {

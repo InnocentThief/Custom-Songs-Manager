@@ -35,13 +35,13 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
         private readonly IUserConfigDomain userConfigDomain;
         private readonly ISongCopyDomain songCopyDomain;
         private readonly ISongSelectionDomain songSelectionDomain;
-        private readonly bool hasEditHeader;
+        private readonly bool isReadOnly;
 
         #endregion
 
         #region Properties
 
-        public bool HasEditHeader => hasEditHeader;
+        public bool IsReadOnly => isReadOnly;
 
         public ObservableCollection<BasePlaylistViewModel> Playlists { get; } = [];
 
@@ -56,7 +56,8 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
                 OnPropertyChanged();
 
                 UpdateCommands();
-                songCopyDomain.SetSelectedPlaylist(value);
+                if (!isReadOnly)
+                    songCopyDomain.SetSelectedPlaylist(value);
             }
         }
 
@@ -72,17 +73,19 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
 
         #endregion
 
-        public PlaylistTreeControlViewModel(IServiceLocator serviceLocator, SongSelectionType songSelectionType, bool hasEditHeader = true) : base(serviceLocator)
+        public PlaylistTreeControlViewModel(IServiceLocator serviceLocator, SongSelectionType songSelectionType, bool isReadOnly = false) : base(serviceLocator)
         {
             this.songSelectionType = songSelectionType;
             logger = serviceLocator.GetService<ILogger<PlaylistTreeControlViewModel>>();
             userConfigDomain = serviceLocator.GetService<IUserConfigDomain>();
             songCopyDomain = serviceLocator.GetService<ISongCopyDomain>();
             songSelectionDomain = serviceLocator.GetService<ISongSelectionDomain>();
-            this.hasEditHeader = hasEditHeader;
+            this.isReadOnly = isReadOnly;
 
-            songCopyDomain.OnCreatePlaylist += SongCopyDomain_OnCreatePlaylist;
+            if (!isReadOnly)
+                songCopyDomain.OnCreatePlaylist += SongCopyDomain_OnCreatePlaylist;
             songSelectionDomain.OnSongSelectionChanged += SongSelectionDomain_OnSongSelectionChanged;
+
         }
 
         public async Task LoadAsync(bool refresh)
@@ -129,7 +132,7 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
                     var playList = JsonSerializer.Deserialize<Playlist>(content);
                     if (playList == null)
                         continue;
-                    var playlistViewModel = new PlaylistViewModel(ServiceLocator, playList, file, songSelectionType);
+                    var playlistViewModel = new PlaylistViewModel(ServiceLocator, playList, file, songSelectionType, isReadOnly);
                     retval.Add(playlistViewModel);
                 }
                 catch (Exception ex)
@@ -335,7 +338,7 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
                 var content = JsonSerializer.Serialize(playlist, JsonSerializerHelper.CreateDefaultSerializerOptions());
                 File.WriteAllText(playlistPath, content);
 
-                var playlistViewModel = new PlaylistViewModel(ServiceLocator, playlist, playlistPath, songSelectionType);
+                var playlistViewModel = new PlaylistViewModel(ServiceLocator, playlist, playlistPath, songSelectionType, IsReadOnly);
                 if (selectedFolderViewModel != null)
                     selectedFolderViewModel.Playlists.Add(playlistViewModel);
                 else

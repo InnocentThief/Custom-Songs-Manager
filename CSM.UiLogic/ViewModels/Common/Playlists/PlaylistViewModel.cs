@@ -30,7 +30,7 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
         private readonly Playlist playlist;
         private readonly ILogger logger;
         private readonly IBeatSaverService beatSaverService;
-        private readonly ISongCopyDomain songCopyDomain;
+        private readonly ISongCopyDomain? songCopyDomain;
         private readonly ISongSelectionDomain songSelectionDomain;
         private readonly IUserConfigDomain userConfigDomain;
 
@@ -124,21 +124,28 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
            IServiceLocator serviceLocator,
            Playlist playlist,
            string path,
-           SongSelectionType songSelectionType) : base(serviceLocator, playlist.PlaylistTitle, path)
+           SongSelectionType songSelectionType,
+           bool isReadOnly) : base(serviceLocator, playlist.PlaylistTitle, path)
         {
             this.playlist = playlist;
             this.songSelectionType = songSelectionType;
             logger = serviceLocator.GetService<ILogger<PlaylistViewModel>>();
             beatSaverService = serviceLocator.GetService<IBeatSaverService>();
-            songCopyDomain = serviceLocator.GetService<ISongCopyDomain>();
-            songCopyDomain.OnCopySongs += SongCopyDomain_OnCopySongs;
+            if (!isReadOnly)
+            {
+                songCopyDomain = serviceLocator.GetService<ISongCopyDomain>();
+                songCopyDomain.OnCopySongs += SongCopyDomain_OnCopySongs;
+            }
             songSelectionDomain = serviceLocator.GetService<ISongSelectionDomain>();
             userConfigDomain = serviceLocator.GetService<IUserConfigDomain>();
 
             foreach (var song in playlist.Songs)
             {
                 var vm = new PlaylistSongViewModel(serviceLocator, song);
-                vm.OnSongRemoved += Playlist_OnSongRemoved;
+                if (!isReadOnly)
+                {
+                    vm.OnSongRemoved += Playlist_OnSongRemoved;
+                }
                 Songs.Add(vm);
             }
         }
@@ -207,6 +214,8 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
 
         public override void CleanUpReferences()
         {
+            if (songCopyDomain == null)
+                return;
             songCopyDomain.OnCopySongs -= SongCopyDomain_OnCopySongs;
             foreach (var song in Songs)
             {
@@ -284,7 +293,7 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
 
         private void SongCopyDomain_OnCopySongs(object? sender, Business.Core.SongCopy.SongCopyEventArgs e)
         {
-            if (this != songCopyDomain.SelectedPlaylist) return;
+            if (this != songCopyDomain?.SelectedPlaylist) return;
             foreach (var song in e.Songs)
             {
                 var existingSong = Songs.SingleOrDefault(s => s.Hash == song.Hash);

@@ -1,4 +1,7 @@
-﻿using CSM.DataAccess.BeatSaver;
+﻿using CSM.Business.Core;
+using CSM.Business.Core.SongCopy;
+using CSM.Business.Interfaces;
+using CSM.DataAccess.BeatSaver;
 using CSM.DataAccess.Playlists;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
@@ -13,10 +16,12 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
         #region Private fields
 
         private MapDetailViewModel? mapDetailViewModel;
-        private IRelayCommand? removeFromPlaylistCommand;
+        private IRelayCommand? addToPlaylistCommand, removeFromPlaylistCommand;
 
         private readonly Song song;
         private readonly List<PlaylistSongDifficultyViewModel> difficulties = [];
+        private readonly IBeatSaverService beatSaverService;
+        private readonly ISongCopyDomain songCopyDomain;
 
         #endregion
 
@@ -59,6 +64,7 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
             }
         }
 
+        public IRelayCommand? AddToPlaylistCommand => addToPlaylistCommand ??= CommandFactory.CreateFromAsync(AddToPlaylistAsync, CanAddToPlaylist);
         public IRelayCommand? RemoveFromPlaylistCommand => removeFromPlaylistCommand ??= CommandFactory.Create(RemoveFromPlaylist, CanRemoveFromPlaylist);
 
         #endregion
@@ -69,8 +75,17 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
         {
             this.song = song;
 
+            beatSaverService = serviceLocator.GetService<IBeatSaverService>();
+            songCopyDomain = serviceLocator.GetService<ISongCopyDomain>();
+            songCopyDomain.OnPlaylistSelectionChanged += SongCopyDomain_OnPlaylistSelectionChanged;
+
             difficulties.AddRange(song.Difficulties?.Select(d => new PlaylistSongDifficultyViewModel(serviceLocator, d)) ?? []);
             OnPropertyChanged(nameof(Difficulties));
+        }
+
+        public void CleanUpReferences()
+        {
+            songCopyDomain.OnPlaylistSelectionChanged -= SongCopyDomain_OnPlaylistSelectionChanged;
         }
 
         public void UpdateData(MapDetail mapDetail)
@@ -95,6 +110,50 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
 
         #region Helper methods
 
+        public async Task AddToPlaylistAsync()
+        {
+            if (MapDetailViewModel == null)
+            {
+                var mapDetail = await beatSaverService.GetMapDetailAsync(BsrKey, BeatSaverKeyType.Id);
+                if (mapDetail == null)
+                    return;
+                UpdateMapDetail(mapDetail);
+            }
+
+            if (MapDetailViewModel == null)
+                return;
+
+            Song? songToCopy = null;
+            if (MapDetailViewModel.Model.Versions.Count == 1)
+            {
+                songToCopy = new Song
+                {
+                    Hash = MapDetailViewModel.Model.Versions.First().Hash,
+                    Key = MapDetailViewModel.Model.Versions.First().Key,
+                    LevelAuthorName = MapDetailViewModel.Model.Metadata?.LevelAuthorName,
+                    SongName = MapDetailViewModel.Model.Metadata?.SongName ?? string.Empty,
+                };
+            }
+            else
+            {
+                // todo: Show version selection dialog
+            }
+
+            if (songToCopy == null)
+                return;
+
+            var songCopyEventArgs = new SongCopyEventArgs
+            {
+                Songs = { songToCopy }
+            };
+            songCopyDomain.CopySongs(songCopyEventArgs);
+        }
+
+        public bool CanAddToPlaylist()
+        {
+            return songCopyDomain.SelectedPlaylist is PlaylistViewModel;
+        }
+
         private void RemoveFromPlaylist()
         {
             OnSongRemoved?.Invoke(this, EventArgs.Empty);
@@ -105,7 +164,11 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
             return true;
         }
 
+        private void SongCopyDomain_OnPlaylistSelectionChanged(object? sender, Business.Core.SongCopy.PlaylistSelectionChangedEventArgs e)
+        {
+            addToPlaylistCommand?.RaiseCanExecuteChanged();
+        }
+
         #endregion
     }
-
 }

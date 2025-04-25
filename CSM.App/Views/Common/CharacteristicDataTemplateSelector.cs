@@ -19,7 +19,7 @@ namespace CSM.App.Views.Common
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            Characteristic characteristic = Characteristic.Standard; 
+            Characteristic characteristic = Characteristic.Standard;
 
             if (item == null)
                 return base.SelectTemplate(item, container);
@@ -27,7 +27,8 @@ namespace CSM.App.Views.Common
             if (item is PlaylistSongDifficultyViewModel playlistSongDifficultyViewModel)
             {
                 characteristic = playlistSongDifficultyViewModel.Characteristic;
-            } else if (item is MapDifficultyViewModel mapDifficultyViewModel)
+            }
+            else if (item is MapDifficultyViewModel mapDifficultyViewModel)
             {
                 characteristic = mapDifficultyViewModel.Characteristic;
             }

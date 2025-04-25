@@ -16,7 +16,7 @@ namespace CSM.UiLogic.ViewModels.Workspaces
 
         public PlaylistsWorkspaceViewModel(IServiceLocator serviceLocator) : base(serviceLocator)
         {
-            PlaylistsTree = new PlaylistTreeControlViewModel(ServiceLocator,SongSelectionType.Left);
+            PlaylistsTree = new PlaylistTreeControlViewModel(ServiceLocator, SongSelectionType.Left);
             SongSources = new SongSourcesControlViewModel(ServiceLocator);
         }
 

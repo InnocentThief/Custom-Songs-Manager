@@ -10,7 +10,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         public PlaylistsSourceViewModel(IServiceLocator serviceLocator) : base(serviceLocator)
         {
-            PlaylistsTree = new PlaylistTreeControlViewModel(ServiceLocator, Business.Core.SongSelection.SongSelectionType.Right, false);
+            PlaylistsTree = new PlaylistTreeControlViewModel(ServiceLocator, Business.Core.SongSelection.SongSelectionType.Right, true);
         }
 
         public async Task LoadAsync()

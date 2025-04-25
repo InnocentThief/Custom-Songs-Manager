@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-using System.Windows;
-using CSM.Business.Core.SongCopy;
+﻿using CSM.Business.Core.SongCopy;
 using CSM.Business.Core.SongSelection;
 using CSM.Business.Interfaces;
 using CSM.Framework.ServiceLocation;
@@ -8,6 +6,7 @@ using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.Commands;
 using CSM.UiLogic.ViewModels.Common.Playlists;
 using Microsoft.Extensions.Logging;
+using System.Windows;
 
 namespace CSM.UiLogic.ViewModels.Controls.SongSources
 {
@@ -332,7 +331,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             var playlist = await songSuggestDomain.GetPlaylistAsync();
             if (playlist != null)
             {
-                var playlistViewModel = new PlaylistViewModel(ServiceLocator, playlist, songSuggestDomain.GetPlaylistPath() ?? string.Empty, SongSelectionType.Right);
+                var playlistViewModel = new PlaylistViewModel(ServiceLocator, playlist, songSuggestDomain.GetPlaylistPath() ?? string.Empty, SongSelectionType.Right, true);
                 await playlistViewModel.FetchDataAsync();
                 Playlist = playlistViewModel;
                 OnPropertyChanged(nameof(Playlist));
@@ -391,7 +390,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
             var createPlaylistEventArgs = new CreatePlaylistEventArgs
             {
-                PlaylistName = $"Suggested Songs {DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")}",
+                PlaylistName = $"Suggested Songs {DateTime.Now:yyyy-MM-dd HH-mm-ss}",
                 Songs = [.. Playlist.Songs.Select(x => x.Model)] // todo: only take filtered songs
             };
             songCopyDomain.CreatePlaylist(createPlaylistEventArgs);

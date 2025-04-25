@@ -1,6 +1,6 @@
-﻿using System.IO;
-using CSM.Framework.ServiceLocation;
+﻿using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
+using System.IO;
 
 namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
 {
@@ -26,11 +26,11 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
 
         public override bool CanContinue()
         {
-            var baseContinue =  base.CanContinue();
+            var baseContinue = base.CanContinue();
             if (!baseContinue)
                 return false;
 
-            if (string.IsNullOrWhiteSpace(FolderName)) 
+            if (string.IsNullOrWhiteSpace(FolderName))
                 return false;
             return FolderName.IndexOfAny(Path.GetInvalidPathChars()) < 0;
         }

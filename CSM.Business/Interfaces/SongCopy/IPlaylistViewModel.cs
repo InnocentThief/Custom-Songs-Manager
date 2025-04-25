@@ -1,6 +1,6 @@
 ﻿namespace CSM.Business.Interfaces.SongCopy
 {
-    internal interface IPlaylistViewModel :IBasePlaylistViewModel
+    internal interface IPlaylistViewModel : IBasePlaylistViewModel
     {
     }
 }

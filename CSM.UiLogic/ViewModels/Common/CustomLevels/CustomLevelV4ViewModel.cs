@@ -5,11 +5,11 @@ using CSM.Framework.ServiceLocation;
 namespace CSM.UiLogic.ViewModels.Common.CustomLevels
 {
     internal sealed class CustomLevelV4ViewModel(
-        IServiceLocator serviceLocator, 
-        InfoV4 model, 
-        string path, 
-        string bsrKey, 
-        DateTime lastwriteTime) 
+        IServiceLocator serviceLocator,
+        InfoV4 model,
+        string path,
+        string bsrKey,
+        DateTime lastwriteTime)
         : BaseCustomLevelViewModel<InfoV4>(serviceLocator, model, path, bsrKey, lastwriteTime)
     {
         public override string Version => Model.Version;

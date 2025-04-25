@@ -60,13 +60,13 @@
                     </Grid.RowDefinitions>
                     <!-- Playlist title -->
                     <telerik:Label Content="Title" />
-                    <telerik:Label Grid.Column="1" Content="{Binding PlaylistTitle, UpdateSourceTrigger=PropertyChanged}" />
+                    <telerik:RadWatermarkTextBox Grid.Column="1" Text="{Binding PlaylistTitle}" IsReadOnly="True" />
                     <!-- Playlist author -->
                     <telerik:Label Grid.Row="1" Content="Author" />
-                    <telerik:Label Grid.Column="1" Grid.Row="1" Content="{Binding PlaylistAuthor, UpdateSourceTrigger=PropertyChanged}" />
+                    <telerik:RadWatermarkTextBox Grid.Column="1" Grid.Row="1" Text="{Binding PlaylistAuthor}" IsReadOnly="True" />
                     <!-- Playlist description -->
                     <telerik:Label Grid.Row="2" Content="Description" />
-                    <telerik:Label Grid.Column="1" Grid.Row="2" Content="{Binding PlaylistDescription, UpdateSourceTrigger=PropertyChanged}" />
+                    <telerik:RadWatermarkTextBox Grid.Column="1" Grid.Row="2" Text="{Binding PlaylistDescription}" IsReadOnly="True" />
                 </Grid>
             </Grid>
 
