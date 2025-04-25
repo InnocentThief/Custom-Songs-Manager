@@ -6,7 +6,7 @@
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:local="clr-namespace:CSM.App.Views.Controls.SongSources"
              xmlns:behaviours="clr-namespace:CSM.App.Behaviours"
-             xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
+             xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib" xmlns:common="clr-namespace:CSM.App.Views.Common"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -16,10 +16,27 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="40" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="3" />
+                <RowDefinition Height="220" MinHeight="50" />
             </Grid.RowDefinitions>
             <!-- Header -->
             <Grid Background="#88018574">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <!-- Title -->
                 <TextBlock Text="Custom Levels" Style="{StaticResource HeaderTitleStyle}" />
+                <!-- Commands -->
+                <telerik:RadToolBar Grid.Column="1" Style="{StaticResource HeaderToolBarStyle}" >
+                    <TextBlock Text="{Binding CustomLevelPath}" TextTrimming="CharacterEllipsis" Width="300" ToolTip="{Binding CustomLevelPath}"/>
+                    <telerik:RadButton Command="{Binding OpenInFileExplorerCommand}" ToolTip="Open in File Explorer">
+                        <telerik:RadGlyph Glyph="&#xe134;" />
+                    </telerik:RadButton>
+                    <telerik:RadButton Command="{Binding RefreshCommand}" ToolTip="Refresh">
+                        <telerik:RadGlyph Glyph="&#xe103;" />
+                    </telerik:RadButton>
+                </telerik:RadToolBar>
             </Grid>
             <!-- Content -->
             <Grid Grid.Row="1">
@@ -55,6 +72,13 @@
                 </telerik:RadGridView>
                 <!-- Entry counter -->
                 <telerik:Label Grid.Row="1" Content="{Binding CustomLevelCount}" Margin="6" />
+            </Grid>
+            <GridSplitter Grid.Row="2" Style="{StaticResource WorkspaceHorizontalGridSplitterStyle}" VerticalAlignment="Center" />
+
+            <common:MapDetailNoDataControl Grid.Row="3" Visibility="{Binding HasSelectedCustomLevel, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
+
+            <Grid Grid.Row="3" Visibility="{Binding HasSelectedCustomLevel, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <common:MapDetailTailoredControl DataContext="{Binding SelectedCustomLevel.MapDetailViewModel}" />
             </Grid>
         </Grid>
     </telerik:RadBusyIndicator>

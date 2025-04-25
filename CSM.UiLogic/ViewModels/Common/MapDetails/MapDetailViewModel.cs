@@ -11,6 +11,8 @@ namespace CSM.UiLogic.ViewModels.Common.MapDetails
 
         #region Properties
 
+        public MapDetail Model => mapDetail;
+
         public string Id => mapDetail.Id;
 
         public string CoverUrl => mapDetail.Versions.OrderByDescending(v => v.CreatedAt).FirstOrDefault()?.CoverUrl ?? string.Empty;

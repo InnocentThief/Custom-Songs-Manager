@@ -61,6 +61,51 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Easy.
+        /// </summary>
+        public static string enum_Difficulty_Easy {
+            get {
+                return ResourceManager.GetString("enum_Difficulty_Easy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expert.
+        /// </summary>
+        public static string enum_Difficulty_Expert {
+            get {
+                return ResourceManager.GetString("enum_Difficulty_Expert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ExpertPlus.
+        /// </summary>
+        public static string enum_Difficulty_ExpertPlus {
+            get {
+                return ResourceManager.GetString("enum_Difficulty_ExpertPlus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hard.
+        /// </summary>
+        public static string enum_Difficulty_Hard {
+            get {
+                return ResourceManager.GetString("enum_Difficulty_Hard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Normal.
+        /// </summary>
+        public static string enum_Difficulty_Normal {
+            get {
+                return ResourceManager.GetString("enum_Difficulty_Normal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to BeatLeader.
         /// </summary>
         public static string enum_LeaderboardType_BeatLeader {

@@ -1,22 +1,34 @@
-﻿using CSM.DataAccess.BeatSaver;
+﻿using CSM.Business.Core.SongCopy;
+using CSM.Business.Interfaces;
+using CSM.DataAccess.BeatSaver;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
+using CSM.UiLogic.Commands;
 using CSM.UiLogic.ViewModels.Common.MapDetails;
+using CSM.UiLogic.ViewModels.Common.Playlists;
 using System.Globalization;
 
 namespace CSM.UiLogic.ViewModels.Common.CustomLevels
 {
-    internal abstract class BaseCustomLevelViewModel<TModel>(IServiceLocator serviceLocator, TModel model, string path, string bsrKey, DateTime lastwriteTime) : BaseViewModel(serviceLocator), ICustomLevelViewModel where TModel : class
+    internal abstract class BaseCustomLevelViewModel<TModel> : BaseViewModel, ICustomLevelViewModel where TModel : class
     {
-        private MapDetailViewModel? mapDetailViewModel;
+        #region Private fields
 
-        protected TModel Model { get; } = model;
+        private MapDetailViewModel? mapDetailViewModel;
+        private IRelayCommand? addToPlaylistCommand;
+
+        private readonly IBeatSaverService beatSaverService;
+        private readonly ISongCopyDomain songCopyDomain;
+
+        #endregion
+
+        protected TModel Model { get; }
 
         #region Properties
 
-        public string Path { get; } = path;
+        public string Path { get; }
 
-        public string BsrKey { get; } = bsrKey;
+        public string BsrKey { get; }
 
         public int BsrKeyHex
         {
@@ -27,7 +39,7 @@ namespace CSM.UiLogic.ViewModels.Common.CustomLevels
             }
         }
 
-        public DateTime LastWriteTime { get; } = lastwriteTime;
+        public DateTime LastWriteTime { get; }
 
         public abstract string Version { get; }
 
@@ -51,6 +63,8 @@ namespace CSM.UiLogic.ViewModels.Common.CustomLevels
 
         public abstract bool HasExpertPlusMap { get; }
 
+        public IRelayCommand AddToPlaylistCommand => addToPlaylistCommand ??= CommandFactory.CreateFromAsync(AddToPlaylistAsync, CanAddToPlaylist);
+
         public MapDetailViewModel? MapDetailViewModel
         {
             get => mapDetailViewModel;
@@ -65,9 +79,84 @@ namespace CSM.UiLogic.ViewModels.Common.CustomLevels
 
         #endregion
 
+        public BaseCustomLevelViewModel(
+            IServiceLocator serviceLocator,
+            TModel model,
+            string path,
+            string bsrKey,
+            DateTime lastwriteTime) : base(serviceLocator)
+        {
+            Model = model;
+            Path = path;
+            BsrKey = bsrKey;
+            LastWriteTime = lastwriteTime;
+
+            beatSaverService = serviceLocator.GetService<IBeatSaverService>();
+            songCopyDomain = serviceLocator.GetService<ISongCopyDomain>();
+            songCopyDomain.OnPlaylistSelectionChanged += SongCopyDomain_OnPlaylistSelectionChanged;
+        }
+
+        public void CleanUpReferences()
+        {
+            songCopyDomain.OnPlaylistSelectionChanged -= SongCopyDomain_OnPlaylistSelectionChanged;
+        }
+
         public void UpdateMapDetail(MapDetail mapDetail)
         {
             MapDetailViewModel = new MapDetailViewModel(ServiceLocator, mapDetail);
         }
+
+        #region Helper methods
+
+        private async Task AddToPlaylistAsync()
+        {
+            if (MapDetailViewModel == null)
+            {
+                var mapDetail = await beatSaverService.GetMapDetailAsync(BsrKey, BeatSaverKeyType.Id);
+                if (mapDetail == null)
+                    return;
+                UpdateMapDetail(mapDetail);
+            }
+
+            if (MapDetailViewModel == null)
+                return;
+
+            DataAccess.Playlists.Song? songToCopy = null;
+            if (MapDetailViewModel.Model.Versions.Count == 1)
+            {
+                songToCopy = new DataAccess.Playlists.Song
+                {
+                    Hash = MapDetailViewModel.Model.Versions.First().Hash,
+                    Key = MapDetailViewModel.Model.Versions.First().Key,
+                    LevelAuthorName = MapDetailViewModel.Model.Metadata?.LevelAuthorName,
+                    SongName = MapDetailViewModel.Model.Metadata?.SongName ?? string.Empty,
+                };
+            }
+            else
+            {
+                // todo: Show version selection dialog
+            }
+
+            if (songToCopy == null)
+                return;
+
+            var songCopyEventArgs = new SongCopyEventArgs
+            {
+                Songs = { songToCopy }
+            };
+            songCopyDomain.CopySongs(songCopyEventArgs);
+        }
+
+        private bool CanAddToPlaylist()
+        {
+            return songCopyDomain.SelectedPlaylist is PlaylistViewModel;
+        }
+
+        private void SongCopyDomain_OnPlaylistSelectionChanged(object? sender, Business.Core.SongCopy.PlaylistSelectionChangedEventArgs e)
+        {
+            addToPlaylistCommand?.RaiseCanExecuteChanged();
+        }
+
+        #endregion
     }
 }

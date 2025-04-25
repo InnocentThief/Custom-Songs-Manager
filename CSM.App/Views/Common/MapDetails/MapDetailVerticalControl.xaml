@@ -114,7 +114,7 @@
                 <TextBlock Grid.Column="1" Grid.Row="13" Text="{Binding Tags}" TextWrapping="Wrap" />
             </Grid>
 
-            <ScrollViewer Grid.Row="3" Margin="0,10,0,0" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"  telerik:StyleManager.Theme="Windows11" >
+            <ScrollViewer Grid.Row="3" Margin="0,10,0,0" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" telerik:StyleManager.Theme="Windows11" >
                 <ItemsControl ItemsSource="{Binding Difficulties}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>

@@ -43,14 +43,14 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <!-- Cover image -->
-            <Image Source="{Binding CoverUrl}" HorizontalAlignment="Left" ToolTip="{Binding Description}" MaxHeight="100" />
+            <Image Source="{Binding CoverUrl}" HorizontalAlignment="Left" ToolTip="{Binding Description}" />
 
-            <WrapPanel Grid.Column="1" Orientation="Horizontal" Margin="6,0,0,0" >
+            <WrapPanel Grid.Column="1" Orientation="Vertical" Margin="6,0,0,0" >
                 <WrapPanel.Resources>
                     <Style TargetType="{x:Type Grid}">
                         <Setter Property="Width" Value="250" />
@@ -188,7 +188,8 @@
                 </Grid>
             </WrapPanel>
 
-            <ItemsControl Grid.ColumnSpan="2" Grid.Row="1" ItemsSource="{Binding Difficulties}" Margin="0,6,0,0">
+            <ScrollViewer Grid.ColumnSpan="2" Grid.Row="1" Margin="0,6,0,0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" telerik:StyleManager.Theme="Windows11">
+                <ItemsControl ItemsSource="{Binding Difficulties}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel  Orientation="Horizontal" />
@@ -237,6 +238,8 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+            </ScrollViewer>
+            
 
 
             <Grid Grid.Column="1" Margin="6,0,0,0">

@@ -4,7 +4,13 @@ using CSM.Framework.ServiceLocation;
 
 namespace CSM.UiLogic.ViewModels.Common.CustomLevels
 {
-    internal class CustomLevelV2ViewModel : BaseCustomLevelViewModel<InfoV2>
+    internal class CustomLevelV2ViewModel(
+        IServiceLocator serviceLocator, 
+        InfoV2 model, 
+        string path, 
+        string bsrKey, 
+        DateTime lastwriteTime) 
+        : BaseCustomLevelViewModel<InfoV2>(serviceLocator, model, path, bsrKey, lastwriteTime)
     {
         public override string Version => Model.Version;
 
@@ -27,9 +33,5 @@ namespace CSM.UiLogic.ViewModels.Common.CustomLevels
         public override bool HasExpertMap => Model.DifficultyBeatmapSets.Any(ds => ds.DifficultyBeatmaps.Any(d => d.Difficulty == Difficulty.Expert));
 
         public override bool HasExpertPlusMap => Model.DifficultyBeatmapSets.Any(ds => ds.DifficultyBeatmaps.Any(d => d.Difficulty == Difficulty.ExpertPlus));
-
-        public CustomLevelV2ViewModel(IServiceLocator serviceLocator, InfoV2 model, string path, string bsrKey, DateTime lastwriteTime) : base(serviceLocator, model, path, bsrKey, lastwriteTime)
-        {
-        }
     }
 }

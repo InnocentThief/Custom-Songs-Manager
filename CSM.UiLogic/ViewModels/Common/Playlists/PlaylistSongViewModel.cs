@@ -2,6 +2,7 @@
 using CSM.DataAccess.Playlists;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
+using CSM.UiLogic.Commands;
 using CSM.UiLogic.ViewModels.Common.MapDetails;
 using System.Globalization;
 
@@ -12,6 +13,7 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
         #region Private fields
 
         private MapDetailViewModel? mapDetailViewModel;
+        private IRelayCommand? removeFromPlaylistCommand;
 
         private readonly Song song;
         private readonly List<PlaylistSongDifficultyViewModel> difficulties = [];
@@ -57,7 +59,11 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
             }
         }
 
+        public IRelayCommand? RemoveFromPlaylistCommand => removeFromPlaylistCommand ??= CommandFactory.Create(RemoveFromPlaylist, CanRemoveFromPlaylist);
+
         #endregion
+
+        public event EventHandler? OnSongRemoved;
 
         public PlaylistSongViewModel(IServiceLocator serviceLocator, Song song) : base(serviceLocator)
         {
@@ -86,6 +92,20 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
         {
             MapDetailViewModel = new MapDetailViewModel(ServiceLocator, mapDetail);
         }
+
+        #region Helper methods
+
+        private void RemoveFromPlaylist()
+        {
+            OnSongRemoved?.Invoke(this, EventArgs.Empty);
+        }
+
+        private bool CanRemoveFromPlaylist()
+        {
+            return true;
+        }
+
+        #endregion
     }
 
 }

@@ -5,7 +5,11 @@ using CSM.UiLogic.AbstractBase;
 
 namespace CSM.UiLogic.ViewModels.Common.Playlists
 {
-    internal abstract class BasePlaylistViewModel(IServiceLocator serviceLocator, string name, string path) : BaseViewModel(serviceLocator), IBasePlaylistViewModel
+    internal abstract class BasePlaylistViewModel(
+        IServiceLocator serviceLocator, 
+        string name, 
+        string path) 
+        : BaseViewModel(serviceLocator), IBasePlaylistViewModel
     {
         #region Private fields
 
@@ -54,5 +58,7 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
         #endregion
 
         public abstract bool CheckContainsSong(string? hash, SongSelectionType songSelectionType);
+
+        public abstract void CleanUpReferences();
     }
 }

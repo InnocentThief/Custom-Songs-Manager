@@ -76,6 +76,7 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
 
             SetLoadingInProgress(true, "Loading custom levels...");
 
+            CustomLevels.ForEach(cl => cl.CleanUpReferences());
             CustomLevels.Clear();
             var path = userConfigDomain?.Config?.CustomLevelsConfig.CustomLevelPath.Path;
             if (string.IsNullOrEmpty(path) || !Path.Exists(path))
@@ -91,7 +92,7 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
 
         public async Task LoadSelectedCustomLevelDataAsync()
         {
-            if (SelectedCustomLevel == null)
+            if (SelectedCustomLevel == null || SelectedCustomLevel.MapDetailViewModel != null)
                 return;
 
             var mapDetail = await beatSaverService.GetMapDetailAsync(SelectedCustomLevel.BsrKey, DataAccess.BeatSaver.BeatSaverKeyType.Id);
@@ -107,7 +108,6 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
 
             songSelectionDomain.SetSongHash(hashes.Last(), SongSelectionType.Right);
         }
-
 
         #region Helper methods
 

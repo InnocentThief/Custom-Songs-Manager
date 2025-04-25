@@ -92,6 +92,7 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
 
             SetLoadingInProgress(true, "Loading playlists...");
 
+            Playlists.ForEach(pl => pl.CleanUpReferences());
             Playlists.Clear();
             var path = userConfigDomain?.Config?.PlaylistsConfig.PlaylistPath.Path;
             if (string.IsNullOrEmpty(path) || !Path.Exists(path))

@@ -3,7 +3,6 @@ using CSM.Business.Interfaces;
 using CSM.Business.Interfaces.SongCopy;
 using CSM.DataAccess.BeatSaver;
 using CSM.DataAccess.Playlists;
-using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.Commands;
 using CSM.UiLogic.Converter;
@@ -20,13 +19,16 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
     {
         #region Private fields
 
-        private IRelayCommand? fetchDataCommand;
+        private IRelayCommand? fetchDataCommand, savePlaylistCommand, applySortOrderAndSaveCommand;
         private PlaylistSongViewModel? selectedSong;
+        //private string sortColumnName;
+        //private SortingState sortingState;
 
         private readonly SongSelectionType songSelectionType;
         private readonly Playlist playlist;
         private readonly ILogger logger;
         private readonly IBeatSaverService beatSaverService;
+        private readonly ISongCopyDomain songCopyDomain;
         private readonly ISongSelectionDomain songSelectionDomain;
 
         #endregion
@@ -34,6 +36,8 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
         #region Properties
 
         public IRelayCommand? FetchDataCommand => fetchDataCommand ??= CommandFactory.CreateFromAsync(FetchDataAsync, CanFetchData);
+        public IRelayCommand? SavePlaylistCommand => savePlaylistCommand ??= CommandFactory.CreateFromAsync(SaveAsync, CanSave);
+        public IRelayCommand? ApplySortOrderAndSaveCommand => applySortOrderAndSaveCommand ??= CommandFactory.CreateFromAsync(ApplySortOrderAndSaveAsync, CanSave);
 
         public string PlaylistTitle
         {
@@ -87,9 +91,15 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
                 if (value == selectedSong) return;
                 selectedSong = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(HasSelectedSong));
 
                 songSelectionDomain.SetSongHash(selectedSong?.Hash ?? null, songSelectionType);
             }
+        }
+
+        public bool HasSelectedSong
+        {
+            get => SelectedSong != null;
         }
 
         #endregion
@@ -104,9 +114,16 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
             this.songSelectionType = songSelectionType;
             logger = serviceLocator.GetService<ILogger<PlaylistViewModel>>();
             beatSaverService = serviceLocator.GetService<IBeatSaverService>();
+            songCopyDomain = serviceLocator.GetService<ISongCopyDomain>();
+            songCopyDomain.OnCopySongs += SongCopyDomain_OnCopySongs;
             songSelectionDomain = serviceLocator.GetService<ISongSelectionDomain>();
 
-            Songs.AddRange(playlist.Songs.Select(s => new PlaylistSongViewModel(serviceLocator, s)));
+            foreach (var song in playlist.Songs)
+            {
+                var vm = new PlaylistSongViewModel(serviceLocator, song);
+                vm.OnSongRemoved += Playlist_OnSongRemoved;
+                Songs.Add(vm);
+            }
         }
 
         public async Task FetchDataAsync()
@@ -145,6 +162,18 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
             }
         }
 
+        public async Task LoadSelectedSongDataAsync()
+        {
+            if (SelectedSong == null || SelectedSong.MapDetailViewModel != null)
+                return;
+
+            var mapDetail = await beatSaverService.GetMapDetailAsync(SelectedSong.Hash, BeatSaverKeyType.Hash);
+            if (mapDetail == null)
+                return;
+
+            SelectedSong.UpdateMapDetail(mapDetail);
+        }
+
         public override bool CheckContainsSong(string? hash, SongSelectionType songSelectionType)
         {
             var hasSelectedSong = Songs.Any(s => s.Hash == hash);
@@ -159,16 +188,13 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
             return hasSelectedSong;
         }
 
-        public async Task LoadSelectedSongDataAsync()
+        public override void CleanUpReferences()
         {
-            if (SelectedSong == null)
-                return;
-
-            var mapDetail = await beatSaverService.GetMapDetailAsync(SelectedSong.Hash, BeatSaverKeyType.Hash);
-            if (mapDetail == null)
-                return;
-
-            SelectedSong.UpdateMapDetail(mapDetail);
+            songCopyDomain.OnCopySongs -= SongCopyDomain_OnCopySongs;
+            foreach (var song in Songs)
+            {
+                song.OnSongRemoved -= Playlist_OnSongRemoved;
+            }
         }
 
         #region Helper methods
@@ -179,12 +205,58 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
             await File.WriteAllTextAsync(Path, content);
         }
 
+        private async Task ApplySortOrderAndSaveAsync()
+        {
+            //if (string.IsNullOrWhiteSpace(sortColumnName)) return;
+            //if (sortingState == Telerik.Windows.Controls.SortingState.None) return;
+
+            //var sortedSongs = Songs.OrderBy(s => s.SongName).ToList();
+            //playlist.Songs.Clear();
+            //foreach (var song in sortedSongs)
+            //{
+            //    playlist.Songs.Add(song.Model);
+            //}
+            await SaveAsync();
+        }
+
+        private bool CanSave()
+        {
+            return true;
+        }
+
         private bool CanFetchData()
         {
             return true;
         }
 
-        #endregion
+        private void SongCopyDomain_OnCopySongs(object? sender, Business.Core.SongCopy.SongCopyEventArgs e)
+        {
+            if (this != songCopyDomain.SelectedPlaylist) return;
+            foreach (var song in e.Songs)
+            {
+                var existingSong = Songs.SingleOrDefault(s => s.Hash == song.Hash);
+                if (existingSong != null) return;
+                playlist.Songs.Add(song);
+                var playlistSongViewModel = new PlaylistSongViewModel(ServiceLocator, song);
+                playlistSongViewModel.OnSongRemoved += Playlist_OnSongRemoved;
+                Songs.Add(playlistSongViewModel);
+            }
+        }
 
+        private void Playlist_OnSongRemoved(object? sender, EventArgs e)
+        {
+            if (sender is PlaylistSongViewModel playlistSongViewModel)
+            {
+                var existingSong = playlist.Songs.SingleOrDefault(s => s.Hash == playlistSongViewModel.Model.Hash);
+                if (existingSong != null)
+                {
+                    playlist.Songs.Remove(existingSong);
+                    playlistSongViewModel.OnSongRemoved -= Playlist_OnSongRemoved;
+                    Songs.Remove(playlistSongViewModel);
+                }
+            }
+        }
+
+        #endregion
     }
 }

@@ -24,7 +24,7 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
                         ContainsLeftSong = true;
                     else
                         ContainsRightSong = true;
-                    retval =  true;
+                    retval = true;
                 }
                 else
                 {
@@ -35,6 +35,14 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
                 }
             }
             return retval;
+        }
+
+        public override void CleanUpReferences()
+        {
+            foreach (var playlist in Playlists)
+            {
+                playlist.CleanUpReferences();
+            }
         }
     }
 }

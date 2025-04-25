@@ -13,7 +13,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="3" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="220" />
         </Grid.RowDefinitions>
         <!-- Header -->
         <Grid Background="#88018574">
@@ -29,11 +29,11 @@
                     <telerik:RadGlyph Glyph="&#xe68F;" />
                 </telerik:RadButton>
                 <telerik:RadToolBarSeparator />
-                <telerik:RadButton ToolTip="Apply current sort order and save playlist">
+                <telerik:RadButton Command="{Binding ApplySortOrderAndSaveCommand}" ToolTip="Apply current sort order and save playlist">
                     <telerik:RadGlyph Glyph="&#xe666;" />
                 </telerik:RadButton>
                 <telerik:RadToolBarSeparator />
-                <telerik:RadButton ToolTip="Save playlist">
+                <telerik:RadButton Command="{Binding SavePlaylistCommand}" ToolTip="Save playlist">
                     <telerik:RadGlyph Glyph="&#xe109;" />
                 </telerik:RadButton>
             </telerik:RadToolBar>
@@ -109,7 +109,7 @@
                 <telerik:GridViewColumn Width="Auto">
                     <telerik:GridViewColumn.CellTemplate>
                         <DataTemplate>
-                            <telerik:RadButton Grid.Column="1" Background="Transparent" BorderThickness="0" Margin="0,0,10,0" ToolTip="Remove song from playlist" Focusable="False">
+                            <telerik:RadButton Command="{Binding RemoveFromPlaylistCommand}" Grid.Column="1" Background="Transparent" BorderThickness="0" Margin="0,0,10,0" ToolTip="Remove song from playlist" Focusable="False">
                                 <telerik:RadGlyph Glyph="&#xe121;" Foreground="Red" />
                             </telerik:RadButton>
                         </DataTemplate>
@@ -119,9 +119,11 @@
         </telerik:RadGridView>
         <GridSplitter Grid.Row="3" Style="{StaticResource WorkspaceHorizontalGridSplitterStyle}" VerticalAlignment="Center" />
 
-        <common:MapDetailTailoredControl Grid.Row="4" DataContext="{Binding SelectedSong.MapDetailViewModel}" />
-
-        <common:MapDetailNoDataControl Grid.Row="4" />
+        <Grid Grid.Row="4" Visibility="{Binding HasSelectedSong, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <common:MapDetailTailoredControl DataContext="{Binding SelectedSong.MapDetailViewModel}" />
+        </Grid>
+        
+        <common:MapDetailNoDataControl Grid.Row="4" Visibility="{Binding HasSelectedSong, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
     </Grid>
 </UserControl>
 

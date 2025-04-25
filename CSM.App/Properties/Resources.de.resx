@@ -165,4 +165,19 @@
   <data name="enum_LeaderboardType_None" xml:space="preserve">
     <value>Keine</value>
   </data>
+  <data name="enum_Difficulty_Easy" xml:space="preserve">
+    <value>Easy</value>
+  </data>
+  <data name="enum_Difficulty_Normal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="enum_Difficulty_Hard" xml:space="preserve">
+    <value>Hard</value>
+  </data>
+  <data name="enum_Difficulty_Expert" xml:space="preserve">
+    <value>Expert</value>
+  </data>
+  <data name="enum_Difficulty_ExpertPlus" xml:space="preserve">
+    <value>ExpertPlus</value>
+  </data>
 </root>
