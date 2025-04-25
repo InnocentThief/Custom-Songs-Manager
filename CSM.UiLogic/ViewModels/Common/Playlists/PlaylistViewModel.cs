@@ -6,13 +6,14 @@ using CSM.DataAccess.Playlists;
 using CSM.Framework.ServiceLocation;
 using CSM.Framework.Types;
 using CSM.UiLogic.Commands;
-using CSM.UiLogic.Converter;
 using CSM.UiLogic.Helper;
 using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text.Json;
+using System.Windows;
 using System.Windows.Media;
+using Telerik.Windows.Controls;
 
 namespace CSM.UiLogic.ViewModels.Common.Playlists
 {
@@ -20,7 +21,7 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
     {
         #region Private fields
 
-        private IRelayCommand? fetchDataCommand, savePlaylistCommand, applySortOrderAndSaveCommand;
+        private IRelayCommand? fetchDataCommand, savePlaylistCommand, applySortOrderAndSaveCommand, chooseCoverImageCommand;
         private PlaylistSongViewModel? selectedSong;
         private string sortColumnName = string.Empty;
         private GridViewSortingState sortingState = GridViewSortingState.None;
@@ -40,6 +41,7 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
         public IRelayCommand? FetchDataCommand => fetchDataCommand ??= CommandFactory.CreateFromAsync(FetchDataAsync, CanFetchData);
         public IRelayCommand? SavePlaylistCommand => savePlaylistCommand ??= CommandFactory.CreateFromAsync(SaveAsync, CanSave);
         public IRelayCommand? ApplySortOrderAndSaveCommand => applySortOrderAndSaveCommand ??= CommandFactory.CreateFromAsync(ApplySortOrderAndSaveAsync, CanSave);
+        public IRelayCommand? ChooseCoverImageCommand => chooseCoverImageCommand ??= CommandFactory.CreateFromAsync(ChooseCoverImage, CanChooseCoverImage);
 
         public string PlaylistTitle
         {
@@ -79,7 +81,7 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
             get
             {
                 if (string.IsNullOrWhiteSpace(playlist.Image)) return null;
-                return ImageConverter.BitmapFromBase64(playlist.Image.Split(',').Last());
+                return Converter.ImageConverter.BitmapFromBase64(playlist.Image.Split(',').Last());
             }
         }
 
@@ -296,24 +298,31 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
             }
         }
 
-        private void ChooseCoverImage()
+        private async Task ChooseCoverImage()
         {
             var playlistPath = System.IO.Path.Combine(userConfigDomain.Config?.PlaylistsConfig.PlaylistPath.Path ?? "C:\\", "CoverImages");
             if (!Directory.Exists(playlistPath)) playlistPath = "C:\\";
 
-            //RadOpenFileDialog openFileDialog = new RadOpenFileDialog();
-            //openFileDialog.Owner = AppCurrent.Current.MainWindow;
-            //openFileDialog.RestoreDirectory = true;
-            //openFileDialog.InitialDirectory = playlistPath;
-            //openFileDialog.Filter = "|Image Files|*.jpg;*.png";
-            //openFileDialog.ShowDialog();
-            //if (openFileDialog.DialogResult == true)
-            //{
-            //    playlist.Image = CSMImageConverter.StringFromBitmap(openFileDialog.FileName);
-            //    SaveToFile();
-            //    OnPropertyChanged(nameof(CoverImage));
-            //}
+            RadOpenFileDialog openFileDialog = new()
+            {
+                Owner = Application.Current.MainWindow,
+                RestoreDirectory = true,
+                InitialDirectory = playlistPath,
+                Filter = "|Image Files|*.jpg;*.png"
+            };
+            openFileDialog.ShowDialog();
+            if (openFileDialog.DialogResult == true)
+            {
+                playlist.Image = Converter.ImageConverter.StringFromBitmap(openFileDialog.FileName);
+                await SaveAsync();
+                OnPropertyChanged(nameof(CoverImage));
+            }
         }
+
+        private bool CanChooseCoverImage()
+        {
+            return true;
+        }   
 
         #endregion
     }

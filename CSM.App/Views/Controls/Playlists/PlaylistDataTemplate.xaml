@@ -50,7 +50,7 @@
                     <ColumnDefinition Width="80" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <telerik:RadButton Focusable="False" Padding="0" Background="Transparent" BorderThickness="0"  ToolTip="Click to change cover image">
+                <telerik:RadButton Command="{Binding ChooseCoverImageCommand}" Focusable="False" Padding="0" Background="Transparent" BorderThickness="0"  ToolTip="Click to change cover image">
                     <Image Source="{Binding CoverImage}" />
                 </telerik:RadButton>
                 <Grid Grid.Column="1">
@@ -124,7 +124,7 @@
         <Grid Grid.Row="4" Visibility="{Binding HasSelectedSong, Converter={StaticResource BooleanToVisibilityConverter}}">
             <common:MapDetailTailoredControl DataContext="{Binding SelectedSong.MapDetailViewModel}" />
         </Grid>
-        
+
         <common:MapDetailNoDataControl Grid.Row="4" Visibility="{Binding HasSelectedSong, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
     </Grid>
 </UserControl>
