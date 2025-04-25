@@ -1,4 +1,5 @@
-﻿using CSM.UiLogic.ViewModels.Common.Playlists;
+﻿using CSM.Framework.Types;
+using CSM.UiLogic.ViewModels.Common.Playlists;
 using System.Windows.Controls;
 
 namespace CSM.App.Views.Controls.Playlists
@@ -19,6 +20,45 @@ namespace CSM.App.Views.Controls.Playlists
             if (DataContext is PlaylistViewModel viewModel)
             {
                 await viewModel.LoadSelectedSongDataAsync();
+            }
+        }
+
+        private void RadGridView_FilterOperatorsLoading(object sender, Telerik.Windows.Controls.GridView.FilterOperatorsLoadingEventArgs e)
+        {
+            if (e.Column.UniqueName == "BsrKey")
+            {
+                e.AvailableOperators.Remove(Telerik.Windows.Data.FilterOperator.IsLessThan);
+                e.AvailableOperators.Remove(Telerik.Windows.Data.FilterOperator.IsLessThanOrEqualTo);
+                e.AvailableOperators.Remove(Telerik.Windows.Data.FilterOperator.IsNotEqualTo);
+                e.AvailableOperators.Remove(Telerik.Windows.Data.FilterOperator.IsGreaterThanOrEqualTo);
+                e.AvailableOperators.Remove(Telerik.Windows.Data.FilterOperator.IsGreaterThan);
+                e.AvailableOperators.Remove(Telerik.Windows.Data.FilterOperator.StartsWith);
+                e.AvailableOperators.Remove(Telerik.Windows.Data.FilterOperator.EndsWith);
+                e.AvailableOperators.Remove(Telerik.Windows.Data.FilterOperator.Contains);
+                e.AvailableOperators.Remove(Telerik.Windows.Data.FilterOperator.DoesNotContain);
+                e.AvailableOperators.Remove(Telerik.Windows.Data.FilterOperator.IsContainedIn);
+                e.AvailableOperators.Remove(Telerik.Windows.Data.FilterOperator.IsNotContainedIn);
+                e.DefaultOperator1 = Telerik.Windows.Data.FilterOperator.IsEqualTo;
+            }
+            else
+            {
+                e.DefaultOperator1 = Telerik.Windows.Data.FilterOperator.Contains;
+            }
+        }
+
+        private void RadGridView_Sorted(object sender, Telerik.Windows.Controls.GridViewSortedEventArgs e)
+        {
+            if (DataContext is PlaylistViewModel viewModel)
+            {
+                var sortingState = e.Column.SortingState switch
+                {
+                    Telerik.Windows.Controls.SortingState.None => GridViewSortingState.None,
+                    Telerik.Windows.Controls.SortingState.Ascending => GridViewSortingState.Ascending,
+                    Telerik.Windows.Controls.SortingState.Descending => GridViewSortingState.Descending,
+                    _ => GridViewSortingState.None
+                };
+
+                viewModel.SetSortOrder(e.Column.UniqueName, sortingState);
             }
         }
     }

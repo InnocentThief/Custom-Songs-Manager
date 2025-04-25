@@ -82,7 +82,9 @@
             ItemsSource="{Binding Songs}"
             Margin="3" 
             SelectedItem="{Binding SelectedSong}"
+            FilterOperatorsLoading="RadGridView_FilterOperatorsLoading"
             SelectionChanged="RadGridView_SelectionChanged"
+            Sorted="RadGridView_Sorted"
             Style="{StaticResource RadGridViewStyle}">
             <telerik:RadGridView.Columns>
                 <!-- Key -->

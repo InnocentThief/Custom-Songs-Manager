@@ -4,6 +4,7 @@ using CSM.Business.Interfaces.SongCopy;
 using CSM.DataAccess.BeatSaver;
 using CSM.DataAccess.Playlists;
 using CSM.Framework.ServiceLocation;
+using CSM.Framework.Types;
 using CSM.UiLogic.Commands;
 using CSM.UiLogic.Converter;
 using CSM.UiLogic.Helper;
@@ -21,8 +22,8 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
 
         private IRelayCommand? fetchDataCommand, savePlaylistCommand, applySortOrderAndSaveCommand;
         private PlaylistSongViewModel? selectedSong;
-        //private string sortColumnName;
-        //private SortingState sortingState;
+        private string sortColumnName = string.Empty;
+        private GridViewSortingState sortingState = GridViewSortingState.None;
 
         private readonly SongSelectionType songSelectionType;
         private readonly Playlist playlist;
@@ -30,6 +31,7 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
         private readonly IBeatSaverService beatSaverService;
         private readonly ISongCopyDomain songCopyDomain;
         private readonly ISongSelectionDomain songSelectionDomain;
+        private readonly IUserConfigDomain userConfigDomain;
 
         #endregion
 
@@ -117,6 +119,7 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
             songCopyDomain = serviceLocator.GetService<ISongCopyDomain>();
             songCopyDomain.OnCopySongs += SongCopyDomain_OnCopySongs;
             songSelectionDomain = serviceLocator.GetService<ISongSelectionDomain>();
+            userConfigDomain = serviceLocator.GetService<IUserConfigDomain>();
 
             foreach (var song in playlist.Songs)
             {
@@ -197,6 +200,12 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
             }
         }
 
+        public void SetSortOrder(string columnName, GridViewSortingState sortingState)
+        {
+            sortColumnName = columnName;
+            this.sortingState = sortingState;
+        }
+
         #region Helper methods
 
         private async Task SaveAsync()
@@ -207,15 +216,45 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
 
         private async Task ApplySortOrderAndSaveAsync()
         {
-            //if (string.IsNullOrWhiteSpace(sortColumnName)) return;
-            //if (sortingState == Telerik.Windows.Controls.SortingState.None) return;
-
-            //var sortedSongs = Songs.OrderBy(s => s.SongName).ToList();
-            //playlist.Songs.Clear();
-            //foreach (var song in sortedSongs)
-            //{
-            //    playlist.Songs.Add(song.Model);
-            //}
+            if (string.IsNullOrWhiteSpace(sortColumnName)) return;
+            if (sortingState == GridViewSortingState.None) return;
+            var currentSongs = playlist.Songs.ToList();
+            playlist.Songs.Clear();
+            switch (sortColumnName)
+            {
+                case "BsrKeyHex":
+                    if (sortingState == GridViewSortingState.Ascending)
+                    {
+                        playlist.Songs.AddRange(currentSongs.OrderBy(s => s.Key));
+                    }
+                    else
+                    {
+                        playlist.Songs.AddRange(currentSongs.OrderByDescending(s => s.Key));
+                    }
+                    break;
+                case "SongName":
+                    if (sortingState == GridViewSortingState.Ascending)
+                    {
+                        playlist.Songs.AddRange(currentSongs.OrderBy(s => s.SongName));
+                    }
+                    else
+                    {
+                        playlist.Songs.AddRange(currentSongs.OrderByDescending(s => s.SongName));
+                    }
+                    break;
+                case "LevelAuthorName":
+                    if (sortingState == GridViewSortingState.Ascending)
+                    {
+                        playlist.Songs.AddRange(currentSongs.OrderBy(s => s.LevelAuthorName));
+                    }
+                    else
+                    {
+                        playlist.Songs.AddRange(currentSongs.OrderByDescending(s => s.LevelAuthorName));
+                    }
+                    break;
+                default:
+                    break;
+            }
             await SaveAsync();
         }
 
@@ -255,6 +294,25 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
                     Songs.Remove(playlistSongViewModel);
                 }
             }
+        }
+
+        private void ChooseCoverImage()
+        {
+            var playlistPath = System.IO.Path.Combine(userConfigDomain.Config?.PlaylistsConfig.PlaylistPath.Path ?? "C:\\", "CoverImages");
+            if (!Directory.Exists(playlistPath)) playlistPath = "C:\\";
+
+            //RadOpenFileDialog openFileDialog = new RadOpenFileDialog();
+            //openFileDialog.Owner = AppCurrent.Current.MainWindow;
+            //openFileDialog.RestoreDirectory = true;
+            //openFileDialog.InitialDirectory = playlistPath;
+            //openFileDialog.Filter = "|Image Files|*.jpg;*.png";
+            //openFileDialog.ShowDialog();
+            //if (openFileDialog.DialogResult == true)
+            //{
+            //    playlist.Image = CSMImageConverter.StringFromBitmap(openFileDialog.FileName);
+            //    SaveToFile();
+            //    OnPropertyChanged(nameof(CoverImage));
+            //}
         }
 
         #endregion
