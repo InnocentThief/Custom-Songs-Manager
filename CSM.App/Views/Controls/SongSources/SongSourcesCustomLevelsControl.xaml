@@ -71,7 +71,9 @@
                     </telerik:RadGridView.Columns>
                 </telerik:RadGridView>
                 <!-- Entry counter -->
-                <telerik:Label Grid.Row="1" Content="{Binding CustomLevelCount}" Margin="6" />
+                <Border Grid.Row="1" Padding="6">
+                    <telerik:Label Content="{Binding CustomLevelCount}"  />
+                </Border>
             </Grid>
             <GridSplitter Grid.Row="2" Style="{StaticResource WorkspaceHorizontalGridSplitterStyle}" VerticalAlignment="Center" />
 

@@ -57,7 +57,17 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
 
         public SongDetailPosition SongDetailPosition => userConfigDomain.Config?.CustomLevelsConfig.SongDetailPosition ?? SongDetailPosition.Bottom;
 
-        public string CustomLevelCount => $"{CustomLevels.Count} custom levels loaded";
+        public string CustomLevelCount
+        {
+            get
+            {
+                if (CustomLevels.Count == 0)
+                    return "No custom levels";
+                if (CustomLevels.Count == 1)
+                    return "1 custom level";
+                return $"{CustomLevels.Count} custom levels";
+            }
+        }
 
         public string CustomLevelPath => userConfigDomain.Config?.CustomLevelsConfig.CustomLevelPath.Path ?? "";
 

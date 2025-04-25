@@ -3,16 +3,41 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:playlists="clr-namespace:CSM.App.Views.Controls.Playlists"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:playlists="clr-namespace:CSM.App.Views.Controls.Playlists" 
+             xmlns:local="clr-namespace:CSM.App.Views.Controls.SongSources"
+             xmlns:common="clr-namespace:CSM.App.Views.Common"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <DataTemplate x:Key="NoPlaylistDataTemplate">
+            <playlists:NoPlaylistDataTemplate />
+        </DataTemplate>
+
+        <DataTemplate x:Key="FolderDataTemplate">
+            <playlists:PlaylistFolderDataTemplate />
+        </DataTemplate>
+
+        <DataTemplate x:Key="PlaylistDataTemplate">
+            <local:PlaylistDataTemplate />
+        </DataTemplate>
+
+        <playlists:PlaylistDataTemplateSelector x:Key="PlaylistDataTemplateSelector"
+                                    NoPlaylistDataTemplate="{StaticResource NoPlaylistDataTemplate}"
+                                    FolderDataTemplate="{StaticResource FolderDataTemplate}"
+                                    PlaylistDataTemplate="{StaticResource PlaylistDataTemplate}"/>
+    </UserControl.Resources>
+
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="3" />
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
-        <playlists:PlaylistControl DataContext="{Binding PlaylistsTree.SelectedPlaylist}"  />
+        <!-- Content -->
+        <ContentControl DataContext="{Binding PlaylistsTree.SelectedPlaylist}" Content="{Binding}" ContentTemplateSelector="{StaticResource PlaylistDataTemplateSelector}" />
         <GridSplitter Grid.Column="1" Style="{StaticResource WorkspaceVerticalGridSplitterStyle}" HorizontalAlignment="Center" />
         <playlists:PlaylistsTreeControl Grid.Column="2" DataContext="{Binding PlaylistsTree}" />
     </Grid>

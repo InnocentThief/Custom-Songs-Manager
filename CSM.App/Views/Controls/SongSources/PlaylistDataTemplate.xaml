@@ -1,11 +1,11 @@
-﻿<UserControl x:Class="CSM.App.Views.Controls.Playlists.PlaylistDataTemplate"
+﻿<UserControl x:Class="CSM.App.Views.Controls.SongSources.PlaylistDataTemplate"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:common="clr-namespace:CSM.App.Views.Common"
-             xmlns:local="clr-namespace:CSM.App.Views.Controls.Playlists"
+             xmlns:playlists="clr-namespace:CSM.App.Views.Controls.Playlists"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -27,16 +27,8 @@
             <TextBlock Text="{Binding PlaylistTitle}" Style="{StaticResource HeaderTitleStyle}" />
             <!-- Commands -->
             <telerik:RadToolBar Grid.Column="1" Style="{StaticResource HeaderToolBarStyle}" >
-                <telerik:RadButton Command="{Binding FetchDataCommand}" ToolTip="Fetch playlist data">
-                    <telerik:RadGlyph Glyph="&#xe68F;" />
-                </telerik:RadButton>
-                <telerik:RadToolBarSeparator />
-                <telerik:RadButton Command="{Binding ApplySortOrderAndSaveCommand}" ToolTip="Apply current sort order and save playlist">
-                    <telerik:RadGlyph Glyph="&#xe666;" />
-                </telerik:RadButton>
-                <telerik:RadToolBarSeparator />
-                <telerik:RadButton Command="{Binding SavePlaylistCommand}" ToolTip="Save playlist">
-                    <telerik:RadGlyph Glyph="&#xe109;" />
+                <telerik:RadButton Background="Transparent">
+                    <telerik:RadGlyph Glyph="&#xe68F;" Foreground="Transparent"  />
                 </telerik:RadButton>
             </telerik:RadToolBar>
         </Grid>
@@ -52,7 +44,7 @@
                     <ColumnDefinition Width="80" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <telerik:RadButton Command="{Binding ChooseCoverImageCommand}" Focusable="False" Padding="0" Background="Transparent" BorderThickness="0"  ToolTip="Click to change cover image">
+                <telerik:RadButton Focusable="False" Padding="0" Background="Transparent" BorderThickness="0" >
                     <Image Source="{Binding CoverImage}" />
                 </telerik:RadButton>
                 <Grid Grid.Column="1">
@@ -68,27 +60,37 @@
                     </Grid.RowDefinitions>
                     <!-- Playlist title -->
                     <telerik:Label Content="Title" />
-                    <telerik:RadWatermarkTextBox Grid.Column="1" Text="{Binding PlaylistTitle, UpdateSourceTrigger=PropertyChanged}" />
+                    <telerik:Label Grid.Column="1" Content="{Binding PlaylistTitle, UpdateSourceTrigger=PropertyChanged}" />
                     <!-- Playlist author -->
                     <telerik:Label Grid.Row="1" Content="Author" />
-                    <telerik:RadWatermarkTextBox Grid.Column="1" Grid.Row="1" Text="{Binding PlaylistAuthor, UpdateSourceTrigger=PropertyChanged}" />
+                    <telerik:Label Grid.Column="1" Grid.Row="1" Content="{Binding PlaylistAuthor, UpdateSourceTrigger=PropertyChanged}" />
                     <!-- Playlist description -->
                     <telerik:Label Grid.Row="2" Content="Description" />
-                    <telerik:RadWatermarkTextBox Grid.Column="1" Grid.Row="2" Text="{Binding PlaylistDescription, UpdateSourceTrigger=PropertyChanged}" />
+                    <telerik:Label Grid.Column="1" Grid.Row="2" Content="{Binding PlaylistDescription, UpdateSourceTrigger=PropertyChanged}" />
                 </Grid>
             </Grid>
+
         </Grid>
         <!-- Songs -->
         <telerik:RadGridView 
-            Grid.Row="2" 
+            Grid.Row="2"
             ItemsSource="{Binding Songs}"
             Margin="3" 
             SelectedItem="{Binding SelectedSong}"
             FilterOperatorsLoading="RadGridView_FilterOperatorsLoading"
             SelectionChanged="RadGridView_SelectionChanged"
-            Sorted="RadGridView_Sorted"
             Style="{StaticResource RadGridViewStyle}">
             <telerik:RadGridView.Columns>
+                <!-- Add button (will add song to selected playlist) -->
+                <telerik:GridViewColumn Width="SizeToCells">
+                    <telerik:GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <telerik:RadButton Command="{Binding AddToPlaylistCommand}" Grid.Column="1" Background="Transparent" BorderThickness="0" ToolTip="Add to selected playlist">
+                                <telerik:RadGlyph Glyph="&#xe11e;" Foreground="#FF008BC1" />
+                            </telerik:RadButton>
+                        </DataTemplate>
+                    </telerik:GridViewColumn.CellTemplate>
+                </telerik:GridViewColumn>
                 <!-- Key -->
                 <telerik:GridViewDataColumn UniqueName="BsrKey" Header="BSR" Width="Auto" DataMemberBinding="{Binding BsrKeyHex}" IsFilterable="true" FilterMemberPath="BsrKey">
                     <telerik:GridViewDataColumn.CellTemplate>
@@ -105,20 +107,10 @@
                 <telerik:GridViewDataColumn Header="Difficulties" DataMemberBinding="{Binding Difficulties}" Width="Auto">
                     <telerik:GridViewDataColumn.CellTemplate>
                         <DataTemplate>
-                            <local:SongDifficultyControl />
+                            <playlists:SongDifficultyControl />
                         </DataTemplate>
                     </telerik:GridViewDataColumn.CellTemplate>
                 </telerik:GridViewDataColumn>
-                <!-- Delete button (remove song from playlist) -->
-                <telerik:GridViewColumn Width="Auto">
-                    <telerik:GridViewColumn.CellTemplate>
-                        <DataTemplate>
-                            <telerik:RadButton Command="{Binding RemoveFromPlaylistCommand}" Grid.Column="1" Background="Transparent" BorderThickness="0" Margin="0,0,10,0" ToolTip="Remove song from playlist" Focusable="False">
-                                <telerik:RadGlyph Glyph="&#xe121;" Foreground="Red" />
-                            </telerik:RadButton>
-                        </DataTemplate>
-                    </telerik:GridViewColumn.CellTemplate>
-                </telerik:GridViewColumn>
             </telerik:RadGridView.Columns>
         </telerik:RadGridView>
 
@@ -136,5 +128,3 @@
         <common:MapDetailNoDataControl Grid.Row="5" Visibility="{Binding HasSelectedSong, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
     </Grid>
 </UserControl>
-
-

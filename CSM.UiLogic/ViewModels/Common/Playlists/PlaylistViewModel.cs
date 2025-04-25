@@ -106,6 +106,18 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
             get => SelectedSong != null;
         }
 
+        public string SongCount
+        {
+            get
+            {
+                if (Songs.Count == 0)
+                    return "No songs";
+                if (Songs.Count == 1)
+                    return "1 song";
+                return $"{Songs.Count} songs";
+            }
+        }
+
         #endregion
 
         public PlaylistViewModel(
@@ -282,6 +294,7 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
                 playlistSongViewModel.OnSongRemoved += Playlist_OnSongRemoved;
                 Songs.Add(playlistSongViewModel);
             }
+            OnPropertyChanged(nameof(SongCount));
         }
 
         private void Playlist_OnSongRemoved(object? sender, EventArgs e)
@@ -294,6 +307,7 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
                     playlist.Songs.Remove(existingSong);
                     playlistSongViewModel.OnSongRemoved -= Playlist_OnSongRemoved;
                     Songs.Remove(playlistSongViewModel);
+                    OnPropertyChanged(nameof(SongCount));
                 }
             }
         }
@@ -322,7 +336,7 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
         private bool CanChooseCoverImage()
         {
             return true;
-        }   
+        }
 
         #endregion
     }
