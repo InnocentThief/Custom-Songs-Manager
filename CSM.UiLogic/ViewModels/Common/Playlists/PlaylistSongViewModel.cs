@@ -1,5 +1,4 @@
-﻿using CSM.Business.Core;
-using CSM.Business.Core.SongCopy;
+﻿using CSM.Business.Core.SongCopy;
 using CSM.Business.Interfaces;
 using CSM.DataAccess.BeatSaver;
 using CSM.DataAccess.Playlists;
