@@ -1,15 +1,26 @@
 ﻿using CSM.DataAccess.BeatSaver;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
+using CSM.UiLogic.Commands;
+using System.Diagnostics;
 using System.Text;
+using System.Windows;
 
 namespace CSM.UiLogic.ViewModels.Common.MapDetails
 {
     internal class MapDetailViewModel : BaseViewModel
     {
+        #region Private fields
+
+        private IRelayCommand? previewCommand, copyBSRCommand;
         private readonly MapDetail mapDetail;
 
+        #endregion
+
         #region Properties
+
+        public IRelayCommand? PreviewCommand => previewCommand ??= CommandFactory.Create(Preview, CanPreview);
+        public IRelayCommand? CopyBSRCommand => copyBSRCommand ??= CommandFactory.Create(CopyBSR, CanCopyBSR);
 
         public MapDetail Model => mapDetail;
 
@@ -34,8 +45,6 @@ namespace CSM.UiLogic.ViewModels.Common.MapDetails
         public int? Upvotes => mapDetail.Stats?.Upvotes;
 
         public int? Downvotes => mapDetail.Stats?.Downvotes;
-
-        //public string Score => $"{Math.Round(mapDetail.Stats?.Score ?? 0 * 100, 0)}%";
 
         public string Score
         {
@@ -128,5 +137,33 @@ namespace CSM.UiLogic.ViewModels.Common.MapDetails
                 Difficulties.AddRange(mapVersion.Diffs.Select(d => new MapDifficultyViewModel(serviceLocator, d, mapVersion)));
             }
         }
+
+        #region Helper methods
+
+        private void Preview()
+        {
+            string url = $"https://allpoland.github.io/ArcViewer/?id={mapDetail.Id}";
+            if (!string.IsNullOrWhiteSpace(url))
+            {
+                Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+            }
+        }
+
+        private bool CanPreview()
+        {
+            return true;
+        }
+
+        private void CopyBSR()
+        {
+            Clipboard.SetText($"!BSR {mapDetail.Id}");
+        }
+
+        private bool CanCopyBSR()
+        {
+            return !string.IsNullOrWhiteSpace(mapDetail.Id);
+        }
+
+        #endregion
     }
 }

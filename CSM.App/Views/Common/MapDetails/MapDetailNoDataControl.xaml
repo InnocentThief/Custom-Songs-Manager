@@ -22,10 +22,10 @@
             <!-- Commands -->
             <telerik:RadToolBar Grid.Column="1" Style="{StaticResource HeaderToolBarStyle}" >
                 <telerik:RadButton IsEnabled="False">
-                    <telerik:RadGlyph Glyph="&#xe941;" Foreground="#88018574" />
+                    <telerik:RadGlyph Glyph="&#xe200;" Foreground="#88018574" />
                 </telerik:RadButton>
                 <telerik:RadButton IsEnabled="False">
-                    <telerik:RadGlyph Glyph="&#xe941;" Foreground="#88018574" />
+                    <telerik:RadGlyph Glyph="&#xe111;" Foreground="#88018574" />
                 </telerik:RadButton>
             </telerik:RadToolBar>
         </Grid>

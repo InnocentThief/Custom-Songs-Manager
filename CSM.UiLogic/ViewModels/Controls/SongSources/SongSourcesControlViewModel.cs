@@ -1,4 +1,5 @@
-﻿using CSM.Business.Interfaces;
+﻿using CSM.Business.Core.SongSelection;
+using CSM.Business.Interfaces;
 using CSM.DataAccess.UserConfiguration;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
@@ -13,6 +14,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
         private ISongSourceViewModel? selectedSource;
 
         private readonly UserConfig? userConfig;
+        private readonly ISongSelectionDomain songSelectionDomain;
 
         #endregion
 
@@ -45,6 +47,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
                 {
                     SelectedSource = Sources.SingleOrDefault(s => s is CustomLevelsControlViewModel);
                     OnPropertyChanged();
+                    songSelectionDomain.SetSongHash(null, SongSelectionType.Right);
                 }
             }
         }
@@ -60,6 +63,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
                 {
                     SelectedSource = Sources.SingleOrDefault(s => s is PlaylistsSourceViewModel);
                     OnPropertyChanged();
+                    songSelectionDomain.SetSongHash(null, SongSelectionType.Right);
                 }
             }
         }
@@ -75,6 +79,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
                 {
                     SelectedSource = Sources.SingleOrDefault(s => s is BeatSaberFavouritesSourceViewModel);
                     OnPropertyChanged();
+                    songSelectionDomain.SetSongHash(null, SongSelectionType.Right);
                 }
             }
         }
@@ -90,6 +95,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
                 {
                     SelectedSource = Sources.SingleOrDefault(s => s is SongSearchSourceViewModel);
                     OnPropertyChanged();
+                    songSelectionDomain.SetSongHash(null, SongSelectionType.Right);
                 }
             }
         }
@@ -105,6 +111,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
                 {
                     SelectedSource = Sources.SingleOrDefault(s => s is SongSuggestSourceViewModel);
                     OnPropertyChanged();
+                    songSelectionDomain.SetSongHash(null, SongSelectionType.Right);
                 }
             }
         }
@@ -114,6 +121,8 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
         public SongSourcesControlViewModel(IServiceLocator serviceLocator) : base(serviceLocator)
         {
             userConfig = serviceLocator.GetService<IUserConfigDomain>().Config;
+            songSelectionDomain = serviceLocator.GetService<ISongSelectionDomain>();
+
             if (CustomLevelsAvailable)
             {
                 Sources.Add(new CustomLevelsControlViewModel(serviceLocator));
@@ -155,7 +164,6 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
                 default:
                     break;
             }
-
         }
 
         public async Task LoadAsync()
