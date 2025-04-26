@@ -184,7 +184,8 @@
                 </Grid>
             </WrapPanel>
 
-            <ItemsControl Grid.Column="2" ItemsSource="{Binding Difficulties}">
+            <ScrollViewer Grid.Column="2" Margin="0,6,0,0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" telerik:StyleManager.Theme="Windows11">
+            <ItemsControl ItemsSource="{Binding Difficulties}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel  Orientation="Vertical" />
@@ -233,6 +234,8 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+            </ScrollViewer>
+            
         </Grid>
     </Grid>
 

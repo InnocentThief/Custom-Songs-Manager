@@ -18,22 +18,19 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
 
             foreach (var playlist in Playlists)
             {
-                if (playlist.CheckContainsSong(hash, songSelectionType))
-                {
-                    if (songSelectionType == SongSelectionType.Left)
-                        ContainsLeftSong = true;
-                    else
-                        ContainsRightSong = true;
-                    retval = true;
-                }
-                else
-                {
-                    if (songSelectionType == SongSelectionType.Left)
-                        ContainsLeftSong = false;
-                    else
-                        ContainsRightSong = false;
-                }
+                var contains = playlist.CheckContainsSong(hash, songSelectionType);
+                if (retval == false)
+                    retval = contains;
             }
+
+            if (songSelectionType == SongSelectionType.Left)
+            {
+                ContainsLeftSong = retval;
+            } else
+            {
+                ContainsRightSong = retval;
+            }
+
             return retval;
         }
 

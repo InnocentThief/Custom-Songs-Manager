@@ -28,7 +28,7 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
 
         public Song Model => song;
 
-        public string Hash => song.Hash.ToLower();
+        public string Hash => song.Hash;
 
         public string BsrKey => song.Key ?? string.Empty;
 

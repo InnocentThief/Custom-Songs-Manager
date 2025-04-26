@@ -96,8 +96,6 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
                 selectedSong = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(HasSelectedSong));
-
-                songSelectionDomain.SetSongHash(selectedSong?.Hash ?? null, songSelectionType);
             }
         }
 
@@ -167,7 +165,7 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
                     {
                         if (mapDetail.Value == null)
                             continue;
-                        var existingSongs = Songs.Where(s => s.Hash == mapDetail.Key);
+                        var existingSongs = Songs.Where(s => string.Compare(s.Hash, mapDetail.Key, StringComparison.OrdinalIgnoreCase) == 0);
                         foreach (var existingSong in existingSongs)
                         {
                             existingSong.UpdateData(mapDetail.Value);
@@ -188,19 +186,27 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
 
         public async Task LoadSelectedSongDataAsync()
         {
-            if (SelectedSong == null || SelectedSong.MapDetailViewModel != null)
+            if (SelectedSong == null)
                 return;
 
-            var mapDetail = await beatSaverService.GetMapDetailAsync(SelectedSong.Hash, BeatSaverKeyType.Hash);
-            if (mapDetail == null)
-                return;
+            if (SelectedSong.MapDetailViewModel == null)
+            {
+                var mapDetail = await beatSaverService.GetMapDetailAsync(SelectedSong.Hash, BeatSaverKeyType.Hash);
+                if (mapDetail == null)
+                    return;
 
-            SelectedSong.UpdateMapDetail(mapDetail);
+                SelectedSong.UpdateMapDetail(mapDetail);
+            }
+
+            // todo: which hash to use? latest? based on what?
+            var hashes = SelectedSong.MapDetailViewModel?.Model.Versions.OrderBy(v => v.CreatedAt).Select(v => v.Hash).ToList();
+            if (hashes != null && hashes.Count > 0)
+                songSelectionDomain.SetSongHash(hashes.Last(), songSelectionType);
         }
 
         public override bool CheckContainsSong(string? hash, SongSelectionType songSelectionType)
         {
-            var hasSelectedSong = Songs.Any(s => s.Hash == hash);
+            var hasSelectedSong = Songs.Any(s => string.Compare(s.Hash, hash, StringComparison.OrdinalIgnoreCase) == 0);
             if (songSelectionType == SongSelectionType.Left)
             {
                 ContainsLeftSong = hasSelectedSong;
@@ -214,13 +220,14 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
 
         public override void CleanUpReferences()
         {
-            if (songCopyDomain == null)
-                return;
-            songCopyDomain.OnCopySongs -= SongCopyDomain_OnCopySongs;
+            songSelectionDomain.SetSongHash(null, songSelectionType);
             foreach (var song in Songs)
             {
                 song.OnSongRemoved -= Playlist_OnSongRemoved;
             }
+
+            if (songCopyDomain != null)
+                songCopyDomain.OnCopySongs -= SongCopyDomain_OnCopySongs;
         }
 
         public void SetSortOrder(string columnName, GridViewSortingState sortingState)

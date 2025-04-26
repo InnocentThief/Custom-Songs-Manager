@@ -325,6 +325,9 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             if (songSuggestDomain == null)
                 return;
 
+            if (Playlist != null)
+                Playlist.CleanUpReferences();
+
             SetLoadingInProgress(true, "Generating song suggestions...");
             var playerIdToUse = string.IsNullOrWhiteSpace(playerId) ? null : playerId;
             await songSuggestDomain.GenerateSongSuggestionsAsync(playerIdToUse);

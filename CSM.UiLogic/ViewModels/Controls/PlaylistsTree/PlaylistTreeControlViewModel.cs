@@ -85,7 +85,6 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
             if (!isReadOnly)
                 songCopyDomain.OnCreatePlaylist += SongCopyDomain_OnCreatePlaylist;
             songSelectionDomain.OnSongSelectionChanged += SongSelectionDomain_OnSongSelectionChanged;
-
         }
 
         public async Task LoadAsync(bool refresh)

@@ -1,5 +1,6 @@
 ﻿using CSM.Business.Core.SongSelection;
 using CSM.Business.Interfaces;
+using CSM.DataAccess.BeatSaver;
 using CSM.DataAccess.CustomLevels;
 using CSM.DataAccess.UserConfiguration;
 using CSM.Framework.Extensions;
@@ -102,21 +103,21 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
 
         public async Task LoadSelectedCustomLevelDataAsync()
         {
-            if (SelectedCustomLevel == null || SelectedCustomLevel.MapDetailViewModel != null)
+            if (SelectedCustomLevel == null)
                 return;
 
-            var mapDetail = await beatSaverService.GetMapDetailAsync(SelectedCustomLevel.BsrKey, DataAccess.BeatSaver.BeatSaverKeyType.Id);
-            if (mapDetail == null)
-                return;
+            if (SelectedCustomLevel.MapDetailViewModel == null)
+            {
+                var mapDetail = await beatSaverService.GetMapDetailAsync(SelectedCustomLevel.BsrKey, DataAccess.BeatSaver.BeatSaverKeyType.Id);
+                if (mapDetail == null)
+                    return;
+                SelectedCustomLevel.UpdateMapDetail(mapDetail);
+            }
 
             // todo: which hash to use? latest? based on what?
-            var hashes = mapDetail.Versions.OrderBy(v => v.CreatedAt).Select(v => v.Hash).ToList();
-            if (hashes.Count == 0)
-                return;
-
-            SelectedCustomLevel.UpdateMapDetail(mapDetail);
-
-            songSelectionDomain.SetSongHash(hashes.Last(), SongSelectionType.Right);
+            var hashes = SelectedCustomLevel.MapDetailViewModel?.Model.Versions.OrderBy(v => v.CreatedAt).Select(v => v.Hash).ToList();
+            if (hashes != null && hashes.Count > 0)
+                songSelectionDomain.SetSongHash(hashes.Last(), SongSelectionType.Right);
         }
 
         #region Helper methods
