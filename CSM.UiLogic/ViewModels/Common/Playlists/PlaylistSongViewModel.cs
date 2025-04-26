@@ -100,6 +100,8 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
             OnPropertyChanged(nameof(SongName));
             OnPropertyChanged(nameof(LevelAuthorName));
             OnPropertyChanged(nameof(Uploaded));
+
+            UpdateMapDetail(mapDetail);
         }
 
         public void UpdateMapDetail(MapDetail mapDetail)

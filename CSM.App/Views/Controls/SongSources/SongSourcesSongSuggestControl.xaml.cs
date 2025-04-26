@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using CSM.UiLogic.ViewModels.Common.Playlists;
 
 namespace CSM.App.Views.Controls.SongSources
 {
@@ -10,6 +11,20 @@ namespace CSM.App.Views.Controls.SongSources
         public SongSourcesSongSuggestControl()
         {
             InitializeComponent();
+        }
+
+        private async void RadGridView_SelectionChanged(object sender, Telerik.Windows.Controls.SelectionChangeEventArgs e)
+        {
+            if (e.AddedItems.Count == 0) return;
+            if (sender is Telerik.Windows.Controls.RadGridView gridView && gridView.DataContext is PlaylistViewModel viewModel)
+            {
+                await viewModel.LoadSelectedSongDataAsync();
+            }
+        }
+
+        private void RadGridView_FilterOperatorsLoading(object sender, Telerik.Windows.Controls.GridView.FilterOperatorsLoadingEventArgs e)
+        {
+            e.DefaultOperator1 = Telerik.Windows.Data.FilterOperator.Contains;
         }
     }
 }
