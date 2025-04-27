@@ -1,25 +1,88 @@
-﻿using CSM.DataAccess.BeatSaver;
+﻿using System.Collections.ObjectModel;
+using CSM.Business.Interfaces;
+using CSM.DataAccess.BeatSaver;
+using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
+using CSM.UiLogic.Commands;
 using CSM.UiLogic.ViewModels.Controls.SongSources.SongSearch;
 
 namespace CSM.UiLogic.ViewModels.Controls.SongSources
 {
     internal class SongSearchSourceViewModel : BaseViewModel, ISongSourceViewModel
     {
-        private SearchQueryBuilder searchQueryBuilder = new SearchQueryBuilder();
-        private bool searchExpanded;
-        private string query;
+        #region Private fields
 
-        public bool SearchExpanded
+        private IRelayCommand? searchCommand, showMoreCommand, showFilterCommand, hideFilterCommand, resetFilterCommand, createPlaylistCommand, overwritePlaylistCommand, mergePlaylistCommand;
+        private SearchQueryBuilder searchQueryBuilder = new();
+        private bool filterVisible;
+        private string query;
+        private SearchResultMapDetailViewModel? selectedResult;
+        private string? createPlaylistCommandText, overwritePlaylistCommandText, mergePlaylistCommandText;
+        private string songCount = string.Empty;
+
+        private readonly IBeatSaverService beatSaverService;
+
+        #endregion
+
+        #region Properties
+
+        public IRelayCommand? SearchCommand => searchCommand ??= CommandFactory.CreateFromAsync(SearchAsync, CanSearch);
+        public IRelayCommand? ShowMoreCommand => showMoreCommand ??= CommandFactory.CreateFromAsync(ShowMoreAsync, CanShowMore);
+        public IRelayCommand? ShowFilterCommand => showFilterCommand ??= CommandFactory.Create(ShowFilter, CanShowFilter);
+        public IRelayCommand? HideFilterCommand => hideFilterCommand ??= CommandFactory.Create(HideFilter, CanHideFilter);
+        public IRelayCommand? ResetFilterCommand => resetFilterCommand ??= CommandFactory.Create(ResetFilter, CanResetFilter);
+        public IRelayCommand? CreatePlaylistCommand => createPlaylistCommand ??= CommandFactory.Create(CreatePlaylist, CanCreatePlaylist);
+        public IRelayCommand? OverwritePlaylistCommand => overwritePlaylistCommand ??= CommandFactory.Create(OverwritePlaylist, CanOverwritePlaylist);
+        public IRelayCommand? MergePlaylistCommand => mergePlaylistCommand ??= CommandFactory.Create(MergePlaylist, CanMergePlaylist);
+
+        public string? CreatePlaylistCommandText
         {
-            get => searchExpanded;
+            get => createPlaylistCommandText;
             set
             {
-                if (value == searchExpanded)
+                if (createPlaylistCommandText == value)
                     return;
-                searchExpanded = value;
+                createPlaylistCommandText = value;
                 OnPropertyChanged();
+            }
+        }
+
+        public string? OverwritePlaylistCommandText
+        {
+            get => overwritePlaylistCommandText;
+            set
+            {
+                if (overwritePlaylistCommandText == value)
+                    return;
+                overwritePlaylistCommandText = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string? MergePlaylistCommandText
+        {
+            get => mergePlaylistCommandText;
+            set
+            {
+                if (mergePlaylistCommandText == value)
+                    return;
+                mergePlaylistCommandText = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool FilterVisible
+        {
+            get => filterVisible;
+            set
+            {
+                filterVisible = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(ShowResults));
+                OnPropertyChanged(nameof(ShowNoResults));
+                ShowFilterCommand?.RaiseCanExecuteChanged();
+                HideFilterCommand?.RaiseCanExecuteChanged();
             }
         }
 
@@ -32,8 +95,70 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
                     return;
                 query = value;
                 OnPropertyChanged();
+                SearchCommand?.RaiseCanExecuteChanged();
             }
         }
+
+        public List<YesNoItem> AutoMapper { get; } = [
+            new YesNoItem(null, "All", true),
+            new YesNoItem(true, "Human"),
+            new YesNoItem(false, "AI"),
+        ];
+
+        public List<YesNoItem> Curated { get; } = [
+            new YesNoItem(null, string.Empty, true),
+            new YesNoItem(true, "Yes"),
+            new YesNoItem(false, "No"),
+        ];
+
+        public List<YesNoItem> Verified { get; } = [
+            new YesNoItem(null, string.Empty, true),
+            new YesNoItem(true, "Yes"),
+            new YesNoItem(false, "No"),
+        ];
+
+        public List<YesNoItem> FullSpread { get; } = [
+            new YesNoItem(null, string.Empty, true),
+            new YesNoItem(true, "Yes"),
+            new YesNoItem(false, "No"),
+        ];
+
+        public List<LeaderboardItem> Leaderboard { get; } = [
+            new LeaderboardItem(LeaderboardItemType.All, "All", true),
+            new LeaderboardItem(LeaderboardItemType.Ranked, "Ranked"),
+            new LeaderboardItem(LeaderboardItemType.BeatLeader, "BeatLeader"),
+            new LeaderboardItem(LeaderboardItemType.ScoreSaber, "ScoreSaber"),
+        ];
+
+        public List<YesNoItem> Chroma { get; } = [
+            new YesNoItem(null, string.Empty, true),
+            new YesNoItem(true, "Yes"),
+            new YesNoItem(false, "No"),
+        ];
+
+        public List<YesNoItem> NoodleExtensions { get; } = [
+            new YesNoItem(null, string.Empty, true),
+            new YesNoItem(true, "Yes"),
+            new YesNoItem(false, "No"),
+        ];
+
+        public List<YesNoItem> MappingExtensions { get; } = [
+            new YesNoItem(null, string.Empty, true),
+            new YesNoItem(true, "Yes"),
+            new YesNoItem(false, "No"),
+        ];
+
+        public List<YesNoItem> Cinema { get; } = [
+            new YesNoItem(null, string.Empty, true),
+            new YesNoItem(true, "Yes"),
+            new YesNoItem(false, "No"),
+        ];
+
+        public List<YesNoItem> Vivify { get; } = [
+            new YesNoItem(null, string.Empty, true),
+            new YesNoItem(true, "Yes"),
+            new YesNoItem(false, "No"),
+        ];
 
         public List<StyleItem> MapStyles { get; } = [
             new StyleItem(Tag.None, string.Empty, true),
@@ -139,8 +264,149 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             new EnvironmentItem(DataAccess.BeatSaver.Environment.MetallicaEnvironment, "Metallica")
         ];
 
+        public ObservableCollection<SearchResultMapDetailViewModel> Results { get; } = [];
+
+        public SearchResultMapDetailViewModel? SelectedResult
+        {
+            get => selectedResult;
+            set
+            {
+                if (value == selectedResult)
+                    return;
+                selectedResult = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(HasSelectedResult));
+            }
+        }
+
+        public bool HasSelectedResult => SelectedResult != null;
+
+        public bool ShowResults => !FilterVisible && Results.Count > 0;
+
+        public bool ShowNoResults => !FilterVisible && Results.Count == 0;
+
+        public string SongCount
+        {
+            get => songCount;
+            set
+            {
+                if (value == songCount)
+                    return;
+                songCount = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
         public SongSearchSourceViewModel(IServiceLocator serviceLocator) : base(serviceLocator)
         {
+            beatSaverService = serviceLocator.GetService<IBeatSaverService>();
         }
+
+        #region Private fields
+
+        private async Task SearchAsync()
+        {
+            Results.ForEach(result => result.CleanUpReferences());
+            Results.Clear();
+
+            searchQueryBuilder.Query = Query;
+            var searchQuery = searchQueryBuilder.GetSearchQuery(0);
+            if (string.IsNullOrWhiteSpace(searchQuery?.Query))
+                return;
+            var searchResult = await beatSaverService.SearchAsync(searchQuery.Query);
+            if (searchResult == null || searchResult.Docs.Count == 0)
+                return;
+            Results.AddRange(searchResult.Docs.Select(mapDetail => new SearchResultMapDetailViewModel(ServiceLocator, mapDetail)));
+            SongCount = $"Showing {searchResult.Docs.Count} from {searchResult.Info.Total} results";
+            FilterVisible = false;
+        }
+
+        private bool CanSearch()
+        {
+            return !string.IsNullOrWhiteSpace(Query);
+        }
+
+        private async Task ShowMoreAsync()
+        {
+        }
+
+        private bool CanShowMore()
+        {
+            return true;
+        }
+
+        private void ShowFilter()
+        {
+            FilterVisible = true;
+        }
+
+        private bool CanShowFilter()
+        {
+            return !FilterVisible;
+        }
+
+        private void HideFilter()
+        {
+            FilterVisible = false;
+        }
+
+        private bool CanHideFilter()
+        {
+            return FilterVisible;
+        }
+
+        private void ResetFilter()
+        {
+            searchQueryBuilder.ResetSearchParameters();
+        }
+
+        private bool CanResetFilter()
+        {
+            return true;
+        }
+
+        private void CreatePlaylist()
+        {
+            //if (Playlist == null || Playlist.Songs.Count == 0)
+            //{
+            //    MessageBox.Show("No songs to copy.", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    return;
+            //}
+
+            //var createPlaylistEventArgs = new CreatePlaylistEventArgs
+            //{
+            //    PlaylistName = $"Suggested Songs {DateTime.Now:yyyy-MM-dd HH-mm-ss}",
+            //    Songs = [.. Playlist.Songs.Select(x => x.Model)] // todo: only take filtered songs
+            //};
+            //songCopyDomain.CreatePlaylist(createPlaylistEventArgs);
+        }
+
+        private bool CanCreatePlaylist()
+        {
+            return true;
+            //return songCopyDomain.SelectedPlaylist == null || songCopyDomain.SelectedPlaylist is PlaylistFolderViewModel;
+        }
+        private void OverwritePlaylist()
+        {
+        }
+
+        private bool CanOverwritePlaylist()
+        {
+            return true;
+            //return songCopyDomain.SelectedPlaylist != null && songCopyDomain.SelectedPlaylist is PlaylistViewModel;
+        }
+        private void MergePlaylist()
+        {
+        }
+
+        private bool CanMergePlaylist()
+        {
+            return true;
+            //return songCopyDomain.SelectedPlaylist != null && songCopyDomain.SelectedPlaylist is PlaylistViewModel;
+        }
+
+        #endregion
     }
 }

@@ -6,5 +6,8 @@ namespace CSM.DataAccess.BeatSaver
     {
         [JsonPropertyName("docs")]
         public List<MapDetail> Docs { get; set; } = [];
+
+        [JsonPropertyName("info")]
+        public SearchInfo Info { get; set; } = new SearchInfo();
     }
 }

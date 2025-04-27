@@ -1,0 +1,353 @@
+﻿<UserControl x:Class="CSM.App.Views.Controls.SongSources.SongSearchFilter"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" telerik:StyleManager.Theme="Windows11">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <!-- General, Requirements, Relevance -->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <!-- Genreral -->
+                <GroupBox Header="General" Style="{StaticResource WorkspaceGroupBoxStyle}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <!-- Automapper -->
+                        <telerik:Label Content="Automapper" />
+                        <ItemsControl Grid.Column="1" ItemsSource="{Binding AutoMapper}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <telerik:RadRadioButton GroupName="AutoMapper" Focusable="False" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" IsChecked="{Binding IsSelected}">
+                                        <Grid>
+                                            <telerik:Label Content="{Binding Name}" Margin="3" />
+                                        </Grid>
+                                    </telerik:RadRadioButton>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <!-- Curated -->
+                        <telerik:Label Content="Curated" Grid.Row="1" />
+                        <ItemsControl Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Curated}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <telerik:RadRadioButton GroupName="Curated" Focusable="False" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" IsChecked="{Binding IsSelected}">
+                                        <Grid>
+                                            <telerik:Label Content="{Binding Name}" Margin="3" Visibility="{Binding None, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
+                                            <telerik:RadGlyph Glyph="&#xe117;" Margin="3" Visibility="{Binding None, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                        </Grid>
+                                    </telerik:RadRadioButton>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <!-- Verified Mapper -->
+                        <telerik:Label Content="Verified Mapper" Grid.Row="2" />
+                        <ItemsControl Grid.Column="1" Grid.Row="2" ItemsSource="{Binding Verified}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <telerik:RadRadioButton GroupName="Verified" Focusable="False" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" IsChecked="{Binding IsSelected}">
+                                        <Grid>
+                                            <telerik:Label Content="{Binding Name}" Margin="3" Visibility="{Binding None, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
+                                            <telerik:RadGlyph Glyph="&#xe117;" Margin="3" Visibility="{Binding None, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                        </Grid>
+                                    </telerik:RadRadioButton>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <!-- Full Spread -->
+                        <telerik:Label Content="Full Spread" Grid.Row="3" />
+                        <ItemsControl Grid.Column="1" Grid.Row="3" ItemsSource="{Binding FullSpread}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <telerik:RadRadioButton GroupName="FullSpread" Focusable="False" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" IsChecked="{Binding IsSelected}">
+                                        <Grid>
+                                            <telerik:Label Content="{Binding Name}" Margin="3" Visibility="{Binding None, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
+                                            <telerik:RadGlyph Glyph="&#xe117;" Margin="3" Visibility="{Binding None, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                        </Grid>
+                                    </telerik:RadRadioButton>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Grid.Row="1" Header="Leaderboard" Style="{StaticResource WorkspaceGroupBoxStyle}" Margin="0,10,0,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <!-- Leaderboard -->
+                        <telerik:Label Content="Leaderboard" />
+                        <ItemsControl Grid.Column="1"  Grid.ColumnSpan="2" ItemsSource="{Binding Leaderboard}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <telerik:RadRadioButton GroupName="Leaderboard" Focusable="False" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" IsChecked="{Binding IsSelected}">
+                                        <Grid>
+                                            <telerik:Label Content="{Binding Name}" Margin="3" />
+                                        </Grid>
+                                    </telerik:RadRadioButton>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <!-- Stars -->
+                        <telerik:Label Content="Stars" Grid.Row="1" />
+                        <telerik:RadSlider Grid.Column="1" Grid.Row="1" LargeChange="2" SmallChange="0.1" Minimum="0" Maximum="16" IsSelectionRangeEnabled="True" SelectionStart="0" SelectionEnd="16" Focusable="False" />
+                        <telerik:Label Content="0-16" Grid.Column="2" Grid.Row="1" Margin="10,0" />
+                    </Grid>
+                </GroupBox>
+                <GroupBox Grid.Row="2" Header="Requirements" Style="{StaticResource WorkspaceGroupBoxStyle}" Margin="0,10,0,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <!-- Chroma -->
+                        <telerik:Label Content="Chroma" />
+                        <ItemsControl Grid.Column="1" ItemsSource="{Binding Chroma}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <telerik:RadRadioButton GroupName="Chroma" Focusable="False" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" IsChecked="{Binding IsSelected}">
+                                        <Grid>
+                                            <telerik:Label Content="{Binding Name}" Margin="3" Visibility="{Binding None, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
+                                            <telerik:RadGlyph Glyph="&#xe117;" Margin="3" Visibility="{Binding None, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                        </Grid>
+                                    </telerik:RadRadioButton>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <!-- Noodle Extensions -->
+                        <telerik:Label Content="Noodle Extensions" Grid.Row="1" />
+                        <ItemsControl Grid.Column="1" Grid.Row="1" ItemsSource="{Binding NoodleExtensions}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <telerik:RadRadioButton GroupName="NoodleExtensions" Focusable="False" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" IsChecked="{Binding IsSelected}">
+                                        <Grid>
+                                            <telerik:Label Content="{Binding Name}" Margin="3" Visibility="{Binding None, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
+                                            <telerik:RadGlyph Glyph="&#xe117;" Margin="3" Visibility="{Binding None, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                        </Grid>
+                                    </telerik:RadRadioButton>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <!-- Mapping Extensions -->
+                        <telerik:Label Content="Mapping Extensions" Grid.Row="2" />
+                        <ItemsControl Grid.Column="1" Grid.Row="2" ItemsSource="{Binding MappingExtensions}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <telerik:RadRadioButton GroupName="MappingExtensions" Focusable="False" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" IsChecked="{Binding IsSelected}">
+                                        <Grid>
+                                            <telerik:Label Content="{Binding Name}" Margin="3" Visibility="{Binding None, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
+                                            <telerik:RadGlyph Glyph="&#xe117;" Margin="3" Visibility="{Binding None, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                        </Grid>
+                                    </telerik:RadRadioButton>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <!-- Cinema -->
+                        <telerik:Label Content="Cinema" Grid.Row="3" />
+                        <ItemsControl Grid.Column="1" Grid.Row="3" ItemsSource="{Binding Cinema}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <telerik:RadRadioButton GroupName="Cinema" Focusable="False" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" IsChecked="{Binding IsSelected}">
+                                        <Grid>
+                                            <telerik:Label Content="{Binding Name}" Margin="3" Visibility="{Binding None, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
+                                            <telerik:RadGlyph Glyph="&#xe117;" Margin="3" Visibility="{Binding None, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                        </Grid>
+                                    </telerik:RadRadioButton>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <!-- Vivify -->
+                        <telerik:Label Content="Vivify" Grid.Row="4" />
+                        <ItemsControl Grid.Column="1" Grid.Row="4" ItemsSource="{Binding Vivify}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <telerik:RadRadioButton GroupName="Vivify" Focusable="False" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" IsChecked="{Binding IsSelected}">
+                                        <Grid>
+                                            <telerik:Label Content="{Binding Name}" Margin="3" Visibility="{Binding None, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
+                                            <telerik:RadGlyph Glyph="&#xe117;" Margin="3" Visibility="{Binding None, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                        </Grid>
+                                    </telerik:RadRadioButton>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Grid.Row="3" Header="Tags" Style="{StaticResource WorkspaceGroupBoxStyle}" Margin="0,10,0,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <ItemsControl ItemsSource="{Binding MapStyles}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <telerik:RadRadioButton GroupName="TagBlue" Focusable="False" Background="#1B3E54" IsChecked="{Binding IsSelected}">
+                                        <Grid>
+                                            <telerik:Label Content="{Binding Name}" Margin="3" Visibility="{Binding None, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
+                                            <telerik:RadGlyph Glyph="&#xe117;" Margin="3" Visibility="{Binding None, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                        </Grid>
+                                    </telerik:RadRadioButton>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <ItemsControl Grid.Row="1" ItemsSource="{Binding SongStyles}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <telerik:RadRadioButton GroupName="TagGreen" Focusable="False" Background="#144736" IsChecked="{Binding IsSelected}">
+                                        <Grid>
+                                            <telerik:Label Content="{Binding Name}" Margin="3" Visibility="{Binding None, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
+                                            <telerik:RadGlyph Glyph="&#xe117;" Margin="3" Visibility="{Binding None, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                        </Grid>
+                                    </telerik:RadRadioButton>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Grid.Row="4" Header="Environments" Style="{StaticResource WorkspaceGroupBoxStyle}" Margin="0,10,0,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <ItemsControl ItemsSource="{Binding LegacyEnvironments}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <telerik:RadRadioButton GroupName="EnvironmentLegacy" Focusable="False" Background="#54523A" IsChecked="{Binding IsSelected}">
+                                        <Grid>
+                                            <telerik:Label Content="{Binding Name}" Margin="3" Visibility="{Binding None, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
+                                            <telerik:RadGlyph Glyph="&#xe117;" Margin="3" Visibility="{Binding None, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                            <telerik:Label Content="{Binding Name}" Margin="3" Visibility="{Binding All, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                        </Grid>
+                                    </telerik:RadRadioButton>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <ItemsControl Grid.Row="1" ItemsSource="{Binding NewEnvironments}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <telerik:RadRadioButton GroupName="EnvironmentNew" Focusable="False" Background="#43305A" IsChecked="{Binding IsSelected}">
+                                        <Grid>
+                                            <telerik:Label Content="{Binding Name}" Margin="3" Visibility="{Binding None, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
+                                            <telerik:RadGlyph Glyph="&#xe117;" Margin="3" Visibility="{Binding None, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                            <telerik:Label Content="{Binding Name}" Margin="3" Visibility="{Binding All, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                        </Grid>
+                                    </telerik:RadRadioButton>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </GroupBox>
+
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

@@ -223,6 +223,7 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
             songSelectionDomain.SetSongHash(null, songSelectionType);
             foreach (var song in Songs)
             {
+                song.CleanUpReferences();
                 song.OnSongRemoved -= Playlist_OnSongRemoved;
             }
 
@@ -321,6 +322,7 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
                 if (existingSong != null)
                 {
                     playlist.Songs.Remove(existingSong);
+                    playlistSongViewModel.CleanUpReferences();
                     playlistSongViewModel.OnSongRemoved -= Playlist_OnSongRemoved;
                     Songs.Remove(playlistSongViewModel);
                     OnPropertyChanged(nameof(SongCount));

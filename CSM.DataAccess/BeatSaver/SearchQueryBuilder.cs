@@ -7,7 +7,7 @@ namespace CSM.DataAccess.BeatSaver
     {
         #region Properties
 
-        public bool? AI { get; set; } = true; // true = both, false = only AI, null = no AI
+        public bool? AI { get; set; } = null; // true = both, false = only AI, null = no AI
 
         public bool? Chroma { get; set; }
 
@@ -19,7 +19,7 @@ namespace CSM.DataAccess.BeatSaver
 
         public bool? Followed { get; set; }
 
-        public DateTime? From { get; set; } = new(2018, 5, 8);
+        public DateTime? From { get; set; } = null;
 
         public bool? FullSpread { get; set; }
 
@@ -33,7 +33,7 @@ namespace CSM.DataAccess.BeatSaver
 
         public int? MaxDuration { get; set; }
 
-        public decimal? MaxNps { get; set; } = 0;
+        public decimal? MaxNps { get; set; } = 16;
 
         public decimal? MaxRating { get; set; }
 
@@ -71,7 +71,7 @@ namespace CSM.DataAccess.BeatSaver
 
         public List<Tag> Tags { get; set; } = [];
 
-        public DateTime? To { get; set; } = DateTime.Today;
+        public DateTime? To { get; set; } = null;
 
         public bool? Verified { get; set; }
 
@@ -79,7 +79,7 @@ namespace CSM.DataAccess.BeatSaver
 
         #endregion
 
-        public SearchQuery? GetSearchQuery(int pageIndex, int pageSize = 20)
+        public SearchQuery? GetSearchQuery(int pageIndex, int pageSize = 50)
         {
             var parameters = new StringBuilder();
 
@@ -95,6 +95,8 @@ namespace CSM.DataAccess.BeatSaver
                 parameters.Append($"q={Query}");
                 return new SearchQuery(parameters.ToString(), pageIndex, true);
             }
+
+            parameters.Append($"&q={Query}");
 
             switch (AI)
             {
@@ -168,7 +170,7 @@ namespace CSM.DataAccess.BeatSaver
                 parameters.Append($"&maxDuration={MaxDuration.Value.ToString(CultureInfo.InvariantCulture)}");
             }
 
-            if (MaxNps.HasValue)
+            if (MaxNps.HasValue && MaxNps != 16)
             {
                 parameters.Append($"&maxNps={MaxNps.Value.ToString(CultureInfo.InvariantCulture)}");
             }
@@ -218,7 +220,7 @@ namespace CSM.DataAccess.BeatSaver
                 parameters.Append($"&minDuration={MinDuration.Value.ToString(CultureInfo.InvariantCulture)}");
             }
 
-            if (MinNps.HasValue)
+            if (MinNps.HasValue && MinNps > 0)
             {
                 parameters.Append($"&minNps={MinNps.Value.ToString(CultureInfo.InvariantCulture)}");
             }
@@ -274,7 +276,7 @@ namespace CSM.DataAccess.BeatSaver
             }
 
 
-            return new SearchQuery(parameters.ToString(), pageIndex, false);
+            return new SearchQuery($"{initialQuery}{parameters.ToString()}", pageIndex, false);
         }
 
         public void ResetSearchParameters()

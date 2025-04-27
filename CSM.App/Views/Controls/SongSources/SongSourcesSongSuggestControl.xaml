@@ -5,8 +5,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:behaviours="clr-namespace:CSM.App.Behaviours"
+             xmlns:common="clr-namespace:CSM.App.Views.Common"
              xmlns:playlists="clr-namespace:CSM.App.Views.Controls.Playlists"
-             xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib" xmlns:common="clr-namespace:CSM.App.Views.Common"
+             xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -244,7 +245,6 @@
 
             <!-- NoResults -->
             <Grid Grid.Row="3" Visibility="{Binding HasResults, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
-                <!-- Content -->
                 <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
