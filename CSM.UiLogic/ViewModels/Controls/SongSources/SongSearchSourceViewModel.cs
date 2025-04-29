@@ -100,8 +100,8 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
         }
 
         public List<YesNoItem> AutoMapper { get; } = [
-            new YesNoItem(null, "All", true),
-            new YesNoItem(true, "Human"),
+            new YesNoItem(null, "Human", true),
+            new YesNoItem(true, "All"),
             new YesNoItem(false, "AI"),
         ];
 
@@ -124,10 +124,11 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
         ];
 
         public List<LeaderboardItem> Leaderboard { get; } = [
-            new LeaderboardItem(LeaderboardItemType.All, "All", true),
-            new LeaderboardItem(LeaderboardItemType.Ranked, "Ranked"),
-            new LeaderboardItem(LeaderboardItemType.BeatLeader, "BeatLeader"),
-            new LeaderboardItem(LeaderboardItemType.ScoreSaber, "ScoreSaber"),
+            new LeaderboardItem(null, string.Empty, true),
+            new LeaderboardItem(SearchParamLeaderboard.All, "All"),
+            new LeaderboardItem(SearchParamLeaderboard.Ranked, "Ranked"),
+            new LeaderboardItem(SearchParamLeaderboard.BeatLeader, "BeatLeader"),
+            new LeaderboardItem(SearchParamLeaderboard.ScoreSaber, "ScoreSaber"),
         ];
 
         public List<YesNoItem> Chroma { get; } = [
@@ -311,7 +312,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             Results.ForEach(result => result.CleanUpReferences());
             Results.Clear();
 
-            searchQueryBuilder.Query = Query;
+            SetSearchQueryBuilderData();
             var searchQuery = searchQueryBuilder.GetSearchQuery(0);
             if (string.IsNullOrWhiteSpace(searchQuery?.Query))
                 return;
@@ -321,6 +322,70 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             Results.AddRange(searchResult.Docs.Select(mapDetail => new SearchResultMapDetailViewModel(ServiceLocator, mapDetail)));
             SongCount = $"Showing {searchResult.Docs.Count} from {searchResult.Info.Total} results";
             FilterVisible = false;
+        }
+
+        private void SetSearchQueryBuilderData()
+        {
+            var selectedAutoMapper = AutoMapper.SingleOrDefault(am => am.IsSelected);
+            searchQueryBuilder.AI = selectedAutoMapper?.Key;
+
+            var selectedChroma = Chroma.SingleOrDefault(c => c.IsSelected);
+            searchQueryBuilder.Chroma = selectedChroma?.Key;
+
+            var selectedCinema = Cinema.SingleOrDefault(c => c.IsSelected);
+            searchQueryBuilder.Cinema = selectedCinema?.Key;
+
+            var selectedCurated = Curated.SingleOrDefault(c => c.IsSelected);
+            searchQueryBuilder.Curated = selectedCurated?.Key;
+
+            var selectedFullSpread = FullSpread.SingleOrDefault(fs => fs.IsSelected);
+            searchQueryBuilder.FullSpread = selectedFullSpread?.Key;
+
+            var selectedMappingExtensions = MappingExtensions.SingleOrDefault(me => me.IsSelected);
+            searchQueryBuilder.Me = selectedMappingExtensions?.Key;
+
+            var selectedNoodleExtensions = NoodleExtensions.SingleOrDefault(ne => ne.IsSelected);
+            searchQueryBuilder.Noodle = selectedNoodleExtensions?.Key;
+
+            var selectedVerified = Verified.SingleOrDefault(v => v.IsSelected);
+            searchQueryBuilder.Verified = selectedVerified?.Key;
+
+            var selectedVivify = Vivify.SingleOrDefault(v => v.IsSelected);
+            searchQueryBuilder.Vivify = selectedVivify?.Key;
+
+            var selectedLeaderboard = Leaderboard.SingleOrDefault(lb => lb.IsSelected);
+            searchQueryBuilder.Leaderboard = selectedLeaderboard?.Key;
+            switch (selectedLeaderboard?.Key)
+            {
+                case SearchParamLeaderboard.All:
+                    searchQueryBuilder.MaxBlStars = 16; // todo: get from slider
+                    searchQueryBuilder.MaxSsStars = 16; // todo: get from slider
+                    searchQueryBuilder.MinBlStars = 0; // todo: get from slider
+                    searchQueryBuilder.MinSsStars = 0; // todo: get from slider
+                    break;
+                case SearchParamLeaderboard.Ranked:
+                    searchQueryBuilder.MaxBlStars = 16; // todo: get from slider
+                    searchQueryBuilder.MaxSsStars = 16; // todo: get from slider
+                    searchQueryBuilder.MinBlStars = 0; // todo: get from slider
+                    searchQueryBuilder.MinSsStars = 0; // todo: get from slider
+                    break;
+                case SearchParamLeaderboard.BeatLeader:
+                    searchQueryBuilder.MaxBlStars = 16; // todo: get from slider
+                    searchQueryBuilder.MinBlStars = 0; // todo: get from slider
+                    break;
+                case SearchParamLeaderboard.ScoreSaber:
+                    searchQueryBuilder.MaxSsStars = 16; // todo: get from slider
+                    searchQueryBuilder.MinSsStars = 0; // todo: get from slider
+                    break;
+                default:
+                    searchQueryBuilder.MaxBlStars = null;
+                    searchQueryBuilder.MaxSsStars = null;
+                    searchQueryBuilder.MinBlStars = null;
+                    searchQueryBuilder.MinSsStars = null;
+                    break;
+            }
+
+            searchQueryBuilder.Query = Query;
         }
 
         private bool CanSearch()

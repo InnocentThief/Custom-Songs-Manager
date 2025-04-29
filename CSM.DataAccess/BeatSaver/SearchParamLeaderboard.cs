@@ -2,10 +2,9 @@
 {
     internal enum SearchParamLeaderboard
     {
-        Undefined = 0,
-        All = 1,
-        Ranked = 2,
-        BeatLeader = 3,
-        ScoreSaber = 4,
+        All = 0,
+        Ranked = 1,
+        BeatLeader = 2,
+        ScoreSaber = 3,
     }
 }

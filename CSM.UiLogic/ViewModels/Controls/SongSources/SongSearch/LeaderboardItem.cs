@@ -1,14 +1,17 @@
-﻿using CSM.UiLogic.AbstractBase;
+﻿using CSM.DataAccess.BeatSaver;
+using CSM.UiLogic.AbstractBase;
 
 namespace CSM.UiLogic.ViewModels.Controls.SongSources.SongSearch
 {
-    internal class LeaderboardItem(LeaderboardItemType key, string name, bool isSelected = false) : BaseNotifiable
+    internal class LeaderboardItem(SearchParamLeaderboard? key, string name, bool isSelected = false) : BaseNotifiable
     {
         private bool isSelected = isSelected;
 
-        public LeaderboardItemType Key { get; } = key;
+        public SearchParamLeaderboard? Key { get; } = key;
 
         public string Name { get; } = name;
+
+        public bool None => Key == null;
 
         public bool IsSelected
         {
@@ -21,13 +24,5 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources.SongSearch
                 OnPropertyChanged();
             }
         }
-    }
-
-    internal enum LeaderboardItemType
-    {
-        All = 0,
-        Ranked = 1,
-        BeatLeader = 2,
-        ScoreSaber = 3
     }
 }

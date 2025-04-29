@@ -138,7 +138,8 @@
                                 <DataTemplate>
                                     <telerik:RadRadioButton GroupName="Leaderboard" Focusable="False" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" IsChecked="{Binding IsSelected}">
                                         <Grid>
-                                            <telerik:Label Content="{Binding Name}" Margin="3" />
+                                            <telerik:Label Content="{Binding Name}" Margin="3" Visibility="{Binding None, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
+                                            <telerik:RadGlyph Glyph="&#xe117;" Margin="3" Visibility="{Binding None, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                         </Grid>
                                     </telerik:RadRadioButton>
                                 </DataTemplate>

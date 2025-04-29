@@ -23,7 +23,7 @@ namespace CSM.DataAccess.BeatSaver
 
         public bool? FullSpread { get; set; }
 
-        public SearchParamLeaderboard Leaderboard { get; set; } = SearchParamLeaderboard.Undefined;
+        public SearchParamLeaderboard? Leaderboard { get; set; } = null;
 
         public decimal? MaxBlStars { get; set; }
 
@@ -145,9 +145,9 @@ namespace CSM.DataAccess.BeatSaver
                 parameters.Append($"&fullspread={FullSpread.Value.ToString().ToLower()}");
             }
 
-            if (Leaderboard != SearchParamLeaderboard.Undefined)
+            if (Leaderboard.HasValue)
             {
-                parameters.Append($"&leaderboard={Leaderboard.ToString().ToLower()}");
+                parameters.Append($"&leaderboard={Leaderboard.Value.ToString().ToLower()}");
             }
 
             if (MaxBlStars.HasValue)
@@ -287,9 +287,9 @@ namespace CSM.DataAccess.BeatSaver
             Curated = null;
             Environments = [];
             Followed = null;
-            From = new DateTime(2018, 5, 8);
+            From = null;
             FullSpread = null;
-            Leaderboard = SearchParamLeaderboard.Undefined;
+            Leaderboard = null;
             MaxBlStars = null;
             MaxBpm = null;
             MaxDownVotes = null;
@@ -313,7 +313,7 @@ namespace CSM.DataAccess.BeatSaver
             Relevance = SearchParamRelevance.Undefined;
             Query = string.Empty;
             Tags = [];
-            To = DateTime.Today;
+            To = null;
             Verified = null;
             Vivify = null;
         }

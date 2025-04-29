@@ -2,9 +2,9 @@
 
 namespace CSM.UiLogic.ViewModels.Controls.SongSources.SongSearch
 {
-    internal class YesNoItem(bool? key, string name, bool? isSelected = null): BaseNotifiable
+    internal class YesNoItem(bool? key, string name, bool isSelected = false): BaseNotifiable
     {
-        private bool? isSelected = isSelected;
+        private bool isSelected = isSelected;
 
         public bool? Key { get; } = key;
 
@@ -12,7 +12,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources.SongSearch
 
         public bool None => Key == null;
 
-        public bool? IsSelected
+        public bool IsSelected
         {
             get => isSelected;
             set
