@@ -180,4 +180,19 @@
   <data name="enum_Difficulty_ExpertPlus" xml:space="preserve">
     <value>ExpertPlus</value>
   </data>
+  <data name="enum_Relevance_Latest" xml:space="preserve">
+    <value>Latest</value>
+  </data>
+  <data name="enum_Relevance_Relevance" xml:space="preserve">
+    <value>Relevance</value>
+  </data>
+  <data name="enum_Relevance_Rating" xml:space="preserve">
+    <value>Rating</value>
+  </data>
+  <data name="enum_Relevance_Curated" xml:space="preserve">
+    <value>Curated</value>
+  </data>
+  <data name="enum_Relevance_Random" xml:space="preserve">
+    <value>Random</value>
+  </data>
 </root>

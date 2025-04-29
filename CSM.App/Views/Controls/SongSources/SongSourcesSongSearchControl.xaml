@@ -59,9 +59,6 @@
                     <telerik:RadGlyph Glyph="&#xe102;" />
                 </telerik:RadButton>
             </telerik:RadToolBar>
-
-            <!-- NPS -->
-            <telerik:Label Content="NPS" Grid.Row="1" />
         </Grid>
 
         <local:SongSearchFilter Grid.Row="2" Visibility="{Binding FilterVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
@@ -79,7 +76,7 @@
                 <TextBlock Grid.Row="2" Text="Enter a search criteria and hit the search icon" TextAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" />
             </Grid>
         </Grid>
-        
+
         <!-- Results -->
         <Grid Grid.Row="2" Visibility="{Binding ShowResults, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Grid.RowDefinitions>

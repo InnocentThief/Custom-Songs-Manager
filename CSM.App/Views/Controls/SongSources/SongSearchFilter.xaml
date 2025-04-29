@@ -21,6 +21,7 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <!-- Genreral -->
                 <GroupBox Header="General" Style="{StaticResource WorkspaceGroupBoxStyle}">
@@ -34,10 +35,41 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
+
+                        <!-- NPS -->
+                        <telerik:Label Content="NPS" />
+                        <Grid Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <telerik:RadSlider 
+                                Focusable="False" 
+                                IsSelectionRangeEnabled="True" 
+                                LargeChange="2" 
+                                SmallChange="0.1" 
+                                Minimum="0" 
+                                Maximum="16" 
+                                SelectionStart="{Binding NPSStart, Mode=TwoWay}" 
+                                SelectionEnd="{Binding NPSEnd, Mode=TwoWay}"/>
+                            <telerik:Label Grid.Column="1" Content="{Binding NPSRange}" Margin="6,0,0,0" />
+                        </Grid>
+
+                        <!-- From/To -->
+                        <telerik:Label Grid.Row="1" Content="Date range" />
+                        <telerik:RadDateRangePicker Grid.Column="1" Grid.Row="1" EmptyContent="Select date range" StartDate="{Binding DateSelectionStart}" EndDate="{Binding DateSelectionEnd}" SelectableDateStart="{Binding DateMinimum}" SelectableDateEnd="{Binding DateMaximum}" />
+
+                        <!-- Relevance -->
+                        <telerik:Label Grid.Row="2" Content="Relevance" />
+                        <telerik:RadComboBox Grid.Column="1" Grid.Row="2" ItemsSource="{Binding Relevances}" DisplayMemberPath="DisplayText" SelectedItem="{Binding SelectedRelevance}" ClearSelectionButtonVisibility="Visible" ClearSelectionButtonContent="Clear selection" />
+
                         <!-- Automapper -->
-                        <telerik:Label Content="Automapper" />
-                        <ItemsControl Grid.Column="1" ItemsSource="{Binding AutoMapper}">
+                        <telerik:Label Grid.Row="3" Content="Automapper" />
+                        <ItemsControl Grid.Column="1" Grid.Row="3" ItemsSource="{Binding AutoMapper}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <WrapPanel Orientation="Horizontal" />
@@ -54,8 +86,8 @@
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                         <!-- Curated -->
-                        <telerik:Label Content="Curated" Grid.Row="1" />
-                        <ItemsControl Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Curated}">
+                        <telerik:Label Content="Curated" Grid.Row="4" />
+                        <ItemsControl Grid.Column="1" Grid.Row="4" ItemsSource="{Binding Curated}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <WrapPanel Orientation="Horizontal" />
@@ -73,8 +105,8 @@
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                         <!-- Verified Mapper -->
-                        <telerik:Label Content="Verified Mapper" Grid.Row="2" />
-                        <ItemsControl Grid.Column="1" Grid.Row="2" ItemsSource="{Binding Verified}">
+                        <telerik:Label Content="Verified Mapper" Grid.Row="5" />
+                        <ItemsControl Grid.Column="1" Grid.Row="5" ItemsSource="{Binding Verified}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <WrapPanel Orientation="Horizontal" />
@@ -92,8 +124,8 @@
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                         <!-- Full Spread -->
-                        <telerik:Label Content="Full Spread" Grid.Row="3" />
-                        <ItemsControl Grid.Column="1" Grid.Row="3" ItemsSource="{Binding FullSpread}">
+                        <telerik:Label Content="Full Spread" Grid.Row="6" />
+                        <ItemsControl Grid.Column="1" Grid.Row="6" ItemsSource="{Binding FullSpread}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <WrapPanel Orientation="Horizontal" />
@@ -112,11 +144,12 @@
                         </ItemsControl>
                     </Grid>
                 </GroupBox>
+
+                <!-- Leaderboard -->
                 <GroupBox Grid.Row="1" Header="Leaderboard" Style="{StaticResource WorkspaceGroupBoxStyle}" Margin="0,10,0,0">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="150" />
-                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
@@ -128,7 +161,7 @@
                         </Grid.RowDefinitions>
                         <!-- Leaderboard -->
                         <telerik:Label Content="Leaderboard" />
-                        <ItemsControl Grid.Column="1"  Grid.ColumnSpan="2" ItemsSource="{Binding Leaderboard}">
+                        <ItemsControl Grid.Column="1" ItemsSource="{Binding Leaderboard}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <WrapPanel Orientation="Horizontal" />
@@ -147,11 +180,99 @@
                         </ItemsControl>
                         <!-- Stars -->
                         <telerik:Label Content="Stars" Grid.Row="1" />
-                        <telerik:RadSlider Grid.Column="1" Grid.Row="1" LargeChange="2" SmallChange="0.1" Minimum="0" Maximum="16" IsSelectionRangeEnabled="True" SelectionStart="0" SelectionEnd="16" Focusable="False" />
-                        <telerik:Label Content="0-16" Grid.Column="2" Grid.Row="1" Margin="10,0" />
+                        <Grid Grid.Column="1" Grid.Row="1" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <telerik:RadSlider 
+                                Focusable="False"
+                                LargeChange="2" 
+                                SmallChange="0.1" 
+                                Minimum="{Binding StarsMinimum}" 
+                                Maximum="{Binding StarsMaximum}" 
+                                IsSelectionRangeEnabled="True" 
+                                SelectionStart="{Binding StarsStart, Mode=TwoWay}" 
+                                SelectionEnd="{Binding StarsEnd, Mode=TwoWay}" />
+                            <telerik:Label Content="{Binding Stars}" Grid.Column="1" Margin="10,0" />
+                        </Grid>
                     </Grid>
                 </GroupBox>
-                <GroupBox Grid.Row="2" Header="Requirements" Style="{StaticResource WorkspaceGroupBoxStyle}" Margin="0,10,0,0">
+
+                <!-- Votes -->
+                <GroupBox Grid.Row="2" Header="Votes" Style="{StaticResource WorkspaceGroupBoxStyle}" Margin="0,10,0,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <!-- Votes -->
+                        <telerik:Label Content="Votes" />
+                        <Grid Grid.Column="1" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <telerik:RadSlider 
+                                Focusable="False"
+                                LargeChange="100" 
+                                SmallChange="10" 
+                                Minimum="{Binding VotesMinimum}" 
+                                Maximum="{Binding VotesMaximum}" 
+                                IsSelectionRangeEnabled="True" 
+                                SelectionStart="{Binding VotesStart, Mode=TwoWay}" 
+                                SelectionEnd="{Binding VotesEnd, Mode=TwoWay}" />
+                            <telerik:Label Content="{Binding Votes}" Grid.Column="1" Margin="10,0" />
+                        </Grid>
+
+                        <!-- Upvotes -->
+                        <telerik:Label Grid.Row="1" Content="Up votes" />
+                        <Grid Grid.Column="1" Grid.Row="1" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <telerik:RadSlider 
+                                 Focusable="False"
+                                 LargeChange="100" 
+                                 SmallChange="10" 
+                                 Minimum="{Binding UpVotesMinimum}" 
+                                 Maximum="{Binding UpVotesMaximum}" 
+                                 IsSelectionRangeEnabled="True" 
+                                 SelectionStart="{Binding UpVotesStart, Mode=TwoWay}" 
+                                 SelectionEnd="{Binding UpVotesEnd, Mode=TwoWay}" />
+                            <telerik:Label Content="{Binding UpVotes}" Grid.Column="1" Margin="10,0" />
+                        </Grid>
+
+                        <!-- Downvotes -->
+                        <telerik:Label Grid.Row="2" Content="Down votes" />
+                        <Grid Grid.Column="1" Grid.Row="2" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <telerik:RadSlider 
+                                 Focusable="False"
+                                 LargeChange="100" 
+                                 SmallChange="10" 
+                                 Minimum="{Binding DownVotesMinimum}" 
+                                 Maximum="{Binding DownVotesMaximum}" 
+                                 IsSelectionRangeEnabled="True" 
+                                 SelectionStart="{Binding DownVotesStart, Mode=TwoWay}" 
+                                 SelectionEnd="{Binding DownVotesEnd, Mode=TwoWay}" />
+                            <telerik:Label Content="{Binding DownVotes}" Grid.Column="1" Margin="10,0" />
+                        </Grid>
+
+                    </Grid>
+                </GroupBox>
+
+                <!-- Requirements -->
+                <GroupBox Grid.Row="3" Header="Requirements" Style="{StaticResource WorkspaceGroupBoxStyle}" Margin="0,10,0,0">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="150" />
@@ -261,7 +382,9 @@
                         </ItemsControl>
                     </Grid>
                 </GroupBox>
-                <GroupBox Grid.Row="3" Header="Tags" Style="{StaticResource WorkspaceGroupBoxStyle}" Margin="0,10,0,0">
+
+                <!-- Tags -->
+                <GroupBox Grid.Row="4" Header="Tags" Style="{StaticResource WorkspaceGroupBoxStyle}" Margin="0,10,0,0">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -303,7 +426,9 @@
                         </ItemsControl>
                     </Grid>
                 </GroupBox>
-                <GroupBox Grid.Row="4" Header="Environments" Style="{StaticResource WorkspaceGroupBoxStyle}" Margin="0,10,0,0">
+
+                <!-- Environments -->
+                <GroupBox Grid.Row="5" Header="Environments" Style="{StaticResource WorkspaceGroupBoxStyle}" Margin="0,10,0,0">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />

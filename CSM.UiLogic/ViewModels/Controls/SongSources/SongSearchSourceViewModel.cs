@@ -1,11 +1,12 @@
-﻿using System.Collections.ObjectModel;
-using CSM.Business.Interfaces;
+﻿using CSM.Business.Interfaces;
 using CSM.DataAccess.BeatSaver;
 using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.Commands;
+using CSM.UiLogic.Helper;
 using CSM.UiLogic.ViewModels.Controls.SongSources.SongSearch;
+using System.Collections.ObjectModel;
 
 namespace CSM.UiLogic.ViewModels.Controls.SongSources
 {
@@ -14,12 +15,17 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
         #region Private fields
 
         private IRelayCommand? searchCommand, showMoreCommand, showFilterCommand, hideFilterCommand, resetFilterCommand, createPlaylistCommand, overwritePlaylistCommand, mergePlaylistCommand;
-        private SearchQueryBuilder searchQueryBuilder = new();
+        private readonly SearchQueryBuilder searchQueryBuilder = new();
         private bool filterVisible;
-        private string query;
+        private string query = string.Empty;
         private SearchResultMapDetailViewModel? selectedResult;
         private string? createPlaylistCommandText, overwritePlaylistCommandText, mergePlaylistCommandText;
         private string songCount = string.Empty;
+        private double npsStart, npsEnd = 16, starsStart, starsEnd = 16;
+        private int votesStart, votesEnd = 1000, upVotesStart, upVotesEnd = 1000, downVotesStart, downVotesEnd = 1000;
+        private DateTime? dateSelectionStart;
+        private DateTime? dateSelectionEnd;
+        private EnumWrapper<SearchParamRelevance>? selectedRelevance;
 
         private readonly IBeatSaverService beatSaverService;
 
@@ -99,6 +105,20 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             }
         }
 
+        public ObservableCollection<EnumWrapper<SearchParamRelevance>> Relevances { get; } = [];
+
+        public EnumWrapper<SearchParamRelevance>? SelectedRelevance
+        {
+            get => selectedRelevance;
+            set
+            {
+                if (value == selectedRelevance)
+                    return;
+                selectedRelevance = value;
+                OnPropertyChanged();
+            }
+        }
+
         public List<YesNoItem> AutoMapper { get; } = [
             new YesNoItem(null, "Human", true),
             new YesNoItem(true, "All"),
@@ -160,6 +180,224 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             new YesNoItem(true, "Yes"),
             new YesNoItem(false, "No"),
         ];
+
+        public string NPSRange
+        {
+            get
+            {
+                var min = NPSStart.ToString("0.0");
+                var max = NPSEnd == 16 ? "∞" : NPSEnd.ToString("0.0");
+                return $"{min} - {max}";
+            }
+        }
+
+        public double NPSStart
+        {
+            get => npsStart;
+            set
+            {
+                if (value == npsStart)
+                    return;
+                npsStart = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(NPSRange));
+            }
+        }
+
+        public double NPSEnd
+        {
+            get => npsEnd;
+            set
+            {
+                if (value == npsEnd)
+                    return;
+                npsEnd = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(NPSRange));
+            }
+        }
+
+        public static DateTime DateMinimum => new(2018, 5, 8);
+
+        public static DateTime DateMaximum => DateTime.Today;
+
+        public DateTime? DateSelectionStart
+        {
+            get => dateSelectionStart;
+            set
+            {
+                if (value == dateSelectionStart) return;
+                dateSelectionStart = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public DateTime? DateSelectionEnd
+        {
+            get => dateSelectionEnd;
+            set
+            {
+                if (value == dateSelectionEnd) return;
+                dateSelectionEnd = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Stars
+        {
+            get
+            {
+                var min = StarsStart.ToString("0.0");
+                var max = StarsEnd == 16 ? "∞" : StarsEnd.ToString("0.0");
+                return $"{min} - {max}";
+            }
+        }
+
+        public static double StarsMinimum => 0;
+        public static double StarsMaximum => 16;
+
+        public double StarsStart
+        {
+            get => starsStart;
+            set
+            {
+                if (value == starsStart)
+                    return;
+                starsStart = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(Stars));
+            }
+        }
+
+        public double StarsEnd
+        {
+            get => starsEnd;
+            set
+            {
+                if (value == starsEnd)
+                    return;
+                starsEnd = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(Stars));
+            }
+        }
+
+        public string Votes
+        {
+            get
+            {
+                var min = VotesStart.ToString();
+                var max = VotesEnd == 1000 ? "∞" : VotesEnd.ToString();
+                return $"{min} - {max}";
+            }
+        }
+
+        public static int VotesMinimum => 0;
+        public static int VotesMaximum => 1000;
+
+        public int VotesStart
+        {
+            get => votesStart;
+            set
+            {
+                if (value == votesStart)
+                    return;
+                votesStart = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(Votes));
+            }
+        }
+
+        public int VotesEnd
+        {
+            get => votesEnd;
+            set
+            {
+                if (value == votesEnd)
+                    return;
+                votesEnd = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(Votes));
+            }
+        }
+
+        public string DownVotes
+        {
+            get
+            {
+                var min = DownVotesStart.ToString();
+                var max = DownVotesEnd == 1000 ? "∞" : DownVotesEnd.ToString();
+                return $"{min} - {max}";
+            }
+        }
+
+        public static int DownVotesMinimum => 0;
+        public static int DownVotesMaximum => 1000;
+
+        public int DownVotesStart
+        {
+            get => downVotesStart;
+            set
+            {
+                if (value == downVotesStart)
+                    return;
+                downVotesStart = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(DownVotes));
+            }
+        }
+
+        public int DownVotesEnd
+        {
+            get => downVotesEnd;
+            set
+            {
+                if (value == downVotesEnd)
+                    return;
+                downVotesEnd = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(DownVotes));
+            }
+        }
+
+        public string UpVotes
+        {
+            get
+            {
+                var min = UpVotesStart.ToString();
+                var max = UpVotesEnd == 1000 ? "∞" : UpVotesEnd.ToString();
+                return $"{min} - {max}";
+            }
+        }
+
+        public static int UpVotesMinimum => 0;
+        public static int UpVotesMaximum => 1000;
+
+        public int UpVotesStart
+        {
+            get => upVotesStart;
+            set
+            {
+                if (value == upVotesStart)
+                    return;
+                upVotesStart = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(UpVotes));
+            }
+        }
+
+        public int UpVotesEnd
+        {
+            get => upVotesEnd;
+            set
+            {
+                if (value == upVotesEnd)
+                    return;
+                upVotesEnd = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(UpVotes));
+            }
+        }
 
         public List<StyleItem> MapStyles { get; } = [
             new StyleItem(Tag.None, string.Empty, true),
@@ -303,6 +541,8 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
         public SongSearchSourceViewModel(IServiceLocator serviceLocator) : base(serviceLocator)
         {
             beatSaverService = serviceLocator.GetService<IBeatSaverService>();
+
+            Relevances.AddRange(EnumWrapper<SearchParamRelevance>.GetValues(serviceLocator, n => n.Value));
         }
 
         #region Private fields
@@ -326,6 +566,17 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         private void SetSearchQueryBuilderData()
         {
+            searchQueryBuilder.MinNps = NPSStart;
+            searchQueryBuilder.MaxNps = NPSEnd;
+
+            if (DateSelectionStart != null && DateSelectionStart > DateMinimum)
+                searchQueryBuilder.From = DateSelectionStart;
+            if (DateSelectionEnd != null && DateSelectionEnd < DateMaximum)
+                searchQueryBuilder.To = DateSelectionEnd;
+
+            if (SelectedRelevance != null)
+                searchQueryBuilder.Relevance = SelectedRelevance.Value;
+
             var selectedAutoMapper = AutoMapper.SingleOrDefault(am => am.IsSelected);
             searchQueryBuilder.AI = selectedAutoMapper?.Key;
 
@@ -358,24 +609,24 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             switch (selectedLeaderboard?.Key)
             {
                 case SearchParamLeaderboard.All:
-                    searchQueryBuilder.MaxBlStars = 16; // todo: get from slider
-                    searchQueryBuilder.MaxSsStars = 16; // todo: get from slider
-                    searchQueryBuilder.MinBlStars = 0; // todo: get from slider
-                    searchQueryBuilder.MinSsStars = 0; // todo: get from slider
+                    searchQueryBuilder.MaxBlStars = StarsEnd < 16 ? StarsEnd : null;
+                    searchQueryBuilder.MaxSsStars = StarsEnd < 16 ? StarsEnd : null;
+                    searchQueryBuilder.MinBlStars = StarsStart > 0 ? StarsStart : null;
+                    searchQueryBuilder.MinSsStars = StarsStart > 0 ? StarsStart : null;
                     break;
                 case SearchParamLeaderboard.Ranked:
-                    searchQueryBuilder.MaxBlStars = 16; // todo: get from slider
-                    searchQueryBuilder.MaxSsStars = 16; // todo: get from slider
-                    searchQueryBuilder.MinBlStars = 0; // todo: get from slider
-                    searchQueryBuilder.MinSsStars = 0; // todo: get from slider
+                    searchQueryBuilder.MaxBlStars = StarsEnd < 16 ? StarsEnd : null;
+                    searchQueryBuilder.MaxSsStars = StarsEnd < 16 ? StarsEnd : null;
+                    searchQueryBuilder.MinBlStars = StarsStart > 0 ? StarsStart : null;
+                    searchQueryBuilder.MinSsStars = StarsStart > 0 ? StarsStart : null;
                     break;
                 case SearchParamLeaderboard.BeatLeader:
-                    searchQueryBuilder.MaxBlStars = 16; // todo: get from slider
-                    searchQueryBuilder.MinBlStars = 0; // todo: get from slider
+                    searchQueryBuilder.MaxBlStars = StarsEnd < 16 ? StarsEnd : null;
+                    searchQueryBuilder.MinBlStars = StarsStart > 0 ? StarsStart : null;
                     break;
                 case SearchParamLeaderboard.ScoreSaber:
-                    searchQueryBuilder.MaxSsStars = 16; // todo: get from slider
-                    searchQueryBuilder.MinSsStars = 0; // todo: get from slider
+                    searchQueryBuilder.MaxSsStars = StarsEnd < 16 ? StarsEnd : null;
+                    searchQueryBuilder.MinSsStars = StarsStart > 0 ? StarsStart : null;
                     break;
                 default:
                     searchQueryBuilder.MaxBlStars = null;
@@ -383,6 +634,45 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
                     searchQueryBuilder.MinBlStars = null;
                     searchQueryBuilder.MinSsStars = null;
                     break;
+            }
+
+            searchQueryBuilder.MinVotes = VotesStart;
+            searchQueryBuilder.MaxVotes = VotesEnd;
+            searchQueryBuilder.MinDownVotes = DownVotesStart;
+            searchQueryBuilder.MaxDownVotes = DownVotesEnd;
+            searchQueryBuilder.MinUpVotes = UpVotesStart;
+            searchQueryBuilder.MaxUpVotes = UpVotesEnd;
+
+            searchQueryBuilder.Tags.Clear();
+            var selectedMapStyle = MapStyles.SingleOrDefault(ms => ms.IsSelected);
+            if (selectedMapStyle?.None == false)
+            {
+                searchQueryBuilder.Tags.Add(selectedMapStyle.Key);
+            }
+            var selectedSongStyle = SongStyles.SingleOrDefault(ss => ss.IsSelected);
+            if (selectedSongStyle?.None == false)
+            {
+                searchQueryBuilder.Tags.Add(selectedSongStyle.Key);
+            }
+
+            searchQueryBuilder.Environments.Clear();
+            var selectedLegacyEnvironment = LegacyEnvironments.SingleOrDefault(le => le.IsSelected);
+            if (selectedLegacyEnvironment != null && selectedLegacyEnvironment.Key == DataAccess.BeatSaver.Environment.All)
+            {
+                searchQueryBuilder.Environments.AddRange(LegacyEnvironments.Where(le => !le.None && le.Key != DataAccess.BeatSaver.Environment.All).Select(le => le.Key));
+            }
+            else if (selectedLegacyEnvironment != null && !selectedLegacyEnvironment.None)
+            {
+                searchQueryBuilder.Environments.Add(selectedLegacyEnvironment.Key);
+            }
+            var selectedNewEnvironment = NewEnvironments.SingleOrDefault(le => le.IsSelected);
+            if (selectedNewEnvironment != null && selectedNewEnvironment.Key == DataAccess.BeatSaver.Environment.All)
+            {
+                searchQueryBuilder.Environments.AddRange(NewEnvironments.Where(le => !le.None && le.Key != DataAccess.BeatSaver.Environment.All).Select(le => le.Key));
+            }
+            else if (selectedNewEnvironment != null && !selectedNewEnvironment.None)
+            {
+                searchQueryBuilder.Environments.Add(selectedNewEnvironment.Key);
             }
 
             searchQueryBuilder.Query = Query;

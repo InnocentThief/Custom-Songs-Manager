@@ -232,6 +232,51 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Curated.
+        /// </summary>
+        public static string enum_Relevance_Curated {
+            get {
+                return ResourceManager.GetString("enum_Relevance_Curated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Latest.
+        /// </summary>
+        public static string enum_Relevance_Latest {
+            get {
+                return ResourceManager.GetString("enum_Relevance_Latest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Random.
+        /// </summary>
+        public static string enum_Relevance_Random {
+            get {
+                return ResourceManager.GetString("enum_Relevance_Random", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rating.
+        /// </summary>
+        public static string enum_Relevance_Rating {
+            get {
+                return ResourceManager.GetString("enum_Relevance_Rating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Relevance.
+        /// </summary>
+        public static string enum_Relevance_Relevance {
+            get {
+                return ResourceManager.GetString("enum_Relevance_Relevance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bottom.
         /// </summary>
         public static string enum_SongDetailPosition_Bottom {

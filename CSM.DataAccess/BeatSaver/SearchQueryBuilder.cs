@@ -25,43 +25,43 @@ namespace CSM.DataAccess.BeatSaver
 
         public SearchParamLeaderboard? Leaderboard { get; set; } = null;
 
-        public decimal? MaxBlStars { get; set; }
+        public double? MaxBlStars { get; set; }
 
         public decimal? MaxBpm { get; set; }
 
-        public int? MaxDownVotes { get; set; }
+        public int MaxDownVotes { get; set; } = 1000;
 
         public int? MaxDuration { get; set; }
 
-        public decimal? MaxNps { get; set; } = 16;
+        public double MaxNps { get; set; } = 16;
 
         public decimal? MaxRating { get; set; }
 
-        public decimal? MaxSsStars { get; set; }
+        public double? MaxSsStars { get; set; }
 
-        public int? MaxUpVotes { get; set; }
+        public int MaxUpVotes { get; set; } = 1000;
 
-        public int? MaxVotes { get; set; }
+        public int MaxVotes { get; set; } = 1000;
 
         public bool? Me { get; set; }
 
-        public decimal? MinBlStars { get; set; }
+        public double? MinBlStars { get; set; }
 
         public decimal? MinBpm { get; set; }
 
-        public int? MinDownVotes { get; set; }
+        public int MinDownVotes { get; set; }
 
         public int? MinDuration { get; set; }
 
-        public decimal? MinNps { get; set; } = 0;
+        public double MinNps { get; set; } = 0;
 
         public decimal? MinRating { get; set; }
 
-        public decimal? MinSsStars { get; set; }
+        public double? MinSsStars { get; set; }
 
-        public int? MinUpVotes { get; set; }
+        public int MinUpVotes { get; set; }
 
-        public int? MinVotes { get; set; }
+        public int MinVotes { get; set; }
 
         public bool? Noodle { get; set; }
 
@@ -147,7 +147,7 @@ namespace CSM.DataAccess.BeatSaver
 
             if (Leaderboard.HasValue)
             {
-                parameters.Append($"&leaderboard={Leaderboard.Value.ToString().ToLower()}");
+                parameters.Append($"&leaderboard={Leaderboard.Value.ToString()}");
             }
 
             if (MaxBlStars.HasValue)
@@ -160,9 +160,9 @@ namespace CSM.DataAccess.BeatSaver
                 parameters.Append($"&maxBpm={MaxBpm.Value.ToString(CultureInfo.InvariantCulture)}");
             }
 
-            if (MaxDownVotes.HasValue)
+            if (MaxDownVotes < 1000)
             {
-                parameters.Append($"&maxDownVotes={MaxDownVotes.Value.ToString(CultureInfo.InvariantCulture)}");
+                parameters.Append($"&maxDownVotes={MaxDownVotes.ToString(CultureInfo.InvariantCulture)}");
             }
 
             if (MaxDuration.HasValue)
@@ -170,9 +170,9 @@ namespace CSM.DataAccess.BeatSaver
                 parameters.Append($"&maxDuration={MaxDuration.Value.ToString(CultureInfo.InvariantCulture)}");
             }
 
-            if (MaxNps.HasValue && MaxNps != 16)
+            if (MaxNps < 16)
             {
-                parameters.Append($"&maxNps={MaxNps.Value.ToString(CultureInfo.InvariantCulture)}");
+                parameters.Append($"&maxNps={MaxNps.ToString(CultureInfo.InvariantCulture)}");
             }
 
             if (MaxRating.HasValue)
@@ -185,14 +185,14 @@ namespace CSM.DataAccess.BeatSaver
                 parameters.Append($"&maxSsStars={MaxSsStars.Value.ToString(CultureInfo.InvariantCulture)}");
             }
 
-            if (MaxUpVotes.HasValue)
+            if (MaxUpVotes < 1000)
             {
-                parameters.Append($"&maxUpVotes={MaxUpVotes.Value.ToString(CultureInfo.InvariantCulture)}");
+                parameters.Append($"&maxUpVotes={MaxUpVotes.ToString(CultureInfo.InvariantCulture)}");
             }
 
-            if (MaxVotes.HasValue)
+            if (MaxVotes < 1000)
             {
-                parameters.Append($"&maxVotes={MaxVotes.Value.ToString(CultureInfo.InvariantCulture)}");
+                parameters.Append($"&maxVotes={MaxVotes.ToString(CultureInfo.InvariantCulture)}");
             }
 
             if (Me.HasValue)
@@ -210,9 +210,9 @@ namespace CSM.DataAccess.BeatSaver
                 parameters.Append($"&minBpm={MinBpm.Value.ToString(CultureInfo.InvariantCulture)}");
             }
 
-            if (MinDownVotes.HasValue)
+            if (MinDownVotes > 0)
             {
-                parameters.Append($"&minDownVotes={MinDownVotes.Value.ToString(CultureInfo.InvariantCulture)}");
+                parameters.Append($"&minDownVotes={MinDownVotes.ToString(CultureInfo.InvariantCulture)}");
             }
 
             if (MinDuration.HasValue)
@@ -220,9 +220,9 @@ namespace CSM.DataAccess.BeatSaver
                 parameters.Append($"&minDuration={MinDuration.Value.ToString(CultureInfo.InvariantCulture)}");
             }
 
-            if (MinNps.HasValue && MinNps > 0)
+            if (MinNps > 0)
             {
-                parameters.Append($"&minNps={MinNps.Value.ToString(CultureInfo.InvariantCulture)}");
+                parameters.Append($"&minNps={MinNps.ToString(CultureInfo.InvariantCulture)}");
             }
 
             if (MinRating.HasValue)
@@ -235,14 +235,14 @@ namespace CSM.DataAccess.BeatSaver
                 parameters.Append($"&minSsStars={MinSsStars.Value.ToString(CultureInfo.InvariantCulture)}");
             }
 
-            if (MinUpVotes.HasValue)
+            if (MinUpVotes > 0)
             {
-                parameters.Append($"&minUpVotes={MinUpVotes.Value.ToString(CultureInfo.InvariantCulture)}");
+                parameters.Append($"&minUpVotes={MinUpVotes.ToString(CultureInfo.InvariantCulture)}");
             }
 
-            if (MinVotes.HasValue)
+            if (MinVotes > 0)
             {
-                parameters.Append($"&minVotes={MinVotes.Value.ToString(CultureInfo.InvariantCulture)}");
+                parameters.Append($"&minVotes={MinVotes.ToString(CultureInfo.InvariantCulture)}");
             }
 
             if (Noodle.HasValue)
@@ -292,23 +292,23 @@ namespace CSM.DataAccess.BeatSaver
             Leaderboard = null;
             MaxBlStars = null;
             MaxBpm = null;
-            MaxDownVotes = null;
+            MaxDownVotes = 1000;
             MaxDuration = null;
             MaxNps = 0;
             MaxRating = null;
             MaxSsStars = null;
-            MaxUpVotes = null;
-            MaxVotes = null;
+            MaxUpVotes = 1000;
+            MaxVotes = 1000;
             Me = null;
             MinBlStars = null;
             MinBpm = null;
-            MinDownVotes = null;
+            MinDownVotes = 0;
             MinDuration = null;
             MinNps = 0;
             MinRating = null;
             MinSsStars = null;
-            MinUpVotes = null;
-            MinVotes = null;
+            MinUpVotes = 0;
+            MinVotes = 0;
             Noodle = null;
             Relevance = SearchParamRelevance.Undefined;
             Query = string.Empty;
