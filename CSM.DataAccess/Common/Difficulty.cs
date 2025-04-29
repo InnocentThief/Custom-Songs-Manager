@@ -2,7 +2,7 @@
 
 namespace CSM.DataAccess.Common
 {
-    [JsonConverter(typeof(JsonStringEnumConverter))]
+    [JsonConverter(typeof(CaseInsensitiveJsonStringEnumConverter))]
     internal enum Difficulty
     {
         [JsonStringEnumMemberName("Easy")]

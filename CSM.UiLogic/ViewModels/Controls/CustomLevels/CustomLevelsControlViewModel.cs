@@ -1,5 +1,6 @@
 ﻿using CSM.Business.Core.SongSelection;
 using CSM.Business.Interfaces;
+using CSM.DataAccess;
 using CSM.DataAccess.BeatSaver;
 using CSM.DataAccess.CustomLevels;
 using CSM.DataAccess.UserConfiguration;
@@ -144,7 +145,7 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
 
                     if (content.Contains("_version"))
                     {
-                        var customLevel = JsonSerializer.Deserialize<InfoV2>(content);
+                        var customLevel = JsonSerializer.Deserialize<InfoV2>(content, JsonSerializerHelper.CreateDefaultSerializerOptions());
                         if (customLevel == null)
                             continue;
                         retval.Add(new CustomLevelV2ViewModel(ServiceLocator, customLevel, directory, bsrKey, lastWriteTime));
@@ -152,7 +153,7 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
                     }
                     else
                     {
-                        var customLevel = JsonSerializer.Deserialize<InfoV4>(content);
+                        var customLevel = JsonSerializer.Deserialize<InfoV4>(content, JsonSerializerHelper.CreateDefaultSerializerOptions());
                         if (customLevel == null)
                             continue;
                         retval.Add(new CustomLevelV4ViewModel(ServiceLocator, customLevel, directory, bsrKey, lastWriteTime));

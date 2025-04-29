@@ -2,7 +2,7 @@
 
 namespace CSM.DataAccess.BeatSaver
 {
-    [JsonConverter(typeof(JsonStringEnumConverter))]
+    [JsonConverter(typeof(CaseInsensitiveJsonStringEnumConverter))]
     internal enum Tag
     {
         None,

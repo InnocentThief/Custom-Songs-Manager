@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using CSM.DataAccess;
+using System.Diagnostics;
 using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text.Json;
@@ -33,7 +34,7 @@ namespace CSM.Business
                 return default;
             }
             var content = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<T>(content);
+            return JsonSerializer.Deserialize<T>(content, JsonSerializerHelper.CreateDefaultSerializerOptions());
         }
     }
 }

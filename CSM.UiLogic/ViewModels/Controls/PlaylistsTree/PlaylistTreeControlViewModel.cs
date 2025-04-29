@@ -1,5 +1,7 @@
 ﻿using CSM.Business.Core.SongSelection;
 using CSM.Business.Interfaces;
+using CSM.DataAccess;
+using CSM.DataAccess.Common;
 using CSM.DataAccess.Playlists;
 using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
@@ -128,7 +130,7 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
                 try
                 {
                     var content = await File.ReadAllTextAsync(file);
-                    var playList = JsonSerializer.Deserialize<Playlist>(content);
+                    var playList = JsonSerializer.Deserialize<Playlist>(content, JsonSerializerHelper.CreateDefaultSerializerOptions());
                     if (playList == null)
                         continue;
                     var playlistViewModel = new PlaylistViewModel(ServiceLocator, playList, file, songSelectionType, isReadOnly);

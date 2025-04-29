@@ -2,7 +2,6 @@
 
 namespace CSM.DataAccess.Common
 {
-    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum Characteristic
     {
         [JsonStringEnumMemberName("Standard")]
