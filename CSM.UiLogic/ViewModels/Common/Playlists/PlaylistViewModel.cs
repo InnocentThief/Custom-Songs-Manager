@@ -7,7 +7,6 @@ using CSM.DataAccess.Playlists;
 using CSM.Framework.ServiceLocation;
 using CSM.Framework.Types;
 using CSM.UiLogic.Commands;
-using CSM.UiLogic.Helper;
 using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
 using System.IO;

@@ -26,7 +26,8 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
             if (songSelectionType == SongSelectionType.Left)
             {
                 ContainsLeftSong = retval;
-            } else
+            }
+            else
             {
                 ContainsRightSong = retval;
             }

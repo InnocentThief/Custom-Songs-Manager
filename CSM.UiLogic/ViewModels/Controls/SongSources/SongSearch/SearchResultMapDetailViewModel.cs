@@ -1,12 +1,11 @@
-﻿using System.Globalization;
-using CSM.Business.Core;
-using CSM.Business.Interfaces;
+﻿using CSM.Business.Interfaces;
 using CSM.DataAccess.BeatSaver;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.Commands;
 using CSM.UiLogic.ViewModels.Common.MapDetails;
 using CSM.UiLogic.ViewModels.Common.Playlists;
+using System.Globalization;
 
 namespace CSM.UiLogic.ViewModels.Controls.SongSources.SongSearch
 {

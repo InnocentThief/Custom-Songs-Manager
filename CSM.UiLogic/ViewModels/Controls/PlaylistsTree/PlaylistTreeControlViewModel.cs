@@ -1,14 +1,12 @@
 ﻿using CSM.Business.Core.SongSelection;
 using CSM.Business.Interfaces;
 using CSM.DataAccess;
-using CSM.DataAccess.Common;
 using CSM.DataAccess.Playlists;
 using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.Commands;
 using CSM.UiLogic.Converter;
-using CSM.UiLogic.Helper;
 using CSM.UiLogic.ViewModels.Common.Playlists;
 using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;

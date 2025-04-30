@@ -1,7 +1,6 @@
 ﻿using CSM.Business.Core.SongSelection;
 using CSM.Business.Interfaces;
 using CSM.DataAccess;
-using CSM.DataAccess.BeatSaver;
 using CSM.DataAccess.CustomLevels;
 using CSM.DataAccess.UserConfiguration;
 using CSM.Framework.Extensions;
@@ -161,7 +160,7 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
                 }
                 catch (Exception ex)
                 {
-                    logger.LogError(ex, $"Error loading custom level from {infoFile}");
+                    logger.LogError(ex, "Error loading custom level from {infoFile}", infoFile);
                     continue;
                 }
             }
