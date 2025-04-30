@@ -5,6 +5,7 @@ using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.Commands;
 using CSM.UiLogic.Helper;
+using CSM.UiLogic.ViewModels.Common.Playlists;
 using CSM.UiLogic.ViewModels.Controls.SongSources.SongSearch;
 using System.Collections.ObjectModel;
 
@@ -26,8 +27,10 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
         private DateTime? dateSelectionStart;
         private DateTime? dateSelectionEnd;
         private EnumWrapper<SearchParamRelevance>? selectedRelevance;
+        private int currentPageIndex = 0;
 
         private readonly IBeatSaverService beatSaverService;
+        private readonly ISongCopyDomain songCopyDomain;
 
         #endregion
 
@@ -541,27 +544,63 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
         public SongSearchSourceViewModel(IServiceLocator serviceLocator) : base(serviceLocator)
         {
             beatSaverService = serviceLocator.GetService<IBeatSaverService>();
+            songCopyDomain = serviceLocator.GetService<ISongCopyDomain>();
+            songCopyDomain.OnPlaylistSelectionChanged += SongCopyDomain_OnPlaylistSelectionChanged;
 
-            Relevances.AddRange(EnumWrapper<SearchParamRelevance>.GetValues(serviceLocator, n => n.Value));
+            Relevances.AddRange(EnumWrapper<SearchParamRelevance>.GetValues(serviceLocator, SearchParamRelevance.Undefined));
+        }
+
+        public async Task SearchAsync()
+        {
+            currentPageIndex = 0;
+
+            SetSearchQueryBuilderData();
+            var searchQuery = searchQueryBuilder.GetSearchQuery(currentPageIndex);
+            if (string.IsNullOrWhiteSpace(searchQuery?.Query))
+            {
+                UpdateSearchData(null);
+                return;
+            }
+
+            MapDetails? searchResult;
+            if (searchQuery.IsKey)
+            {
+                var mapDetail = await beatSaverService.GetMapDetailAsync(searchQuery.Query, BeatSaverKeyType.Id);
+                if (mapDetail == null)
+                {
+                    UpdateSearchData(null);
+                    return;
+                }
+
+                searchResult = new MapDetails
+                {
+                    Docs = [mapDetail]
+                };
+            }
+            else
+            {
+                searchResult = await beatSaverService.SearchAsync(searchQuery.Query);
+            }
+            UpdateSearchData(searchResult);
         }
 
         #region Private fields
 
-        private async Task SearchAsync()
+        private void UpdateSearchData(MapDetails? searchResult)
         {
             Results.ForEach(result => result.CleanUpReferences());
             Results.Clear();
 
-            SetSearchQueryBuilderData();
-            var searchQuery = searchQueryBuilder.GetSearchQuery(0);
-            if (string.IsNullOrWhiteSpace(searchQuery?.Query))
-                return;
-            var searchResult = await beatSaverService.SearchAsync(searchQuery.Query);
             if (searchResult == null || searchResult.Docs.Count == 0)
+            {
+                OnPropertyChanged(nameof(ShowResults));
+                OnPropertyChanged(nameof(ShowNoResults));
                 return;
+            }
             Results.AddRange(searchResult.Docs.Select(mapDetail => new SearchResultMapDetailViewModel(ServiceLocator, mapDetail)));
-            SongCount = $"Showing {searchResult.Docs.Count} from {searchResult.Info.Total} results";
+            SongCount = $"Showing {searchResult.Docs.Count} from {Math.Max(searchResult.Info.Total, searchResult.Docs.Count)} results";
             FilterVisible = false;
+            ShowMoreCommand?.RaiseCanExecuteChanged();
         }
 
         private void SetSearchQueryBuilderData()
@@ -675,7 +714,32 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
                 searchQueryBuilder.Environments.Add(selectedNewEnvironment.Key);
             }
 
-            searchQueryBuilder.Query = Query;
+            searchQueryBuilder.Query = Query == "*" ? " " : Query;
+        }
+
+        private void SongCopyDomain_OnPlaylistSelectionChanged(object? sender, Business.Core.SongCopy.PlaylistSelectionChangedEventArgs e)
+        {
+            if (e.Playlist == null)
+            {
+                CreatePlaylistCommandText = "Create new playlist in root with all songs (all filter will apply)";
+                OnPropertyChanged(nameof(CreatePlaylistCommandText));
+            }
+            else if (e.Playlist is PlaylistFolderViewModel playlistFolderViewModel)
+            {
+                CreatePlaylistCommandText = $"Create new playlist in folder '{playlistFolderViewModel.Name}' with all songs (all filter will apply)";
+                OnPropertyChanged(nameof(CreatePlaylistCommandText));
+            }
+            else if (e.Playlist is PlaylistViewModel playlistViewModel)
+            {
+                OverwritePlaylistCommandText = $"Overwrite playlist '{playlistViewModel.PlaylistTitle}' with all songs (all filter will apply)";
+                OnPropertyChanged(nameof(OverwritePlaylistCommandText));
+                MergePlaylistCommandText = $"Merge all songs (all filter will apply) with songs from playlist '{playlistViewModel.PlaylistTitle}'";
+                OnPropertyChanged(nameof(MergePlaylistCommandText));
+            }
+
+            CreatePlaylistCommand?.RaiseCanExecuteChanged();
+            OverwritePlaylistCommand?.RaiseCanExecuteChanged();
+            MergePlaylistCommand?.RaiseCanExecuteChanged();
         }
 
         private bool CanSearch()
@@ -685,11 +749,41 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         private async Task ShowMoreAsync()
         {
+            currentPageIndex++;
+
+            SetSearchQueryBuilderData();
+            var searchQuery = searchQueryBuilder.GetSearchQuery(currentPageIndex);
+            if (string.IsNullOrWhiteSpace(searchQuery?.Query))
+            {
+                UpdateSearchData(null);
+                return;
+            }
+
+            MapDetails? searchResult;
+            if (searchQuery.IsKey)
+            {
+                var mapDetail = await beatSaverService.GetMapDetailAsync(searchQuery.Query, BeatSaverKeyType.Id);
+                if (mapDetail == null)
+                {
+                    UpdateSearchData(null);
+                    return;
+                }
+
+                searchResult = new MapDetails
+                {
+                    Docs = [mapDetail]
+                };
+            }
+            else
+            {
+                searchResult = await beatSaverService.SearchAsync(searchQuery.Query);
+            }
+            UpdateSearchData(searchResult);
         }
 
         private bool CanShowMore()
         {
-            return true;
+            return ShowResults;
         }
 
         private void ShowFilter()
@@ -715,6 +809,77 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
         private void ResetFilter()
         {
             searchQueryBuilder.ResetSearchParameters();
+
+            NPSStart = searchQueryBuilder.MinNps;
+            NPSEnd = searchQueryBuilder.MaxNps;
+            DateSelectionStart = searchQueryBuilder.From;
+            DateSelectionEnd = searchQueryBuilder.To;
+            SelectedRelevance = null;
+
+            var defaultAutoMapper = AutoMapper.SingleOrDefault(am => am.None);
+            if (defaultAutoMapper != null)
+                defaultAutoMapper.IsSelected = true;
+
+            var defaultCurated = Curated.SingleOrDefault(c => c.None);
+            if (defaultCurated != null)
+                defaultCurated.IsSelected = true;
+
+            var defaultVerified = Verified.SingleOrDefault(c => c.None);
+            if (defaultVerified != null)
+                defaultVerified.IsSelected = true;
+
+            var defaultFullSpread = FullSpread.SingleOrDefault(c => c.None);
+            if (defaultFullSpread != null)
+                defaultFullSpread.IsSelected = true;
+
+            var defaultLeaderboard = Leaderboard.SingleOrDefault(c => c.None);
+            if (defaultLeaderboard != null)
+                defaultLeaderboard.IsSelected = true;
+            StarsStart = 0;
+            StarsEnd = 16;
+
+            VotesStart = 0;
+            VotesEnd = 1000;
+            UpVotesStart = 0;
+            UpVotesEnd = 1000;
+            DownVotesStart = 0;
+            DownVotesEnd = 1000;
+
+            var defaultChroma = Chroma.SingleOrDefault(c => c.None);
+            if (defaultChroma != null)
+                defaultChroma.IsSelected = true;
+
+            var defaultNoodle = NoodleExtensions.SingleOrDefault(c => c.None);
+            if (defaultNoodle != null)
+                defaultNoodle.IsSelected = true;
+
+            var defaultMappingExtensions = MappingExtensions.SingleOrDefault(c => c.None);
+            if (defaultMappingExtensions != null)
+                defaultMappingExtensions.IsSelected = true;
+
+            var defaultCinema = Cinema.SingleOrDefault(c => c.None);
+            if (defaultCinema != null)
+                defaultCinema.IsSelected = true;
+
+            var defaultVivify = Vivify.SingleOrDefault(c => c.None);
+            if (defaultVivify != null)
+                defaultVivify.IsSelected = true;
+
+            var defaulMapStyle = MapStyles.SingleOrDefault(c => c.None);
+            if (defaulMapStyle != null)
+                defaulMapStyle.IsSelected = true;
+
+            var defaulSongStyle = SongStyles.SingleOrDefault(c => c.None);
+            if (defaulSongStyle != null)
+                defaulSongStyle.IsSelected = true;
+
+            var defaulLegacyEnvironment = LegacyEnvironments.SingleOrDefault(c => c.None);
+            if (defaulLegacyEnvironment != null)
+                defaulLegacyEnvironment.IsSelected = true;
+
+            var defaulNewEnvironment = NewEnvironments.SingleOrDefault(c => c.None);
+            if (defaulNewEnvironment != null)
+                defaulNewEnvironment.IsSelected = true;
         }
 
         private bool CanResetFilter()
@@ -740,8 +905,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         private bool CanCreatePlaylist()
         {
-            return true;
-            //return songCopyDomain.SelectedPlaylist == null || songCopyDomain.SelectedPlaylist is PlaylistFolderViewModel;
+            return songCopyDomain.SelectedPlaylist != null || songCopyDomain.SelectedPlaylist is PlaylistFolderViewModel;
         }
         private void OverwritePlaylist()
         {
@@ -749,8 +913,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         private bool CanOverwritePlaylist()
         {
-            return true;
-            //return songCopyDomain.SelectedPlaylist != null && songCopyDomain.SelectedPlaylist is PlaylistViewModel;
+            return songCopyDomain.SelectedPlaylist != null && songCopyDomain.SelectedPlaylist is PlaylistViewModel;
         }
         private void MergePlaylist()
         {
@@ -758,8 +921,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         private bool CanMergePlaylist()
         {
-            return true;
-            //return songCopyDomain.SelectedPlaylist != null && songCopyDomain.SelectedPlaylist is PlaylistViewModel;
+            return songCopyDomain.SelectedPlaylist != null && songCopyDomain.SelectedPlaylist is PlaylistViewModel;
         }
 
         #endregion

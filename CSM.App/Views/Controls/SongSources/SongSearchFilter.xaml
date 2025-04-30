@@ -61,11 +61,25 @@
 
                         <!-- From/To -->
                         <telerik:Label Grid.Row="1" Content="Date range" />
-                        <telerik:RadDateRangePicker Grid.Column="1" Grid.Row="1" EmptyContent="Select date range" StartDate="{Binding DateSelectionStart}" EndDate="{Binding DateSelectionEnd}" SelectableDateStart="{Binding DateMinimum}" SelectableDateEnd="{Binding DateMaximum}" />
+                        <telerik:RadDateRangePicker 
+                            Grid.Column="1" 
+                            Grid.Row="1" 
+                            EmptyContent="Select date range" 
+                            StartDate="{Binding DateSelectionStart, Mode=TwoWay}" 
+                            EndDate="{Binding DateSelectionEnd, Mode=TwoWay}" 
+                            SelectableDateStart="{Binding DateMinimum}" 
+                            SelectableDateEnd="{Binding DateMaximum}" />
 
                         <!-- Relevance -->
                         <telerik:Label Grid.Row="2" Content="Relevance" />
-                        <telerik:RadComboBox Grid.Column="1" Grid.Row="2" ItemsSource="{Binding Relevances}" DisplayMemberPath="DisplayText" SelectedItem="{Binding SelectedRelevance}" ClearSelectionButtonVisibility="Visible" ClearSelectionButtonContent="Clear selection" />
+                        <telerik:RadComboBox 
+                            Grid.Column="1" 
+                            Grid.Row="2" 
+                            ItemsSource="{Binding Relevances}" 
+                            DisplayMemberPath="DisplayText" 
+                            SelectedItem="{Binding SelectedRelevance}" 
+                            ClearSelectionButtonVisibility="Visible" 
+                            ClearSelectionButtonContent="Clear selection" />
 
                         <!-- Automapper -->
                         <telerik:Label Grid.Row="3" Content="Automapper" />

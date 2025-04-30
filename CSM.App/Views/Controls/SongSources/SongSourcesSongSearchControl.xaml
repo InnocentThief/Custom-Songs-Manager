@@ -31,7 +31,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <telerik:RadWatermarkTextBox WatermarkContent="Search" Text="{Binding Query, UpdateSourceTrigger=PropertyChanged}" />
+            <telerik:RadWatermarkTextBox WatermarkContent="Search" Text="{Binding Query, UpdateSourceTrigger=PropertyChanged}" KeyUp="RadWatermarkTextBox_KeyUp" />
             <telerik:RadToolBar Grid.Column="1" Style="{StaticResource HeaderToolBarStyle}">
                 <!-- Search Button -->
                 <telerik:RadButton Command="{Binding SearchCommand}" ToolTip="Search">

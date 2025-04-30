@@ -1,4 +1,5 @@
 ﻿using CSM.UiLogic.ViewModels.Common.Playlists;
+using CSM.UiLogic.ViewModels.Controls.SongSources;
 using System.Windows.Controls;
 
 namespace CSM.App.Views.Controls.SongSources
@@ -42,6 +43,15 @@ namespace CSM.App.Views.Controls.SongSources
             else
             {
                 e.DefaultOperator1 = Telerik.Windows.Data.FilterOperator.Contains;
+            }
+        }
+
+        private async void RadWatermarkTextBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key != System.Windows.Input.Key.Enter) return;
+            if (DataContext is SongSearchSourceViewModel viewModel)
+            {
+                await viewModel.SearchAsync();
             }
         }
     }

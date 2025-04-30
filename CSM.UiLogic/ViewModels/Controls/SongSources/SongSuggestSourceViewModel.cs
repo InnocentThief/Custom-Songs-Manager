@@ -401,7 +401,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         private bool CanCreatePlaylist()
         {
-            return songCopyDomain.SelectedPlaylist == null || songCopyDomain.SelectedPlaylist is PlaylistFolderViewModel;
+            return songCopyDomain.SelectedPlaylist != null && songCopyDomain.SelectedPlaylist is PlaylistFolderViewModel;
         }
 
         private void OverwritePlaylist()

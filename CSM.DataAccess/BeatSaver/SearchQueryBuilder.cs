@@ -83,17 +83,13 @@ namespace CSM.DataAccess.BeatSaver
         {
             var parameters = new StringBuilder();
 
-            if (string.IsNullOrWhiteSpace(Query))
-                return null;
-
             var initialQuery = $"{pageIndex}?pageSize={pageSize}";
 
             // if query is a bsr key, use it as is
             int.TryParse(Query, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out int result);
             if (result > 0)
             {
-                parameters.Append($"q={Query}");
-                return new SearchQuery(parameters.ToString(), pageIndex, true);
+                return new SearchQuery(Query, pageIndex, true);
             }
 
             parameters.Append($"&q={Query}");
@@ -276,7 +272,7 @@ namespace CSM.DataAccess.BeatSaver
             }
 
 
-            return new SearchQuery($"{initialQuery}{parameters.ToString()}", pageIndex, false);
+            return new SearchQuery($"{initialQuery}{parameters}", pageIndex, false);
         }
 
         public void ResetSearchParameters()
@@ -294,7 +290,7 @@ namespace CSM.DataAccess.BeatSaver
             MaxBpm = null;
             MaxDownVotes = 1000;
             MaxDuration = null;
-            MaxNps = 0;
+            MaxNps = 16;
             MaxRating = null;
             MaxSsStars = null;
             MaxUpVotes = 1000;

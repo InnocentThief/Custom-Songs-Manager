@@ -59,26 +59,30 @@ namespace CSM.UiLogic.ViewModels.Common.MapDetails
         {
             get
             {
-                if (mapDetail.Ranked)
-                {
-                    var ranked = new StringBuilder();
-                    if (mapDetail.Versions.Any(v => v.Diffs.Any(d => d.Stars > 0)))
-                        ranked.Append("SS");
+                var ranked = new StringBuilder();
+                if (mapDetail.Versions.Any(v => v.Diffs.Any(d => d.Stars > 0)))
+                    ranked.Append("SS");
 
-                    if (mapDetail.Versions.Any(v => v.Diffs.Any(d => d.BlStars > 0)))
+                if (mapDetail.Versions.Any(v => v.Diffs.Any(d => d.BlStars > 0)))
+                {
+                    if (ranked.Length == 0)
                     {
-                        if (ranked.Length == 0)
-                        {
-                            ranked.Append("BL");
-                        }
-                        else
-                        {
-                            ranked.Append(", BL");
-                        }
+                        ranked.Append("BL");
                     }
+                    else
+                    {
+                        ranked.Append(", BL");
+                    }
+                }
+
+                if (string.IsNullOrWhiteSpace(ranked.ToString()))
+                {
+                    return "No";
+                }
+                else
+                {
                     return ranked.ToString();
                 }
-                return "No";
             }
         }
 
