@@ -22,7 +22,6 @@
         <Setter Property="AlternationCount" Value="2" />
         <Setter Property="AutoGenerateColumns" Value="False" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="FilteringDropDownStaysOpen" Value="True" />
         <Setter Property="FilteringMode" Value="Popup" />
         <Setter Property="FrozenColumnsSplitterVisibility" Value="Collapsed" />
         <Setter Property="RowIndicatorVisibility" Value="Collapsed" />

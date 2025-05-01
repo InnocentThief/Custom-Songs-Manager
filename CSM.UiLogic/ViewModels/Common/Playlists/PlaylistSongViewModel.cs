@@ -2,10 +2,12 @@
 using CSM.Business.Interfaces;
 using CSM.DataAccess.BeatSaver;
 using CSM.DataAccess.Playlists;
+using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.Commands;
 using CSM.UiLogic.ViewModels.Common.MapDetails;
+using System.Collections.ObjectModel;
 using System.Globalization;
 
 namespace CSM.UiLogic.ViewModels.Common.Playlists
@@ -15,7 +17,7 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
         #region Private fields
 
         private MapDetailViewModel? mapDetailViewModel;
-        private IRelayCommand? addToPlaylistCommand, removeFromPlaylistCommand;
+        private IRelayCommand? addToPlaylistCommand, removeFromPlaylistCommand, setAvailableDifficultiesCommand;
 
         private readonly Song song;
         private readonly List<PlaylistSongDifficultyViewModel> difficulties = [];
@@ -47,7 +49,9 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
 
         public string? LevelAuthorName => song.LevelAuthorName;
 
-        public List<PlaylistSongDifficultyViewModel> Difficulties => [.. difficulties.OrderBy(d => d.Difficulty)];
+        public ObservableCollection<PlaylistSongDifficultyViewModel> AvailableDifficulties { get; } = [];
+
+        public List<PlaylistSongDifficultyViewModel> Difficulties => [.. difficulties.OrderBy(d => d.Characteristic).ThenBy(d => d.Difficulty)];
 
         public DateTime? Uploaded { get; private set; }
 
@@ -65,6 +69,7 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
 
         public IRelayCommand? AddToPlaylistCommand => addToPlaylistCommand ??= CommandFactory.CreateFromAsync(AddToPlaylistAsync, CanAddToPlaylist);
         public IRelayCommand? RemoveFromPlaylistCommand => removeFromPlaylistCommand ??= CommandFactory.Create(RemoveFromPlaylist, CanRemoveFromPlaylist);
+        public IRelayCommand? SetAvailableDifficultiesCommand => setAvailableDifficultiesCommand ??= CommandFactory.CreateFromAsync(SetAvailableDifficultiesAsync, CanSetAvailableDifficulties);
 
         #endregion
 
@@ -78,12 +83,14 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
             songCopyDomain = serviceLocator.GetService<ISongCopyDomain>();
             songCopyDomain.OnPlaylistSelectionChanged += SongCopyDomain_OnPlaylistSelectionChanged;
 
-            difficulties.AddRange(song.Difficulties?.Select(d => new PlaylistSongDifficultyViewModel(serviceLocator, d)) ?? []);
+            difficulties.AddRange(song.Difficulties?.Select(d => new PlaylistSongDifficultyViewModel(serviceLocator, d, true)) ?? []);
             OnPropertyChanged(nameof(Difficulties));
         }
 
         public void CleanUpReferences()
         {
+            Difficulties.ForEach(d => d.DifficultyChanged -= DifficultyViewModel_DifficultyChanged);
+            AvailableDifficulties.ForEach(d => d.DifficultyChanged -= DifficultyViewModel_DifficultyChanged);
             songCopyDomain.OnPlaylistSelectionChanged -= SongCopyDomain_OnPlaylistSelectionChanged;
         }
 
@@ -165,7 +172,79 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
             return true;
         }
 
-        private void SongCopyDomain_OnPlaylistSelectionChanged(object? sender, Business.Core.SongCopy.PlaylistSelectionChangedEventArgs e)
+        private async Task SetAvailableDifficultiesAsync()
+        {
+            AvailableDifficulties.ForEach(d => d.DifficultyChanged -= DifficultyViewModel_DifficultyChanged);
+            AvailableDifficulties.Clear();
+
+            var mapDetail = await beatSaverService.GetMapDetailAsync(Hash, BeatSaverKeyType.Hash);
+            if (mapDetail == null)
+                return;
+
+            MapDetailViewModel ??= new MapDetailViewModel(ServiceLocator, mapDetail);
+
+            var latestVersion = mapDetail.Versions.OrderByDescending(v => v.CreatedAt).FirstOrDefault();
+            if (latestVersion == null)
+                return;
+
+            foreach (var difficulty in latestVersion.Diffs.OrderBy(d => d.Characteristic).ThenBy(d => d.Difficulty))
+            {
+                var difficultyViewModel = Difficulties.SingleOrDefault(d => d.Difficulty == difficulty.Difficulty && d.Characteristic == difficulty.Characteristic);
+                if (difficultyViewModel == null)
+                {
+                    var playlistSongDifficulty = new Difficulty
+                    {
+                        Characteristic = difficulty.Characteristic,
+                        Name = difficulty.Difficulty,
+                    };
+                    difficultyViewModel = new PlaylistSongDifficultyViewModel(ServiceLocator, playlistSongDifficulty);
+                }
+
+                difficultyViewModel.DifficultyChanged += DifficultyViewModel_DifficultyChanged;
+                AvailableDifficulties.Add(difficultyViewModel);
+            }
+        }
+
+        private bool CanSetAvailableDifficulties()
+        {
+            return true;
+        }
+
+        private void DifficultyViewModel_DifficultyChanged(object? sender, EventArgs e)
+        {
+            if (sender is not PlaylistSongDifficultyViewModel difficultyViewModel)
+                return;
+
+            if (difficultyViewModel.IsSelected)
+            {
+                var difficulty = new Difficulty
+                {
+                    Characteristic = difficultyViewModel.Characteristic,
+                    Name = difficultyViewModel.Difficulty,
+                };
+
+                song.Difficulties ??= [];
+                song.Difficulties.Add(difficulty);
+                difficulties.Add(difficultyViewModel);
+                OnPropertyChanged(nameof(Difficulties));
+            }
+            else
+            {
+                var existingDifficultyVieWModel = Difficulties?.SingleOrDefault(d => d.Characteristic == difficultyViewModel.Characteristic && d.Difficulty == difficultyViewModel.Difficulty);
+                if (existingDifficultyVieWModel == null)
+                    return;
+                difficulties?.Remove(existingDifficultyVieWModel);
+                OnPropertyChanged(nameof(Difficulties));
+
+                var existingDifficulty = song.Difficulties?.SingleOrDefault(d => d.Characteristic == difficultyViewModel.Characteristic && d.Name == difficultyViewModel.Difficulty);
+                if (existingDifficulty == null)
+                    return;
+                song.Difficulties?.Remove(existingDifficulty);
+
+            }
+        }
+
+        private void SongCopyDomain_OnPlaylistSelectionChanged(object? sender, PlaylistSelectionChangedEventArgs e)
         {
             addToPlaylistCommand?.RaiseCanExecuteChanged();
         }

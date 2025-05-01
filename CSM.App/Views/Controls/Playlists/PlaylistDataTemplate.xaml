@@ -105,7 +105,7 @@
                 <telerik:GridViewDataColumn Header="Difficulties" DataMemberBinding="{Binding Difficulties}" Width="Auto">
                     <telerik:GridViewDataColumn.CellTemplate>
                         <DataTemplate>
-                            <local:SongDifficultyControl />
+                            <local:SongDifficultyEditControl />
                         </DataTemplate>
                     </telerik:GridViewDataColumn.CellTemplate>
                 </telerik:GridViewDataColumn>

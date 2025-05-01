@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="CSM.App.Views.Controls.Playlists.SongDifficultyEditControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    
+    <StackPanel Orientation="Horizontal">
+        <!-- Edit Button with menu of available difficulties -->
+        <telerik:RadToggleButton Margin="0,0,6,0" Background="Transparent" Focusable="False" BorderThickness="0" IsChecked="{Binding IsOpen, ElementName=radContextMenu, Mode=TwoWay}" Command="{Binding SetAvailableDifficultiesCommand}" >
+            <telerik:RadGlyph Glyph="&#xe10b;" />
+            <telerik:RadContextMenu.ContextMenu>
+                <telerik:RadContextMenu x:Name="radContextMenu" IconColumnWidth="0" Placement="Bottom" ItemsSource="{Binding AvailableDifficulties}">
+                    <telerik:RadContextMenu.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding IsSelected}" Foreground="White">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <ContentControl Content="{Binding}" ContentTemplateSelector="{StaticResource CharacteristicDataTemplateSelector}" Margin="6,0" />
+                                    <telerik:Label Grid.Column="1" Content="{Binding Difficulty}" />
+                                </Grid>
+                            </CheckBox>
+                        </DataTemplate>
+                    </telerik:RadContextMenu.ItemTemplate>
+                </telerik:RadContextMenu>
+            </telerik:RadContextMenu.ContextMenu>
+        </telerik:RadToggleButton>
+
+        <!-- List with difficulties -->
+        <ItemsControl ItemsSource="{Binding Difficulties}" Background="Transparent" BorderThickness="0">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,0,2,0">
+                        <ContentControl Content="{Binding}" ContentTemplateSelector="{StaticResource CharacteristicDataTemplateSelector}" />
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </StackPanel>
+</UserControl>
