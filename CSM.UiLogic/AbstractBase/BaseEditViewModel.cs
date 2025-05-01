@@ -44,6 +44,8 @@ namespace CSM.UiLogic.AbstractBase
             }
         }
 
+        public bool HasCancelCommand => !string.IsNullOrWhiteSpace(CancelCommandText);
+
         public string CancelCommandText { get; } = cancelCommandText;
 
         public IRelayCommand ContinueCommand => continueCommand ??= CommandFactory.Create(ContinueAction, CanContinue);

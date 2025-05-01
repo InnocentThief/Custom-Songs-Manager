@@ -81,7 +81,8 @@ namespace CSM.UiLogic.ViewModels.Navigation
 
         private void ShowInfo()
         {
-
+            var infoVieWModel = new InfoViewModel(ServiceLocator);
+            UserInteraction.ShowWindow<InfoViewModel>(infoVieWModel);
         }
 
         private bool CanShowInfo()

@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="CSM.App.Views.Windows.InfoControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CSM.App.Views.Windows"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <!-- CSM Image -->
+        <Image Source="../../Images/CSM.png" />
+        <Grid Grid.Column="1" Margin="10,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <!-- CSM name -->
+            <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2">
+                <telerik:Label Content="Custom Songs Manager" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" />
+                <telerik:Label Content="{Binding Version}" Margin="10,0" FontWeight="DemiBold" FontSize="16" VerticalAlignment="Center" />
+                <telerik:RadButton Background="{x:Null}"  Focusable="False" BorderThickness="0" Margin="10,0" ToolTip="GitHub" Command="{Binding OpenGithubCommand}">
+                    <telerik:RadGlyph Glyph="&#xe134;" />
+                </telerik:RadButton>
+            </StackPanel>
+            
+            <!-- Contributors -->
+            <GroupBox Grid.Row="1" Header="Contributors" Style="{StaticResource WorkspaceGroupBoxStyle}" Margin="0,10,0,0">
+                <Grid Grid.Column="1" Margin="6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <!-- Idea -->
+                    <telerik:Label Grid.Row="1" Content="Idea" Margin="0,3" FontWeight="DemiBold" />
+                    <telerik:Label Grid.Column="2" Grid.Row="1" Content="GoodOldNervy" Margin="0,3" />
+                    <!-- Development -->
+                    <telerik:Label Grid.Row="2" Content="Development" Margin="0,3" FontWeight="DemiBold" />
+                    <telerik:Label Grid.Column="2" Grid.Row="2" Content="InnocentThief" Margin="0,3" />
+                    <!-- Icon -->
+                    <telerik:Label Grid.Row="3" Content="Icon" Margin="0,3" FontWeight="DemiBold" />
+                    <telerik:Label Grid.Column="2" Grid.Row="3" Content="SmokyJoe" Margin="0,3" />
+                    <!-- Testing -->
+                    <telerik:Label Grid.Row="4" Content="Testing" Margin="0,3" FontWeight="DemiBold" />
+                    <telerik:Label Grid.Column="2" Grid.Row="4" Content="-" Margin="0,3" />
+                    <!-- JS/CSS Help -->
+                    <telerik:Label Grid.Row="5" Content="Help with JS and CSS" Margin="0,3" FontWeight="DemiBold" />
+                    <telerik:Label Grid.Column="2" Grid.Row="5" Content="BF_Moritz" Margin="0,3" />
+                </Grid>
+            </GroupBox>
+
+            <!-- Libraries -->
+            <GroupBox Grid.Row="2" Header="Libraries" Style="{StaticResource WorkspaceGroupBoxStyle}" Margin="0,10,0,0">
+                <Grid Grid.Column="1" Margin="6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <!-- Song Suggest Integration -->
+                    <telerik:Label Content="Song Suggest" FontWeight="DemiBold" Margin="0,3" />
+                    <telerik:Label Grid.Column="2" Content="https://github.com/TaohRihze/SongSuggestCore" Margin="0,3" />
+                    <!-- Twitch Integration -->
+                    <telerik:Label Grid.Row="1" Content="TwitchLib" FontWeight="DemiBold" Margin="0,3" />
+                    <telerik:Label Grid.Column="2" Grid.Row="1" Content="https://github.com/TwitchLib/TwitchLib" Margin="0,3" />
+                </Grid>
+            </GroupBox>
+
+        </Grid>
+    </Grid>
+</UserControl>

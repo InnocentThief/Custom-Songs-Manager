@@ -4,6 +4,8 @@
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+                     xmlns:infoView="clr-namespace:CSM.App.Views.Windows"
+                     xmlns:infoViewModel="clr-namespace:CSM.UiLogic.ViewModels;assembly=CSM.UiLogic"
                      xmlns:playlistsView="clr-namespace:CSM.App.Views.Windows.Playlists"
                      xmlns:playlistsViewModel="clr-namespace:CSM.UiLogic.ViewModels.Controls.PlaylistsTree;assembly=CSM.UiLogic"
                      xmlns:settingsView="clr-namespace:CSM.App.Views.Windows.Settings"
@@ -13,6 +15,9 @@
                      WindowStartupLocation="CenterOwner">
 
     <telerik:RadWindow.Resources>
+        <DataTemplate DataType="{x:Type infoViewModel:InfoViewModel}">
+            <infoView:InfoControl />
+        </DataTemplate>
         <DataTemplate DataType="{x:Type playlistsViewModel:NewPlaylistFolderViewModel}">
             <playlistsView:NewPlaylistFolderControl />
         </DataTemplate>
@@ -29,7 +34,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-       
+
         <!-- Content -->
         <ContentControl 
             x:Name="contentControl"
@@ -37,7 +42,7 @@
 
         <!-- Footer -->
         <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right">
-            <telerik:RadButton Command="{Binding CancelCommand}" Background="{Binding CancelCommandColor}">
+            <telerik:RadButton Command="{Binding CancelCommand}" Background="{Binding CancelCommandColor}" Visibility="{Binding HasCancelCommand, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <telerik:Label Content="{Binding CancelCommandText}" Margin="6" />
             </telerik:RadButton>
             <telerik:RadButton Command="{Binding ContinueCommand}" Background="{Binding ContinueCommandColor}">
