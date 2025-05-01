@@ -21,7 +21,7 @@
                     <ColumnDefinition Width="3" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <playlists:PlaylistsTreeControl />
+                <playlists:PlaylistsTreeControl DataContext="{Binding PlaylistsTree}" />
                 <GridSplitter Grid.Column="1" Style="{StaticResource WorkspaceVerticalGridSplitterStyle}" HorizontalAlignment="Center" />
                 <Grid Grid.Column="2">
                     <Grid.RowDefinitions>

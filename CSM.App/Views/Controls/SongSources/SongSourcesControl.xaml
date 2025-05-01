@@ -58,9 +58,9 @@
                         <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsPlaylistsSelected}" Padding="8" ToolTip="Playlists" Visibility="{Binding PlaylistsAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" Click="Playlists_Click">
                             <telerik:RadGlyph Glyph="&#xe029;" />
                         </telerik:RadRadioButton>
-                        <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsFavouritesSelected}" Padding="8" ToolTip="Beat Saber Favourites" Visibility="{Binding FavouritesAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" Click="Favourites_Click">
+                        <!--<telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsFavouritesSelected}" Padding="8" ToolTip="Beat Saber Favourites" Visibility="{Binding FavouritesAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" Click="Favourites_Click">
                             <telerik:RadGlyph Glyph="&#xe301;" />
-                        </telerik:RadRadioButton>
+                        </telerik:RadRadioButton>-->
                         <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsSearchSelected}" Padding="8" ToolTip="Search" Visibility="{Binding SearchAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" Click="SongSearch_Click">
                             <telerik:RadGlyph Glyph="&#xe13e;" />
                         </telerik:RadRadioButton>
