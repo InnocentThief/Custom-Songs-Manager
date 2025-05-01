@@ -195,4 +195,7 @@
   <data name="enum_SearchParamRelevance_Random" xml:space="preserve">
     <value>Random</value>
   </data>
+  <data name="enum_PlaylistsSourceAvailability_Twitch" xml:space="preserve">
+    <value>Twitch</value>
+  </data>
 </root>

@@ -232,6 +232,15 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Twitch.
+        /// </summary>
+        public static string enum_PlaylistsSourceAvailability_Twitch {
+            get {
+                return ResourceManager.GetString("enum_PlaylistsSourceAvailability_Twitch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Curated.
         /// </summary>
         public static string enum_SearchParamRelevance_Curated {

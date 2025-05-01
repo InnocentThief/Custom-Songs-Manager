@@ -52,5 +52,13 @@ namespace CSM.App.Views.Controls.SongSources
                 await viewModel.LoadAsync();
             }
         }
+
+        private async void Twitch_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (DataContext is SongSourcesControlViewModel viewModel)
+            {
+                await viewModel.LoadAsync();
+            }
+        }
     }
 }

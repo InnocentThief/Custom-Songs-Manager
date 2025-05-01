@@ -1,0 +1,94 @@
+﻿<UserControl x:Class="CSM.App.Views.Controls.SongSources.Twitch.LoggedInControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CSM.App.Views.Controls.SongSources.Twitch"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="3" />
+            <RowDefinition Height="220" />
+        </Grid.RowDefinitions>
+
+        <!-- Channels -->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <!-- Title -->
+                <TextBlock Text="Channels" Style="{StaticResource HeaderTitleStyle}" Foreground="#88018574" />
+                <!-- Commands -->
+                <telerik:RadToolBar Grid.Column="1" Style="{StaticResource HeaderToolBarStyle}" >
+                    <telerik:RadButton Command="{Binding AddChannelCommand}" ToolTip="Add channel">
+                        <telerik:RadGlyph Glyph="&#xe11e;" Foreground="#88018574" />
+                    </telerik:RadButton>
+                    <telerik:RadButton Command="{Binding RemoveChannelCommand}" ToolTip="Remove channel">
+                        <telerik:RadGlyph Glyph="&#xe121;" Foreground="#88018574" />
+                    </telerik:RadButton>
+                </telerik:RadToolBar>
+            </Grid>
+
+            <telerik:RadListBox Grid.Row="1" Background="Transparent" BorderThickness="0" ItemsSource="{Binding Channels}" SelectedItem="{Binding SelectedChannel, Mode=TwoWay}" SelectionMode="Single" >
+                <telerik:RadListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="6" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <!-- Channel name -->
+                            <telerik:RadWatermarkTextBox />
+                            <!-- Join / leave -->
+                            <telerik:RadButton Grid.Column="2" Background="Transparent" BorderThickness="0">
+                                <Grid>
+                                    <telerik:RadGlyph Glyph="&#xe13d;"/>
+                                    <telerik:RadGlyph Glyph="&#xe510;" Visibility="{Binding Joined, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                                </Grid>
+                            </telerik:RadButton>
+                        </Grid>        
+                    </DataTemplate>
+                </telerik:RadListBox.ItemTemplate>
+            </telerik:RadListBox>
+            
+        </Grid>
+        
+        <!-- Song history -->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Song History" Style="{StaticResource HeaderTitleStyle}" Foreground="#88018574" />
+                <!-- Commands -->
+                <telerik:RadToolBar Grid.Column="1" Style="{StaticResource HeaderToolBarStyle}" >
+                    <telerik:RadButton ToolTip="Add channel">
+                        <telerik:RadGlyph Glyph="&#xe11e;" Foreground="#88018574" />
+                    </telerik:RadButton>
+                    <telerik:RadButton ToolTip="Remove channel">
+                        <telerik:RadGlyph Glyph="&#xe121;" Foreground="#88018574" />
+                    </telerik:RadButton>
+                </telerik:RadToolBar>
+            </Grid>
+        </Grid>
+
+        <GridSplitter Grid.Row="2" Style="{StaticResource WorkspaceHorizontalGridSplitterStyle}" VerticalAlignment="Center" />
+
+    </Grid>
+</UserControl>

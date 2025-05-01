@@ -116,6 +116,22 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             }
         }
 
+        public bool TwitchAvailable => userConfig?.PlaylistsConfig.SourceAvailability.HasFlag(PlaylistsSourceAvailability.Twitch) ?? false;
+
+        public bool IsTwitchSelected
+        {
+            get => selectedSource is TwitchSourceViewModel;
+            set
+            {
+                if (value)
+                {
+                    SelectedSource = Sources.SingleOrDefault(s => s is TwitchSourceViewModel);
+                    OnPropertyChanged();
+                    songSelectionDomain.SetSongHash(null, SongSelectionType.Right);
+                }
+            }
+        }
+
         #endregion
 
         public SongSourcesControlViewModel(IServiceLocator serviceLocator) : base(serviceLocator)
@@ -143,6 +159,10 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             {
                 Sources.Add(new SongSuggestSourceViewModel(serviceLocator));
             }
+            if (TwitchAvailable)
+            {
+                Sources.Add(new TwitchSourceViewModel(serviceLocator));
+            }
 
             switch (userConfig?.PlaylistsConfig.DefaultSource)
             {
@@ -160,6 +180,9 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
                     break;
                 case PlaylistsSourceAvailability.SongSuggest:
                     IsSongSuggestSelected = true;
+                    break;
+                case PlaylistsSourceAvailability.Twitch:
+                    IsTwitchSelected = true;
                     break;
                 default:
                     break;
@@ -193,6 +216,10 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
                 await songSuggestSourceViewModel.LoadAsync();
             }
 
+            if (selectedSource is TwitchSourceViewModel twitchSourceViewModel)
+            {
+                await twitchSourceViewModel.LoadAsync();
+            }
         }
     }
 }

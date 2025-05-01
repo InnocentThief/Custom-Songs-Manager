@@ -29,12 +29,17 @@
             <local:SongSourcesSongSuggestControl />
         </DataTemplate>
 
-        <local:SongSourceDataTemplateSelector x:Key="SongSourceDataTemplateSelector"
+        <DataTemplate x:Key="TwitchDataTemplate">
+            <local:SongSourcesTwitchControl />
+        </DataTemplate>
+
+                <local:SongSourceDataTemplateSelector x:Key="SongSourceDataTemplateSelector"
                                               CustomLevelsDataTemplate="{StaticResource CustomLevelsDataTemplate}"
                                               PlaylistsDataTemplate="{StaticResource PlaylistsDataTemplate}"
                                               FavouritesDataTemplate="{StaticResource FavouritesDataTemplate}"
                                               SearchDataTemplate="{StaticResource SearchDataTemplate}"
-                                              SongSuggestDataTemplate="{StaticResource SongSuggestDataTemplate}"/>
+                                              SongSuggestDataTemplate="{StaticResource SongSuggestDataTemplate}"
+                                              TwitchDataTemplate="{StaticResource TwitchDataTemplate}" />
 
     </UserControl.Resources>
 
@@ -66,6 +71,9 @@
                         </telerik:RadRadioButton>
                         <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsSongSuggestSelected}" Padding="8" ToolTip="Song Suggest" Visibility="{Binding SongSuggestAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" Click="SongSuggest_Click">
                             <telerik:RadGlyph Glyph="&#xe05f;" />
+                        </telerik:RadRadioButton>
+                        <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsTwitchSelected}" Padding="8" ToolTip="Twitch" Visibility="{Binding TwitchAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" Click="Twitch_Click">
+                            <telerik:RadGlyph Glyph="&#xe800;" />
                         </telerik:RadRadioButton>
                     </StackPanel>
                 </Grid>

@@ -16,6 +16,7 @@ namespace CSM.UiLogic.ViewModels.Controls.Settings
         private bool favouritesAvailable;
         private bool songSearchAvailable;
         private bool songSuggestAvailable;
+        private bool twitchAvailable;
 
         private readonly UserConfig userConfig;
 
@@ -112,6 +113,19 @@ namespace CSM.UiLogic.ViewModels.Controls.Settings
             }
         }
 
+        public bool TwitchAvailable
+        {
+            get => twitchAvailable;
+            set
+            {
+                if (value == twitchAvailable)
+                    return;
+                twitchAvailable = value;
+                OnPropertyChanged();
+                UpdateSourceAvailability();
+            }
+        }
+
         public ObservableCollection<EnumWrapper<PlaylistsSourceAvailability>> SongSources { get; } = [];
 
         public EnumWrapper<PlaylistsSourceAvailability>? SelectedSongSource
@@ -137,6 +151,7 @@ namespace CSM.UiLogic.ViewModels.Controls.Settings
             favouritesAvailable = userConfig.PlaylistsConfig.SourceAvailability.HasFlag(PlaylistsSourceAvailability.BeatSaberFavourites);
             songSearchAvailable = userConfig.PlaylistsConfig.SourceAvailability.HasFlag(PlaylistsSourceAvailability.SongSearch);
             songSuggestAvailable = userConfig.PlaylistsConfig.SourceAvailability.HasFlag(PlaylistsSourceAvailability.SongSuggest);
+            twitchAvailable = userConfig.PlaylistsConfig.SourceAvailability.HasFlag(PlaylistsSourceAvailability.Twitch);
 
             SongSources.AddRange(EnumWrapper<PlaylistsSourceAvailability>.GetValues(serviceLocator, PlaylistsSourceAvailability.None));
         }
@@ -151,6 +166,7 @@ namespace CSM.UiLogic.ViewModels.Controls.Settings
             if (favouritesAvailable) userConfig.PlaylistsConfig.SourceAvailability |= PlaylistsSourceAvailability.BeatSaberFavourites;
             if (songSearchAvailable) userConfig.PlaylistsConfig.SourceAvailability |= PlaylistsSourceAvailability.SongSearch;
             if (songSuggestAvailable) userConfig.PlaylistsConfig.SourceAvailability |= PlaylistsSourceAvailability.SongSuggest;
+            if (twitchAvailable) userConfig.PlaylistsConfig.SourceAvailability |= PlaylistsSourceAvailability.Twitch;
         }
 
         #endregion

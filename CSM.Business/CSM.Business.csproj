@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Core\Twitch\TwitchGetAccessToken.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Core\Twitch\TwitchGetAccessToken.html" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.4" />
     <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="8.0.0" />
   </ItemGroup>

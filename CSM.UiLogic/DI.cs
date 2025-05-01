@@ -28,7 +28,6 @@ namespace CSM.UiLogic
             return services
                 .AddTransient<CustomLevelsWorkspaceViewModel>()
                 .AddTransient<PlaylistsWorkspaceViewModel>()
-                .AddTransient<TwitchWorkspaceViewModel>()
                 .AddTransient<ScoreSaberWorkspaceViewModel>()
                 .AddTransient<BeatLeaderWorkspaceViewModel>();
         }

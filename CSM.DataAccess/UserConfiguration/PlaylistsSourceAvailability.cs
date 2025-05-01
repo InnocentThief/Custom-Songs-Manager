@@ -9,5 +9,6 @@
         BeatSaberFavourites = 4,
         SongSearch = 8,
         SongSuggest = 16,
+        Twitch = 32,
     }
 }

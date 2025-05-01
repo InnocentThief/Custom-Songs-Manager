@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="CSM.App.Views.Windows.Settings.TwitchSettingsControl"
+﻿<UserControl x:Class="CSM.App.Views.Controls.SongSources.Twitch.NotLoggedInControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -6,17 +6,16 @@
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Margin="0,6">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+    
+    <!-- Content -->
+    <Grid Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <!-- Availability -->
-        <telerik:Label Content="Available" />
-        <telerik:RadToggleSwitchButton Grid.Column="1"  Focusable="False" IsChecked="{Binding Available}" />
+        <telerik:RadGlyph Glyph="&#xe116;" FontSize="30" />
+        <TextBlock Grid.Row="1" Text="Not signed in to Twitch" TextAlignment="Center" HorizontalAlignment="Center" Margin="0,10,0,3" TextWrapping="Wrap" FontWeight="DemiBold" />
+        <TextBlock Grid.Row="2" Text="Sign in to Twitch to add channels" TextAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" />
     </Grid>
 </UserControl>

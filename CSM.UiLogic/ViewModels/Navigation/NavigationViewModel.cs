@@ -40,12 +40,6 @@ namespace CSM.UiLogic.ViewModels.Navigation
                 playlists.SelectionChanged += NavigationItemSelectionChanged;
                 Items.Add(playlists);
             }
-            if (userConfigDomain.Config?.TwitchConfig.Available ?? false)
-            {
-                var twitch = new NavigationItemViewModel(serviceLocator, NavigationType.TwitchIntegration, "Twitch", "&#xe800;");
-                twitch.SelectionChanged += NavigationItemSelectionChanged;
-                Items.Add(twitch);
-            }
             if (userConfigDomain.Config?.ScoreSaberConfig.Available ?? false)
             {
                 var scoreSaber = new NavigationItemViewModel(serviceLocator, NavigationType.ScoreSaberIntegration, "ScoreSaber", "&#xea0b;");

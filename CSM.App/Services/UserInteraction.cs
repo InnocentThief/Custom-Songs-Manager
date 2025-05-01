@@ -17,7 +17,7 @@ namespace CSM.App.Services
 
         public void ShowError(string message)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public void ShowWarning(string message)

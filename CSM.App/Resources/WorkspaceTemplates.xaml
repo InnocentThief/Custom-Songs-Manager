@@ -11,10 +11,6 @@
         <workspaces:PlaylistsWorkspace />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type workspacesViewModels:TwitchWorkspaceViewModel}">
-        <workspaces:TwitchWorkspace />
-    </DataTemplate>
-
     <DataTemplate DataType="{x:Type workspacesViewModels:ScoreSaberWorkspaceViewModel}">
         <workspaces:ScoreSaberWorkspace />
     </DataTemplate>

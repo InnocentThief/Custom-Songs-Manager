@@ -14,8 +14,6 @@ namespace CSM.UiLogic.ViewModels.Controls.Settings
 
         public PlaylistsSettingsViewModel PlaylistsSettings { get; }
 
-        public TwitchSettingsViewModel TwitchSettings { get; }
-
         public ScoreSaberSettingsViewModel ScoreSaberSettings { get; }
 
         public BeatLeaderSettingsViewModel BeatLeaderSettings { get; }
@@ -29,7 +27,6 @@ namespace CSM.UiLogic.ViewModels.Controls.Settings
             GeneralSettings = new GeneralSettingsViewModel(serviceLocator, userConfigDomain.Config!);
             CustomLevelsSettings = new CustomLevelsSettingsViewModel(serviceLocator, userConfigDomain.Config!);
             PlaylistsSettings = new PlaylistsSettingsViewModel(serviceLocator, userConfigDomain.Config!);
-            TwitchSettings = new TwitchSettingsViewModel(serviceLocator, userConfigDomain.Config!);
             ScoreSaberSettings = new ScoreSaberSettingsViewModel(serviceLocator, userConfigDomain.Config!);
             BeatLeaderSettings = new BeatLeaderSettingsViewModel(serviceLocator, userConfigDomain.Config!);
             SongSuggestSettings = new SongSuggestSettingsViewModel(serviceLocator, userConfigDomain.Config!);

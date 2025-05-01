@@ -11,7 +11,6 @@ namespace CSM.UiLogic.ViewModels.Navigation
             {
                 NavigationType.CustomLevels => typeof(CustomLevelsWorkspaceViewModel),
                 NavigationType.Playlists => typeof(PlaylistsWorkspaceViewModel),
-                NavigationType.TwitchIntegration => typeof(TwitchWorkspaceViewModel),
                 NavigationType.ScoreSaberIntegration => typeof(ScoreSaberWorkspaceViewModel),
                 NavigationType.BeatLeaderIntegration => typeof(BeatLeaderWorkspaceViewModel),
                 _ => throw new NotImplementedException($"View model type for navigation type '{navigationType}' missing"),

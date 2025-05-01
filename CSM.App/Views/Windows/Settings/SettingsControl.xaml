@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" Width="700">
     <Grid>
-        <telerik:RadTabControl Align="Justify" Background="Transparent" BorderThickness="0" Height="300" HeaderBackground="Transparent">
+        <telerik:RadTabControl Align="Justify" Background="Transparent" BorderThickness="0" Height="350" HeaderBackground="Transparent">
             <telerik:RadTabItem Header="General">
                 <local:GeneralSettingsControl DataContext="{Binding GeneralSettings}" />
             </telerik:RadTabItem>
@@ -17,9 +17,6 @@
             </telerik:RadTabItem>
             <telerik:RadTabItem Header="Playlists">
                 <local:PlaylistsSettingsControl DataContext="{Binding PlaylistsSettings}" />
-            </telerik:RadTabItem>
-            <telerik:RadTabItem Header="Twitch">
-                <local:TwitchSettingsControl DataContext="{Binding TwitchSettings}" />
             </telerik:RadTabItem>
             <telerik:RadTabItem Header="ScoreSaber">
                 <local:ScoreSaberSettingsControl DataContext="{Binding ScoreSaberSettings}" />
