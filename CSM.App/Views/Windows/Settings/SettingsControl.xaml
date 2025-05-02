@@ -4,27 +4,27 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CSM.App.Views.Windows.Settings"
-             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" 
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" xmlns:p="clr-namespace:CSM.App.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="450" Width="700">
     <Grid>
         <telerik:RadTabControl Align="Justify" Background="Transparent" BorderThickness="0" Height="350" HeaderBackground="Transparent">
-            <telerik:RadTabItem Header="General">
+            <telerik:RadTabItem Header="{x:Static p:Resources.Settings_General}">
                 <local:GeneralSettingsControl DataContext="{Binding GeneralSettings}" />
             </telerik:RadTabItem>
-            <telerik:RadTabItem Header="Custom Levels">
+            <telerik:RadTabItem Header="{x:Static p:Resources.Settings_CustomLevels}">
                 <local:CustomLevelsSettingsControl DataContext="{Binding CustomLevelsSettings}" />
             </telerik:RadTabItem>
-            <telerik:RadTabItem Header="Playlists">
+            <telerik:RadTabItem Header="{x:Static p:Resources.Settings_Playlists}">
                 <local:PlaylistsSettingsControl DataContext="{Binding PlaylistsSettings}" />
             </telerik:RadTabItem>
-            <telerik:RadTabItem Header="ScoreSaber">
+            <telerik:RadTabItem Header="{x:Static p:Resources.Settings_ScoreSaber}">
                 <local:ScoreSaberSettingsControl DataContext="{Binding ScoreSaberSettings}" />
             </telerik:RadTabItem>
-            <telerik:RadTabItem Header="BeatLeader">
+            <telerik:RadTabItem Header="{x:Static p:Resources.Settings_BeatLeader}">
                 <local:BeatLeaderSettingsControl DataContext="{Binding BeatLeaderSettings}" />
             </telerik:RadTabItem>
-            <telerik:RadTabItem Header="Song Suggest">
+            <telerik:RadTabItem Header="{x:Static p:Resources.Settings_SongSuggest}">
                 <local:SongSuggestSettingsControl DataContext="{Binding SongSuggestSettings}" />
             </telerik:RadTabItem>
         </telerik:RadTabControl>

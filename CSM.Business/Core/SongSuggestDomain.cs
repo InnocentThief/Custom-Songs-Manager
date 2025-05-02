@@ -1,4 +1,5 @@
 ﻿using CSM.Business.Interfaces;
+using CSM.DataAccess;
 using CSM.DataAccess.Playlists;
 using Microsoft.Extensions.Logging;
 using Settings;
@@ -54,7 +55,7 @@ namespace CSM.Business.Core
                 return null;
 
             var content = await File.ReadAllTextAsync(playlistFile);
-            return JsonSerializer.Deserialize<Playlist>(content);
+            return JsonSerializer.Deserialize<Playlist>(content, JsonSerializerHelper.CreateDefaultSerializerOptions());
         }
 
         public string? GetPlaylistPath()

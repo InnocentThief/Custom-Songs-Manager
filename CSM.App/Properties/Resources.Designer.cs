@@ -302,5 +302,284 @@ namespace CSM.App.Properties {
                 return ResourceManager.GetString("enum_SongDetailPosition_Right", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contributors.
+        /// </summary>
+        public static string Info_Contributors {
+            get {
+                return ResourceManager.GetString("Info_Contributors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Development.
+        /// </summary>
+        public static string Info_Development {
+            get {
+                return ResourceManager.GetString("Info_Development", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Help with JS and CSS.
+        /// </summary>
+        public static string Info_HelpWithJSandCSS {
+            get {
+                return ResourceManager.GetString("Info_HelpWithJSandCSS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Icon.
+        /// </summary>
+        public static string Info_Icon {
+            get {
+                return ResourceManager.GetString("Info_Icon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Idea.
+        /// </summary>
+        public static string Info_Idea {
+            get {
+                return ResourceManager.GetString("Info_Idea", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Libraries.
+        /// </summary>
+        public static string Info_Libraries {
+            get {
+                return ResourceManager.GetString("Info_Libraries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Testing.
+        /// </summary>
+        public static string Info_Testing {
+            get {
+                return ResourceManager.GetString("Info_Testing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Author.
+        /// </summary>
+        public static string Playlist_Author {
+            get {
+                return ResourceManager.GetString("Playlist_Author", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string Playlist_Description {
+            get {
+                return ResourceManager.GetString("Playlist_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title.
+        /// </summary>
+        public static string Playlist_Title {
+            get {
+                return ResourceManager.GetString("Playlist_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BeatLeader.
+        /// </summary>
+        public static string Settings_BeatLeader {
+            get {
+                return ResourceManager.GetString("Settings_BeatLeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom Levels.
+        /// </summary>
+        public static string Settings_CustomLevels {
+            get {
+                return ResourceManager.GetString("Settings_CustomLevels", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to General.
+        /// </summary>
+        public static string Settings_General {
+            get {
+                return ResourceManager.GetString("Settings_General", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Playlists.
+        /// </summary>
+        public static string Settings_Playlists {
+            get {
+                return ResourceManager.GetString("Settings_Playlists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Available.
+        /// </summary>
+        public static string Settings_Playlists_Available {
+            get {
+                return ResourceManager.GetString("Settings_Playlists_Available", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ScoreSaber.
+        /// </summary>
+        public static string Settings_ScoreSaber {
+            get {
+                return ResourceManager.GetString("Settings_ScoreSaber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Available.
+        /// </summary>
+        public static string Settings_ScoreSaber_Available {
+            get {
+                return ResourceManager.GetString("Settings_ScoreSaber_Available", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Song Suggest.
+        /// </summary>
+        public static string Settings_SongSuggest {
+            get {
+                return ResourceManager.GetString("Settings_SongSuggest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BeatLeader user id.
+        /// </summary>
+        public static string Settings_SongSuggest_BLUserId {
+            get {
+                return ResourceManager.GetString("Settings_SongSuggest_BLUserId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default leaderboard.
+        /// </summary>
+        public static string Settings_SongSuggest_DefaultLeaderboard {
+            get {
+                return ResourceManager.GetString("Settings_SongSuggest_DefaultLeaderboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ScoreSaber user id.
+        /// </summary>
+        public static string Settings_SongSuggest_SSUserId {
+            get {
+                return ResourceManager.GetString("Settings_SongSuggest_SSUserId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use BeatLeader leaderboard.
+        /// </summary>
+        public static string Settings_SongSuggest_UseBLLeaderboard {
+            get {
+                return ResourceManager.GetString("Settings_SongSuggest_UseBLLeaderboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use ScoreSaber leaderboard.
+        /// </summary>
+        public static string Settings_SongSuggest_UseSSLeaderboard {
+            get {
+                return ResourceManager.GetString("Settings_SongSuggest_UseSSLeaderboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Difficulties.
+        /// </summary>
+        public static string Song_Difficulties {
+            get {
+                return ResourceManager.GetString("Song_Difficulties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mapper.
+        /// </summary>
+        public static string Song_Mapper {
+            get {
+                return ResourceManager.GetString("Song_Mapper", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title.
+        /// </summary>
+        public static string Song_Title {
+            get {
+                return ResourceManager.GetString("Song_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click to change cover image.
+        /// </summary>
+        public static string ToolTip_Playlist_ClickToChangeCoverImage {
+            get {
+                return ResourceManager.GetString("ToolTip_Playlist_ClickToChangeCoverImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fetch playlist data.
+        /// </summary>
+        public static string ToolTip_Playlist_FetchData {
+            get {
+                return ResourceManager.GetString("ToolTip_Playlist_FetchData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save playlist.
+        /// </summary>
+        public static string ToolTip_Playlist_SavePlaylist {
+            get {
+                return ResourceManager.GetString("ToolTip_Playlist_SavePlaylist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apply current sort order and save playlist.
+        /// </summary>
+        public static string ToolTip_Playlist_SavePlaylistWithCurrentOrder {
+            get {
+                return ResourceManager.GetString("ToolTip_Playlist_SavePlaylistWithCurrentOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove song from playlist.
+        /// </summary>
+        public static string ToolTip_Song_RemoveFromPlaylist {
+            get {
+                return ResourceManager.GetString("ToolTip_Song_RemoveFromPlaylist", resourceCulture);
+            }
+        }
     }
 }

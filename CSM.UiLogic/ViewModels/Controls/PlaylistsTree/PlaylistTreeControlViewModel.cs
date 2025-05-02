@@ -330,9 +330,30 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
                     PlaylistTitle = playlistName,
                     PlaylistAuthor = string.Empty,
                     PlaylistDescription = string.Empty,
-                    Songs = songs,
+                    Songs = [],
                     Image = image != null ? $"base64,{ImageConverter.StringFromBitmap(image)}" : string.Empty,
                 };
+
+                foreach (var songToCopy in songs)
+                {
+                    var existingSong = playlist.Songs.SingleOrDefault(s => s.Hash == songToCopy.Hash);
+                    if (existingSong != null)
+                    {
+                        foreach (var difficultyToCopy in songToCopy.Difficulties ?? [])
+                        {
+                            var existingDifficulty = existingSong.Difficulties.SingleOrDefault(d => d.Characteristic == difficultyToCopy.Characteristic && d.Name == difficultyToCopy.Name);
+                            if (existingDifficulty == null)
+                            {
+                                existingSong.Difficulties ??= [];
+                                existingSong.Difficulties.Add(difficultyToCopy);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        playlist.Songs.Add(songToCopy);
+                    }
+                }
 
                 var content = JsonSerializer.Serialize(playlist, JsonSerializerHelper.CreateDefaultSerializerOptions());
                 File.WriteAllText(playlistPath, content);

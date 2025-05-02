@@ -1,10 +1,9 @@
 ﻿<UserControl x:Class="CSM.App.Views.Windows.InfoControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:CSM.App.Views.Windows"
-             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" xmlns:p="clr-namespace:CSM.App.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -30,7 +29,7 @@
             </StackPanel>
             
             <!-- Contributors -->
-            <GroupBox Grid.Row="1" Header="Contributors" Style="{StaticResource WorkspaceGroupBoxStyle}" Margin="0,10,0,0">
+            <GroupBox Grid.Row="1" Header="{x:Static p:Resources.Info_Contributors}" Style="{StaticResource WorkspaceGroupBoxStyle}" Margin="0,10,0,0">
                 <Grid Grid.Column="1" Margin="6">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -46,25 +45,25 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <!-- Idea -->
-                    <telerik:Label Grid.Row="1" Content="Idea" Margin="0,3" FontWeight="DemiBold" />
+                    <telerik:Label Grid.Row="1" Content="{x:Static p:Resources.Info_Idea}" Margin="0,3" FontWeight="DemiBold" />
                     <telerik:Label Grid.Column="2" Grid.Row="1" Content="GoodOldNervy" Margin="0,3" />
                     <!-- Development -->
-                    <telerik:Label Grid.Row="2" Content="Development" Margin="0,3" FontWeight="DemiBold" />
+                    <telerik:Label Grid.Row="2" Content="{x:Static p:Resources.Info_Development}" Margin="0,3" FontWeight="DemiBold" />
                     <telerik:Label Grid.Column="2" Grid.Row="2" Content="InnocentThief" Margin="0,3" />
                     <!-- Icon -->
-                    <telerik:Label Grid.Row="3" Content="Icon" Margin="0,3" FontWeight="DemiBold" />
+                    <telerik:Label Grid.Row="3" Content="{x:Static p:Resources.Info_Icon}" Margin="0,3" FontWeight="DemiBold" />
                     <telerik:Label Grid.Column="2" Grid.Row="3" Content="SmokyJoe" Margin="0,3" />
                     <!-- Testing -->
-                    <telerik:Label Grid.Row="4" Content="Testing" Margin="0,3" FontWeight="DemiBold" />
+                    <telerik:Label Grid.Row="4" Content="{x:Static p:Resources.Info_Testing}" Margin="0,3" FontWeight="DemiBold" />
                     <telerik:Label Grid.Column="2" Grid.Row="4" Content="-" Margin="0,3" />
                     <!-- JS/CSS Help -->
-                    <telerik:Label Grid.Row="5" Content="Help with JS and CSS" Margin="0,3" FontWeight="DemiBold" />
+                    <telerik:Label Grid.Row="5" Content="{x:Static p:Resources.Info_HelpWithJSandCSS}" Margin="0,3" FontWeight="DemiBold" />
                     <telerik:Label Grid.Column="2" Grid.Row="5" Content="BF_Moritz" Margin="0,3" />
                 </Grid>
             </GroupBox>
 
             <!-- Libraries -->
-            <GroupBox Grid.Row="2" Header="Libraries" Style="{StaticResource WorkspaceGroupBoxStyle}" Margin="0,10,0,0">
+            <GroupBox Grid.Row="2" Header="{x:Static p:Resources.Info_Libraries}" Style="{StaticResource WorkspaceGroupBoxStyle}" Margin="0,10,0,0">
                 <Grid Grid.Column="1" Margin="6">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -83,7 +82,6 @@
                     <telerik:Label Grid.Column="2" Grid.Row="1" Content="https://github.com/TwitchLib/TwitchLib" Margin="0,3" />
                 </Grid>
             </GroupBox>
-
         </Grid>
     </Grid>
 </UserControl>

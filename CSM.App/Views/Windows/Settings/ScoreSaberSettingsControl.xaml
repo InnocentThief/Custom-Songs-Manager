@@ -4,8 +4,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:p="clr-namespace:CSM.App.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    
     <Grid Margin="0,6">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -16,7 +18,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <!-- Availability -->
-        <telerik:Label Content="Available" />
+        <telerik:Label Content="{x:Static p:Resources.Settings_ScoreSaber_Available}" />
         <telerik:RadToggleSwitchButton Grid.Column="1"  Focusable="False" IsChecked="{Binding Available}" />
     </Grid>
 </UserControl>

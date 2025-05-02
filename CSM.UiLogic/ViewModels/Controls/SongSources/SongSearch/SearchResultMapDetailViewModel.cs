@@ -23,6 +23,8 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources.SongSearch
 
         #region Properties
 
+        public MapDetail Model => mapDetail;
+
         public IRelayCommand? AddToPlaylistCommand => addToPlaylistCommand ??= CommandFactory.Create(AddToPlaylist, CanAddToPlaylist);
 
         public string BsrKey => mapDetail.Id;

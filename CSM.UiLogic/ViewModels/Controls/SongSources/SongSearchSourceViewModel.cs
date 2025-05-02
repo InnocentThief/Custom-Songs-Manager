@@ -1,5 +1,7 @@
-﻿using CSM.Business.Interfaces;
+﻿using CSM.Business.Core.SongCopy;
+using CSM.Business.Interfaces;
 using CSM.DataAccess.BeatSaver;
+using CSM.DataAccess.Playlists;
 using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
@@ -889,18 +891,20 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         private void CreatePlaylist()
         {
-            //if (Playlist == null || Playlist.Songs.Count == 0)
-            //{
-            //    MessageBox.Show("No songs to copy.", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
-            //    return;
-            //}
+            // todo: only take filtered songs
+            var songs = Results.Select(r => new Song
+            {
+                Hash = r.Model.Versions.OrderByDescending(v => v.CreatedAt).First().Hash,
+                Key = r.Model.Id,
+                SongName = r.SongName,
+            });
 
-            //var createPlaylistEventArgs = new CreatePlaylistEventArgs
-            //{
-            //    PlaylistName = $"Suggested Songs {DateTime.Now:yyyy-MM-dd HH-mm-ss}",
-            //    Songs = [.. Playlist.Songs.Select(x => x.Model)] // todo: only take filtered songs
-            //};
-            //songCopyDomain.CreatePlaylist(createPlaylistEventArgs);
+            var createPlaylistEventArgs = new CreatePlaylistEventArgs
+            {
+                PlaylistName = $"Song search {DateTime.Now:yyyy-MM-dd HH-mm-ss}",
+                Songs = [.. songs]
+            };
+            songCopyDomain.CreatePlaylist(createPlaylistEventArgs);
         }
 
         private bool CanCreatePlaylist()
@@ -909,6 +913,20 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
         }
         private void OverwritePlaylist()
         {
+            // todo: only take filtered songs
+            var songs = Results.Select(r => new Song
+            {
+                Hash = r.Model.Versions.OrderByDescending(v => v.CreatedAt).First().Hash,
+                Key = r.Model.Id,
+                SongName = r.SongName,
+            });
+
+            var songCopyEventArgs = new SongCopyEventArgs
+            {
+                OverwritePlaylist = true,
+                Songs = [.. songs]
+            };
+            songCopyDomain.CopySongs(songCopyEventArgs);
         }
 
         private bool CanOverwritePlaylist()
@@ -917,6 +935,19 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
         }
         private void MergePlaylist()
         {
+            // todo: only take filtered songs
+            var songs = Results.Select(r => new Song
+            {
+                Hash = r.Model.Versions.OrderByDescending(v => v.CreatedAt).First().Hash,
+                Key = r.Model.Id,
+                SongName = r.SongName,
+            });
+
+            var songCopyEventArgs = new SongCopyEventArgs
+            {
+                Songs = [.. songs]
+            };
+            songCopyDomain.CopySongs(songCopyEventArgs);
         }
 
         private bool CanMergePlaylist()

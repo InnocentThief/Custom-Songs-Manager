@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:common="clr-namespace:CSM.App.Views.Common"
-             xmlns:local="clr-namespace:CSM.App.Views.Controls.Playlists"
+             xmlns:local="clr-namespace:CSM.App.Views.Controls.Playlists" xmlns:p="clr-namespace:CSM.App.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -27,15 +27,15 @@
             <TextBlock Text="{Binding PlaylistTitle}" Style="{StaticResource HeaderTitleStyle}" />
             <!-- Commands -->
             <telerik:RadToolBar Grid.Column="1" Style="{StaticResource HeaderToolBarStyle}" >
-                <telerik:RadButton Command="{Binding FetchDataCommand}" ToolTip="Fetch playlist data">
+                <telerik:RadButton Command="{Binding FetchDataCommand}" ToolTip="{x:Static p:Resources.ToolTip_Playlist_FetchData}">
                     <telerik:RadGlyph Glyph="&#xe68F;" />
                 </telerik:RadButton>
                 <telerik:RadToolBarSeparator />
-                <telerik:RadButton Command="{Binding ApplySortOrderAndSaveCommand}" ToolTip="Apply current sort order and save playlist">
+                <telerik:RadButton Command="{Binding ApplySortOrderAndSaveCommand}" ToolTip="{x:Static p:Resources.ToolTip_Playlist_SavePlaylistWithCurrentOrder}">
                     <telerik:RadGlyph Glyph="&#xe666;" />
                 </telerik:RadButton>
                 <telerik:RadToolBarSeparator />
-                <telerik:RadButton Command="{Binding SavePlaylistCommand}" ToolTip="Save playlist">
+                <telerik:RadButton Command="{Binding SavePlaylistCommand}" ToolTip="{x:Static p:Resources.ToolTip_Playlist_SavePlaylist}">
                     <telerik:RadGlyph Glyph="&#xe109;" />
                 </telerik:RadButton>
             </telerik:RadToolBar>
@@ -52,7 +52,7 @@
                     <ColumnDefinition Width="80" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <telerik:RadButton Command="{Binding ChooseCoverImageCommand}" Focusable="False" Padding="0" Background="Transparent" BorderThickness="0"  ToolTip="Click to change cover image">
+                <telerik:RadButton Command="{Binding ChooseCoverImageCommand}" Focusable="False" Padding="0" Background="Transparent" BorderThickness="0"  ToolTip="{x:Static p:Resources.ToolTip_Playlist_ClickToChangeCoverImage}">
                     <Image Source="{Binding CoverImage}" />
                 </telerik:RadButton>
                 <Grid Grid.Column="1">
@@ -67,13 +67,13 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <!-- Playlist title -->
-                    <telerik:Label Content="Title" />
+                    <telerik:Label Content="{x:Static p:Resources.Playlist_Title}" />
                     <telerik:RadWatermarkTextBox Grid.Column="1" Text="{Binding PlaylistTitle, UpdateSourceTrigger=PropertyChanged}" />
                     <!-- Playlist author -->
-                    <telerik:Label Grid.Row="1" Content="Author" />
+                    <telerik:Label Grid.Row="1" Content="{x:Static p:Resources.Playlist_Author}" />
                     <telerik:RadWatermarkTextBox Grid.Column="1" Grid.Row="1" Text="{Binding PlaylistAuthor, UpdateSourceTrigger=PropertyChanged}" />
                     <!-- Playlist description -->
-                    <telerik:Label Grid.Row="2" Content="Description" />
+                    <telerik:Label Grid.Row="2" Content="{x:Static p:Resources.Playlist_Description}" />
                     <telerik:RadWatermarkTextBox Grid.Column="1" Grid.Row="2" Text="{Binding PlaylistDescription, UpdateSourceTrigger=PropertyChanged}" />
                 </Grid>
             </Grid>
@@ -98,11 +98,11 @@
                     </telerik:GridViewDataColumn.CellTemplate>
                 </telerik:GridViewDataColumn>
                 <!-- Title of the song -->
-                <telerik:GridViewDataColumn Header="Title" DataMemberBinding="{Binding SongName}" Width="*" TextTrimming="CharacterEllipsis" />
+                <telerik:GridViewDataColumn Header="{x:Static p:Resources.Song_Title}" DataMemberBinding="{Binding SongName}" Width="*" TextTrimming="CharacterEllipsis" />
                 <!-- Mapper of the song -->
-                <telerik:GridViewDataColumn Header="Mapper" DataMemberBinding="{Binding LevelAuthorName}" Width="*" TextTrimming="CharacterEllipsis" />
+                <telerik:GridViewDataColumn Header="{x:Static p:Resources.Song_Mapper}" DataMemberBinding="{Binding LevelAuthorName}" Width="*" TextTrimming="CharacterEllipsis" />
                 <!-- Difficulties -->
-                <telerik:GridViewDataColumn Header="Difficulties" DataMemberBinding="{Binding Difficulties}" Width="Auto">
+                <telerik:GridViewDataColumn Header="{x:Static p:Resources.Song_Difficulties}" DataMemberBinding="{Binding Difficulties}" Width="Auto">
                     <telerik:GridViewDataColumn.CellTemplate>
                         <DataTemplate>
                             <local:SongDifficultyEditControl />
@@ -113,7 +113,7 @@
                 <telerik:GridViewColumn Width="Auto">
                     <telerik:GridViewColumn.CellTemplate>
                         <DataTemplate>
-                            <telerik:RadButton Command="{Binding RemoveFromPlaylistCommand}" Grid.Column="1" Background="Transparent" BorderThickness="0" Margin="0,0,10,0" ToolTip="Remove song from playlist" Focusable="False">
+                            <telerik:RadButton Command="{Binding RemoveFromPlaylistCommand}" Grid.Column="1" Background="Transparent" BorderThickness="0" Margin="0,0,10,0" ToolTip="{x:Static p:Resources.ToolTip_Song_RemoveFromPlaylist}" Focusable="False">
                                 <telerik:RadGlyph Glyph="&#xe121;" Foreground="Red" />
                             </telerik:RadButton>
                         </DataTemplate>

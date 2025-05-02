@@ -116,6 +116,23 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
             MapDetailViewModel = new MapDetailViewModel(ServiceLocator, mapDetail);
         }
 
+        public void AddDifficulty(Difficulty difficulty)
+        {
+            var existingDifficulty = difficulties.SingleOrDefault(d => d.Characteristic == difficulty.Characteristic && d.Difficulty == difficulty.Name);
+            if (existingDifficulty == null)
+            {
+                song.Difficulties ??= [];
+                song.Difficulties.Add(difficulty);
+                var newSongDifficultyViewModel = new PlaylistSongDifficultyViewModel(ServiceLocator, difficulty, true);
+                difficulties.Add(newSongDifficultyViewModel);
+                OnPropertyChanged(nameof(Difficulties));
+            }
+            else
+            {
+                existingDifficulty.IsSelected = true;
+            }
+        }
+
         #region Helper methods
 
         public async Task AddToPlaylistAsync()

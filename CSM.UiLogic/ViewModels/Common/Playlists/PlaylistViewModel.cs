@@ -4,6 +4,7 @@ using CSM.Business.Interfaces.SongCopy;
 using CSM.DataAccess;
 using CSM.DataAccess.BeatSaver;
 using CSM.DataAccess.Playlists;
+using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
 using CSM.Framework.Types;
 using CSM.UiLogic.Commands;
@@ -301,15 +302,39 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
 
         private void SongCopyDomain_OnCopySongs(object? sender, Business.Core.SongCopy.SongCopyEventArgs e)
         {
-            if (this != songCopyDomain?.SelectedPlaylist) return;
-            foreach (var song in e.Songs)
+            if (this != songCopyDomain?.SelectedPlaylist)
+                return;
+
+            if (e.OverwritePlaylist)
             {
-                var existingSong = Songs.SingleOrDefault(s => s.Hash == song.Hash);
-                if (existingSong != null) return;
-                playlist.Songs.Add(song);
-                var playlistSongViewModel = new PlaylistSongViewModel(ServiceLocator, song);
-                playlistSongViewModel.OnSongRemoved += Playlist_OnSongRemoved;
-                Songs.Add(playlistSongViewModel);
+                playlist.Songs.Clear();
+                Songs.ForEach(s => s.OnSongRemoved -= Playlist_OnSongRemoved);
+                Songs.ForEach(s => s.CleanUpReferences());
+                Songs.Clear();
+            }
+
+            foreach (var songToCopy in e.Songs)
+            {
+                var existingSong = Songs.SingleOrDefault(s => s.Hash == songToCopy.Hash);
+                if (existingSong != null)
+                {
+                    foreach (var difficultyToCopy in songToCopy.Difficulties ?? [])
+                    {
+                        var newDifficulty = new Difficulty
+                        {
+                            Characteristic = difficultyToCopy.Characteristic,
+                            Name = difficultyToCopy.Name,
+                        };
+                        existingSong.AddDifficulty(newDifficulty);
+                    }
+                }
+                else
+                {
+                    playlist.Songs.Add(songToCopy);
+                    var playlistSongViewModel = new PlaylistSongViewModel(ServiceLocator, songToCopy);
+                    playlistSongViewModel.OnSongRemoved += Playlist_OnSongRemoved;
+                    Songs.Add(playlistSongViewModel);
+                }
             }
             OnPropertyChanged(nameof(SongCount));
         }

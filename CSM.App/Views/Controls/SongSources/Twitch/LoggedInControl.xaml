@@ -33,37 +33,58 @@
                     <telerik:RadButton Command="{Binding AddChannelCommand}" ToolTip="Add channel">
                         <telerik:RadGlyph Glyph="&#xe11e;" Foreground="#88018574" />
                     </telerik:RadButton>
-                    <telerik:RadButton Command="{Binding RemoveChannelCommand}" ToolTip="Remove channel">
-                        <telerik:RadGlyph Glyph="&#xe121;" Foreground="#88018574" />
-                    </telerik:RadButton>
                 </telerik:RadToolBar>
             </Grid>
 
-            <telerik:RadListBox Grid.Row="1" Background="Transparent" BorderThickness="0" ItemsSource="{Binding Channels}" SelectedItem="{Binding SelectedChannel, Mode=TwoWay}" SelectionMode="Single" >
-                <telerik:RadListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="6" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <!-- Channel name -->
-                            <telerik:RadWatermarkTextBox />
-                            <!-- Join / leave -->
-                            <telerik:RadButton Grid.Column="2" Background="Transparent" BorderThickness="0">
+            <telerik:RadGridView Grid.Row="1" ItemsSource="{Binding Channels}" Style="{StaticResource RadGridViewStyle}" Margin="3" ShowGroupPanel="False" ShowColumnHeaders="False" GridLinesVisibility="None">
+                <telerik:RadGridView.Columns>
+                    <telerik:GridViewDataColumn Width="*" IsReadOnly="True">
+                        <telerik:GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <telerik:RadWatermarkTextBox WatermarkContent="Enter a channel name" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+                            </DataTemplate>
+                        </telerik:GridViewColumn.CellTemplate>
+                    </telerik:GridViewDataColumn>
+                    <telerik:GridViewColumn Width="Auto" IsReadOnly="True">
+                        <telerik:GridViewColumn.CellTemplate>
+                            <DataTemplate>
                                 <Grid>
-                                    <telerik:RadGlyph Glyph="&#xe13d;"/>
-                                    <telerik:RadGlyph Glyph="&#xe510;" Visibility="{Binding Joined, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                                    <telerik:RadButton 
+                                        Command="{Binding JoinCommand}" 
+                                        Content="Join" 
+                                        Grid.Column="1" 
+                                        Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" 
+                                        BorderThickness="0" 
+                                        Padding="6"
+                                        Focusable="False"
+                                        Visibility="{Binding Joined, Converter={StaticResource InvertedBooleanToVisibilityConverter}}"/>
+                                    <telerik:RadButton 
+                                        Command="{Binding LeaveCommand}" 
+                                        Content="Leave" 
+                                        Grid.Column="1" 
+                                        Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" 
+                                        BorderThickness="0" 
+                                        Padding="6"
+                                        Focusable="False"
+                                        Visibility="{Binding Joined, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                                 </Grid>
-                            </telerik:RadButton>
-                        </Grid>        
-                    </DataTemplate>
-                </telerik:RadListBox.ItemTemplate>
-            </telerik:RadListBox>
-            
+
+                            </DataTemplate>
+                        </telerik:GridViewColumn.CellTemplate>
+                    </telerik:GridViewColumn>
+                    <telerik:GridViewColumn Width="Auto" IsReadOnly="True">
+                        <telerik:GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <telerik:RadButton Command="{Binding RemoveCommand}" Grid.Column="1" Background="Transparent" BorderThickness="0" Margin="0,0,10,0" ToolTip="Remove channel" Focusable="False">
+                                    <telerik:RadGlyph Glyph="&#xe121;" Foreground="Red" />
+                                </telerik:RadButton>
+                            </DataTemplate>
+                        </telerik:GridViewColumn.CellTemplate>
+                    </telerik:GridViewColumn>
+                </telerik:RadGridView.Columns>
+            </telerik:RadGridView>
         </Grid>
-        
+
         <!-- Song history -->
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>

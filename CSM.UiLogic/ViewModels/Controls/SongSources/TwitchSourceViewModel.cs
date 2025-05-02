@@ -137,7 +137,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         private void AddChannel()
         {
-            var newChannel = new TwitchChannelViewModel();
+            var newChannel = new TwitchChannelViewModel(ServiceLocator);
             Channels.Add(newChannel);
 
         }

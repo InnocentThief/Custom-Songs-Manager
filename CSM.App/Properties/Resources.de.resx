@@ -198,4 +198,97 @@
   <data name="enum_PlaylistsSourceAvailability_Twitch" xml:space="preserve">
     <value>Twitch</value>
   </data>
+  <data name="ToolTip_Playlist_FetchData" xml:space="preserve">
+    <value>Playlistendaten aktualisieren</value>
+  </data>
+  <data name="ToolTip_Playlist_SavePlaylistWithCurrentOrder" xml:space="preserve">
+    <value>Aktuelle Songreihenfolge übernehmen und speichern</value>
+  </data>
+  <data name="ToolTip_Playlist_SavePlaylist" xml:space="preserve">
+    <value>Playliste speichern</value>
+  </data>
+  <data name="ToolTip_Playlist_ClickToChangeCoverImage" xml:space="preserve">
+    <value>Hier klicken um das Bild zu ändern</value>
+  </data>
+  <data name="Playlist_Title" xml:space="preserve">
+    <value>Titel</value>
+  </data>
+  <data name="Playlist_Author" xml:space="preserve">
+    <value>Author</value>
+  </data>
+  <data name="Playlist_Description" xml:space="preserve">
+    <value>Bemerkung</value>
+  </data>
+  <data name="Song_Title" xml:space="preserve">
+    <value>Titel</value>
+  </data>
+  <data name="Song_Mapper" xml:space="preserve">
+    <value>Mapper</value>
+  </data>
+  <data name="Song_Difficulties" xml:space="preserve">
+    <value>Schwierigkeitsstufen</value>
+  </data>
+  <data name="ToolTip_Song_RemoveFromPlaylist" xml:space="preserve">
+    <value>Song von der Playliste entfernen</value>
+  </data>
+  <data name="Info_Contributors" xml:space="preserve">
+    <value>Contributors</value>
+  </data>
+  <data name="Info_Idea" xml:space="preserve">
+    <value>Idee</value>
+  </data>
+  <data name="Info_Development" xml:space="preserve">
+    <value>Entwicklung</value>
+  </data>
+  <data name="Info_Icon" xml:space="preserve">
+    <value>Icon</value>
+  </data>
+  <data name="Info_Testing" xml:space="preserve">
+    <value>Tests</value>
+  </data>
+  <data name="Info_HelpWithJSandCSS" xml:space="preserve">
+    <value>Hilfe mit JS und CSS</value>
+  </data>
+  <data name="Info_Libraries" xml:space="preserve">
+    <value>Bibliotheken</value>
+  </data>
+  <data name="Settings_SongSuggest_SSUserId" xml:space="preserve">
+    <value>ScoreSaber Benutzer-ID</value>
+  </data>
+  <data name="Settings_SongSuggest_BLUserId" xml:space="preserve">
+    <value>BeatLeader Benutzer-ID</value>
+  </data>
+  <data name="Settings_SongSuggest_UseSSLeaderboard" xml:space="preserve">
+    <value>ScoreSaber Rangliste verwenden</value>
+  </data>
+  <data name="Settings_SongSuggest_UseBLLeaderboard" xml:space="preserve">
+    <value>BeatLeader Rangliste verwenden</value>
+  </data>
+  <data name="Settings_SongSuggest_DefaultLeaderboard" xml:space="preserve">
+    <value>Standard-Rangliste</value>
+  </data>
+  <data name="Settings_General" xml:space="preserve">
+    <value>Allgemein</value>
+  </data>
+  <data name="Settings_CustomLevels" xml:space="preserve">
+    <value>Custom Levels</value>
+  </data>
+  <data name="Settings_Playlists" xml:space="preserve">
+    <value>Playlisten</value>
+  </data>
+  <data name="Settings_ScoreSaber" xml:space="preserve">
+    <value>ScoreSaber</value>
+  </data>
+  <data name="Settings_BeatLeader" xml:space="preserve">
+    <value>BeatLeader</value>
+  </data>
+  <data name="Settings_SongSuggest" xml:space="preserve">
+    <value>Liedervorschlag</value>
+  </data>
+  <data name="Settings_ScoreSaber_Available" xml:space="preserve">
+    <value>Verfügbar</value>
+  </data>
+  <data name="Settings_Playlists_Available" xml:space="preserve">
+    <value>Verfügbar</value>
+  </data>
 </root>

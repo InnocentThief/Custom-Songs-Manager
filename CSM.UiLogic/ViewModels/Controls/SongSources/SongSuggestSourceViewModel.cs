@@ -406,7 +406,18 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         private void OverwritePlaylist()
         {
+            if (Playlist == null || Playlist.Songs.Count == 0)
+            {
+                MessageBox.Show("No songs to copy.", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
 
+            var songCopyEventArgs = new SongCopyEventArgs
+            {
+                OverwritePlaylist = true,
+                Songs = [.. Playlist.Songs.Select(x => x.Model)]  // todo: only take filtered songs
+            };
+            songCopyDomain.CopySongs(songCopyEventArgs);
         }
 
         private bool CanOverwritePlaylist()
@@ -416,7 +427,17 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         private void MergePlaylist()
         {
+            if (Playlist == null || Playlist.Songs.Count == 0)
+            {
+                MessageBox.Show("No songs to copy.", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
 
+            var songCopyEventArgs = new SongCopyEventArgs
+            {
+                Songs = [.. Playlist.Songs.Select(x => x.Model)]  // todo: only take filtered songs
+            };
+            songCopyDomain.CopySongs(songCopyEventArgs);
         }
 
         private bool CanMergePlaylist()
