@@ -1,39 +1,33 @@
-﻿using CSM.Framework.ServiceLocation;
+﻿using CSM.Business.Interfaces;
+using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.Commands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Threading;
+using TwitchLib.Client.Events;
 
 namespace CSM.UiLogic.ViewModels.Controls.SongSources.Twitch
 {
     internal class TwitchChannelViewModel : BaseViewModel
     {
+        #region Private fields
+
         private IRelayCommand? joinCommand, leaveCommand, removeCommand;
         private bool joined = false;
         private string name = string.Empty;
 
-        public IRelayCommand? JoinCommand => joinCommand ??= CommandFactory.CreateFromAsync(Join, CanJoin);
+        private readonly ITwitchChannelService twitchChannelService;
+
+        #endregion
+
+        #region Properties
+
+        public IRelayCommand? JoinCommand => joinCommand ??= CommandFactory.Create(Join, CanJoin);
 
         public IRelayCommand? LeaveCommand => leaveCommand ??= CommandFactory.Create(Leave, CanLeave);
 
         public IRelayCommand? RemoveCommand => removeCommand ??= CommandFactory.Create(Remove, CanRemove);
 
-        public bool Joined
-        {
-            get => joined;
-            set
-            {
-                if (value == joined)
-                    return;
-                joined = value;
-                OnPropertyChanged();
-                JoinCommand?.RaiseCanExecuteChanged();
-                LeaveCommand?.RaiseCanExecuteChanged();
-            }
-        }
+        public bool Joined => twitchChannelService.CheckChannelIsJoined(Name);
 
         public string Name
         {
@@ -44,35 +38,49 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources.Twitch
                     return;
                 name = value;
                 OnPropertyChanged();
-                JoinCommand?.RaiseCanExecuteChanged();    
+                JoinCommand?.RaiseCanExecuteChanged();
             }
         }
 
+        #endregion
+
         public TwitchChannelViewModel(IServiceLocator serviceLocator) : base(serviceLocator)
         {
+            twitchChannelService = serviceLocator.GetService<ITwitchChannelService>();
+            twitchChannelService.OnJoinedChannel += TwitchChannelService_OnJoinedChannel;
+            twitchChannelService.OnLeftChannel += TwitchChannelService_OnLeftChannel;
+        }
+
+        public void CleanupReferences()
+        {
+            twitchChannelService.OnJoinedChannel -= TwitchChannelService_OnJoinedChannel;
+            twitchChannelService.OnLeftChannel -= TwitchChannelService_OnLeftChannel;
         }
 
         #region Helper methods
 
-        private async Task Join()
+        private void Join()
         {
-            Joined = true;
-            await Task.CompletedTask;
+            if (!twitchChannelService.Initialize())
+                return;
+            twitchChannelService.JoinChannel(Name);
         }
 
         private bool CanJoin()
         {
-            return !Joined && !string.IsNullOrWhiteSpace(Name);
+            return !string.IsNullOrWhiteSpace(Name);
         }
 
         private void Leave()
         {
-            Joined = false;
+            if (!twitchChannelService.Initialize())
+                return;
+            twitchChannelService.LeaveChannel(Name);
         }
 
         private bool CanLeave()
         {
-            return Joined;
+            return true;
         }
 
         private void Remove()
@@ -83,6 +91,22 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources.Twitch
         private bool CanRemove()
         {
             return true;
+        }
+
+        private void TwitchChannelService_OnJoinedChannel(object? sender, OnJoinedChannelArgs e)
+        {
+            if (e.Channel.Equals(Name, StringComparison.InvariantCultureIgnoreCase))
+            {
+                OnPropertyChanged(nameof(Joined));
+            }
+        }
+
+        private void TwitchChannelService_OnLeftChannel(object? sender, OnLeftChannelArgs e)
+        {
+            if (e.Channel.Equals(Name, StringComparison.InvariantCultureIgnoreCase))
+            {
+                OnPropertyChanged(nameof(Joined));
+            }
         }
 
         #endregion

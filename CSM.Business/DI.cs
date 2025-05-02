@@ -16,6 +16,7 @@ namespace CSM.Business
                     .AddSingleton<ISongSelectionDomain, SongSelectionDomain>()
                     .AddSingleton<ISongSuggestDomain, SongSuggestDomain>()
                     .AddSingleton<ITwitchService, TwitchService>()
+                    .AddSingleton<ITwitchChannelService, TwitchChannelService>()
                     .AddSingleton<IUserConfigDomain, UserConfigDomain>();
         }
     }
