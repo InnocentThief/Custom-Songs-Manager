@@ -6,7 +6,6 @@
         public bool IgnorePlayedAll { get; set; } = false;
         public int IgnorePlayedDays { get; set; } = 14;
         public bool IgnoreNonImprovable { get; set; } = true;
-        public int RequiredMatches { get; set; } = 90;
         public bool UseLikedSongs { get; set; } = false;
         public bool FillLikedSongs { get; set; } = true;
         public bool UseLocalScores { get; set; } = false;

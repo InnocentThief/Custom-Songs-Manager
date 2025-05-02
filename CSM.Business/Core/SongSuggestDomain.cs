@@ -41,7 +41,6 @@ namespace CSM.Business.Core
                 logger.LogError(ex, "Error generating song suggestions.");
                 throw;
             }
-
         }
 
         public async Task<Playlist?> GetPlaylistAsync()
@@ -72,6 +71,7 @@ namespace CSM.Business.Core
                 var settings = new CoreSettings()
                 {
                     FilePathSettings = new FilePathSettings(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Custom Songs Manager", "SongSuggest")),
+                    Log = new SongSuggestLogger(logger),
                     UserID = userConfigDomain.Config?.SongSuggestConfig.DefaultLeaderboard == DataAccess.UserConfiguration.LeaderboardType.ScoreSaber ? userConfigDomain.Config?.SongSuggestConfig.ScoreSaberUserId : userConfigDomain.Config?.SongSuggestConfig.BeatLeaderUserId,
                     UseScoreSaberLeaderboard = userConfigDomain.Config?.SongSuggestConfig.UseScoreSaberLeaderboard ?? false,
                     UseBeatLeaderLeaderboard = userConfigDomain.Config?.SongSuggestConfig.UseBeatLeaderLeaderboard ?? false,
@@ -95,7 +95,6 @@ namespace CSM.Business.Core
                 IgnorePlayedAll = userConfigDomain.Config?.SongSuggestConfig.SongSuggestSettings.IgnorePlayedAll ?? false,
                 IgnorePlayedDays = userConfigDomain.Config?.SongSuggestConfig.SongSuggestSettings.IgnorePlayedDays ?? 14,
                 IgnoreNonImproveable = userConfigDomain.Config?.SongSuggestConfig.SongSuggestSettings.IgnoreNonImprovable ?? true,
-                RequiredMatches = userConfigDomain.Config?.SongSuggestConfig.SongSuggestSettings.RequiredMatches ?? 90,
                 UseLikedSongs = userConfigDomain.Config?.SongSuggestConfig.SongSuggestSettings.UseLikedSongs ?? false,
                 FillLikedSongs = userConfigDomain.Config?.SongSuggestConfig.SongSuggestSettings.FillLikedSongs ?? true,
                 UseLocalScores = userConfigDomain.Config?.SongSuggestConfig.SongSuggestSettings.UseLocalScores ?? false,

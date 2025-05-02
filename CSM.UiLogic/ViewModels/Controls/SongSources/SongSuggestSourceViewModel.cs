@@ -169,19 +169,6 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             }
         }
 
-        public int RequiredMatches
-        {
-            get => userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.RequiredMatches;
-            set
-            {
-                if (value == userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.RequiredMatches)
-                    return;
-                userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.RequiredMatches = value;
-                IsDirty = true;
-                OnPropertyChanged();
-            }
-        }
-
         public bool UseLikedSongs
         {
             get => userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.UseLikedSongs;
@@ -356,7 +343,6 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             OnPropertyChanged(nameof(IgnorePlayedAll));
             OnPropertyChanged(nameof(IgnorePlayedDays));
             OnPropertyChanged(nameof(IgnoreNonImprovable));
-            OnPropertyChanged(nameof(RequiredMatches));
             OnPropertyChanged(nameof(UseLikedSongs));
             OnPropertyChanged(nameof(FillLikedSongs));
             OnPropertyChanged(nameof(UseLocalScores));

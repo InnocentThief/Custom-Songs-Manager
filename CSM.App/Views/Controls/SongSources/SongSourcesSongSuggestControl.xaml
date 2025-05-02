@@ -81,7 +81,6 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
 
                             <!-- IgnorePlayedAll -->
@@ -115,17 +114,6 @@
                                 </Grid.ColumnDefinitions>
                                 <telerik:RadToggleSwitchButton IsChecked="{Binding IgnoreNonImprovable}" />
                                 <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="If enabled, maps that you already have a great score on will not be suggested" />
-                            </Grid>
-
-                            <!-- RequiredMatches -->
-                            <telerik:Label Content="Required matches" Grid.Row="3" />
-                            <Grid Grid.Column="1" Grid.Row="3">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <telerik:RadNumericUpDown IsInteger="True" ShowButtons="False" Value="{Binding RequiredMatches}" NullValue="90" />
-                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="Add some useful informations" />
                             </Grid>
 
                             <!-- UseLikedSongs -->
