@@ -1,5 +1,6 @@
 ﻿using CSM.Business.Core.Twitch;
 using CSM.Business.Interfaces;
+using CSM.DataAccess.UserConfiguration;
 using Microsoft.Extensions.Logging;
 using TwitchLib.Client;
 using TwitchLib.Client.Events;
@@ -19,6 +20,24 @@ namespace CSM.Business.Core
         public event EventHandler<OnLeftChannelArgs>? OnLeftChannel;
 
         public event EventHandler<SongRequestEventArgs>? OnBsrKeyReceived;
+
+        public event EventHandler<OnConnectedArgs>? OnConnected;
+
+        public void AddChannel(string channelName)
+        {
+            if (userConfigDomain.Config?.TwitchConfig.Channels.Find(c => c.Name == channelName) != null)
+                return;
+            userConfigDomain.Config!.TwitchConfig.Channels.Add(new TwitchChannel { Name = channelName });
+            userConfigDomain.SaveUserConfig();
+        }
+
+        public void AddSong(string key, string channelName, DateTime receivedAt)
+        {
+            if (userConfigDomain.Config?.TwitchConfig.Songs.Find(s => s.Key == key) != null)
+                return;
+            userConfigDomain.Config!.TwitchConfig.Songs.Add(new TwitchSong { Key = key, ChannelName = channelName, ReceivedAt = receivedAt });
+            userConfigDomain.SaveUserConfig();
+        }
 
         public bool CheckChannelIsJoined(string channelName)
         {
@@ -51,7 +70,7 @@ namespace CSM.Business.Core
                 twitchClient.OnJoinedChannel += TwitchClient_OnJoinedChannel;
                 twitchClient.OnLeftChannel += TwitchClient_OnLeftChannel;
                 twitchClient.OnChatCommandReceived += TwitchClient_OnChatCommandReceived;
-                twitchClient.OnMessageReceived += TwitchClient_OnMessageReceived; ;
+                twitchClient.OnMessageReceived += TwitchClient_OnMessageReceived;
                 twitchClient.Connect();
 
                 return true;
@@ -83,6 +102,26 @@ namespace CSM.Business.Core
             }
         }
 
+        public void RemoveChannel(string channelName)
+        {
+            var channel = userConfigDomain.Config!.TwitchConfig.Channels.FirstOrDefault(c => c.Name == channelName);
+            if (channel != null)
+            {
+                userConfigDomain.Config.TwitchConfig.Channels.Remove(channel);
+                userConfigDomain.SaveUserConfig();
+            }
+        }
+
+        public void RemoveSong(string key)
+        {
+            var song = userConfigDomain.Config!.TwitchConfig.Songs.FirstOrDefault(s => s.Key == key);
+            if (song != null)
+            {
+                userConfigDomain.Config.TwitchConfig.Songs.Remove(song);
+                userConfigDomain.SaveUserConfig();
+            }
+        }
+
         #region Helper methods
 
         private void TwitchClient_OnConnectionError(object? sender, OnConnectionErrorArgs e)
@@ -93,6 +132,7 @@ namespace CSM.Business.Core
         private void TwitchClient_OnConnected(object? sender, OnConnectedArgs e)
         {
             logger.LogInformation("Twitch client connected to {username}", e.BotUsername);
+            OnConnected?.Invoke(this, e);
         }
 
         private void TwitchClient_OnJoinedChannel(object? sender, OnJoinedChannelArgs e)
@@ -136,8 +176,6 @@ namespace CSM.Business.Core
             };
             OnBsrKeyReceived?.Invoke(sender, eventArgs);
         }
-
-
 
         #endregion
     }

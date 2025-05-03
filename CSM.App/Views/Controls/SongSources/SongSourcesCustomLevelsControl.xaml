@@ -55,7 +55,7 @@
                     Style="{StaticResource RadGridViewStyle}">
                     <telerik:RadGridView.Columns>
                         <!-- Add button (will add song to selected playlist) -->
-                        <telerik:GridViewColumn Width="SizeToCells">
+                        <telerik:GridViewColumn Width="Auto" IsResizable="False">
                             <telerik:GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <telerik:RadButton Command="{Binding AddToPlaylistCommand}" Grid.Column="1" Background="Transparent" BorderThickness="0" ToolTip="Add to selected playlist">

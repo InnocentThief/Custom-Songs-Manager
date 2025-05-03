@@ -2,7 +2,6 @@
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.Commands;
-using System.Windows.Threading;
 using TwitchLib.Client.Events;
 
 namespace CSM.UiLogic.ViewModels.Controls.SongSources.Twitch
@@ -43,6 +42,8 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources.Twitch
         }
 
         #endregion
+
+        public event EventHandler? OnRemoveChannel;
 
         public TwitchChannelViewModel(IServiceLocator serviceLocator) : base(serviceLocator)
         {
@@ -85,7 +86,10 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources.Twitch
 
         private void Remove()
         {
-
+            if (Joined)
+                twitchChannelService.LeaveChannel(Name);
+            twitchChannelService.RemoveChannel(Name);
+            OnRemoveChannel?.Invoke(this, EventArgs.Empty);
         }
 
         private bool CanRemove()
@@ -98,6 +102,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources.Twitch
             if (e.Channel.Equals(Name, StringComparison.InvariantCultureIgnoreCase))
             {
                 OnPropertyChanged(nameof(Joined));
+                twitchChannelService.AddChannel(Name);
             }
         }
 

@@ -13,7 +13,6 @@
             <RowDefinition Height="40" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="3" />
             <RowDefinition Height="220" />
         </Grid.RowDefinitions>
@@ -27,6 +26,13 @@
             <TextBlock Text="{Binding PlaylistTitle}" Style="{StaticResource HeaderTitleStyle}" />
             <!-- Commands -->
             <telerik:RadToolBar Grid.Column="1" Style="{StaticResource HeaderToolBarStyle}" >
+                <telerik:RadButton Command="{Binding UpdateFromSourceCommand}" ToolTip="Update data from source" Visibility="{Binding HasExternalSource, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <telerik:RadGlyph Glyph="&#xe132;" />
+                </telerik:RadButton>
+                <!--<telerik:RadButton ToolTip="Update source from data" Visibility="{Binding HasExternalSource, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <telerik:RadGlyph Glyph="&#xe133;" />
+                </telerik:RadButton>-->
+                <telerik:RadToolBarSeparator Visibility="{Binding HasExternalSource, Converter={StaticResource BooleanToVisibilityConverter}}" />
                 <telerik:RadButton Command="{Binding FetchDataCommand}" ToolTip="{x:Static p:Resources.ToolTip_Playlist_FetchData}">
                     <telerik:RadGlyph Glyph="&#xe68F;" />
                 </telerik:RadButton>
@@ -79,61 +85,66 @@
             </Grid>
         </Grid>
         <!-- Songs -->
-        <telerik:RadGridView 
-            Grid.Row="2" 
-            ItemsSource="{Binding Songs}"
-            Margin="3" 
-            SelectedItem="{Binding SelectedSong}"
-            FilterOperatorsLoading="RadGridView_FilterOperatorsLoading"
-            SelectionChanged="RadGridView_SelectionChanged"
-            Sorted="RadGridView_Sorted"
-            Style="{StaticResource RadGridViewStyle}">
-            <telerik:RadGridView.Columns>
-                <!-- Key -->
-                <telerik:GridViewDataColumn UniqueName="BsrKey" Header="BSR" Width="Auto" DataMemberBinding="{Binding BsrKeyHex}" IsFilterable="true" FilterMemberPath="BsrKey">
-                    <telerik:GridViewDataColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding BsrKey}" />
-                        </DataTemplate>
-                    </telerik:GridViewDataColumn.CellTemplate>
-                </telerik:GridViewDataColumn>
-                <!-- Title of the song -->
-                <telerik:GridViewDataColumn Header="{x:Static p:Resources.Song_Title}" DataMemberBinding="{Binding SongName}" Width="*" TextTrimming="CharacterEllipsis" />
-                <!-- Mapper of the song -->
-                <telerik:GridViewDataColumn Header="{x:Static p:Resources.Song_Mapper}" DataMemberBinding="{Binding LevelAuthorName}" Width="*" TextTrimming="CharacterEllipsis" />
-                <!-- Difficulties -->
-                <telerik:GridViewDataColumn Header="{x:Static p:Resources.Song_Difficulties}" DataMemberBinding="{Binding Difficulties}" Width="Auto">
-                    <telerik:GridViewDataColumn.CellTemplate>
-                        <DataTemplate>
-                            <local:SongDifficultyEditControl />
-                        </DataTemplate>
-                    </telerik:GridViewDataColumn.CellTemplate>
-                </telerik:GridViewDataColumn>
-                <!-- Delete button (remove song from playlist) -->
-                <telerik:GridViewColumn Width="Auto">
-                    <telerik:GridViewColumn.CellTemplate>
-                        <DataTemplate>
-                            <telerik:RadButton Command="{Binding RemoveFromPlaylistCommand}" Grid.Column="1" Background="Transparent" BorderThickness="0" Margin="0,0,10,0" ToolTip="{x:Static p:Resources.ToolTip_Song_RemoveFromPlaylist}" Focusable="False">
-                                <telerik:RadGlyph Glyph="&#xe121;" Foreground="Red" />
-                            </telerik:RadButton>
-                        </DataTemplate>
-                    </telerik:GridViewColumn.CellTemplate>
-                </telerik:GridViewColumn>
-            </telerik:RadGridView.Columns>
-        </telerik:RadGridView>
+        <Grid Grid.Row="2" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <telerik:RadGridView 
+                ItemsSource="{Binding Songs}"
+                Margin="3" 
+                SelectedItem="{Binding SelectedSong}"
+                FilterOperatorsLoading="RadGridView_FilterOperatorsLoading"
+                SelectionChanged="RadGridView_SelectionChanged"
+                Sorted="RadGridView_Sorted"
+                Style="{StaticResource RadGridViewStyle}">
+                <telerik:RadGridView.Columns>
+                    <!-- Key -->
+                    <telerik:GridViewDataColumn UniqueName="BsrKey" Header="BSR" Width="Auto" DataMemberBinding="{Binding BsrKeyHex}" IsFilterable="true" FilterMemberPath="BsrKey">
+                        <telerik:GridViewDataColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding BsrKey}" />
+                            </DataTemplate>
+                        </telerik:GridViewDataColumn.CellTemplate>
+                    </telerik:GridViewDataColumn>
+                    <!-- Title of the song -->
+                    <telerik:GridViewDataColumn Header="{x:Static p:Resources.Song_Title}" DataMemberBinding="{Binding SongName}" Width="*" TextTrimming="CharacterEllipsis" />
+                    <!-- Mapper of the song -->
+                    <telerik:GridViewDataColumn Header="{x:Static p:Resources.Song_Mapper}" DataMemberBinding="{Binding LevelAuthorName}" Width="*" TextTrimming="CharacterEllipsis" />
+                    <!-- Difficulties -->
+                    <telerik:GridViewDataColumn Header="{x:Static p:Resources.Song_Difficulties}" DataMemberBinding="{Binding Difficulties}" Width="Auto">
+                        <telerik:GridViewDataColumn.CellTemplate>
+                            <DataTemplate>
+                                <local:SongDifficultyEditControl />
+                            </DataTemplate>
+                        </telerik:GridViewDataColumn.CellTemplate>
+                    </telerik:GridViewDataColumn>
+                    <!-- Delete button (remove song from playlist) -->
+                    <telerik:GridViewColumn Width="Auto" IsResizable="False">
+                        <telerik:GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <telerik:RadButton Command="{Binding RemoveFromPlaylistCommand}" Grid.Column="1" Background="Transparent" BorderThickness="0" Margin="0,0,10,0" ToolTip="{x:Static p:Resources.ToolTip_Song_RemoveFromPlaylist}" Focusable="False">
+                                    <telerik:RadGlyph Glyph="&#xe121;" Foreground="Red" />
+                                </telerik:RadButton>
+                            </DataTemplate>
+                        </telerik:GridViewColumn.CellTemplate>
+                    </telerik:GridViewColumn>
+                </telerik:RadGridView.Columns>
+            </telerik:RadGridView>
 
-        <!-- Entry counter -->
-        <Border Grid.Row="3" Padding="6">
-            <telerik:Label Content="{Binding SongCount}"  />
-        </Border>
+            <!-- Entry counter -->
+            <Border Grid.Row="1" Padding="6">
+                <telerik:Label Content="{Binding SongCount}"  />
+            </Border>
+        </Grid>
 
-        <GridSplitter Grid.Row="4" Style="{StaticResource WorkspaceHorizontalGridSplitterStyle}" VerticalAlignment="Center" />
+        <GridSplitter Grid.Row="3" Style="{StaticResource WorkspaceHorizontalGridSplitterStyle}" VerticalAlignment="Center" />
 
-        <Grid Grid.Row="5" Visibility="{Binding HasSelectedSong, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <Grid Grid.Row="4" Visibility="{Binding HasSelectedSong, Converter={StaticResource BooleanToVisibilityConverter}}">
             <common:MapDetailTailoredControl DataContext="{Binding SelectedSong.MapDetailViewModel}" />
         </Grid>
 
-        <common:MapDetailNoDataControl Grid.Row="5" Visibility="{Binding HasSelectedSong, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
+        <common:MapDetailNoDataControl Grid.Row="4" Visibility="{Binding HasSelectedSong, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
     </Grid>
 </UserControl>
 

@@ -56,8 +56,11 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
                 OnPropertyChanged();
 
                 UpdateCommands();
-                if (!isReadOnly)
+                if (!isReadOnly || value == null)
+                {
                     songCopyDomain.SetSelectedPlaylist(value);
+                    songSelectionDomain.SetSongHash(null, songSelectionType);
+                }
             }
         }
 

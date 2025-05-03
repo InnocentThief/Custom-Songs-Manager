@@ -97,7 +97,7 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
         public void UpdateData(MapDetail mapDetail)
         {
             song.Key = mapDetail.Id;
-            song.SongName = mapDetail.Name;
+            song.SongName = mapDetail.Metadata?.SongName ?? string.Empty;
             song.LevelAuthorName = mapDetail.Metadata?.LevelAuthorName;
             song.LevelId = mapDetail.Id;
             Uploaded = mapDetail.Uploaded;

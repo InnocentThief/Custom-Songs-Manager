@@ -21,5 +21,8 @@ namespace CSM.DataAccess.Playlists
 
         [JsonPropertyName("image")]
         public string Image { get; set; } = string.Empty;
+
+        [JsonPropertyName("syncURL")]
+        public string syncURL { get; set; } = string.Empty;
     }
 }

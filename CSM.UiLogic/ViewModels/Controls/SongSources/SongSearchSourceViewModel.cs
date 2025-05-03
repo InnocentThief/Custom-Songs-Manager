@@ -1,4 +1,5 @@
 ﻿using CSM.Business.Core.SongCopy;
+using CSM.Business.Core.SongSelection;
 using CSM.Business.Interfaces;
 using CSM.DataAccess.BeatSaver;
 using CSM.DataAccess.Playlists;
@@ -33,6 +34,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         private readonly IBeatSaverService beatSaverService;
         private readonly ISongCopyDomain songCopyDomain;
+        private readonly ISongSelectionDomain songSelectionDomain;
 
         #endregion
 
@@ -520,6 +522,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
                 selectedResult = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(HasSelectedResult));
+                songSelectionDomain.SetSongHash(SelectedResult?.Model.Versions.OrderByDescending(v => v.CreatedAt).FirstOrDefault()?.Hash, SongSelectionType.Right);
             }
         }
 
@@ -548,6 +551,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             beatSaverService = serviceLocator.GetService<IBeatSaverService>();
             songCopyDomain = serviceLocator.GetService<ISongCopyDomain>();
             songCopyDomain.OnPlaylistSelectionChanged += SongCopyDomain_OnPlaylistSelectionChanged;
+            songSelectionDomain = serviceLocator.GetService<ISongSelectionDomain>();
 
             Relevances.AddRange(EnumWrapper<SearchParamRelevance>.GetValues(serviceLocator, SearchParamRelevance.Undefined));
         }

@@ -13,5 +13,9 @@
         public string Login { get; set; } = string.Empty;
 
         public string UserId { get; set; } = string.Empty;
+
+        public List<TwitchChannel> Channels { get; set; } = [];
+
+        public List<TwitchSong> Songs { get; set; } = [];
     }
 }

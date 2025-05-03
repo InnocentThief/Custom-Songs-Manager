@@ -11,8 +11,10 @@ using CSM.UiLogic.Commands;
 using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Net.Http;
 using System.Text.Json;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using Telerik.Windows.Controls;
 
@@ -22,7 +24,7 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
     {
         #region Private fields
 
-        private IRelayCommand? fetchDataCommand, savePlaylistCommand, applySortOrderAndSaveCommand, chooseCoverImageCommand;
+        private IRelayCommand? fetchDataCommand, savePlaylistCommand, applySortOrderAndSaveCommand, chooseCoverImageCommand, updateFromSourceCommand;
         private PlaylistSongViewModel? selectedSong;
         private string sortColumnName = string.Empty;
         private GridViewSortingState sortingState = GridViewSortingState.None;
@@ -43,6 +45,7 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
         public IRelayCommand? SavePlaylistCommand => savePlaylistCommand ??= CommandFactory.CreateFromAsync(SaveAsync, CanSave);
         public IRelayCommand? ApplySortOrderAndSaveCommand => applySortOrderAndSaveCommand ??= CommandFactory.CreateFromAsync(ApplySortOrderAndSaveAsync, CanSave);
         public IRelayCommand? ChooseCoverImageCommand => chooseCoverImageCommand ??= CommandFactory.CreateFromAsync(ChooseCoverImage, CanChooseCoverImage);
+        public IRelayCommand? UpdateFromSourceCommand => updateFromSourceCommand ??= CommandFactory.CreateFromAsync(UpdateFromSourceAsync, CanUpdateFromSource);
 
         public string PlaylistTitle
         {
@@ -114,6 +117,19 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
                 if (Songs.Count == 1)
                     return "1 song";
                 return $"{Songs.Count} songs";
+            }
+        }
+
+        public bool HasExternalSource
+        {
+            get
+            {
+                var syncUrl = playlist.CustomData?.SyncURL ?? string.Empty;
+                if (string.IsNullOrWhiteSpace(syncUrl))
+                {
+                    syncUrl = playlist.syncURL ?? string.Empty;
+                }
+                return (!string.IsNullOrWhiteSpace(syncUrl));
             }
         }
 
@@ -298,6 +314,67 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
         private bool CanFetchData()
         {
             return true;
+        }
+
+        private async Task UpdateFromSourceAsync()
+        {
+            SetLoadingInProgress(true, "Updating playlist from source");
+
+            var syncUrl = playlist.CustomData?.SyncURL ?? string.Empty;
+            if (string.IsNullOrWhiteSpace(syncUrl))
+            {
+                syncUrl = playlist.syncURL ?? string.Empty;
+            }
+            if (string.IsNullOrWhiteSpace(syncUrl))
+                return;
+
+            try
+            {
+                using var client = new HttpClient();
+                var content = await client.GetStringAsync(syncUrl);
+                var newPlaylist = JsonSerializer.Deserialize<Playlist>(content, JsonSerializerHelper.CreateDefaultSerializerOptions());
+                if (newPlaylist == null)
+                    return;
+
+                PlaylistTitle = newPlaylist.PlaylistTitle;
+                PlaylistAuthor = newPlaylist.PlaylistAuthor;
+                PlaylistDescription = newPlaylist.PlaylistDescription;
+                playlist.Image = newPlaylist.Image;
+
+                OnPropertyChanged(nameof(CoverImage));
+
+                playlist.Songs.Clear();
+                playlist.Songs.AddRange(newPlaylist.Songs);
+
+                Songs.ForEach(s => s.OnSongRemoved -= Playlist_OnSongRemoved);
+                Songs.ForEach(s => s.CleanUpReferences());
+                Songs.Clear();
+                foreach (var song in playlist.Songs)
+                {
+                    var vm = new PlaylistSongViewModel(ServiceLocator, song);
+                    vm.OnSongRemoved += Playlist_OnSongRemoved;
+                    Songs.Add(vm);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error while updating playlist '{title}' from source.", playlist.PlaylistTitle);
+                throw;
+            }
+            finally
+            {
+                SetLoadingInProgress(false, string.Empty);
+            }
+        }
+
+        private bool CanUpdateFromSource()
+        {
+            var syncUrl = playlist.CustomData?.SyncURL ?? string.Empty;
+            if (string.IsNullOrWhiteSpace(syncUrl))
+            {
+                syncUrl = playlist.syncURL ?? string.Empty;
+            }
+            return (!string.IsNullOrWhiteSpace(syncUrl));
         }
 
         private void SongCopyDomain_OnCopySongs(object? sender, Business.Core.SongCopy.SongCopyEventArgs e)

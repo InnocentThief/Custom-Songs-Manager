@@ -31,11 +31,13 @@
                 </telerik:RadButton>
             </telerik:RadToolBar>
         </Grid>
-        
-        <!-- Not logged in -->
+
         <twitch:NotLoggedInControl Grid.Row="1" Visibility="{Binding LoggedIn, Converter={StaticResource InvertedBooleanToVisibilityConverter}}"/>
 
-        <!-- Logged in -->
-        <twitch:LoggedInControl Grid.Row="1" Visibility="{Binding LoggedIn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <Grid Grid.Row="1" Visibility="{Binding LoggedIn, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <twitch:LoggedInControl Visibility="{Binding Connected, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <twitch:NotConnectedControl Visibility="{Binding Connected, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
+        </Grid>
+
     </Grid>
 </UserControl>
