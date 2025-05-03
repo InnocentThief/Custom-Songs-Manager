@@ -11,7 +11,6 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources.Twitch
         #region Private fields
 
         private IRelayCommand? joinCommand, leaveCommand, removeCommand;
-        private bool joined = false;
         private string name = string.Empty;
 
         private readonly ITwitchChannelService twitchChannelService;

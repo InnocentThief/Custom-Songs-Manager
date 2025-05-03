@@ -344,7 +344,7 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
                     {
                         foreach (var difficultyToCopy in songToCopy.Difficulties ?? [])
                         {
-                            var existingDifficulty = existingSong.Difficulties.SingleOrDefault(d => d.Characteristic == difficultyToCopy.Characteristic && d.Name == difficultyToCopy.Name);
+                            var existingDifficulty = existingSong.Difficulties?.SingleOrDefault(d => d.Characteristic == difficultyToCopy.Characteristic && d.Name == difficultyToCopy.Name);
                             if (existingDifficulty == null)
                             {
                                 existingSong.Difficulties ??= [];

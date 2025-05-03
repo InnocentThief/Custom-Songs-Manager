@@ -31,7 +31,7 @@ namespace CSM.App.Behaviours
                 if ((bool)e.NewValue)
                 {
                     // Create new GridViewHeaderMenu and attach RowLoaded event.
-                    GridViewHeaderContextMenuBehaviour menu = new GridViewHeaderContextMenuBehaviour(grid);
+                    GridViewHeaderContextMenuBehaviour menu = new(grid);
                     menu.Attach();
                 }
             }
@@ -62,7 +62,7 @@ namespace CSM.App.Behaviours
             {
                 menu.Items.Clear();
 
-                RadMenuItem item = new RadMenuItem
+                RadMenuItem item = new()
                 {
                     Header = String.Format(@"Sort Ascending by ""{0}""", cell.Column.Header)
                 };
@@ -101,14 +101,14 @@ namespace CSM.App.Behaviours
                 // create menu items
                 foreach (GridViewColumn column in grid.Columns)
                 {
-                    RadMenuItem subMenu = new RadMenuItem
+                    RadMenuItem subMenu = new()
                     {
                         Header = column.Header,
                         IsCheckable = true,
                         IsChecked = true
                     };
 
-                    Binding isCheckedBinding = new Binding("IsVisible")
+                    Binding isCheckedBinding = new("IsVisible")
                     {
                         Mode = BindingMode.TwoWay,
                         Source = column
@@ -131,20 +131,19 @@ namespace CSM.App.Behaviours
             RadContextMenu menu = (RadContextMenu)sender;
 
             GridViewHeaderCell cell = menu.GetClickedElement<GridViewHeaderCell>();
-            RadMenuItem? clickedItem = ((RadRoutedEventArgs)e).OriginalSource as RadMenuItem;
             GridViewColumn column = cell.Column;
 
-            if (clickedItem == null) return;
+            if (((RadRoutedEventArgs)e).OriginalSource is not RadMenuItem clickedItem) return;
 
             if (clickedItem.Parent is RadMenuItem)
                 return;
 
-            string header = Convert.ToString(clickedItem.Header);
+            string? header = Convert.ToString(clickedItem.Header);
             if (header == null) return;
 
             using (grid.DeferRefresh())
             {
-                ColumnSortDescriptor sd = (from d in grid.SortDescriptors.OfType<ColumnSortDescriptor>()
+                ColumnSortDescriptor? sd = (from d in grid.SortDescriptors.OfType<ColumnSortDescriptor>()
                                            where object.Equals(d.Column, column)
                                            select d).FirstOrDefault();
 
@@ -155,9 +154,11 @@ namespace CSM.App.Behaviours
                         grid.SortDescriptors.Remove(sd);
                     }
 
-                    ColumnSortDescriptor newDescriptor = new ColumnSortDescriptor();
-                    newDescriptor.Column = column;
-                    newDescriptor.SortDirection = ListSortDirection.Ascending;
+                    ColumnSortDescriptor newDescriptor = new()
+                    {
+                        Column = column,
+                        SortDirection = ListSortDirection.Ascending
+                    };
 
                     grid.SortDescriptors.Add(newDescriptor);
                 }
@@ -168,9 +169,11 @@ namespace CSM.App.Behaviours
                         grid.SortDescriptors.Remove(sd);
                     }
 
-                    ColumnSortDescriptor newDescriptor = new ColumnSortDescriptor();
-                    newDescriptor.Column = column;
-                    newDescriptor.SortDirection = ListSortDirection.Descending;
+                    ColumnSortDescriptor newDescriptor = new()
+                    {
+                        Column = column,
+                        SortDirection = ListSortDirection.Descending
+                    };
 
                     grid.SortDescriptors.Add(newDescriptor);
                 }
@@ -183,21 +186,23 @@ namespace CSM.App.Behaviours
                 }
                 else if (header.Contains("Group by"))
                 {
-                    ColumnGroupDescriptor gd = (from d in grid.GroupDescriptors.OfType<ColumnGroupDescriptor>()
+                    ColumnGroupDescriptor? gd = (from d in grid.GroupDescriptors.OfType<ColumnGroupDescriptor>()
                                                 where object.Equals(d.Column, column)
                                                 select d).FirstOrDefault();
 
                     if (gd == null)
                     {
-                        ColumnGroupDescriptor newDescriptor = new ColumnGroupDescriptor();
-                        newDescriptor.Column = column;
-                        newDescriptor.SortDirection = ListSortDirection.Ascending;
+                        ColumnGroupDescriptor newDescriptor = new()
+                        {
+                            Column = column,
+                            SortDirection = ListSortDirection.Ascending
+                        };
                         grid.GroupDescriptors.Add(newDescriptor);
                     }
                 }
                 else if (header.Contains("Ungroup"))
                 {
-                    ColumnGroupDescriptor gd = (from d in grid.GroupDescriptors.OfType<ColumnGroupDescriptor>()
+                    ColumnGroupDescriptor? gd = (from d in grid.GroupDescriptors.OfType<ColumnGroupDescriptor>()
                                                 where object.Equals(d.Column, column)
                                                 select d).FirstOrDefault();
                     if (gd != null)

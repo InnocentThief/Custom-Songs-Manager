@@ -130,7 +130,7 @@ namespace CSM.App
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }

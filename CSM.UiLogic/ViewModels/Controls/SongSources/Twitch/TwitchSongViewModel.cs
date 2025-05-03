@@ -52,7 +52,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources.Twitch
 
         #endregion
 
-        public event EventHandler OnRemoveSong;
+        public event EventHandler? OnRemoveSong;
 
         public TwitchSongViewModel(IServiceLocator serviceLocator, string channelName, MapDetail mapDetail) : base(serviceLocator)
         {
