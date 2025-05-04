@@ -1,11 +1,13 @@
 ﻿using CSM.Business.Core.Twitch;
 using CSM.Business.Interfaces;
 using CSM.DataAccess.BeatSaver;
+using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.Commands;
 using CSM.UiLogic.ViewModels.Controls.SongSources.Twitch;
 using System.Collections.ObjectModel;
+using System.Windows.Threading;
 using TwitchLib.Client.Events;
 
 namespace CSM.UiLogic.ViewModels.Controls.SongSources
@@ -14,7 +16,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
     {
         #region Private fields
 
-        private IRelayCommand? loginCommand, logoutCommand, addChannelCommand, removeChannelCommand, connectToTwitchCommand;
+        private IRelayCommand? loginCommand, logoutCommand, addChannelCommand, removeChannelCommand, connectToTwitchCommand, clearSongHistoryCommand;
         private bool loggedIn;
         private TwitchChannelViewModel? selectedChannel;
         private TwitchSongViewModel? selectedMap;
@@ -33,7 +35,8 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
         public IRelayCommand LogoutCommand => logoutCommand ??= CommandFactory.Create(LogoutFromTwitch, CanLogoutFromTwitch);
         public IRelayCommand AddChannelCommand => addChannelCommand ??= CommandFactory.Create(AddChannel, CanAddChannel);
         public IRelayCommand RemoveChannelCommand => removeChannelCommand ??= CommandFactory.Create(RemoveChannel, CanRemoveChannel);
-        public IRelayCommand ConnectToTwitchCommand => connectToTwitchCommand ??= CommandFactory.Create(ConnectToTwitch, CanConnectToTwitch);
+        public IRelayCommand ConnectToTwitchCommand => connectToTwitchCommand ??= CommandFactory.CreateFromAsync(ConnectToTwitchAsync, CanConnectToTwitch);
+        public IRelayCommand ClearSongHistoryCommand => clearSongHistoryCommand ??= CommandFactory.CreateFromAsync(ClearSongHistoryAsync, CanClearSongHistory);
 
         public bool LoggedIn
         {
@@ -104,6 +107,23 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
                     return;
                 selectedMap = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(HasSelectedMap));
+            }
+        }
+
+        public bool HasSelectedMap => SelectedMap != null;
+
+        public string MapCount
+        {
+            get
+            {
+                ClearSongHistoryCommand?.RaiseCanExecuteChanged(); // we do this here because we don't want to care about threads
+
+                if (Maps.Count == 0)
+                    return "No songs";
+                if (Maps.Count == 1)
+                    return "1 song";
+                return $"{Maps.Count} songs";
             }
         }
 
@@ -141,19 +161,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
                 LoggedIn = false;
             }
 
-            var songKeys = userConfigDomain.Config?.TwitchConfig.Songs.Select(x => x.Key).ToList();
-            if (songKeys == null || songKeys.Count == 0)
-                return;
-            var mapDetails = await beatSaverService.GetMapDetailsAsync(songKeys, BeatSaverKeyType.Id);
-            foreach (var song in userConfigDomain.Config?.TwitchConfig.Songs ?? [])
-            {
-                if (mapDetails == null || !mapDetails.ContainsKey(song.Key))
-                    continue;
-                var mapDetail = mapDetails[song.Key];
-                var newSong = new TwitchSongViewModel(ServiceLocator, song.ChannelName, mapDetail);
-                newSong.OnRemoveSong += Song_OnRemoveSong;
-                Maps.Add(newSong);
-            }
+
         }
 
         #region Helper methods
@@ -227,19 +235,20 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
             var song = new TwitchSongViewModel(ServiceLocator, e.ChannelName, mapDetail);
             song.OnRemoveSong += Song_OnRemoveSong;
-            twitchChannelService.AddSong(e.Key, e.ChannelName, song.ReceivedAt);
+            await twitchChannelService.AddSongAsync(e.Key, e.ChannelName, song.ReceivedAt);
             Maps.Add(song);
+            OnPropertyChanged(nameof(MapCount));
         }
 
-        private void Song_OnRemoveSong(object? sender, EventArgs e)
+        private async void Song_OnRemoveSong(object? sender, EventArgs e)
         {
-            var song = sender as TwitchSongViewModel;
-            if (song == null)
+            if (sender is not TwitchSongViewModel song)
                 return;
             song.OnRemoveSong -= Song_OnRemoveSong;
             song.CleanUpReferences();
-            twitchChannelService.RemoveSong(song.BsrKey);
+            await twitchChannelService.RemoveSongAsync(song.BsrKey);
             Maps.Remove(song);
+            OnPropertyChanged(nameof(MapCount));
         }
 
         private void Channel_OnRemove(object? sender, EventArgs e)
@@ -253,15 +262,46 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             Channels.Remove(channel);
         }
 
-        private void ConnectToTwitch()
+        private async Task ConnectToTwitchAsync()
         {
             SetLoadingInProgress(true, "Connecting to Twitch...");
-            twitchChannelService.Initialize();
+            await twitchChannelService.Initialize();
+
+            var songKeys = twitchChannelService.TwitchSongs?.Songs.Select(x => x.Key).ToList();
+            if (songKeys == null || songKeys.Count == 0)
+                return;
+            var mapDetails = await beatSaverService.GetMapDetailsAsync(songKeys, BeatSaverKeyType.Id);
+            foreach (var song in twitchChannelService.TwitchSongs?.Songs ?? [])
+            {
+                if (mapDetails == null || !mapDetails.ContainsKey(song.Key))
+                    continue;
+                var mapDetail = mapDetails[song.Key];
+                var newSong = new TwitchSongViewModel(ServiceLocator, song.ChannelName, mapDetail);
+                newSong.OnRemoveSong += Song_OnRemoveSong;
+                Maps.Add(newSong);
+            }
+            OnPropertyChanged(nameof(MapCount));
+            ClearSongHistoryCommand.RaiseCanExecuteChanged();
         }
 
         private bool CanConnectToTwitch()
         {
             return LoggedIn;
+        }
+
+        private async Task ClearSongHistoryAsync()
+        {
+            Maps.ForEach(m => m.OnRemoveSong -= Song_OnRemoveSong);
+            Maps.ForEach(m => m.CleanUpReferences());
+            Maps.Clear();
+            await twitchChannelService.ClearSongHistoryAsync();
+            OnPropertyChanged(nameof(MapCount));
+            ClearSongHistoryCommand.RaiseCanExecuteChanged();
+        }
+
+        private bool CanClearSongHistory()
+        {
+            return Maps.Count > 0;
         }
 
         private void TwitchChannelService_OnConnected(object? sender, OnConnectedArgs e)

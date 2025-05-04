@@ -19,9 +19,9 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources.Twitch
 
         #region Properties
 
-        public IRelayCommand? JoinCommand => joinCommand ??= CommandFactory.Create(Join, CanJoin);
+        public IRelayCommand? JoinCommand => joinCommand ??= CommandFactory.CreateFromAsync(JoinAsync, CanJoin);
 
-        public IRelayCommand? LeaveCommand => leaveCommand ??= CommandFactory.Create(Leave, CanLeave);
+        public IRelayCommand? LeaveCommand => leaveCommand ??= CommandFactory.CreateFromAsync(LeaveAsync, CanLeave);
 
         public IRelayCommand? RemoveCommand => removeCommand ??= CommandFactory.Create(Remove, CanRemove);
 
@@ -59,9 +59,9 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources.Twitch
 
         #region Helper methods
 
-        private void Join()
+        private async Task JoinAsync()
         {
-            if (!twitchChannelService.Initialize())
+            if (!await twitchChannelService.Initialize())
                 return;
             twitchChannelService.JoinChannel(Name);
         }
@@ -71,9 +71,9 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources.Twitch
             return !string.IsNullOrWhiteSpace(Name);
         }
 
-        private void Leave()
+        private async Task LeaveAsync()
         {
-            if (!twitchChannelService.Initialize())
+            if (!await twitchChannelService.Initialize())
                 return;
             twitchChannelService.LeaveChannel(Name);
         }

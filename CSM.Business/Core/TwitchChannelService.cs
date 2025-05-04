@@ -1,7 +1,10 @@
 ﻿using CSM.Business.Core.Twitch;
 using CSM.Business.Interfaces;
+using CSM.DataAccess;
+using CSM.DataAccess.Twitch;
 using CSM.DataAccess.UserConfiguration;
 using Microsoft.Extensions.Logging;
+using System.Text.Json;
 using TwitchLib.Client;
 using TwitchLib.Client.Events;
 using TwitchLib.Client.Models;
@@ -13,7 +16,12 @@ namespace CSM.Business.Core
     internal class TwitchChannelService(IUserConfigDomain userConfigDomain, ILogger<TwitchChannelService> logger) : ITwitchChannelService
     {
         private TwitchClient? twitchClient;
+        private string twitchSongsFilePath = string.Empty;
+        static SemaphoreSlim semaphore = new(1); // Allow up to 3 threads
+
         const string beatsaverUri = "https://beatsaver.com/maps/";
+
+        public TwitchSongs? TwitchSongs { get; private set; }
 
         public event EventHandler<OnJoinedChannelArgs>? OnJoinedChannel;
 
@@ -31,12 +39,48 @@ namespace CSM.Business.Core
             userConfigDomain.SaveUserConfig();
         }
 
-        public void AddSong(string key, string channelName, DateTime receivedAt)
+        public async Task AddSongAsync(string key, string channelName, DateTime receivedAt)
         {
-            if (userConfigDomain.Config?.TwitchConfig.Songs.Find(s => s.Key == key) != null)
-                return;
-            userConfigDomain.Config!.TwitchConfig.Songs.Add(new TwitchSong { Key = key, ChannelName = channelName, ReceivedAt = receivedAt });
-            userConfigDomain.SaveUserConfig();
+            await semaphore.WaitAsync();
+
+            try
+            {
+                if (!File.Exists(twitchSongsFilePath))
+                {
+                    TwitchSongs = new TwitchSongs
+                    {
+                        Songs = [],
+                    };
+                    var newContent = JsonSerializer.Serialize(TwitchSongs, JsonSerializerHelper.CreateDefaultSerializerOptions());
+                    await File.WriteAllTextAsync(twitchSongsFilePath, newContent);
+                }
+                else
+                {
+                    if (TwitchSongs == null)
+                    {
+                        var content = await File.ReadAllTextAsync(twitchSongsFilePath);
+                        TwitchSongs = JsonSerializer.Deserialize<TwitchSongs>(content, JsonSerializerHelper.CreateDefaultSerializerOptions());
+                    }
+                }
+
+                if (TwitchSongs == null)
+                    return;
+
+                if (TwitchSongs.Songs.Find(s => s.ChannelName == channelName && s.Key == key) != null)
+                    return;
+
+                TwitchSongs.Songs.Add(new TwitchSong { Key = key, ChannelName = channelName, ReceivedAt = receivedAt });
+                var json = JsonSerializer.Serialize(TwitchSongs, JsonSerializerHelper.CreateDefaultSerializerOptions());
+                await File.WriteAllTextAsync(twitchSongsFilePath, json);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Failed to add song to Twitch songs file.");
+            }
+            finally
+            {
+                semaphore.Release();
+            }
         }
 
         public bool CheckChannelIsJoined(string channelName)
@@ -44,12 +88,23 @@ namespace CSM.Business.Core
             return twitchClient != null && twitchClient.JoinedChannels.Any(c => c.Channel == channelName);
         }
 
-        public bool Initialize()
+        public async Task ClearSongHistoryAsync()
+        {
+            if (TwitchSongs == null)
+                return;
+            TwitchSongs.Songs.Clear();
+            var json = JsonSerializer.Serialize(TwitchSongs, JsonSerializerHelper.CreateDefaultSerializerOptions());
+            await File.WriteAllTextAsync(twitchSongsFilePath, json);
+        }
+
+        public async Task<bool> Initialize()
         {
             try
             {
                 if (twitchClient != null)
                     return true;
+
+                twitchSongsFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Custom Songs Manager", "TwitchSongs.json");
 
                 var username = userConfigDomain.Config?.TwitchConfig.Username;
                 var accessToken = userConfigDomain.Config?.TwitchConfig.AccessToken;
@@ -72,6 +127,24 @@ namespace CSM.Business.Core
                 twitchClient.OnChatCommandReceived += TwitchClient_OnChatCommandReceived;
                 twitchClient.OnMessageReceived += TwitchClient_OnMessageReceived;
                 twitchClient.Connect();
+
+                if (!File.Exists(twitchSongsFilePath))
+                {
+                    TwitchSongs = new TwitchSongs
+                    {
+                        Songs = [],
+                    };
+                    var newContent = JsonSerializer.Serialize(TwitchSongs, JsonSerializerHelper.CreateDefaultSerializerOptions());
+                    await File.WriteAllTextAsync(twitchSongsFilePath, newContent);
+                }
+                else
+                {
+                    if (TwitchSongs == null)
+                    {
+                        var content = await File.ReadAllTextAsync(twitchSongsFilePath);
+                        TwitchSongs = JsonSerializer.Deserialize<TwitchSongs>(content, JsonSerializerHelper.CreateDefaultSerializerOptions());
+                    }
+                }
 
                 return true;
             }
@@ -112,13 +185,48 @@ namespace CSM.Business.Core
             }
         }
 
-        public void RemoveSong(string key)
+        public async Task RemoveSongAsync(string key)
         {
-            var song = userConfigDomain.Config!.TwitchConfig.Songs.FirstOrDefault(s => s.Key == key);
-            if (song != null)
+            await semaphore.WaitAsync();
+
+            try
             {
-                userConfigDomain.Config.TwitchConfig.Songs.Remove(song);
-                userConfigDomain.SaveUserConfig();
+                if (!File.Exists(twitchSongsFilePath))
+                {
+                    TwitchSongs = new TwitchSongs
+                    {
+                        Songs = [],
+                    };
+                    var newContent = JsonSerializer.Serialize(TwitchSongs, JsonSerializerHelper.CreateDefaultSerializerOptions());
+                    await File.WriteAllTextAsync(twitchSongsFilePath, newContent);
+                }
+                else
+                {
+                    if (TwitchSongs == null)
+                    {
+                        var content = await File.ReadAllTextAsync(twitchSongsFilePath);
+                        TwitchSongs = JsonSerializer.Deserialize<TwitchSongs>(content, JsonSerializerHelper.CreateDefaultSerializerOptions());
+                    }
+                }
+
+                if (TwitchSongs == null)
+                    return;
+
+                var song = TwitchSongs.Songs.FirstOrDefault(s => s.Key == key);
+                if (song != null)
+                {
+                    TwitchSongs.Songs.Remove(song);
+                    var json = JsonSerializer.Serialize(TwitchSongs, JsonSerializerHelper.CreateDefaultSerializerOptions());
+                    await File.WriteAllTextAsync(twitchSongsFilePath, json);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Failed to remove song from Twitch songs file.");
+            }
+            finally
+            {
+                semaphore.Release();
             }
         }
 

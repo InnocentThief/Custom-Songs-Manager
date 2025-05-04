@@ -1,4 +1,4 @@
-﻿namespace CSM.DataAccess.UserConfiguration
+﻿namespace CSM.DataAccess.Twitch
 {
     internal class TwitchSong
     {

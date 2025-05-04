@@ -91,6 +91,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -100,11 +101,8 @@
                 <TextBlock Text="Song History" Style="{StaticResource HeaderTitleStyle}" Foreground="#88018574" />
                 <!-- Commands -->
                 <telerik:RadToolBar Grid.Column="1" Style="{StaticResource HeaderToolBarStyle}" >
-                    <!--<telerik:RadButton ToolTip="Add channel">
-                        <telerik:RadGlyph Glyph="&#xe11e;" Foreground="#88018574" />
-                    </telerik:RadButton>-->
-                    <telerik:RadButton ToolTip="Remove channel">
-                        <telerik:RadGlyph Glyph="&#xe121;" Foreground="Transparent" />
+                    <telerik:RadButton Command="{Binding ClearSongHistoryCommand}" ToolTip="Clear song history">
+                        <telerik:RadGlyph Glyph="&#xe10c;" Foreground="#88018574" />
                     </telerik:RadButton>
                 </telerik:RadToolBar>
             </Grid>
@@ -157,11 +155,20 @@
                 </telerik:RadGridView.Columns>
             </telerik:RadGridView>
 
+            <!-- Entry counter -->
+            <Border Grid.Row="2" Padding="6">
+                <telerik:Label Content="{Binding MapCount}"  />
+            </Border>
+
         </Grid>
 
         <GridSplitter Grid.Row="2" Style="{StaticResource WorkspaceHorizontalGridSplitterStyle}" VerticalAlignment="Center" />
 
-        <common:MapDetailTailoredControl Grid.Row="3" DataContext="{Binding SelectedMap.MapDetailViewModel}" />
+        <Grid Grid.Row="3" Visibility="{Binding HasSelectedMap, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <common:MapDetailTailoredControl DataContext="{Binding SelectedMap.MapDetailViewModel}" />
+        </Grid>
+
+        <common:MapDetailNoDataControl Grid.Row="3" Visibility="{Binding HasSelectedMap, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
 
     </Grid>
 </UserControl>
