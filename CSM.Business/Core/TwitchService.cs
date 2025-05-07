@@ -14,7 +14,7 @@ namespace CSM.Business.Core
         private readonly HttpClient client = new();
         private readonly HttpListener listener = new();
         private readonly string redirect_uri = "http://localhost:57789/";
-        private readonly string client_id = "mf66rq31qva9bv7dit1jygdjs39loa";
+        private readonly string client_id = "";
         private readonly List<string> scopes = ["chat:read", "chat:edit"];
 
         public async Task GetAccessTokenAsync()
