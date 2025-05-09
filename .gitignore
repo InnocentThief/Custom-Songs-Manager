@@ -9,6 +9,7 @@
 *.user
 *.userosscache
 *.sln.docstates
+TwitchKey.cs
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

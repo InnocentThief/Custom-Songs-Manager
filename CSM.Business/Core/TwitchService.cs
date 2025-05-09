@@ -1,4 +1,5 @@
-﻿using CSM.Business.Interfaces;
+﻿using CSM.Business.Core.Twitch;
+using CSM.Business.Interfaces;
 using CSM.DataAccess.Twitch;
 using System.Diagnostics;
 using System.Net;
@@ -14,7 +15,7 @@ namespace CSM.Business.Core
         private readonly HttpClient client = new();
         private readonly HttpListener listener = new();
         private readonly string redirect_uri = "http://localhost:57789/";
-        private readonly string client_id = "";
+        private readonly string client_id = TwitchKey.ClientId;
         private readonly List<string> scopes = ["chat:read", "chat:edit"];
 
         public async Task GetAccessTokenAsync()
