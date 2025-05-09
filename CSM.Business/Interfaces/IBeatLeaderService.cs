@@ -2,5 +2,6 @@
 {
     internal interface IBeatLeaderService
     {
+        Task<bool> PlayerExistsAsync(string id);
     }
 }
