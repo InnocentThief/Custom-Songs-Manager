@@ -102,13 +102,13 @@ namespace CSM.Business.Core
                 {
                     RemoveReceivedSongAfterAddingToPlaylist = false,
                 },
-                ScoreSaberConfig = new ScoreSaberConfig()
+                LeaderboardsConfig = new LeaderboardsConfig()
                 {
-                    Available = true,
-                },
-                BeatLeaderConfig = new BeatLeaderConfig()
-                {
-                    Available = true,
+                    UseBeatLeaderLeaderboard = true,
+                    UseScoreSaberLeaderboard = true,
+                    BeatLeaderUserId = string.Empty,
+                    ScoreSaberUserId = string.Empty,
+                    DefaultLeaderboard = LeaderboardType.BeatLeader,
                 },
             };
         }

@@ -40,13 +40,13 @@ namespace CSM.UiLogic.ViewModels.Navigation
                 playlists.SelectionChanged += NavigationItemSelectionChanged;
                 Items.Add(playlists);
             }
-            if (userConfigDomain.Config?.ScoreSaberConfig.Available ?? false)
+            if (userConfigDomain.Config?.LeaderboardsConfig.UseScoreSaberLeaderboard ?? false)
             {
                 var scoreSaber = new NavigationItemViewModel(serviceLocator, NavigationType.ScoreSaberIntegration, "ScoreSaber", "&#xea0b;");
                 scoreSaber.SelectionChanged += NavigationItemSelectionChanged;
                 Items.Add(scoreSaber);
             }
-            if (userConfigDomain.Config?.BeatLeaderConfig.Available ?? false)
+            if (userConfigDomain.Config?.LeaderboardsConfig.UseBeatLeaderLeaderboard ?? false)
             {
                 var beatLeader = new NavigationItemViewModel(serviceLocator, NavigationType.BeatLeaderIntegration, "BeatLeader", "&#xea00;");
                 beatLeader.SelectionChanged += NavigationItemSelectionChanged;

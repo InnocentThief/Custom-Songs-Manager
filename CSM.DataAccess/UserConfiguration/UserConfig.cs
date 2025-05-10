@@ -11,9 +11,8 @@ namespace CSM.DataAccess.UserConfiguration
         public CustomLevelsConfig CustomLevelsConfig { get; set; } = new();
         public PlaylistsConfig PlaylistsConfig { get; set; } = new();
         public TwitchConfig TwitchConfig { get; set; } = new();
-        public ScoreSaberConfig ScoreSaberConfig { get; set; } = new();
-        public BeatLeaderConfig BeatLeaderConfig { get; set; } = new();
-        public SongSuggestConfig SongSuggestConfig { get; set; } = new();
+        public LeaderboardsConfig LeaderboardsConfig { get; set; } = new();
+        public SongSuggestSettings SongSuggestSettings { get; set; } = new();
 
     }
 }

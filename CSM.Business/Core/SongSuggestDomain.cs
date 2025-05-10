@@ -72,9 +72,9 @@ namespace CSM.Business.Core
                 {
                     FilePathSettings = new FilePathSettings(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Custom Songs Manager", "SongSuggest")),
                     Log = new SongSuggestLogger(logger),
-                    UserID = userConfigDomain.Config?.SongSuggestConfig.DefaultLeaderboard == DataAccess.UserConfiguration.LeaderboardType.ScoreSaber ? userConfigDomain.Config?.SongSuggestConfig.ScoreSaberUserId : userConfigDomain.Config?.SongSuggestConfig.BeatLeaderUserId,
-                    UseScoreSaberLeaderboard = userConfigDomain.Config?.SongSuggestConfig.UseScoreSaberLeaderboard ?? false,
-                    UseBeatLeaderLeaderboard = userConfigDomain.Config?.SongSuggestConfig.UseBeatLeaderLeaderboard ?? false,
+                    UserID = userConfigDomain.Config?.LeaderboardsConfig.DefaultLeaderboard == DataAccess.UserConfiguration.LeaderboardType.ScoreSaber ? userConfigDomain.Config?.LeaderboardsConfig.ScoreSaberUserId : userConfigDomain.Config?.LeaderboardsConfig.BeatLeaderUserId,
+                    UseScoreSaberLeaderboard = userConfigDomain.Config?.LeaderboardsConfig.UseScoreSaberLeaderboard ?? false,
+                    UseBeatLeaderLeaderboard = userConfigDomain.Config?.LeaderboardsConfig.UseBeatLeaderLeaderboard ?? false,
                 };
                 songSuggest = new SongSuggest(settings);
             }
@@ -85,36 +85,36 @@ namespace CSM.Business.Core
             string? playerIdToUse = playerId;
             if (string.IsNullOrWhiteSpace(playerIdToUse))
             {
-                playerIdToUse = userConfigDomain.Config?.SongSuggestConfig.DefaultLeaderboard == DataAccess.UserConfiguration.LeaderboardType.ScoreSaber ? userConfigDomain.Config?.SongSuggestConfig.ScoreSaberUserId : userConfigDomain.Config?.SongSuggestConfig.BeatLeaderUserId;
+                playerIdToUse = userConfigDomain.Config?.LeaderboardsConfig.DefaultLeaderboard == DataAccess.UserConfiguration.LeaderboardType.ScoreSaber ? userConfigDomain.Config?.LeaderboardsConfig.ScoreSaberUserId : userConfigDomain.Config?.LeaderboardsConfig.BeatLeaderUserId;
             }
 
             return new SongSuggestSettings
             {
-                SuggestionName = userConfigDomain.Config?.SongSuggestConfig.SongSuggestSettings.SuggestionName ?? string.Empty,
+                SuggestionName = userConfigDomain.Config?.SongSuggestSettings.SuggestionName ?? string.Empty,
                 PlayerID = playerIdToUse,
-                IgnorePlayedAll = userConfigDomain.Config?.SongSuggestConfig.SongSuggestSettings.IgnorePlayedAll ?? false,
-                IgnorePlayedDays = userConfigDomain.Config?.SongSuggestConfig.SongSuggestSettings.IgnorePlayedDays ?? 14,
-                IgnoreNonImproveable = userConfigDomain.Config?.SongSuggestConfig.SongSuggestSettings.IgnoreNonImprovable ?? true,
-                UseLikedSongs = userConfigDomain.Config?.SongSuggestConfig.SongSuggestSettings.UseLikedSongs ?? false,
-                FillLikedSongs = userConfigDomain.Config?.SongSuggestConfig.SongSuggestSettings.FillLikedSongs ?? true,
-                UseLocalScores = userConfigDomain.Config?.SongSuggestConfig.SongSuggestSettings.UseLocalScores ?? false,
-                ExtraSongs = userConfigDomain.Config?.SongSuggestConfig.SongSuggestSettings.ExtraSongs ?? 15,
-                PlaylistLength = userConfigDomain.Config?.SongSuggestConfig.SongSuggestSettings.PlaylistLength ?? 50,
-                Leaderboard = userConfigDomain.Config?.SongSuggestConfig.DefaultLeaderboard == DataAccess.UserConfiguration.LeaderboardType.ScoreSaber ? Actions.LeaderboardType.ScoreSaber : Actions.LeaderboardType.BeatLeader,
-                OriginSongCount = userConfigDomain.Config?.SongSuggestConfig.SongSuggestSettings.OriginSongCount ?? 50,
+                IgnorePlayedAll = userConfigDomain.Config?.SongSuggestSettings.IgnorePlayedAll ?? false,
+                IgnorePlayedDays = userConfigDomain.Config?.SongSuggestSettings.IgnorePlayedDays ?? 14,
+                IgnoreNonImproveable = userConfigDomain.Config?.SongSuggestSettings.IgnoreNonImprovable ?? true,
+                UseLikedSongs = userConfigDomain.Config?.SongSuggestSettings.UseLikedSongs ?? false,
+                FillLikedSongs = userConfigDomain.Config?.SongSuggestSettings.FillLikedSongs ?? true,
+                UseLocalScores = userConfigDomain.Config?.SongSuggestSettings.UseLocalScores ?? false,
+                ExtraSongs = userConfigDomain.Config?.SongSuggestSettings.ExtraSongs ?? 15,
+                PlaylistLength = userConfigDomain.Config?.SongSuggestSettings.PlaylistLength ?? 50,
+                Leaderboard = userConfigDomain.Config?.LeaderboardsConfig.DefaultLeaderboard == DataAccess.UserConfiguration.LeaderboardType.ScoreSaber ? Actions.LeaderboardType.ScoreSaber : Actions.LeaderboardType.BeatLeader,
+                OriginSongCount = userConfigDomain.Config?.SongSuggestSettings.OriginSongCount ?? 50,
                 FilterSettings = new FilterSettings
                 {
-                    modifierStyle = userConfigDomain.Config?.SongSuggestConfig.SongSuggestSettings.FilterSettings.ModifierStyle ?? 100.0,
-                    modifierOverweight = userConfigDomain.Config?.SongSuggestConfig.SongSuggestSettings.FilterSettings.ModifierOverweight ?? 81.0,
+                    modifierStyle = userConfigDomain.Config?.SongSuggestSettings.FilterSettings.ModifierStyle ?? 100.0,
+                    modifierOverweight = userConfigDomain.Config?.SongSuggestSettings.FilterSettings.ModifierOverweight ?? 81.0,
                 },
                 PlaylistSettings = new PlaylistSettings
                 {
-                    title = userConfigDomain.Config?.SongSuggestConfig.SongSuggestSettings.PlaylistSettings.Title ?? string.Empty,
-                    author = userConfigDomain.Config?.SongSuggestConfig.SongSuggestSettings.PlaylistSettings.Author ?? string.Empty,
-                    fileName = userConfigDomain.Config?.SongSuggestConfig.SongSuggestSettings.PlaylistSettings.FileName ?? string.Empty,
-                    description = userConfigDomain.Config?.SongSuggestConfig.SongSuggestSettings.PlaylistSettings.Description ?? string.Empty,
-                    syncURL = userConfigDomain.Config?.SongSuggestConfig.SongSuggestSettings.PlaylistSettings.SyncUrl ?? string.Empty,
-                    image = userConfigDomain.Config?.SongSuggestConfig.SongSuggestSettings.PlaylistSettings.Image ?? string.Empty,
+                    title = userConfigDomain.Config?.SongSuggestSettings.PlaylistSettings.Title ?? string.Empty,
+                    author = userConfigDomain.Config?.SongSuggestSettings.PlaylistSettings.Author ?? string.Empty,
+                    fileName = userConfigDomain.Config?.SongSuggestSettings.PlaylistSettings.FileName ?? string.Empty,
+                    description = userConfigDomain.Config?.SongSuggestSettings.PlaylistSettings.Description ?? string.Empty,
+                    syncURL = userConfigDomain.Config?.SongSuggestSettings.PlaylistSettings.SyncUrl ?? string.Empty,
+                    image = userConfigDomain.Config?.SongSuggestSettings.PlaylistSettings.Image ?? string.Empty,
                 },
             };
         }

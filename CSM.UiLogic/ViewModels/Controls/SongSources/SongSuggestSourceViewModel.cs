@@ -132,12 +132,12 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         public bool IgnorePlayedAll
         {
-            get => userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.IgnorePlayedAll;
+            get => userConfigDomain.Config!.SongSuggestSettings.IgnorePlayedAll;
             set
             {
-                if (value == userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.IgnorePlayedAll)
+                if (value == userConfigDomain.Config!.SongSuggestSettings.IgnorePlayedAll)
                     return;
-                userConfigDomain.Config.SongSuggestConfig.SongSuggestSettings.IgnorePlayedAll = value;
+                userConfigDomain.Config.SongSuggestSettings.IgnorePlayedAll = value;
                 IsDirty = true;
                 OnPropertyChanged();
             }
@@ -145,12 +145,12 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         public int IgnorePlayedDays
         {
-            get => userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.IgnorePlayedDays;
+            get => userConfigDomain.Config!.SongSuggestSettings.IgnorePlayedDays;
             set
             {
-                if (value == userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.IgnorePlayedDays)
+                if (value == userConfigDomain.Config!.SongSuggestSettings.IgnorePlayedDays)
                     return;
-                userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.IgnorePlayedDays = value;
+                userConfigDomain.Config!.SongSuggestSettings.IgnorePlayedDays = value;
                 IsDirty = true;
                 OnPropertyChanged();
             }
@@ -158,12 +158,12 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         public bool IgnoreNonImprovable
         {
-            get => userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.IgnoreNonImprovable;
+            get => userConfigDomain.Config!.SongSuggestSettings.IgnoreNonImprovable;
             set
             {
-                if (value == userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.IgnoreNonImprovable)
+                if (value == userConfigDomain.Config!.SongSuggestSettings.IgnoreNonImprovable)
                     return;
-                userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.IgnoreNonImprovable = value;
+                userConfigDomain.Config!.SongSuggestSettings.IgnoreNonImprovable = value;
                 IsDirty = true;
                 OnPropertyChanged();
             }
@@ -171,12 +171,12 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         public bool UseLikedSongs
         {
-            get => userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.UseLikedSongs;
+            get => userConfigDomain.Config!.SongSuggestSettings.UseLikedSongs;
             set
             {
-                if (value == userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.UseLikedSongs)
+                if (value == userConfigDomain.Config!.SongSuggestSettings.UseLikedSongs)
                     return;
-                userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.UseLikedSongs = value;
+                userConfigDomain.Config!.SongSuggestSettings.UseLikedSongs = value;
                 IsDirty = true;
                 OnPropertyChanged();
             }
@@ -184,12 +184,12 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         public bool FillLikedSongs
         {
-            get => userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.FillLikedSongs;
+            get => userConfigDomain.Config!.SongSuggestSettings.FillLikedSongs;
             set
             {
-                if (value == userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.FillLikedSongs)
+                if (value == userConfigDomain.Config!.SongSuggestSettings.FillLikedSongs)
                     return;
-                userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.FillLikedSongs = value;
+                userConfigDomain.Config!.SongSuggestSettings.FillLikedSongs = value;
                 IsDirty = true;
                 OnPropertyChanged();
             }
@@ -197,12 +197,12 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         public bool UseLocalScores
         {
-            get => userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.UseLocalScores;
+            get => userConfigDomain.Config!.SongSuggestSettings.UseLocalScores;
             set
             {
-                if (value == userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.UseLocalScores)
+                if (value == userConfigDomain.Config!.SongSuggestSettings.UseLocalScores)
                     return;
-                userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.UseLocalScores = value;
+                userConfigDomain.Config!.SongSuggestSettings.UseLocalScores = value;
                 IsDirty = true;
                 OnPropertyChanged();
             }
@@ -210,12 +210,12 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         public int ExtraSongs
         {
-            get => userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.ExtraSongs;
+            get => userConfigDomain.Config!.SongSuggestSettings.ExtraSongs;
             set
             {
-                if (value == userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.ExtraSongs)
+                if (value == userConfigDomain.Config!.SongSuggestSettings.ExtraSongs)
                     return;
-                userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.ExtraSongs = value;
+                userConfigDomain.Config!.SongSuggestSettings.ExtraSongs = value;
                 IsDirty = true;
                 OnPropertyChanged();
             }
@@ -223,12 +223,12 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         public int PlaylistLength
         {
-            get => userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.PlaylistLength;
+            get => userConfigDomain.Config!.SongSuggestSettings.PlaylistLength;
             set
             {
-                if (value == userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.PlaylistLength)
+                if (value == userConfigDomain.Config!.SongSuggestSettings.PlaylistLength)
                     return;
-                userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.PlaylistLength = value;
+                userConfigDomain.Config!.SongSuggestSettings.PlaylistLength = value;
                 IsDirty = true;
                 OnPropertyChanged();
             }
@@ -238,12 +238,12 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         public int OriginSongCount
         {
-            get => userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.OriginSongCount;
+            get => userConfigDomain.Config!.SongSuggestSettings.OriginSongCount;
             set
             {
-                if (value == userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.OriginSongCount)
+                if (value == userConfigDomain.Config!.SongSuggestSettings.OriginSongCount)
                     return;
-                userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.OriginSongCount = value;
+                userConfigDomain.Config!.SongSuggestSettings.OriginSongCount = value;
                 IsDirty = true;
                 OnPropertyChanged();
             }
@@ -251,12 +251,12 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         public double ModifierStyle
         {
-            get => userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.FilterSettings.ModifierStyle;
+            get => userConfigDomain.Config!.SongSuggestSettings.FilterSettings.ModifierStyle;
             set
             {
-                if (value == userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.FilterSettings.ModifierStyle)
+                if (value == userConfigDomain.Config!.SongSuggestSettings.FilterSettings.ModifierStyle)
                     return;
-                userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.FilterSettings.ModifierStyle = value;
+                userConfigDomain.Config!.SongSuggestSettings.FilterSettings.ModifierStyle = value;
                 IsDirty = true;
                 OnPropertyChanged();
             }
@@ -264,12 +264,12 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         public double ModifierOverweight
         {
-            get => userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.FilterSettings.ModifierOverweight;
+            get => userConfigDomain.Config!.SongSuggestSettings.FilterSettings.ModifierOverweight;
             set
             {
-                if (value == userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.FilterSettings.ModifierOverweight)
+                if (value == userConfigDomain.Config!.SongSuggestSettings.FilterSettings.ModifierOverweight)
                     return;
-                userConfigDomain.Config!.SongSuggestConfig.SongSuggestSettings.FilterSettings.ModifierOverweight = value;
+                userConfigDomain.Config!.SongSuggestSettings.FilterSettings.ModifierOverweight = value;
                 IsDirty = true;
                 OnPropertyChanged();
             }

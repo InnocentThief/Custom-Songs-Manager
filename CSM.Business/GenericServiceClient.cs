@@ -36,5 +36,11 @@ namespace CSM.Business
             var content = await response.Content.ReadAsStringAsync();
             return JsonSerializer.Deserialize<T>(content, JsonSerializerHelper.CreateDefaultSerializerOptions());
         }
+
+        public async Task<HttpResponseMessage> GetAsync(string api)
+        {
+            Debug.WriteLine($"GET {apiBaseAddress + api}");
+            return await httpClient.GetAsync(apiBaseAddress + api);
+        }
     }
 }

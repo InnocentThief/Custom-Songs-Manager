@@ -14,11 +14,7 @@ namespace CSM.UiLogic.ViewModels.Controls.Settings
 
         public PlaylistsSettingsViewModel PlaylistsSettings { get; }
 
-        public ScoreSaberSettingsViewModel ScoreSaberSettings { get; }
-
-        public BeatLeaderSettingsViewModel BeatLeaderSettings { get; }
-
-        public SongSuggestSettingsViewModel SongSuggestSettings { get; }
+        public LeaderboardsSettingsViewModel LeaderboardsSettings { get; }
 
         public SettingsControlViewModel(IServiceLocator serviceLocator) : base(serviceLocator, "Cancel", EditViewModelCommandColor.Default, "Save", EditViewModelCommandColor.Default)
         {
@@ -27,9 +23,7 @@ namespace CSM.UiLogic.ViewModels.Controls.Settings
             GeneralSettings = new GeneralSettingsViewModel(serviceLocator, userConfigDomain.Config!);
             CustomLevelsSettings = new CustomLevelsSettingsViewModel(serviceLocator, userConfigDomain.Config!);
             PlaylistsSettings = new PlaylistsSettingsViewModel(serviceLocator, userConfigDomain.Config!);
-            ScoreSaberSettings = new ScoreSaberSettingsViewModel(serviceLocator, userConfigDomain.Config!);
-            BeatLeaderSettings = new BeatLeaderSettingsViewModel(serviceLocator, userConfigDomain.Config!);
-            SongSuggestSettings = new SongSuggestSettingsViewModel(serviceLocator, userConfigDomain.Config!);
+            LeaderboardsSettings = new LeaderboardsSettingsViewModel(serviceLocator, userConfigDomain.Config!);
         }
     }
 }

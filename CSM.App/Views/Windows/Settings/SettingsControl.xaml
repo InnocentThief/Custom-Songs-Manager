@@ -18,14 +18,8 @@
             <telerik:RadTabItem Header="{x:Static p:Resources.Settings_Playlists}">
                 <local:PlaylistsSettingsControl DataContext="{Binding PlaylistsSettings}" />
             </telerik:RadTabItem>
-            <telerik:RadTabItem Header="{x:Static p:Resources.Settings_ScoreSaber}">
-                <local:ScoreSaberSettingsControl DataContext="{Binding ScoreSaberSettings}" />
-            </telerik:RadTabItem>
-            <telerik:RadTabItem Header="{x:Static p:Resources.Settings_BeatLeader}">
-                <local:BeatLeaderSettingsControl DataContext="{Binding BeatLeaderSettings}" />
-            </telerik:RadTabItem>
-            <telerik:RadTabItem Header="{x:Static p:Resources.Settings_SongSuggest}">
-                <local:SongSuggestSettingsControl DataContext="{Binding SongSuggestSettings}" />
+            <telerik:RadTabItem Header="Leaderboards">
+                <local:LeaderboardsSettingsControl DataContext="{Binding LeaderboardsSettings}" />
             </telerik:RadTabItem>
         </telerik:RadTabControl>
     </Grid>
