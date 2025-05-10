@@ -1,6 +1,6 @@
-﻿using CSM.UiLogic.ViewModels.Common.Playlists;
+﻿using System.Windows.Controls;
+using CSM.UiLogic.ViewModels.Common.Playlists;
 using CSM.UiLogic.ViewModels.Controls.SongSources;
-using System.Windows.Controls;
 
 namespace CSM.App.Views.Controls.SongSources
 {

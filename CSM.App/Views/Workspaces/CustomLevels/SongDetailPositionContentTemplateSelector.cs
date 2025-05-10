@@ -1,7 +1,7 @@
-﻿using CSM.DataAccess.UserConfiguration;
-using CSM.UiLogic.ViewModels.Controls.CustomLevels;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
+using CSM.DataAccess.UserConfiguration;
+using CSM.UiLogic.ViewModels.Controls.CustomLevels;
 
 namespace CSM.App.Views.Workspaces.CustomLevels
 {

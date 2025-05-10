@@ -1,6 +1,4 @@
-﻿using CSM.DataAccess.Twitch;
-
-namespace CSM.DataAccess.UserConfiguration
+﻿namespace CSM.DataAccess.UserConfiguration
 {
     internal class TwitchConfig
     {

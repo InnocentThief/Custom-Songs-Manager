@@ -1,4 +1,10 @@
-﻿using CSM.Business.Core.SongSelection;
+﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
+using System.Reflection;
+using System.Text.Json;
+using System.Windows;
+using CSM.Business.Core.SongSelection;
 using CSM.Business.Interfaces;
 using CSM.DataAccess;
 using CSM.DataAccess.Playlists;
@@ -9,12 +15,6 @@ using CSM.UiLogic.Commands;
 using CSM.UiLogic.Converter;
 using CSM.UiLogic.ViewModels.Common.Playlists;
 using Microsoft.Extensions.Logging;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.IO;
-using System.Reflection;
-using System.Text.Json;
-using System.Windows;
 
 namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
 {

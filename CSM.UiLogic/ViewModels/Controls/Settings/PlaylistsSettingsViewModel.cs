@@ -1,9 +1,9 @@
-﻿using CSM.DataAccess.UserConfiguration;
+﻿using System.Collections.ObjectModel;
+using CSM.DataAccess.UserConfiguration;
 using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.Helper;
-using System.Collections.ObjectModel;
 
 namespace CSM.UiLogic.ViewModels.Controls.Settings
 {

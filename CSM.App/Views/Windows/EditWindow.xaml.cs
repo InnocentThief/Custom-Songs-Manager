@@ -1,5 +1,5 @@
-﻿using CSM.UiLogic.AbstractBase;
-using System.Windows;
+﻿using System.Windows;
+using CSM.UiLogic.AbstractBase;
 using Telerik.Windows.Controls;
 
 namespace CSM.App.Views.Windows

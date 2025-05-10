@@ -1,5 +1,5 @@
-﻿using CSM.UiLogic.ViewModels.Controls.Settings;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
+using CSM.UiLogic.ViewModels.Controls.Settings;
 
 namespace CSM.App.Views.Windows.Settings
 {

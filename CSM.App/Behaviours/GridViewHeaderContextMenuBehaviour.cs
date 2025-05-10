@@ -144,8 +144,8 @@ namespace CSM.App.Behaviours
             using (grid.DeferRefresh())
             {
                 ColumnSortDescriptor? sd = (from d in grid.SortDescriptors.OfType<ColumnSortDescriptor>()
-                                           where object.Equals(d.Column, column)
-                                           select d).FirstOrDefault();
+                                            where object.Equals(d.Column, column)
+                                            select d).FirstOrDefault();
 
                 if (header.Contains("Sort Ascending"))
                 {
@@ -187,8 +187,8 @@ namespace CSM.App.Behaviours
                 else if (header.Contains("Group by"))
                 {
                     ColumnGroupDescriptor? gd = (from d in grid.GroupDescriptors.OfType<ColumnGroupDescriptor>()
-                                                where object.Equals(d.Column, column)
-                                                select d).FirstOrDefault();
+                                                 where object.Equals(d.Column, column)
+                                                 select d).FirstOrDefault();
 
                     if (gd == null)
                     {
@@ -203,8 +203,8 @@ namespace CSM.App.Behaviours
                 else if (header.Contains("Ungroup"))
                 {
                     ColumnGroupDescriptor? gd = (from d in grid.GroupDescriptors.OfType<ColumnGroupDescriptor>()
-                                                where object.Equals(d.Column, column)
-                                                select d).FirstOrDefault();
+                                                 where object.Equals(d.Column, column)
+                                                 select d).FirstOrDefault();
                     if (gd != null)
                     {
                         grid.GroupDescriptors.Remove(gd);

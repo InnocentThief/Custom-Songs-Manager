@@ -1,7 +1,7 @@
-﻿using CSM.DataAccess.Common;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
+using CSM.DataAccess.Common;
 
 namespace CSM.App.Converter
 {

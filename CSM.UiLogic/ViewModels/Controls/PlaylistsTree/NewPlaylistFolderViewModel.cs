@@ -1,6 +1,6 @@
-﻿using CSM.Framework.ServiceLocation;
+﻿using System.IO;
+using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
-using System.IO;
 
 namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
 {

@@ -1,5 +1,5 @@
-﻿using CSM.Framework.Helper;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
+using CSM.Framework.Helper;
 
 namespace CSM.DataAccess.BeatSaver
 {

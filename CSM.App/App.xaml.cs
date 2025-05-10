@@ -1,4 +1,8 @@
-﻿using CSM.App.Services;
+﻿using System.IO;
+using System.Windows;
+using System.Windows.Media;
+using System.Windows.Threading;
+using CSM.App.Services;
 using CSM.App.Views;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.Services;
@@ -7,10 +11,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using RestoreWindowPlace;
-using System.IO;
-using System.Windows;
-using System.Windows.Media;
-using System.Windows.Threading;
 using Telerik.Windows.Controls;
 
 namespace CSM.App

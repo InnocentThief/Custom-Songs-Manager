@@ -1,7 +1,7 @@
-﻿using CSM.UiLogic.ViewModels.Controls.CustomLevels;
-using CSM.UiLogic.ViewModels.Controls.SongSources;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
+using CSM.UiLogic.ViewModels.Controls.CustomLevels;
+using CSM.UiLogic.ViewModels.Controls.SongSources;
 
 namespace CSM.App.Views.Controls.SongSources
 {

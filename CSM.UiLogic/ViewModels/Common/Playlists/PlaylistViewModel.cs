@@ -1,4 +1,10 @@
-﻿using CSM.Business.Core.SongSelection;
+﻿using System.Collections.ObjectModel;
+using System.IO;
+using System.Net.Http;
+using System.Text.Json;
+using System.Windows;
+using System.Windows.Media;
+using CSM.Business.Core.SongSelection;
 using CSM.Business.Interfaces;
 using CSM.Business.Interfaces.SongCopy;
 using CSM.DataAccess;
@@ -9,13 +15,6 @@ using CSM.Framework.ServiceLocation;
 using CSM.Framework.Types;
 using CSM.UiLogic.Commands;
 using Microsoft.Extensions.Logging;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Net.Http;
-using System.Text.Json;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
 using Telerik.Windows.Controls;
 
 namespace CSM.UiLogic.ViewModels.Common.Playlists

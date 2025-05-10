@@ -1,7 +1,7 @@
-﻿using CSM.Business.Core.SongSelection;
+﻿using System.Collections.ObjectModel;
+using CSM.Business.Core.SongSelection;
 using CSM.Business.Interfaces.SongCopy;
 using CSM.Framework.ServiceLocation;
-using System.Collections.ObjectModel;
 
 namespace CSM.UiLogic.ViewModels.Common.Playlists
 {

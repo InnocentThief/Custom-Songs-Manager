@@ -1,10 +1,10 @@
-﻿using CSM.DataAccess.BeatSaver;
+﻿using System.Diagnostics;
+using System.Text;
+using System.Windows;
+using CSM.DataAccess.BeatSaver;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.Commands;
-using System.Diagnostics;
-using System.Text;
-using System.Windows;
 
 namespace CSM.UiLogic.ViewModels.Common.MapDetails
 {

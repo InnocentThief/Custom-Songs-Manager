@@ -1,4 +1,5 @@
-﻿using CSM.Business.Core.SongCopy;
+﻿using System.Collections.ObjectModel;
+using CSM.Business.Core.SongCopy;
 using CSM.Business.Core.SongSelection;
 using CSM.Business.Interfaces;
 using CSM.DataAccess.BeatSaver;
@@ -10,7 +11,6 @@ using CSM.UiLogic.Commands;
 using CSM.UiLogic.Helper;
 using CSM.UiLogic.ViewModels.Common.Playlists;
 using CSM.UiLogic.ViewModels.Controls.SongSources.SongSearch;
-using System.Collections.ObjectModel;
 
 namespace CSM.UiLogic.ViewModels.Controls.SongSources
 {

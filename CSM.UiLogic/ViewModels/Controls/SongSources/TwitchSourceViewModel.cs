@@ -1,4 +1,5 @@
-﻿using CSM.Business.Core.Twitch;
+﻿using System.Collections.ObjectModel;
+using CSM.Business.Core.Twitch;
 using CSM.Business.Interfaces;
 using CSM.DataAccess.BeatSaver;
 using CSM.Framework.Extensions;
@@ -6,8 +7,6 @@ using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.Commands;
 using CSM.UiLogic.ViewModels.Controls.SongSources.Twitch;
-using System.Collections.ObjectModel;
-using System.Windows.Threading;
 using TwitchLib.Client.Events;
 
 namespace CSM.UiLogic.ViewModels.Controls.SongSources

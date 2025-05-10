@@ -1,12 +1,12 @@
-﻿using CSM.Business.Core.Twitch;
-using CSM.Business.Interfaces;
-using CSM.DataAccess.Twitch;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
+using CSM.Business.Core.Twitch;
+using CSM.Business.Interfaces;
+using CSM.DataAccess.Twitch;
 
 namespace CSM.Business.Core
 {

@@ -1,10 +1,10 @@
-﻿using CSM.Business.Core.Twitch;
+﻿using System.Text.Json;
+using CSM.Business.Core.Twitch;
 using CSM.Business.Interfaces;
 using CSM.DataAccess;
 using CSM.DataAccess.Twitch;
 using CSM.DataAccess.UserConfiguration;
 using Microsoft.Extensions.Logging;
-using System.Text.Json;
 using TwitchLib.Client;
 using TwitchLib.Client.Events;
 using TwitchLib.Client.Models;

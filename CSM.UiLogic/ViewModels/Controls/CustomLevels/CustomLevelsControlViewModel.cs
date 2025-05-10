@@ -1,4 +1,8 @@
-﻿using CSM.Business.Core.SongSelection;
+﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
+using System.Text.Json;
+using CSM.Business.Core.SongSelection;
 using CSM.Business.Interfaces;
 using CSM.DataAccess;
 using CSM.DataAccess.CustomLevels;
@@ -10,10 +14,6 @@ using CSM.UiLogic.Commands;
 using CSM.UiLogic.ViewModels.Common.CustomLevels;
 using CSM.UiLogic.ViewModels.Controls.SongSources;
 using Microsoft.Extensions.Logging;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.IO;
-using System.Text.Json;
 
 namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
 {

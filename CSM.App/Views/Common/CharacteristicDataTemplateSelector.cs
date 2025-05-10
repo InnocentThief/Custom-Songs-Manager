@@ -1,8 +1,8 @@
-﻿using CSM.DataAccess.Common;
+﻿using System.Windows;
+using System.Windows.Controls;
+using CSM.DataAccess.Common;
 using CSM.UiLogic.ViewModels.Common.MapDetails;
 using CSM.UiLogic.ViewModels.Common.Playlists;
-using System.Windows;
-using System.Windows.Controls;
 
 namespace CSM.App.Views.Common
 {

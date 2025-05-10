@@ -1,6 +1,6 @@
-﻿using CSM.Framework.ServiceLocation;
+﻿using System.Windows.Media;
+using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.Commands;
-using System.Windows.Media;
 
 namespace CSM.UiLogic.AbstractBase
 {

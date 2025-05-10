@@ -1,8 +1,8 @@
-﻿using CSM.DataAccess;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text.Json;
+using CSM.DataAccess;
 
 namespace CSM.Business
 {
