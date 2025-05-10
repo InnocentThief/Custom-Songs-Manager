@@ -6,6 +6,8 @@ namespace CSM.Business.Interfaces
     {
         Task<Player?> GetPlayerProfileAsync(string id);
 
+        Task<List<string>> GetPlayerScoresAsync(string id);
+
         Task<bool> PlayerExistsAsync(string id);
     }
 }

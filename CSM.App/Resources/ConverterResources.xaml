@@ -1,9 +1,13 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation">
+                    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+                    xmlns:converter="clr-namespace:CSM.App.Converter"
+                    xmlns:flags="clr-namespace:FamFamFam.Flags.Wpf;assembly=FamFamFam.Flags.Wpf">
 
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     <telerik:InvertedBooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter" />
     <telerik:InvertedBooleanConverter x:Key="InvertedBooleanConverter" />
+    <flags:CountryIdToFlagImageSourceConverter x:Key="CountryIdToFlagImageSourceConverter" />
+    <converter:BackgroundToTextColorConverter x:Key="BackgroundToTextColorConverter"/>
 
 </ResourceDictionary>

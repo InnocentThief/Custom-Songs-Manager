@@ -18,6 +18,7 @@ namespace CSM.DataAccess
 
             options = new JsonSerializerOptions
             {
+                PropertyNameCaseInsensitive = true,
                 WriteIndented = true,
                 Converters =
                 {

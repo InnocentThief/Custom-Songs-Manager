@@ -1,4 +1,6 @@
-﻿namespace CSM.DataAccess.BeatLeader
+﻿using System.Text.Json.Serialization;
+
+namespace CSM.DataAccess.BeatLeader
 {
     internal class Player
     {

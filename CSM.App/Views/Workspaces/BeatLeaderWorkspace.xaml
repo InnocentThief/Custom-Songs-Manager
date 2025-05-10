@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" xmlns:beatleader="clr-namespace:CSM.App.Views.Controls.BeatLeader"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -17,16 +17,8 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="3" />
-                    <RowDefinition Height="200" MinHeight="50" />
                 </Grid.RowDefinitions>
-                <Grid>
-
-                </Grid>
-                <GridSplitter Grid.Row="1" Style="{StaticResource WorkspaceHorizontalGridSplitterStyle}" VerticalAlignment="Center" />
-                <Grid Grid.Row="2">
-
-                </Grid>
+                <beatleader:BeatLeaderControl DataContext="{Binding BeatLeaderControl}" />
             </Grid>
         </Border>
     </Grid>

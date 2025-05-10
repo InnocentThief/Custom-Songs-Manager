@@ -1,0 +1,161 @@
+﻿<UserControl x:Class="CSM.App.Views.Controls.BeatLeader.PlayerControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+
+
+    <Grid Margin="6">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid VerticalAlignment="Top">
+            <Ellipse Width="75" Height="75">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="{Binding Avatar}" />
+                </Ellipse.Fill>
+            </Ellipse>
+            <telerik:RadBadge.Badge>
+                <telerik:RadBadge 
+                    x:Name="homeBadge"
+                    BadgeType="ContentOnly" 
+                    Content="{Binding HomeClan}" 
+                    Geometry="{telerik:Geometry Type=RoundedRectangle}" 
+                    Background="{Binding HomeClanColor}" 
+                    Position="0.9,0.75"
+                    Height="17"
+                    FontSize="12"
+                    FontWeight="DemiBold"
+                    Foreground="{Binding Background, ElementName=homeBadge, Converter={StaticResource BackgroundToTextColorConverter}}"/>
+            </telerik:RadBadge.Badge>
+        </Grid>
+
+        <Grid Grid.Column="1" Margin="20,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <telerik:Label Content="{Binding Name}" FontWeight="DemiBold" FontSize="20" />
+            <ItemsControl ItemsSource="{Binding Clans}" Grid.Row="1" Margin="0,6,0,0">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="{Binding Color}" Margin="3" CornerRadius="3" Padding="6,1,6,1" x:Name="clanBadge">
+                            <TextBlock 
+                                Text="{Binding Tag}" 
+                                FontSize="9" 
+                                FontWeight="Bold" 
+                                Foreground="{Binding Background, ElementName=clanBadge, Converter={StaticResource BackgroundToTextColorConverter}}" />
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+
+
+        <Grid Grid.Column="2" Margin="20,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Border Grid.ColumnSpan="2" Background="#332C36" Padding="3">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <telerik:Label Content="{Binding PP}" Grid.Column="1" Foreground="#FDDBFF" FontWeight="DemiBold" FontSize="18" />
+                    <telerik:Label Content="pp" Foreground="#FDDBFF" FontWeight="DemiBold" FontSize="18" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="#332C36" BorderThickness="2" Grid.Row="1" Padding="3">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <telerik:Label Content="Global" Grid.Row="1" />
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right">
+                        <telerik:RadGlyph Glyph="&#xe700;" Foreground="White" />
+                        <telerik:Label Content="#" />
+                        <telerik:Label Content="{Binding Rank}" />
+                    </StackPanel>
+                    <telerik:Label Content="Country" Grid.Row="2" />
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right">
+                        <Image Source="{Binding Country, Converter={StaticResource CountryIdToFlagImageSourceConverter}}" RenderOptions.BitmapScalingMode="HighQuality" VerticalAlignment="Center" />
+                        <telerik:Label Content="#" Margin="3,0,0,0" />
+                        <telerik:Label Content="{Binding CountryRank}" HorizontalAlignment="Right" />
+                    </StackPanel>
+
+                </Grid>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Column="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <ItemsControl ItemsSource="{Binding ScoreStats}" Margin="20,0,0,0">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" Margin="0,0,4,4" CornerRadius="3" Padding="6,2">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <telerik:Label Content="{Binding Label}" FontWeight="Bold" FontSize="12" />
+                                <telerik:Label Content="|" Grid.Column="1" Margin="3,0" FontSize="12" />
+                                <telerik:Label Content="{Binding Value}" Grid.Column="2" FontSize="12" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <ItemsControl ItemsSource="{Binding PlaysStats}" Grid.Row="1" Margin="20,0,0,0">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" Margin="0,0,4,4" CornerRadius="3" Padding="6,2">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <telerik:Label Content="{Binding Label}" FontWeight="Bold" FontSize="12" />
+                                <telerik:Label Content="|" Grid.Column="1" Margin="3,0" FontSize="12" />
+                                <telerik:Label Content="{Binding Value}" Grid.Column="2" FontSize="12" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+    </Grid>
+</UserControl>
