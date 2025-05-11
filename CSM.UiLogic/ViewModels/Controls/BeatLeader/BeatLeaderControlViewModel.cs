@@ -2,23 +2,54 @@
 using CSM.Business.Interfaces;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
+using CSM.UiLogic.Commands;
 using CSM.UiLogic.ViewModels.Common.Leaderboard;
 
 namespace CSM.UiLogic.ViewModels.Controls.BeatLeader
 {
     internal class BeatLeaderControlViewModel : BaseViewModel
     {
+        #region Private fields
+
+        private IRelayCommand? switchPlayerCommand;
+        private bool playerSearchVisible;
+
         private readonly IBeatLeaderService beatLeaderService;
         private readonly IUserConfigDomain userConfigDomain;
+
+        #endregion
+
+        #region Properties
+
+        public IRelayCommand? SwichPlayerCommand => switchPlayerCommand ??= CommandFactory.Create(SwitchPlayer, CanSwitchPlayer);
 
         public BeatLeaderPlayerViewModel? Player { get; private set; }
 
         public ObservableCollection<BeatLeaderScoreViewModel> Scores { get; } = [];
 
+        public bool PlayerSearchVisible
+        {
+            get => playerSearchVisible;
+            set
+            {
+                if (value == playerSearchVisible)
+                    return;
+                playerSearchVisible = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public PlayerSearchViewModel PlayerSearch { get; }
+
+        #endregion
+
         public BeatLeaderControlViewModel(IServiceLocator serviceLocator) : base(serviceLocator)
         {
             beatLeaderService = serviceLocator.GetService<IBeatLeaderService>();
             userConfigDomain = serviceLocator.GetService<IUserConfigDomain>();
+
+            PlayerSearch = new PlayerSearchViewModel(serviceLocator, LeaderboardSearchType.BeatLeader);
+            PlayerSearch.SearchResultSelected += OnPlayerSearchResultSelected;
         }
 
         internal async Task LoadAsync(bool refresh)
@@ -26,19 +57,22 @@ namespace CSM.UiLogic.ViewModels.Controls.BeatLeader
             if (Player != null && !refresh)
                 return;
 
-            SetLoadingInProgress(true, "Loading player data...");
+
 
             var playerId = userConfigDomain.Config?.LeaderboardsConfig.BeatLeaderUserId;
             if (string.IsNullOrEmpty(playerId))
                 return;
 
-            await LoadData(playerId);
+            await LoadDataAsync(playerId);
 
-            SetLoadingInProgress(false, string.Empty);
         }
 
-        private async Task LoadData(string playerId)
+        #region Helper methods
+
+        private async Task LoadDataAsync(string playerId)
         {
+            SetLoadingInProgress(true, "Loading player data...");
+
             var playerExists = await beatLeaderService.PlayerExistsAsync(playerId);
             if (!playerExists)
             {
@@ -46,7 +80,7 @@ namespace CSM.UiLogic.ViewModels.Controls.BeatLeader
             }
 
             var playerTask = beatLeaderService.GetPlayerProfileAsync(playerId);
-            var scoresTask = beatLeaderService.GetPlayerScoresAsync(playerId);
+            var scoresTask = beatLeaderService.GetPlayerScoresAsync(playerId, 1, 100);
 
             await Task.WhenAll(playerTask, scoresTask);
 
@@ -57,14 +91,52 @@ namespace CSM.UiLogic.ViewModels.Controls.BeatLeader
                 OnPropertyChanged(nameof(Player));
             }
 
-            var scores = scoresTask.Result;
+            var scoreResult = scoresTask.Result;
+            if (scoreResult == null)
+                return;
             // todo: cleanup dependency on BeatLeaderScoreViewModel
             Scores.Clear();
-            foreach (var score in scores)
+            foreach (var score in scoreResult.Data)
             {
-                //var scoreViewModel = new BeatLeaderScoreViewModel(ServiceLocator, score);
-                //Scores.Add(scoreViewModel);
+                var scoreViewModel = new BeatLeaderScoreViewModel(ServiceLocator, score);
+                Scores.Add(scoreViewModel);
             }
+
+            var additionalRequestCount = scoreResult.Metadata.Total / 100;
+            for (int i = 2; i <= additionalRequestCount; i++)
+            {
+                var additionScoreResult = await beatLeaderService.GetPlayerScoresAsync(playerId, i, 100);
+                foreach (var score in scoreResult.Data)
+                {
+                    var scoreViewModel = new BeatLeaderScoreViewModel(ServiceLocator, score);
+                    Scores.Add(scoreViewModel);
+                }
+            }
+
+
+            SetLoadingInProgress(false, string.Empty);
         }
+
+        public void SwitchPlayer()
+        {
+            PlayerSearchVisible = true;
+
+        }
+
+        private bool CanSwitchPlayer()
+        {
+            return true;
+        }
+
+        private async void OnPlayerSearchResultSelected(object? sender, SearchResultEventArgs e)
+        {
+            if (e.PlayerId == null)
+                return;
+
+            PlayerSearchVisible = false;
+            await LoadDataAsync(e.PlayerId);
+        }
+
+        #endregion
     }
 }

@@ -7,17 +7,19 @@ namespace CSM.UiLogic.ViewModels.Common.Leaderboard
     {
         private readonly Player player;
 
+        public override string Id => player.Id;
+
         public override string Name => player.Name;
 
         public override string Avatar => player.Avatar;
 
-        public override double PP => Math.Round(player.Pp, 2);
+        public override string PP => Math.Round(player.Pp, 2).ToString("N2");
 
-        public override int Rank => player.Rank;
+        public override string Rank => player.Rank.ToString("N0");
 
         public override string Country => player.Country;
 
-        public override int CountryRank => player.CountryRank;
+        public override string CountryRank => player.CountryRank.ToString("N0");
 
         public string HomeClan => player.ClanOrder.Split(',').FirstOrDefault() ?? string.Empty;
 
@@ -62,22 +64,22 @@ namespace CSM.UiLogic.ViewModels.Common.Leaderboard
 
                 if (profileAppearance.Contains("totalPlayCount"))
                 {
-                    scoreStats.Add(new StatsViewModel($"Total play count", player.ScoreStats.TotalPlayCount.ToString()));
+                    scoreStats.Add(new StatsViewModel($"Total play count", player.ScoreStats.TotalPlayCount.ToString("N0")));
                 }
 
                 if (profileAppearance.Contains("totalScore"))
                 {
-                    scoreStats.Add(new StatsViewModel("Total score", player.ScoreStats.TotalScore.ToString()));
+                    scoreStats.Add(new StatsViewModel("Total score", player.ScoreStats.TotalScore.ToString("N0")));
                 }
 
                 if (profileAppearance.Contains("rankedPlayCount"))
                 {
-                    scoreStats.Add(new StatsViewModel($"Ranked play count", player.ScoreStats.RankedPlayCount.ToString()));
+                    scoreStats.Add(new StatsViewModel($"Ranked play count", player.ScoreStats.RankedPlayCount.ToString("N0")));
                 }
 
                 if (profileAppearance.Contains("totalRankedScore"))
                 {
-                    scoreStats.Add(new StatsViewModel("Total ranked score", player.ScoreStats.TotalRankedScore.ToString()));
+                    scoreStats.Add(new StatsViewModel("Total ranked score", player.ScoreStats.TotalRankedScore.ToString("N0")));
                 }
 
                 if (profileAppearance.Contains("topPp"))
@@ -87,37 +89,37 @@ namespace CSM.UiLogic.ViewModels.Common.Leaderboard
 
                 if (profileAppearance.Contains("topAccuracy"))
                 {
-                    scoreStats.Add(new StatsViewModel("Best acc", $"{Math.Round(player.ScoreStats.TopAccuracy, 2)}%"));
+                    scoreStats.Add(new StatsViewModel("Best acc", $"{Math.Round(player.ScoreStats.TopAccuracy * 100, 2)}%"));
                 }
 
                 if (profileAppearance.Contains("topRankedAccuracy"))
                 {
-                    scoreStats.Add(new StatsViewModel("Best ranked acc", $"{Math.Round(player.ScoreStats.TopRankedAccuracy, 2)}%"));
+                    scoreStats.Add(new StatsViewModel("Best ranked acc", $"{Math.Round(player.ScoreStats.TopRankedAccuracy * 100, 2)}%"));
                 }
 
                 if (profileAppearance.Contains("averageAccuracy"))
                 {
-                    scoreStats.Add(new StatsViewModel("Average acc", $"{Math.Round(player.ScoreStats.AverageAccuracy, 2)}%"));
+                    scoreStats.Add(new StatsViewModel("Average acc", $"{Math.Round(player.ScoreStats.AverageAccuracy * 100, 2)}%"));
                 }
 
                 if (profileAppearance.Contains("medianAccuracy"))
                 {
-                    scoreStats.Add(new StatsViewModel("Median acc", $"{Math.Round(player.ScoreStats.MedianAccuracy, 2)}%"));
+                    scoreStats.Add(new StatsViewModel("Median acc", $"{Math.Round(player.ScoreStats.MedianAccuracy * 100, 2)}%"));
                 }
 
                 if (profileAppearance.Contains("averageRankedAccuracy"))
                 {
-                    scoreStats.Add(new StatsViewModel("Average ranked acc", $"{Math.Round(player.ScoreStats.AverageRankedAccuracy, 2)}%"));
+                    scoreStats.Add(new StatsViewModel("Average ranked acc", $"{Math.Round(player.ScoreStats.AverageRankedAccuracy * 100, 2)}%"));
                 }
 
                 if (profileAppearance.Contains("averageWeightedRankedAccuracy"))
                 {
-                    scoreStats.Add(new StatsViewModel("Weighted ranked acc", $"{Math.Round(player.ScoreStats.AverageWeightedRankedAccuracy, 2)}%"));
+                    scoreStats.Add(new StatsViewModel("Weighted ranked acc", $"{Math.Round(player.ScoreStats.AverageWeightedRankedAccuracy * 100, 2)}%"));
                 }
 
                 if (profileAppearance.Contains("medianRankedAccuracy"))
                 {
-                    scoreStats.Add(new StatsViewModel("Median ranked acc", $"{Math.Round(player.ScoreStats.MedianRankedAccuracy, 2)}%"));
+                    scoreStats.Add(new StatsViewModel("Median ranked acc", $"{Math.Round(player.ScoreStats.MedianRankedAccuracy * 100, 2)}%"));
                 }
 
                 if (profileAppearance.Contains("averageWeightedRankedRank"))
@@ -127,7 +129,7 @@ namespace CSM.UiLogic.ViewModels.Common.Leaderboard
 
                 if (profileAppearance.Contains("peakRank"))
                 {
-                    scoreStats.Add(new StatsViewModel($"Peak rank", player.ScoreStats.PeakRank.ToString()));
+                    scoreStats.Add(new StatsViewModel($"Peak rank", player.ScoreStats.PeakRank.ToString("N0")));
                 }
 
                 if (profileAppearance.Contains("averageRank"))
@@ -137,7 +139,7 @@ namespace CSM.UiLogic.ViewModels.Common.Leaderboard
 
                 if (profileAppearance.Contains("top1Count"))
                 {
-                    scoreStats.Add(new StatsViewModel($"#1's", player.ScoreStats.Top1Count.ToString()));
+                    scoreStats.Add(new StatsViewModel($"#1's", player.ScoreStats.Top1Count.ToString("N0")));
                 }
 
                 if (profileAppearance.Contains("topPercentile"))
@@ -165,27 +167,27 @@ namespace CSM.UiLogic.ViewModels.Common.Leaderboard
 
                 if (profileAppearance.Contains("sspPlays"))
                 {
-                    playsStats.Add(new StatsViewModel($"SS+", player.ScoreStats.SspPlays.ToString()));
+                    playsStats.Add(new StatsViewModel($"SS+", player.ScoreStats.SspPlays.ToString("N0")));
                 }
 
                 if (profileAppearance.Contains("ssPlays"))
                 {
-                    playsStats.Add(new StatsViewModel($"SS", player.ScoreStats.SsPlays.ToString()));
+                    playsStats.Add(new StatsViewModel($"SS", player.ScoreStats.SsPlays.ToString("N0")));
                 }
 
                 if (profileAppearance.Contains("spPlays"))
                 {
-                    playsStats.Add(new StatsViewModel($"S+", player.ScoreStats.SpPlays.ToString()));
+                    playsStats.Add(new StatsViewModel($"S+", player.ScoreStats.SpPlays.ToString("N0")));
                 }
 
                 if (profileAppearance.Contains("sPlays"))
                 {
-                    playsStats.Add(new StatsViewModel($"S", player.ScoreStats.SPlays.ToString()));
+                    playsStats.Add(new StatsViewModel($"S", player.ScoreStats.SPlays.ToString("N0")));
                 }
 
                 if (profileAppearance.Contains("aPlays"))
                 {
-                    playsStats.Add(new StatsViewModel($"A", player.ScoreStats.APlays.ToString()));
+                    playsStats.Add(new StatsViewModel($"A", player.ScoreStats.APlays.ToString("N0")));
                 }
 
                 return playsStats;

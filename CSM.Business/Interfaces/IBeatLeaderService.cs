@@ -6,7 +6,9 @@ namespace CSM.Business.Interfaces
     {
         Task<Player?> GetPlayerProfileAsync(string id);
 
-        Task<List<string>> GetPlayerScoresAsync(string id);
+        Task<PlayerSearchResult?> GetPlayersAsync(string name);
+
+        Task<ScoreSearchResult?> GetPlayerScoresAsync(string id, int page, int count);
 
         Task<bool> PlayerExistsAsync(string id);
     }
