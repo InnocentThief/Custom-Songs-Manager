@@ -43,19 +43,50 @@
             <!-- Player -->
             <beatleader:PlayerControl Grid.Row="1" DataContext="{Binding Player}" />
 
-            <!-- Scores -->
-            <telerik:RadGridView Grid.Row="2" ItemsSource="{Binding Scores}" Style="{StaticResource RadGridViewStyle}" Margin="3">
-                <telerik:RadGridView.Columns>
-                    <telerik:GridViewDataColumn Header="Rank" DataMemberBinding="{Binding Rank}">
-                        
-                    </telerik:GridViewDataColumn>
-                    <telerik:GridViewDataColumn Header="Song" DataMemberBinding="{Binding SongName}">
-                        
-                    </telerik:GridViewDataColumn>
-                </telerik:RadGridView.Columns>
-                
-            </telerik:RadGridView>
 
+
+            <!-- Scores -->
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Scores" Style="{StaticResource HeaderTitleStyle}" Foreground="#88018574" />
+                    <!-- Commands -->
+                    <telerik:RadToolBar Grid.Column="1" Style="{StaticResource HeaderToolBarStyle}" >
+                        <telerik:RadButton Command="{Binding ClearSongHistoryCommand}" ToolTip="Clear song history">
+                            <telerik:RadGlyph Glyph="&#xe10c;" Foreground="#88018574" />
+                        </telerik:RadButton>
+                    </telerik:RadToolBar>
+                </Grid>
+
+                <telerik:RadGridView Grid.Row="1" ItemsSource="{Binding Scores}" Style="{StaticResource RadGridViewStyle}" Margin="3">
+                    <telerik:RadGridView.Columns>
+                        <telerik:GridViewDataColumn Header="Rank" DataMemberBinding="{Binding Rank}">
+
+                        </telerik:GridViewDataColumn>
+                        <telerik:GridViewDataColumn Header="Song" DataMemberBinding="{Binding SongName}" Width="*">
+
+                        </telerik:GridViewDataColumn>
+                        <telerik:GridViewDataColumn Header="FC" DataMemberBinding="{Binding FC}" Width="Auto">
+                            <telerik:GridViewDataColumn.CellTemplate>
+                                <DataTemplate>
+                                    <telerik:RadGlyph Glyph="&#xe118;" Visibility="{Binding FC, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                </DataTemplate>
+                            </telerik:GridViewDataColumn.CellTemplate>
+                        </telerik:GridViewDataColumn>
+                        <telerik:GridViewDataColumn Header="Bad cuts" DataMemberBinding="{Binding BadCuts}" Width="Auto" />
+                        <telerik:GridViewDataColumn Header="Missed notes" DataMemberBinding="{Binding MissedNotes}" Width="Auto" />
+                    </telerik:RadGridView.Columns>
+
+                </telerik:RadGridView>
+            </Grid>
 
             <!-- Player search -->
             <Grid Grid.RowSpan="3" Background="Black" Opacity="0.9" Visibility="{Binding PlayerSearchVisible, Converter={StaticResource BooleanToVisibilityConverter}}">

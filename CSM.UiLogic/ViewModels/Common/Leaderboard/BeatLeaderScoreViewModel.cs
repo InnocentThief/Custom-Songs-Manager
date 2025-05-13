@@ -7,9 +7,15 @@ namespace CSM.UiLogic.ViewModels.Common.Leaderboard
     {
         private Score score;
 
-        public int Rank => score.Rank;
+        public override int Rank => score.Rank;
 
-        public string SongName => score.Leaderboard.Song.Name;
+        public override string SongName => score.Leaderboard.Song.Name;
+
+        public override bool FC => score.FullCombo;
+
+        public override int BadCuts => score.BadCuts;
+
+        public override int MissedNotes => score.MissedNotes;
 
         public BeatLeaderScoreViewModel(IServiceLocator serviceLocator, Score score) : base(serviceLocator)
         {

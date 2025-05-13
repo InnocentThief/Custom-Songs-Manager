@@ -10,5 +10,8 @@ namespace CSM.DataAccess.BeatLeader
     {
         public Leaderboard Leaderboard { get; set; } = new();
         public int Rank { get; set; }
+        public int BadCuts { get; set; }
+        public int MissedNotes { get; set; }
+        public bool FullCombo { get; set; }
     }
 }
