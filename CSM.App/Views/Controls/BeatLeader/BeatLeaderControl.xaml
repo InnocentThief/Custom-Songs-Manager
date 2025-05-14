@@ -43,8 +43,6 @@
             <!-- Player -->
             <beatleader:PlayerControl Grid.Row="1" DataContext="{Binding Player}" />
 
-
-
             <!-- Scores -->
             <Grid Grid.Row="2">
                 <Grid.RowDefinitions>
@@ -68,11 +66,47 @@
 
                 <telerik:RadGridView Grid.Row="1" ItemsSource="{Binding Scores}" Style="{StaticResource RadGridViewStyle}" Margin="3">
                     <telerik:RadGridView.Columns>
-                        <telerik:GridViewDataColumn Header="Rank" DataMemberBinding="{Binding Rank}">
-
+                        <telerik:GridViewDataColumn Header="Rank" DataMemberBinding="{Binding Rank}" IsReadOnly="True">
+                            <telerik:GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <telerik:RadGlyph Glyph="&#xe700;"/>
+                                        <telerik:Label Content="#" />
+                                        <telerik:Label Content="{Binding Rank}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </telerik:GridViewColumn.CellTemplate>
                         </telerik:GridViewDataColumn>
-                        <telerik:GridViewDataColumn Header="Song" DataMemberBinding="{Binding SongName}" Width="*">
-
+                        <telerik:GridViewDataColumn Header="Song" DataMemberBinding="{Binding SongName}" Width="*" IsReadOnly="True">
+                            <telerik:GridViewDataColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,3">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Ellipse Width="50" Height="50">
+                                            <Ellipse.Fill>
+                                                <ImageBrush ImageSource="{Binding CoverImage}" />
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <Grid VerticalAlignment="Center" Grid.Column="1" Margin="10,0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding SongName}" FontWeight="DemiBold" />
+                                                <TextBlock Text="{Binding SubName}" FontWeight="DemiBold" Margin="6,0" />
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Grid.Row="1">
+                                                <TextBlock Text="{Binding Author}" VerticalAlignment="Bottom" />
+                                                <TextBlock Text="{Binding Mapper}" Margin="6,0" FontSize="12" VerticalAlignment="Bottom" FontWeight="DemiBold" />
+                                            </StackPanel>
+                                        </Grid>
+                                    </Grid>
+                                </DataTemplate>
+                            </telerik:GridViewDataColumn.CellTemplate>
                         </telerik:GridViewDataColumn>
                         <telerik:GridViewDataColumn Header="FC" DataMemberBinding="{Binding FC}" Width="Auto">
                             <telerik:GridViewDataColumn.CellTemplate>

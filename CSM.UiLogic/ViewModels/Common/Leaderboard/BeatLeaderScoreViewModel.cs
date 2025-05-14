@@ -17,6 +17,16 @@ namespace CSM.UiLogic.ViewModels.Common.Leaderboard
 
         public override int MissedNotes => score.MissedNotes;
 
+        public override string Id => score.Leaderboard.Song.Id;
+
+        public override string SubName => score.Leaderboard.Song.SubName;
+
+        public override string Author => score.Leaderboard.Song.Author;
+
+        public override string Mapper => score.Leaderboard.Song.Mapper;
+
+        public override string CoverImage => score.Leaderboard.Song.CoverImage;
+
         public BeatLeaderScoreViewModel(IServiceLocator serviceLocator, Score score) : base(serviceLocator)
         {
             this.score = score;
