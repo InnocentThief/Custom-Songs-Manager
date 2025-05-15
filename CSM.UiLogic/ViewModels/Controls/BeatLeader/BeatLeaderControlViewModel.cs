@@ -27,6 +27,18 @@ namespace CSM.UiLogic.ViewModels.Controls.BeatLeader
 
         public ObservableCollection<BeatLeaderScoreViewModel> Scores { get; } = [];
 
+        public string ScoreCount
+        {
+            get
+            {
+                if (Scores.Count == 0)
+                    return "No score on record";
+                if (Scores.Count == 1)
+                    return "1 score";
+                return $"{Scores.Count} scores";
+            }
+        }
+
         public bool PlayerSearchVisible
         {
             get => playerSearchVisible;
@@ -56,8 +68,6 @@ namespace CSM.UiLogic.ViewModels.Controls.BeatLeader
         {
             if (Player != null && !refresh)
                 return;
-
-
 
             var playerId = userConfigDomain.Config?.LeaderboardsConfig.BeatLeaderUserId;
             if (string.IsNullOrEmpty(playerId))
@@ -102,17 +112,20 @@ namespace CSM.UiLogic.ViewModels.Controls.BeatLeader
                 Scores.Add(scoreViewModel);
             }
 
-            var additionalRequestCount = scoreResult.Metadata.Total / 100;
+            var additionalRequestCount = scoreResult.Metadata.Total / 100+1;
             for (int i = 2; i <= additionalRequestCount; i++)
             {
                 var additionScoreResult = await beatLeaderService.GetPlayerScoresAsync(playerId, i, 100);
-                foreach (var score in scoreResult.Data)
+                if (additionScoreResult == null)
+                    continue;
+                foreach (var score in additionScoreResult.Data)
                 {
                     var scoreViewModel = new BeatLeaderScoreViewModel(ServiceLocator, score);
                     Scores.Add(scoreViewModel);
                 }
             }
 
+            OnPropertyChanged(nameof(ScoreCount));
 
             SetLoadingInProgress(false, string.Empty);
         }

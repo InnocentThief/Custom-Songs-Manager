@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using CSM.DataAccess.Common;
+using CSM.UiLogic.ViewModels.Common.Leaderboard;
 using CSM.UiLogic.ViewModels.Common.MapDetails;
 using CSM.UiLogic.ViewModels.Common.Playlists;
 
@@ -31,6 +32,10 @@ namespace CSM.App.Views.Common
             else if (item is MapDifficultyViewModel mapDifficultyViewModel)
             {
                 characteristic = mapDifficultyViewModel.Characteristic;
+            }
+            else if (item is BeatLeaderScoreViewModel beatLeaderScoreViewModel)
+            {
+                characteristic = beatLeaderScoreViewModel.Characteristic;
             }
 
             if (characteristic == Characteristic.Degree360) return Degree360DataTemplate;

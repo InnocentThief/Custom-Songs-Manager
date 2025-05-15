@@ -1,0 +1,122 @@
+﻿<UserControl x:Class="CSM.App.Views.Controls.BeatLeader.ScoreControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CSM.App.Views.Controls.BeatLeader"
+             mc:Ignorable="d" 
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Scores" Style="{StaticResource HeaderTitleStyle}" Foreground="#88018574" />
+            <!-- Commands -->
+            <telerik:RadToolBar Grid.Column="1" Style="{StaticResource HeaderToolBarStyle}" >
+                <telerik:RadButton Command="{Binding ClearSongHistoryCommand}" ToolTip="Clear song history">
+                    <telerik:RadGlyph Glyph="&#xe10c;" Foreground="#88018574" />
+                </telerik:RadButton>
+            </telerik:RadToolBar>
+        </Grid>
+
+        <telerik:RadGridView Grid.Row="1" ItemsSource="{Binding Scores}" Style="{StaticResource RadGridViewStyle}" Margin="3">
+            <telerik:RadGridView.Columns>
+                <telerik:GridViewDataColumn Header="Rank" DataMemberBinding="{Binding Rank}" IsReadOnly="True">
+                    <telerik:GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <telerik:RadGlyph Glyph="&#xe700;"/>
+                                <telerik:Label Content="#" />
+                                <telerik:Label Content="{Binding Rank}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </telerik:GridViewColumn.CellTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="Date" Width="Auto" DataMemberBinding="{Binding Date, StringFormat='d', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
+                <telerik:GridViewDataColumn Header="Song" DataMemberBinding="{Binding SongName}" Width="*" IsReadOnly="True">
+                    <telerik:GridViewDataColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Ellipse Width="50" Height="50">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="{Binding CoverImage}" />
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                <Grid VerticalAlignment="Center" Grid.Column="1" Margin="10,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding SongName}" FontWeight="DemiBold" />
+                                        <TextBlock Text="{Binding SubName}" FontWeight="DemiBold" Margin="6,0" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Grid.Row="1">
+                                        <TextBlock Text="{Binding Author}" VerticalAlignment="Bottom" />
+                                        <TextBlock Text="{Binding Mapper}" Margin="6,0" FontSize="12" VerticalAlignment="Bottom" FontWeight="DemiBold" />
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="" DataMemberBinding="{Binding Difficulty}" IsReadOnly="True">
+                    <telerik:GridViewDataColumn.CellTemplate>
+                        <DataTemplate>
+                            <ContentControl Content="{Binding}" ContentTemplateSelector="{StaticResource CharacteristicDataTemplateSelector}" Height="30" />
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="ACC" DataMemberBinding="{Binding Accuracy}" IsReadOnly="True">
+                    <telerik:GridViewDataColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding AccuracyString}" />
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="PP" IsReadOnly="True" DataMemberBinding="{Binding PP}">
+                    <telerik:GridViewDataColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="{Binding PP}" HorizontalAlignment="Center" />
+                                <TextBlock Text="{Binding WeightedPP}" FontSize="11" HorizontalAlignment="Center" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="FC" DataMemberBinding="{Binding FC}" Width="Auto">
+                    <telerik:GridViewDataColumn.CellTemplate>
+                        <DataTemplate>
+                            <telerik:RadGlyph Glyph="&#xe118;" Visibility="{Binding FC, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="Bad cuts" DataMemberBinding="{Binding BadCuts}" Width="Auto" IsReadOnly="True" />
+                <telerik:GridViewDataColumn Header="Missed" DataMemberBinding="{Binding MissedNotes}" Width="Auto" IsReadOnly="True" />
+                <telerik:GridViewDataColumn Header="Pauses" DataMemberBinding="{Binding Pauses}" Width="Auto" IsReadOnly="True" />
+                <telerik:GridViewDataColumn Header="Modifiers" DataMemberBinding="{Binding Modifiers}" Width="Auto" IsReadOnly="True" />
+            </telerik:RadGridView.Columns>
+
+        </telerik:RadGridView>
+
+        <!-- Entry counter -->
+        <Border Grid.Row="2" Padding="6">
+            <telerik:Label Content="{Binding ScoreCount}"  />
+        </Border>
+    </Grid>
+</UserControl>
