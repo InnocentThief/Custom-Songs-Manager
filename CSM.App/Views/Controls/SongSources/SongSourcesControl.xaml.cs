@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using CSM.UiLogic.ViewModels.Controls.BeatLeader;
 using CSM.UiLogic.ViewModels.Controls.SongSources;
 
 namespace CSM.App.Views.Controls.SongSources
@@ -54,6 +55,14 @@ namespace CSM.App.Views.Controls.SongSources
         }
 
         private async void Twitch_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (DataContext is SongSourcesControlViewModel viewModel)
+            {
+                await viewModel.LoadAsync();
+            }
+        }
+
+        private async void BeatLeader_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             if (DataContext is SongSourcesControlViewModel viewModel)
             {

@@ -4,6 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:behaviours="clr-namespace:CSM.App.Behaviours"
              xmlns:common="clr-namespace:CSM.App.Views.Common"
              xmlns:local="clr-namespace:CSM.App.Views.Controls.SongSources"
              xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
@@ -113,6 +114,7 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <telerik:RadGridView 
+                    behaviours:GridViewHeaderContextMenuBehaviour.IsEnabled="True"
                      ItemsSource="{Binding Results}"
                      Margin="3" 
                      SelectedItem="{Binding SelectedResult}"

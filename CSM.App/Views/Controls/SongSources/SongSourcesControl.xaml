@@ -4,7 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
-             xmlns:local="clr-namespace:CSM.App.Views.Controls.SongSources"
+             xmlns:local="clr-namespace:CSM.App.Views.Controls.SongSources" xmlns:beatleader="clr-namespace:CSM.App.Views.Controls.BeatLeader"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -33,13 +33,18 @@
             <local:SongSourcesTwitchControl />
         </DataTemplate>
 
-                <local:SongSourceDataTemplateSelector x:Key="SongSourceDataTemplateSelector"
+        <DataTemplate x:Key="BeatLeaderDataTemplate">
+            <beatleader:BeatLeaderControl />
+        </DataTemplate>
+
+        <local:SongSourceDataTemplateSelector x:Key="SongSourceDataTemplateSelector"
                                               CustomLevelsDataTemplate="{StaticResource CustomLevelsDataTemplate}"
                                               PlaylistsDataTemplate="{StaticResource PlaylistsDataTemplate}"
                                               FavouritesDataTemplate="{StaticResource FavouritesDataTemplate}"
                                               SearchDataTemplate="{StaticResource SearchDataTemplate}"
                                               SongSuggestDataTemplate="{StaticResource SongSuggestDataTemplate}"
-                                              TwitchDataTemplate="{StaticResource TwitchDataTemplate}" />
+                                              TwitchDataTemplate="{StaticResource TwitchDataTemplate}"
+                                              BeatLeaderDataTemplate="{StaticResource BeatLeaderDataTemplate}"/>
 
     </UserControl.Resources>
 
@@ -74,6 +79,12 @@
                         </telerik:RadRadioButton>
                         <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsTwitchSelected}" Padding="8" ToolTip="Twitch" Visibility="{Binding TwitchAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" Click="Twitch_Click">
                             <telerik:RadGlyph Glyph="&#xe800;" />
+                        </telerik:RadRadioButton>
+                        <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsScoreSaberSelected}" Padding="8" ToolTip="Twitch" Visibility="{Binding ScoreSaberSelected, Converter={StaticResource BooleanToVisibilityConverter}}" Click="BeatLeader_Click">
+                            <telerik:RadGlyph Glyph="&#xea0b;" />
+                        </telerik:RadRadioButton>
+                        <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsBeatLeaderSelected}" Padding="8" ToolTip="Twitch" Visibility="{Binding BeatLeaderAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" Click="BeatLeader_Click">
+                            <telerik:RadGlyph Glyph="&#xea00;" />
                         </telerik:RadRadioButton>
                     </StackPanel>
                 </Grid>

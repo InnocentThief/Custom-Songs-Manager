@@ -4,10 +4,11 @@ using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.Commands;
 using CSM.UiLogic.ViewModels.Common.Leaderboard;
+using CSM.UiLogic.ViewModels.Controls.SongSources;
 
 namespace CSM.UiLogic.ViewModels.Controls.BeatLeader
 {
-    internal class BeatLeaderControlViewModel : BaseViewModel
+    internal class BeatLeaderControlViewModel : BaseViewModel, ISongSourceViewModel
     {
         #region Private fields
 
@@ -64,7 +65,7 @@ namespace CSM.UiLogic.ViewModels.Controls.BeatLeader
             PlayerSearch.SearchResultSelected += OnPlayerSearchResultSelected;
         }
 
-        internal async Task LoadAsync(bool refresh)
+        public async Task LoadAsync(bool refresh)
         {
             if (Player != null && !refresh)
                 return;

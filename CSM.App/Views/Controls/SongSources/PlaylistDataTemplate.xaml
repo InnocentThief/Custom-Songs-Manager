@@ -6,6 +6,7 @@
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:common="clr-namespace:CSM.App.Views.Common"
              xmlns:playlists="clr-namespace:CSM.App.Views.Controls.Playlists"
+             xmlns:behaviours="clr-namespace:CSM.App.Behaviours"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -78,6 +79,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <telerik:RadGridView 
+                behaviours:GridViewHeaderContextMenuBehaviour.IsEnabled="True"
                 ItemsSource="{Binding Songs}"
                 Margin="3" 
                 SelectedItem="{Binding SelectedSong}"

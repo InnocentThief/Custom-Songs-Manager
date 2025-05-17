@@ -47,6 +47,7 @@
     <PackageReference Include="Telerik.Windows.Controls.FileDialogs.for.Wpf.Xaml" Version="2025.1.211" />
     <PackageReference Include="Telerik.Windows.Controls.GridView.for.Wpf.Xaml" Version="2025.1.211" />
     <PackageReference Include="Telerik.Windows.Controls.RibbonView.for.Wpf.Xaml" Version="2025.1.211" />
+    <PackageReference Include="Telerik.Windows.PersistenceFramework.for.Wpf.Xaml" Version="2025.1.211" />
   </ItemGroup>
 
   <ItemGroup>

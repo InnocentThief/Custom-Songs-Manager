@@ -3,6 +3,7 @@ using CSM.Business.Interfaces;
 using CSM.DataAccess.UserConfiguration;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
+using CSM.UiLogic.ViewModels.Controls.BeatLeader;
 using CSM.UiLogic.ViewModels.Controls.CustomLevels;
 
 namespace CSM.UiLogic.ViewModels.Controls.SongSources
@@ -20,7 +21,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         #region Properties
 
-        public bool AnySourcesAvailable => CustomLevelsAvailable || PlaylistsAvailable || FavouritesAvailable || SearchAvailable || SongSuggestAvailable;
+        public bool AnySourcesAvailable => CustomLevelsAvailable || PlaylistsAvailable || FavouritesAvailable || SearchAvailable || SongSuggestAvailable || BeatLeaderAvailable;
 
         public List<ISongSourceViewModel> Sources { get; set; } = [];
 
@@ -132,6 +133,22 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             }
         }
 
+        public bool BeatLeaderAvailable => userConfig?.PlaylistsConfig.SourceAvailability.HasFlag(PlaylistsSourceAvailability.BeatLeader) ?? false;
+
+        public bool IsBeatLeaderSelected
+        {
+            get => selectedSource is BeatLeaderControlViewModel;
+            set
+            {
+                if (value)
+                {
+                    SelectedSource = Sources.SingleOrDefault(s => s is BeatLeaderControlViewModel);
+                    OnPropertyChanged();
+                    songSelectionDomain.SetSongHash(null, SongSelectionType.Right);
+                }
+            }
+        }
+
         #endregion
 
         public SongSourcesControlViewModel(IServiceLocator serviceLocator) : base(serviceLocator)
@@ -163,6 +180,10 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             {
                 Sources.Add(new TwitchSourceViewModel(serviceLocator));
             }
+            if (BeatLeaderAvailable)
+            {
+                Sources.Add(new BeatLeaderControlViewModel(serviceLocator));
+            }
 
             switch (userConfig?.PlaylistsConfig.DefaultSource)
             {
@@ -183,6 +204,9 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
                     break;
                 case PlaylistsSourceAvailability.Twitch:
                     IsTwitchSelected = true;
+                    break;
+                case PlaylistsSourceAvailability.BeatLeader:
+                    IsBeatLeaderSelected = true;
                     break;
                 default:
                     break;
@@ -219,6 +243,11 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             if (selectedSource is TwitchSourceViewModel twitchSourceViewModel)
             {
                 await twitchSourceViewModel.LoadAsync();
+            }
+
+            if (selectedSource is BeatLeaderControlViewModel beatLeaderControlViewModel)
+            {
+                await beatLeaderControlViewModel.LoadAsync(false);
             }
         }
     }

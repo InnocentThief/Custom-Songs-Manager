@@ -291,4 +291,10 @@
   <data name="Settings_Playlists_Available" xml:space="preserve">
     <value>Verfügbar</value>
   </data>
+  <data name="enum_PlaylistsSourceAvailability_BeatLeader" xml:space="preserve">
+    <value>BeatLeader</value>
+  </data>
+  <data name="enum_PlaylistsSourceAvailability_ScoreSaber" xml:space="preserve">
+    <value>ScoreSaber</value>
+  </data>
 </root>

@@ -178,6 +178,15 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BeatLeader.
+        /// </summary>
+        public static string enum_PlaylistsSourceAvailability_BeatLeader {
+            get {
+                return ResourceManager.GetString("enum_PlaylistsSourceAvailability_BeatLeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Beat Saber Favourites.
         /// </summary>
         public static string enum_PlaylistsSourceAvailability_BeatSaberFavourites {
@@ -210,6 +219,15 @@ namespace CSM.App.Properties {
         public static string enum_PlaylistsSourceAvailability_Playlists {
             get {
                 return ResourceManager.GetString("enum_PlaylistsSourceAvailability_Playlists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ScoreSaber.
+        /// </summary>
+        public static string enum_PlaylistsSourceAvailability_ScoreSaber {
+            get {
+                return ResourceManager.GetString("enum_PlaylistsSourceAvailability_ScoreSaber", resourceCulture);
             }
         }
         

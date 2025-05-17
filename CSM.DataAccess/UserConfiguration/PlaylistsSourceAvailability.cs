@@ -10,5 +10,7 @@
         SongSearch = 8,
         SongSuggest = 16,
         Twitch = 32,
+        BeatLeader = 64,
+        ScoreSaber = 128,
     }
 }

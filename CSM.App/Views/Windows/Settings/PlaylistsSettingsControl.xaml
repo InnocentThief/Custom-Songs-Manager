@@ -23,6 +23,8 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <!-- Availability -->
         <telerik:Label Content="{x:Static p:Resources.Settings_Playlists_Available}" />
@@ -43,9 +45,13 @@
         <telerik:RadToggleSwitchButton Grid.Column="1" Grid.Row="6" CheckedContent="Song Suggest" UncheckedContent="Song suggest" ContentPosition="Right" Focusable="False" IsChecked="{Binding SongSuggestAvailable}" />
         <!-- Sources: Twitch -->
         <telerik:RadToggleSwitchButton Grid.Column="1" Grid.Row="7" CheckedContent="Twitch" UncheckedContent="Twitch" ContentPosition="Right" Focusable="False" IsChecked="{Binding TwitchAvailable}" />
-        <!-- Default source -->
-        <telerik:Label Content="Default song source" Grid.Row="8" />
-        <telerik:RadComboBox Grid.Column="1" Grid.Row="8" Focusable="False" ItemsSource="{Binding SongSources}" SelectedItem="{Binding SelectedSongSource}" DisplayMemberPath="DisplayText" />
+        <!-- Sources: BeatLeader -->
+        <telerik:RadToggleSwitchButton Grid.Column="1" Grid.Row="8" CheckedContent="BeatLeader" UncheckedContent="BeatLeader" ContentPosition="Right" Focusable="False" IsChecked="{Binding BeatLeaderAvailable}" />
+        <!-- Sources: ScoreSaber -->
+        <telerik:RadToggleSwitchButton Grid.Column="1" Grid.Row="9" CheckedContent="ScoreSaber" UncheckedContent="ScoreSaber" ContentPosition="Right" Focusable="False" IsChecked="{Binding ScoreSaberAvailable}" />
+
+        <telerik:Label Content="Default song source" Grid.Row="10" />
+        <telerik:RadComboBox Grid.Column="1" Grid.Row="10" Focusable="False" ItemsSource="{Binding SongSources}" SelectedItem="{Binding SelectedSongSource}" DisplayMemberPath="DisplayText" />
 
     </Grid>
 </UserControl>

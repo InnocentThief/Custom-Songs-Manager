@@ -17,6 +17,8 @@ namespace CSM.UiLogic.ViewModels.Controls.Settings
         private bool songSearchAvailable;
         private bool songSuggestAvailable;
         private bool twitchAvailable;
+        private bool beatLeaderAvailable;
+        private bool scoreSaberAvailable;
 
         private readonly UserConfig userConfig;
 
@@ -126,6 +128,32 @@ namespace CSM.UiLogic.ViewModels.Controls.Settings
             }
         }
 
+        public bool BeatLeaderAvailable
+        {
+            get => beatLeaderAvailable;
+            set
+            {
+                if (value == beatLeaderAvailable)
+                    return;
+                beatLeaderAvailable = value;
+                OnPropertyChanged();
+                UpdateSourceAvailability();
+            }
+        }
+
+        public bool ScoreSaberAvailable
+        {
+            get => scoreSaberAvailable;
+            set
+            {
+                if (value == scoreSaberAvailable)
+                    return;
+                scoreSaberAvailable = value;
+                OnPropertyChanged();
+                UpdateSourceAvailability();
+            }
+        }
+
         public ObservableCollection<EnumWrapper<PlaylistsSourceAvailability>> SongSources { get; } = [];
 
         public EnumWrapper<PlaylistsSourceAvailability>? SelectedSongSource
@@ -152,6 +180,8 @@ namespace CSM.UiLogic.ViewModels.Controls.Settings
             songSearchAvailable = userConfig.PlaylistsConfig.SourceAvailability.HasFlag(PlaylistsSourceAvailability.SongSearch);
             songSuggestAvailable = userConfig.PlaylistsConfig.SourceAvailability.HasFlag(PlaylistsSourceAvailability.SongSuggest);
             twitchAvailable = userConfig.PlaylistsConfig.SourceAvailability.HasFlag(PlaylistsSourceAvailability.Twitch);
+            beatLeaderAvailable = userConfig.PlaylistsConfig.SourceAvailability.HasFlag(PlaylistsSourceAvailability.BeatLeader);
+            scoreSaberAvailable = userConfig.PlaylistsConfig.SourceAvailability.HasFlag(PlaylistsSourceAvailability.ScoreSaber);
 
             SongSources.AddRange(EnumWrapper<PlaylistsSourceAvailability>.GetValues(serviceLocator, PlaylistsSourceAvailability.None));
         }
@@ -167,6 +197,8 @@ namespace CSM.UiLogic.ViewModels.Controls.Settings
             if (songSearchAvailable) userConfig.PlaylistsConfig.SourceAvailability |= PlaylistsSourceAvailability.SongSearch;
             if (songSuggestAvailable) userConfig.PlaylistsConfig.SourceAvailability |= PlaylistsSourceAvailability.SongSuggest;
             if (twitchAvailable) userConfig.PlaylistsConfig.SourceAvailability |= PlaylistsSourceAvailability.Twitch;
+            if (beatLeaderAvailable) userConfig.PlaylistsConfig.SourceAvailability |= PlaylistsSourceAvailability.BeatLeader;
+            if (scoreSaberAvailable) userConfig.PlaylistsConfig.SourceAvailability |= PlaylistsSourceAvailability.ScoreSaber;
         }
 
         #endregion

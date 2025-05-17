@@ -1,12 +1,12 @@
 ﻿<UserControl x:Class="CSM.App.Views.Controls.BeatLeader.ScoreControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:CSM.App.Views.Controls.BeatLeader"
-             mc:Ignorable="d" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:behaviours="clr-namespace:CSM.App.Behaviours"
              xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
+             mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid>
@@ -30,7 +30,12 @@
             </telerik:RadToolBar>
         </Grid>
 
-        <telerik:RadGridView Grid.Row="1" ItemsSource="{Binding Scores}" Style="{StaticResource RadGridViewStyle}" Margin="3">
+        <telerik:RadGridView 
+            behaviours:GridViewHeaderContextMenuBehaviour.IsEnabled="True"
+            Grid.Row="1" 
+            ItemsSource="{Binding Scores}" 
+            Style="{StaticResource RadGridViewStyle}" 
+            Margin="3">
             <telerik:RadGridView.Columns>
                 <telerik:GridViewDataColumn Header="Rank" DataMemberBinding="{Binding Rank}" IsReadOnly="True">
                     <telerik:GridViewColumn.CellTemplate>
@@ -75,10 +80,10 @@
                         </DataTemplate>
                     </telerik:GridViewDataColumn.CellTemplate>
                 </telerik:GridViewDataColumn>
-                <telerik:GridViewDataColumn Header="" DataMemberBinding="{Binding Difficulty}" IsReadOnly="True">
+                <telerik:GridViewDataColumn Header="Difficulty" DataMemberBinding="{Binding Difficulty}" IsReadOnly="True">
                     <telerik:GridViewDataColumn.CellTemplate>
                         <DataTemplate>
-                            <ContentControl Content="{Binding}" ContentTemplateSelector="{StaticResource CharacteristicDataTemplateSelector}" Height="30" />
+                            <ContentControl Content="{Binding}" ContentTemplateSelector="{StaticResource CharacteristicDataTemplateSelector}" Height="30" Width="30" />
                         </DataTemplate>
                     </telerik:GridViewDataColumn.CellTemplate>
                 </telerik:GridViewDataColumn>
