@@ -5,11 +5,13 @@
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
                      xmlns:infoView="clr-namespace:CSM.App.Views.Windows"
-                     xmlns:infoViewModel="clr-namespace:CSM.UiLogic.ViewModels;assembly=CSM.UiLogic"
+                     xmlns:common="clr-namespace:CSM.App.Views.Windows.Common"
                      xmlns:playlistsView="clr-namespace:CSM.App.Views.Windows.Playlists"
-                     xmlns:playlistsViewModel="clr-namespace:CSM.UiLogic.ViewModels.Controls.PlaylistsTree;assembly=CSM.UiLogic"
                      xmlns:settingsView="clr-namespace:CSM.App.Views.Windows.Settings"
+                     xmlns:playlistsViewModel="clr-namespace:CSM.UiLogic.ViewModels.Controls.PlaylistsTree;assembly=CSM.UiLogic"
                      xmlns:settingsViewModel="clr-namespace:CSM.UiLogic.ViewModels.Controls.Settings;assembly=CSM.UiLogic"
+                     xmlns:viewDefinitionViewModel="clr-namespace:CSM.UiLogic.AbstractBase;assembly=CSM.UiLogic"
+                     xmlns:infoViewModel="clr-namespace:CSM.UiLogic.ViewModels;assembly=CSM.UiLogic"
                      mc:Ignorable="d"
                      Header="{Binding Title}"
                      WindowStartupLocation="CenterOwner">
@@ -26,6 +28,9 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type settingsViewModel:SettingsControlViewModel}">
             <settingsView:SettingsControl />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewDefinitionViewModel:NewViewDefinitionViewModel}">
+            <common:NewViewDefinitionControl />
         </DataTemplate>
     </telerik:RadWindow.Resources>
 

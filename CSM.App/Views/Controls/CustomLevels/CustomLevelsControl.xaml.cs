@@ -1,5 +1,10 @@
-﻿using System.Windows.Controls;
+﻿using CSM.App.Views.Helper;
+using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.ViewModels.Controls.CustomLevels;
+using System.Windows;
+using System.Windows.Controls;
+using Telerik.Windows.Controls;
+using Telerik.Windows.Persistence;
 
 namespace CSM.App.Views.Controls.CustomLevels
 {
@@ -8,6 +13,8 @@ namespace CSM.App.Views.Controls.CustomLevels
     /// </summary>
     public partial class CustomLevelsControl : UserControl
     {
+        private PersistenceManager persistenceManager = PersistenceFrameworkHelper.GetPersistenceManager();
+
         public CustomLevelsControl()
         {
             InitializeComponent();
@@ -44,5 +51,45 @@ namespace CSM.App.Views.Controls.CustomLevels
                 e.DefaultOperator1 = Telerik.Windows.Data.FilterOperator.Contains;
             }
         }
+
+        private async void Add_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is CustomLevelsControlViewModel viewModel)
+            {
+                var stream = persistenceManager.Save(mainCustomLevelsGridView);
+                await viewModel.SaveViewDefinitionAsync(stream, SavableUiElement.CustomLevelsMainView);
+            }
+        }
+
+        private async void Save_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is CustomLevelsControlViewModel viewModel && viewModel.SelectedViewDefinition != null)
+            {
+                var stream = persistenceManager.Save(mainCustomLevelsGridView);
+                await viewModel.SaveViewDefinitionAsync(stream, SavableUiElement.CustomLevelsMainView, viewModel.SelectedViewDefinition.Name);
+            }
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is CustomLevelsControlViewModel viewModel && viewModel.SelectedViewDefinition != null)
+            {
+                viewModel.DeleteViewDefinition(SavableUiElement.CustomLevelsMainView, viewModel.SelectedViewDefinition.Name);
+            }
+        }
+
+        private void ViewDefinitions_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (DataContext is CustomLevelsControlViewModel viewModel)
+            {
+                if (viewModel.SelectedViewDefinition != null && viewModel.SelectedViewDefinition.Stream != null)
+                {
+                    persistenceManager.Load(mainCustomLevelsGridView, viewModel.SelectedViewDefinition.Stream);
+                    viewModel.SelectedViewDefinition.Stream.Position = 0;
+                }
+            }
+        }
     }
 }
+
+

@@ -1,9 +1,6 @@
-﻿using System.IO;
-using System.Windows;
-using System.Windows.Media;
-using System.Windows.Threading;
-using CSM.App.Services;
+﻿using CSM.App.Services;
 using CSM.App.Views;
+using CSM.App.Views.Helper;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.Services;
 using CSM.UiLogic.ViewModels;
@@ -11,7 +8,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using RestoreWindowPlace;
+using System.IO;
+using System.Windows;
+using System.Windows.Media;
+using System.Windows.Threading;
 using Telerik.Windows.Controls;
+using Telerik.Windows.Persistence.Services;
 
 namespace CSM.App
 {
@@ -35,6 +37,7 @@ namespace CSM.App
         public App()
         {
             SetStyle();
+            Telerik.Windows.Persistence.Services.ServiceProvider.RegisterPersistenceProvider<ICustomPropertyProvider>(typeof(RadGridView), new GridViewCustomPropertyProvider());
 
             WindowPlace = new WindowPlace(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Custom Songs Manager", "placement.config"))
             {

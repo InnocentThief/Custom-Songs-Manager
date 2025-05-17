@@ -24,19 +24,38 @@
                 <!-- Title -->
                 <TextBlock Text="Custom Levels" Style="{StaticResource HeaderTitleStyle}" />
                 <!-- Commands -->
-                <telerik:RadToolBar Grid.Column="1" Style="{StaticResource HeaderToolBarStyle}" >
-                    <TextBlock Text="{Binding CustomLevelPath}" TextTrimming="CharacterEllipsis" Width="300" ToolTip="{Binding CustomLevelPath}"/>
-                    <telerik:RadButton Command="{Binding OpenInFileExplorerCommand}" ToolTip="Open in File Explorer">
-                        <telerik:RadGlyph Glyph="&#xe134;" />
-                    </telerik:RadButton>
-                    <telerik:RadButton Command="{Binding RefreshCommand}" ToolTip="Refresh">
-                        <telerik:RadGlyph Glyph="&#xe103;" />
-                    </telerik:RadButton>
-                    <telerik:RadToolBarSeparator />
-                    <telerik:RadButton Command="{Binding DeleteCustomLevelCommand}" ToolTip="Delete selected custom level">
-                        <telerik:RadGlyph Glyph="&#xe10c;" />
-                    </telerik:RadButton>
-                </telerik:RadToolBar>
+                <telerik:RadToolBarTray Grid.Column="1">
+                    <!-- Folder Path -->
+                    <telerik:RadToolBar Style="{StaticResource HeaderToolBarStyle}" >
+                        <TextBlock Text="{Binding CustomLevelPath}" TextTrimming="CharacterEllipsis" Width="300" ToolTip="{Binding CustomLevelPath}"/>
+                        <telerik:RadButton Command="{Binding OpenInFileExplorerCommand}" ToolTip="Open in File Explorer">
+                            <telerik:RadGlyph Glyph="&#xe134;" />
+                        </telerik:RadButton>
+                    </telerik:RadToolBar>
+                    <!-- View Definitions -->
+                    <telerik:RadToolBar Style="{StaticResource HeaderToolBarStyle}" >
+                        <TextBlock Text="View" />
+                        <telerik:RadComboBox ItemsSource="{Binding ViewDefinitions}" SelectedItem="{Binding SelectedViewDefinition}" DisplayMemberPath="Name" Background="Transparent"  Focusable="False" Visibility="{Binding ShowViewDefinitions, Converter={StaticResource BooleanToVisibilityConverter}}" SelectionChanged="ViewDefinitions_SelectionChanged" />
+                        <telerik:RadButton ToolTip="Create new view definition" Click="Add_Click">
+                            <telerik:RadGlyph Glyph="&#xe907;" />
+                        </telerik:RadButton>
+                        <telerik:RadButton ToolTip="Save selected view definition" Click="Save_Click" IsEnabled="{Binding CanSaveViewDefinition}">
+                            <telerik:RadGlyph Glyph="&#xe109;" />
+                        </telerik:RadButton>
+                        <telerik:RadButton ToolTip="Delete selected view definition" Click="Delete_Click" IsEnabled="{Binding CanDeleteViewDefinition}">
+                            <telerik:RadGlyph Glyph="&#xe10c;" />
+                        </telerik:RadButton>
+                    </telerik:RadToolBar>
+                    <!-- Refresh / Delete custom level -->
+                    <telerik:RadToolBar Style="{StaticResource HeaderToolBarStyle}" >
+                        <telerik:RadButton Command="{Binding RefreshCommand}" ToolTip="Refresh">
+                            <telerik:RadGlyph Glyph="&#xe103;" />
+                        </telerik:RadButton>
+                        <telerik:RadButton Command="{Binding DeleteCustomLevelCommand}" ToolTip="Delete selected custom level">
+                            <telerik:RadGlyph Glyph="&#xe10c;" />
+                        </telerik:RadButton>
+                    </telerik:RadToolBar>
+                </telerik:RadToolBarTray>
             </Grid>
             <!-- Content -->
             <Grid Grid.Row="1">
@@ -46,6 +65,7 @@
                 </Grid.RowDefinitions>
                 <!-- ListView -->
                 <telerik:RadGridView 
+                        x:Name="mainCustomLevelsGridView"
                         behaviours:GridViewHeaderContextMenuBehaviour.IsEnabled="True"
                         Margin="3,3,3,3" 
                         ItemsSource="{Binding CustomLevels}" 

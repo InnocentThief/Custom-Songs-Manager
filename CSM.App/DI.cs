@@ -1,9 +1,13 @@
-﻿using CSM.App.Views.Windows;
+﻿using CSM.App.Views.Helper;
+using CSM.App.Views.Windows;
 using CSM.Business;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Telerik.Windows.Controls;
+using Telerik.Windows.Persistence.Services;
+using Telerik.Windows.Persistence;
 
 namespace CSM.App
 {

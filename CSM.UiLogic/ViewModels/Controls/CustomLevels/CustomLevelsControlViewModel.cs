@@ -1,8 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.IO;
-using System.Text.Json;
-using CSM.Business.Core.SongSelection;
+﻿using CSM.Business.Core.SongSelection;
 using CSM.Business.Interfaces;
 using CSM.DataAccess;
 using CSM.DataAccess.CustomLevels;
@@ -14,10 +10,15 @@ using CSM.UiLogic.Commands;
 using CSM.UiLogic.ViewModels.Common.CustomLevels;
 using CSM.UiLogic.ViewModels.Controls.SongSources;
 using Microsoft.Extensions.Logging;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
+using System.Text.Json;
 
 namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
 {
-    internal class CustomLevelsControlViewModel(IServiceLocator serviceLocator) : BaseViewModel(serviceLocator), ISongSourceViewModel
+    internal class CustomLevelsControlViewModel(IServiceLocator serviceLocator)
+        : BaseViewModel(serviceLocator), ISongSourceViewModel
     {
         #region Private fields
 
@@ -25,6 +26,7 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
         private IRelayCommand? refreshCommand;
         private ICustomLevelViewModel? selectedCustomLevel;
         private IRelayCommand? deleteCustomLevelCommand;
+        private ViewDefinition? selectedViewDefinition;
 
         private readonly ILogger<CustomLevelsControlViewModel> logger = serviceLocator.GetService<ILogger<CustomLevelsControlViewModel>>();
         private readonly IBeatSaverService beatSaverService = serviceLocator.GetService<IBeatSaverService>();
@@ -78,6 +80,31 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
 
         public IRelayCommand DeleteCustomLevelCommand => deleteCustomLevelCommand ??= CommandFactory.Create(Delete, CanDelete);
 
+        public ObservableCollection<ViewDefinition> ViewDefinitions { get; } = [];
+
+        public ViewDefinition? SelectedViewDefinition
+        {
+            get => selectedViewDefinition;
+            set
+            {
+                if (value == selectedViewDefinition)
+                    return;
+                selectedViewDefinition = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(CanSaveViewDefinition));
+                OnPropertyChanged(nameof(CanDeleteViewDefinition));
+
+                userConfigDomain!.Config!.CustomLevelsConfig.LastViewDefinitionName = selectedViewDefinition?.Name;
+                userConfigDomain.SaveUserConfig();
+            }
+        }
+
+        public bool ShowViewDefinitions => ViewDefinitions.Count > 0;
+
+        public bool CanSaveViewDefinition => SelectedViewDefinition != null;
+
+        public bool CanDeleteViewDefinition => SelectedViewDefinition != null;
+
         #endregion
 
         public async Task LoadAsync(bool refresh)
@@ -97,6 +124,13 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
             }
             CustomLevels.AddRange(await LoadCustomLevelsAsync(path));
             OnPropertyChanged(nameof(CustomLevelCount));
+
+
+            // Load view definitions
+            ViewDefinitions.Clear();
+            ViewDefinitions.AddRange(await LoadViewDefinitionsAsync(SavableUiElement.CustomLevelsMainView));
+            SelectedViewDefinition = ViewDefinitions.FirstOrDefault(vd => vd.Name == userConfigDomain!.Config?.CustomLevelsConfig.LastViewDefinitionName); // store selected view definition in user config
+            OnPropertyChanged(nameof(ShowViewDefinitions));
 
             SetLoadingInProgress(false, string.Empty);
         }
@@ -118,6 +152,28 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
             var hashes = SelectedCustomLevel.MapDetailViewModel?.Model.Versions.OrderBy(v => v.CreatedAt).Select(v => v.Hash).ToList();
             if (hashes != null && hashes.Count > 0)
                 songSelectionDomain.SetSongHash(hashes.Last(), SongSelectionType.Right);
+        }
+
+        public override async Task<ViewDefinition?> SaveViewDefinitionAsync(Stream stream, SavableUiElement savableUiElement, string? name = null)
+        {
+            var newViewDefinition = await base.SaveViewDefinitionAsync(stream, savableUiElement, name);
+            if (newViewDefinition != null)
+            {
+                ViewDefinitions.Add(newViewDefinition);
+                SelectedViewDefinition = newViewDefinition;
+                OnPropertyChanged(nameof(ShowViewDefinitions));
+            }
+            return newViewDefinition;
+        }
+
+        public override void DeleteViewDefinition(SavableUiElement savableUiElement, string name)
+        {
+            if (SelectedViewDefinition == null)
+                return;
+            base.DeleteViewDefinition(savableUiElement, name);
+            ViewDefinitions.Remove(SelectedViewDefinition);
+            SelectedViewDefinition = ViewDefinitions.FirstOrDefault();
+            OnPropertyChanged(nameof(ShowViewDefinitions));
         }
 
         #region Helper methods

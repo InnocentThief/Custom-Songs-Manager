@@ -14,7 +14,7 @@
     <Style x:Key="HeaderToolBarStyle" TargetType="telerik:RadToolBar">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="GripVisibility" Value="Collapsed" />
+        <!--<Setter Property="GripVisibility" Value="Collapsed" />-->
         <Setter Property="OverflowButtonVisibility" Value="Collapsed" />
     </Style>
     

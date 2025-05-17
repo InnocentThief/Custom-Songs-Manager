@@ -1,10 +1,16 @@
-﻿using System.IO;
-using CSM.Framework.ServiceLocation;
+﻿using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
+using System.IO;
 
 namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
 {
-    internal class NewPlaylistViewModel : BaseEditViewModel
+    internal class NewPlaylistViewModel(
+        IServiceLocator serviceLocator, 
+        string cancelCommandText, 
+        EditViewModelCommandColor cancelCommandColor, 
+        string continueCommandText, 
+        EditViewModelCommandColor continueCommandColor) 
+        : BaseEditViewModel(serviceLocator, cancelCommandText, cancelCommandColor, continueCommandText, continueCommandColor)
     {
         private string playlistName = string.Empty;
 
@@ -21,10 +27,6 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
                 OnPropertyChanged();
                 ContinueCommand.RaiseCanExecuteChanged();
             }
-        }
-
-        public NewPlaylistViewModel(IServiceLocator serviceLocator, string cancelCommandText, EditViewModelCommandColor cancelCommandColor, string continueCommandText, EditViewModelCommandColor continueCommandColor) : base(serviceLocator, cancelCommandText, cancelCommandColor, continueCommandText, continueCommandColor)
-        {
         }
 
         public override bool CanContinue()
