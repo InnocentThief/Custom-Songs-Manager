@@ -67,7 +67,7 @@
                 <!-- Title -->
                 <TextBlock Text="Playlists" Style="{StaticResource HeaderTitleStyle}" />
                 <!-- Commands -->
-                <telerik:RadToolBar Grid.Column="1" Style="{StaticResource HeaderToolBarStyle}" >
+                <telerik:RadToolBar Grid.Column="1" Style="{StaticResource HeaderToolBarNoGripStyle}" >
                     <telerik:RadButton Command="{Binding OpenInFileExplorerCommand}" ToolTip="Open in File Explorer">
                         <telerik:RadGlyph Glyph="&#xe134;" />
                     </telerik:RadButton>

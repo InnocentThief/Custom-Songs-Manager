@@ -21,7 +21,7 @@
             <!-- Title -->
             <TextBlock Text="Twitch" Style="{StaticResource HeaderTitleStyle}" />
             <!-- Commands -->
-            <telerik:RadToolBar Grid.Column="1" Style="{StaticResource HeaderToolBarStyle}" >
+            <telerik:RadToolBar Grid.Column="1" Style="{StaticResource HeaderToolBarNoGripStyle}" >
                 <TextBlock Text="{Binding Username}"/>
                 <telerik:RadButton Command="{Binding LoginCommand}" ToolTip="Login to Twitch" Visibility="{Binding LoggedIn, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
                     <telerik:RadGlyph Glyph="&#xe130;" />

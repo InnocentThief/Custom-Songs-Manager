@@ -21,7 +21,7 @@
             <!-- Title -->
             <TextBlock Text="Song Detail" Style="{StaticResource HeaderTitleStyle}" Foreground="#88018574" />
             <!-- Commands -->
-            <telerik:RadToolBar Grid.Column="1" Style="{StaticResource HeaderToolBarStyle}" >
+            <telerik:RadToolBar Grid.Column="1" Style="{StaticResource HeaderToolBarNoGripStyle}" >
                 <telerik:RadButton Command="{Binding PreviewCommand}" ToolTip="Show preview">
                     <telerik:RadGlyph Glyph="&#xe200;" Foreground="#88018574" />
                 </telerik:RadButton>
