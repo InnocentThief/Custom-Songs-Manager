@@ -1,3 +1,8 @@
+# Current state of Custom-Songs-Manager
+**I'm rewriting the whole thing. Please be careful with the current release as it has some problems handling playlists with sync url's.**
+**There is a pre-release of the current reworked Custom-Songs-Manager. Try it out! Feddback is welcome** 
+**===========================================================================**
+
 # Custom-Songs-Manager
 "Custom Songs Manager" is an app that lets you manage playlists and beatmaps for the game Beat Saber. It also lets you receive and send !bsr request to a Twitch channel.
 # Features
