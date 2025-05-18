@@ -1,6 +1,10 @@
-﻿using System.Windows.Controls;
+﻿using CSM.App.Views.Helper;
+using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.ViewModels.Common.Playlists;
 using CSM.UiLogic.ViewModels.Controls.SongSources;
+using System.Windows;
+using System.Windows.Controls;
+using Telerik.Windows.Persistence;
 
 namespace CSM.App.Views.Controls.SongSources
 {
@@ -9,6 +13,8 @@ namespace CSM.App.Views.Controls.SongSources
     /// </summary>
     public partial class SongSourcesSongSearchControl : UserControl
     {
+        private PersistenceManager persistenceManager = PersistenceFrameworkHelper.GetPersistenceManager();
+
         public SongSourcesSongSearchControl()
         {
             InitializeComponent();
@@ -52,6 +58,44 @@ namespace CSM.App.Views.Controls.SongSources
             if (DataContext is SongSearchSourceViewModel viewModel)
             {
                 await viewModel.SearchAsync();
+            }
+        }
+
+        private async void Add_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is SongSearchSourceViewModel viewModel)
+            {
+                var stream = persistenceManager.Save(songSearchGridView);
+                await viewModel.SaveViewDefinitionAsync(stream, SavableUiElement.SongSearch);
+            }
+        }
+
+        private async void Save_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is SongSearchSourceViewModel viewModel && viewModel.SelectedViewDefinition != null)
+            {
+                var stream = persistenceManager.Save(songSearchGridView);
+                await viewModel.SaveViewDefinitionAsync(stream, SavableUiElement.SongSearch, viewModel.SelectedViewDefinition.Name);
+            }
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is SongSearchSourceViewModel viewModel && viewModel.SelectedViewDefinition != null)
+            {
+                viewModel.DeleteViewDefinition(SavableUiElement.SongSearch, viewModel.SelectedViewDefinition.Name);
+            }
+        }
+
+        private void ViewDefinitions_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (DataContext is SongSearchSourceViewModel viewModel)
+            {
+                if (viewModel.SelectedViewDefinition != null && viewModel.SelectedViewDefinition.Stream != null)
+                {
+                    persistenceManager.Load(songSearchGridView, viewModel.SelectedViewDefinition.Stream);
+                    viewModel.SelectedViewDefinition.Stream.Position = 0;
+                }
             }
         }
     }

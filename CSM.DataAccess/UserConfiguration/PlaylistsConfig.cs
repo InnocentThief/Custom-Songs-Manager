@@ -10,5 +10,6 @@
         public string? LastLeftViewDefinitionName { get; set; }
         public string? LastRightViewDefinitionName { get; set; }
         public string? LastSongSuggestViewDefinitionName { get; set; }
+        public string? LastSongSearchViewDefinitionName { get; set; }
     }
 }

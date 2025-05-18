@@ -6,5 +6,6 @@
         PlaylistLeft = 1,
         PlaylistRight = 2,
         SongSuggestPlaylist = 3,
+        SongSearch = 4,
     }
 }

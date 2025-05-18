@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+﻿using CSM.Business.Core;
 using CSM.Business.Core.SongCopy;
 using CSM.Business.Core.SongSelection;
 using CSM.Business.Interfaces;
@@ -11,6 +11,8 @@ using CSM.UiLogic.Commands;
 using CSM.UiLogic.Helper;
 using CSM.UiLogic.ViewModels.Common.Playlists;
 using CSM.UiLogic.ViewModels.Controls.SongSources.SongSearch;
+using System.Collections.ObjectModel;
+using System.IO;
 
 namespace CSM.UiLogic.ViewModels.Controls.SongSources
 {
@@ -31,10 +33,12 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
         private DateTime? dateSelectionEnd;
         private EnumWrapper<SearchParamRelevance>? selectedRelevance;
         private int currentPageIndex = 0;
+        private ViewDefinition? selectedViewDefinition;
 
         private readonly IBeatSaverService beatSaverService;
         private readonly ISongCopyDomain songCopyDomain;
         private readonly ISongSelectionDomain songSelectionDomain;
+        private readonly IUserConfigDomain userConfigDomain;
 
         #endregion
 
@@ -544,6 +548,31 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             }
         }
 
+        public ObservableCollection<ViewDefinition> ViewDefinitions { get; } = [];
+
+        public ViewDefinition? SelectedViewDefinition
+        {
+            get => selectedViewDefinition;
+            set
+            {
+                if (value == selectedViewDefinition)
+                    return;
+                selectedViewDefinition = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(CanSaveViewDefinition));
+                OnPropertyChanged(nameof(CanDeleteViewDefinition));
+
+                userConfigDomain!.Config!.PlaylistsConfig.LastSongSearchViewDefinitionName = selectedViewDefinition?.Name;
+                userConfigDomain.SaveUserConfig();
+            }
+        }
+
+        public bool ShowViewDefinitions => ViewDefinitions.Count > 0;
+
+        public bool CanSaveViewDefinition => SelectedViewDefinition != null;
+
+        public bool CanDeleteViewDefinition => SelectedViewDefinition != null;
+
         #endregion
 
         public SongSearchSourceViewModel(IServiceLocator serviceLocator) : base(serviceLocator)
@@ -552,8 +581,17 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             songCopyDomain = serviceLocator.GetService<ISongCopyDomain>();
             songCopyDomain.OnPlaylistSelectionChanged += SongCopyDomain_OnPlaylistSelectionChanged;
             songSelectionDomain = serviceLocator.GetService<ISongSelectionDomain>();
+            userConfigDomain = serviceLocator.GetService<IUserConfigDomain>();
 
             Relevances.AddRange(EnumWrapper<SearchParamRelevance>.GetValues(serviceLocator, SearchParamRelevance.Undefined));
+        }
+
+        public async Task LoadAsync()
+        {
+            ViewDefinitions.Clear();
+            ViewDefinitions.AddRange(await LoadViewDefinitionsAsync(SavableUiElement.SongSearch));
+            SelectedViewDefinition = ViewDefinitions.FirstOrDefault(vd => vd.Name == userConfigDomain!.Config?.PlaylistsConfig.LastSongSearchViewDefinitionName);
+            OnPropertyChanged(nameof(ShowViewDefinitions));
         }
 
         public async Task SearchAsync()
@@ -588,6 +626,28 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
                 searchResult = await beatSaverService.SearchAsync(searchQuery.Query);
             }
             UpdateSearchData(searchResult);
+        }
+
+        public override async Task<ViewDefinition?> SaveViewDefinitionAsync(Stream stream, SavableUiElement savableUiElement, string? name = null)
+        {
+            var newViewDefinition = await base.SaveViewDefinitionAsync(stream, savableUiElement, name);
+            if (newViewDefinition != null)
+            {
+                ViewDefinitions.Add(newViewDefinition);
+                SelectedViewDefinition = newViewDefinition;
+                OnPropertyChanged(nameof(ShowViewDefinitions));
+            }
+            return newViewDefinition;
+        }
+
+        public override void DeleteViewDefinition(SavableUiElement savableUiElement, string name)
+        {
+            if (SelectedViewDefinition == null)
+                return;
+            base.DeleteViewDefinition(savableUiElement, name);
+            ViewDefinitions.Remove(SelectedViewDefinition);
+            SelectedViewDefinition = ViewDefinitions.FirstOrDefault();
+            OnPropertyChanged(nameof(ShowViewDefinitions));
         }
 
         #region Private fields

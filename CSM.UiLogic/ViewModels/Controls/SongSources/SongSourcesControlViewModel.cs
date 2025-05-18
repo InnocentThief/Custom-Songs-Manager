@@ -232,7 +232,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
             if (selectedSource is SongSearchSourceViewModel songSearchSourceViewModel)
             {
-                // nothing to load
+                await songSearchSourceViewModel.LoadAsync();
             }
 
             if (selectedSource is SongSuggestSourceViewModel songSuggestSourceViewModel)

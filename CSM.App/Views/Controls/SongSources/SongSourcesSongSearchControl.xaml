@@ -33,7 +33,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <telerik:RadWatermarkTextBox WatermarkContent="Search" Text="{Binding Query, UpdateSourceTrigger=PropertyChanged}" KeyUp="RadWatermarkTextBox_KeyUp" />
-            <telerik:RadToolBar Grid.Column="1" Style="{StaticResource HeaderToolBarStyle}">
+            <telerik:RadToolBar Grid.Column="1" Style="{StaticResource HeaderToolBarNoGripStyle}">
                 <!-- Search Button -->
                 <telerik:RadButton Command="{Binding SearchCommand}" ToolTip="Search">
                     <telerik:RadGlyph Glyph="&#xe13e;" />
@@ -95,17 +95,35 @@
                 <!-- Title -->
                 <TextBlock Text="Search Results" Style="{StaticResource HeaderTitleStyle}" Foreground="#88018574" />
                 <!-- Commands -->
-                <telerik:RadToolBar Grid.Column="1" Style="{StaticResource HeaderToolBarStyle}" >
-                    <telerik:RadButton Command="{Binding CreatePlaylistCommand}" ToolTip="{Binding CreatePlaylistCommandText}">
-                        <telerik:RadGlyph Glyph="&#xe907;" Foreground="#88018574" />
-                    </telerik:RadButton>
-                    <telerik:RadButton Command="{Binding OverwritePlaylistCommand}" ToolTip="{Binding OverwritePlaylistCommandText}">
-                        <telerik:RadGlyph Glyph="&#xe945;" Foreground="#88018574" />
-                    </telerik:RadButton>
-                    <telerik:RadButton Command="{Binding MergePlaylistCommand}" ToolTip="{Binding MergePlaylistCommandText}">
-                        <telerik:RadGlyph Glyph="&#xe941;" Foreground="#88018574" />
-                    </telerik:RadButton>
-                </telerik:RadToolBar>
+                <telerik:RadToolBarTray Grid.Column="1">
+                    <!-- View Definitions -->
+                    <telerik:RadToolBar Style="{StaticResource HeaderToolBarStyle}" >
+                        <TextBlock Text="View" />
+                        <telerik:RadComboBox ItemsSource="{Binding ViewDefinitions}" SelectedItem="{Binding SelectedViewDefinition}" DisplayMemberPath="Name" Background="Transparent"  Focusable="False" Visibility="{Binding ShowViewDefinitions, Converter={StaticResource BooleanToVisibilityConverter}}" SelectionChanged="ViewDefinitions_SelectionChanged" />
+                        <telerik:RadButton ToolTip="Create new view definition" Click="Add_Click">
+                            <telerik:RadGlyph Glyph="&#xe907;" />
+                        </telerik:RadButton>
+                        <telerik:RadButton ToolTip="Save selected view definition" Click="Save_Click" IsEnabled="{Binding CanSaveViewDefinition}">
+                            <telerik:RadGlyph Glyph="&#xe109;" />
+                        </telerik:RadButton>
+                        <telerik:RadButton ToolTip="Delete selected view definition" Click="Delete_Click" IsEnabled="{Binding CanDeleteViewDefinition}">
+                            <telerik:RadGlyph Glyph="&#xe10c;" />
+                        </telerik:RadButton>
+                    </telerik:RadToolBar>
+
+                    <!-- Playlist commands -->
+                    <telerik:RadToolBar Style="{StaticResource HeaderToolBarStyle}" >
+                        <telerik:RadButton Command="{Binding CreatePlaylistCommand}" ToolTip="{Binding CreatePlaylistCommandText}">
+                            <telerik:RadGlyph Glyph="&#xe907;" />
+                        </telerik:RadButton>
+                        <telerik:RadButton Command="{Binding OverwritePlaylistCommand}" ToolTip="{Binding OverwritePlaylistCommandText}">
+                            <telerik:RadGlyph Glyph="&#xe945;" />
+                        </telerik:RadButton>
+                        <telerik:RadButton Command="{Binding MergePlaylistCommand}" ToolTip="{Binding MergePlaylistCommandText}">
+                            <telerik:RadGlyph Glyph="&#xe941;" />
+                        </telerik:RadButton>
+                    </telerik:RadToolBar>
+                </telerik:RadToolBarTray>
             </Grid>
 
             <Grid Grid.Row="1">
@@ -114,6 +132,7 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <telerik:RadGridView 
+                    x:Name="songSearchGridView"
                     behaviours:GridViewHeaderContextMenuBehaviour.IsEnabled="True"
                      ItemsSource="{Binding Results}"
                      Margin="3" 
