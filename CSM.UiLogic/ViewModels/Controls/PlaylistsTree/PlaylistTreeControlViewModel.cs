@@ -66,7 +66,7 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
 
         public IRelayCommand AddFolderCommand => addFolderCommand ??= CommandFactory.Create(AddFolder, CanAddFolder);
 
-        public IRelayCommand AddPlaylistCommand => addPlaylistCommand ??= CommandFactory.Create(AddPlaylist, CanAddPlaylist);
+        public IRelayCommand AddPlaylistCommand => addPlaylistCommand ??= CommandFactory.CreateFromAsync(AddPlaylistAsync, CanAddPlaylist);
 
         public IRelayCommand DeletePlaylistCommand => deletePlaylistCommand ??= CommandFactory.Create(Delete, CanDelete);
 
@@ -135,6 +135,7 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
                     if (playList == null)
                         continue;
                     var playlistViewModel = new PlaylistViewModel(ServiceLocator, playList, file, songSelectionType, isReadOnly);
+                    await playlistViewModel.LoadAsync();
                     retval.Add(playlistViewModel);
                 }
                 catch (Exception ex)
@@ -181,7 +182,7 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
             return true;
         }
 
-        private void AddPlaylist()
+        private async Task AddPlaylistAsync()
         {
             var assemblyLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             if (assemblyLocation == null)
@@ -193,7 +194,7 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
             UserInteraction.ShowWindow(editNewPlaylistName);
             if (editNewPlaylistName.Continue)
             {
-                CreatePlaylist(editNewPlaylistName.PlaylistName, [], defaultImageLocation);
+                await CreatePlaylistAsync(editNewPlaylistName.PlaylistName, [], defaultImageLocation);
             }
         }
 
@@ -300,13 +301,13 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
             OpenInFileExplorerCommand.RaiseCanExecuteChanged();
         }
 
-        private void SongCopyDomain_OnCreatePlaylist(object? sender, Business.Core.SongCopy.CreatePlaylistEventArgs e)
+        private async void SongCopyDomain_OnCreatePlaylist(object? sender, Business.Core.SongCopy.CreatePlaylistEventArgs e)
         {
             var assemblyLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             if (assemblyLocation == null)
                 return;
 
-            CreatePlaylist(e.PlaylistName, e.Songs, Path.Combine(assemblyLocation, "Images\\CSM_Logo_Song_Suggest_400px.png"));
+            await CreatePlaylistAsync(e.PlaylistName, e.Songs, Path.Combine(assemblyLocation, "Images\\CSM_Logo_Song_Suggest_400px.png"));
         }
 
         private void SongSelectionDomain_OnSongSelectionChanged(object? sender, SongSelectionChangedEventArgs e)
@@ -317,7 +318,7 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
             }
         }
 
-        private void CreatePlaylist(string playlistName, List<Song> songs, string? image)
+        private async Task CreatePlaylistAsync(string playlistName, List<Song> songs, string? image)
         {
             var playlistsPath = userConfigDomain.Config?.PlaylistsConfig.PlaylistPath.Path;
             var selectedFolderViewModel = selectedPlaylist as PlaylistFolderViewModel;
@@ -362,6 +363,7 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
                 File.WriteAllText(playlistPath, content);
 
                 var playlistViewModel = new PlaylistViewModel(ServiceLocator, playlist, playlistPath, songSelectionType, IsReadOnly);
+                await playlistViewModel.LoadAsync();
                 if (selectedFolderViewModel != null)
                     selectedFolderViewModel.Playlists.Add(playlistViewModel);
                 else

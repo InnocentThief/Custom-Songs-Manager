@@ -27,26 +27,41 @@
             <!-- Title -->
             <TextBlock Text="{Binding PlaylistTitle}" Style="{StaticResource HeaderTitleStyle}" />
             <!-- Commands -->
-            <telerik:RadToolBar Grid.Column="1" Style="{StaticResource HeaderToolBarStyle}" >
-                <telerik:RadButton Command="{Binding UpdateFromSourceCommand}" ToolTip="Update data from source" Visibility="{Binding HasExternalSource, Converter={StaticResource BooleanToVisibilityConverter}}">
-                    <telerik:RadGlyph Glyph="&#xe132;" />
-                </telerik:RadButton>
-                <!--<telerik:RadButton ToolTip="Update source from data" Visibility="{Binding HasExternalSource, Converter={StaticResource BooleanToVisibilityConverter}}">
-                    <telerik:RadGlyph Glyph="&#xe133;" />
-                </telerik:RadButton>-->
-                <telerik:RadToolBarSeparator Visibility="{Binding HasExternalSource, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                <telerik:RadButton Command="{Binding FetchDataCommand}" ToolTip="{x:Static p:Resources.ToolTip_Playlist_FetchData}">
-                    <telerik:RadGlyph Glyph="&#xe68F;" />
-                </telerik:RadButton>
-                <telerik:RadToolBarSeparator />
-                <telerik:RadButton Command="{Binding ApplySortOrderAndSaveCommand}" ToolTip="{x:Static p:Resources.ToolTip_Playlist_SavePlaylistWithCurrentOrder}">
-                    <telerik:RadGlyph Glyph="&#xe666;" />
-                </telerik:RadButton>
-                <telerik:RadToolBarSeparator />
-                <telerik:RadButton Command="{Binding SavePlaylistCommand}" ToolTip="{x:Static p:Resources.ToolTip_Playlist_SavePlaylist}">
-                    <telerik:RadGlyph Glyph="&#xe109;" />
-                </telerik:RadButton>
-            </telerik:RadToolBar>
+            <telerik:RadToolBarTray Grid.Column="1">
+                <!-- View Definitions -->
+                <telerik:RadToolBar Style="{StaticResource HeaderToolBarStyle}" >
+                    <TextBlock Text="View" />
+                    <telerik:RadComboBox ItemsSource="{Binding ViewDefinitions}" SelectedItem="{Binding SelectedViewDefinition}" DisplayMemberPath="Name" Background="Transparent"  Focusable="False" Visibility="{Binding ShowViewDefinitions, Converter={StaticResource BooleanToVisibilityConverter}}" SelectionChanged="ViewDefinitions_SelectionChanged" />
+                    <telerik:RadButton ToolTip="Create new view definition" Click="Add_Click">
+                        <telerik:RadGlyph Glyph="&#xe907;" />
+                    </telerik:RadButton>
+                    <telerik:RadButton ToolTip="Save selected view definition" Click="Save_Click" IsEnabled="{Binding CanSaveViewDefinition}">
+                        <telerik:RadGlyph Glyph="&#xe109;" />
+                    </telerik:RadButton>
+                    <telerik:RadButton ToolTip="Delete selected view definition" Click="Delete_Click" IsEnabled="{Binding CanDeleteViewDefinition}">
+                        <telerik:RadGlyph Glyph="&#xe10c;" />
+                    </telerik:RadButton>
+                </telerik:RadToolBar>
+                <!-- Fetch data, save sort order / save -->
+                <telerik:RadToolBar Style="{StaticResource HeaderToolBarStyle}" >
+                    <telerik:RadButton Command="{Binding UpdateFromSourceCommand}" ToolTip="Update data from source" Visibility="{Binding HasExternalSource, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <telerik:RadGlyph Glyph="&#xe132;" />
+                    </telerik:RadButton>
+                    <telerik:RadToolBarSeparator Visibility="{Binding HasExternalSource, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <telerik:RadButton Command="{Binding FetchDataCommand}" ToolTip="{x:Static p:Resources.ToolTip_Playlist_FetchData}">
+                        <telerik:RadGlyph Glyph="&#xe68F;" />
+                    </telerik:RadButton>
+                    <telerik:RadToolBarSeparator />
+                    <telerik:RadButton Command="{Binding ApplySortOrderAndSaveCommand}" ToolTip="{x:Static p:Resources.ToolTip_Playlist_SavePlaylistWithCurrentOrder}">
+                        <telerik:RadGlyph Glyph="&#xe666;" />
+                    </telerik:RadButton>
+                    <telerik:RadToolBarSeparator />
+                    <telerik:RadButton Command="{Binding SavePlaylistCommand}" ToolTip="{x:Static p:Resources.ToolTip_Playlist_SavePlaylist}">
+                        <telerik:RadGlyph Glyph="&#xe109;" />
+                    </telerik:RadButton>
+                </telerik:RadToolBar>
+            </telerik:RadToolBarTray>
+
         </Grid>
         <!-- Playlist infos -->
         <Grid Grid.Row="1">
@@ -93,6 +108,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <telerik:RadGridView 
+                x:Name="playlistLeftGridView"
                 behaviours:GridViewHeaderContextMenuBehaviour.IsEnabled="True"
                 ItemsSource="{Binding Songs}"
                 Margin="3" 
@@ -111,11 +127,11 @@
                         </telerik:GridViewDataColumn.CellTemplate>
                     </telerik:GridViewDataColumn>
                     <!-- Title of the song -->
-                    <telerik:GridViewDataColumn Header="{x:Static p:Resources.Song_Title}" DataMemberBinding="{Binding SongName}" Width="*" TextTrimming="CharacterEllipsis" />
+                    <telerik:GridViewDataColumn UniqueName="SongTitle" Header="{x:Static p:Resources.Song_Title}" DataMemberBinding="{Binding SongName}" Width="*" TextTrimming="CharacterEllipsis" />
                     <!-- Mapper of the song -->
-                    <telerik:GridViewDataColumn Header="{x:Static p:Resources.Song_Mapper}" DataMemberBinding="{Binding LevelAuthorName}" Width="*" TextTrimming="CharacterEllipsis" />
+                    <telerik:GridViewDataColumn UniqueName="SongMapper" Header="{x:Static p:Resources.Song_Mapper}" DataMemberBinding="{Binding LevelAuthorName}" Width="*" TextTrimming="CharacterEllipsis" />
                     <!-- Difficulties -->
-                    <telerik:GridViewDataColumn Header="{x:Static p:Resources.Song_Difficulties}" DataMemberBinding="{Binding Difficulties}" Width="Auto">
+                    <telerik:GridViewDataColumn UniqueName="SongFifficulties" Header="{x:Static p:Resources.Song_Difficulties}" DataMemberBinding="{Binding Difficulties}" Width="Auto">
                         <telerik:GridViewDataColumn.CellTemplate>
                             <DataTemplate>
                                 <local:SongDifficultyEditControl />
@@ -123,7 +139,7 @@
                         </telerik:GridViewDataColumn.CellTemplate>
                     </telerik:GridViewDataColumn>
                     <!-- Delete button (remove song from playlist) -->
-                    <telerik:GridViewColumn Width="Auto" IsResizable="False">
+                    <telerik:GridViewColumn UniqueName="DeleteButton" Width="Auto" IsResizable="False">
                         <telerik:GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <telerik:RadButton Command="{Binding RemoveFromPlaylistCommand}" Grid.Column="1" Background="Transparent" BorderThickness="0" Margin="0,0,10,0" ToolTip="{x:Static p:Resources.ToolTip_Song_RemoveFromPlaylist}" Focusable="False">

@@ -1,6 +1,10 @@
-﻿using System.Windows.Controls;
+﻿using CSM.App.Views.Helper;
 using CSM.Framework.Types;
+using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.ViewModels.Common.Playlists;
+using System.Windows;
+using System.Windows.Controls;
+using Telerik.Windows.Persistence;
 
 namespace CSM.App.Views.Controls.Playlists
 {
@@ -9,6 +13,8 @@ namespace CSM.App.Views.Controls.Playlists
     /// </summary>
     public partial class PlaylistDataTemplate : UserControl
     {
+        private PersistenceManager persistenceManager = PersistenceFrameworkHelper.GetPersistenceManager();
+
         public PlaylistDataTemplate()
         {
             InitializeComponent();
@@ -59,6 +65,44 @@ namespace CSM.App.Views.Controls.Playlists
                 };
 
                 viewModel.SetSortOrder(e.Column.UniqueName, sortingState);
+            }
+        }
+
+        private async void Add_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is PlaylistViewModel viewModel)
+            {
+                var stream = persistenceManager.Save(playlistLeftGridView);
+                await viewModel.SaveViewDefinitionAsync(stream, SavableUiElement.PlaylistLeft);
+            }
+        }
+
+        private async void Save_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is PlaylistViewModel viewModel && viewModel.SelectedViewDefinition != null)
+            {
+                var stream = persistenceManager.Save(playlistLeftGridView);
+                await viewModel.SaveViewDefinitionAsync(stream, SavableUiElement.PlaylistLeft, viewModel.SelectedViewDefinition.Name);
+            }
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is PlaylistViewModel viewModel && viewModel.SelectedViewDefinition != null)
+            {
+                viewModel.DeleteViewDefinition(SavableUiElement.PlaylistLeft, viewModel.SelectedViewDefinition.Name);
+            }
+        }
+
+        private void ViewDefinitions_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (DataContext is PlaylistViewModel viewModel)
+            {
+                if (viewModel.SelectedViewDefinition != null && viewModel.SelectedViewDefinition.Stream != null)
+                {
+                    persistenceManager.Load(playlistLeftGridView, viewModel.SelectedViewDefinition.Stream);
+                    viewModel.SelectedViewDefinition.Stream.Position = 0;
+                }
             }
         }
     }

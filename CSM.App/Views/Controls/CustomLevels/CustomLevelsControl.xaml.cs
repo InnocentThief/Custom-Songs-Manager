@@ -3,7 +3,6 @@ using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.ViewModels.Controls.CustomLevels;
 using System.Windows;
 using System.Windows.Controls;
-using Telerik.Windows.Controls;
 using Telerik.Windows.Persistence;
 
 namespace CSM.App.Views.Controls.CustomLevels

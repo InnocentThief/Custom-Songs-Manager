@@ -7,5 +7,8 @@
         public PlaylistsSourceAvailability SourceAvailability { get; set; } = PlaylistsSourceAvailability.CustomLevels | PlaylistsSourceAvailability.Playlists | PlaylistsSourceAvailability.BeatSaberFavourites | PlaylistsSourceAvailability.SongSearch | PlaylistsSourceAvailability.SongSuggest;
 
         public PlaylistsSourceAvailability DefaultSource { get; set; }
+        public string? LastLeftViewDefinitionName { get; set; }
+        public string? LastRightViewDefinitionName { get; set; }
+        public string? LastSongSuggestViewDefinitionName { get; set; }
     }
 }

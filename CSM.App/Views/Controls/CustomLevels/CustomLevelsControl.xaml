@@ -81,47 +81,47 @@
                                 </DataTemplate>
                             </telerik:GridViewDataColumn.CellTemplate>
                         </telerik:GridViewDataColumn>
-                        <telerik:GridViewDataColumn Header="Title" Width="*" DataMemberBinding="{Binding SongTitle}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" />
-                        <telerik:GridViewDataColumn Header="Subtitle" Width="*" DataMemberBinding="{Binding SongSubTitle}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" />
-                        <telerik:GridViewDataColumn Header="Mapper" Width="*" DataMemberBinding="{Binding LevelAuthor}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" />
-                        <telerik:GridViewDataColumn Header="Artist" Width="*" DataMemberBinding="{Binding SongAuthor}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" />
-                        <telerik:GridViewDataColumn Header="BPM" Width="Auto" DataMemberBinding="{Binding Bpm}" />
-                        <telerik:GridViewDataColumn Header="E" Width="SizeToCells" DataMemberBinding="{Binding HasEasyMap}" IsFilterable="False">
+                        <telerik:GridViewDataColumn UniqueName="Title" Header="Title" Width="*" DataMemberBinding="{Binding SongTitle}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" />
+                        <telerik:GridViewDataColumn UniqueName="Subtitle" Header="Subtitle" Width="*" DataMemberBinding="{Binding SongSubTitle}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" />
+                        <telerik:GridViewDataColumn UniqueName="Mapper" Header="Mapper" Width="*" DataMemberBinding="{Binding LevelAuthor}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" />
+                        <telerik:GridViewDataColumn UniqueName="Artist" Header="Artist" Width="*" DataMemberBinding="{Binding SongAuthor}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" />
+                        <telerik:GridViewDataColumn UniqueName="BPM" Header="BPM" Width="Auto" DataMemberBinding="{Binding Bpm}" />
+                        <telerik:GridViewDataColumn UniqueName="Easy" Header="E" Width="SizeToCells" DataMemberBinding="{Binding HasEasyMap}" IsFilterable="False">
                             <telerik:GridViewDataColumn.CellTemplate>
                                 <DataTemplate>
                                     <telerik:RadGlyph Glyph="&#xe118;" Visibility="{Binding HasEasyMap, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                 </DataTemplate>
                             </telerik:GridViewDataColumn.CellTemplate>
                         </telerik:GridViewDataColumn>
-                        <telerik:GridViewDataColumn Header="N" Width="SizeToCells" DataMemberBinding="{Binding HasNormalMap}" IsFilterable="False">
+                        <telerik:GridViewDataColumn UniqueName="Normal" Header="N" Width="SizeToCells" DataMemberBinding="{Binding HasNormalMap}" IsFilterable="False">
                             <telerik:GridViewDataColumn.CellTemplate>
                                 <DataTemplate>
                                     <telerik:RadGlyph Glyph="&#xe118;" Visibility="{Binding HasNormalMap, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                 </DataTemplate>
                             </telerik:GridViewDataColumn.CellTemplate>
                         </telerik:GridViewDataColumn>
-                        <telerik:GridViewDataColumn Header="H" Width="SizeToCells" DataMemberBinding="{Binding HasHardMap}" IsFilterable="False">
+                        <telerik:GridViewDataColumn UniqueName="Hard" Header="H" Width="SizeToCells" DataMemberBinding="{Binding HasHardMap}" IsFilterable="False">
                             <telerik:GridViewDataColumn.CellTemplate>
                                 <DataTemplate>
                                     <telerik:RadGlyph Glyph="&#xe118;" Visibility="{Binding HasHardMap, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                 </DataTemplate>
                             </telerik:GridViewDataColumn.CellTemplate>
                         </telerik:GridViewDataColumn>
-                        <telerik:GridViewDataColumn Header="Ex" Width="SizeToCells" DataMemberBinding="{Binding HasExpertMap}" IsFilterable="False">
+                        <telerik:GridViewDataColumn UniqueName="Expert" Header="Ex" Width="SizeToCells" DataMemberBinding="{Binding HasExpertMap}" IsFilterable="False">
                             <telerik:GridViewDataColumn.CellTemplate>
                                 <DataTemplate>
                                     <telerik:RadGlyph Glyph="&#xe118;"  Visibility="{Binding HasExpertMap, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                 </DataTemplate>
                             </telerik:GridViewDataColumn.CellTemplate>
                         </telerik:GridViewDataColumn>
-                        <telerik:GridViewDataColumn Header="Ex+" Width="Auto" DataMemberBinding="{Binding HasExpertPlusMap}" IsFilterable="False">
+                        <telerik:GridViewDataColumn UniqueName="ExpertPlus" Header="Ex+" Width="Auto" DataMemberBinding="{Binding HasExpertPlusMap}" IsFilterable="False">
                             <telerik:GridViewDataColumn.CellTemplate>
                                 <DataTemplate>
                                     <telerik:RadGlyph Glyph="&#xe118;" Visibility="{Binding HasExpertPlusMap, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                 </DataTemplate>
                             </telerik:GridViewDataColumn.CellTemplate>
                         </telerik:GridViewDataColumn>
-                        <telerik:GridViewDataColumn Header="Last write date" Width="Auto" DataMemberBinding="{Binding LastWriteTime, StringFormat='d', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
+                        <telerik:GridViewDataColumn UniqueName="LastWriteDate" Header="Last write date" Width="Auto" DataMemberBinding="{Binding LastWriteTime, StringFormat='d', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
                     </telerik:RadGridView.Columns>
                 </telerik:RadGridView>
                 <!-- Entry counter -->

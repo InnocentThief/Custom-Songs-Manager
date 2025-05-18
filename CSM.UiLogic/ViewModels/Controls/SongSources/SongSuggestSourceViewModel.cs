@@ -321,7 +321,8 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             var playlist = await songSuggestDomain.GetPlaylistAsync();
             if (playlist != null)
             {
-                var playlistViewModel = new PlaylistViewModel(ServiceLocator, playlist, songSuggestDomain.GetPlaylistPath() ?? string.Empty, SongSelectionType.Right, true);
+                var playlistViewModel = new PlaylistViewModel(ServiceLocator, playlist, songSuggestDomain.GetPlaylistPath() ?? string.Empty, SongSelectionType.Right, true, true);
+                await playlistViewModel.LoadAsync();
                 await playlistViewModel.FetchDataAsync();
                 Playlist = playlistViewModel;
                 OnPropertyChanged(nameof(Playlist));

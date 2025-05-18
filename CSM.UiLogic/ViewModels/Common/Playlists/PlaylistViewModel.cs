@@ -1,10 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.IO;
-using System.Net.Http;
-using System.Text.Json;
-using System.Windows;
-using System.Windows.Media;
-using CSM.Business.Core.SongSelection;
+﻿using CSM.Business.Core.SongSelection;
 using CSM.Business.Interfaces;
 using CSM.Business.Interfaces.SongCopy;
 using CSM.DataAccess;
@@ -13,8 +7,15 @@ using CSM.DataAccess.Playlists;
 using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
 using CSM.Framework.Types;
+using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.Commands;
 using Microsoft.Extensions.Logging;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Net.Http;
+using System.Text.Json;
+using System.Windows;
+using System.Windows.Media;
 using Telerik.Windows.Controls;
 
 namespace CSM.UiLogic.ViewModels.Common.Playlists
@@ -27,6 +28,8 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
         private PlaylistSongViewModel? selectedSong;
         private string sortColumnName = string.Empty;
         private GridViewSortingState sortingState = GridViewSortingState.None;
+        private ViewDefinition? selectedViewDefinition;
+        private bool isSongSuggest;
 
         private readonly SongSelectionType songSelectionType;
         private readonly Playlist playlist;
@@ -132,6 +135,43 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
             }
         }
 
+        public ObservableCollection<ViewDefinition> ViewDefinitions { get; } = [];
+
+        public ViewDefinition? SelectedViewDefinition
+        {
+            get => selectedViewDefinition;
+            set
+            {
+                if (value == selectedViewDefinition)
+                    return;
+                selectedViewDefinition = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(CanSaveViewDefinition));
+                OnPropertyChanged(nameof(CanDeleteViewDefinition));
+
+                if (isSongSuggest)
+                {
+                    userConfigDomain!.Config!.PlaylistsConfig.LastSongSuggestViewDefinitionName = selectedViewDefinition?.Name;
+                }
+                else if (songSelectionType == SongSelectionType.Left)
+                {
+                    userConfigDomain!.Config!.PlaylistsConfig.LastLeftViewDefinitionName = selectedViewDefinition?.Name;
+                }
+                else
+                {
+                    userConfigDomain!.Config!.PlaylistsConfig.LastRightViewDefinitionName = selectedViewDefinition?.Name;
+                }
+
+                userConfigDomain.SaveUserConfig();
+            }
+        }
+
+        public bool ShowViewDefinitions => ViewDefinitions.Count > 0;
+
+        public bool CanSaveViewDefinition => SelectedViewDefinition != null;
+
+        public bool CanDeleteViewDefinition => SelectedViewDefinition != null;
+
         #endregion
 
         public PlaylistViewModel(
@@ -139,10 +179,12 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
            Playlist playlist,
            string path,
            SongSelectionType songSelectionType,
-           bool isReadOnly) : base(serviceLocator, playlist.PlaylistTitle, path)
+           bool isReadOnly,
+           bool isSongSuggest = false) : base(serviceLocator, playlist.PlaylistTitle, path)
         {
             this.playlist = playlist;
             this.songSelectionType = songSelectionType;
+            this.isSongSuggest = isSongSuggest;
             logger = serviceLocator.GetService<ILogger<PlaylistViewModel>>();
             beatSaverService = serviceLocator.GetService<IBeatSaverService>();
             if (!isReadOnly)
@@ -162,6 +204,28 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
                 }
                 Songs.Add(vm);
             }
+        }
+
+        public async Task LoadAsync()
+        {
+            // Load view definitions
+            List<ViewDefinition> viewDefinitions;
+            string? lastViewDefinition;
+            if (isSongSuggest)
+            {
+                viewDefinitions = await LoadViewDefinitionsAsync(SavableUiElement.SongSuggestPlaylist);
+                lastViewDefinition = userConfigDomain!.Config?.PlaylistsConfig.LastSongSuggestViewDefinitionName;
+            }
+            else
+            {
+                viewDefinitions = await LoadViewDefinitionsAsync(songSelectionType == SongSelectionType.Right ? SavableUiElement.PlaylistRight : SavableUiElement.PlaylistLeft);
+                lastViewDefinition = songSelectionType == SongSelectionType.Right ? userConfigDomain!.Config?.PlaylistsConfig.LastRightViewDefinitionName : userConfigDomain!.Config?.PlaylistsConfig.LastLeftViewDefinitionName;
+            }
+
+            ViewDefinitions.Clear();
+            ViewDefinitions.AddRange(viewDefinitions);
+            SelectedViewDefinition = ViewDefinitions.FirstOrDefault(vd => vd.Name == lastViewDefinition);
+            OnPropertyChanged(nameof(ShowViewDefinitions));
         }
 
         public async Task FetchDataAsync()
@@ -251,6 +315,28 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
         {
             sortColumnName = columnName;
             this.sortingState = sortingState;
+        }
+
+        public override async Task<ViewDefinition?> SaveViewDefinitionAsync(Stream stream, SavableUiElement savableUiElement, string? name = null)
+        {
+            var newViewDefinition = await base.SaveViewDefinitionAsync(stream, savableUiElement, name);
+            if (newViewDefinition != null)
+            {
+                ViewDefinitions.Add(newViewDefinition);
+                SelectedViewDefinition = newViewDefinition;
+                OnPropertyChanged(nameof(ShowViewDefinitions));
+            }
+            return newViewDefinition;
+        }
+
+        public override void DeleteViewDefinition(SavableUiElement savableUiElement, string name)
+        {
+            if (SelectedViewDefinition == null)
+                return;
+            base.DeleteViewDefinition(savableUiElement, name);
+            ViewDefinitions.Remove(SelectedViewDefinition);
+            SelectedViewDefinition = ViewDefinitions.FirstOrDefault();
+            OnPropertyChanged(nameof(ShowViewDefinitions));
         }
 
         #region Helper methods

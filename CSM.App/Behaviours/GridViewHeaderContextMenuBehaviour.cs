@@ -58,6 +58,12 @@ namespace CSM.App.Behaviours
             RadContextMenu menu = (RadContextMenu)sender;
             GridViewHeaderCell cell = menu.GetClickedElement<GridViewHeaderCell>();
 
+            if (cell.DataColumn == null)
+            {
+                menu.Items.Clear();
+                return;
+            }
+
             if (cell != null)
             {
                 menu.Items.Clear();
@@ -101,6 +107,9 @@ namespace CSM.App.Behaviours
                 // create menu items
                 foreach (GridViewColumn column in grid.Columns)
                 {
+                    if (column.Header == null)
+                        continue;
+
                     RadMenuItem subMenu = new()
                     {
                         Header = column.Header,

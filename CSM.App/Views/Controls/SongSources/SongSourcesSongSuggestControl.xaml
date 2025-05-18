@@ -260,17 +260,34 @@
                     <!-- Title -->
                     <TextBlock Text="Suggested Songs" Style="{StaticResource HeaderTitleStyle}" Foreground="#88018574" />
                     <!-- Commands -->
-                    <telerik:RadToolBar Grid.Column="1" Style="{StaticResource HeaderToolBarStyle}" >
-                        <telerik:RadButton Command="{Binding CreatePlaylistCommand}" ToolTip="{Binding CreatePlaylistCommandText}">
-                            <telerik:RadGlyph Glyph="&#xe907;" Foreground="#88018574" />
-                        </telerik:RadButton>
-                        <telerik:RadButton Command="{Binding OverwritePlaylistCommand}" ToolTip="{Binding OverwritePlaylistCommandText}">
-                            <telerik:RadGlyph Glyph="&#xe945;" Foreground="#88018574" />
-                        </telerik:RadButton>
-                        <telerik:RadButton Command="{Binding MergePlaylistCommand}" ToolTip="{Binding MergePlaylistCommandText}">
-                            <telerik:RadGlyph Glyph="&#xe941;" Foreground="#88018574" />
-                        </telerik:RadButton>
-                    </telerik:RadToolBar>
+                    <telerik:RadToolBarTray Grid.Column="1">
+                        <!-- View Definitions -->
+                        <telerik:RadToolBar Style="{StaticResource HeaderToolBarStyle}" DataContext="{Binding Playlist}" >
+                            <TextBlock Text="View"  />
+                            <telerik:RadComboBox ItemsSource="{Binding ViewDefinitions}" SelectedItem="{Binding SelectedViewDefinition}" DisplayMemberPath="Name" Background="Transparent"  Focusable="False" Visibility="{Binding ShowViewDefinitions, Converter={StaticResource BooleanToVisibilityConverter}}" SelectionChanged="ViewDefinitions_SelectionChanged" />
+                            <telerik:RadButton ToolTip="Create new view definition" Click="Add_Click">
+                                <telerik:RadGlyph Glyph="&#xe907;" />
+                            </telerik:RadButton>
+                            <telerik:RadButton ToolTip="Save selected view definition" Click="Save_Click" IsEnabled="{Binding CanSaveViewDefinition}">
+                                <telerik:RadGlyph Glyph="&#xe109;" />
+                            </telerik:RadButton>
+                            <telerik:RadButton ToolTip="Delete selected view definition" Click="Delete_Click" IsEnabled="{Binding CanDeleteViewDefinition}">
+                                <telerik:RadGlyph Glyph="&#xe10c;" />
+                            </telerik:RadButton>
+                        </telerik:RadToolBar>
+                        <!-- Song and playlist commands -->
+                        <telerik:RadToolBar Style="{StaticResource HeaderToolBarStyle}" >
+                            <telerik:RadButton Command="{Binding CreatePlaylistCommand}" ToolTip="{Binding CreatePlaylistCommandText}">
+                                <telerik:RadGlyph Glyph="&#xe907;" />
+                            </telerik:RadButton>
+                            <telerik:RadButton Command="{Binding OverwritePlaylistCommand}" ToolTip="{Binding OverwritePlaylistCommandText}">
+                                <telerik:RadGlyph Glyph="&#xe945;" />
+                            </telerik:RadButton>
+                            <telerik:RadButton Command="{Binding MergePlaylistCommand}" ToolTip="{Binding MergePlaylistCommandText}">
+                                <telerik:RadGlyph Glyph="&#xe941;" />
+                            </telerik:RadButton>
+                        </telerik:RadToolBar>
+                    </telerik:RadToolBarTray>
                 </Grid>
 
                 <Grid Grid.Row="1" DataContext="{Binding Playlist}">
@@ -285,6 +302,7 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <telerik:RadGridView 
+                            x:Name="songSuggestPlaylist"
                             behaviours:GridViewHeaderContextMenuBehaviour.IsEnabled="True"
                             Margin="3,3,3,3" 
                             ItemsSource="{Binding Songs}" 
@@ -325,7 +343,7 @@
                             <telerik:Label Content="{Binding SongCount}"  />
                         </Border>
                     </Grid>
-                    
+
                     <GridSplitter Grid.Row="1" Style="{StaticResource WorkspaceHorizontalGridSplitterStyle}" VerticalAlignment="Center" />
 
                     <Grid Grid.Row="2" Visibility="{Binding HasSelectedSong, Converter={StaticResource BooleanToVisibilityConverter}}">

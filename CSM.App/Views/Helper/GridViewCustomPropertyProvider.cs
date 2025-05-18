@@ -52,7 +52,7 @@ namespace CSM.App.Views.Helper
                             columnProxies.Add(new ColumnProxy()
                             {
                                 UniqueName = column.UniqueName,
-                                Header = column.Header.ToString(),
+                                Header = column.Header?.ToString() ?? string.Empty,
                                 DisplayOrder = column.DisplayIndex,
                                 Width = column.Width,
                                 Visible = column.IsVisible

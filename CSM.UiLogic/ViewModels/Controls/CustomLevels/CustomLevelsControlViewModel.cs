@@ -125,11 +125,10 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
             CustomLevels.AddRange(await LoadCustomLevelsAsync(path));
             OnPropertyChanged(nameof(CustomLevelCount));
 
-
             // Load view definitions
             ViewDefinitions.Clear();
             ViewDefinitions.AddRange(await LoadViewDefinitionsAsync(SavableUiElement.CustomLevelsMainView));
-            SelectedViewDefinition = ViewDefinitions.FirstOrDefault(vd => vd.Name == userConfigDomain!.Config?.CustomLevelsConfig.LastViewDefinitionName); // store selected view definition in user config
+            SelectedViewDefinition = ViewDefinitions.FirstOrDefault(vd => vd.Name == userConfigDomain!.Config?.CustomLevelsConfig.LastViewDefinitionName);
             OnPropertyChanged(nameof(ShowViewDefinitions));
 
             SetLoadingInProgress(false, string.Empty);

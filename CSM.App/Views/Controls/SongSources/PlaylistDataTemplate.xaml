@@ -26,11 +26,23 @@
             <!-- Title -->
             <TextBlock Text="{Binding PlaylistTitle}" Style="{StaticResource HeaderTitleStyle}" />
             <!-- Commands -->
-            <telerik:RadToolBar Grid.Column="1" Style="{StaticResource HeaderToolBarStyle}" >
-                <telerik:RadButton Background="Transparent">
-                    <telerik:RadGlyph Glyph="&#xe68F;" Foreground="Transparent"  />
-                </telerik:RadButton>
-            </telerik:RadToolBar>
+            <telerik:RadToolBarTray Grid.Column="1">
+                <!-- View Definitions -->
+                <telerik:RadToolBar Style="{StaticResource HeaderToolBarStyle}" >
+                    <TextBlock Text="View" />
+                    <telerik:RadComboBox ItemsSource="{Binding ViewDefinitions}" SelectedItem="{Binding SelectedViewDefinition}" DisplayMemberPath="Name" Background="Transparent"  Focusable="False" Visibility="{Binding ShowViewDefinitions, Converter={StaticResource BooleanToVisibilityConverter}}" SelectionChanged="ViewDefinitions_SelectionChanged" />
+                    <telerik:RadButton ToolTip="Create new view definition" Click="Add_Click">
+                        <telerik:RadGlyph Glyph="&#xe907;" />
+                    </telerik:RadButton>
+                    <telerik:RadButton ToolTip="Save selected view definition" Click="Save_Click" IsEnabled="{Binding CanSaveViewDefinition}">
+                        <telerik:RadGlyph Glyph="&#xe109;" />
+                    </telerik:RadButton>
+                    <telerik:RadButton ToolTip="Delete selected view definition" Click="Delete_Click" IsEnabled="{Binding CanDeleteViewDefinition}">
+                        <telerik:RadGlyph Glyph="&#xe10c;" />
+                    </telerik:RadButton>
+                </telerik:RadToolBar>
+            </telerik:RadToolBarTray>
+
         </Grid>
         <!-- Playlist infos -->
         <Grid Grid.Row="1">
@@ -79,6 +91,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <telerik:RadGridView 
+                x:Name="playlistRightGridView"
                 behaviours:GridViewHeaderContextMenuBehaviour.IsEnabled="True"
                 ItemsSource="{Binding Songs}"
                 Margin="3" 
