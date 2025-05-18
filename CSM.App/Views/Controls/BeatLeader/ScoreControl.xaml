@@ -24,7 +24,7 @@
             <TextBlock Text="Scores" Style="{StaticResource HeaderTitleStyle}" Foreground="#88018574" />
             <!-- Commands -->
             <telerik:RadToolBar Grid.Column="1" Style="{StaticResource HeaderToolBarStyle}" >
-                <telerik:RadButton Command="{Binding ClearSongHistoryCommand}" ToolTip="Clear song history">
+                <telerik:RadButton ToolTip="Clear song history">
                     <telerik:RadGlyph Glyph="&#xe10c;" Foreground="#88018574" />
                 </telerik:RadButton>
             </telerik:RadToolBar>

@@ -117,7 +117,7 @@
                 Style="{StaticResource RadGridViewStyle}">
                 <telerik:RadGridView.Columns>
                     <!-- Add button (will add song to selected playlist) -->
-                    <telerik:GridViewColumn Width="SizeToCells">
+                    <telerik:GridViewColumn UniqueName="AddButton" Width="SizeToCells">
                         <telerik:GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <telerik:RadButton Command="{Binding AddToPlaylistCommand}" Grid.Column="1" Background="Transparent" BorderThickness="0" ToolTip="Add to playlist">
@@ -127,11 +127,11 @@
                         </telerik:GridViewColumn.CellTemplate>
                     </telerik:GridViewColumn>
                     <!-- Channel -->
-                    <telerik:GridViewDataColumn Header="Channel" Width="*" DataMemberBinding="{Binding ChannelName}" />
+                    <telerik:GridViewDataColumn UniqueName="Channel" Header="Channel" Width="*" DataMemberBinding="{Binding ChannelName}" />
                     <!-- Received At -->
-                    <telerik:GridViewDataColumn Header="Received at" Width="SizeToCells" DataMemberBinding="{Binding ReceivedAt, StringFormat='g', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
+                    <telerik:GridViewDataColumn UniqueName="ReceivedAt" Header="Received at" Width="SizeToCells" DataMemberBinding="{Binding ReceivedAt, StringFormat='g', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
                     <!-- BSR -->
-                    <telerik:GridViewDataColumn Header="BSR" Width="Auto" DataMemberBinding="{Binding BsrKeyHex}" IsFilterable="False">
+                    <telerik:GridViewDataColumn UniqueName="BSR" Header="BSR" Width="Auto" DataMemberBinding="{Binding BsrKeyHex}" IsFilterable="False">
                         <telerik:GridViewDataColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding BsrKey}" />
@@ -139,13 +139,13 @@
                         </telerik:GridViewDataColumn.CellTemplate>
                     </telerik:GridViewDataColumn>
                     <!-- Song Name -->
-                    <telerik:GridViewDataColumn Header="Title" Width="*" DataMemberBinding="{Binding SongName}" />
+                    <telerik:GridViewDataColumn UniqueName="Title" Header="Title" Width="*" DataMemberBinding="{Binding SongName}" />
                     <!-- Song Author Name -->
-                    <telerik:GridViewDataColumn Header="Artist" Width="*" DataMemberBinding="{Binding SongAuthorName}" />
+                    <telerik:GridViewDataColumn UniqueName="Artist" Header="Artist" Width="*" DataMemberBinding="{Binding SongAuthorName}" />
                     <!-- Level Author Name -->
-                    <telerik:GridViewDataColumn Header="Mapper" Width="*" DataMemberBinding="{Binding LevelAuthorName}" />
+                    <telerik:GridViewDataColumn UniqueName="Mapper" Header="Mapper" Width="*" DataMemberBinding="{Binding LevelAuthorName}" />
                     <!-- Delete button (remove song from playlist) -->
-                    <telerik:GridViewColumn>
+                    <telerik:GridViewColumn UniqueName="RemoveButton" Width="SizeToCells">
                         <telerik:GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <telerik:RadButton Command="{Binding RemoveCommand}" Grid.Column="1" Background="Transparent" BorderThickness="0" Margin="0,0,10,0" ToolTip="Delete song">

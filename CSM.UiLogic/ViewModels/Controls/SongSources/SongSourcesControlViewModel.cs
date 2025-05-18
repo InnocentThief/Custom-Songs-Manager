@@ -5,6 +5,7 @@ using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.ViewModels.Controls.BeatLeader;
 using CSM.UiLogic.ViewModels.Controls.CustomLevels;
+using CSM.UiLogic.ViewModels.Controls.ScoreSaber;
 
 namespace CSM.UiLogic.ViewModels.Controls.SongSources
 {
@@ -133,6 +134,22 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             }
         }
 
+        public bool ScoreSaberAvailable => userConfig?.PlaylistsConfig.SourceAvailability.HasFlag(PlaylistsSourceAvailability.ScoreSaber) ?? false;
+
+        public bool IsScoreSaberSelected
+        {
+            get => selectedSource is ScoreSaberControlViewModel;
+            set
+            {
+                if (value)
+                {
+                    SelectedSource = Sources.SingleOrDefault(s => s is ScoreSaberControlViewModel);
+                    OnPropertyChanged();
+                    songSelectionDomain.SetSongHash(null, SongSelectionType.Right);
+                }
+            }
+        }
+
         public bool BeatLeaderAvailable => userConfig?.PlaylistsConfig.SourceAvailability.HasFlag(PlaylistsSourceAvailability.BeatLeader) ?? false;
 
         public bool IsBeatLeaderSelected
@@ -180,6 +197,10 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             {
                 Sources.Add(new TwitchSourceViewModel(serviceLocator));
             }
+            if (ScoreSaberAvailable)
+            {
+                Sources.Add(new ScoreSaberControlViewModel(serviceLocator));
+            }
             if (BeatLeaderAvailable)
             {
                 Sources.Add(new BeatLeaderControlViewModel(serviceLocator));
@@ -204,6 +225,9 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
                     break;
                 case PlaylistsSourceAvailability.Twitch:
                     IsTwitchSelected = true;
+                    break;
+                case PlaylistsSourceAvailability.ScoreSaber:
+                    IsScoreSaberSelected = true;
                     break;
                 case PlaylistsSourceAvailability.BeatLeader:
                     IsBeatLeaderSelected = true;
@@ -243,6 +267,11 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             if (selectedSource is TwitchSourceViewModel twitchSourceViewModel)
             {
                 await twitchSourceViewModel.LoadAsync();
+            }
+
+            if (selectedSource is ScoreSaberControlViewModel scoreSaberControlViewModel)
+            {
+                await scoreSaberControlViewModel.LoadAsync(false);
             }
 
             if (selectedSource is BeatLeaderControlViewModel beatLeaderControlViewModel)

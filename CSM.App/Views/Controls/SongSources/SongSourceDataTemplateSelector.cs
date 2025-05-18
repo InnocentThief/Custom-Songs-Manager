@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using CSM.UiLogic.ViewModels.Controls.BeatLeader;
 using CSM.UiLogic.ViewModels.Controls.CustomLevels;
+using CSM.UiLogic.ViewModels.Controls.ScoreSaber;
 using CSM.UiLogic.ViewModels.Controls.SongSources;
 
 namespace CSM.App.Views.Controls.SongSources
@@ -15,6 +16,7 @@ namespace CSM.App.Views.Controls.SongSources
         public DataTemplate SongSuggestDataTemplate { get; set; } = null!;
         public DataTemplate TwitchDataTemplate { get; set; } = null!;
         public DataTemplate BeatLeaderDataTemplate { get; set; } = null!;
+        public DataTemplate ScoreSaberDataTemplate { get; set; } = null!;
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
@@ -33,6 +35,8 @@ namespace CSM.App.Views.Controls.SongSources
                 return TwitchDataTemplate;
             if (item is BeatLeaderControlViewModel)
                 return BeatLeaderDataTemplate;
+            if (item is ScoreSaberControlViewModel)
+                return ScoreSaberDataTemplate;
             return base.SelectTemplate(item, container);
         }
     }

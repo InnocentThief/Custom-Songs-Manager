@@ -40,7 +40,37 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources.SongSearch
 
         public string SongName => mapDetail.Metadata?.SongName ?? string.Empty;
 
+        public string SongSubName => mapDetail.Metadata?.SongSubName ?? string.Empty;
+
         public string LevelAuthorName => mapDetail.Metadata?.LevelAuthorName ?? string.Empty;
+
+        public string SongAuthorName => mapDetail.Metadata?.SongAuthorName ?? string.Empty;
+
+        public string BPM
+        {
+            get
+            {
+                var bpm = mapDetail.Metadata?.Bpm ?? 0;
+                if (bpm > 0)
+                    return bpm.ToString("N0");
+                return string.Empty;
+            }
+        }
+
+        public string Duration
+        {
+            get
+            {
+                var duration = mapDetail.Metadata?.Duration ?? 0;
+
+                if (duration > 0)
+                {
+                    TimeSpan timeSpan = TimeSpan.FromSeconds(duration);
+                    return timeSpan.ToString();
+                }
+                return string.Empty;
+            }
+        }
 
         public DateTime Uploaded => mapDetail.Uploaded;
 

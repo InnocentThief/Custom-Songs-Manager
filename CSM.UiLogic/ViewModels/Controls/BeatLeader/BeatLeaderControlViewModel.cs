@@ -144,10 +144,10 @@ namespace CSM.UiLogic.ViewModels.Controls.BeatLeader
 
         private async void OnPlayerSearchResultSelected(object? sender, SearchResultEventArgs e)
         {
+            PlayerSearchVisible = false;
+
             if (e.PlayerId == null)
                 return;
-
-            PlayerSearchVisible = false;
             await LoadDataAsync(e.PlayerId);
         }
 

@@ -107,7 +107,7 @@ namespace CSM.App.Behaviours
                 // create menu items
                 foreach (GridViewColumn column in grid.Columns)
                 {
-                    if (column.Header == null)
+                    if (column.Header == null || string.IsNullOrWhiteSpace(column.Header.ToString()))
                         continue;
 
                     RadMenuItem subMenu = new()

@@ -4,7 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
          xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
-        xmlns:local="clr-namespace:CSM.App" xmlns:navigation="clr-namespace:CSM.App.Views.Controls.Navigation" xmlns:workspaces="clr-namespace:CSM.App.Views.Workspaces"
+        xmlns:local="clr-namespace:CSM.App" 
+                         xmlns:navigation="clr-namespace:CSM.App.Views.Controls.Navigation" 
+                         xmlns:workspaces="clr-namespace:CSM.App.Views.Workspaces"
                          mc:Ignorable="d"
         Title="MainWindow"
                          ResizeMode="CanResizeWithGrip"
@@ -19,9 +21,5 @@
         <navigation:Navigation Margin="4,25,0,0" DataContext="{Binding Navigation}" />
         <ContentControl Grid.Column="1" Content="{Binding Workspaces/}" />
     </Grid>
-
-
-
-
 
 </telerik:RadRibbonWindow>
