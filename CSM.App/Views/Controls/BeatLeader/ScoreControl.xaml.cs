@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CSM.App.Views.Helper;
+using CSM.UiLogic.AbstractBase;
+using CSM.UiLogic.ViewModels.Controls.CustomLevels;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Telerik.Windows.Persistence;
 
 namespace CSM.App.Views.Controls.BeatLeader
 {
@@ -20,9 +12,49 @@ namespace CSM.App.Views.Controls.BeatLeader
     /// </summary>
     public partial class ScoreControl : UserControl
     {
+        private PersistenceManager persistenceManager = PersistenceFrameworkHelper.GetPersistenceManager();
+
         public ScoreControl()
         {
             InitializeComponent();
+        }
+
+        private async void Add_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is CustomLevelsControlViewModel viewModel)
+            {
+                var stream = persistenceManager.Save(blScoresGridView);
+                await viewModel.SaveViewDefinitionAsync(stream, SavableUiElement.BlMainControl);
+            }
+        }
+
+        private async void Save_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is CustomLevelsControlViewModel viewModel && viewModel.SelectedViewDefinition != null)
+            {
+                var stream = persistenceManager.Save(blScoresGridView);
+                await viewModel.SaveViewDefinitionAsync(stream, SavableUiElement.BlMainControl, viewModel.SelectedViewDefinition.Name);
+            }
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is CustomLevelsControlViewModel viewModel && viewModel.SelectedViewDefinition != null)
+            {
+                viewModel.DeleteViewDefinition(SavableUiElement.BlMainControl, viewModel.SelectedViewDefinition.Name);
+            }
+        }
+
+        private void ViewDefinitions_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (DataContext is CustomLevelsControlViewModel viewModel)
+            {
+                if (viewModel.SelectedViewDefinition != null && viewModel.SelectedViewDefinition.Stream != null)
+                {
+                    persistenceManager.Load(blScoresGridView, viewModel.SelectedViewDefinition.Stream);
+                    viewModel.SelectedViewDefinition.Stream.Position = 0;
+                }
+            }
         }
     }
 }

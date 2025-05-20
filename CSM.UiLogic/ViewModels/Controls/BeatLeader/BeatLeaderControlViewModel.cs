@@ -1,10 +1,12 @@
-﻿using System.Collections.ObjectModel;
-using CSM.Business.Interfaces;
+﻿using CSM.Business.Interfaces;
+using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.Commands;
 using CSM.UiLogic.ViewModels.Common.Leaderboard;
 using CSM.UiLogic.ViewModels.Controls.SongSources;
+using System.Collections.ObjectModel;
+using System.IO;
 
 namespace CSM.UiLogic.ViewModels.Controls.BeatLeader
 {
@@ -14,6 +16,8 @@ namespace CSM.UiLogic.ViewModels.Controls.BeatLeader
 
         private IRelayCommand? switchPlayerCommand;
         private bool playerSearchVisible;
+        private ViewDefinition? selectedViewDefinition;
+        private bool isSourceControl;
 
         private readonly IBeatLeaderService beatLeaderService;
         private readonly IUserConfigDomain userConfigDomain;
@@ -54,10 +58,44 @@ namespace CSM.UiLogic.ViewModels.Controls.BeatLeader
 
         public PlayerSearchViewModel PlayerSearch { get; }
 
+        public ObservableCollection<ViewDefinition> ViewDefinitions { get; } = [];
+
+        public ViewDefinition? SelectedViewDefinition
+        {
+            get => selectedViewDefinition;
+            set
+            {
+                if (value == selectedViewDefinition)
+                    return;
+                selectedViewDefinition = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(CanSaveViewDefinition));
+                OnPropertyChanged(nameof(CanDeleteViewDefinition));
+
+                if (isSourceControl)
+                {
+                    userConfigDomain!.Config!.PlaylistsConfig.LastBlSourceControlViewDefinitionName = selectedViewDefinition?.Name;
+                }
+                else
+                {
+                    userConfigDomain!.Config!.PlaylistsConfig.LastBlMainControlViewDefinitionName = selectedViewDefinition?.Name;
+                }
+
+                userConfigDomain.SaveUserConfig();
+            }
+        }
+
+        public bool ShowViewDefinitions => ViewDefinitions.Count > 0;
+
+        public bool CanSaveViewDefinition => SelectedViewDefinition != null;
+
+        public bool CanDeleteViewDefinition => SelectedViewDefinition != null;
+
         #endregion
 
-        public BeatLeaderControlViewModel(IServiceLocator serviceLocator) : base(serviceLocator)
+        public BeatLeaderControlViewModel(IServiceLocator serviceLocator, bool isSourceControl = false) : base(serviceLocator)
         {
+            this.isSourceControl = isSourceControl;
             beatLeaderService = serviceLocator.GetService<IBeatLeaderService>();
             userConfigDomain = serviceLocator.GetService<IUserConfigDomain>();
 
@@ -75,7 +113,28 @@ namespace CSM.UiLogic.ViewModels.Controls.BeatLeader
                 return;
 
             await LoadDataAsync(playerId);
+        }
 
+        public override async Task<ViewDefinition?> SaveViewDefinitionAsync(Stream stream, SavableUiElement savableUiElement, string? name = null)
+        {
+            var newViewDefinition = await base.SaveViewDefinitionAsync(stream, savableUiElement, name);
+            if (newViewDefinition != null)
+            {
+                ViewDefinitions.Add(newViewDefinition);
+                SelectedViewDefinition = newViewDefinition;
+                OnPropertyChanged(nameof(ShowViewDefinitions));
+            }
+            return newViewDefinition;
+        }
+
+        public override void DeleteViewDefinition(SavableUiElement savableUiElement, string name)
+        {
+            if (SelectedViewDefinition == null)
+                return;
+            base.DeleteViewDefinition(savableUiElement, name);
+            ViewDefinitions.Remove(SelectedViewDefinition);
+            SelectedViewDefinition = ViewDefinitions.FirstOrDefault();
+            OnPropertyChanged(nameof(ShowViewDefinitions));
         }
 
         #region Helper methods
@@ -113,7 +172,7 @@ namespace CSM.UiLogic.ViewModels.Controls.BeatLeader
                 Scores.Add(scoreViewModel);
             }
 
-            var additionalRequestCount = scoreResult.Metadata.Total / 100+1;
+            var additionalRequestCount = scoreResult.Metadata.Total / 100 + 1;
             for (int i = 2; i <= additionalRequestCount; i++)
             {
                 var additionScoreResult = await beatLeaderService.GetPlayerScoresAsync(playerId, i, 100);
@@ -128,10 +187,29 @@ namespace CSM.UiLogic.ViewModels.Controls.BeatLeader
 
             OnPropertyChanged(nameof(ScoreCount));
 
+            // Load view definitions
+            List<ViewDefinition> viewDefinitions;
+            string? lastViewDefinition;
+            if (isSourceControl)
+            {
+                viewDefinitions = await LoadViewDefinitionsAsync(SavableUiElement.BlSourceControl);
+                lastViewDefinition = userConfigDomain!.Config?.PlaylistsConfig.LastBlSourceControlViewDefinitionName;
+            }
+            else
+            {
+                viewDefinitions = await LoadViewDefinitionsAsync(SavableUiElement.BlMainControl);
+                lastViewDefinition = userConfigDomain!.Config?.PlaylistsConfig.LastBlMainControlViewDefinitionName;
+            }
+
+            ViewDefinitions.Clear();
+            ViewDefinitions.AddRange(viewDefinitions);
+            SelectedViewDefinition = ViewDefinitions.FirstOrDefault(vd => vd.Name == lastViewDefinition);
+            OnPropertyChanged(nameof(ShowViewDefinitions));
+
             SetLoadingInProgress(false, string.Empty);
         }
 
-        public void SwitchPlayer()
+        private void SwitchPlayer()
         {
             PlayerSearchVisible = true;
 

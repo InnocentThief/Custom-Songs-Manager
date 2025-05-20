@@ -7,5 +7,7 @@
         PlaylistRight = 2,
         SongSuggestPlaylist = 3,
         SongSearch = 4,
+        BlSourceControl = 5,
+        BlMainControl = 6,
     }
 }

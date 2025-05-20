@@ -11,5 +11,7 @@
         public string? LastRightViewDefinitionName { get; set; }
         public string? LastSongSuggestViewDefinitionName { get; set; }
         public string? LastSongSearchViewDefinitionName { get; set; }
+        public string? LastBlSourceControlViewDefinitionName { get; set; }
+        public string? LastBlMainControlViewDefinitionName { get; set; }
     }
 }

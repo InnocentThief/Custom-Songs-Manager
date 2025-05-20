@@ -13,6 +13,5 @@ namespace CSM.DataAccess.UserConfiguration
         public TwitchConfig TwitchConfig { get; set; } = new();
         public LeaderboardsConfig LeaderboardsConfig { get; set; } = new();
         public SongSuggestSettings SongSuggestSettings { get; set; } = new();
-
     }
 }

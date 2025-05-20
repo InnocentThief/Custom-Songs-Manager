@@ -203,7 +203,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             }
             if (BeatLeaderAvailable)
             {
-                Sources.Add(new BeatLeaderControlViewModel(serviceLocator));
+                Sources.Add(new BeatLeaderControlViewModel(serviceLocator, true));
             }
 
             switch (userConfig?.PlaylistsConfig.DefaultSource)
