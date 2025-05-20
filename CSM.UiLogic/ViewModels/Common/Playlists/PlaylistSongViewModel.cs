@@ -99,7 +99,6 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
             song.Key = mapDetail.Id;
             song.SongName = mapDetail.Metadata?.SongName ?? string.Empty;
             song.LevelAuthorName = mapDetail.Metadata?.LevelAuthorName;
-            song.LevelId = mapDetail.Id;
             Uploaded = mapDetail.Uploaded;
 
             OnPropertyChanged(nameof(BsrKey));
