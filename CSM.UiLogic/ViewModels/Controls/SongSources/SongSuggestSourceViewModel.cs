@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using CSM.Business.Core.SongCopy;
+﻿using CSM.Business.Core.SongCopy;
 using CSM.Business.Core.SongSelection;
 using CSM.Business.Interfaces;
 using CSM.Framework.ServiceLocation;
@@ -7,6 +6,7 @@ using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.Commands;
 using CSM.UiLogic.ViewModels.Common.Playlists;
 using Microsoft.Extensions.Logging;
+using System.Windows;
 
 namespace CSM.UiLogic.ViewModels.Controls.SongSources
 {

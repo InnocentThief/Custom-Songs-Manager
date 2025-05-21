@@ -1,9 +1,9 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Data;
-using CSM.Business.Interfaces;
+﻿using CSM.Business.Interfaces;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.ViewModels.Navigation;
+using System.Collections.ObjectModel;
+using System.Windows.Data;
 
 namespace CSM.UiLogic.ViewModels
 {

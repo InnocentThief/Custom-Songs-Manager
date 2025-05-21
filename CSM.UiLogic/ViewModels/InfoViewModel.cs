@@ -1,8 +1,8 @@
-﻿using System.Diagnostics;
-using System.Reflection;
-using CSM.Framework.ServiceLocation;
+﻿using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.Commands;
+using System.Diagnostics;
+using System.Reflection;
 
 namespace CSM.UiLogic.ViewModels
 {

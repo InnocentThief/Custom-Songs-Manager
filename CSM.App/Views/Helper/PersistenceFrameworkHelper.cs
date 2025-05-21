@@ -1,5 +1,4 @@
-﻿using System.IO;
-using Telerik.Windows.Controls;
+﻿using Telerik.Windows.Controls;
 using Telerik.Windows.Persistence;
 
 namespace CSM.App.Views.Helper
@@ -9,7 +8,7 @@ namespace CSM.App.Views.Helper
 
         public static PersistenceManager GetPersistenceManager()
         {
-            return  new PersistenceManager()
+            return new PersistenceManager()
                 .AllowDataAssembly()
                 .AllowCoreControls()
                 .AllowGridViewControls()
@@ -26,9 +25,9 @@ namespace CSM.App.Views.Helper
                     typeof(List<FilterSetting>),
                     typeof(List<object>)
                 );
-           
+
         }
 
-        
+
     }
 }

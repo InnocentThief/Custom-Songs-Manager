@@ -1,6 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using CSM.UiLogic.ViewModels.Controls.BeatLeader;
+using System.Windows.Controls;
 using System.Windows.Input;
-using CSM.UiLogic.ViewModels.Controls.BeatLeader;
 
 namespace CSM.App.Views.Controls.BeatLeader
 {

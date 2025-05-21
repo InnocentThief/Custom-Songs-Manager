@@ -11,7 +11,7 @@ namespace CSM.UiLogic.ViewModels.Common.Leaderboard
 
         public abstract string Avatar { get; }
 
-        public abstract string PP { get; } 
+        public abstract string PP { get; }
 
         public abstract string Rank { get; }
 

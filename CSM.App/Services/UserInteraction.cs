@@ -1,19 +1,14 @@
-﻿using System.Windows;
-using CSM.App.Views.Windows;
+﻿using CSM.App.Views.Windows;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.Services;
+using System.Windows;
 
 namespace CSM.App.Services
 {
-    internal class UserInteraction : IUserInteraction
+    internal class UserInteraction(IServiceLocator serviceLocator) : IUserInteraction
     {
-        private IServiceLocator serviceLocator;
-
-        public UserInteraction(IServiceLocator serviceLocator)
-        {
-            this.serviceLocator = serviceLocator;
-        }
+        private readonly IServiceLocator serviceLocator = serviceLocator;
 
         public void ShowError(string message)
         {

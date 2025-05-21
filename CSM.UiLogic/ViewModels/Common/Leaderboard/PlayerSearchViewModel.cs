@@ -1,8 +1,8 @@
-﻿using System.Collections.ObjectModel;
-using CSM.Business.Interfaces;
+﻿using CSM.Business.Interfaces;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.Commands;
+using System.Collections.ObjectModel;
 
 namespace CSM.UiLogic.ViewModels.Common.Leaderboard
 {

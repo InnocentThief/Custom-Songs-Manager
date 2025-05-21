@@ -1,6 +1,5 @@
-﻿using System.Windows.Controls;
-using CSM.UiLogic.ViewModels.Controls.BeatLeader;
-using CSM.UiLogic.ViewModels.Controls.SongSources;
+﻿using CSM.UiLogic.ViewModels.Controls.SongSources;
+using System.Windows.Controls;
 
 namespace CSM.App.Views.Controls.SongSources
 {

@@ -5,11 +5,11 @@ using System.IO;
 namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
 {
     internal class NewPlaylistViewModel(
-        IServiceLocator serviceLocator, 
-        string cancelCommandText, 
-        EditViewModelCommandColor cancelCommandColor, 
-        string continueCommandText, 
-        EditViewModelCommandColor continueCommandColor) 
+        IServiceLocator serviceLocator,
+        string cancelCommandText,
+        EditViewModelCommandColor cancelCommandColor,
+        string continueCommandText,
+        EditViewModelCommandColor continueCommandColor)
         : BaseEditViewModel(serviceLocator, cancelCommandText, cancelCommandColor, continueCommandText, continueCommandColor)
     {
         private string playlistName = string.Empty;

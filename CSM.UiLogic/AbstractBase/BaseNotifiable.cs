@@ -1,6 +1,6 @@
-﻿using System.ComponentModel;
+﻿using CSM.Framework.PropertyChanged;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using CSM.Framework.PropertyChanged;
 
 namespace CSM.UiLogic.AbstractBase
 {

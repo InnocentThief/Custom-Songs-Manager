@@ -1,10 +1,10 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
-using CSM.Business.Interfaces;
+﻿using CSM.Business.Interfaces;
 using CSM.Framework.ServiceLocation;
 using CSM.Framework.Types;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.ViewModels.Controls.Settings;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace CSM.UiLogic.ViewModels.Navigation
 {

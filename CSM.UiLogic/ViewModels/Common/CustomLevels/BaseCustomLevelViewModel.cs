@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using CSM.Business.Core.SongCopy;
+﻿using CSM.Business.Core.SongCopy;
 using CSM.Business.Interfaces;
 using CSM.DataAccess.BeatSaver;
 using CSM.Framework.ServiceLocation;
@@ -7,6 +6,7 @@ using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.Commands;
 using CSM.UiLogic.ViewModels.Common.MapDetails;
 using CSM.UiLogic.ViewModels.Common.Playlists;
+using System.Globalization;
 
 namespace CSM.UiLogic.ViewModels.Common.CustomLevels
 {

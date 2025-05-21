@@ -1,8 +1,8 @@
-﻿using System.Text.Json;
-using CSM.Business.Interfaces;
+﻿using CSM.Business.Interfaces;
 using CSM.DataAccess.UserConfiguration;
 using CSM.Framework.Types;
 using Microsoft.Extensions.Logging;
+using System.Text.Json;
 
 namespace CSM.Business.Core
 {

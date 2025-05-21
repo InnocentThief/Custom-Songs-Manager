@@ -1,7 +1,7 @@
-﻿using System.Text.Json;
-using CSM.DataAccess.BeatSaver;
+﻿using CSM.DataAccess.BeatSaver;
 using CSM.DataAccess.Common;
 using CSM.Framework.Helper;
+using System.Text.Json;
 
 namespace CSM.DataAccess
 {
