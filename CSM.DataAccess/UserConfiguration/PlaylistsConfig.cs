@@ -13,5 +13,7 @@
         public string? LastSongSearchViewDefinitionName { get; set; }
         public string? LastBlSourceControlViewDefinitionName { get; set; }
         public string? LastBlMainControlViewDefinitionName { get; set; }
+        public string? LastSSSourceControlViewDefinitionName { get; set; }
+        public string? LastSSMainControlViewDefinitionName { get; set; }
     }
 }

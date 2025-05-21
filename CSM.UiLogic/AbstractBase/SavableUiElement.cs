@@ -9,5 +9,7 @@
         SongSearch = 4,
         BlSourceControl = 5,
         BlMainControl = 6,
+        SSSourceControl = 7,
+        SSMainControl = 8,
     }
 }

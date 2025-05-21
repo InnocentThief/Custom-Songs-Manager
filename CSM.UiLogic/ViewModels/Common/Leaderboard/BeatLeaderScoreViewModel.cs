@@ -4,9 +4,9 @@ using CSM.Framework.ServiceLocation;
 
 namespace CSM.UiLogic.ViewModels.Common.Leaderboard
 {
-    internal sealed class BeatLeaderScoreViewModel : BaseScoreViewModel
+    internal sealed class BeatLeaderScoreViewModel(IServiceLocator serviceLocator, Score score) : BaseScoreViewModel(serviceLocator)
     {
-        private readonly Score score;
+        private readonly Score score = score;
 
         public override int Rank => score.Rank;
         public override string SongName => score.Leaderboard.Song.Name;
@@ -30,10 +30,5 @@ namespace CSM.UiLogic.ViewModels.Common.Leaderboard
         public override Characteristic Characteristic => score.Leaderboard.Difficulty.ModeName;
 
         public override DataAccess.Common.Difficulty Difficulty => score.Leaderboard.Difficulty.DifficultyName;
-
-        public BeatLeaderScoreViewModel(IServiceLocator serviceLocator, Score score) : base(serviceLocator)
-        {
-            this.score = score;
-        }
     }
 }

@@ -19,7 +19,7 @@ namespace CSM.Business.Core
 
         public async Task<ScoreSearchResult?> GetPlayerScoresAsync(string id, int page, int count)
         {
-            return  await client.GetAsync<ScoreSearchResult>($"player/{id}/scores?page={page}&count={count}");
+            return await client.GetAsync<ScoreSearchResult>($"player/{id}/scores?page={page}&count={count}");
         }
 
         public async Task<bool> PlayerExistsAsync(string id)

@@ -3,9 +3,9 @@ using CSM.Framework.ServiceLocation;
 
 namespace CSM.UiLogic.ViewModels.Common.Leaderboard
 {
-    internal sealed class BeatLeaderPlayerViewModel : BasePlayerViewModel
+    internal sealed class BeatLeaderPlayerViewModel(IServiceLocator serviceLocator, Player player) : BasePlayerViewModel(serviceLocator)
     {
-        private readonly Player player;
+        private readonly Player player = player;
 
         public override string Id => player.Id;
 
@@ -13,7 +13,7 @@ namespace CSM.UiLogic.ViewModels.Common.Leaderboard
 
         public override string Avatar => player.Avatar;
 
-        public override string PP => Math.Round(player.Pp, 2).ToString("N2");
+        public override string PP => player.Pp.ToString("N2");
 
         public override string Rank => player.Rank.ToString("N0");
 
@@ -192,11 +192,6 @@ namespace CSM.UiLogic.ViewModels.Common.Leaderboard
 
                 return playsStats;
             }
-        }
-
-        public BeatLeaderPlayerViewModel(IServiceLocator serviceLocator, Player player) : base(serviceLocator)
-        {
-            this.player = player;
         }
     }
 }

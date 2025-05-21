@@ -1,35 +1,42 @@
 ﻿using CSM.DataAccess.Common;
+using CSM.DataAccess.ScoreSaber;
 using CSM.Framework.ServiceLocation;
 
 namespace CSM.UiLogic.ViewModels.Common.Leaderboard
 {
-    internal sealed class ScoreSaberScoreViewModel : BaseScoreViewModel
+    internal sealed class ScoreSaberScoreViewModel(IServiceLocator serviceLocator, PlayerScore score) : BaseScoreViewModel(serviceLocator)
     {
-        public override int Rank => throw new NotImplementedException();
-        public override string SongName => throw new NotImplementedException();
-        public override bool FC => throw new NotImplementedException();
-        public override int BadCuts => throw new NotImplementedException();
-        public override int MissedNotes => throw new NotImplementedException();
-        public override string Id => throw new NotImplementedException();
-        public override string SubName => throw new NotImplementedException();
-        public override string Author => throw new NotImplementedException();
-        public override string Mapper => throw new NotImplementedException();
-        public override string CoverImage => throw new NotImplementedException();
-        public override double Accuracy => throw new NotImplementedException();
-        public override double PP => throw new NotImplementedException();
-        public override double WeightedPP => throw new NotImplementedException();
-        public override int Pauses => throw new NotImplementedException();
-        public override string Modifiers => throw new NotImplementedException();
-        public override DateTime Date => throw new NotImplementedException();
+        private readonly PlayerScore score = score;
 
-        public override Characteristic Characteristic => throw new NotImplementedException();
-
-        public override Difficulty Difficulty => throw new NotImplementedException();
-
-        public ScoreSaberScoreViewModel(IServiceLocator serviceLocator) : base(serviceLocator)
+        public override int Rank => score.Score.Rank;
+        public override string SongName => score.Leaderboard.SongName;
+        public override bool FC => score.Score.FullCombo;
+        public override int BadCuts => score.Score.BadCuts;
+        public override int MissedNotes => score.Score.MissedNotes;
+        public override string Id => score.Leaderboard.Id.ToString();
+        public override string SubName => score.Leaderboard.SongSubName;
+        public override string Author => score.Leaderboard.SongAuthorName;
+        public override string Mapper => score.Leaderboard.LevelAuthorName;
+        public override string CoverImage => score.Leaderboard.CoverImage;
+        public override double Accuracy
         {
+            get
+            {
+                if (score.Leaderboard.MaxScore == 0)
+                {
+                    return 0;
+                }
+                return Math.Round(((double)score.Score.BaseScore / score.Leaderboard.MaxScore) * 100, 2);
+            }
         }
+        public override double PP => Math.Round(score.Score.PP, 2);
+        public override double WeightedPP => Math.Round(PP * score.Score.Weight, 2);
+        public override int Pauses => 0; // ScoreSaber does not provide pause information
+        public override string Modifiers => score.Score.Modifiers.Replace(",", ", ");
+        public override DateTime Date => score.Score.TimeSet;
 
+        public override Characteristic Characteristic => score.Leaderboard.Difficulty.Characteristic;
 
+        public override Difficulty Difficulty => (Difficulty)score.Leaderboard.Difficulty.Difficulty;
     }
 }

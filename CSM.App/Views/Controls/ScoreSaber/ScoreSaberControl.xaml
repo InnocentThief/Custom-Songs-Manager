@@ -32,7 +32,11 @@
                 </telerik:RadToolBar>
             </Grid>
 
+            <!-- Player -->
+            <local:PlayerControl Grid.Row="1" DataContext="{Binding Player}" />
 
+            <!-- Scores -->
+            <local:ScoreControl Grid.Row="2" />
 
             <!-- Player search -->
             <Grid Grid.RowSpan="3" Background="Black" Opacity="0.9" Visibility="{Binding PlayerSearchVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
@@ -55,12 +59,12 @@
                                 <telerik:RadGlyph Glyph="&#xe13e;" />
                             </telerik:RadButton>
                             <telerik:RadListBox 
-                    Grid.ColumnSpan="2" 
-                    Grid.Row="1" 
-                    ItemsSource="{Binding SearchResults}" 
-                    SelectedItem="{Binding SelectedSearchResult, Mode=TwoWay}" 
-                    Background="Transparent"  
-                    BorderThickness="0">
+                                Grid.ColumnSpan="2" 
+                                Grid.Row="1" 
+                                ItemsSource="{Binding SearchResults}" 
+                                SelectedItem="{Binding SelectedSearchResult, Mode=TwoWay}" 
+                                Background="Transparent"  
+                                BorderThickness="0">
                                 <telerik:RadListBox.ItemTemplate>
                                     <DataTemplate>
                                         <Grid>

@@ -4,16 +4,11 @@ using CSM.UiLogic.ViewModels.Controls.BeatLeader;
 
 namespace CSM.UiLogic.ViewModels.Workspaces
 {
-    internal sealed class BeatLeaderWorkspaceViewModel : WorkspaceViewModel
+    internal sealed class BeatLeaderWorkspaceViewModel(IServiceLocator serviceLocator) : WorkspaceViewModel(serviceLocator)
     {
         public override string Title => "Custom Songs Manager - BeatLeader";
 
-        public BeatLeaderControlViewModel BeatLeaderControl { get; }
-
-        public BeatLeaderWorkspaceViewModel(IServiceLocator serviceLocator) : base(serviceLocator)
-        {
-            BeatLeaderControl = new BeatLeaderControlViewModel(ServiceLocator);
-        }
+        public BeatLeaderControlViewModel BeatLeaderControl { get; } = new BeatLeaderControlViewModel(serviceLocator);
 
         public override async Task ActivateAsync(bool refresh)
         {

@@ -16,6 +16,7 @@ namespace CSM.UiLogic.ViewModels.Common.Leaderboard
 
         private readonly LeaderboardSearchType leaderboardSearchType;
         private readonly IBeatLeaderService beatLeaderService;
+        private readonly IScoreSaberService scoresaberService;
 
         #endregion
 
@@ -57,12 +58,13 @@ namespace CSM.UiLogic.ViewModels.Common.Leaderboard
 
         #endregion
 
-       public event EventHandler<SearchResultEventArgs>? SearchResultSelected;
+        public event EventHandler<SearchResultEventArgs>? SearchResultSelected;
 
         public PlayerSearchViewModel(IServiceLocator serviceLocator, LeaderboardSearchType leaderboardSearchType) : base(serviceLocator)
         {
             this.leaderboardSearchType = leaderboardSearchType;
             beatLeaderService = serviceLocator.GetService<IBeatLeaderService>();
+            scoresaberService = serviceLocator.GetService<IScoreSaberService>();
         }
 
         public async Task SearchAsync()
@@ -81,7 +83,15 @@ namespace CSM.UiLogic.ViewModels.Common.Leaderboard
             }
             else
             {
-                // Handle other leaderboard types if needed
+                var searchResult = await scoresaberService.GetPlayersAsync(SearchText);
+                if (searchResult != null)
+                {
+                    SearchResults.Clear();
+                    foreach (var player in searchResult.Players)
+                    {
+                        SearchResults.Add(new ScoreSaberPlayerViewModel(ServiceLocator, player));
+                    }
+                }
             }
         }
 
