@@ -13,14 +13,5 @@ namespace CSM.App.Views.Controls.ScoreSaber
         {
             InitializeComponent();
         }
-
-        private async void RadWatermarkTextBox_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key != Key.Enter) return;
-            if (DataContext is ScoreSaberControlViewModel viewModel)
-            {
-                await viewModel.PlayerSearch.SearchAsync();
-            }
-        }
     }
 }

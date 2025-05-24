@@ -26,6 +26,8 @@ namespace CSM.Business
 
         public async Task<T?> GetAsync<T>(string api)
         {
+            try
+            {
             Debug.WriteLine($"GET {apiBaseAddress + api}");
             var response = await httpClient.GetAsync(apiBaseAddress + api);
             if (!response.IsSuccessStatusCode)
@@ -35,6 +37,14 @@ namespace CSM.Business
             }
             var content = await response.Content.ReadAsStringAsync();
             return JsonSerializer.Deserialize<T>(content, JsonSerializerHelper.CreateDefaultSerializerOptions());
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+
         }
 
         public async Task<HttpResponseMessage> GetAsync(string api)

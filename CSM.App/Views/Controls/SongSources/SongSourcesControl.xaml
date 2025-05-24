@@ -34,11 +34,11 @@
         </DataTemplate>
 
         <DataTemplate x:Key="BeatLeaderDataTemplate">
-            <beatleader:BeatLeaderControl />
+            <local:SongSourcesBeatLeaderControl />
         </DataTemplate>
 
         <DataTemplate x:Key="ScoreSaberDataTemplate">
-            <scoresaber:ScoreSaberControl />
+            <local:SongSourcesScoreSaberControl />
         </DataTemplate>
 
         <local:SongSourceDataTemplateSelector x:Key="SongSourceDataTemplateSelector"

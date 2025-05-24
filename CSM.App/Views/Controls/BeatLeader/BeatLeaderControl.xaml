@@ -4,6 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:common="clr-namespace:CSM.App.Views.Common"
              xmlns:local="clr-namespace:CSM.App.Views.Controls.BeatLeader"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -40,78 +41,8 @@
 
             <!-- Player search -->
             <Grid Grid.RowSpan="3" Background="Black" Opacity="0.9" Visibility="{Binding PlayerSearchVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <Border HorizontalAlignment="Center" VerticalAlignment="Center" MinHeight="300" MinWidth="400">
-                    <Grid>
-                        <Border Grid.ColumnSpan="2" Grid.RowSpan="3" Background="White" Opacity="0.2" />
-                        <Grid Grid.Column="1" Grid.Row="1" DataContext="{Binding PlayerSearch}" Margin="6">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-
-                            <telerik:RadWatermarkTextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" WatermarkContent="Player name"  Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" KeyUp="RadWatermarkTextBox_KeyUp" />
-                            <telerik:RadButton Grid.Column="1" Command="{Binding SearchCommand}" Padding="6" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}">
-                                <telerik:RadGlyph Glyph="&#xe13e;" />
-                            </telerik:RadButton>
-                            <telerik:RadListBox 
-                                Grid.ColumnSpan="2" 
-                                Grid.Row="1" 
-                                ItemsSource="{Binding SearchResults}" 
-                                SelectedItem="{Binding SelectedSearchResult, Mode=TwoWay}" 
-                                Background="Transparent"  
-                                BorderThickness="0">
-                                <telerik:RadListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="80" />
-                                                <ColumnDefinition Width="30" />
-                                                <ColumnDefinition Width="10" />
-                                                <ColumnDefinition Width="16" />
-                                                <ColumnDefinition Width="10" />
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="Auto" />
-                                            </Grid.ColumnDefinitions>
-                                            <StackPanel Orientation="Horizontal">
-                                                <telerik:Label Content="#" />
-                                                <telerik:Label Content="{Binding Rank}" />
-                                            </StackPanel>
-
-                                            <Ellipse Width="25" Height="25" Grid.Column="1">
-                                                <Ellipse.Fill>
-                                                    <ImageBrush ImageSource="{Binding Avatar}" />
-                                                </Ellipse.Fill>
-                                            </Ellipse>
-
-                                            <Image Grid.Column="3" Source="{Binding Country, Converter={StaticResource CountryIdToFlagImageSourceConverter}}" RenderOptions.BitmapScalingMode="HighQuality" VerticalAlignment="Center" />
-
-                                            <TextBlock Grid.Column="5" Text="{Binding Name}" VerticalAlignment="Center" />
-
-                                            <StackPanel Grid.Column="6" Orientation="Horizontal" VerticalAlignment="Center">
-                                                <telerik:Label Content="{Binding PP}" />
-                                                <telerik:Label Content="pp" />
-                                            </StackPanel>
-
-                                        </Grid>
-                                    </DataTemplate>
-                                </telerik:RadListBox.ItemTemplate>
-                            </telerik:RadListBox>
-                            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" >
-                                <telerik:RadButton Command="{Binding CancelCommand}" Content="Cancel" Padding="6" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" />
-                                <telerik:RadButton Command="{Binding SwitchToPlayerCommand}" Content="Switch to selected player" Padding="6" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" />
-                            </StackPanel>
-                        </Grid>
-                    </Grid>
-
-                </Border>
-
+                <common:PlayerSearch DataContext="{Binding PlayerSearch}" />
             </Grid>
-
         </Grid>
     </telerik:RadBusyIndicator>
 

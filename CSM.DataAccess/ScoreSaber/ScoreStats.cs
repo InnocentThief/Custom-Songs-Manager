@@ -2,8 +2,8 @@
 {
     internal class ScoreStats
     {
-        public int TotalScore { get; set; }
-        public int TotalRankedScore { get; set; }
+        public long TotalScore { get; set; }
+        public long TotalRankedScore { get; set; }
         public double AverageRankedAccuracy { get; set; }
         public int TotalPlayCount { get; set; }
         public int RankedPlayCount { get; set; }
