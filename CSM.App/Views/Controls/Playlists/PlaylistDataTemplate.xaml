@@ -108,18 +108,18 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <telerik:RadGridView 
-                x:Name="playlistLeftGridView"
+                x:Name="PlaylistLeftGridView"
                 behaviours:GridViewHeaderContextMenuBehaviour.IsEnabled="True"
                 ItemsSource="{Binding Songs}"
                 Margin="3" 
                 SelectedItem="{Binding SelectedSong}"
-                FilterOperatorsLoading="RadGridView_FilterOperatorsLoading"
-                SelectionChanged="RadGridView_SelectionChanged"
-                Sorted="RadGridView_Sorted"
-                Style="{StaticResource RadGridViewStyle}">
+                FilterOperatorsLoading="PlaylistLeftGridView_FilterOperatorsLoading"
+                FieldFilterEditorCreated="PlaylistLeftGridView_FieldFilterEditorCreated"
+                SelectionChanged="PlaylistLeftGridView_SelectionChanged"
+                Sorted="PlaylistLeftGridView_Sorted">
                 <telerik:RadGridView.Columns>
                     <!-- Key -->
-                    <telerik:GridViewDataColumn UniqueName="BsrKey" Header="BSR" Width="Auto" DataMemberBinding="{Binding BsrKeyHex}" IsFilterable="true" FilterMemberPath="BsrKey">
+                    <telerik:GridViewDataColumn UniqueName="BsrKey" Header="BSR" Width="70" DataMemberBinding="{Binding BsrKeyHex}" IsFilterable="true" FilterMemberPath="BsrKey">
                         <telerik:GridViewDataColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding BsrKey}" />

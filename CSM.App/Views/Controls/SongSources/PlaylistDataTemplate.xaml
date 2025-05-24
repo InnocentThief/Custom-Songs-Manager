@@ -91,14 +91,14 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <telerik:RadGridView 
-                x:Name="playlistRightGridView"
+                x:Name="PlaylistRightGridView"
                 behaviours:GridViewHeaderContextMenuBehaviour.IsEnabled="True"
                 ItemsSource="{Binding Songs}"
                 Margin="3" 
                 SelectedItem="{Binding SelectedSong}"
-                FilterOperatorsLoading="RadGridView_FilterOperatorsLoading"
-                SelectionChanged="RadGridView_SelectionChanged"
-                Style="{StaticResource RadGridViewStyle}">
+                FilterOperatorsLoading="PlaylistRightGridView_FilterOperatorsLoading"
+                SelectionChanged="PlaylistRightGridView_SelectionChanged" 
+                FieldFilterEditorCreated="PlaylistRightGridView_FieldFilterEditorCreated">
                 <telerik:RadGridView.Columns>
                     <!-- Add button (will add song to selected playlist) -->
                     <telerik:GridViewColumn UniqueName="AddButton" Width="Auto" IsResizable="False">
@@ -111,7 +111,7 @@
                         </telerik:GridViewColumn.CellTemplate>
                     </telerik:GridViewColumn>
                     <!-- Key -->
-                    <telerik:GridViewDataColumn UniqueName="BsrKey" Header="BSR" Width="Auto" DataMemberBinding="{Binding BsrKeyHex}" IsFilterable="true" FilterMemberPath="BsrKey">
+                    <telerik:GridViewDataColumn UniqueName="BsrKey" Header="BSR" Width="70" DataMemberBinding="{Binding BsrKeyHex}" IsFilterable="true" FilterMemberPath="BsrKey">
                         <telerik:GridViewDataColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding BsrKey}" />

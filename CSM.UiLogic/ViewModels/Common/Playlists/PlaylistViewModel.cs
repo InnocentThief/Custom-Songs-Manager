@@ -4,6 +4,7 @@ using CSM.Business.Interfaces.SongCopy;
 using CSM.DataAccess;
 using CSM.DataAccess.BeatSaver;
 using CSM.DataAccess.Playlists;
+using CSM.DataAccess.UserConfiguration;
 using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
 using CSM.Framework.Types;
@@ -171,6 +172,8 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
         public bool CanSaveViewDefinition => SelectedViewDefinition != null;
 
         public bool CanDeleteViewDefinition => SelectedViewDefinition != null;
+
+        public FilterMode FilterMode => userConfigDomain.Config?.FilterMode ?? FilterMode.PopUp;
 
         #endregion
 

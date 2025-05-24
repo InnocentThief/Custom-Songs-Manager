@@ -64,12 +64,27 @@ namespace CSM.UiLogic.ViewModels.Controls.Settings
             }
         }
 
+        public ObservableCollection<EnumWrapper<FilterMode>> FilterModes { get; } = [];
+
+        public EnumWrapper<FilterMode>? SelectedFilterMode
+        {
+            get => FilterModes.SingleOrDefault(w => w.Value == userConfig.FilterMode);
+            set
+            {
+                if (value == null || value.Value == userConfig.FilterMode)
+                    return;
+                userConfig.FilterMode = value.Value;
+                OnPropertyChanged();
+            }
+        }
+
         public GeneralSettingsViewModel(IServiceLocator serviceLocator, UserConfig userConfig) : base(serviceLocator)
         {
             this.userConfig = userConfig;
 
             Workspaces.AddRange(EnumWrapper<NavigationType>.GetValues(serviceLocator, n => n.Value));
             VisibleLeaderboardInfos.AddRange(EnumWrapper<LeaderboardType>.GetValues(serviceLocator));
+            FilterModes.AddRange(EnumWrapper<FilterMode>.GetValues(serviceLocator, f => f.Value));
         }
     }
 }

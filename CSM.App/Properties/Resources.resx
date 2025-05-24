@@ -297,4 +297,10 @@
   <data name="enum_PlaylistsSourceAvailability_ScoreSaber" xml:space="preserve">
     <value>ScoreSaber</value>
   </data>
+  <data name="enum_FilterMode_PopUp" xml:space="preserve">
+    <value>PopUp</value>
+  </data>
+  <data name="enum_FilterMode_Row" xml:space="preserve">
+    <value>Row</value>
+  </data>
 </root>

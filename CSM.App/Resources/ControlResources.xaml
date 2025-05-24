@@ -31,6 +31,17 @@
         <Setter Property="SelectionMode" Value="Single" />
     </Style>
 
+    <Style TargetType="telerik:RadGridView" BasedOn="{StaticResource RadGridViewStyle}">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding FilterMode}" Value="PopUp">
+                <Setter Property="FilteringMode" Value="Popup" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding FilterMode}" Value="Row">
+                <Setter Property="FilteringMode" Value="FilterRow" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
     <Style x:Key="WorkspaceGroupBoxStyle" TargetType="{x:Type GroupBox}">
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Template">

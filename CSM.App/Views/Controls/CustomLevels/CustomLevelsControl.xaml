@@ -9,6 +9,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
+
+
     <telerik:RadBusyIndicator IsBusy="{Binding LoadingInProgress}" BusyContent="{Binding LoadingInProgressMessage}">
         <Grid>
             <Grid.RowDefinitions>
@@ -65,16 +67,16 @@
                 </Grid.RowDefinitions>
                 <!-- ListView -->
                 <telerik:RadGridView 
-                        x:Name="mainCustomLevelsGridView"
-                        behaviours:GridViewHeaderContextMenuBehaviour.IsEnabled="True"
-                        Margin="3,3,3,3" 
-                        ItemsSource="{Binding CustomLevels}" 
-                        SelectedItem="{Binding SelectedCustomLevel}" 
-                        SelectionChanged="RadGridView_SelectionChanged" 
-                        FilterOperatorsLoading="RadGridView_FilterOperatorsLoading" 
-                        Style="{StaticResource RadGridViewStyle}">
+                    x:Name="MainCustomLevelsGridView"
+                    behaviours:GridViewHeaderContextMenuBehaviour.IsEnabled="True"
+                    Margin="3,3,3,3" 
+                    ItemsSource="{Binding CustomLevels}" 
+                    SelectedItem="{Binding SelectedCustomLevel}" 
+                    SelectionChanged="MainCustomLevelsGridView_SelectionChanged" 
+                    FilterOperatorsLoading="MainCustomLevelsGridView_FilterOperatorsLoading" 
+                    FieldFilterEditorCreated="MainCustomLevelsGridView_FieldFilterEditorCreated" >
                     <telerik:RadGridView.Columns>
-                        <telerik:GridViewDataColumn UniqueName="BsrKey" Header="BSR" Width="120" DataMemberBinding="{Binding BsrKeyHex}" IsFilterable="true" FilterMemberPath="BsrKey">
+                        <telerik:GridViewDataColumn UniqueName="BsrKey" Header="BSR" Width="80" DataMemberBinding="{Binding BsrKeyHex}" IsFilterable="true" FilterMemberPath="BsrKey">
                             <telerik:GridViewDataColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding BsrKey}" />

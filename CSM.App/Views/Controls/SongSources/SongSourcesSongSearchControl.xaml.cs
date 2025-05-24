@@ -4,6 +4,7 @@ using CSM.UiLogic.ViewModels.Common.Playlists;
 using CSM.UiLogic.ViewModels.Controls.SongSources;
 using System.Windows;
 using System.Windows.Controls;
+using Telerik.Windows.Controls.Filtering.Editors;
 using Telerik.Windows.Persistence;
 
 namespace CSM.App.Views.Controls.SongSources
@@ -20,7 +21,7 @@ namespace CSM.App.Views.Controls.SongSources
             InitializeComponent();
         }
 
-        private async void RadGridView_SelectionChanged(object sender, Telerik.Windows.Controls.SelectionChangeEventArgs e)
+        private async void SongSearchGridView_SelectionChanged(object sender, Telerik.Windows.Controls.SelectionChangeEventArgs e)
         {
             if (e.AddedItems.Count == 0) return;
             if (DataContext is PlaylistViewModel viewModel)
@@ -29,7 +30,7 @@ namespace CSM.App.Views.Controls.SongSources
             }
         }
 
-        private void RadGridView_FilterOperatorsLoading(object sender, Telerik.Windows.Controls.GridView.FilterOperatorsLoadingEventArgs e)
+        private void SongSearchGridView_FilterOperatorsLoading(object sender, Telerik.Windows.Controls.GridView.FilterOperatorsLoadingEventArgs e)
         {
             if (e.Column.UniqueName == "BsrKey")
             {
@@ -65,7 +66,7 @@ namespace CSM.App.Views.Controls.SongSources
         {
             if (DataContext is SongSearchSourceViewModel viewModel)
             {
-                var stream = persistenceManager.Save(songSearchGridView);
+                var stream = persistenceManager.Save(SongSearchGridView);
                 await viewModel.SaveViewDefinitionAsync(stream, SavableUiElement.SongSearch);
             }
         }
@@ -74,7 +75,7 @@ namespace CSM.App.Views.Controls.SongSources
         {
             if (DataContext is SongSearchSourceViewModel viewModel && viewModel.SelectedViewDefinition != null)
             {
-                var stream = persistenceManager.Save(songSearchGridView);
+                var stream = persistenceManager.Save(SongSearchGridView);
                 await viewModel.SaveViewDefinitionAsync(stream, SavableUiElement.SongSearch, viewModel.SelectedViewDefinition.Name);
             }
         }
@@ -93,9 +94,17 @@ namespace CSM.App.Views.Controls.SongSources
             {
                 if (viewModel.SelectedViewDefinition != null && viewModel.SelectedViewDefinition.Stream != null)
                 {
-                    persistenceManager.Load(songSearchGridView, viewModel.SelectedViewDefinition.Stream);
+                    persistenceManager.Load(SongSearchGridView, viewModel.SelectedViewDefinition.Stream);
                     viewModel.SelectedViewDefinition.Stream.Position = 0;
                 }
+            }
+        }
+
+        private void SongSearchGridView_FieldFilterEditorCreated(object sender, Telerik.Windows.Controls.GridView.EditorCreatedEventArgs e)
+        {
+            if (e.Editor is StringFilterEditor stringFilterEditor)
+            {
+                stringFilterEditor.MatchCaseVisibility = Visibility.Collapsed;
             }
         }
     }

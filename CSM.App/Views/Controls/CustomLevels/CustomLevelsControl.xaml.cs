@@ -3,6 +3,7 @@ using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.ViewModels.Controls.CustomLevels;
 using System.Windows;
 using System.Windows.Controls;
+using Telerik.Windows.Controls.Filtering.Editors;
 using Telerik.Windows.Persistence;
 
 namespace CSM.App.Views.Controls.CustomLevels
@@ -19,7 +20,7 @@ namespace CSM.App.Views.Controls.CustomLevels
             InitializeComponent();
         }
 
-        private async void RadGridView_SelectionChanged(object sender, Telerik.Windows.Controls.SelectionChangeEventArgs e)
+        private async void MainCustomLevelsGridView_SelectionChanged(object sender, Telerik.Windows.Controls.SelectionChangeEventArgs e)
         {
             if (e.AddedItems.Count == 0) return;
             if (DataContext is CustomLevelsControlViewModel viewModel)
@@ -28,7 +29,7 @@ namespace CSM.App.Views.Controls.CustomLevels
             }
         }
 
-        private void RadGridView_FilterOperatorsLoading(object sender, Telerik.Windows.Controls.GridView.FilterOperatorsLoadingEventArgs e)
+        private void MainCustomLevelsGridView_FilterOperatorsLoading(object sender, Telerik.Windows.Controls.GridView.FilterOperatorsLoadingEventArgs e)
         {
             if (e.Column.UniqueName == "BsrKey")
             {
@@ -55,7 +56,7 @@ namespace CSM.App.Views.Controls.CustomLevels
         {
             if (DataContext is CustomLevelsControlViewModel viewModel)
             {
-                var stream = persistenceManager.Save(mainCustomLevelsGridView);
+                var stream = persistenceManager.Save(MainCustomLevelsGridView);
                 await viewModel.SaveViewDefinitionAsync(stream, SavableUiElement.CustomLevelsMainView);
             }
         }
@@ -64,7 +65,7 @@ namespace CSM.App.Views.Controls.CustomLevels
         {
             if (DataContext is CustomLevelsControlViewModel viewModel && viewModel.SelectedViewDefinition != null)
             {
-                var stream = persistenceManager.Save(mainCustomLevelsGridView);
+                var stream = persistenceManager.Save(MainCustomLevelsGridView);
                 await viewModel.SaveViewDefinitionAsync(stream, SavableUiElement.CustomLevelsMainView, viewModel.SelectedViewDefinition.Name);
             }
         }
@@ -83,9 +84,17 @@ namespace CSM.App.Views.Controls.CustomLevels
             {
                 if (viewModel.SelectedViewDefinition != null && viewModel.SelectedViewDefinition.Stream != null)
                 {
-                    persistenceManager.Load(mainCustomLevelsGridView, viewModel.SelectedViewDefinition.Stream);
+                    persistenceManager.Load(MainCustomLevelsGridView, viewModel.SelectedViewDefinition.Stream);
                     viewModel.SelectedViewDefinition.Stream.Position = 0;
                 }
+            }
+        }
+
+        private void MainCustomLevelsGridView_FieldFilterEditorCreated(object sender, Telerik.Windows.Controls.GridView.EditorCreatedEventArgs e)
+        {
+            if (e.Editor is StringFilterEditor stringFilterEditor)
+            {
+                stringFilterEditor.MatchCaseVisibility = Visibility.Collapsed;
             }
         }
     }

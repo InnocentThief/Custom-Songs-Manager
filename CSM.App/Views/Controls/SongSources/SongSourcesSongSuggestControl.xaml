@@ -302,14 +302,14 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <telerik:RadGridView 
-                            x:Name="songSuggestPlaylist"
+                            x:Name="SongSuggestPlaylist"
                             behaviours:GridViewHeaderContextMenuBehaviour.IsEnabled="True"
                             Margin="3,3,3,3" 
                             ItemsSource="{Binding Songs}" 
                             SelectedItem="{Binding SelectedSong}" 
-                            FilterOperatorsLoading="RadGridView_FilterOperatorsLoading"
-                            SelectionChanged="RadGridView_SelectionChanged"
-                            Style="{StaticResource RadGridViewStyle}">
+                            FilterOperatorsLoading="SongSuggestPlaylist_FilterOperatorsLoading"
+                            SelectionChanged="SongSuggestPlaylist_SelectionChanged" 
+                            FieldFilterEditorCreated="SongSuggestPlaylist_FieldFilterEditorCreated">
                             <telerik:RadGridView.Columns>
                                 <!-- Add button (will add song to selected playlist) -->
                                 <telerik:GridViewColumn UniqueName="AddButton" Width="Auto" IsResizable="False">

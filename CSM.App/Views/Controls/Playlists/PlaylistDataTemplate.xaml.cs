@@ -1,9 +1,10 @@
-﻿using CSM.App.Views.Helper;
+﻿using System.Windows;
+using System.Windows.Controls;
+using CSM.App.Views.Helper;
 using CSM.Framework.Types;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.ViewModels.Common.Playlists;
-using System.Windows;
-using System.Windows.Controls;
+using Telerik.Windows.Controls.Filtering.Editors;
 using Telerik.Windows.Persistence;
 
 namespace CSM.App.Views.Controls.Playlists
@@ -20,7 +21,7 @@ namespace CSM.App.Views.Controls.Playlists
             InitializeComponent();
         }
 
-        private async void RadGridView_SelectionChanged(object sender, Telerik.Windows.Controls.SelectionChangeEventArgs e)
+        private async void PlaylistLeftGridView_SelectionChanged(object sender, Telerik.Windows.Controls.SelectionChangeEventArgs e)
         {
             if (e.AddedItems.Count == 0) return;
             if (DataContext is PlaylistViewModel viewModel)
@@ -29,7 +30,7 @@ namespace CSM.App.Views.Controls.Playlists
             }
         }
 
-        private void RadGridView_FilterOperatorsLoading(object sender, Telerik.Windows.Controls.GridView.FilterOperatorsLoadingEventArgs e)
+        private void PlaylistLeftGridView_FilterOperatorsLoading(object sender, Telerik.Windows.Controls.GridView.FilterOperatorsLoadingEventArgs e)
         {
             if (e.Column.UniqueName == "BsrKey")
             {
@@ -52,7 +53,7 @@ namespace CSM.App.Views.Controls.Playlists
             }
         }
 
-        private void RadGridView_Sorted(object sender, Telerik.Windows.Controls.GridViewSortedEventArgs e)
+        private void PlaylistLeftGridView_Sorted(object sender, Telerik.Windows.Controls.GridViewSortedEventArgs e)
         {
             if (DataContext is PlaylistViewModel viewModel)
             {
@@ -72,7 +73,7 @@ namespace CSM.App.Views.Controls.Playlists
         {
             if (DataContext is PlaylistViewModel viewModel)
             {
-                var stream = persistenceManager.Save(playlistLeftGridView);
+                var stream = persistenceManager.Save(PlaylistLeftGridView);
                 await viewModel.SaveViewDefinitionAsync(stream, SavableUiElement.PlaylistLeft);
             }
         }
@@ -81,7 +82,7 @@ namespace CSM.App.Views.Controls.Playlists
         {
             if (DataContext is PlaylistViewModel viewModel && viewModel.SelectedViewDefinition != null)
             {
-                var stream = persistenceManager.Save(playlistLeftGridView);
+                var stream = persistenceManager.Save(PlaylistLeftGridView);
                 await viewModel.SaveViewDefinitionAsync(stream, SavableUiElement.PlaylistLeft, viewModel.SelectedViewDefinition.Name);
             }
         }
@@ -100,9 +101,17 @@ namespace CSM.App.Views.Controls.Playlists
             {
                 if (viewModel.SelectedViewDefinition != null && viewModel.SelectedViewDefinition.Stream != null)
                 {
-                    persistenceManager.Load(playlistLeftGridView, viewModel.SelectedViewDefinition.Stream);
+                    persistenceManager.Load(PlaylistLeftGridView, viewModel.SelectedViewDefinition.Stream);
                     viewModel.SelectedViewDefinition.Stream.Position = 0;
                 }
+            }
+        }
+
+        private void PlaylistLeftGridView_FieldFilterEditorCreated(object sender, Telerik.Windows.Controls.GridView.EditorCreatedEventArgs e)
+        {
+            if (e.Editor is StringFilterEditor stringFilterEditor)
+            {
+                stringFilterEditor.MatchCaseVisibility = Visibility.Collapsed;
             }
         }
     }

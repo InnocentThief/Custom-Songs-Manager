@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
+using Telerik.Windows.Controls.Filtering.Editors;
 
 namespace CSM.App.Views.Controls.ScoreSaber
 {
@@ -10,6 +12,14 @@ namespace CSM.App.Views.Controls.ScoreSaber
         public ScoreControl()
         {
             InitializeComponent();
+        }
+
+        private void SsScoresGridView_FieldFilterEditorCreated(object sender, Telerik.Windows.Controls.GridView.EditorCreatedEventArgs e)
+        {
+            if (e.Editor is StringFilterEditor stringFilterEditor)
+            {
+                stringFilterEditor.MatchCaseVisibility = Visibility.Collapsed;
+            }
         }
     }
 }

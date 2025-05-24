@@ -1,9 +1,10 @@
-﻿using CSM.App.Views.Helper;
+﻿using System.Windows;
+using System.Windows.Controls;
+using CSM.App.Views.Helper;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.ViewModels.Common.Playlists;
 using CSM.UiLogic.ViewModels.Controls.SongSources;
-using System.Windows;
-using System.Windows.Controls;
+using Telerik.Windows.Controls.Filtering.Editors;
 using Telerik.Windows.Persistence;
 
 namespace CSM.App.Views.Controls.SongSources
@@ -20,7 +21,7 @@ namespace CSM.App.Views.Controls.SongSources
             InitializeComponent();
         }
 
-        private async void RadGridView_SelectionChanged(object sender, Telerik.Windows.Controls.SelectionChangeEventArgs e)
+        private async void SongSuggestPlaylist_SelectionChanged(object sender, Telerik.Windows.Controls.SelectionChangeEventArgs e)
         {
             if (e.AddedItems.Count == 0) return;
             if (sender is Telerik.Windows.Controls.RadGridView gridView && gridView.DataContext is PlaylistViewModel viewModel)
@@ -29,7 +30,7 @@ namespace CSM.App.Views.Controls.SongSources
             }
         }
 
-        private void RadGridView_FilterOperatorsLoading(object sender, Telerik.Windows.Controls.GridView.FilterOperatorsLoadingEventArgs e)
+        private void SongSuggestPlaylist_FilterOperatorsLoading(object sender, Telerik.Windows.Controls.GridView.FilterOperatorsLoadingEventArgs e)
         {
             e.DefaultOperator1 = Telerik.Windows.Data.FilterOperator.Contains;
         }
@@ -38,7 +39,7 @@ namespace CSM.App.Views.Controls.SongSources
         {
             if (DataContext is SongSuggestSourceViewModel viewModel && viewModel.Playlist != null)
             {
-                var stream = persistenceManager.Save(songSuggestPlaylist);
+                var stream = persistenceManager.Save(SongSuggestPlaylist);
                 await viewModel.Playlist.SaveViewDefinitionAsync(stream, SavableUiElement.SongSuggestPlaylist);
             }
         }
@@ -47,7 +48,7 @@ namespace CSM.App.Views.Controls.SongSources
         {
             if (DataContext is SongSuggestSourceViewModel viewModel && viewModel.Playlist != null && viewModel.Playlist.SelectedViewDefinition != null)
             {
-                var stream = persistenceManager.Save(songSuggestPlaylist);
+                var stream = persistenceManager.Save(SongSuggestPlaylist);
                 await viewModel.SaveViewDefinitionAsync(stream, SavableUiElement.SongSuggestPlaylist, viewModel.Playlist.SelectedViewDefinition.Name);
             }
         }
@@ -66,9 +67,17 @@ namespace CSM.App.Views.Controls.SongSources
             {
                 if (viewModel.Playlist.SelectedViewDefinition != null && viewModel.Playlist.SelectedViewDefinition.Stream != null)
                 {
-                    persistenceManager.Load(songSuggestPlaylist, viewModel.Playlist.SelectedViewDefinition.Stream);
+                    persistenceManager.Load(SongSuggestPlaylist, viewModel.Playlist.SelectedViewDefinition.Stream);
                     viewModel.Playlist.SelectedViewDefinition.Stream.Position = 0;
                 }
+            }
+        }
+
+        private void SongSuggestPlaylist_FieldFilterEditorCreated(object sender, Telerik.Windows.Controls.GridView.EditorCreatedEventArgs e)
+        {
+            if (e.Editor is StringFilterEditor stringFilterEditor)
+            {
+                stringFilterEditor.MatchCaseVisibility = Visibility.Collapsed;
             }
         }
     }

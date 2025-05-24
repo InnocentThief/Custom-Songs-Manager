@@ -38,7 +38,14 @@
                 </telerik:RadToolBar>
             </Grid>
 
-            <telerik:RadGridView Grid.Row="1" ItemsSource="{Binding Channels}" Style="{StaticResource RadGridViewStyle}" Margin="3" ShowGroupPanel="False" ShowColumnHeaders="False" GridLinesVisibility="None">
+            <telerik:RadGridView 
+                Grid.Row="1" 
+                ItemsSource="{Binding Channels}" 
+                Style="{StaticResource RadGridViewStyle}" 
+                Margin="3" 
+                ShowGroupPanel="False" 
+                ShowColumnHeaders="False" 
+                GridLinesVisibility="None">
                 <telerik:RadGridView.Columns>
                     <telerik:GridViewDataColumn Width="*" IsReadOnly="True">
                         <telerik:GridViewColumn.CellTemplate>
@@ -109,12 +116,13 @@
             </Grid>
 
             <telerik:RadGridView 
+                x:Name="TwitchSongHistoryGridView"
                 behaviours:GridViewHeaderContextMenuBehaviour.IsEnabled="True"
                 Grid.Row="1" 
                 Margin="3"
                 ItemsSource="{Binding Maps}" 
                 SelectedItem="{Binding SelectedMap}" 
-                Style="{StaticResource RadGridViewStyle}">
+                FieldFilterEditorCreated="TwitchSongHistoryGridView_FieldFilterEditorCreated">
                 <telerik:RadGridView.Columns>
                     <!-- Add button (will add song to selected playlist) -->
                     <telerik:GridViewColumn UniqueName="AddButton" Width="SizeToCells">

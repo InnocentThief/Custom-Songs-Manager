@@ -1,5 +1,7 @@
-﻿using CSM.UiLogic.ViewModels.Controls.CustomLevels;
+﻿using System.Windows;
 using System.Windows.Controls;
+using CSM.UiLogic.ViewModels.Controls.CustomLevels;
+using Telerik.Windows.Controls.Filtering.Editors;
 
 namespace CSM.App.Views.Controls.SongSources
 {
@@ -13,7 +15,7 @@ namespace CSM.App.Views.Controls.SongSources
             InitializeComponent();
         }
 
-        private async void RadGridView_SelectionChanged(object sender, Telerik.Windows.Controls.SelectionChangeEventArgs e)
+        private async void SongSourcesCustomLevelsGridView_SelectionChanged(object sender, Telerik.Windows.Controls.SelectionChangeEventArgs e)
         {
             if (e.AddedItems.Count == 0) return;
             if (DataContext is CustomLevelsControlViewModel viewModel)
@@ -22,7 +24,7 @@ namespace CSM.App.Views.Controls.SongSources
             }
         }
 
-        private void RadGridView_FilterOperatorsLoading(object sender, Telerik.Windows.Controls.GridView.FilterOperatorsLoadingEventArgs e)
+        private void SongSourcesCustomLevelsGridView_FilterOperatorsLoading(object sender, Telerik.Windows.Controls.GridView.FilterOperatorsLoadingEventArgs e)
         {
             if (e.Column.UniqueName == "BsrKey")
             {
@@ -42,6 +44,14 @@ namespace CSM.App.Views.Controls.SongSources
             else
             {
                 e.DefaultOperator1 = Telerik.Windows.Data.FilterOperator.Contains;
+            }
+        }
+
+        private void SongSourcesCustomLevelsGridView_FieldFilterEditorCreated(object sender, Telerik.Windows.Controls.GridView.EditorCreatedEventArgs e)
+        {
+            if (e.Editor is StringFilterEditor stringFilterEditor)
+            {
+                stringFilterEditor.MatchCaseVisibility = Visibility.Collapsed;
             }
         }
     }

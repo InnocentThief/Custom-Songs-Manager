@@ -1,6 +1,7 @@
 ﻿using CSM.Business.Core.Twitch;
 using CSM.Business.Interfaces;
 using CSM.DataAccess.BeatSaver;
+using CSM.DataAccess.UserConfiguration;
 using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
@@ -125,6 +126,8 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
                 return $"{Maps.Count} songs";
             }
         }
+
+        public FilterMode FilterMode => userConfigDomain.Config?.FilterMode ?? FilterMode.PopUp;
 
         #endregion
 

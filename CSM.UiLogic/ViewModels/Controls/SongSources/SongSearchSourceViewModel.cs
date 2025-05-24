@@ -3,6 +3,7 @@ using CSM.Business.Core.SongSelection;
 using CSM.Business.Interfaces;
 using CSM.DataAccess.BeatSaver;
 using CSM.DataAccess.Playlists;
+using CSM.DataAccess.UserConfiguration;
 using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
@@ -572,6 +573,8 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         public bool CanDeleteViewDefinition => SelectedViewDefinition != null;
 
+        public FilterMode FilterMode => userConfigDomain.Config?.FilterMode ?? FilterMode.PopUp;
+
         #endregion
 
         public SongSearchSourceViewModel(IServiceLocator serviceLocator) : base(serviceLocator)
@@ -595,6 +598,9 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         public async Task SearchAsync()
         {
+            Results.ForEach(result => result.CleanUpReferences());
+            Results.Clear();
+
             currentPageIndex = 0;
 
             SetSearchQueryBuilderData();
@@ -653,9 +659,6 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         private void UpdateSearchData(MapDetails? searchResult)
         {
-            Results.ForEach(result => result.CleanUpReferences());
-            Results.Clear();
-
             if (searchResult == null || searchResult.Docs.Count == 0)
             {
                 OnPropertyChanged(nameof(ShowResults));
@@ -663,7 +666,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
                 return;
             }
             Results.AddRange(searchResult.Docs.Select(mapDetail => new SearchResultMapDetailViewModel(ServiceLocator, mapDetail)));
-            SongCount = $"Showing {searchResult.Docs.Count} from {Math.Max(searchResult.Info.Total, searchResult.Docs.Count)} results";
+            SongCount = $"Showing {Results.Count} from {Math.Max(searchResult.Info.Total, searchResult.Docs.Count)} results";
             FilterVisible = false;
             ShowMoreCommand?.RaiseCanExecuteChanged();
         }

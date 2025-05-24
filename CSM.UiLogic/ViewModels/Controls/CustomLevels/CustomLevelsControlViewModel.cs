@@ -105,6 +105,8 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
 
         public bool CanDeleteViewDefinition => SelectedViewDefinition != null;
 
+        public FilterMode FilterMode => userConfigDomain.Config?.FilterMode ?? FilterMode.PopUp;
+
         #endregion
 
         public async Task LoadAsync(bool refresh)

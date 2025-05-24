@@ -39,7 +39,7 @@
                 </Style>
             </Grid.Resources>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="80" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -50,196 +50,198 @@
             <!-- Cover image -->
             <Image Source="{Binding CoverUrl}" HorizontalAlignment="Left" ToolTip="{Binding Description}" />
 
-            <WrapPanel Grid.Column="1" Orientation="Vertical" Margin="6,0,0,0" >
-                <WrapPanel.Resources>
-                    <Style TargetType="{x:Type Grid}">
-                        <Setter Property="Width" Value="250" />
-                        <Setter Property="Margin" Value="0,2,10,0" />
-                    </Style>
-                </WrapPanel.Resources>
-                <!-- BSR (Id) -->
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="BSR" FontWeight="DemiBold" />
-                    <TextBlock Grid.Column="1" Text="{Binding Id}" />
-                </Grid>
-                <!-- SongName -->
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="Title" FontWeight="DemiBold" />
-                    <TextBlock Grid.Column="1" Text="{Binding SongName}" TextWrapping="Wrap" />
-                </Grid>
-                <!-- SongSubName -->
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="Subtitle" FontWeight="DemiBold" />
-                    <TextBlock Grid.Column="1" Text="{Binding SongSubName}" TextWrapping="Wrap" />
-                </Grid>
-                <!-- SongAuthorName -->
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="Artist" FontWeight="DemiBold" />
-                    <TextBlock Grid.Column="1" Text="{Binding SongAuthorName}" TextWrapping="Wrap" />
-                </Grid>
-                <!-- LevelAuthorName -->
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="Mapper" FontWeight="DemiBold" />
-                    <TextBlock Grid.Column="1" Text="{Binding LevelAuthorName}" TextWrapping="Wrap" />
-                </Grid>
-                <!-- Uploaded -->
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="Uploaded" FontWeight="DemiBold" />
-                    <TextBlock Grid.Column="1" Text="{Binding Uploaded, StringFormat='g', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
-                </Grid>
-                <!-- Beats per minute -->
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="Bpm" FontWeight="DemiBold"  />
-                    <TextBlock Grid.Column="1" Text="{Binding Bpm}" />
-                </Grid>
-                <!-- Duration -->
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="Duration" FontWeight="DemiBold" />
-                    <StackPanel Grid.Column="1" Orientation="Horizontal">
-                        <TextBlock Text="{Binding Duration}" />
-                        <TextBlock Text="seconds" Margin="3,0" />
-                    </StackPanel>
-                </Grid>
-                <!-- Upvotes -->
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="Upvotes" FontWeight="DemiBold" />
-                    <TextBlock Grid.Column="1" Text="{Binding Upvotes}" />
-                </Grid>
-                <!-- Downvotes -->
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="Downvotes" FontWeight="DemiBold" />
-                    <TextBlock Grid.Column="1" Text="{Binding Downvotes}" />
-                </Grid>
-                <!-- Score -->
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="Score" FontWeight="DemiBold" />
-                    <TextBlock Grid.Column="1" Text="{Binding Score}" />
-                </Grid>
-                <!-- Ranked -->
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="Ranked" FontWeight="DemiBold" />
-                    <TextBlock Grid.Column="1" Text="{Binding Ranked}" />
-                </Grid>
-                <!-- Qualified -->
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="Qualified" FontWeight="DemiBold" />
-                    <TextBlock Grid.Column="1" Text="{Binding Qualified}" />
-                </Grid>
-                <!-- Tags -->
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="Tags" FontWeight="DemiBold" />
-                    <TextBlock Grid.Column="1" Text="{Binding Tags}" TextWrapping="Wrap" />
-                </Grid>
-            </WrapPanel>
+            <ScrollViewer Grid.Column="1" Margin="6,0,0,0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" telerik:StyleManager.Theme="Windows11">
+                <WrapPanel Orientation="Vertical" >
+                    <WrapPanel.Resources>
+                        <Style TargetType="{x:Type Grid}">
+                            <Setter Property="Width" Value="250" />
+                            <Setter Property="Margin" Value="0,2,10,0" />
+                        </Style>
+                    </WrapPanel.Resources>
+                    <!-- BSR (Id) -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="BSR" FontWeight="DemiBold" />
+                        <TextBlock Grid.Column="1" Text="{Binding Id}" />
+                    </Grid>
+                    <!-- SongName -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Title" FontWeight="DemiBold" />
+                        <TextBlock Grid.Column="1" Text="{Binding SongName}" TextWrapping="Wrap" />
+                    </Grid>
+                    <!-- SongSubName -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Subtitle" FontWeight="DemiBold" />
+                        <TextBlock Grid.Column="1" Text="{Binding SongSubName}" TextWrapping="Wrap" />
+                    </Grid>
+                    <!-- SongAuthorName -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Artist" FontWeight="DemiBold" />
+                        <TextBlock Grid.Column="1" Text="{Binding SongAuthorName}" TextWrapping="Wrap" />
+                    </Grid>
+                    <!-- LevelAuthorName -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Mapper" FontWeight="DemiBold" />
+                        <TextBlock Grid.Column="1" Text="{Binding LevelAuthorName}" TextWrapping="Wrap" />
+                    </Grid>
+                    <!-- Uploaded -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Uploaded" FontWeight="DemiBold" />
+                        <TextBlock Grid.Column="1" Text="{Binding Uploaded, StringFormat='g', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
+                    </Grid>
+                    <!-- Beats per minute -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Bpm" FontWeight="DemiBold"  />
+                        <TextBlock Grid.Column="1" Text="{Binding Bpm}" />
+                    </Grid>
+                    <!-- Duration -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Duration" FontWeight="DemiBold" />
+                        <StackPanel Grid.Column="1" Orientation="Horizontal">
+                            <TextBlock Text="{Binding Duration}" />
+                            <TextBlock Text="seconds" Margin="3,0" />
+                        </StackPanel>
+                    </Grid>
+                    <!-- Upvotes -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Upvotes" FontWeight="DemiBold" />
+                        <TextBlock Grid.Column="1" Text="{Binding Upvotes}" />
+                    </Grid>
+                    <!-- Downvotes -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Downvotes" FontWeight="DemiBold" />
+                        <TextBlock Grid.Column="1" Text="{Binding Downvotes}" />
+                    </Grid>
+                    <!-- Score -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Score" FontWeight="DemiBold" />
+                        <TextBlock Grid.Column="1" Text="{Binding Score}" />
+                    </Grid>
+                    <!-- Ranked -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Ranked" FontWeight="DemiBold" />
+                        <TextBlock Grid.Column="1" Text="{Binding Ranked}" />
+                    </Grid>
+                    <!-- Qualified -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Qualified" FontWeight="DemiBold" />
+                        <TextBlock Grid.Column="1" Text="{Binding Qualified}" />
+                    </Grid>
+                    <!-- Tags -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Tags" FontWeight="DemiBold" />
+                        <TextBlock Grid.Column="1" Text="{Binding Tags}" TextWrapping="Wrap" />
+                    </Grid>
+                </WrapPanel>
+            </ScrollViewer>
 
             <ScrollViewer Grid.ColumnSpan="2" Grid.Row="1" Margin="0,6,0,0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" telerik:StyleManager.Theme="Windows11">
                 <ItemsControl ItemsSource="{Binding Difficulties}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel  Orientation="Horizontal" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Margin="0,0,6,6">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="200" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <ContentControl Content="{Binding}" ContentTemplateSelector="{StaticResource CharacteristicDataTemplateSelector}" />
-                            <Border Grid.Column="1" BorderThickness="0" BorderBrush="{Binding Difficulty, Converter={StaticResource DiffToColorConverter}}">
-                                <Border.Background>
-                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                        <LinearGradientBrush.RelativeTransform>
-                                            <TransformGroup>
-                                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                                                <SkewTransform CenterX="0.5" CenterY="0.5"/>
-                                                <RotateTransform Angle="90" CenterX="0.5" CenterY="0.5"/>
-                                                <TranslateTransform/>
-                                            </TransformGroup>
-                                        </LinearGradientBrush.RelativeTransform>
-                                        <GradientStop Color="{Binding Difficulty, Converter={StaticResource DiffToGradientStopColorConverter}}"/>
-                                        <GradientStop Color="{Binding Difficulty, Converter={StaticResource DiffToGradientStartColorConverter}}" Offset="1"/>
-                                    </LinearGradientBrush>
-                                </Border.Background>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Text="{Binding Label}" HorizontalAlignment="left" FontWeight="Bold" VerticalAlignment="Center" Foreground="{Binding Difficulty, Converter={StaticResource DiffToColorConverter}}" Margin="6,0,0,0" />
-                                    <TextBlock Grid.Column="1" Text="{Binding Stars}" FontWeight="DemiBold" VerticalAlignment="Center" Foreground="White" Margin="0,0,6,0" />
-                                </Grid>
-                            </Border>
-                            <Border Grid.ColumnSpan="2" Grid.Row="1" BorderThickness="1,0,1,1" BorderBrush="{Binding Difficulty, Converter={StaticResource DiffToColorConverter}}" Padding="3">
-                                <TextBlock Text="{Binding Infos}" Foreground="White" />
-                            </Border>
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel  Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,0,6,6">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="200" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <ContentControl Content="{Binding}" ContentTemplateSelector="{StaticResource CharacteristicDataTemplateSelector}" />
+                                <Border Grid.Column="1" BorderThickness="0" BorderBrush="{Binding Difficulty, Converter={StaticResource DiffToColorConverter}}">
+                                    <Border.Background>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <LinearGradientBrush.RelativeTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                                    <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                                                    <RotateTransform Angle="90" CenterX="0.5" CenterY="0.5"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </LinearGradientBrush.RelativeTransform>
+                                            <GradientStop Color="{Binding Difficulty, Converter={StaticResource DiffToGradientStopColorConverter}}"/>
+                                            <GradientStop Color="{Binding Difficulty, Converter={StaticResource DiffToGradientStartColorConverter}}" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding Label}" HorizontalAlignment="left" FontWeight="Bold" VerticalAlignment="Center" Foreground="{Binding Difficulty, Converter={StaticResource DiffToColorConverter}}" Margin="6,0,0,0" />
+                                        <TextBlock Grid.Column="1" Text="{Binding Stars}" FontWeight="DemiBold" VerticalAlignment="Center" Foreground="White" Margin="0,0,6,0" />
+                                    </Grid>
+                                </Border>
+                                <Border Grid.ColumnSpan="2" Grid.Row="1" BorderThickness="1,0,1,1" BorderBrush="{Binding Difficulty, Converter={StaticResource DiffToColorConverter}}" Padding="3">
+                                    <TextBlock Text="{Binding Infos}" Foreground="White" />
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </ScrollViewer>
-            
+
 
 
             <Grid Grid.Column="1" Margin="6,0,0,0">
@@ -248,10 +250,10 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                
+
             </Grid>
-            
-            
+
+
 
         </Grid>
 

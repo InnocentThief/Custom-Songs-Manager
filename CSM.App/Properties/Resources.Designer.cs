@@ -106,6 +106,24 @@ namespace CSM.App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PopUp.
+        /// </summary>
+        public static string enum_FilterMode_PopUp {
+            get {
+                return ResourceManager.GetString("enum_FilterMode_PopUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Row.
+        /// </summary>
+        public static string enum_FilterMode_Row {
+            get {
+                return ResourceManager.GetString("enum_FilterMode_Row", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to BeatLeader.
         /// </summary>
         public static string enum_LeaderboardType_BeatLeader {

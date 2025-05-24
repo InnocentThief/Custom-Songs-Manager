@@ -32,9 +32,9 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" MinWidth="50" />
             <ColumnDefinition Width="3" />
-            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" MinWidth="50" />
         </Grid.ColumnDefinitions>
         <!-- Content -->
         <ContentControl DataContext="{Binding PlaylistsTree.SelectedPlaylist}" Content="{Binding}" ContentTemplateSelector="{StaticResource PlaylistDataTemplateSelector}" />

@@ -55,7 +55,6 @@
 
     <telerik:RadBusyIndicator IsBusy="{Binding LoadingInProgress}">
         <Grid>
-
             <Grid Visibility="{Binding AnySourcesAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -85,16 +84,15 @@
                         <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsTwitchSelected}" Padding="8" ToolTip="Twitch" Visibility="{Binding TwitchAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" Click="Twitch_Click">
                             <telerik:RadGlyph Glyph="&#xe800;" />
                         </telerik:RadRadioButton>
-                        <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsScoreSaberSelected}" Padding="8" ToolTip="Twitch" Visibility="{Binding ScoreSaberAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" Click="BeatLeader_Click">
+                        <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsScoreSaberSelected}" Padding="8" ToolTip="ScoreSaber" Visibility="{Binding ScoreSaberAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" Click="BeatLeader_Click">
                             <telerik:RadGlyph Glyph="&#xea0b;" />
                         </telerik:RadRadioButton>
-                        <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsBeatLeaderSelected}" Padding="8" ToolTip="Twitch" Visibility="{Binding BeatLeaderAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" Click="BeatLeader_Click">
+                        <telerik:RadRadioButton GroupName="SongSourceGroup" Focusable="False" IsChecked="{Binding IsBeatLeaderSelected}" Padding="8" ToolTip="BeatLeader" Visibility="{Binding BeatLeaderAvailable, Converter={StaticResource BooleanToVisibilityConverter}}" Click="BeatLeader_Click">
                             <telerik:RadGlyph Glyph="&#xea00;" />
                         </telerik:RadRadioButton>
                     </StackPanel>
                 </Grid>
             </Grid>
-
 
             <Grid Visibility="{Binding AnySourcesAvailable, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
                 <Grid.RowDefinitions>

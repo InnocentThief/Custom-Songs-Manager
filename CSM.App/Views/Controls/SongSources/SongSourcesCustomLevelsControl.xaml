@@ -46,13 +46,14 @@
                 </Grid.RowDefinitions>
                 <!-- ListView -->
                 <telerik:RadGridView 
+                    x:Name="SongSourcesCustomLevelsGridView"
                     behaviours:GridViewHeaderContextMenuBehaviour.IsEnabled="True"
                     Margin="3,3,3,3" 
                     ItemsSource="{Binding CustomLevels}" 
                     SelectedItem="{Binding SelectedCustomLevel}" 
-                    SelectionChanged="RadGridView_SelectionChanged"
-                    FilterOperatorsLoading="RadGridView_FilterOperatorsLoading" 
-                    Style="{StaticResource RadGridViewStyle}">
+                    SelectionChanged="SongSourcesCustomLevelsGridView_SelectionChanged"
+                    FilterOperatorsLoading="SongSourcesCustomLevelsGridView_FilterOperatorsLoading" 
+                    FieldFilterEditorCreated="SongSourcesCustomLevelsGridView_FieldFilterEditorCreated">
                     <telerik:RadGridView.Columns>
                         <!-- Add button (will add song to selected playlist) -->
                         <telerik:GridViewColumn Width="Auto" IsResizable="False">

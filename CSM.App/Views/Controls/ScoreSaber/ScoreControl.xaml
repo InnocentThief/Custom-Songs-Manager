@@ -32,12 +32,12 @@ xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
         </Grid>
 
         <telerik:RadGridView 
-    x:Name="blScoresGridView"
-    behaviours:GridViewHeaderContextMenuBehaviour.IsEnabled="True"
-    Grid.Row="1" 
-    ItemsSource="{Binding Scores}" 
-    Style="{StaticResource RadGridViewStyle}" 
-    Margin="3">
+            x:Name="SsScoresGridView"
+            behaviours:GridViewHeaderContextMenuBehaviour.IsEnabled="True"
+            Grid.Row="1" 
+            FieldFilterEditorCreated="SsScoresGridView_FieldFilterEditorCreated"
+            ItemsSource="{Binding Scores}" 
+            Margin="3">
             <telerik:RadGridView.Columns>
                 <telerik:GridViewDataColumn Header="Rank" DataMemberBinding="{Binding Rank}" IsReadOnly="True">
                     <telerik:GridViewColumn.CellTemplate>

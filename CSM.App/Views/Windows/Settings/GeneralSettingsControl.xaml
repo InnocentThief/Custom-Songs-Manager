@@ -17,6 +17,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <!-- Default Workspace -->
         <telerik:Label Content="Default workspace" />
@@ -30,5 +31,8 @@
         <!-- Visible leaderboard infos -->
         <telerik:Label Content="Visible leaderboard info" Grid.Row="3" />
         <telerik:RadComboBox Grid.Column="1" Grid.Row="3" Focusable="False" ItemsSource="{Binding VisibleLeaderboardInfos}" SelectedItem="{Binding SelectedVisibleLeaderboardInfos}" DisplayMemberPath="DisplayText" />
+        <!-- Filter mode for grids -->
+        <telerik:Label Content="Filter mode for data grids" Grid.Row="4" />
+        <telerik:RadComboBox Grid.Column="1" Grid.Row="4" Focusable="False" ItemsSource="{Binding FilterModes}" SelectedItem="{Binding SelectedFilterMode}" DisplayMemberPath="DisplayText" />
     </Grid>
 </UserControl>

@@ -132,14 +132,14 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <telerik:RadGridView 
-                    x:Name="songSearchGridView"
+                    x:Name="SongSearchGridView"
                     behaviours:GridViewHeaderContextMenuBehaviour.IsEnabled="True"
-                     ItemsSource="{Binding Results}"
-                     Margin="3" 
-                     SelectedItem="{Binding SelectedResult}"
-                     FilterOperatorsLoading="RadGridView_FilterOperatorsLoading"
-                     SelectionChanged="RadGridView_SelectionChanged"
-                     Style="{StaticResource RadGridViewStyle}" >
+                    ItemsSource="{Binding Results}"
+                    Margin="3" 
+                    SelectedItem="{Binding SelectedResult}"
+                    FilterOperatorsLoading="SongSearchGridView_FilterOperatorsLoading"
+                    SelectionChanged="SongSearchGridView_SelectionChanged" 
+                    FieldFilterEditorCreated="SongSearchGridView_FieldFilterEditorCreated" >
                     <telerik:RadGridView.Columns>
                         <!-- Add button (will add song to selected playlist) -->
                         <telerik:GridViewColumn UniqueName="AddButton" Width="Auto" IsResizable="False">
@@ -152,7 +152,7 @@
                             </telerik:GridViewColumn.CellTemplate>
                         </telerik:GridViewColumn>
                         <!-- Key -->
-                        <telerik:GridViewDataColumn UniqueName="BsrKey" Header="BSR" Width="Auto" DataMemberBinding="{Binding BsrKeyHex}" IsFilterable="true" FilterMemberPath="BsrKey">
+                        <telerik:GridViewDataColumn UniqueName="BsrKey" Header="BSR" Width="70" DataMemberBinding="{Binding BsrKeyHex}" IsFilterable="true" FilterMemberPath="BsrKey">
                             <telerik:GridViewDataColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding BsrKey}" />
@@ -168,9 +168,9 @@
                         <!-- Artist -->
                         <telerik:GridViewDataColumn UniqueName="Artist" Header="Artist" DataMemberBinding="{Binding SongAuthorName}" Width="*" TextTrimming="CharacterEllipsis" IsVisible="False" />
                         <!-- BPM -->
-                        <telerik:GridViewDataColumn UniqueName="BPM" Header="BPM" DataMemberBinding="{Binding BPM}" Width="Auto" TextTrimming="CharacterEllipsis" IsVisible="False" />
+                        <telerik:GridViewDataColumn UniqueName="BPM" Header="BPM" DataMemberBinding="{Binding BPM}" Width="70" TextTrimming="CharacterEllipsis" IsVisible="False" />
                         <!-- Duration -->
-                        <telerik:GridViewDataColumn UniqueName="Duration" Header="Duration" DataMemberBinding="{Binding Duration}" Width="Auto" TextTrimming="CharacterEllipsis" IsVisible="False" />
+                        <telerik:GridViewDataColumn UniqueName="Duration" Header="Duration" DataMemberBinding="{Binding Duration}" Width="80" TextTrimming="CharacterEllipsis" IsVisible="False" />
                         <!-- Uploaded -->
                         <telerik:GridViewDataColumn UniqueName="Uploaded" Header="Uploaded" Width="Auto" DataMemberBinding="{Binding Uploaded, StringFormat='d', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
                         <!-- Ranked -->

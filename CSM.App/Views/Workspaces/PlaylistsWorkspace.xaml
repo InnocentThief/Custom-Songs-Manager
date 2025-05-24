@@ -22,7 +22,7 @@
                     <ColumnDefinition Width="3" />
                     <ColumnDefinition Width="2*" MinWidth="50" />
                     <ColumnDefinition Width="3" />
-                    <ColumnDefinition Width="3*" MinWidth="50" />
+                    <ColumnDefinition Width="3*" MinWidth="90" />
                 </Grid.ColumnDefinitions>
                 <playlists:PlaylistsTreeControl DataContext="{Binding PlaylistsTree}" />
                 <GridSplitter Grid.Column="1" Style="{StaticResource WorkspaceVerticalGridSplitterStyle}" HorizontalAlignment="Center" />

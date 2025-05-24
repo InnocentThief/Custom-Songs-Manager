@@ -31,12 +31,12 @@
         </Grid>
 
         <telerik:RadGridView 
-            x:Name="blScoresGridView"
+            x:Name="BlScoresGridView"
             behaviours:GridViewHeaderContextMenuBehaviour.IsEnabled="True"
             Grid.Row="1" 
             ItemsSource="{Binding Scores}" 
-            Style="{StaticResource RadGridViewStyle}" 
-            Margin="3">
+            Margin="3"
+            FieldFilterEditorCreated="BlScoresGridView_FieldFilterEditorCreated">
             <telerik:RadGridView.Columns>
                 <telerik:GridViewDataColumn Header="Rank" DataMemberBinding="{Binding Rank}" IsReadOnly="True">
                     <telerik:GridViewColumn.CellTemplate>

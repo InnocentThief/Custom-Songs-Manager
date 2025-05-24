@@ -1,4 +1,5 @@
 ﻿using CSM.Business.Interfaces;
+using CSM.DataAccess.UserConfiguration;
 using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
@@ -90,6 +91,8 @@ namespace CSM.UiLogic.ViewModels.Controls.ScoreSaber
         public bool CanSaveViewDefinition => SelectedViewDefinition != null;
 
         public bool CanDeleteViewDefinition => SelectedViewDefinition != null;
+
+        public FilterMode FilterMode => userConfigDomain.Config?.FilterMode ?? FilterMode.PopUp;
 
         #endregion
 

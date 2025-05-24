@@ -3,6 +3,7 @@ using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.ViewModels.Controls.CustomLevels;
 using System.Windows;
 using System.Windows.Controls;
+using Telerik.Windows.Controls.Filtering.Editors;
 using Telerik.Windows.Persistence;
 
 namespace CSM.App.Views.Controls.BeatLeader
@@ -23,7 +24,7 @@ namespace CSM.App.Views.Controls.BeatLeader
         {
             if (DataContext is CustomLevelsControlViewModel viewModel)
             {
-                var stream = persistenceManager.Save(blScoresGridView);
+                var stream = persistenceManager.Save(BlScoresGridView);
                 await viewModel.SaveViewDefinitionAsync(stream, SavableUiElement.BlMainControl);
             }
         }
@@ -32,7 +33,7 @@ namespace CSM.App.Views.Controls.BeatLeader
         {
             if (DataContext is CustomLevelsControlViewModel viewModel && viewModel.SelectedViewDefinition != null)
             {
-                var stream = persistenceManager.Save(blScoresGridView);
+                var stream = persistenceManager.Save(BlScoresGridView);
                 await viewModel.SaveViewDefinitionAsync(stream, SavableUiElement.BlMainControl, viewModel.SelectedViewDefinition.Name);
             }
         }
@@ -51,9 +52,17 @@ namespace CSM.App.Views.Controls.BeatLeader
             {
                 if (viewModel.SelectedViewDefinition != null && viewModel.SelectedViewDefinition.Stream != null)
                 {
-                    persistenceManager.Load(blScoresGridView, viewModel.SelectedViewDefinition.Stream);
+                    persistenceManager.Load(BlScoresGridView, viewModel.SelectedViewDefinition.Stream);
                     viewModel.SelectedViewDefinition.Stream.Position = 0;
                 }
+            }
+        }
+
+        private void BlScoresGridView_FieldFilterEditorCreated(object sender, Telerik.Windows.Controls.GridView.EditorCreatedEventArgs e)
+        {
+            if (e.Editor is StringFilterEditor stringFilterEditor)
+            {
+                stringFilterEditor.MatchCaseVisibility = Visibility.Collapsed;
             }
         }
     }
