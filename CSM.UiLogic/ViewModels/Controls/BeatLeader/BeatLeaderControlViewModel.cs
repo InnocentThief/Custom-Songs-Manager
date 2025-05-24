@@ -1,13 +1,20 @@
-﻿using CSM.Business.Interfaces;
+﻿using CSM.Business.Core.SongCopy;
+using CSM.Business.Core;
+using CSM.Business.Interfaces;
 using CSM.DataAccess.UserConfiguration;
 using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.Commands;
 using CSM.UiLogic.ViewModels.Common.Leaderboard;
+using CSM.UiLogic.ViewModels.Common.Playlists;
 using CSM.UiLogic.ViewModels.Controls.SongSources;
 using System.Collections.ObjectModel;
 using System.IO;
+using CSM.DataAccess.Playlists;
+using CSM.Business.Core.SongSelection;
+using CSM.UiLogic.ViewModels.Controls.PlaylistsTree;
+using System.Reflection;
 
 namespace CSM.UiLogic.ViewModels.Controls.BeatLeader
 {
@@ -15,12 +22,16 @@ namespace CSM.UiLogic.ViewModels.Controls.BeatLeader
     {
         #region Private fields
 
-        private IRelayCommand? switchPlayerCommand;
+        private IRelayCommand? switchPlayerCommand, createPlaylistCommand, overwritePlaylistCommand, mergePlaylistCommand;
         private bool playerSearchVisible;
         private ViewDefinition? selectedViewDefinition;
-        private bool isSourceControl;
+        private string? createPlaylistCommandText, overwritePlaylistCommandText, mergePlaylistCommandText;
+        private BeatLeaderScoreViewModel? selectedScore;
 
+        private readonly bool isSourceControl;
         private readonly IBeatLeaderService beatLeaderService;
+        private readonly ISongCopyDomain songCopyDomain;
+        private readonly ISongSelectionDomain songSelectionDomain;
         private readonly IUserConfigDomain userConfigDomain;
 
         #endregion
@@ -28,10 +39,27 @@ namespace CSM.UiLogic.ViewModels.Controls.BeatLeader
         #region Properties
 
         public IRelayCommand? SwichPlayerCommand => switchPlayerCommand ??= CommandFactory.Create(SwitchPlayer, CanSwitchPlayer);
+        public IRelayCommand? CreatePlaylistCommand => createPlaylistCommand ??= CommandFactory.Create(CreatePlaylist, CanCreatePlaylist);
+        public IRelayCommand? OverwritePlaylistCommand => overwritePlaylistCommand ??= CommandFactory.Create(OverwritePlaylist, CanOverwritePlaylist);
+        public IRelayCommand? MergePlaylistCommand => mergePlaylistCommand ??= CommandFactory.Create(MergePlaylist, CanMergePlaylist);
 
         public BeatLeaderPlayerViewModel? Player { get; private set; }
 
         public ObservableCollection<BeatLeaderScoreViewModel> Scores { get; } = [];
+
+        public BeatLeaderScoreViewModel? SelectedScore
+        {
+            get => selectedScore;
+            set
+            {
+                if (value == selectedScore)
+                    return;
+                selectedScore = value;
+                OnPropertyChanged();
+                if (selectedScore != null)
+                    songSelectionDomain.SetSongHash(selectedScore.Model.Leaderboard.Song.Hash, SongSelectionType.Right);
+            }
+        }
 
         public string ScoreCount
         {
@@ -94,12 +122,51 @@ namespace CSM.UiLogic.ViewModels.Controls.BeatLeader
 
         public FilterMode FilterMode => userConfigDomain.Config?.FilterMode ?? FilterMode.PopUp;
 
+        public string? CreatePlaylistCommandText
+        {
+            get => createPlaylistCommandText;
+            set
+            {
+                if (createPlaylistCommandText == value)
+                    return;
+                createPlaylistCommandText = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string? OverwritePlaylistCommandText
+        {
+            get => overwritePlaylistCommandText;
+            set
+            {
+                if (overwritePlaylistCommandText == value)
+                    return;
+                overwritePlaylistCommandText = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string? MergePlaylistCommandText
+        {
+            get => mergePlaylistCommandText;
+            set
+            {
+                if (mergePlaylistCommandText == value)
+                    return;
+                mergePlaylistCommandText = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         public BeatLeaderControlViewModel(IServiceLocator serviceLocator, bool isSourceControl = false) : base(serviceLocator)
         {
             this.isSourceControl = isSourceControl;
             beatLeaderService = serviceLocator.GetService<IBeatLeaderService>();
+            songCopyDomain = serviceLocator.GetService<ISongCopyDomain>();
+            songCopyDomain.OnPlaylistSelectionChanged += SongCopyDomain_OnPlaylistSelectionChanged;
+            songSelectionDomain = serviceLocator.GetService<ISongSelectionDomain>();
             userConfigDomain = serviceLocator.GetService<IUserConfigDomain>();
 
             PlayerSearch = new PlayerSearchViewModel(serviceLocator, LeaderboardSearchType.BeatLeader);
@@ -167,7 +234,7 @@ namespace CSM.UiLogic.ViewModels.Controls.BeatLeader
             var scoreResult = scoresTask.Result;
             if (scoreResult == null)
                 return;
-            // todo: cleanup dependency on BeatLeaderScoreViewModel
+            Scores.ForEach(s => s.CleanUpReferences());
             Scores.Clear();
             foreach (var score in scoreResult.Data)
             {
@@ -215,7 +282,6 @@ namespace CSM.UiLogic.ViewModels.Controls.BeatLeader
         private void SwitchPlayer()
         {
             PlayerSearchVisible = true;
-
         }
 
         private bool CanSwitchPlayer()
@@ -230,6 +296,129 @@ namespace CSM.UiLogic.ViewModels.Controls.BeatLeader
             if (e.PlayerId == null)
                 return;
             await LoadDataAsync(e.PlayerId);
+        }
+
+        private void SongCopyDomain_OnPlaylistSelectionChanged(object? sender, Business.Core.SongCopy.PlaylistSelectionChangedEventArgs e)
+        {
+            if (e.Playlist == null)
+            {
+                CreatePlaylistCommandText = "Create new playlist in root with all songs (all filter will apply)";
+                OnPropertyChanged(nameof(CreatePlaylistCommandText));
+            }
+            else if (e.Playlist is PlaylistFolderViewModel playlistFolderViewModel)
+            {
+                CreatePlaylistCommandText = $"Create new playlist in folder '{playlistFolderViewModel.Name}' with all songs (all filter will apply)";
+                OnPropertyChanged(nameof(CreatePlaylistCommandText));
+            }
+            else if (e.Playlist is PlaylistViewModel playlistViewModel)
+            {
+                OverwritePlaylistCommandText = $"Overwrite playlist '{playlistViewModel.PlaylistTitle}' with all songs (all filter will apply)";
+                OnPropertyChanged(nameof(OverwritePlaylistCommandText));
+                MergePlaylistCommandText = $"Merge all songs (all filter will apply) with songs from playlist '{playlistViewModel.PlaylistTitle}'";
+                OnPropertyChanged(nameof(MergePlaylistCommandText));
+            }
+
+            CreatePlaylistCommand?.RaiseCanExecuteChanged();
+            OverwritePlaylistCommand?.RaiseCanExecuteChanged();
+            MergePlaylistCommand?.RaiseCanExecuteChanged();
+        }
+
+        private void CreatePlaylist()
+        {
+            var editNewPlaylistName = new NewPlaylistViewModel(ServiceLocator, "Cancel", EditViewModelCommandColor.Default, "Create playlist", EditViewModelCommandColor.Default)
+            {
+                PlaylistName = $"BeatLeader {Player?.Name ?? string.Empty} {DateTime.Now:yyyy-MM-dd HH-mm-ss}"
+            };
+            UserInteraction.ShowWindow(editNewPlaylistName);
+            if (editNewPlaylistName.Continue)
+            {
+                // todo: only take filtered songs
+                var songs = Scores.Select(s => new Song
+                {
+                    Hash = s.Model.Leaderboard.Song.Hash,
+                    LevelAuthorName = s.Model.Leaderboard.Song.Mapper,
+                    SongName = s.Model.Leaderboard.Song.Name,
+                    Difficulties =
+                    [
+                        new Difficulty
+                    {
+                        Characteristic = s.Model.Leaderboard.Difficulty.ModeName,
+                        Name = s.Model.Leaderboard.Difficulty.DifficultyName
+                    }
+                    ]
+                });
+
+                var createPlaylistEventArgs = new CreatePlaylistEventArgs
+                {
+                    PlaylistName = editNewPlaylistName.PlaylistName,
+                    Songs = [.. songs]
+                };
+                songCopyDomain.CreatePlaylist(createPlaylistEventArgs);
+            }
+        }
+
+        private bool CanCreatePlaylist()
+        {
+            return songCopyDomain.SelectedPlaylist != null || songCopyDomain.SelectedPlaylist is PlaylistFolderViewModel;
+        }
+        private void OverwritePlaylist()
+        {
+            // todo: only take filtered songs
+            var songs = Scores.Select(s => new Song
+            {
+                Hash = s.Model.Leaderboard.Song.Hash,
+                LevelAuthorName = s.Model.Leaderboard.Song.Mapper,
+                SongName = s.Model.Leaderboard.Song.Name,
+                Difficulties =
+                [
+                    new Difficulty
+                    {
+                        Characteristic = s.Model.Leaderboard.Difficulty.ModeName,
+                        Name = s.Model.Leaderboard.Difficulty.DifficultyName
+                    }
+                ]
+            });
+
+            var songCopyEventArgs = new SongCopyEventArgs
+            {
+                OverwritePlaylist = true,
+                Songs = [.. songs]
+            };
+            songCopyDomain.CopySongs(songCopyEventArgs);
+        }
+
+        private bool CanOverwritePlaylist()
+        {
+            return songCopyDomain.SelectedPlaylist != null && songCopyDomain.SelectedPlaylist is PlaylistViewModel;
+        }
+        private void MergePlaylist()
+        {
+            // todo: only take filtered songs
+            var songs = Scores.Select(s => new Song
+            {
+                Hash = s.Model.Leaderboard.Song.Hash,
+                LevelAuthorName = s.Model.Leaderboard.Song.Mapper,
+                SongName = s.Model.Leaderboard.Song.Name,
+                Difficulties =
+                [
+                    new Difficulty
+                    {
+                        Characteristic = s.Model.Leaderboard.Difficulty.ModeName,
+                        Name = s.Model.Leaderboard.Difficulty.DifficultyName
+                    }
+                ]
+            });
+
+            var songCopyEventArgs = new SongCopyEventArgs
+            {
+                Songs = [.. songs]
+            };
+            songCopyDomain.CopySongs(songCopyEventArgs);
+        }
+
+        private bool CanMergePlaylist()
+        {
+            return songCopyDomain.SelectedPlaylist != null && songCopyDomain.SelectedPlaylist is PlaylistViewModel;
         }
 
         #endregion

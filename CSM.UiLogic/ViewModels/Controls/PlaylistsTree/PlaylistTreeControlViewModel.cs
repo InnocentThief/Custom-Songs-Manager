@@ -307,7 +307,14 @@ namespace CSM.UiLogic.ViewModels.Controls.PlaylistsTree
             if (assemblyLocation == null)
                 return;
 
-            await CreatePlaylistAsync(e.PlaylistName, e.Songs, Path.Combine(assemblyLocation, "Images\\CSM_Logo_Song_Suggest_400px.png"));
+            if (e.IsSongSuggest)
+            {
+                await CreatePlaylistAsync(e.PlaylistName, e.Songs, Path.Combine(assemblyLocation, "Images\\CSM_Logo_Song_Suggest_400px.png"));
+            }
+            else
+            {
+                await CreatePlaylistAsync(e.PlaylistName, e.Songs, Path.Combine(assemblyLocation, "Images\\CSM_Logo_400px.png"));
+            }
         }
 
         private void SongSelectionDomain_OnSongSelectionChanged(object? sender, SongSelectionChangedEventArgs e)

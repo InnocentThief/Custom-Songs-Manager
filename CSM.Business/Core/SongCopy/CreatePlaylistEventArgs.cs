@@ -7,5 +7,7 @@ namespace CSM.Business.Core.SongCopy
         public string PlaylistName { get; set; } = string.Empty;
 
         public List<Song> Songs { get; set; } = [];
+
+        public bool IsSongSuggest { get; set; }
     }
 }

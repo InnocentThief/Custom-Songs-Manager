@@ -38,6 +38,19 @@
                         <telerik:RadGlyph Glyph="&#xe10c;" />
                     </telerik:RadButton>
                 </telerik:RadToolBar>
+
+                <!-- Playlist commands -->
+                <telerik:RadToolBar Style="{StaticResource HeaderToolBarStyle}" >
+                    <telerik:RadButton Command="{Binding CreatePlaylistCommand}" ToolTip="{Binding CreatePlaylistCommandText}">
+                        <telerik:RadGlyph Glyph="&#xe907;" />
+                    </telerik:RadButton>
+                    <telerik:RadButton Command="{Binding OverwritePlaylistCommand}" ToolTip="{Binding OverwritePlaylistCommandText}">
+                        <telerik:RadGlyph Glyph="&#xe945;" />
+                    </telerik:RadButton>
+                    <telerik:RadButton Command="{Binding MergePlaylistCommand}" ToolTip="{Binding MergePlaylistCommandText}">
+                        <telerik:RadGlyph Glyph="&#xe941;" />
+                    </telerik:RadButton>
+                </telerik:RadToolBar>
             </telerik:RadToolBarTray>
         </Grid>
 
@@ -47,6 +60,7 @@
             Grid.Row="1" 
             FieldFilterEditorCreated="SsSourceScoresGridView_FieldFilterEditorCreated"
             ItemsSource="{Binding Scores}" 
+            SelectedItem="{Binding SelectedScore}"
             Margin="3">
             <telerik:RadGridView.Columns>
                 <!-- Add button (will add song to selected playlist) -->

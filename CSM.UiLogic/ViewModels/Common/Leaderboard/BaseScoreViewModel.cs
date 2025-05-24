@@ -50,49 +50,14 @@ namespace CSM.UiLogic.ViewModels.Common.Leaderboard
             songCopyDomain.OnPlaylistSelectionChanged += SongCopyDomain_OnPlaylistSelectionChanged;
         }
 
-
-        #region Helper methods
+        public void CleanUpReferences()
+        {
+            songCopyDomain.OnPlaylistSelectionChanged -= SongCopyDomain_OnPlaylistSelectionChanged;
+        }
 
         public abstract void AddToPlaylist();
-        //{
-        //if (MapDetailViewModel == null)
-        //{
-        //    var mapDetail = await beatSaverService.GetMapDetailAsync(BsrKey, BeatSaverKeyType.Id);
-        //    if (mapDetail == null)
-        //        return;
-        //    UpdateMapDetail(mapDetail);
-        //}
 
-        //if (MapDetailViewModel == null)
-        //    return;
-
-        //Song? songToCopy = null;
-        //if (MapDetailViewModel.Model.Versions.Count == 1)
-        //{
-        //    songToCopy = new Song
-        //    {
-        //        Hash = MapDetailViewModel.Model.Versions.First().Hash,
-        //        Key = MapDetailViewModel.Model.Versions.First().Key,
-        //        LevelAuthorName = MapDetailViewModel.Model.Metadata?.LevelAuthorName,
-        //        SongName = MapDetailViewModel.Model.Metadata?.SongName ?? string.Empty,
-        //    };
-        //}
-        //else
-        //{
-        //    // todo: Show version selection dialog
-        //}
-
-        //if (songToCopy == null)
-        //    return;
-
-        //var songCopyEventArgs = new SongCopyEventArgs
-        //{
-        //    Songs = { songToCopy }
-        //};
-        //songCopyDomain.CopySongs(songCopyEventArgs);
-        //}
-
-        public bool CanAddToPlaylist()
+        protected bool CanAddToPlaylist()
         {
             return songCopyDomain.SelectedPlaylist is PlaylistViewModel;
         }
@@ -101,7 +66,5 @@ namespace CSM.UiLogic.ViewModels.Common.Leaderboard
         {
             addToPlaylistCommand?.RaiseCanExecuteChanged();
         }
-
-        #endregion
     }
 }

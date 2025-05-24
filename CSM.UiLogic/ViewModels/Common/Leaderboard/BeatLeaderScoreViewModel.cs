@@ -11,6 +11,8 @@ namespace CSM.UiLogic.ViewModels.Common.Leaderboard
 
         #region Properties
 
+        public Score Model => score;
+
         public override int Rank => score.Rank;
         public override string SongName => score.Leaderboard.Song.Name;
         public override bool FC => score.FullCombo;

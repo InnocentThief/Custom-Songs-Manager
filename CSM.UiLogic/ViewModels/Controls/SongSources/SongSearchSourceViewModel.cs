@@ -10,9 +10,11 @@ using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.Commands;
 using CSM.UiLogic.Helper;
 using CSM.UiLogic.ViewModels.Common.Playlists;
+using CSM.UiLogic.ViewModels.Controls.PlaylistsTree;
 using CSM.UiLogic.ViewModels.Controls.SongSources.SongSearch;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Reflection;
 
 namespace CSM.UiLogic.ViewModels.Controls.SongSources
 {
@@ -957,20 +959,28 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         private void CreatePlaylist()
         {
-            // todo: only take filtered songs
-            var songs = Results.Select(r => new Song
+            var editNewPlaylistName = new NewPlaylistViewModel(ServiceLocator, "Cancel", EditViewModelCommandColor.Default, "Create playlist", EditViewModelCommandColor.Default)
             {
-                Hash = r.Model.Versions.OrderByDescending(v => v.CreatedAt).First().Hash,
-                Key = r.Model.Id,
-                SongName = r.SongName,
-            });
-
-            var createPlaylistEventArgs = new CreatePlaylistEventArgs
-            {
-                PlaylistName = $"Song search {DateTime.Now:yyyy-MM-dd HH-mm-ss}",
-                Songs = [.. songs]
+                PlaylistName = $"Search {DateTime.Now:yyyy-MM-dd HH-mm-ss}"
             };
-            songCopyDomain.CreatePlaylist(createPlaylistEventArgs);
+            UserInteraction.ShowWindow(editNewPlaylistName);
+            if (editNewPlaylistName.Continue)
+            {
+                // todo: only take filtered songs
+                var songs = Results.Select(r => new Song
+                {
+                    Hash = r.Model.Versions.OrderByDescending(v => v.CreatedAt).First().Hash,
+                    Key = r.Model.Id,
+                    SongName = r.SongName,
+                });
+
+                var createPlaylistEventArgs = new CreatePlaylistEventArgs
+                {
+                    PlaylistName = editNewPlaylistName.PlaylistName,
+                    Songs = [.. songs],
+                };
+                songCopyDomain.CreatePlaylist(createPlaylistEventArgs);
+            }
         }
 
         private bool CanCreatePlaylist()

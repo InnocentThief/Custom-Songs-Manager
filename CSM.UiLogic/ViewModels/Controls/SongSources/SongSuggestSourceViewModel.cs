@@ -5,7 +5,10 @@ using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.Commands;
 using CSM.UiLogic.ViewModels.Common.Playlists;
+using CSM.UiLogic.ViewModels.Controls.PlaylistsTree;
 using Microsoft.Extensions.Logging;
+using System.IO;
+using System.Reflection;
 using System.Windows;
 
 namespace CSM.UiLogic.ViewModels.Controls.SongSources
@@ -312,8 +315,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             if (songSuggestDomain == null)
                 return;
 
-            if (Playlist != null)
-                Playlist.CleanUpReferences();
+            Playlist?.CleanUpReferences();
 
             SetLoadingInProgress(true, "Generating song suggestions...");
             var playerIdToUse = string.IsNullOrWhiteSpace(playerId) ? null : playerId;
@@ -378,12 +380,21 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
                 return;
             }
 
-            var createPlaylistEventArgs = new CreatePlaylistEventArgs
+            var editNewPlaylistName = new NewPlaylistViewModel(ServiceLocator, "Cancel", EditViewModelCommandColor.Default, "Create playlist", EditViewModelCommandColor.Default)
             {
-                PlaylistName = $"Suggested Songs {DateTime.Now:yyyy-MM-dd HH-mm-ss}",
-                Songs = [.. Playlist.Songs.Select(x => x.Model)] // todo: only take filtered songs
+                PlaylistName = $"Suggested Songs {DateTime.Now:yyyy-MM-dd HH-mm-ss}"
             };
-            songCopyDomain.CreatePlaylist(createPlaylistEventArgs);
+            UserInteraction.ShowWindow(editNewPlaylistName);
+            if (editNewPlaylistName.Continue)
+            {
+                var createPlaylistEventArgs = new CreatePlaylistEventArgs
+                {
+                    PlaylistName = editNewPlaylistName.PlaylistName,
+                    Songs = [.. Playlist.Songs.Select(x => x.Model)], // todo: only take filtered songs
+                    IsSongSuggest = true
+                };
+                songCopyDomain.CreatePlaylist(createPlaylistEventArgs);
+            }
         }
 
         private bool CanCreatePlaylist()
