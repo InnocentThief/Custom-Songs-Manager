@@ -199,7 +199,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             }
             if (ScoreSaberAvailable)
             {
-                Sources.Add(new ScoreSaberControlViewModel(serviceLocator));
+                Sources.Add(new ScoreSaberControlViewModel(serviceLocator, true));
             }
             if (BeatLeaderAvailable)
             {

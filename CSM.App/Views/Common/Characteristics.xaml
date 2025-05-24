@@ -9,8 +9,8 @@
     <converter:DifficultyToGradientStopColorConverter x:Key="DiffToGradientStopColorConverter" />
 
     <DataTemplate x:Key="Degree360DataTemplate">
-        <Border Background="{Binding Difficulty, Converter={StaticResource DiffToColorConverter}}" CornerRadius="5" Padding="2">
-            <Canvas Height="14" Width="14" Margin="6,3">
+        <Border Background="{Binding Difficulty, Converter={StaticResource DiffToColorConverter}}" CornerRadius="5" Padding="1">
+            <Canvas Height="16" Width="16" Margin="6,3">
                 <Canvas.RenderTransform>
                     <MatrixTransform Matrix="0.01254435 0 0 0.01475564 -1.0411809 -2.4379264"/>
                 </Canvas.RenderTransform>
@@ -34,8 +34,8 @@
     </DataTemplate>
 
     <DataTemplate x:Key="Degree90DataTemplate">
-        <Border Background="{Binding Difficulty, Converter={StaticResource DiffToColorConverter}}" CornerRadius="5" Padding="2">
-            <Canvas Height="14" Width="14" Margin="6,3">
+        <Border Background="{Binding Difficulty, Converter={StaticResource DiffToColorConverter}}" CornerRadius="5" Padding="1">
+            <Canvas Height="16" Width="16" Margin="6,3">
                 <Canvas.RenderTransform>
                     <MatrixTransform Matrix="0.01254435 0 0 0.01475564 -1.0411809 -2.4379264"/>
                 </Canvas.RenderTransform>
@@ -54,8 +54,8 @@
     </DataTemplate>
 
     <DataTemplate x:Key="StandardDataTemplate">
-        <Border Background="{Binding Difficulty, Converter={StaticResource DiffToColorConverter}}" CornerRadius="5" Padding="2">
-            <Canvas Height="14" Width="14" Margin="6,3">
+        <Border Background="{Binding Difficulty, Converter={StaticResource DiffToColorConverter}}" CornerRadius="5" Padding="1">
+            <Canvas Height="16" Width="16" Margin="6,3">
                 <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path249" Fill="#FFFFFFFF" StrokeThickness="0.0124695">
                     <Path.Data>
                         <PathGeometry Figures="m 11.746052 13.830964 c 0.480494 0.0631 0.776183 -0.03786 0.934747 -0.399946 v 0 c 0.166694 -0.409663 -0.02242 -0.880283 -0.422343 -1.050913 l -4.2815739 -1.827708 0.88066 -0.478571 3.9624769 1.830611 c 0.403122 0.186279 0.87721 0.0025 1.059058 -0.410421 v 0 c 0.09092 -0.206472 0.10497 -0.452825 0.04608 -0.670782 -0.0084 -0.03117 -0.01848 -0.06058 -0.02969 -0.0886 L 13.99994 4.0504163 C 14.00404 3.7899282 13.801213 3.5753788 13.54692 3.5712141 v 0 c -0.254292 -0.00416 -0.463738 0.2035695 -0.467804 0.4640575 l -0.09437 6.0376714 C 11.260141 9.2980407 9.5049812 8.5977263 7.7825938 7.817524 c 0.061725 0.0077 0.1245591 0.011737 0.1882551 0.011737 0.8507214 0 1.5404158 -0.7064981 1.5404158 -1.5779471 0 -0.871449 -0.6896944 -1.577821 -1.5404158 -1.577821 -0.850721 0 -1.5404154 0.7064979 -1.5404154 1.5779469 0 0.4698632 0.2005758 0.8916422 0.5186876 1.1807788 C 5.1947006 6.6051938 3.4715743 5.7015627 1.7178931 4.8727711 L 4.299622 0.72540632 C 4.4363783 0.50568254 4.3734213 0.21414782 4.1589235 0.07405971 v 0 C 3.9444261 -0.06602839 3.6598255 -0.00153737 3.5230694 0.21818641 L 0.81074047 4.5754313 C 0.50174565 4.6139241 0.19804861 4.8262014 0.07102563 5.1147069 v 0 C -0.110823 5.5276515 0.06856143 6.0132904 0.47168397 6.1995697 L 4.3293143 7.9818433 3.4878331 10.192711 2.3942773 11.279214 c -0.2577421 0.256072 -0.316387 0.642765 -0.173594 0.958657 0.047064 0.106644 0.1165507 0.204958 0.2082142 0.286992 l 1.4172119 1.267356 c 0.3421366 0.305922 0.861563 0.269827 1.1602087 -0.08052 v 0 C 5.3049638 13.361226 5.2697275 12.829144 4.9277141 12.523222 L 4.1786357 11.853323 4.4175281 11.615931 h 1.6025098 l 2.329e-4 -1.43e-4 z" FillRule="NonZero"/>
@@ -66,8 +66,8 @@
     </DataTemplate>
 
     <DataTemplate x:Key="NoArrowsDataTemplate">
-        <Border Background="{Binding Difficulty, Converter={StaticResource DiffToColorConverter}}" CornerRadius="5" Padding="2">
-            <Canvas Height="14" Width="14" Margin="6,3">
+        <Border Background="{Binding Difficulty, Converter={StaticResource DiffToColorConverter}}" CornerRadius="5" Padding="1">
+            <Canvas Height="16" Width="16" Margin="6,3">
                 <Canvas.RenderTransform>
                     <MatrixTransform Matrix="0.01590891 0 0 0.01590891 -3.181782 -3.181782"/>
                 </Canvas.RenderTransform>
@@ -81,8 +81,8 @@
     </DataTemplate>
 
     <DataTemplate x:Key="OneSaberDataTemplate">
-        <Border Background="{Binding Difficulty, Converter={StaticResource DiffToColorConverter}}" CornerRadius="5" Padding="2">
-            <Canvas Height="14" Width="14" Margin="6,3">
+        <Border Background="{Binding Difficulty, Converter={StaticResource DiffToColorConverter}}" CornerRadius="5" Padding="1">
+            <Canvas Height="16" Width="16" Margin="6,3">
                 <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path9" Fill="#FFFFFFFF" StrokeThickness="0.0118206">
                     <Path.Data>
                         <PathGeometry Figures="M 13.563418 12.554044 11.045124 11.510173 9.4650281 10.111194 V 7.5597044 l 3.5518259 0.5380878 c 0.370799 0.056129 0.712248 -0.232997 0.762658 -0.6457306 v 0 C 13.829922 7.0392031 13.570252 6.6590241 13.199565 6.6028955 L 8.3270902 5.8646147 C 8.7802267 5.6348611 9.0953496 5.1263339 9.0953496 4.5357341 c 0 -0.8060093 -0.5867808 -1.4593484 -1.3106783 -1.4593484 -0.723898 0 -1.3106784 0.6533391 -1.3106784 1.4593484 0 0.6478513 0.3792003 1.1970406 0.90392 1.3876288 L 3.1431896 5.380535 C 3.1132796 5.376665 3.0837046 5.375295 3.0544666 5.375795 3.1077896 5.2459505 3.1082386 5.0909104 3.0436006 4.9549539 L 0.80480499 0.2529828 C 0.69423753 0.02085906 0.4356866 -0.06757493 0.22721032 0.05553419 v 0 C 0.01873408 0.17864332 -0.06069079 0.46652168 0.04987667 0.69864536 L 2.2885601 5.4007416 C 2.3460281 5.5214806 2.443489 5.6031791 2.5531603 5.6366072 2.4670143 5.747368 2.4087616 5.8871911 2.3925182 6.0437281 v 0 c -0.042793 0.413856 0.2238235 0.7880479 0.5956305 0.8356951 l 3.6285625 0.4651205 v 0 l -0.019492 2.2677281 c 0 0 -1.4339042 0.024946 -2.1172496 0.062366 -0.5937258 0.037419 -0.8401782 0.8107492 -0.5158693 1.3251382 5.602e-4 -0.003 1.5340535 2.365143 1.5340535 2.365143 0.2195669 0.331908 0.6390958 0.402755 0.937191 0.158283 v 0 c 0.2980956 -0.244472 0.361725 -0.711588 0.1421585 -1.043497 l -0.607617 -1.233461 2.2516781 -0.07484 2.3038806 1.713175 0.05198 0.02445 2.518295 1.043871 c 0.346938 0.143815 0.73286 -0.05276 0.862023 -0.439051 v 0 c 0.129051 -0.386291 -0.04739 -0.815989 -0.394324 -0.959803 z" FillRule="NonZero"/>
@@ -93,8 +93,8 @@
     </DataTemplate>
 
     <DataTemplate x:Key="LawlessDataTemplate">
-        <Border Background="{Binding Difficulty, Converter={StaticResource DiffToColorConverter}}" CornerRadius="5" Padding="2">
-            <Canvas Height="14" Width="14" Margin="6,3">
+        <Border Background="{Binding Difficulty, Converter={StaticResource DiffToColorConverter}}" CornerRadius="5" Padding="1">
+            <Canvas Height="16" Width="16" Margin="6,3">
                 <Canvas.RenderTransform>
                     <MatrixTransform Matrix="0.01166962 0 0 0.01200784 -0.47586389 -1.191473"/>
                 </Canvas.RenderTransform>
@@ -113,8 +113,8 @@
     </DataTemplate>
 
     <DataTemplate x:Key="LightshowDataTemplate">
-        <Border Background="{Binding Difficulty, Converter={StaticResource DiffToColorConverter}}" CornerRadius="5" Padding="2">
-            <Canvas Height="14" Width="14" Margin="6,3">
+        <Border Background="{Binding Difficulty, Converter={StaticResource DiffToColorConverter}}" CornerRadius="5" Padding="1">
+            <Canvas Height="16" Width="16" Margin="6,3">
                 <Canvas.RenderTransform>
                     <MatrixTransform Matrix="0.01123376 0 0 0.01123431 -0.14880409 -0.37441216"/>
                 </Canvas.RenderTransform>
@@ -133,9 +133,9 @@
     </DataTemplate>
 
     <DataTemplate x:Key="LegacyDataTemplate">
-        <Border Background="{Binding Difficulty, Converter={StaticResource DiffToColorConverter}}" CornerRadius="5" Padding="2">
+        <Border Background="{Binding Difficulty, Converter={StaticResource DiffToColorConverter}}" CornerRadius="5" Padding="1">
             <TextBlock Text="Legacy" />
-            <!--<Canvas Height="14" Width="14" Margin="6,3">
+            <!--<Canvas Height="16" Width="16" Margin="6,3">
                 <Canvas.RenderTransform>
                     <MatrixTransform Matrix="0.01123376 0 0 0.01123431 -0.14880409 -0.37441216"/>
                 </Canvas.RenderTransform>

@@ -23,11 +23,22 @@
             </Grid.ColumnDefinitions>
             <TextBlock Text="Scores" Style="{StaticResource HeaderTitleStyle}" Foreground="#88018574" />
             <!-- Commands -->
-            <telerik:RadToolBar Grid.Column="1" Style="{StaticResource HeaderToolBarStyle}" >
-                <telerik:RadButton ToolTip="Clear song history">
-                    <telerik:RadGlyph Glyph="&#xe10c;" Foreground="#88018574" />
-                </telerik:RadButton>
-            </telerik:RadToolBar>
+            <telerik:RadToolBarTray Grid.Column="1">
+                <!-- View Definitions -->
+                <telerik:RadToolBar Style="{StaticResource HeaderToolBarStyle}" >
+                    <TextBlock Text="View" />
+                    <telerik:RadComboBox ItemsSource="{Binding ViewDefinitions}" SelectedItem="{Binding SelectedViewDefinition}" DisplayMemberPath="Name" Background="Transparent"  Focusable="False" Visibility="{Binding ShowViewDefinitions, Converter={StaticResource BooleanToVisibilityConverter}}" SelectionChanged="ViewDefinitions_SelectionChanged" />
+                    <telerik:RadButton ToolTip="Create new view definition" Click="Add_Click">
+                        <telerik:RadGlyph Glyph="&#xe907;" />
+                    </telerik:RadButton>
+                    <telerik:RadButton ToolTip="Save selected view definition" Click="Save_Click" IsEnabled="{Binding CanSaveViewDefinition}">
+                        <telerik:RadGlyph Glyph="&#xe109;" />
+                    </telerik:RadButton>
+                    <telerik:RadButton ToolTip="Delete selected view definition" Click="Delete_Click" IsEnabled="{Binding CanDeleteViewDefinition}">
+                        <telerik:RadGlyph Glyph="&#xe10c;" />
+                    </telerik:RadButton>
+                </telerik:RadToolBar>
+            </telerik:RadToolBarTray>
         </Grid>
 
         <telerik:RadGridView 

@@ -1,11 +1,25 @@
-﻿using CSM.DataAccess.Common;
+﻿using CSM.Business.Core.SongCopy;
+using CSM.Business.Interfaces;
+using CSM.DataAccess.Common;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
+using CSM.UiLogic.Commands;
+using CSM.UiLogic.ViewModels.Common.Playlists;
 
 namespace CSM.UiLogic.ViewModels.Common.Leaderboard
 {
     internal abstract class BaseScoreViewModel : BaseViewModel
     {
+        #region Private fields
+
+        private IRelayCommand? addToPlaylistCommand;
+
+        protected readonly ISongCopyDomain songCopyDomain;
+
+        #endregion
+
+        #region Properties
+
         public abstract int Rank { get; }
         public abstract string Id { get; }
         public abstract string SongName { get; }
@@ -26,8 +40,68 @@ namespace CSM.UiLogic.ViewModels.Common.Leaderboard
         public abstract Characteristic Characteristic { get; }
         public abstract Difficulty Difficulty { get; }
 
+        public IRelayCommand? AddToPlaylistCommand => addToPlaylistCommand ??= CommandFactory.Create(AddToPlaylist, CanAddToPlaylist);
+
+        #endregion
+
         protected BaseScoreViewModel(IServiceLocator serviceLocator) : base(serviceLocator)
         {
+            songCopyDomain = serviceLocator.GetService<ISongCopyDomain>();
+            songCopyDomain.OnPlaylistSelectionChanged += SongCopyDomain_OnPlaylistSelectionChanged;
         }
+
+
+        #region Helper methods
+
+        public abstract void AddToPlaylist();
+        //{
+        //if (MapDetailViewModel == null)
+        //{
+        //    var mapDetail = await beatSaverService.GetMapDetailAsync(BsrKey, BeatSaverKeyType.Id);
+        //    if (mapDetail == null)
+        //        return;
+        //    UpdateMapDetail(mapDetail);
+        //}
+
+        //if (MapDetailViewModel == null)
+        //    return;
+
+        //Song? songToCopy = null;
+        //if (MapDetailViewModel.Model.Versions.Count == 1)
+        //{
+        //    songToCopy = new Song
+        //    {
+        //        Hash = MapDetailViewModel.Model.Versions.First().Hash,
+        //        Key = MapDetailViewModel.Model.Versions.First().Key,
+        //        LevelAuthorName = MapDetailViewModel.Model.Metadata?.LevelAuthorName,
+        //        SongName = MapDetailViewModel.Model.Metadata?.SongName ?? string.Empty,
+        //    };
+        //}
+        //else
+        //{
+        //    // todo: Show version selection dialog
+        //}
+
+        //if (songToCopy == null)
+        //    return;
+
+        //var songCopyEventArgs = new SongCopyEventArgs
+        //{
+        //    Songs = { songToCopy }
+        //};
+        //songCopyDomain.CopySongs(songCopyEventArgs);
+        //}
+
+        public bool CanAddToPlaylist()
+        {
+            return songCopyDomain.SelectedPlaylist is PlaylistViewModel;
+        }
+
+        private void SongCopyDomain_OnPlaylistSelectionChanged(object? sender, PlaylistSelectionChangedEventArgs e)
+        {
+            addToPlaylistCommand?.RaiseCanExecuteChanged();
+        }
+
+        #endregion
     }
 }

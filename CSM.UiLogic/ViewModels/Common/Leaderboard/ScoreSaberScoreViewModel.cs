@@ -1,4 +1,5 @@
-﻿using CSM.DataAccess.Common;
+﻿using CSM.Business.Core.SongCopy;
+using CSM.DataAccess.Common;
 using CSM.DataAccess.ScoreSaber;
 using CSM.Framework.ServiceLocation;
 
@@ -7,6 +8,8 @@ namespace CSM.UiLogic.ViewModels.Common.Leaderboard
     internal sealed class ScoreSaberScoreViewModel(IServiceLocator serviceLocator, PlayerScore score) : BaseScoreViewModel(serviceLocator)
     {
         private readonly PlayerScore score = score;
+
+        #region Properties
 
         public override int Rank => score.Score.Rank;
         public override string SongName => score.Leaderboard.SongName;
@@ -38,5 +41,30 @@ namespace CSM.UiLogic.ViewModels.Common.Leaderboard
         public override Characteristic Characteristic => score.Leaderboard.Difficulty.Characteristic;
 
         public override Difficulty Difficulty => (Difficulty)score.Leaderboard.Difficulty.Difficulty;
+
+        #endregion
+
+        public override void AddToPlaylist()
+        {
+            var songToCopy = new DataAccess.Playlists.Song
+            {
+                Hash = score.Leaderboard.SongHash,
+                LevelAuthorName = score.Leaderboard.LevelAuthorName,
+                SongName = score.Leaderboard.SongName,
+                Difficulties = []
+            };
+            songToCopy.Difficulties.Add(new DataAccess.Playlists.Difficulty
+            {
+                Characteristic = score.Leaderboard.Difficulty.Characteristic,
+                Name = (Difficulty)score.Leaderboard.Difficulty.Difficulty,
+            });
+
+            var songToCopyEventArgs = new SongCopyEventArgs
+            {
+                Songs = { songToCopy }
+            };
+
+            songCopyDomain.CopySongs(songToCopyEventArgs);
+        }
     }
 }

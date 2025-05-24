@@ -1,4 +1,5 @@
-﻿using CSM.DataAccess.BeatLeader;
+﻿using CSM.Business.Core.SongCopy;
+using CSM.DataAccess.BeatLeader;
 using CSM.DataAccess.Common;
 using CSM.Framework.ServiceLocation;
 
@@ -7,6 +8,8 @@ namespace CSM.UiLogic.ViewModels.Common.Leaderboard
     internal sealed class BeatLeaderScoreViewModel(IServiceLocator serviceLocator, Score score) : BaseScoreViewModel(serviceLocator)
     {
         private readonly Score score = score;
+
+        #region Properties
 
         public override int Rank => score.Rank;
         public override string SongName => score.Leaderboard.Song.Name;
@@ -30,5 +33,31 @@ namespace CSM.UiLogic.ViewModels.Common.Leaderboard
         public override Characteristic Characteristic => score.Leaderboard.Difficulty.ModeName;
 
         public override DataAccess.Common.Difficulty Difficulty => score.Leaderboard.Difficulty.DifficultyName;
+
+        #endregion
+
+        public override void AddToPlaylist()
+        {
+            var songToCopy = new DataAccess.Playlists.Song
+            {
+                Hash = score.Leaderboard.Song.Hash,
+                Key = score.Leaderboard.Song.Id,
+                LevelAuthorName = score.Leaderboard.Song.Mapper,
+                SongName = score.Leaderboard.Song.Name,
+                Difficulties = []
+            };
+            songToCopy.Difficulties.Add(new DataAccess.Playlists.Difficulty
+            {
+                Characteristic = score.Leaderboard.Difficulty.ModeName,
+                Name = score.Leaderboard.Difficulty.DifficultyName,
+            });
+
+            var songToCopyEventArgs = new SongCopyEventArgs
+            {
+                Songs = { songToCopy }
+            };
+
+            songCopyDomain.CopySongs(songToCopyEventArgs);
+        }
     }
 }

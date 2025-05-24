@@ -1,5 +1,6 @@
 ﻿using CSM.App.Views.Helper;
 using CSM.UiLogic.AbstractBase;
+using CSM.UiLogic.ViewModels.Controls.BeatLeader;
 using CSM.UiLogic.ViewModels.Controls.CustomLevels;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,7 +14,7 @@ namespace CSM.App.Views.Controls.BeatLeader
     /// </summary>
     public partial class ScoreControl : UserControl
     {
-        private PersistenceManager persistenceManager = PersistenceFrameworkHelper.GetPersistenceManager();
+        private readonly PersistenceManager persistenceManager = PersistenceFrameworkHelper.GetPersistenceManager();
 
         public ScoreControl()
         {
@@ -22,7 +23,7 @@ namespace CSM.App.Views.Controls.BeatLeader
 
         private async void Add_Click(object sender, RoutedEventArgs e)
         {
-            if (DataContext is CustomLevelsControlViewModel viewModel)
+            if (DataContext is BeatLeaderControlViewModel viewModel)
             {
                 var stream = persistenceManager.Save(BlScoresGridView);
                 await viewModel.SaveViewDefinitionAsync(stream, SavableUiElement.BlMainControl);
@@ -31,7 +32,7 @@ namespace CSM.App.Views.Controls.BeatLeader
 
         private async void Save_Click(object sender, RoutedEventArgs e)
         {
-            if (DataContext is CustomLevelsControlViewModel viewModel && viewModel.SelectedViewDefinition != null)
+            if (DataContext is BeatLeaderControlViewModel viewModel && viewModel.SelectedViewDefinition != null)
             {
                 var stream = persistenceManager.Save(BlScoresGridView);
                 await viewModel.SaveViewDefinitionAsync(stream, SavableUiElement.BlMainControl, viewModel.SelectedViewDefinition.Name);
@@ -40,7 +41,7 @@ namespace CSM.App.Views.Controls.BeatLeader
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            if (DataContext is CustomLevelsControlViewModel viewModel && viewModel.SelectedViewDefinition != null)
+            if (DataContext is BeatLeaderControlViewModel viewModel && viewModel.SelectedViewDefinition != null)
             {
                 viewModel.DeleteViewDefinition(SavableUiElement.BlMainControl, viewModel.SelectedViewDefinition.Name);
             }
@@ -48,7 +49,7 @@ namespace CSM.App.Views.Controls.BeatLeader
 
         private void ViewDefinitions_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (DataContext is CustomLevelsControlViewModel viewModel)
+            if (DataContext is BeatLeaderControlViewModel viewModel)
             {
                 if (viewModel.SelectedViewDefinition != null && viewModel.SelectedViewDefinition.Stream != null)
                 {

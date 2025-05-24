@@ -6,7 +6,7 @@
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    
+
     <StackPanel Orientation="Horizontal">
         <!-- Edit Button with menu of available difficulties -->
         <telerik:RadToggleButton Margin="0,0,6,0" Background="Transparent" Focusable="False" BorderThickness="0" IsChecked="{Binding IsOpen, ElementName=radContextMenu, Mode=TwoWay}" Command="{Binding SetAvailableDifficultiesCommand}" >
@@ -32,7 +32,7 @@
         </telerik:RadToggleButton>
 
         <!-- List with difficulties -->
-        <ItemsControl ItemsSource="{Binding Difficulties}" Background="Transparent" BorderThickness="0">
+        <ItemsControl ItemsSource="{Binding Difficulties}" Background="Transparent" BorderThickness="0" Padding="0">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal" />
@@ -40,9 +40,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid Margin="0,0,2,0">
-                        <ContentControl Content="{Binding}" ContentTemplateSelector="{StaticResource CharacteristicDataTemplateSelector}" />
-                    </Grid>
+                    <ContentControl Content="{Binding}" ContentTemplateSelector="{StaticResource CharacteristicDataTemplateSelector}" Margin="1" />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
