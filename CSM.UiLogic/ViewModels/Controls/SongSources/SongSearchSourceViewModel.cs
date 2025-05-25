@@ -607,6 +607,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
         {
             Results.ForEach(result => result.CleanUpReferences());
             Results.Clear();
+            ResultsFiltered.Clear();
             totalFoundSongs = 0;
 
             currentPageIndex = 0;
@@ -680,7 +681,9 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
                 OnPropertyChanged(nameof(ShowNoResults));
                 return;
             }
-            Results.AddRange(searchResult.Docs.Select(mapDetail => new SearchResultMapDetailViewModel(ServiceLocator, mapDetail)));
+            var results = searchResult.Docs.Select(mapDetail => new SearchResultMapDetailViewModel(ServiceLocator, mapDetail));
+            Results.AddRange(results);
+            ResultsFiltered.AddRange(results);
 
             FilterVisible = false;
             OnPropertyChanged(nameof(SongCount));

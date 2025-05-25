@@ -252,6 +252,7 @@ namespace CSM.UiLogic.ViewModels.Controls.ScoreSaber
             {
                 var scoreViewModel = new ScoreSaberScoreViewModel(ServiceLocator, score);
                 Scores.Add(scoreViewModel);
+                ScoresFiltered.Add(scoreViewModel);
             }
 
             var additionalRequestCount = scoreResult.Metadata.Total / 100 + 1;
@@ -264,6 +265,7 @@ namespace CSM.UiLogic.ViewModels.Controls.ScoreSaber
                 {
                     var scoreViewModel = new ScoreSaberScoreViewModel(ServiceLocator, score);
                     Scores.Add(scoreViewModel);
+                    ScoresFiltered.Add(scoreViewModel);
                 }
             }
 

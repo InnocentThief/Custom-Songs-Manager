@@ -220,6 +220,7 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
                 }
                 Songs.Add(vm);
             }
+            SongsFiltered.AddRange(Songs);
         }
 
         public async Task LoadAsync()
@@ -494,6 +495,7 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
                 Songs.ForEach(s => s.OnSongRemoved -= Playlist_OnSongRemoved);
                 Songs.ForEach(s => s.CleanUpReferences());
                 Songs.Clear();
+                SongsFiltered.Clear();
             }
 
             foreach (var songToCopy in e.Songs)
@@ -517,6 +519,7 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
                     var playlistSongViewModel = new PlaylistSongViewModel(ServiceLocator, songToCopy);
                     playlistSongViewModel.OnSongRemoved += Playlist_OnSongRemoved;
                     Songs.Add(playlistSongViewModel);
+                    SongsFiltered.Add(playlistSongViewModel);
                 }
             }
             OnPropertyChanged(nameof(SongCount));

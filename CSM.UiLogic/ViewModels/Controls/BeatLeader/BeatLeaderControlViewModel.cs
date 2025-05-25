@@ -259,6 +259,7 @@ namespace CSM.UiLogic.ViewModels.Controls.BeatLeader
             {
                 var scoreViewModel = new BeatLeaderScoreViewModel(ServiceLocator, score);
                 Scores.Add(scoreViewModel);
+                ScoresFiltered.Add(scoreViewModel);
             }
 
             var additionalRequestCount = scoreResult.Metadata.Total / 100 + 1;
@@ -271,6 +272,7 @@ namespace CSM.UiLogic.ViewModels.Controls.BeatLeader
                 {
                     var scoreViewModel = new BeatLeaderScoreViewModel(ServiceLocator, score);
                     Scores.Add(scoreViewModel);
+                    ScoresFiltered.Add(scoreViewModel);
                 }
             }
 
