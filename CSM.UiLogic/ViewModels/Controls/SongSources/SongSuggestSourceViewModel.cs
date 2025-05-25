@@ -1,12 +1,16 @@
 ﻿using CSM.Business.Core.SongCopy;
 using CSM.Business.Core.SongSelection;
 using CSM.Business.Interfaces;
+using CSM.DataAccess.UserConfiguration;
+using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.Commands;
+using CSM.UiLogic.Helper;
 using CSM.UiLogic.ViewModels.Common.Playlists;
 using CSM.UiLogic.ViewModels.Controls.PlaylistsTree;
 using Microsoft.Extensions.Logging;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Reflection;
 using System.Windows;
@@ -237,7 +241,21 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             }
         }
 
-        // TODO: Leaderboard
+        public ObservableCollection<EnumWrapper<LeaderboardType>> Leaderboards { get; } = [];
+
+        public EnumWrapper<LeaderboardType>? SelectedLeaderboard
+        {
+            get => Leaderboards.FirstOrDefault(x => x.Value == userConfigDomain.Config!.LeaderboardsConfig.DefaultLeaderboard);
+            set
+            {
+                if (value == null)
+                    return;
+                if (value.Value == userConfigDomain.Config!.LeaderboardsConfig.DefaultLeaderboard)
+                    return;
+                userConfigDomain.Config!.LeaderboardsConfig.DefaultLeaderboard = value.Value;
+                OnPropertyChanged();
+            }
+        }
 
         public int OriginSongCount
         {
@@ -286,6 +304,8 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             songCopyDomain = serviceLocator.GetService<ISongCopyDomain>();
             songCopyDomain.OnPlaylistSelectionChanged += SongCopyDomain_OnPlaylistSelectionChanged;
             userConfigDomain = serviceLocator.GetService<IUserConfigDomain>();
+
+            Leaderboards.AddRange(EnumWrapper<LeaderboardType>.GetValues(serviceLocator, LeaderboardType.None));
 
             createPlaylistCommandText = "Create new playlist in root with all songs (all filter will apply)";
         }

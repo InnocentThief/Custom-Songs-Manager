@@ -160,7 +160,7 @@ namespace CSM.UiLogic.ViewModels.Common.MapDetails
 
         private void CopyBSR()
         {
-            Clipboard.SetText($"!BSR {mapDetail.Id}");
+            Clipboard.SetText($"!bsr {mapDetail.Id}");
         }
 
         private bool CanCopyBSR()

@@ -57,7 +57,7 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <telerik:RadWatermarkTextBox Text="{Binding PlayerId, UpdateSourceTrigger=PropertyChanged}" />
-                        <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="18" ToolTip="Overwrites the default player configuration from settings. Can be used to create song suggestions for a different user" />
+                        <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="18" ToolTip="Overwrites the default player configuration from settings. &#x0a;Can be used to create song suggestions for a different user" />
                     </Grid>
 
                     <!-- Advanced Settings -->
@@ -92,7 +92,7 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <telerik:RadToggleSwitchButton Focusable="False" IsChecked="{Binding IgnorePlayedAll}" x:Name="ignorePlayed" />
-                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="If enabled, maps that you already have played will not be suggested. Overwrites 'Ignore played days'" />
+                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="If enabled, maps that you already have played will not be suggested. &#x0a;Overwrites 'Ignore played days'" />
                             </Grid>
 
                             <!-- IgnorePlayedDays -->
@@ -125,7 +125,7 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <telerik:RadToggleSwitchButton IsChecked="{Binding UseLikedSongs}" />
-                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="Add some useful informations" />
+                                <!--<telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="" />-->
                             </Grid>
 
                             <!-- FillLikedSongs -->
@@ -136,7 +136,7 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <telerik:RadToggleSwitchButton IsChecked="{Binding FillLikedSongs}" />
-                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="Add some useful informations" />
+                                <!--<telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="" />-->
                             </Grid>
 
                             <!-- UseLocalScores -->
@@ -147,7 +147,7 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <telerik:RadToggleSwitchButton IsChecked="{Binding UseLocalScores}" />
-                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="Add some useful informations" />
+                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="If enabled, only local scores will be used to generate suggestions" />
                             </Grid>
 
                             <!-- ExtraSongs -->
@@ -157,8 +157,8 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <telerik:RadNumericUpDown IsInteger="True" ShowButtons="False" Value="{Binding ExtraSongs}" NullValue="15" />
-                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="Add some useful informations" />
+                                <telerik:RadNumericUpDown IsInteger="True" ShowButtons="False" Value="{Binding ExtraSongs}" NullValue="15" Minimum="0" Maximum="100" />
+                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="A lower value selects your profile more on songs you do comparative well on, and will find songs more in your skillset. &#x0a;If you are making rapid progress, you may want to turn this one up" />
                             </Grid>
 
                             <!-- PlaylistLength -->
@@ -169,7 +169,7 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <telerik:RadNumericUpDown IsInteger="True" ShowButtons="False" Value="{Binding PlaylistLength}" NullValue="50" />
-                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="Add some useful informations" />
+                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="Number of songs to be suggested" />
                             </Grid>
 
                             <!-- Leaderboard -->
@@ -179,8 +179,8 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <telerik:RadComboBox />
-                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="Add some useful informations" />
+                                <telerik:RadComboBox ItemsSource="{Binding Leaderboards}" SelectedItem="{Binding SelectedLeaderboard}" DisplayMemberPath="DisplayText" />
+                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="The leaderboard for which to suggest songs" />
                             </Grid>
 
                             <!-- OriginSongCount -->
@@ -191,7 +191,7 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <telerik:RadNumericUpDown IsInteger="True" ShowButtons="False" Value="{Binding OriginSongCount}" NullValue="50" />
-                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="Add some useful informations" />
+                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="Number of songs the suggestion is based on" />
                             </Grid>
 
                             <!-- ModifierStyle -->
@@ -202,7 +202,7 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <telerik:RadNumericUpDown IsInteger="True" ShowButtons="False" Value="{Binding ModifierStyle}" NullValue="50" />
-                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="Add some useful informations" />
+                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="Style is areas you have shown skill or preferences for in your top plays. &#x0a;A high style focus prioritize songs that players similar to you have performed the best on. &#x0a;100% is recommended." />
                             </Grid>
 
                             <!-- OriginSongCount -->
@@ -213,7 +213,7 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <telerik:RadNumericUpDown IsInteger="True" ShowButtons="False" Value="{Binding ModifierOverweight}" NullValue="50" />
-                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="Add some useful informations" />
+                                <telerik:RadGlyph Grid.Column="1" Glyph="&#xe401;" FontSize="20" ToolTip="A higher Tech level prioritize songs that players similar to you gained the most PP from. &#x0a;This means that even Speed-oriented players can benefit from values above 80%." />
                             </Grid>
 
                             <telerik:RadButton Content="Reset advanced settings" Command="{Binding ResetAdvancedSettingsCommand}" Grid.Row="13" Padding="10" Margin="0,10,0,0" Background="{telerik:Windows11Resource ResourceKey=AlternativeBrush}" />
