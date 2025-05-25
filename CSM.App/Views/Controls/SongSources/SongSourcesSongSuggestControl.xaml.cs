@@ -80,5 +80,20 @@ namespace CSM.App.Views.Controls.SongSources
                 stringFilterEditor.MatchCaseVisibility = Visibility.Collapsed;
             }
         }
+
+        private void SongSuggestPlaylist_Filtered(object sender, Telerik.Windows.Controls.GridView.GridViewFilteredEventArgs e)
+        {
+            if (DataContext is SongSuggestSourceViewModel viewModel && viewModel.Playlist!= null)
+            {
+                viewModel.Playlist.SongsFiltered.Clear();
+                foreach (var item in SongSuggestPlaylist.Items)
+                {
+                    if (item is PlaylistSongViewModel songViewModel)
+                    {
+                        viewModel.Playlist.SongsFiltered.Add(songViewModel);
+                    }
+                }
+            }
+        }
     }
 }

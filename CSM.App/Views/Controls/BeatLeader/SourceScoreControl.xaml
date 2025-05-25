@@ -60,7 +60,8 @@
             ItemsSource="{Binding Scores}" 
             SelectedItem="{Binding SelectedScore}"
             Margin="3"
-            FieldFilterEditorCreated="BlSourceScoresGridView_FieldFilterEditorCreated">
+            FieldFilterEditorCreated="BlSourceScoresGridView_FieldFilterEditorCreated"
+            Filtered="BlSourceScoresGridView_Filtered">
             <telerik:RadGridView.Columns>
                 <!-- Add button (will add song to selected playlist) -->
                 <telerik:GridViewColumn UniqueName="AddButton" Width="Auto" IsResizable="False">

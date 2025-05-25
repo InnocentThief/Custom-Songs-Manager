@@ -1,6 +1,8 @@
-﻿using CSM.Business.Core.SongCopy;
-using CSM.Business.Core;
+﻿using CSM.Business.Core;
+using CSM.Business.Core.SongCopy;
+using CSM.Business.Core.SongSelection;
 using CSM.Business.Interfaces;
+using CSM.DataAccess.Playlists;
 using CSM.DataAccess.UserConfiguration;
 using CSM.Framework.Extensions;
 using CSM.Framework.ServiceLocation;
@@ -8,13 +10,12 @@ using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.Commands;
 using CSM.UiLogic.ViewModels.Common.Leaderboard;
 using CSM.UiLogic.ViewModels.Common.Playlists;
+using CSM.UiLogic.ViewModels.Controls.PlaylistsTree;
 using CSM.UiLogic.ViewModels.Controls.SongSources;
 using System.Collections.ObjectModel;
 using System.IO;
-using CSM.DataAccess.Playlists;
-using CSM.Business.Core.SongSelection;
-using CSM.UiLogic.ViewModels.Controls.PlaylistsTree;
 using System.Reflection;
+using System.Windows;
 
 namespace CSM.UiLogic.ViewModels.Controls.BeatLeader
 {
@@ -46,6 +47,8 @@ namespace CSM.UiLogic.ViewModels.Controls.BeatLeader
         public BeatLeaderPlayerViewModel? Player { get; private set; }
 
         public ObservableCollection<BeatLeaderScoreViewModel> Scores { get; } = [];
+
+        public List<BeatLeaderScoreViewModel> ScoresFiltered { get; } = [];
 
         public BeatLeaderScoreViewModel? SelectedScore
         {
@@ -325,6 +328,12 @@ namespace CSM.UiLogic.ViewModels.Controls.BeatLeader
 
         private void CreatePlaylist()
         {
+            if (ScoresFiltered.Count == 0)
+            {
+                MessageBox.Show("No songs to copy.", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
             var editNewPlaylistName = new NewPlaylistViewModel(ServiceLocator, "Cancel", EditViewModelCommandColor.Default, "Create playlist", EditViewModelCommandColor.Default)
             {
                 PlaylistName = $"BeatLeader {Player?.Name ?? string.Empty} {DateTime.Now:yyyy-MM-dd HH-mm-ss}"
@@ -332,8 +341,7 @@ namespace CSM.UiLogic.ViewModels.Controls.BeatLeader
             UserInteraction.ShowWindow(editNewPlaylistName);
             if (editNewPlaylistName.Continue)
             {
-                // todo: only take filtered songs
-                var songs = Scores.Select(s => new Song
+                var songs = ScoresFiltered.Select(s => new Song
                 {
                     Hash = s.Model.Leaderboard.Song.Hash,
                     LevelAuthorName = s.Model.Leaderboard.Song.Mapper,
@@ -363,8 +371,13 @@ namespace CSM.UiLogic.ViewModels.Controls.BeatLeader
         }
         private void OverwritePlaylist()
         {
-            // todo: only take filtered songs
-            var songs = Scores.Select(s => new Song
+            if (ScoresFiltered.Count == 0)
+            {
+                MessageBox.Show("No songs to copy.", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            var songs = ScoresFiltered.Select(s => new Song
             {
                 Hash = s.Model.Leaderboard.Song.Hash,
                 LevelAuthorName = s.Model.Leaderboard.Song.Mapper,
@@ -393,8 +406,13 @@ namespace CSM.UiLogic.ViewModels.Controls.BeatLeader
         }
         private void MergePlaylist()
         {
-            // todo: only take filtered songs
-            var songs = Scores.Select(s => new Song
+            if (ScoresFiltered.Count == 0)
+            {
+                MessageBox.Show("No songs to copy.", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            var songs = ScoresFiltered.Select(s => new Song
             {
                 Hash = s.Model.Leaderboard.Song.Hash,
                 LevelAuthorName = s.Model.Leaderboard.Song.Mapper,

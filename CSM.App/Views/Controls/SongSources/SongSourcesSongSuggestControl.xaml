@@ -309,6 +309,7 @@
                             ItemsSource="{Binding Songs}" 
                             SelectedItem="{Binding SelectedSong}" 
                             FilterOperatorsLoading="SongSuggestPlaylist_FilterOperatorsLoading"
+                            Filtered="SongSuggestPlaylist_Filtered"
                             SelectionChanged="SongSuggestPlaylist_SelectionChanged" 
                             FieldFilterEditorCreated="SongSuggestPlaylist_FieldFilterEditorCreated">
                             <telerik:RadGridView.Columns>

@@ -2,6 +2,7 @@
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.ViewModels.Common.Playlists;
 using CSM.UiLogic.ViewModels.Controls.SongSources;
+using CSM.UiLogic.ViewModels.Controls.SongSources.SongSearch;
 using System.Windows;
 using System.Windows.Controls;
 using Telerik.Windows.Controls.Filtering.Editors;
@@ -105,6 +106,21 @@ namespace CSM.App.Views.Controls.SongSources
             if (e.Editor is StringFilterEditor stringFilterEditor)
             {
                 stringFilterEditor.MatchCaseVisibility = Visibility.Collapsed;
+            }
+        }
+
+        private void SongSearchGridView_Filtered(object sender, Telerik.Windows.Controls.GridView.GridViewFilteredEventArgs e)
+        {
+            if (DataContext is SongSearchSourceViewModel viewModel)
+            {
+                viewModel.ResultsFiltered.Clear();
+                foreach (var item in SongSearchGridView.Items)
+                {
+                    if (item is SearchResultMapDetailViewModel scoreSaberPlayerScore)
+                    {
+                        viewModel.ResultsFiltered.Add(scoreSaberPlayerScore);
+                    }
+                }
             }
         }
     }

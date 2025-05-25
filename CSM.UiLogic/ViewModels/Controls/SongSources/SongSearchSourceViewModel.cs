@@ -15,6 +15,7 @@ using CSM.UiLogic.ViewModels.Controls.SongSources.SongSearch;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Reflection;
+using System.Windows;
 
 namespace CSM.UiLogic.ViewModels.Controls.SongSources
 {
@@ -518,6 +519,8 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         public ObservableCollection<SearchResultMapDetailViewModel> Results { get; } = [];
 
+        public List<SearchResultMapDetailViewModel> ResultsFiltered { get; } = [];
+
         public SearchResultMapDetailViewModel? SelectedResult
         {
             get => selectedResult;
@@ -959,6 +962,12 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         private void CreatePlaylist()
         {
+            if (ResultsFiltered.Count == 0)
+            {
+                MessageBox.Show("No songs to copy.", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
             var editNewPlaylistName = new NewPlaylistViewModel(ServiceLocator, "Cancel", EditViewModelCommandColor.Default, "Create playlist", EditViewModelCommandColor.Default)
             {
                 PlaylistName = $"Search {DateTime.Now:yyyy-MM-dd HH-mm-ss}"
@@ -966,8 +975,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             UserInteraction.ShowWindow(editNewPlaylistName);
             if (editNewPlaylistName.Continue)
             {
-                // todo: only take filtered songs
-                var songs = Results.Select(r => new Song
+                var songs = ResultsFiltered.Select(r => new Song
                 {
                     Hash = r.Model.Versions.OrderByDescending(v => v.CreatedAt).First().Hash,
                     Key = r.Model.Id,
@@ -989,8 +997,13 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
         }
         private void OverwritePlaylist()
         {
-            // todo: only take filtered songs
-            var songs = Results.Select(r => new Song
+            if (ResultsFiltered.Count == 0)
+            {
+                MessageBox.Show("No songs to copy.", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            var songs = ResultsFiltered.Select(r => new Song
             {
                 Hash = r.Model.Versions.OrderByDescending(v => v.CreatedAt).First().Hash,
                 Key = r.Model.Id,
@@ -1011,8 +1024,13 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
         }
         private void MergePlaylist()
         {
-            // todo: only take filtered songs
-            var songs = Results.Select(r => new Song
+            if (ResultsFiltered.Count == 0)
+            {
+                MessageBox.Show("No songs to copy.", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            var songs = ResultsFiltered.Select(r => new Song
             {
                 Hash = r.Model.Versions.OrderByDescending(v => v.CreatedAt).First().Hash,
                 Key = r.Model.Id,

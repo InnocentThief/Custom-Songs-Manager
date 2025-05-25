@@ -394,7 +394,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         private void CreatePlaylist()
         {
-            if (Playlist == null || Playlist.Songs.Count == 0)
+            if (Playlist == null || Playlist.SongsFiltered.Count == 0)
             {
                 MessageBox.Show("No songs to copy.", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
@@ -410,7 +410,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
                 var createPlaylistEventArgs = new CreatePlaylistEventArgs
                 {
                     PlaylistName = editNewPlaylistName.PlaylistName,
-                    Songs = [.. Playlist.Songs.Select(x => x.Model)], // todo: only take filtered songs
+                    Songs = [.. Playlist.SongsFiltered.Select(x => x.Model)],
                     IsSongSuggest = true
                 };
                 songCopyDomain.CreatePlaylist(createPlaylistEventArgs);
@@ -424,7 +424,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         private void OverwritePlaylist()
         {
-            if (Playlist == null || Playlist.Songs.Count == 0)
+            if (Playlist == null || Playlist.SongsFiltered.Count == 0)
             {
                 MessageBox.Show("No songs to copy.", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
@@ -433,7 +433,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             var songCopyEventArgs = new SongCopyEventArgs
             {
                 OverwritePlaylist = true,
-                Songs = [.. Playlist.Songs.Select(x => x.Model)]  // todo: only take filtered songs
+                Songs = [.. Playlist.SongsFiltered.Select(x => x.Model)]
             };
             songCopyDomain.CopySongs(songCopyEventArgs);
         }
@@ -445,7 +445,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         private void MergePlaylist()
         {
-            if (Playlist == null || Playlist.Songs.Count == 0)
+            if (Playlist == null || Playlist.SongsFiltered.Count == 0)
             {
                 MessageBox.Show("No songs to copy.", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
@@ -453,7 +453,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
             var songCopyEventArgs = new SongCopyEventArgs
             {
-                Songs = [.. Playlist.Songs.Select(x => x.Model)]  // todo: only take filtered songs
+                Songs = [.. Playlist.SongsFiltered.Select(x => x.Model)]
             };
             songCopyDomain.CopySongs(songCopyEventArgs);
         }
@@ -463,7 +463,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             return songCopyDomain.SelectedPlaylist != null && songCopyDomain.SelectedPlaylist is PlaylistViewModel;
         }
 
-        private void SongCopyDomain_OnPlaylistSelectionChanged(object? sender, Business.Core.SongCopy.PlaylistSelectionChangedEventArgs e)
+        private void SongCopyDomain_OnPlaylistSelectionChanged(object? sender, PlaylistSelectionChangedEventArgs e)
         {
             if (e.Playlist == null)
             {

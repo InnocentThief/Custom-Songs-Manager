@@ -114,5 +114,5 @@ namespace CSM.App.Views.Controls.Playlists
                 stringFilterEditor.MatchCaseVisibility = Visibility.Collapsed;
             }
         }
-    }
+}
 }

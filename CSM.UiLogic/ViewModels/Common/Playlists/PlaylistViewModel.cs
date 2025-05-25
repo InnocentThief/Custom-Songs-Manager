@@ -94,6 +94,8 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
 
         public ObservableCollection<PlaylistSongViewModel> Songs { get; } = [];
 
+        public List<PlaylistSongViewModel> SongsFiltered { get; } = [];
+
         public PlaylistSongViewModel? SelectedSong
         {
             get => selectedSong;

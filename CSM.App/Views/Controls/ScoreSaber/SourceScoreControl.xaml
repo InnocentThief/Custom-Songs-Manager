@@ -59,6 +59,7 @@
             behaviours:GridViewHeaderContextMenuBehaviour.IsEnabled="True"
             Grid.Row="1" 
             FieldFilterEditorCreated="SsSourceScoresGridView_FieldFilterEditorCreated"
+            Filtered="SsSourceScoresGridView_Filtered"
             ItemsSource="{Binding Scores}" 
             SelectedItem="{Binding SelectedScore}"
             Margin="3">

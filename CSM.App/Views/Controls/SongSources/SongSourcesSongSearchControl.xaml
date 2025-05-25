@@ -138,6 +138,7 @@
                     Margin="3" 
                     SelectedItem="{Binding SelectedResult}"
                     FilterOperatorsLoading="SongSearchGridView_FilterOperatorsLoading"
+                    Filtered="SongSearchGridView_Filtered"
                     SelectionChanged="SongSearchGridView_SelectionChanged" 
                     FieldFilterEditorCreated="SongSearchGridView_FieldFilterEditorCreated" >
                     <telerik:RadGridView.Columns>

@@ -14,6 +14,7 @@ using CSM.UiLogic.ViewModels.Controls.SongSources;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Reflection;
+using System.Windows;
 
 namespace CSM.UiLogic.ViewModels.Controls.ScoreSaber
 {
@@ -45,6 +46,8 @@ namespace CSM.UiLogic.ViewModels.Controls.ScoreSaber
         public ScoreSaberPlayerViewModel? Player { get; private set; }
 
         public ObservableCollection<ScoreSaberScoreViewModel> Scores { get; } = [];
+
+        public List<ScoreSaberScoreViewModel> ScoresFiltered { get; } = [];
 
         public ScoreSaberScoreViewModel? SelectedScore
         {
@@ -319,11 +322,11 @@ namespace CSM.UiLogic.ViewModels.Controls.ScoreSaber
 
         private void CreatePlaylist()
         {
-            var assemblyLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            if (assemblyLocation == null)
+            if (ScoresFiltered.Count == 0)
+            {
+                MessageBox.Show("No songs to copy.", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
-
-            var defaultImageLocation = Path.Combine(assemblyLocation, "Images\\CSM_Logo_400px.png");
+            }
 
             var editNewPlaylistName = new NewPlaylistViewModel(ServiceLocator, "Cancel", EditViewModelCommandColor.Default, "Create playlist", EditViewModelCommandColor.Default)
             {
@@ -332,8 +335,7 @@ namespace CSM.UiLogic.ViewModels.Controls.ScoreSaber
             UserInteraction.ShowWindow(editNewPlaylistName);
             if (editNewPlaylistName.Continue)
             {
-                // todo: only take filtered songs
-                var songs = Scores.Select(s => new Song
+                var songs = ScoresFiltered.Select(s => new Song
                 {
                     Hash = s.Model.Leaderboard.SongHash,
                     LevelAuthorName = s.Model.Leaderboard.LevelAuthorName,
@@ -363,8 +365,13 @@ namespace CSM.UiLogic.ViewModels.Controls.ScoreSaber
         }
         private void OverwritePlaylist()
         {
-            // todo: only take filtered songs
-            var songs = Scores.Select(s => new Song
+            if (ScoresFiltered.Count == 0)
+            {
+                MessageBox.Show("No songs to copy.", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            var songs = ScoresFiltered.Select(s => new Song
             {
                 Hash = s.Model.Leaderboard.SongHash,
                 LevelAuthorName = s.Model.Leaderboard.LevelAuthorName,
@@ -393,8 +400,13 @@ namespace CSM.UiLogic.ViewModels.Controls.ScoreSaber
         }
         private void MergePlaylist()
         {
-            // todo: only take filtered songs
-            var songs = Scores.Select(s => new Song
+            if (ScoresFiltered.Count == 0)
+            {
+                MessageBox.Show("No songs to copy.", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            var songs = ScoresFiltered.Select(s => new Song
             {
                 Hash = s.Model.Leaderboard.SongHash,
                 LevelAuthorName = s.Model.Leaderboard.LevelAuthorName,
