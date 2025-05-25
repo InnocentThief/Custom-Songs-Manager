@@ -83,7 +83,7 @@ namespace CSM.App.Views.Controls.SongSources
 
         private void SongSuggestPlaylist_Filtered(object sender, Telerik.Windows.Controls.GridView.GridViewFilteredEventArgs e)
         {
-            if (DataContext is SongSuggestSourceViewModel viewModel && viewModel.Playlist!= null)
+            if (DataContext is SongSuggestSourceViewModel viewModel && viewModel.Playlist != null)
             {
                 viewModel.Playlist.SongsFiltered.Clear();
                 foreach (var item in SongSuggestPlaylist.Items)
@@ -93,6 +93,7 @@ namespace CSM.App.Views.Controls.SongSources
                         viewModel.Playlist.SongsFiltered.Add(songViewModel);
                     }
                 }
+                viewModel.Playlist.FilterChanged();
             }
         }
     }

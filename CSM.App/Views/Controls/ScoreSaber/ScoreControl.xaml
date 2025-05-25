@@ -46,6 +46,7 @@
             behaviours:GridViewHeaderContextMenuBehaviour.IsEnabled="True"
             Grid.Row="1" 
             FieldFilterEditorCreated="SsScoresGridView_FieldFilterEditorCreated"
+            Filtered="SsScoresGridView_Filtered"
             ItemsSource="{Binding Scores}" 
             Margin="3">
             <telerik:RadGridView.Columns>

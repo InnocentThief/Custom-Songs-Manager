@@ -74,6 +74,7 @@
                     SelectedItem="{Binding SelectedCustomLevel}" 
                     SelectionChanged="MainCustomLevelsGridView_SelectionChanged" 
                     FilterOperatorsLoading="MainCustomLevelsGridView_FilterOperatorsLoading" 
+                    Filtered="MainCustomLevelsGridView_Filtered"
                     FieldFilterEditorCreated="MainCustomLevelsGridView_FieldFilterEditorCreated" >
                     <telerik:RadGridView.Columns>
                         <telerik:GridViewDataColumn UniqueName="BsrKey" Header="BSR" Width="80" DataMemberBinding="{Binding BsrKeyHex}" IsFilterable="true" FilterMemberPath="BsrKey">

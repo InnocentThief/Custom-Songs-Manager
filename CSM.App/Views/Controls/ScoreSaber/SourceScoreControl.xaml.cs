@@ -79,6 +79,7 @@ namespace CSM.App.Views.Controls.ScoreSaber
                         viewModel.ScoresFiltered.Add(score);
                     }
                 }
+                viewModel.FilterChanged();
             }
         }
     }

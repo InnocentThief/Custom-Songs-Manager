@@ -14,7 +14,6 @@ using CSM.UiLogic.ViewModels.Controls.PlaylistsTree;
 using CSM.UiLogic.ViewModels.Controls.SongSources.SongSearch;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Reflection;
 using System.Windows;
 
 namespace CSM.UiLogic.ViewModels.Controls.SongSources
@@ -29,7 +28,6 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
         private string query = string.Empty;
         private SearchResultMapDetailViewModel? selectedResult;
         private string? createPlaylistCommandText, overwritePlaylistCommandText, mergePlaylistCommandText;
-        private string songCount = string.Empty;
         private double npsStart, npsEnd = 16, starsStart, starsEnd = 16;
         private int votesStart, votesEnd = 1000, upVotesStart, upVotesEnd = 1000, downVotesStart, downVotesEnd = 1000;
         private DateTime? dateSelectionStart;
@@ -37,6 +35,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
         private EnumWrapper<SearchParamRelevance>? selectedRelevance;
         private int currentPageIndex = 0;
         private ViewDefinition? selectedViewDefinition;
+        private int totalFoundSongs;
 
         private readonly IBeatSaverService beatSaverService;
         private readonly ISongCopyDomain songCopyDomain;
@@ -543,13 +542,16 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         public string SongCount
         {
-            get => songCount;
-            set
+            get
             {
-                if (value == songCount)
-                    return;
-                songCount = value;
-                OnPropertyChanged();
+                if (ResultsFiltered.Count == 0)
+                {
+                    return $"Showing {Results.Count} from {totalFoundSongs} results";
+                }
+                else
+                {
+                    return $"Showing {ResultsFiltered.Count} filtered from {Results.Count}/{totalFoundSongs} results";
+                }
             }
         }
 
@@ -605,6 +607,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
         {
             Results.ForEach(result => result.CleanUpReferences());
             Results.Clear();
+            totalFoundSongs = 0;
 
             currentPageIndex = 0;
 
@@ -630,10 +633,12 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
                 {
                     Docs = [mapDetail]
                 };
+                totalFoundSongs = 1;
             }
             else
             {
                 searchResult = await beatSaverService.SearchAsync(searchQuery.Query);
+                totalFoundSongs = searchResult?.Info.Total ?? 0;
             }
             UpdateSearchData(searchResult);
         }
@@ -660,6 +665,11 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             OnPropertyChanged(nameof(ShowViewDefinitions));
         }
 
+        public void FilterChanged()
+        {
+            OnPropertyChanged(nameof(SongCount));
+        }
+
         #region Private fields
 
         private void UpdateSearchData(MapDetails? searchResult)
@@ -671,8 +681,9 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
                 return;
             }
             Results.AddRange(searchResult.Docs.Select(mapDetail => new SearchResultMapDetailViewModel(ServiceLocator, mapDetail)));
-            SongCount = $"Showing {Results.Count} from {Math.Max(searchResult.Info.Total, searchResult.Docs.Count)} results";
+
             FilterVisible = false;
+            OnPropertyChanged(nameof(SongCount));
             ShowMoreCommand?.RaiseCanExecuteChanged();
         }
 

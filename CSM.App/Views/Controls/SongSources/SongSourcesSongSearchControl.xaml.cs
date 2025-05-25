@@ -121,6 +121,7 @@ namespace CSM.App.Views.Controls.SongSources
                         viewModel.ResultsFiltered.Add(scoreSaberPlayerScore);
                     }
                 }
+                viewModel.FilterChanged();
             }
         }
     }

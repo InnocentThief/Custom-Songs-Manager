@@ -115,6 +115,7 @@
                 SelectedItem="{Binding SelectedSong}"
                 FilterOperatorsLoading="PlaylistLeftGridView_FilterOperatorsLoading"
                 FieldFilterEditorCreated="PlaylistLeftGridView_FieldFilterEditorCreated"
+                Filtered="PlaylistLeftGridView_Filtered"
                 SelectionChanged="PlaylistLeftGridView_SelectionChanged"
                 Sorted="PlaylistLeftGridView_Sorted">
                 <telerik:RadGridView.Columns>

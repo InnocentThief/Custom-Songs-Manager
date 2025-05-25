@@ -39,6 +39,8 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
 
         public ObservableCollection<ICustomLevelViewModel> CustomLevels { get; } = [];
 
+        public List<ICustomLevelViewModel> CustomLevelsFiltered { get; } = [];
+
         public ICustomLevelViewModel? SelectedCustomLevel
         {
             get => selectedCustomLevel;
@@ -64,11 +66,22 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
         {
             get
             {
-                if (CustomLevels.Count == 0)
-                    return "No custom levels";
-                if (CustomLevels.Count == 1)
-                    return "1 custom level";
-                return $"{CustomLevels.Count} custom levels";
+                if (CustomLevelsFiltered.Count == 0)
+                {
+                    if (CustomLevels.Count == 0)
+                        return "No custom levels";
+                    if (CustomLevels.Count == 1)
+                        return $"1 custom level";
+                    return $"{CustomLevels.Count} custom levels";
+                }
+                else
+                {
+                    if (CustomLevels.Count == 0)
+                        return "No custom levels";
+                    if (CustomLevels.Count == 1)
+                        return $"Showing {CustomLevelsFiltered.Count} of 1 custom level";
+                    return $"Showing {CustomLevelsFiltered.Count} of {CustomLevels.Count} custom levels";
+                }
             }
         }
 
@@ -175,6 +188,11 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
             ViewDefinitions.Remove(SelectedViewDefinition);
             SelectedViewDefinition = ViewDefinitions.FirstOrDefault();
             OnPropertyChanged(nameof(ShowViewDefinitions));
+        }
+
+        public void FilterChanged()
+        {
+            OnPropertyChanged(nameof(CustomLevelCount));
         }
 
         #region Helper methods

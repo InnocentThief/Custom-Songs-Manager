@@ -97,5 +97,21 @@ namespace CSM.App.Views.Controls.SongSources
                 stringFilterEditor.MatchCaseVisibility = Visibility.Collapsed;
             }
         }
+
+        private void PlaylistRightGridView_Filtered(object sender, Telerik.Windows.Controls.GridView.GridViewFilteredEventArgs e)
+        {
+            if (DataContext is PlaylistViewModel viewModel)
+            {
+                viewModel.SongsFiltered.Clear();
+                foreach (var item in PlaylistRightGridView.Items)
+                {
+                    if (item is PlaylistSongViewModel songViewModel)
+                    {
+                        viewModel.SongsFiltered.Add(songViewModel);
+                    }
+                }
+                viewModel.FilterChanged();
+            }
+        }
     }
 }

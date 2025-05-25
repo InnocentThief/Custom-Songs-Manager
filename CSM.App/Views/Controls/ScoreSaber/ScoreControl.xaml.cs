@@ -1,9 +1,11 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using CSM.App.Views.Helper;
+﻿using CSM.App.Views.Helper;
 using CSM.UiLogic.AbstractBase;
+using CSM.UiLogic.ViewModels.Common.Leaderboard;
+using CSM.UiLogic.ViewModels.Controls.BeatLeader;
 using CSM.UiLogic.ViewModels.Controls.CustomLevels;
 using CSM.UiLogic.ViewModels.Controls.ScoreSaber;
+using System.Windows;
+using System.Windows.Controls;
 using Telerik.Windows.Controls.Filtering.Editors;
 using Telerik.Windows.Persistence;
 
@@ -64,6 +66,22 @@ namespace CSM.App.Views.Controls.ScoreSaber
             if (e.Editor is StringFilterEditor stringFilterEditor)
             {
                 stringFilterEditor.MatchCaseVisibility = Visibility.Collapsed;
+            }
+        }
+
+        private void SsScoresGridView_Filtered(object sender, Telerik.Windows.Controls.GridView.GridViewFilteredEventArgs e)
+        {
+            if (DataContext is ScoreSaberControlViewModel viewModel)
+            {
+                viewModel.ScoresFiltered.Clear();
+                foreach (var item in SsScoresGridView.Items)
+                {
+                    if (item is ScoreSaberScoreViewModel score)
+                    {
+                        viewModel.ScoresFiltered.Add(score);
+                    }
+                }
+                viewModel.FilterChanged();
             }
         }
     }

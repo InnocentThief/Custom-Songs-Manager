@@ -47,7 +47,8 @@
             Grid.Row="1" 
             ItemsSource="{Binding Scores}" 
             Margin="3"
-            FieldFilterEditorCreated="BlScoresGridView_FieldFilterEditorCreated">
+            FieldFilterEditorCreated="BlScoresGridView_FieldFilterEditorCreated"
+            Filtered="BlScoresGridView_Filtered">
             <telerik:RadGridView.Columns>
                 <telerik:GridViewDataColumn Header="Rank" DataMemberBinding="{Binding Rank}" IsReadOnly="True">
                     <telerik:GridViewColumn.CellTemplate>

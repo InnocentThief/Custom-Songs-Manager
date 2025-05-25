@@ -79,6 +79,7 @@ namespace CSM.App.Views.Controls.BeatLeader
                         viewModel.ScoresFiltered.Add(score);
                     }
                 }
+                viewModel.FilterChanged();
             }
         }
     }

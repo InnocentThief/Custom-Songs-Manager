@@ -68,11 +68,22 @@ namespace CSM.UiLogic.ViewModels.Controls.BeatLeader
         {
             get
             {
-                if (Scores.Count == 0)
-                    return "No score on record";
-                if (Scores.Count == 1)
-                    return "1 score";
-                return $"{Scores.Count} scores";
+                if (ScoresFiltered.Count == 0)
+                {
+                    if (Scores.Count == 0)
+                        return "No score on record";
+                    if (Scores.Count == 1)
+                        return "1 score";
+                    return $"{Scores.Count} scores";
+                }
+                else
+                {
+                    if (Scores.Count == 0)
+                        return "No score on record";
+                    if (Scores.Count == 1)
+                        return $"Showing {ScoresFiltered.Count} of 1 score";
+                    return $"Showing {ScoresFiltered.Count} of {Scores.Count} scores";
+                }
             }
         }
 
@@ -159,6 +170,11 @@ namespace CSM.UiLogic.ViewModels.Controls.BeatLeader
                 mergePlaylistCommandText = value;
                 OnPropertyChanged();
             }
+        }
+
+        public void FilterChanged()
+        {
+            OnPropertyChanged(nameof(ScoreCount));
         }
 
         #endregion

@@ -117,11 +117,22 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
         {
             get
             {
-                if (Songs.Count == 0)
-                    return "No songs";
-                if (Songs.Count == 1)
-                    return "1 song";
-                return $"{Songs.Count} songs";
+                if (SongsFiltered.Count == 0)
+                {
+                    if (Songs.Count == 0)
+                        return "No songs";
+                    if (Songs.Count == 1)
+                        return "1 song";
+                    return $"{Songs.Count} songs";
+                }
+                else
+                {
+                    if (Songs.Count == 0)
+                        return "No songs";
+                    if (Songs.Count == 1)
+                        return $"Showing {SongsFiltered.Count} of 1 song";
+                    return $"Showing {SongsFiltered.Count} of {Songs.Count} songs";
+                }
             }
         }
 
@@ -342,6 +353,11 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
             ViewDefinitions.Remove(SelectedViewDefinition);
             SelectedViewDefinition = ViewDefinitions.FirstOrDefault();
             OnPropertyChanged(nameof(ShowViewDefinitions));
+        }
+
+        public void FilterChanged()
+        {
+            OnPropertyChanged(nameof(SongCount));
         }
 
         #region Helper methods

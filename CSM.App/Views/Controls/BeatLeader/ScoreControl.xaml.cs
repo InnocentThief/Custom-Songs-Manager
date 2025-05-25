@@ -1,5 +1,6 @@
 ﻿using CSM.App.Views.Helper;
 using CSM.UiLogic.AbstractBase;
+using CSM.UiLogic.ViewModels.Common.Leaderboard;
 using CSM.UiLogic.ViewModels.Controls.BeatLeader;
 using CSM.UiLogic.ViewModels.Controls.CustomLevels;
 using System.Windows;
@@ -64,6 +65,22 @@ namespace CSM.App.Views.Controls.BeatLeader
             if (e.Editor is StringFilterEditor stringFilterEditor)
             {
                 stringFilterEditor.MatchCaseVisibility = Visibility.Collapsed;
+            }
+        }
+
+        private void BlScoresGridView_Filtered(object sender, Telerik.Windows.Controls.GridView.GridViewFilteredEventArgs e)
+        {
+            if (DataContext is BeatLeaderControlViewModel viewModel)
+            {
+                viewModel.ScoresFiltered.Clear();
+                foreach (var item in BlScoresGridView.Items)
+                {
+                    if (item is BeatLeaderScoreViewModel score)
+                    {
+                        viewModel.ScoresFiltered.Add(score);
+                    }
+                }
+                viewModel.FilterChanged();
             }
         }
     }

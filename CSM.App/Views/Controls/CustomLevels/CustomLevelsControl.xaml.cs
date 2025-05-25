@@ -1,5 +1,6 @@
 ﻿using CSM.App.Views.Helper;
 using CSM.UiLogic.AbstractBase;
+using CSM.UiLogic.ViewModels.Common.CustomLevels;
 using CSM.UiLogic.ViewModels.Controls.CustomLevels;
 using System.Windows;
 using System.Windows.Controls;
@@ -95,6 +96,22 @@ namespace CSM.App.Views.Controls.CustomLevels
             if (e.Editor is StringFilterEditor stringFilterEditor)
             {
                 stringFilterEditor.MatchCaseVisibility = Visibility.Collapsed;
+            }
+        }
+
+        private void MainCustomLevelsGridView_Filtered(object sender, Telerik.Windows.Controls.GridView.GridViewFilteredEventArgs e)
+        {
+            if (DataContext is CustomLevelsControlViewModel viewModel)
+            {
+                viewModel.CustomLevelsFiltered.Clear();
+                foreach (var item in MainCustomLevelsGridView.Items)
+                {
+                    if (item is ICustomLevelViewModel customLevel)
+                    {
+                        viewModel.CustomLevelsFiltered.Add(customLevel);
+                    }
+                }
+                viewModel.FilterChanged();
             }
         }
     }
