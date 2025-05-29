@@ -4,16 +4,103 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CSM.App.Views.Controls.SongSources"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:behaviours="clr-namespace:CSM.App.Behaviours"
+             xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib" 
+             xmlns:common="clr-namespace:CSM.App.Views.Common"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <!-- Header -->
-        <Grid Background="#88018574">
-            <TextBlock Text="Beat Saber Favourites" Style="{StaticResource HeaderTitleStyle}" />
+
+    <telerik:RadBusyIndicator IsBusy="{Binding LoadingInProgress}" BusyContent="{Binding LoadingInProgressMessage}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="3" />
+                <RowDefinition Height="220" MinHeight="50" />
+            </Grid.RowDefinitions>
+            <!-- Header -->
+            <Grid Background="#88018574">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Beat Saber Favourites" Style="{StaticResource HeaderTitleStyle}" />
+                <!-- Commands -->
+                <telerik:RadToolBarTray Grid.Column="1">
+                    <!-- View Definitions -->
+                    <telerik:RadToolBar Style="{StaticResource HeaderToolBarStyle}" >
+                        <TextBlock Text="View" />
+                        <telerik:RadComboBox ItemsSource="{Binding ViewDefinitions}" SelectedItem="{Binding SelectedViewDefinition}" DisplayMemberPath="Name" Background="Transparent"  Focusable="False" Visibility="{Binding ShowViewDefinitions, Converter={StaticResource BooleanToVisibilityConverter}}" SelectionChanged="ViewDefinitions_SelectionChanged" />
+                        <telerik:RadButton ToolTip="Create new view definition" Click="Add_Click">
+                            <telerik:RadGlyph Glyph="&#xe907;" />
+                        </telerik:RadButton>
+                        <telerik:RadButton ToolTip="Save selected view definition" Click="Save_Click" IsEnabled="{Binding CanSaveViewDefinition}">
+                            <telerik:RadGlyph Glyph="&#xe109;" />
+                        </telerik:RadButton>
+                        <telerik:RadButton ToolTip="Delete selected view definition" Click="Delete_Click" IsEnabled="{Binding CanDeleteViewDefinition}">
+                            <telerik:RadGlyph Glyph="&#xe10c;" />
+                        </telerik:RadButton>
+                    </telerik:RadToolBar>
+                    <!-- Additional actions -->
+                    <telerik:RadToolBar Style="{StaticResource HeaderToolBarStyle}">
+                        <telerik:RadButton Command="{Binding RefreshCommand}" ToolTip="Refresh">
+                            <telerik:RadGlyph Glyph="&#xe103;" />
+                        </telerik:RadButton>
+                    </telerik:RadToolBar>
+                </telerik:RadToolBarTray>
+            </Grid>
+
+            <!-- Content -->
+            <telerik:RadGridView 
+            x:Name="BeatSaberFavouritesGridView"
+            Grid.Row="1"
+            behaviours:GridViewHeaderContextMenuBehaviour.IsEnabled="True"
+            Margin="3,3,3,3" 
+            ItemsSource="{Binding Favourites}" 
+            SelectedItem="{Binding SelectedFavourite}" 
+            FilterOperatorsLoading="BeatSaberFavouritesGridView_FilterOperatorsLoading" 
+            Filtered="BeatSaberFavouritesGridView_Filtered"
+            FieldFilterEditorCreated="BeatSaberFavouritesGridView_FieldFilterEditorCreated" >
+                <telerik:RadGridView.Columns>
+                    <!-- Add button (will add song to selected playlist) -->
+                    <telerik:GridViewColumn UniqueName="AddButton" Width="Auto" IsResizable="False">
+                        <telerik:GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <telerik:RadButton Command="{Binding AddToPlaylistCommand}" Grid.Column="1" Background="Transparent" BorderThickness="0" ToolTip="Add to selected playlist">
+                                    <telerik:RadGlyph Glyph="&#xe11e;" Foreground="#FF008BC1" />
+                                </telerik:RadButton>
+                            </DataTemplate>
+                        </telerik:GridViewColumn.CellTemplate>
+                    </telerik:GridViewColumn>
+                    <telerik:GridViewDataColumn UniqueName="BsrKey" Header="BSR" Width="80" DataMemberBinding="{Binding MapDetailViewModel.IdHex}" IsFilterable="true" FilterMemberPath="BsrKey">
+                        <telerik:GridViewDataColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding MapDetailViewModel.Id}" />
+                            </DataTemplate>
+                        </telerik:GridViewDataColumn.CellTemplate>
+                    </telerik:GridViewDataColumn>
+                    <telerik:GridViewDataColumn UniqueName="Title" Header="Title" Width="*" DataMemberBinding="{Binding MapDetailViewModel.SongName}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" />
+                    <telerik:GridViewDataColumn UniqueName="Subtitle" Header="Subtitle" Width="*" DataMemberBinding="{Binding MapDetailViewModel.SongSubName}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" />
+                    <telerik:GridViewDataColumn UniqueName="Mapper" Header="Mapper" Width="*" DataMemberBinding="{Binding MapDetailViewModel.LevelAuthorName}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" />
+                    <telerik:GridViewDataColumn UniqueName="Artist" Header="Artist" Width="*" DataMemberBinding="{Binding MapDetailViewModel.SongAuthorName}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" />
+                    <telerik:GridViewDataColumn UniqueName="BPM" Header="BPM" Width="Auto" DataMemberBinding="{Binding MapDetailViewModel.Bpm}" />
+                </telerik:RadGridView.Columns>
+            </telerik:RadGridView>
+
+            <!-- Entry counter -->
+            <Border Grid.Row="2" Padding="6">
+                <telerik:Label Content="{Binding SongCount}"  />
+            </Border>
+
+            <GridSplitter Grid.Row="3" Style="{StaticResource WorkspaceHorizontalGridSplitterStyle}" VerticalAlignment="Center" />
+
+            <Grid Grid.Row="4" Visibility="{Binding HasSelectedSong, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <common:MapDetailTailoredControl DataContext="{Binding SelectedFavourite.MapDetailViewModel}" />
+            </Grid>
+
+            <common:MapDetailNoDataControl Grid.Row="4" Visibility="{Binding HasSelectedSong, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
         </Grid>
-    </Grid>
+    </telerik:RadBusyIndicator>
 </UserControl>

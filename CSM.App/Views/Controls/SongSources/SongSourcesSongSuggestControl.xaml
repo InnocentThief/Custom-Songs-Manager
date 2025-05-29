@@ -31,7 +31,21 @@
             </Grid.RowDefinitions>
             <!-- Header -->
             <Grid Background="#88018574">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
                 <TextBlock Text="Song Suggest" Style="{StaticResource HeaderTitleStyle}" />
+                <telerik:RadToolBar Grid.Column="1" Style="{StaticResource HeaderToolBarNoGripStyle}">
+                    <!-- Show filter -->
+                    <telerik:RadButton Command="{Binding ShowFilterCommand}" ToolTip="Show advanced settings" Visibility="{Binding FilterVisible, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" >
+                        <telerik:RadGlyph Glyph="&#xe129;" />
+                    </telerik:RadButton>
+                    <!-- Hide filter -->
+                    <telerik:RadButton Command="{Binding HideFilterCommand}" ToolTip="Hide advanced settings" Visibility="{Binding FilterVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <telerik:RadGlyph Glyph="&#xe12a;" />
+                    </telerik:RadButton>
+                </telerik:RadToolBar>
             </Grid>
 
             <!-- Configuration -->
@@ -44,14 +58,10 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <!-- Settings -->
-                    <telerik:Label Content="Use default settings" />
-                    <telerik:RadToggleSwitchButton Grid.Column="1" Focusable="False" x:Name="useDefaultSettings" IsChecked="{Binding UseDefaultSettings}" />
-                    <telerik:Label Content="Overwrite player id" Grid.Row="2" />
-                    <Grid Grid.Column="3" Grid.Row="2">
+                    <telerik:Label Content="Overwrite player id" />
+                    <Grid Grid.Column="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
@@ -61,7 +71,7 @@
                     </Grid>
 
                     <!-- Advanced Settings -->
-                    <GroupBox Grid.ColumnSpan="2" Grid.Row="3" Header="Advanced Settings" Margin="0,10,0,0" Visibility="{Binding ElementName=useDefaultSettings, Path=IsChecked, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" Style="{StaticResource WorkspaceGroupBoxStyle}">
+                    <GroupBox Grid.ColumnSpan="2" Grid.Row="1" Header="Advanced Settings" Margin="0,10,0,0" Visibility="{Binding FilterVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource WorkspaceGroupBoxStyle}">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />

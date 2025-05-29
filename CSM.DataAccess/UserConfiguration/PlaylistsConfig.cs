@@ -15,5 +15,6 @@
         public string? LastBlMainControlViewDefinitionName { get; set; }
         public string? LastSSSourceControlViewDefinitionName { get; set; }
         public string? LastSSMainControlViewDefinitionName { get; set; }
+        public string? LastBeatSaberFavouriteViewDefinitionName { get; set; }
     }
 }

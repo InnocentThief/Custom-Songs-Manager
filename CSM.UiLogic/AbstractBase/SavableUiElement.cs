@@ -11,5 +11,6 @@
         BlMainControl = 6,
         SSSourceControl = 7,
         SSMainControl = 8,
+        BeatSaberFavourites = 9
     }
 }

@@ -11,8 +11,6 @@ using CSM.UiLogic.ViewModels.Common.Playlists;
 using CSM.UiLogic.ViewModels.Controls.PlaylistsTree;
 using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Reflection;
 using System.Windows;
 
 namespace CSM.UiLogic.ViewModels.Controls.SongSources
@@ -23,9 +21,9 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         private PlaylistViewModel? playlist;
         private bool isDirty;
-        private bool useDefaultSettings = true;
+        private bool filterVisible = false;
         private string? playerId = string.Empty;
-        private IRelayCommand? generateCommand, resetAdvancedSettingsCommand, saveAdvancedSettingsCommand, createPlaylistCommand, overwritePlaylistCommand, mergePlaylistCommand;
+        private IRelayCommand? generateCommand, resetAdvancedSettingsCommand, saveAdvancedSettingsCommand, createPlaylistCommand, overwritePlaylistCommand, mergePlaylistCommand, showFilterCommand, hideFilterCommand;
         private string? createPlaylistCommandText, overwritePlaylistCommandText, mergePlaylistCommandText;
         private ISongSuggestDomain? songSuggestDomain;
 
@@ -48,6 +46,9 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
         public IRelayCommand OverwritePlaylistCommand => overwritePlaylistCommand ??= CommandFactory.Create(OverwritePlaylist, CanOverwritePlaylist);
 
         public IRelayCommand MergePlaylistCommand => mergePlaylistCommand ??= CommandFactory.Create(MergePlaylist, CanMergePlaylist);
+
+        public IRelayCommand? ShowFilterCommand => showFilterCommand ??= CommandFactory.Create(ShowFilter, CanShowFilter);
+        public IRelayCommand? HideFilterCommand => hideFilterCommand ??= CommandFactory.Create(HideFilter, CanHideFilter);
 
         public string? CreatePlaylistCommandText
         {
@@ -113,15 +114,15 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             }
         }
 
-        public bool UseDefaultSettings
+        public bool FilterVisible
         {
-            get => useDefaultSettings;
+            get => filterVisible;
             set
             {
-                if (useDefaultSettings == value)
-                    return;
-                useDefaultSettings = value;
+                filterVisible = value;
                 OnPropertyChanged();
+                ShowFilterCommand?.RaiseCanExecuteChanged();
+                HideFilterCommand?.RaiseCanExecuteChanged();
             }
         }
 
@@ -350,6 +351,8 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
                 OnPropertyChanged(nameof(Playlist));
                 OnPropertyChanged(nameof(HasResults));
             }
+
+            FilterVisible = false;
             SetLoadingInProgress(false, string.Empty);
         }
 
@@ -486,6 +489,26 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             CreatePlaylistCommand.RaiseCanExecuteChanged();
             OverwritePlaylistCommand.RaiseCanExecuteChanged();
             MergePlaylistCommand.RaiseCanExecuteChanged();
+        }
+
+        private void ShowFilter()
+        {
+            FilterVisible = true;
+        }
+
+        private bool CanShowFilter()
+        {
+            return !FilterVisible;
+        }
+
+        private void HideFilter()
+        {
+            FilterVisible = false;
+        }
+
+        private bool CanHideFilter()
+        {
+            return FilterVisible;
         }
 
         #endregion

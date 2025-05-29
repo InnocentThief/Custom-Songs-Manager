@@ -3,6 +3,7 @@ using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.Commands;
 using System.Diagnostics;
+using System.Globalization;
 using System.Text;
 using System.Windows;
 
@@ -25,6 +26,15 @@ namespace CSM.UiLogic.ViewModels.Common.MapDetails
         public MapDetail Model => mapDetail;
 
         public string Id => mapDetail.Id;
+
+        public int IdHex
+        {
+            get
+            {
+                int.TryParse(Id, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out int result);
+                return result;
+            }
+        }
 
         public string CoverUrl => mapDetail.Versions.OrderByDescending(v => v.CreatedAt).FirstOrDefault()?.CoverUrl ?? string.Empty;
 

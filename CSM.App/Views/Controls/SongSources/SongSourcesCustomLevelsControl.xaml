@@ -6,12 +6,12 @@
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:local="clr-namespace:CSM.App.Views.Controls.SongSources"
              xmlns:behaviours="clr-namespace:CSM.App.Behaviours"
-             xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib" xmlns:common="clr-namespace:CSM.App.Views.Common"
+             xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib" 
+             xmlns:common="clr-namespace:CSM.App.Views.Common"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-
-    <telerik:RadBusyIndicator IsBusy="{Binding LoadingInProgress}">
+    <telerik:RadBusyIndicator IsBusy="{Binding LoadingInProgress}" BusyContent="{Binding LoadingInProgressMessage}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="40" />
