@@ -1,5 +1,4 @@
-﻿using CSM.Business.Core;
-using CSM.Business.Interfaces;
+﻿using CSM.Business.Interfaces;
 using CSM.DataAccess;
 using CSM.DataAccess.BeatSaber;
 using CSM.DataAccess.UserConfiguration;

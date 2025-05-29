@@ -2,7 +2,6 @@
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.ViewModels.Common.Leaderboard;
 using CSM.UiLogic.ViewModels.Controls.BeatLeader;
-using CSM.UiLogic.ViewModels.Controls.CustomLevels;
 using System.Windows;
 using System.Windows.Controls;
 using Telerik.Windows.Controls.Filtering.Editors;

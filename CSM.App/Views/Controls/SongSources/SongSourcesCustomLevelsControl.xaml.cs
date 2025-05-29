@@ -1,6 +1,6 @@
-﻿using System.Windows;
+﻿using CSM.UiLogic.ViewModels.Controls.CustomLevels;
+using System.Windows;
 using System.Windows.Controls;
-using CSM.UiLogic.ViewModels.Controls.CustomLevels;
 using Telerik.Windows.Controls.Filtering.Editors;
 
 namespace CSM.App.Views.Controls.SongSources

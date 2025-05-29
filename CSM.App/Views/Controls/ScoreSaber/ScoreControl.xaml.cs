@@ -1,8 +1,6 @@
 ﻿using CSM.App.Views.Helper;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.ViewModels.Common.Leaderboard;
-using CSM.UiLogic.ViewModels.Controls.BeatLeader;
-using CSM.UiLogic.ViewModels.Controls.CustomLevels;
 using CSM.UiLogic.ViewModels.Controls.ScoreSaber;
 using System.Windows;
 using System.Windows.Controls;

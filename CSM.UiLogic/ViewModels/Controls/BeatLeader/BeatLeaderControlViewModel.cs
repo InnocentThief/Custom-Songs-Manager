@@ -1,5 +1,4 @@
-﻿using CSM.Business.Core;
-using CSM.Business.Core.SongCopy;
+﻿using CSM.Business.Core.SongCopy;
 using CSM.Business.Core.SongSelection;
 using CSM.Business.Interfaces;
 using CSM.DataAccess.Playlists;
@@ -14,7 +13,6 @@ using CSM.UiLogic.ViewModels.Controls.PlaylistsTree;
 using CSM.UiLogic.ViewModels.Controls.SongSources;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Reflection;
 using System.Windows;
 
 namespace CSM.UiLogic.ViewModels.Controls.BeatLeader

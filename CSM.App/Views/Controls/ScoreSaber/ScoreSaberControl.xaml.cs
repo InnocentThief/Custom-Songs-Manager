@@ -1,6 +1,4 @@
-﻿using CSM.UiLogic.ViewModels.Controls.ScoreSaber;
-using System.Windows.Controls;
-using System.Windows.Input;
+﻿using System.Windows.Controls;
 
 namespace CSM.App.Views.Controls.ScoreSaber
 {

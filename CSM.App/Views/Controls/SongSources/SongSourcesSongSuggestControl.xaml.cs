@@ -1,9 +1,9 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using CSM.App.Views.Helper;
+﻿using CSM.App.Views.Helper;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.ViewModels.Common.Playlists;
 using CSM.UiLogic.ViewModels.Controls.SongSources;
+using System.Windows;
+using System.Windows.Controls;
 using Telerik.Windows.Controls.Filtering.Editors;
 using Telerik.Windows.Persistence;
 

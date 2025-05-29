@@ -28,15 +28,15 @@ namespace CSM.Business
         {
             try
             {
-            Debug.WriteLine($"GET {apiBaseAddress + api}");
-            var response = await httpClient.GetAsync(apiBaseAddress + api);
-            if (!response.IsSuccessStatusCode)
-            {
-                Debug.WriteLine($"Error: {response.StatusCode}");
-                return default;
-            }
-            var content = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<T>(content, JsonSerializerHelper.CreateDefaultSerializerOptions());
+                Debug.WriteLine($"GET {apiBaseAddress + api}");
+                var response = await httpClient.GetAsync(apiBaseAddress + api);
+                if (!response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine($"Error: {response.StatusCode}");
+                    return default;
+                }
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonSerializer.Deserialize<T>(content, JsonSerializerHelper.CreateDefaultSerializerOptions());
             }
             catch (Exception ex)
             {
