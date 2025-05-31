@@ -185,6 +185,7 @@ namespace CSM.DataAccess
                         { "expert", Difficulty.Expert },
                         { "expertPlus", Difficulty.ExpertPlus },
                         { "expert+", Difficulty.ExpertPlus },
+                        { "Lightshow", Difficulty.Easy }
                     }
                 }
             };
