@@ -1,5 +1,7 @@
-﻿using CSM.Business.Interfaces;
+﻿using CSM.Business.Core.SongCopy;
+using CSM.Business.Interfaces;
 using CSM.DataAccess.BeatSaver;
+using CSM.DataAccess.Playlists;
 using CSM.Framework.ServiceLocation;
 using CSM.UiLogic.AbstractBase;
 using CSM.UiLogic.Commands;
@@ -115,6 +117,19 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources.SongSearch
 
         private void AddToPlaylist()
         {
+            var song = new Song
+            {
+                Hash = mapDetail.Versions.OrderByDescending(v => v.CreatedAt).First().Hash,
+                Key = mapDetail.Id,
+                SongName = mapDetail.Metadata?.SongName ?? string.Empty,
+                LevelAuthorName = mapDetail.Metadata?.LevelAuthorName ?? string.Empty,
+            };
+
+            var songCopyEventArgs = new SongCopyEventArgs
+            {
+                Songs = { song }
+            };
+            songCopyDomain.CopySongs(songCopyEventArgs);
         }
 
         private bool CanAddToPlaylist()

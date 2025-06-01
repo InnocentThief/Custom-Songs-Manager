@@ -14,6 +14,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="3" />
             <RowDefinition Height="220" />
@@ -61,8 +62,8 @@
                     </telerik:RadButton>
                 </telerik:RadToolBar>
             </telerik:RadToolBarTray>
-
         </Grid>
+        
         <!-- Playlist infos -->
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
@@ -101,8 +102,12 @@
                 </Grid>
             </Grid>
         </Grid>
+        
+        <!-- External source info -->
+        <TextBlock Grid.Row="2" Text="{Binding ExternalSourceDescription}" Margin="3,6" FontWeight="DemiBold" Visibility="{Binding HasExternalSource, Converter={StaticResource BooleanToVisibilityConverter}}" TextTrimming="CharacterEllipsis" ToolTip="{Binding ExternalSourceDescription}" />
+
         <!-- Songs -->
-        <Grid Grid.Row="2" >
+        <Grid Grid.Row="3" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
@@ -158,13 +163,13 @@
             </Border>
         </Grid>
 
-        <GridSplitter Grid.Row="3" Style="{StaticResource WorkspaceHorizontalGridSplitterStyle}" VerticalAlignment="Center" />
+        <GridSplitter Grid.Row="4" Style="{StaticResource WorkspaceHorizontalGridSplitterStyle}" VerticalAlignment="Center" />
 
-        <Grid Grid.Row="4" Visibility="{Binding HasSelectedSong, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <Grid Grid.Row="5" Visibility="{Binding HasSelectedSong, Converter={StaticResource BooleanToVisibilityConverter}}">
             <common:MapDetailTailoredControl DataContext="{Binding SelectedSong.MapDetailViewModel}" />
         </Grid>
 
-        <common:MapDetailNoDataControl Grid.Row="4" Visibility="{Binding HasSelectedSong, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
+        <common:MapDetailNoDataControl Grid.Row="5" Visibility="{Binding HasSelectedSong, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
     </Grid>
 </UserControl>
 

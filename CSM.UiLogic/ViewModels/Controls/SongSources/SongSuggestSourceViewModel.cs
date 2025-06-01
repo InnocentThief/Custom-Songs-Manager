@@ -254,6 +254,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
                 if (value.Value == userConfigDomain.Config!.LeaderboardsConfig.DefaultLeaderboard)
                     return;
                 userConfigDomain.Config!.LeaderboardsConfig.DefaultLeaderboard = value.Value;
+                IsDirty = true;
                 OnPropertyChanged();
             }
         }

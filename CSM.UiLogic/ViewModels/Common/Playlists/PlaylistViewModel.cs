@@ -149,6 +149,23 @@ namespace CSM.UiLogic.ViewModels.Common.Playlists
             }
         }
 
+        public string ExternalSourceDescription
+        {
+            get
+            {
+                var syncUrl = playlist.CustomData?.SyncURL ?? string.Empty;
+                if (string.IsNullOrWhiteSpace(syncUrl))
+                {
+                    syncUrl = playlist.syncURL ?? string.Empty;
+                }
+                if (!string.IsNullOrWhiteSpace(syncUrl))
+                {
+                    return $"External source: {syncUrl}";
+                }
+                return string.Empty;
+            }
+        }
+
         public ObservableCollection<ViewDefinition> ViewDefinitions { get; } = [];
 
         public ViewDefinition? SelectedViewDefinition
