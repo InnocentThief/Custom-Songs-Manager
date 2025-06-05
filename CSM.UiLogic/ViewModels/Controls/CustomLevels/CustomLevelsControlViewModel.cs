@@ -214,7 +214,11 @@ namespace CSM.UiLogic.ViewModels.Controls.CustomLevels
 
                 try
                 {
-                    var bsrKey = directoryInfo.Name[..directoryInfo.Name.IndexOf(' ')];
+                    var bsrKey = string.Empty;
+                    if (directoryInfo.Name.IndexOf(' ') > 0)
+                    {
+                        bsrKey = directoryInfo.Name[..directoryInfo.Name.IndexOf(' ')];
+                    }
                     var lastWriteTime = directoryInfo.LastWriteTime;
 
                     if (content.Contains("_version"))

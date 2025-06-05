@@ -173,7 +173,8 @@ namespace CSM.DataAccess
                         { "360Degree", Characteristic.Degree360 },
                         { "lightshow", Characteristic.Lightshow },
                         { "lawless", Characteristic.Lawless },
-                        { "legacy", Characteristic.Legacy }
+                        { "legacy", Characteristic.Legacy },
+                        { "RhythmGameStandard", Characteristic.Standard }
                     }
                 },
                 {
