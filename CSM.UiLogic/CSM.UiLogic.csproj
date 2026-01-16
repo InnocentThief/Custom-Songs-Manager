@@ -5,6 +5,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <Copyright>Copyright 2026 InnocentThief</Copyright>
+    <Version>2.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

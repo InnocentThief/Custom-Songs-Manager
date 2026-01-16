@@ -23,7 +23,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources.Twitch
 
         public IRelayCommand? LeaveCommand => leaveCommand ??= CommandFactory.CreateFromAsync(LeaveAsync, CanLeave);
 
-        public IRelayCommand? RemoveCommand => removeCommand ??= CommandFactory.Create(Remove, CanRemove);
+        public IRelayCommand? RemoveCommand => removeCommand ??= CommandFactory.CreateFromAsync(RemoveAsync, CanRemove);
 
         public bool Joined => twitchChannelService.CheckChannelIsJoined(Name);
 
@@ -63,7 +63,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources.Twitch
         {
             if (!await twitchChannelService.Initialize())
                 return;
-            twitchChannelService.JoinChannel(Name);
+            await twitchChannelService.JoinChannelAsync(Name);
         }
 
         private bool CanJoin()
@@ -75,7 +75,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources.Twitch
         {
             if (!await twitchChannelService.Initialize())
                 return;
-            twitchChannelService.LeaveChannel(Name);
+            await twitchChannelService.LeaveChannelAsync(Name);
         }
 
         private bool CanLeave()
@@ -83,10 +83,10 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources.Twitch
             return true;
         }
 
-        private void Remove()
+        private async Task RemoveAsync()
         {
             if (Joined)
-                twitchChannelService.LeaveChannel(Name);
+                await twitchChannelService.LeaveChannelAsync(Name);
             twitchChannelService.RemoveChannel(Name);
             OnRemoveChannel?.Invoke(this, EventArgs.Empty);
         }

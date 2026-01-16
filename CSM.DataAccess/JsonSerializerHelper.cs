@@ -70,6 +70,7 @@ namespace CSM.DataAccess
                         { "billie_environment", BeatSaver.Environment.BillieEnvironment },
                         { "halloween_environment", BeatSaver.Environment.HalloweenEnvironment },
                         { "gaga_environment", BeatSaver.Environment.GagaEnvironment },
+                        { "halloween2_environment", BeatSaver.Environment.Halloween2Environment },
                         { "glass_desert_environment", BeatSaver.Environment.GlassDesertEnvironment },
                         { "multiplayer_environment", BeatSaver.Environment.MultiplayerEnvironment },
                         { "weave_environment", BeatSaver.Environment.WeaveEnvironment },
@@ -90,7 +91,9 @@ namespace CSM.DataAccess
                         { "collider_environment", BeatSaver.Environment.ColliderEnvironment },
                         { "britney_environment", BeatSaver.Environment.BritneyEnvironment },
                         { "monstercat2_environment", BeatSaver.Environment.Monstercat2Environment },
-                        { "metallica_environment", BeatSaver.Environment.MetallicaEnvironment }
+                        { "metallica_environment", BeatSaver.Environment.MetallicaEnvironment },
+                        { "grid_environment", BeatSaver.Environment.GridEnvironment },
+                        { "coldplay_environment", BeatSaver.Environment.ColdplayEnvironment }
                     }
                 },
                 {
@@ -125,6 +128,7 @@ namespace CSM.DataAccess
                         { "challenge", Tag.Challenge },
                         { "accuracy", Tag.Accuracy },
                         { "fitness", Tag.Fitness },
+                        { "poodle", Tag.Poodle },
                         { "swing", Tag.Swing },
                         { "nightcore", Tag.Nightcore },
                         { "folk-acoustic", Tag.FolkAccoustic },
@@ -160,7 +164,8 @@ namespace CSM.DataAccess
                         { "dance", Tag.Dance },
                         { "rock", Tag.Rock },
                         { "pop", Tag.Pop },
-                        { "electronic", Tag.Electronic }
+                        { "electronic", Tag.Electronic },
+                        { "ai", Tag.AI }
                     }
                 },
                 {

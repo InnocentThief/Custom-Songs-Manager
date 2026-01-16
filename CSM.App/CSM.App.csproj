@@ -8,6 +8,8 @@
     <UseWPF>true</UseWPF>
     <AssemblyName>CSM</AssemblyName>
     <ApplicationIcon>CSM.ico</ApplicationIcon>
+    <Copyright>Copyright 2026 InnocentThief</Copyright>
+    <Version>2.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
