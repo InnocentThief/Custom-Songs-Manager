@@ -23,7 +23,7 @@
 - work in progress
 
 # Requirements
-- Windows with .NET 4.8
+- Windows with .NET 10
 - Optional (Beat Saber). You can change playlists and custom levels without the need of a Beat Saber installation.
 # Installation
 1. Download and unzip the lates version
