@@ -105,7 +105,7 @@ namespace CSM.Business.Core
                 FilterSettings = new FilterSettings
                 {
                     modifierStyle = userConfigDomain.Config?.SongSuggestSettings.FilterSettings.ModifierStyle ?? 100.0,
-                    modifierOverweight = userConfigDomain.Config?.SongSuggestSettings.FilterSettings.ModifierOverweight ?? 81.0,
+                    modifierOverweight = userConfigDomain.Config?.SongSuggestSettings.FilterSettings.ModifierOverweight ?? 20.0,
                 },
                 PlaylistSettings = new PlaylistSettings
                 {
