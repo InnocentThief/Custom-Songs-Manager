@@ -37,17 +37,17 @@
 
   <ItemGroup>
     <PackageReference Include="FamFamFam.Flags.Wpf" Version="1.2.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.6" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.6" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.6" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.2" />
     <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="8.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="RestoreWindowPlace" Version="3.1.0" />
-    <PackageReference Include="Telerik.Windows.Controls.FileDialogs.for.Wpf.Xaml" Version="2025.2.521" />
-    <PackageReference Include="Telerik.Windows.Controls.GridView.for.Wpf.Xaml" Version="2025.2.521" />
-    <PackageReference Include="Telerik.Windows.Controls.RibbonView.for.Wpf.Xaml" Version="2025.2.521" />
-    <PackageReference Include="Telerik.Windows.PersistenceFramework.for.Wpf.Xaml" Version="2025.2.521" />
+    <PackageReference Include="Telerik.Windows.Controls.FileDialogs.for.Wpf.Xaml" Version="2025.4.1111" />
+    <PackageReference Include="Telerik.Windows.Controls.GridView.for.Wpf.Xaml" Version="2025.4.1111" />
+    <PackageReference Include="Telerik.Windows.Controls.RibbonView.for.Wpf.Xaml" Version="2025.4.1111" />
+    <PackageReference Include="Telerik.Windows.PersistenceFramework.for.Wpf.Xaml" Version="2025.4.1111" />
   </ItemGroup>
 
   <ItemGroup>
