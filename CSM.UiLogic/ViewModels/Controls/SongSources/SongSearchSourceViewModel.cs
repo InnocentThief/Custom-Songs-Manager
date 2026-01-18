@@ -839,7 +839,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         private bool CanSearch()
         {
-            return !string.IsNullOrWhiteSpace(Query);
+            return true;
         }
 
         private async Task ShowMoreAsync()
