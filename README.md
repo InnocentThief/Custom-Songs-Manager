@@ -10,20 +10,19 @@
 - Lists the songs for a playlist
 - Lists the selected difficulties of the songs
 - Lets you change name, author, description and image of a playlist
-- Lets you add and remove songs (incl. the difficulty) from custom levels, Beat Saber favorites, and song search (BeatSaver.com)
+- Lets you add and remove songs (incl. the difficulty) from custom levels, Beat Saber favorites, song search (BeatSaver.com), or SongSuggest
 - Refresh song data for a selected playlist
 - Hitbloq playlist support
 ## Twitch Integration
 - Configure your favorite streamers channel and start "recording" !bsr and !link requests
 - Requested songs will be listed and you can add them to your own playlist
-- Auto-add to selected playlist
 ## ScoreSaber Integration
 - Single player analysis
-## Tools
-- work in progress
+## BeatLeader Integration
+- Single player analysis
 
 # Requirements
-- Windows with .NET 4.8
+- Windows with .NET 10
 - Optional (Beat Saber). You can change playlists and custom levels without the need of a Beat Saber installation.
 # Installation
 1. Download and unzip the lates version

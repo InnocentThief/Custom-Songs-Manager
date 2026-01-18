@@ -54,6 +54,8 @@ namespace CSM.DataAccess.BeatSaver
         HalloweenEnvironment,
         [JsonStringEnumMemberName("GagaEnvironment")]
         GagaEnvironment,
+        [JsonStringEnumMemberName("Halloween2Environment")]
+        Halloween2Environment,
         [JsonStringEnumMemberName("GlassDesertEnvironment")]
         GlassDesertEnvironment,
         [JsonStringEnumMemberName("MultiplayerEnvironment")]
@@ -95,7 +97,11 @@ namespace CSM.DataAccess.BeatSaver
         [JsonStringEnumMemberName("Monstercat2Environment")]
         Monstercat2Environment,
         [JsonStringEnumMemberName("MetallicaEnvironment")]
-        MetallicaEnvironment
+        MetallicaEnvironment,
+        [JsonStringEnumMemberName("GridEnvironment")]
+        GridEnvironment,
+        [JsonStringEnumMemberName("ColdplayEnvironment")]
+        ColdplayEnvironment
     }
 
     public static class EnvironmentExtensions
@@ -133,6 +139,7 @@ namespace CSM.DataAccess.BeatSaver
                         { "billie_environment", Environment.BillieEnvironment },
                         { "halloween_environment", Environment.HalloweenEnvironment },
                         { "gaga_environment", Environment.GagaEnvironment },
+                        { "halloween2_environment", Environment.Halloween2Environment },
                         { "glass_desert_environment", Environment.GlassDesertEnvironment },
                         { "multiplayer_environment", Environment.MultiplayerEnvironment },
                         { "weave_environment", Environment.WeaveEnvironment },
@@ -153,7 +160,9 @@ namespace CSM.DataAccess.BeatSaver
                         { "collider_environment", Environment.ColliderEnvironment },
                         { "britney_environment", Environment.BritneyEnvironment },
                         { "monstercat2_environment", Environment.Monstercat2Environment },
-                        { "metallica_environment", Environment.MetallicaEnvironment }
+                        { "metallica_environment", Environment.MetallicaEnvironment },
+                        { "grid_environment", Environment.GridEnvironment },
+                        { "coldplay_environment", Environment.ColdplayEnvironment }
                     }
                 }
             };

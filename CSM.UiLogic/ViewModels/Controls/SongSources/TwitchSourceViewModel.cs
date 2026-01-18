@@ -306,7 +306,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             return Maps.Count > 0;
         }
 
-        private void TwitchChannelService_OnConnected(object? sender, OnConnectedArgs e)
+        private void TwitchChannelService_OnConnected(object? sender, OnConnectedEventArgs e)
         {
             SetLoadingInProgress(false, string.Empty);
             Connected = true;

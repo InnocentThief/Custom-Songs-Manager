@@ -14,6 +14,7 @@ using CSM.UiLogic.ViewModels.Controls.PlaylistsTree;
 using CSM.UiLogic.ViewModels.Controls.SongSources.SongSearch;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Text;
 using System.Windows;
 
 namespace CSM.UiLogic.ViewModels.Controls.SongSources
@@ -419,12 +420,14 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             new StyleItem(Tag.Challenge, "Challenge"),
             new StyleItem(Tag.DanceStyle, "Dance"),
             new StyleItem(Tag.Fitness, "Fitness"),
+            new StyleItem(Tag.Poodle, "Poodle"),
             new StyleItem(Tag.Speed, "Speed"),
             new StyleItem(Tag.Tech, "Tech"),
         ];
 
         public List<StyleItem> SongStyles { get; } = [
             new StyleItem(Tag.None, string.Empty, true),
+            new StyleItem(Tag.AI, "AI"),
             new StyleItem(Tag.Alternative, "Alternative"),
             new StyleItem(Tag.Ambient, "Ambient"),
             new StyleItem(Tag.Anime, "Anime"),
@@ -434,6 +437,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             new StyleItem(Tag.DrumAndBass, "Drum and Bass"),
             new StyleItem(Tag.Dubstep, "Dubstep"),
             new StyleItem(Tag.Electronic, "Electronic"),
+            new StyleItem(Tag.Fitness, "Fitness"),
             new StyleItem(Tag.FolkAccoustic, "Folk & Acoustic"),
             new StyleItem(Tag.FunkDisco, "Funk & Disco"),
             new StyleItem(Tag.Hardcore, "Hardcore"),
@@ -449,6 +453,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             new StyleItem(Tag.KidsFamily, "Kids & Family"),
             new StyleItem(Tag.Metal, "Metal"),
             new StyleItem(Tag.Nightcore, "Nightcore"),
+            new StyleItem(Tag.Poodle, "Poodle"),
             new StyleItem(Tag.Pop, "Pop"),
             new StyleItem(Tag.Punk, "Punk"),
             new StyleItem(Tag.Rb, "R&B"),
@@ -456,9 +461,9 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             new StyleItem(Tag.Soul, "Soul"),
             new StyleItem(Tag.Speedcore, "Speedcore"),
             new StyleItem(Tag.Swing, "Swing"),
-            new StyleItem(Tag.TvMovieSoundtrack, "TV & Film"),
             new StyleItem(Tag.Techno, "Techno"),
             new StyleItem(Tag.Trance, "Trance"),
+            new StyleItem(Tag.TvMovieSoundtrack, "TV & Film"),
             new StyleItem(Tag.VideoGameSoundtrack, "Video Game"),
             new StyleItem(Tag.Vocaloid, "Vocaloid"),
         ];
@@ -488,6 +493,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             new EnvironmentItem(DataAccess.BeatSaver.Environment.SkrillexEnvironment, "Skrillex"),
             new EnvironmentItem(DataAccess.BeatSaver.Environment.BillieEnvironment, "Billie"),
             new EnvironmentItem(DataAccess.BeatSaver.Environment.HalloweenEnvironment, "Halloween"),
+            new EnvironmentItem(DataAccess.BeatSaver.Environment.Halloween2Environment, "Halloween 2"),
             new EnvironmentItem(DataAccess.BeatSaver.Environment.GagaEnvironment, "Gaga"),
             new EnvironmentItem(DataAccess.BeatSaver.Environment.GlassDesertEnvironment, "Glass Desert")
         ];
@@ -513,7 +519,9 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
             new EnvironmentItem(DataAccess.BeatSaver.Environment.ColliderEnvironment, "Collider"),
             new EnvironmentItem(DataAccess.BeatSaver.Environment.BritneyEnvironment, "Britney"),
             new EnvironmentItem(DataAccess.BeatSaver.Environment.Monstercat2Environment, "Monstercat 2"),
-            new EnvironmentItem(DataAccess.BeatSaver.Environment.MetallicaEnvironment, "Metallica")
+            new EnvironmentItem(DataAccess.BeatSaver.Environment.MetallicaEnvironment, "Metallica"),
+            new EnvironmentItem(DataAccess.BeatSaver.Environment.GridEnvironment, "Cube"),
+            new EnvironmentItem(DataAccess.BeatSaver.Environment.ColdplayEnvironment, "Coldplay")
         ];
 
         public ObservableCollection<SearchResultMapDetailViewModel> Results { get; } = [];
@@ -831,7 +839,7 @@ namespace CSM.UiLogic.ViewModels.Controls.SongSources
 
         private bool CanSearch()
         {
-            return !string.IsNullOrWhiteSpace(Query);
+            return true;
         }
 
         private async Task ShowMoreAsync()

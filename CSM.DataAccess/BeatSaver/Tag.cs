@@ -93,5 +93,9 @@ namespace CSM.DataAccess.BeatSaver
         Pop,
         [JsonStringEnumMemberName("electronic")]
         Electronic,
+        [JsonStringEnumMemberName("poodle")]
+        Poodle,
+        [JsonStringEnumMemberName("ai")]
+        AI,
     }
 }
