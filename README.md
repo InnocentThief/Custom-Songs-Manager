@@ -1,3 +1,5 @@
+⚠️ This repository has moved to [Codeberg](https://codeberg.org/InnocentThief/custom-songs-manager). This GitHub repo will be archived and no longer maintained once release 3 is final.
+
 # Custom-Songs-Manager
 "Custom Songs Manager" is an app that lets you manage playlists and beatmaps for the game Beat Saber. It also lets you receive and send !bsr request to a Twitch channel.
 # Features
